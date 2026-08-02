@@ -72,7 +72,7 @@ export default function ResourcesPage() {
               src="/site/generated/spec-workbench-documents.jpg"
               alt="HVAC spec sheets, line set materials, and product documents on a contractor workbench"
               fill
-              priority
+              preload
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
             />

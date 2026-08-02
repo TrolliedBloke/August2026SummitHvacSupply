@@ -23,7 +23,7 @@ export function SkuCard({ sku, priority = false }: { sku: StorefrontSku; priorit
           src={sku.image}
           alt={`${sku.title} product image`}
           fill
-          priority={priority}
+          preload={priority}
           sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
           className="object-contain p-3 transition-transform duration-300 group-hover:scale-[1.03]"
         />

@@ -10,11 +10,27 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
 
+  const path = request.nextUrl.pathname;
+  const gated = path.startsWith("/admin");
+
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const publicKey =
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !publicKey) return response;
+
+  // Fail closed: without auth env we cannot verify anyone, so a gated path must
+  // be refused rather than waved through. The demo bypass is explicit and never
+  // applies in production.
+  const demoBypass =
+    process.env.NODE_ENV !== "production" &&
+    process.env.ALLOW_UNAUTHENTICATED_ADMIN === "true";
+
+  if (!url || !publicKey) {
+    if (gated && !demoBypass) {
+      return NextResponse.redirect(new URL("/portal/login", request.url));
+    }
+    return response;
+  }
 
   const supabase = createServerClient(url, publicKey, {
     cookies: {
@@ -35,19 +51,34 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const path = request.nextUrl.pathname;
-  const gated = path.startsWith("/admin");
+  if (gated) {
+    if (!user) {
+      const loginUrl = new URL("/portal/login", request.url);
+      loginUrl.searchParams.set("next", path);
+      return NextResponse.redirect(loginUrl);
+    }
 
-  if (gated && !user) {
-    const loginUrl = new URL("/portal/login", request.url);
-    loginUrl.searchParams.set("next", path);
-    return NextResponse.redirect(loginUrl);
+    // Being signed in is not enough -- a homeowner who registers is a valid
+    // user. Only staff may see the operations dashboard.
+    const { data: profile } = await supabase
+      .from("user_profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.role !== "staff") {
+      return NextResponse.redirect(new URL("/portal", request.url));
+    }
   }
 
   return response;
 }
 
 export const config = {
-  // Run on everything except static assets and image optimization.
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:png|jpg|jpeg|svg|ico|webp)$).*)"],
+  // Only auth-relevant paths. This used to match every request, which meant a
+  // network round-trip to Supabase (auth.getUser) in the critical path of the
+  // homepage and every product page -- latency paid in TTFB, and therefore LCP,
+  // on exactly the pages where speed converts. Public catalog pages read no
+  // session, so they gain nothing from the refresh.
+  matcher: ["/admin/:path*", "/portal/:path*", "/checkout/:path*"],
 };

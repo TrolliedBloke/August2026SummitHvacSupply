@@ -95,7 +95,7 @@ export default function DealersPage() {
               src="/site/generated/contractor-will-call-counter.jpg"
               alt="HVAC contractor reviewing a will-call pickup order at a supply counter"
               fill
-              priority
+              preload
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
             />

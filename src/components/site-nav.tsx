@@ -34,23 +34,14 @@ function useClientMounted() {
 
 function Wordmark() {
   return (
-    <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="Summit HVAC Supply home">
+    <Link href="/" className="flex shrink-0 items-center" aria-label="Summit HVAC Supply home">
       <Image
-        src="/logo-summit.svg"
-        alt=""
-        width={44}
-        height={44}
-        priority
-        sizes="44px"
-        className="size-10 shrink-0 object-contain lg:size-11"
-      />
-      <Image
-        src="/wordmark-summit.svg"
+        src="/logo-summit-lockup.png"
         alt="Summit HVAC Supply"
-        width={172}
-        height={42}
-        priority
-        sizes="172px"
+        width={1010}
+        height={280}
+        preload
+        sizes="160px"
         className="h-9 w-auto object-contain lg:h-10"
       />
     </Link>

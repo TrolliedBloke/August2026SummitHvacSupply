@@ -53,10 +53,50 @@ export function ChatWidget() {
   const [input, setInput] = React.useState("");
   const [busy, setBusy] = React.useState(false);
   const scrollRef = React.useRef<HTMLDivElement>(null);
+  const panelRef = React.useRef<HTMLDivElement>(null);
+  const previousFocus = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
   }, [messages, open]);
+
+  // Escape to close + focus trap, matching the quote drawer. Without this the
+  // panel announces itself as a dialog while leaving keyboard users unable to
+  // dismiss it or stay inside it (WCAG 2.1.2).
+  React.useEffect(() => {
+    if (!open) return;
+    previousFocus.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
+      const focusable = Array.from(
+        panelRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      previousFocus.current?.focus();
+    };
+  }, [open]);
 
   async function send(text: string) {
     const trimmed = text.trim();
@@ -115,7 +155,9 @@ export function ChatWidget() {
       {/* Panel */}
       {open && (
         <div
+          ref={panelRef}
           role="dialog"
+          aria-modal="true"
           aria-label="AI assistant chat"
           className="fixed inset-x-3 bottom-3 z-50 flex max-h-[75dvh] flex-col overflow-hidden rounded-(--r-lg) border border-line bg-canvas shadow-[var(--shadow-lg)] sm:inset-x-auto sm:right-5 sm:bottom-5 sm:w-[390px]"
         >

@@ -39,7 +39,7 @@ export function ProductCard({
           src={series.image}
           alt={`${series.name} product image`}
           fill
-          priority={priority}
+          preload={priority}
           sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
           className="object-contain transition-transform duration-300 group-hover:scale-[1.03]"
         />

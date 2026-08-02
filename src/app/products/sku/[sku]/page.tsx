@@ -18,6 +18,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { NotifyMe } from "@/components/notify-me";
 import { ProductGallery } from "@/components/product-gallery";
 import { ProductPurchasePanel } from "@/components/product-purchase-panel";
+import { BuyBoxAssurance } from "@/components/buy-box-assurance";
 import { ReviewStarsInline } from "@/components/product-reviews";
 import { Container, LinkButton } from "@/components/ui";
 import { accessoriesForCategory } from "@/lib/accessories";
@@ -150,6 +151,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
                   </div>
                   <div className="mt-3 flex flex-wrap justify-between gap-2 text-xs text-ink-2"><span>Will-call until 5:00pm today in Newark</span><Link href="/bay-area-hvac-supply" className="text-ink-1 underline underline-offset-4">View all locations</Link></div>
                   <div className="mt-5"><ProductPurchasePanel sku={sku} /></div>
+                  <BuyBoxAssurance price={sku.msrp} className="mt-5" />
                 </>
               ) : (
                 <OutOfStock skuId={sku.id} equivalent={equivalent} />

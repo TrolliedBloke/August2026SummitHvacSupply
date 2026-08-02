@@ -27,7 +27,7 @@ export function ProductGallery({ images, title, specs }: { images: string[]; tit
     <div>
       <div className="relative aspect-[1.5/1] overflow-hidden rounded-(--r-md) border border-line bg-surface-2 sm:aspect-[1.22/1]">
         {current.kind === "photo" ? (
-          <Image src={current.src} alt={title} fill priority sizes="(min-width: 1024px) 48vw, 100vw" className="object-contain p-5 sm:p-12" />
+          <Image src={current.src} alt={title} fill preload sizes="(min-width: 1024px) 48vw, 100vw" className="object-contain p-5 sm:p-12" />
         ) : (
           <DimensionalView title={title} specs={specs} />
         )}

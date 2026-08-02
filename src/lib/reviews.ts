@@ -141,7 +141,31 @@ export const REVIEWS: Record<string, Review[]> = {
   ],
 };
 
+/**
+ * Placeholder reviews are demo scaffolding, and shipping them is a legal
+ * problem rather than a taste problem: the entries in REVIEWS are invented
+ * people carrying `verified: true` badges, and they drive the
+ * Product/AggregateRating schema on every product page.
+ *
+ * Publishing them would put the site inside the FTC's rule on fake consumer
+ * reviews (16 CFR Part 465, in force since 2024, civil penalties assessed per
+ * violation) and Google's review-snippet policy, which answers with manual
+ * action. Relying on someone remembering to empty this file before a deploy is
+ * not a control -- so production refuses to serve them regardless of what the
+ * file contains.
+ *
+ * The demo keeps working locally and in preview. To show them in a hosted demo,
+ * set SHOW_PLACEHOLDER_REVIEWS=true explicitly and accept the above.
+ * Real, consented reviews should be moved to the database and read from there,
+ * at which point this gate stops applying.
+ */
+function placeholderReviewsAllowed(): boolean {
+  if (process.env.SHOW_PLACEHOLDER_REVIEWS === "true") return true;
+  return process.env.NODE_ENV !== "production";
+}
+
 export function getReviews(skuId: string, seriesSlug: string): Review[] {
+  if (!placeholderReviewsAllowed()) return [];
   return REVIEWS[skuId] ?? REVIEWS[seriesSlug] ?? [];
 }
 

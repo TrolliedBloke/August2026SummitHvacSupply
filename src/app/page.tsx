@@ -295,7 +295,7 @@ function DoorCard({
         : "grid-cols-[96px_minmax(0,1fr)] md:grid-cols-[118px_minmax(0,1fr)]"
     }`}>
       <div className={`relative aspect-square w-full ${mediaSide === "right" ? "order-2" : ""}`} aria-hidden="true">
-        <Image src={image} alt="" fill priority sizes="(min-width: 768px) 190px, 120px" className="object-contain" />
+        <Image src={image} alt="" fill preload sizes="(min-width: 768px) 190px, 120px" className="object-contain" />
       </div>
       <div className={`min-w-0 ${mediaSide === "right" ? "order-1" : ""}`}>
         <p className="text-sm font-medium text-ink-1">{eyebrow}</p>

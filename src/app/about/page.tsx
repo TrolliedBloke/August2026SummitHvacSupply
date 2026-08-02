@@ -49,7 +49,7 @@ export default function AboutPage() {
               src="/site/generated/newark-warehouse-stock.jpg"
               alt="Organized Newark HVAC warehouse with stocked heat pump equipment"
               fill
-              priority
+              preload
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
             />

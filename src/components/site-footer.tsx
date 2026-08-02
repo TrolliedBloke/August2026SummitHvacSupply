@@ -8,7 +8,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-[var(--ink-panel)] text-brand-ink">
       <div className="mx-auto w-full max-w-[1180px] px-5 py-7 sm:px-6 lg:px-8">
-        <div className="grid gap-7 md:grid-cols-[1.25fr_1fr_1fr_1.15fr]">
+        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-[1.15fr_.85fr_.85fr_.85fr_1fr]">
           <div>
             <div className="flex items-center gap-2.5">
               <Image src="/logo-summit.svg" alt="" width={34} height={34} sizes="34px" className="size-8 object-contain" />
@@ -54,6 +54,14 @@ export function SiteFooter() {
             <FooterLink href="/homeowners">For Homeowners</FooterLink>
             <FooterLink href="/dealers">For Contractors</FooterLink>
             <FooterLink href="/portal/login">Account Portal</FooterLink>
+          </FooterCol>
+
+          <FooterCol title="Policies">
+            <FooterLink href="/returns">Returns & Refunds</FooterLink>
+            <FooterLink href="/shipping">Shipping & Delivery</FooterLink>
+            <FooterLink href="/resources">Warranty & FAQ</FooterLink>
+            <FooterLink href="/privacy">Privacy Policy</FooterLink>
+            <FooterLink href="/terms">Terms of Service</FooterLink>
           </FooterCol>
 
           <div>

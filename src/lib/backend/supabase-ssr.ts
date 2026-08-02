@@ -20,6 +20,21 @@ export function hasSupabaseAuthEnv(): boolean {
   return Boolean(URL && PUBLIC_KEY);
 }
 
+/**
+ * Whether staff-only surfaces may render WITHOUT a verified staff session.
+ *
+ * Absent auth env used to imply "local demo, let it through", which meant a
+ * missing or misspelled variable in a production deploy silently published the
+ * operations dashboard. Opting out of the gate is now explicit and refuses to
+ * work in production regardless of how the env is set.
+ */
+export function allowUnauthenticatedAdmin(): boolean {
+  return (
+    process.env.NODE_ENV !== "production" &&
+    process.env.ALLOW_UNAUTHENTICATED_ADMIN === "true"
+  );
+}
+
 /** Browser client — for client components (login form, etc.). */
 export function createClientSupabase(): SupabaseClient | null {
   if (!URL || !PUBLIC_KEY) return null;
