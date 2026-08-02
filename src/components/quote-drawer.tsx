@@ -7,6 +7,7 @@ import * as React from "react";
 import { useQuote } from "./quote-context";
 import { getStorefrontSku, productHref } from "@/lib/storefront/catalog";
 import { accessoriesForCategory, type Accessory } from "@/lib/accessories";
+import { SaveCartAsList } from "./saved-lists";
 
 /* Right-side cart drawer. Primary path is /checkout (pickup, delivery, or
    freight); the /quote request form remains the secondary, custom-pricing path. */
@@ -164,6 +165,10 @@ export function QuoteDrawer() {
             </ul>
 
             <CartCrossSell skuIds={items.map((i) => i.skuId)} onNavigate={close} />
+
+            <div className="border-t border-line px-5 py-3">
+              <SaveCartAsList items={items} />
+            </div>
 
             <footer className="border-t border-line bg-surface-2 px-5 py-4">
               <Link

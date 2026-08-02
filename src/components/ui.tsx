@@ -1,6 +1,5 @@
 import Link from "next/link";
 import * as React from "react";
-import { SnowCap } from "./mountain";
 
 /* Shared primitives. One button system, one chip system — reused everywhere
    so the surface treatment stays consistent (skill: same border weight, radius,
@@ -11,14 +10,14 @@ type ButtonSize = "md" | "lg";
 
 const buttonBase =
   "inline-flex items-center justify-center gap-2 font-medium rounded-(--r-sm) " +
-  "transition-[background-color,box-shadow,transform] duration-150 ease-out " +
+  "transition-[background-color,border-color,color] duration-150 ease-out " +
   "active:translate-y-px disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap";
 
 const buttonVariants: Record<ButtonVariant, string> = {
   primary:
-    "bg-brand text-brand-ink hover:bg-brand-hover shadow-[var(--shadow-sm)]",
+    "bg-brand text-brand-ink hover:bg-brand-hover",
   secondary:
-    "bg-surface-1 text-ink-1 border border-line-strong hover:bg-surface-2 hover:border-ink-4 shadow-[var(--shadow-sm)]",
+    "bg-surface-1 text-ink-1 border border-line-strong hover:bg-surface-2 hover:border-ink-4",
   ghost:
     "bg-transparent text-ink-1 border border-line hover:bg-surface-2",
   quiet: "bg-transparent text-ink-2 hover:text-ink-1 hover:bg-surface-2",
@@ -136,12 +135,11 @@ export function Container({
   );
 }
 
-/* Semibold pine label with the logo's snow-cap marker — ties every section
-   heading back to the mark. */
+/* Plain semibold label — the old all-caps letterspaced mono eyebrow read as
+   SaaS-dashboard chrome; a supply house says it straight. */
 export function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-brand">
-      <SnowCap size={14} />
+    <span className="text-sm font-medium text-ink-1">
       {children}
     </span>
   );

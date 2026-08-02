@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/lifecycle/dispatch",
+      "schedule": "0 * * * *"
+    }
+  ]
+}

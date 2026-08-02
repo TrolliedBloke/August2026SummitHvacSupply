@@ -5,6 +5,7 @@ import { createServerSupabaseClient } from "./supabase";
 import { getStripe } from "./stripe";
 import { localDeliveryFee, resolveZone, WAREHOUSE, type FulfillmentMethod } from "./fulfillment";
 import { estimateTax } from "./pricing";
+import { clearCartSnapshot } from "./lifecycle";
 
 /**
  * Places an order from the cart with a chosen fulfillment method.
@@ -65,6 +66,11 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
 
   const supabase = createServerSupabaseClient();
   const orderNumber = "SO-" + Date.now().toString(36).toUpperCase();
+
+  // A placed order ends any pending abandoned-cart sequence (best-effort).
+  if (parsed.buyerEmail) {
+    void clearCartSnapshot(parsed.buyerEmail.toLowerCase()).catch(() => {});
+  }
 
   if (!supabase) {
     // Seeded fallback: no DB. Return a simulated order so the UI flow works.

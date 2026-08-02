@@ -4,6 +4,8 @@ import "./globals.css";
 import { QuoteProvider } from "@/components/quote-context";
 import { FulfillmentProvider } from "@/components/fulfillment-context";
 import { QuoteDrawerMount } from "@/components/quote-drawer-mount";
+import { ChatWidget } from "@/components/chat-widget";
+import { AnalyticsListener } from "@/components/analytics-listener";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE } from "@/lib/site";
@@ -46,8 +48,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f9fa" },
-    { media: "(prefers-color-scheme: dark)", color: "#1f5f4f" },
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
 };
 
@@ -88,6 +90,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main">{children}</main>
             <SiteFooter />
             <QuoteDrawerMount />
+            <ChatWidget />
+            <AnalyticsListener />
           </QuoteProvider>
         </FulfillmentProvider>
       </body>

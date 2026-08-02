@@ -1,18 +1,21 @@
 import {
   AlertTriangle,
   ArrowRight,
+  BarChart3,
   Boxes,
   ClipboardList,
   DollarSign,
   FileText,
   PackageCheck,
   RefreshCw,
+  SearchX,
   ShieldAlert,
   Truck,
   Users,
 } from "lucide-react";
 import { Container, Chip, LinkButton } from "@/components/ui";
 import { getOperationsOverview } from "@/lib/backend/services";
+import { getEventSummary } from "@/lib/backend/events";
 
 export const metadata = {
   title: "Operations Dashboard - Summit HVAC Supply",
@@ -20,6 +23,7 @@ export const metadata = {
 
 export default async function AdminPage() {
   const ops = await getOperationsOverview();
+  const events = await getEventSummary();
 
   return (
     <Container className="py-10 lg:py-14">
@@ -146,6 +150,37 @@ export default async function AdminPage() {
             activity.entityType,
             new Date(activity.createdAt).toLocaleDateString("en-US"),
           ])} />
+        </Panel>
+      </section>
+
+      {/* First-party conversion signals — never CVR alone. */}
+      <section className="mt-6 grid gap-6 lg:grid-cols-2">
+        <Panel title="Conversion events" icon={<BarChart3 size={18} />} action="Last 30 days">
+          {events.counts.length === 0 ? (
+            <p className="text-sm text-ink-3">
+              No events yet. The site logs conversion hooks (chat opens, notify-me
+              signups, buy-again clicks, checkout completions) as buyers use it.
+            </p>
+          ) : (
+            <List rows={events.counts.slice(0, 10).map((row) => [
+              row.name.replaceAll("_", " ").replaceAll("-", " "),
+              "site event",
+              `×${row.count}`,
+            ])} />
+          )}
+        </Panel>
+        <Panel title="Zero-result searches" icon={<SearchX size={18} />} action="What buyers wanted and didn't find">
+          {events.zeroResultQueries.length === 0 ? (
+            <p className="text-sm text-ink-3">No missed searches logged yet.</p>
+          ) : (
+            <ul className="divide-y divide-line">
+              {events.zeroResultQueries.map((query) => (
+                <li key={query} className="py-2 font-mono text-sm text-ink-1 first:pt-0 last:pb-0">
+                  &ldquo;{query}&rdquo;
+                </li>
+              ))}
+            </ul>
+          )}
         </Panel>
       </section>
     </Container>

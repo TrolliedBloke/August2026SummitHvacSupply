@@ -1,4 +1,5 @@
 import { SERIES, CATEGORY_LABEL, type Category, getSeries } from "@/lib/products";
+import { crossReferenceLookup } from "./cross-reference";
 import {
   demoInventoryLots,
   demoSkuDocuments,
@@ -90,10 +91,45 @@ export function getRelatedSkus(sku: StorefrontSku, limit = 4): StorefrontSku[] {
     .slice(0, limit);
 }
 
+/* Forgiving code matching: dashes, slashes, spaces, and case never matter
+   ("th09 svh 23bw" hits TH09SVH23BW), and a single typo in a model number
+   still resolves. Buyers type codes off a nameplate — meet them there. */
+function normalizeCode(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+/** Levenshtein distance capped at 1 — cheap at catalog scale. */
+function withinOneEdit(a: string, b: string): boolean {
+  if (a === b) return true;
+  if (Math.abs(a.length - b.length) > 1) return false;
+  let i = 0;
+  let j = 0;
+  let edits = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) {
+      i++;
+      j++;
+      continue;
+    }
+    if (++edits > 1) return false;
+    if (a.length > b.length) i++;
+    else if (b.length > a.length) j++;
+    else {
+      i++;
+      j++;
+    }
+  }
+  return edits + (a.length - i) + (b.length - j) <= 1;
+}
+
 export function searchStorefrontSkus(query: string, limit = 6): StorefrontSku[] {
   const q = query.trim().toLowerCase();
   if (q.length < 2) return [];
-  return getStorefrontSkus()
+  const qCode = normalizeCode(q);
+
+  const crossRefIds = crossReferenceLookup(query);
+
+  const scored = getStorefrontSkus()
     .map((sku) => {
       const haystack = [
         sku.sku,
@@ -107,15 +143,27 @@ export function searchStorefrontSkus(query: string, limit = 6): StorefrontSku[] 
       ]
         .join(" ")
         .toLowerCase();
-      const exact = sku.sku.toLowerCase() === q || sku.modelNumber.toLowerCase() === q;
-      const starts = sku.sku.toLowerCase().startsWith(q) || sku.modelNumber.toLowerCase().startsWith(q);
+      const skuCode = normalizeCode(sku.sku);
+      const modelCode = normalizeCode(sku.modelNumber);
+      const exact =
+        sku.sku.toLowerCase() === q ||
+        sku.modelNumber.toLowerCase() === q ||
+        (qCode.length >= 4 && (skuCode === qCode || modelCode === qCode));
+      const crossRef = crossRefIds.includes(sku.id);
+      const starts =
+        sku.sku.toLowerCase().startsWith(q) ||
+        sku.modelNumber.toLowerCase().startsWith(q) ||
+        (qCode.length >= 4 && (skuCode.startsWith(qCode) || modelCode.startsWith(qCode)));
       const contains = haystack.includes(q);
-      return { sku, score: exact ? 3 : starts ? 2 : contains ? 1 : 0 };
+      const fuzzy =
+        qCode.length >= 6 && (withinOneEdit(skuCode, qCode) || withinOneEdit(modelCode, qCode));
+      const score = exact ? 5 : crossRef ? 4 : starts ? 3 : contains ? 2 : fuzzy ? 1 : 0;
+      return { sku, score };
     })
     .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score || a.sku.title.localeCompare(b.sku.title))
-    .slice(0, limit)
-    .map((item) => item.sku);
+    .sort((a, b) => b.score - a.score || a.sku.title.localeCompare(b.sku.title));
+
+  return scored.slice(0, limit).map((item) => item.sku);
 }
 
 export function filterStorefrontSkus(filters: CatalogFilters): StorefrontSku[] {

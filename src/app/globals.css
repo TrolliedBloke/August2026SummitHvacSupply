@@ -1,84 +1,5 @@
 @import "tailwindcss";
-
-/*
-  Summit HVAC Supply — "high desert, golden hour"
-  A warm sandstone canvas under a dawn-lit sky. Colors are locked to the logo:
-  slate-teal peaks (navy), summit pine for actions, and a golden amber ribbon.
-  The dark register is used once — the grounding CTA and footer — as the mountain.
-*/
-
-:root {
-  /* --- Canvas & surfaces: warm sandstone paper with soft cream spec layers --- */
-  --canvas: #F4EAD2;
-  --surface-1: #FDFAF1;
-  --surface-2: #EFE3C6;
-  --surface-3: #E7D9B7;
-  --ink-panel: #2B5666; /* logo slate-teal — footer & grounding panels */
-
-  /* --- Ink: warm slate-teal, steady on dense contractor pages --- */
-  --ink-1: #263C46;
-  --ink-2: #4B575D;
-  --ink-3: #5C666B;
-  --ink-4: #566169; /* kept dark so micro-labels clear WCAG AA on sand */
-
-  /* --- Borders: warm sand-brown, low contrast until emphasis --- */
-  --line: rgb(96 72 28 / 0.16);
-  --line-soft: rgb(96 72 28 / 0.09);
-  --line-strong: rgb(96 72 28 / 0.26);
-
-  /* --- Brand: summit pine (from the logo) for actions, links, active state --- */
-  --brand: #1B6B5D;
-  --brand-hover: #155448;
-  --brand-ink: #FFFFFF;
-  --brand-tint: rgb(27 107 93 / 0.12);
-
-  /* --- Amber accent: darkened for text/glyph AA on sand --- */
-  --copper: #B0731A;
-  --copper-tint: rgb(232 154 44 / 0.16);
-
-  --supply-gradient: linear-gradient(100deg, #356378 0%, #1B6B5D 50%, #E89A2C 100%);
-
-  /* --- Golden hour: sun bloom + underline (decorative, not text) --- */
-  --golden: #E89A2C;
-  --golden-tint: rgb(232 154 44 / 0.18);
-  --sun: #F8DD90;
-
-  /* --- Dawn-sand hero gradient --- */
-  --hero-sky: #F7E6AC;
-  --hero-meadow: #F6EED9;
-
-  /* --- Granite: the one dark moment (grounding CTA) --- */
-  --granite: #2B5666;
-  --granite-top: #356378;
-
-  /* --- Amber: stock / ship-today urgency --- */
-  --stock-ready: #E89A2C;
-  --stock-ready-tint: rgb(232 154 44 / 0.16);
-  --stock-ready-ink: #8A5A12;
-
-  /* --- Airflow teal: certification, efficiency, and cooling cues --- */
-  --eco: #3E7C86;
-  --eco-tint: rgb(62 124 134 / 0.13);
-  --eco-ink: #245660;
-
-  /* --- Semantic --- */
-  --danger: oklch(0.55 0.18 25);
-  --danger-tint: oklch(0.55 0.18 25 / 0.10);
-
-  /* --- Form controls (tuned independently from layout surfaces) --- */
-  --control-bg: #F6EEDC;
-  --control-border: rgb(96 72 28 / 0.22);
-
-  /* --- Radius scale --- */
-  --r-sm: 7px;     /* inputs, buttons, chips */
-  --r-md: 12px;    /* cards */
-  --r-lg: 18px;    /* modals, hero panels */
-
-  /* --- Elevation: subtle, warm sand-tinted shadows --- */
-  --shadow-sm: 0 1px 2px rgb(74 54 20 / 0.06);
-  --shadow-md: 0 4px 14px rgb(74 54 20 / 0.09), 0 1px 3px rgb(74 54 20 / 0.06);
-  --shadow-lg: 0 18px 50px rgb(74 54 20 / 0.15), 0 4px 12px rgb(74 54 20 / 0.08);
-}
+@import "../styles/tokens.css";
 
 @theme inline {
   --color-canvas: var(--canvas);
@@ -103,14 +24,6 @@
 
   --color-copper: var(--copper);
   --color-copper-tint: var(--copper-tint);
-
-  --color-golden: var(--golden);
-  --color-golden-tint: var(--golden-tint);
-  --color-sun: var(--sun);
-  --color-hero-sky: var(--hero-sky);
-  --color-hero-meadow: var(--hero-meadow);
-  --color-granite: var(--granite);
-  --color-granite-top: var(--granite-top);
 
   --color-stock-ready: var(--stock-ready);
   --color-stock-ready-tint: var(--stock-ready-tint);
@@ -139,6 +52,12 @@
   --font-mono: var(--font-mono-jb), ui-monospace, monospace;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 /* Default border color lives in the base layer — unlayered it would beat
    every border-color utility (layered styles lose to unlayered ones). */
 @layer base {
@@ -155,6 +74,8 @@ body {
   background: var(--canvas);
   color: var(--ink-1);
   font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums lining-nums;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -181,39 +102,7 @@ body {
   }
 }
 
-/* Subtle entrance, used sparingly (deceleration ease, no bounce) */
-@keyframes rise {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+.part-number {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums lining-nums;
 }
-.rise { animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
-
-/* --- Outdoors motif utilities -------------------------------------------- */
-
-/* Dawn-sand hero: pale sun bloom over a sky→meadow wash */
-.bg-hero-dawn {
-  background:
-    radial-gradient(120% 100% at 88% -16%, var(--sun) 0%, transparent 52%),
-    linear-gradient(178deg, var(--hero-sky) 0%, var(--hero-meadow) 70%);
-}
-
-/* Grounding granite panel: the one dark moment, with a golden-hour bloom
-   and a faint topographic contour. */
-.bg-granite {
-  position: relative;
-  isolation: isolate;
-  background: linear-gradient(172deg, var(--granite-top), var(--granite));
-}
-.bg-granite::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  opacity: 0.5;
-  background:
-    radial-gradient(70% 120% at 86% 128%, var(--golden) 0%, transparent 52%),
-    repeating-radial-gradient(circle at 20% 130%, transparent 0 22px, rgb(255 255 255 / 0.03) 22px 23px);
-}
-
-/* Golden-hour underline for a hero keyword */
-.u-golden { box-shadow: inset 0 -0.26em 0 var(--golden); }

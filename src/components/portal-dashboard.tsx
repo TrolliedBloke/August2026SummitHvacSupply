@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Boxes, ClipboardList, DollarSign, FileText, ShieldAlert } from "lucide-react";
+import { BuyAgainButton } from "@/components/buy-again";
+import { SavedListsPanel } from "@/components/saved-lists";
 import { Chip, LinkButton } from "@/components/ui";
 import type { PortalOverview } from "@/lib/backend/services";
 
@@ -74,11 +76,31 @@ export function PortalDashboard({ overview }: { overview: PortalOverview }) {
           <MiniList rows={overview.quotes.map((quote) => [quote.quoteNumber, currency(quote.total), quote.status])} empty="No quotes yet." />
         </Panel>
         <Panel title="Orders" action="Fulfillment">
-          <MiniList rows={overview.orders.map((order) => [order.orderNumber, currency(order.total), order.status])} empty="No orders yet." />
+          {overview.orders.length === 0 ? (
+            <p className="text-sm text-ink-3">No orders yet.</p>
+          ) : (
+            <div className="divide-y divide-line">
+              {overview.orders.map((order) => (
+                <div key={order.id} className="flex items-start justify-between gap-3 py-3 first:pt-0 last:pb-0">
+                  <div>
+                    <p className="text-sm font-semibold text-ink-1">{order.orderNumber}</p>
+                    <p className="mt-0.5 text-xs text-ink-3">
+                      {currency(order.total)} · {order.status.replaceAll("_", " ")}
+                    </p>
+                  </div>
+                  <BuyAgainButton orderId={order.id} />
+                </div>
+              ))}
+            </div>
+          )}
         </Panel>
         <Panel title="Invoices" action="AR ledger">
           <MiniList rows={overview.invoices.map((invoice) => [invoice.invoiceNumber, `${currency(invoice.balance)} balance`, invoice.status])} empty="No invoices yet." />
         </Panel>
+      </section>
+
+      <section className="mt-6">
+        <SavedListsPanel />
       </section>
 
       <div className="mt-8 rounded-(--r-md) border border-line bg-surface-2/50 p-5">

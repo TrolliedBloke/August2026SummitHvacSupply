@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { AddToQuote } from "./add-to-quote";
+import { NotifyMe } from "./notify-me";
 import { Chip } from "./ui";
 import { ReviewStarsInline } from "./product-reviews";
 import { getReviews, reviewSummary } from "@/lib/reviews";
@@ -81,7 +82,11 @@ export function SkuCard({ sku, priority = false }: { sku: StorefrontSku; priorit
           ))}
         </div>
         <div className="mt-auto flex items-center gap-3">
-          <AddToQuote sku={sku} size="sm" />
+          {sku.stockStatus === "backorder" ? (
+            <NotifyMe skuId={sku.id} compact />
+          ) : (
+            <AddToQuote sku={sku} size="sm" />
+          )}
           <Link href={productHref(sku)} className="inline-flex items-center gap-1 text-sm font-medium text-ink-2 hover:text-brand">
             Details
             <ArrowUpRight size={15} />

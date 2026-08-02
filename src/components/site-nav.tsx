@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Lock, Search, ChevronDown, LifeBuoy, Phone, ShoppingCart } from "lucide-react";
+import { Menu, X, Lock, Search, ChevronDown, Phone, ShoppingCart } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
 import { SITE } from "@/lib/site";
@@ -11,15 +11,15 @@ import { SITE } from "@/lib/site";
 /* Primary nav is capped at 5 top-level targets. Rebates + Bay Area delivery
    live under the Resources menu so the bar never overflows. */
 const PRIMARY = [
-  { href: "/products", label: "Shop Systems" },
-  { href: "/homeowners", label: "For Homeowners" },
-  { href: "/dealers", label: "For Contractors" },
+  { href: "/products", label: "Shop systems" },
+  { href: "/homeowners", label: "For homeowners" },
+  { href: "/dealers", label: "For contractors" },
 ];
 
 const RESOURCES = [
-  { href: "/resources", label: "Resources & buying guides" },
-  { href: "/bay-area-heat-pump-rebates", label: "Bay Area heat pump rebates" },
-  { href: "/bay-area-hvac-supply", label: "Bay Area delivery & will-call" },
+  { href: "/resources", label: "Resources" },
+  { href: "/bay-area-heat-pump-rebates", label: "Bay area heat pump rebates" },
+  { href: "/bay-area-hvac-supply", label: "Bay area delivery and will-call" },
 ];
 
 const RESOURCE_HREFS = RESOURCES.map((r) => r.href);
@@ -140,7 +140,7 @@ function SearchField({
 
   return (
     <div>
-      <div className="flex h-11 items-center gap-2 rounded-(--r-sm) border border-line-strong bg-surface-1 px-3 shadow-[var(--shadow-sm)] focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/25">
+      <div className="flex h-11 items-center gap-2 rounded-(--r-sm) border border-line-strong bg-surface-1 px-3 focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/25">
         <Search size={16} className="shrink-0 text-ink-3" />
         <input
           ref={inputRef}
@@ -162,7 +162,7 @@ function SearchField({
           id={resultsId}
           role="listbox"
           aria-label="Search results"
-          className="mt-2 max-h-[60vh] overflow-y-auto overflow-hidden rounded-(--r-md) border border-line bg-surface-1 shadow-[var(--shadow-md)]"
+          className="mt-2 max-h-[60vh] overflow-y-auto overflow-hidden rounded-(--r-md) border border-line bg-surface-1"
         >
           {loading && results.length === 0 && (
             <li className="px-3 py-3 text-sm text-ink-3">Searching…</li>
@@ -170,7 +170,7 @@ function SearchField({
           {!loading && results.length === 0 && (
             <li className="px-3 py-4 text-sm text-ink-3">
               No matches for “{query.trim()}”. Try a model number, or{" "}
-              <Link href="/contact" onClick={onNavigate} className="font-medium text-brand hover:text-brand-hover">
+              <Link href="/contact" onClick={onNavigate} className="font-medium text-ink-1 underline underline-offset-4">
                 contact our team
               </Link>
               .
@@ -186,10 +186,10 @@ function SearchField({
                   index === active ? "bg-surface-2" : "hover:bg-surface-2"
                 }`}
               >
-                <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-3">
+                <span className="block font-mono text-[11px] font-medium text-ink-3">
                   {result.sku}
                 </span>
-                <span className="mt-0.5 block text-sm font-semibold text-ink-1">{result.title}</span>
+                <span className="mt-0.5 block text-sm font-medium text-ink-1">{result.title}</span>
                 <span className="mt-0.5 block text-xs text-ink-3">
                   {result.modelNumber} · {result.btu.toLocaleString()} BTU · {result.voltage} · {result.available} available
                 </span>
@@ -237,7 +237,7 @@ function SearchPopover() {
         <Search size={18} strokeWidth={2.2} />
       </button>
       {open && (
-        <div className="absolute right-0 top-12 z-50 w-[min(380px,calc(100vw-2rem))] rounded-(--r-md) border border-line bg-canvas p-3 shadow-[var(--shadow-lg)]">
+        <div className="absolute right-0 top-12 z-50 w-[min(380px,calc(100vw-2rem))] rounded-(--r-md) border border-line bg-canvas p-3">
           <SearchField autoFocus onNavigate={() => setOpen(false)} />
         </div>
       )}
@@ -274,7 +274,7 @@ function ResourcesMenu({ pathname }: { pathname: string }) {
         aria-expanded={open}
         aria-haspopup="menu"
         className={`inline-flex items-center gap-1 rounded-(--r-sm) px-3 py-2 text-sm font-medium transition-colors ${
-          active || open ? "text-brand" : "text-ink-2 hover:bg-surface-2 hover:text-ink-1"
+          active || open ? "text-ink-1 underline underline-offset-4" : "text-ink-1 hover:bg-surface-2"
         }`}
       >
         Resources
@@ -283,7 +283,7 @@ function ResourcesMenu({ pathname }: { pathname: string }) {
       {open && (
         <div
           role="menu"
-          className="absolute left-0 top-11 z-50 w-64 overflow-hidden rounded-(--r-md) border border-line bg-canvas p-1.5 shadow-[var(--shadow-lg)]"
+          className="absolute left-0 top-11 z-50 w-64 overflow-hidden rounded-(--r-md) border border-line bg-surface-1 p-1.5"
         >
           {RESOURCES.map((item) => (
             <Link
@@ -312,11 +312,11 @@ function CartButton() {
     <button
       onClick={toggle}
       aria-label={showCount ? `Open your cart (${count} ${count === 1 ? "item" : "items"})` : "Open your cart"}
-      className="relative grid size-10 place-items-center rounded-(--r-sm) border border-line-strong bg-surface-1 text-ink-1 shadow-[var(--shadow-sm)] transition-colors hover:bg-surface-2"
+      className="relative grid size-10 place-items-center rounded-(--r-sm) border border-line-strong bg-surface-1 text-ink-1 transition-colors hover:bg-surface-2"
     >
       <ShoppingCart size={18} strokeWidth={2.1} />
       {showCount && (
-        <span className="tnum absolute -right-1.5 -top-1.5 grid min-w-[18px] place-items-center rounded-full bg-brand px-1 font-mono text-[10px] font-bold leading-[18px] text-brand-ink">
+        <span className="tnum absolute -right-1.5 -top-1.5 grid min-w-[18px] place-items-center rounded-full bg-brand px-1 font-mono text-[10px] font-medium leading-[18px] text-brand-ink">
           {count}
         </span>
       )}
@@ -332,9 +332,8 @@ export function SiteNav() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-canvas/85 backdrop-blur-md">
-      <div className="h-[3px] w-full" style={{ background: "var(--supply-gradient)" }} />
-      <nav className="mx-auto flex h-16 w-full max-w-[1180px] items-center gap-4 px-5 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-30 border-b border-line bg-surface-1">
+      <nav className="mx-auto flex h-[var(--nav-height)] w-full max-w-[var(--counter-max)] items-center gap-4 px-5 sm:px-6 lg:px-[var(--counter-pad)]">
         <Wordmark />
 
         {/* Inline nav appears at xl, exactly where the hamburger hides — the two
@@ -345,7 +344,7 @@ export function SiteNav() {
               <Link
                 href={item.href}
                 className={`whitespace-nowrap rounded-(--r-sm) px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive(item.href) ? "text-brand" : "text-ink-2 hover:bg-surface-2 hover:text-ink-1"
+                  isActive(item.href) ? "text-ink-1 underline underline-offset-4" : "text-ink-1 hover:bg-surface-2"
                 }`}
               >
                 {item.label}
@@ -359,7 +358,7 @@ export function SiteNav() {
             <Link
               href="/contact"
               className={`whitespace-nowrap rounded-(--r-sm) px-3 py-2 text-sm font-medium transition-colors ${
-                isActive("/contact") ? "text-brand" : "text-ink-2 hover:bg-surface-2 hover:text-ink-1"
+                isActive("/contact") ? "text-ink-1 underline underline-offset-4" : "text-ink-1 hover:bg-surface-2"
               }`}
             >
               Contact
@@ -390,7 +389,7 @@ export function SiteNav() {
           {/* Big-ticket, high-anxiety category — people call. The number is the CTA. */}
           <a
             href={SITE.phoneHref}
-            className="hidden h-10 items-center gap-1.5 whitespace-nowrap rounded-(--r-sm) bg-brand px-3.5 text-sm font-semibold text-brand-ink shadow-[var(--shadow-sm)] transition-colors hover:bg-brand-hover md:inline-flex"
+            className="hidden h-10 items-center gap-1.5 whitespace-nowrap rounded-(--r-sm) bg-brand px-3.5 text-sm font-medium text-brand-ink transition-colors hover:bg-brand-hover md:inline-flex"
           >
             <Phone size={15} strokeWidth={2.2} />
             <span className="tnum">{SITE.phone}</span>
@@ -409,7 +408,7 @@ export function SiteNav() {
       {/* Mobile / tablet sheet — available at every width below xl. */}
       {mobileOpen && (
         <div className="border-t border-line bg-canvas xl:hidden">
-          <div className="mx-auto flex w-full max-w-[1180px] flex-col px-5 py-4 sm:px-6">
+          <div className="mx-auto flex w-full max-w-[var(--counter-max)] flex-col px-5 py-4 sm:px-6">
             <SearchField onNavigate={closeMobile} />
             <ul className="mt-4 flex flex-col">
               {PRIMARY.map((item) => (
@@ -418,7 +417,7 @@ export function SiteNav() {
                     href={item.href}
                     onClick={closeMobile}
                     className={`block rounded-(--r-sm) px-3 py-3 text-[15px] font-medium hover:bg-surface-2 ${
-                      isActive(item.href) ? "text-brand" : "text-ink-1"
+                      isActive(item.href) ? "text-ink-1 underline underline-offset-4" : "text-ink-1"
                     }`}
                   >
                     {item.label}
@@ -426,7 +425,7 @@ export function SiteNav() {
                 </li>
               ))}
               <li className="mt-2 border-t border-line pt-2">
-                <p className="px-3 pb-1 pt-2 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-3">
+                <p className="px-3 pb-1 pt-2 text-sm font-medium text-ink-2">
                   Resources
                 </p>
                 {RESOURCES.map((item) => (
@@ -445,7 +444,7 @@ export function SiteNav() {
                   href="/contact"
                   onClick={closeMobile}
                   className={`block rounded-(--r-sm) px-3 py-3 text-[15px] font-medium hover:bg-surface-2 ${
-                    isActive("/contact") ? "text-brand" : "text-ink-1"
+                    isActive("/contact") ? "text-ink-1 underline underline-offset-4" : "text-ink-1"
                   }`}
                 >
                   Contact
@@ -457,7 +456,7 @@ export function SiteNav() {
                   onClick={closeMobile}
                   className="flex h-11 items-center justify-center gap-1.5 rounded-(--r-sm) bg-brand text-sm font-medium text-brand-ink"
                 >
-                  <LifeBuoy size={16} /> Get help
+                  Get help
                 </Link>
                 <Link
                   href="/portal/login"

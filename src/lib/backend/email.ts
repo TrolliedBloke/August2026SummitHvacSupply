@@ -17,12 +17,22 @@ function getResend(): Resend | null {
 
 async function send(to: string, subject: string, html: string): Promise<void> {
   const resend = getResend();
-  if (!resend || !to) return;
+  if (!to) return;
+  if (!resend) {
+    // No API key (yet): log instead of dropping silently, so dev flows are visible.
+    console.log(`[email skipped — no RESEND_API_KEY] to=${to} subject="${subject}"`);
+    return;
+  }
   try {
     await resend.emails.send({ from: FROM, to, subject, html });
   } catch (err) {
     console.error("Resend send failed:", err);
   }
+}
+
+/** Generic transactional send for lifecycle flows (best-effort, never throws). */
+export async function sendEmail(to: string, subject: string, html: string): Promise<void> {
+  await send(to, subject, html);
 }
 
 /** First contact email on an account, or null. */

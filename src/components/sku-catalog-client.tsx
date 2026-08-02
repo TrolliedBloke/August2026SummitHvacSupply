@@ -17,6 +17,8 @@ import {
   type StorefrontSku,
 } from "@/lib/storefront/catalog";
 import type { Category } from "@/lib/products";
+import { SITE } from "@/lib/site";
+import { track } from "@/lib/track";
 
 type Facets = ReturnType<typeof getCatalogFacets>;
 
@@ -247,8 +249,12 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
         </div>
         {filtered.length === 0 ? (
           <div className="rounded-(--r-md) border border-dashed border-line-strong bg-surface-2/50 p-10 text-center">
+            <ZeroResultsLogger query={filters.q} />
             <h2 className="font-display text-xl font-semibold text-ink-1">No SKUs match those filters.</h2>
-            <p className="mt-2 text-sm text-ink-2">Clear filters, search by model number, or send the job details to our team.</p>
+            <p className="mt-2 text-sm text-ink-2">
+              Clear filters or search by model number — or text a photo of the old
+              unit&apos;s model plate to {SITE.phone} and we&apos;ll match it for you.
+            </p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
               <Button type="button" onClick={clear}>Clear filters</Button>
               <Link href="/contact" className="inline-flex h-10 items-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-sm font-medium text-ink-1 hover:bg-surface-2">
@@ -266,6 +272,16 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
       </section>
     </div>
   );
+}
+
+/* Logs the miss once per query — the empty state doubles as market research. */
+function ZeroResultsLogger({ query }: { query?: string }) {
+  React.useEffect(() => {
+    if (query && query.trim().length >= 3) {
+      track("search_zero_results", { q: query.trim().slice(0, 120) });
+    }
+  }, [query]);
+  return null;
 }
 
 function FilterGroup({ label, children }: { label: string; children: React.ReactNode }) {

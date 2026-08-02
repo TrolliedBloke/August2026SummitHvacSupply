@@ -20,6 +20,7 @@ import type {
   Sku,
 } from "./types";
 import type { SeriesCardSummary } from "./catalog";
+import { getStorefrontSku } from "@/lib/storefront/catalog";
 
 const data = createDemoOperationsData();
 
@@ -301,6 +302,59 @@ export async function createContactRequest(input: unknown) {
 
 export function roleCanAccessAccount(role: PersonaRole, accountId: string, requestedAccountId: string): boolean {
   return role === "staff" || accountId === requestedAccountId;
+}
+
+export type ReorderItem = {
+  skuId: string;
+  sku: string;
+  modelNumber: string;
+  title: string;
+  image: string;
+  qty: number;
+  unitPrice: number;       // current price for the requesting tier
+  priceChanged: boolean;   // vs what the original order paid
+  available: number;
+};
+
+/**
+ * Resolve a past order's lines against the CURRENT catalog for one-click
+ * reorder ("Buy Again"). Prices come from today's catalog by tier — the
+ * original order's prices are only used to flag changes. Lines whose SKU no
+ * longer exists are counted, not silently dropped.
+ */
+export function getReorderItems(
+  orderId: string,
+  role: PersonaRole,
+  accountId: string | null
+): { orderNumber: string; items: ReorderItem[]; unresolved: number } | null {
+  const order = data.salesOrders.find((candidate) => candidate.id === orderId);
+  if (!order) return null;
+  // Only staff or the owning account may reorder — a 404 to everyone else.
+  if (!roleCanAccessAccount(role, accountId ?? "", order.accountId)) return null;
+  const trade = role === "dealer" || role === "installer" || role === "staff";
+  const lines = data.orderLines.filter((line) => line.orderId === orderId);
+  const items: ReorderItem[] = [];
+  let unresolved = 0;
+  for (const line of lines) {
+    const sku = getStorefrontSku(line.skuId);
+    if (!sku) {
+      unresolved++;
+      continue;
+    }
+    const unit = trade ? sku.dealerPrice : sku.msrp;
+    items.push({
+      skuId: sku.id,
+      sku: sku.sku,
+      modelNumber: sku.modelNumber,
+      title: sku.title,
+      image: sku.image,
+      qty: line.quantity,
+      unitPrice: unit,
+      priceChanged: Math.abs(unit - line.unitPrice) >= 0.01,
+      available: sku.available,
+    });
+  }
+  return { orderNumber: order.orderNumber, items, unresolved };
 }
 
 export function resetSeededDemo() {

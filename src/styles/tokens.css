@@ -1,0 +1,53 @@
+:root {
+  --ink: #1C1C1A;
+  --text-2: #5F5E5A;
+  --text-muted: #8A8880;
+  --page: #FAFAF8;
+  --surface: #FFFFFF;
+  --border: #E3E1DA;
+  --green: #1B7A3D;
+
+  --radius-control: 6px;
+  --radius-card: 12px;
+  --border-hairline: 0.5px solid var(--border);
+  --nav-height: 54px;
+  --counter-max: 1368px;
+  --counter-pad: 36px;
+  --transition-fast: 150ms;
+
+  /* Compatibility aliases for existing pages while the new system rolls out. */
+  --canvas: var(--page);
+  --surface-1: var(--surface);
+  --surface-2: var(--page);
+  --surface-3: var(--page);
+  --ink-panel: var(--ink);
+  --ink-1: var(--ink);
+  --ink-2: var(--text-2);
+  --ink-3: var(--text-muted);
+  --ink-4: var(--text-muted);
+  --line: var(--border);
+  --line-soft: var(--border);
+  --line-strong: var(--border);
+  --brand: var(--green);
+  --brand-hover: var(--green);
+  --brand-ink: var(--surface);
+  --brand-tint: var(--surface);
+  --copper: var(--ink);
+  --copper-tint: var(--surface);
+  --stock-ready: var(--green);
+  --stock-ready-tint: var(--surface);
+  --stock-ready-ink: var(--green);
+  --eco: var(--ink);
+  --eco-tint: var(--surface);
+  --eco-ink: var(--ink);
+  --danger: var(--ink);
+  --danger-tint: var(--surface);
+  --control-bg: var(--surface);
+  --control-border: var(--border);
+  --r-sm: var(--radius-control);
+  --r-md: var(--radius-card);
+  --r-lg: var(--radius-card);
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+}

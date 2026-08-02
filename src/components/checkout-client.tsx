@@ -14,6 +14,7 @@ import {
 } from "@/lib/backend/fulfillment";
 import { estimateTax, round2 } from "@/lib/backend/pricing";
 import { PURCHASE } from "@/lib/site";
+import { track } from "@/lib/track";
 
 /* One input treatment for the whole checkout — visible focus ring included
    (plain `outline-none` would defeat the global :focus-visible ring). */
@@ -61,6 +62,31 @@ export function CheckoutClient({
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
 
   const touch = (field: string) => setTouched((t) => ({ ...t, [field]: true }));
+
+  // Cart-recovery capture: once we have a plausible email, snapshot the cart
+  // server-side so an abandoned checkout can get the 3-email sequence.
+  // Best-effort — failures never surface to the buyer.
+  const snapshotCart = React.useCallback(
+    (emailValue: string) => {
+      if (!/.+@.+\..+/.test(emailValue) || items.length === 0) return;
+      track("cart_email_captured");
+      void fetch("/api/cart-snapshots", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: emailValue,
+          items: items.map((i) => ({
+            skuId: i.skuId,
+            sku: i.sku,
+            title: i.title,
+            qty: i.qty,
+            unitPrice: i.unitPrice,
+          })),
+        }),
+      }).catch(() => {});
+    },
+    [items]
+  );
 
   // Cart contents come from localStorage (client-only). Render nothing until
   // mounted so SSR (always empty) and the client don't disagree — otherwise
@@ -146,6 +172,7 @@ export function CheckoutClient({
       if (!data.ok) throw new Error(data.error ?? "Checkout failed");
 
       // Hand the result to the confirmation page (incl. any Stripe clientSecret).
+      track("checkout_completed", { total, method: selectedMethod });
       sessionStorage.setItem("summit-last-order", JSON.stringify(data));
       clear();
       router.push(`/checkout/confirmation?order=${encodeURIComponent(data.orderNumber)}`);
@@ -298,7 +325,7 @@ export function CheckoutClient({
               <input
                 value={buyerEmail}
                 onChange={(e) => setBuyerEmail(e.target.value)}
-                onBlur={() => touch("buyerEmail")}
+                onBlur={() => { touch("buyerEmail"); snapshotCart(buyerEmail); }}
                 type="email"
                 autoComplete="email"
                 aria-invalid={showError("buyerEmail") ? true : undefined}
