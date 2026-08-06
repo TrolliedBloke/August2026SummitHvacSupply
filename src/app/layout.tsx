@@ -41,9 +41,6 @@ export const metadata: Metadata = {
     type: "website",
     siteName: SITE.name,
   },
-  alternates: {
-    canonical: "/",
-  },
 };
 
 export const viewport: Viewport = {

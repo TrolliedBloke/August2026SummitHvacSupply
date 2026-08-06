@@ -8,6 +8,7 @@ import { Container, Eyebrow, Button } from "@/components/ui";
 import { Field, Input, Textarea } from "@/components/form";
 import { useQuote } from "@/components/quote-context";
 import { SITE } from "@/lib/site";
+import { postJson } from "@/lib/client/post-json";
 
 export default function QuotePage() {
   const { items, count } = useQuote();
@@ -21,10 +22,8 @@ export default function QuotePage() {
     setIsSubmitting(true);
     setError(null);
     const form = new FormData(e.currentTarget);
-    const response = await fetch("/api/quote-requests", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    try {
+      const payload = await postJson<{ ok: boolean; id?: string; error?: string }>("/api/quote-requests", {
         name: String(form.get("name") ?? ""),
         email: String(form.get("email") ?? ""),
         phone: String(form.get("phone") ?? ""),
@@ -36,17 +35,15 @@ export default function QuotePage() {
           productName: item.title,
           quantity: item.qty,
         })),
-      }),
-    });
-    const payload = await response.json();
-    setIsSubmitting(false);
-    if (!response.ok || !payload.ok) {
-      setError(payload.error ?? "Could not prepare quote request.");
-      return;
+      });
+      setRequestId(payload.id ?? null);
+      setSent(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : "Could not prepare quote request.");
+    } finally {
+      setIsSubmitting(false);
     }
-    setRequestId(payload.id ?? null);
-    setSent(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
@@ -107,11 +104,11 @@ export default function QuotePage() {
                   placeholder="e.g. (3) 24k BreezeIN heads + condensers for a Bay Area changeout, plus lead time on the Elite 9k."
                 />
               </Field>
-              <Button type="submit" size="lg" className="self-start">
+              <Button type="submit" size="lg" className="self-start" disabled={isSubmitting}>
                 {isSubmitting ? "Preparing..." : "Prepare quote request"}
                 <ArrowRight size={18} />
               </Button>
-              {error && <p className="text-sm text-danger">{error}</p>}
+              {error && <p role="alert" className="text-sm text-danger">{error}</p>}
             </form>
           )}
         </div>

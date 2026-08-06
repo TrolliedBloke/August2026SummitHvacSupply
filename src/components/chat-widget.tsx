@@ -54,7 +54,8 @@ export function ChatWidget() {
   const [busy, setBusy] = React.useState(false);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const panelRef = React.useRef<HTMLDivElement>(null);
-  const previousFocus = React.useRef<HTMLElement | null>(null);
+  const closeRef = React.useRef<HTMLButtonElement>(null);
+  const launcherRef = React.useRef<HTMLButtonElement>(null);
 
   React.useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
@@ -65,8 +66,14 @@ export function ChatWidget() {
   // dismiss it or stay inside it (WCAG 2.1.2).
   React.useEffect(() => {
     if (!open) return;
-    previousFocus.current =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+    // The launcher unmounts the moment `open` flips, so by the time this effect
+    // runs document.activeElement is already <body>. Leaving focus there would
+    // make the trap decorative: the `activeElement === first/last` wrap checks
+    // below never match, so Tab walks straight out of a dialog that claims
+    // aria-modal. Moving focus into the panel is what makes the trap real --
+    // the same reason quote-drawer.tsx:24 focuses its close button on open.
+    closeRef.current?.focus();
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -92,10 +99,18 @@ export function ChatWidget() {
     };
 
     document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      previousFocus.current?.focus();
-    };
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Return focus to the launcher after closing. This cannot live in the effect
+  // above: cleanup runs before the launcher remounts, so launcherRef would
+  // still be null there. Watching the true->false transition instead means the
+  // button exists by the time we reach for it, and a keyboard user lands back
+  // where they started rather than at the top of the document.
+  const wasOpen = React.useRef(false);
+  React.useEffect(() => {
+    if (wasOpen.current && !open) launcherRef.current?.focus();
+    wasOpen.current = open;
   }, [open]);
 
   async function send(text: string) {
@@ -141,14 +156,15 @@ export function ChatWidget() {
       {/* Launcher — sits above the sticky mobile buy bar */}
       {!open && (
         <button
+          ref={launcherRef}
           type="button"
           onClick={() => setOpen(true)}
           data-conversion-hook="chat-open"
           aria-label="Open AI assistant chat"
-          className="fixed bottom-20 right-4 z-40 flex h-13 items-center gap-2 rounded-full bg-brand px-4 py-3 text-sm font-semibold text-brand-ink shadow-[var(--shadow-lg)] transition-transform hover:scale-[1.03] lg:bottom-5 lg:right-5"
+          title="Ask us anything"
+          className="fixed bottom-5 right-0 z-40 hidden size-11 items-center justify-center rounded-l-full bg-brand text-brand-ink shadow-[var(--shadow-lg)] transition-transform hover:scale-[1.03] lg:flex"
         >
           <MessageCircle size={19} strokeWidth={2.2} />
-          <span className="hidden sm:inline">Ask us anything</span>
         </button>
       )}
 
@@ -172,10 +188,11 @@ export function ChatWidget() {
               </div>
             </div>
             <button
+              ref={closeRef}
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close chat"
-              className="grid size-9 place-items-center rounded-(--r-sm) text-ink-2 hover:bg-surface-2 hover:text-ink-1"
+              className="grid size-11 place-items-center rounded-(--r-sm) text-ink-2 hover:bg-surface-2 hover:text-ink-1"
             >
               <X size={18} />
             </button>
@@ -194,7 +211,7 @@ export function ChatWidget() {
                       key={q}
                       type="button"
                       onClick={() => void send(q)}
-                      className="rounded-full border border-line bg-surface-1 px-3 py-1.5 text-xs font-medium text-ink-1 hover:border-brand hover:text-brand"
+                      className="min-h-11 rounded-full border border-line bg-surface-1 px-3 py-1.5 text-xs font-medium text-ink-1 hover:border-brand hover:text-brand"
                     >
                       {q}
                     </button>

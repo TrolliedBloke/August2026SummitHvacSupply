@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { safeNextPath } from "@/lib/safe-redirect";
 import * as React from "react";
 import {
   Lock,
@@ -35,10 +36,12 @@ export default async function PortalLoginPage({
 
   // Already signed in: send them where they belong.
   if (profile) {
-    redirect(profile.role === "staff" ? (next ?? "/admin") : "/portal");
+    // `next` is attacker-controllable via the query string and this fires on a
+    // bare GET, so it must be constrained to a site-relative path before use.
+    redirect(profile.role === "staff" ? safeNextPath(next, "/admin") : "/portal");
   }
 
-  const target = next ?? "/portal";
+  const target = safeNextPath(next, "/portal");
 
   return (
     <Container className="py-14 lg:py-20">

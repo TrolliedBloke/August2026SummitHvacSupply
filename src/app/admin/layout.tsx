@@ -1,6 +1,9 @@
 import { requireStaff } from "@/lib/backend/auth";
 import { signOut } from "@/lib/backend/auth-actions";
 import { allowUnauthenticatedAdmin } from "@/lib/backend/supabase-ssr";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 /**
  * Staff-only gate. Fails CLOSED: anything other than a verified staff session

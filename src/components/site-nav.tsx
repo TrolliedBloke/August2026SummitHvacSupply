@@ -18,8 +18,10 @@ const PRIMARY = [
 
 const RESOURCES = [
   { href: "/resources", label: "Resources" },
+  { href: "/tools/model-number-decoder", label: "Model number decoder" },
+  { href: "/guides/bay-area-hvac-permits", label: "Permit and code guides" },
   { href: "/bay-area-heat-pump-rebates", label: "Bay area heat pump rebates" },
-  { href: "/bay-area-hvac-supply", label: "Bay area delivery and will-call" },
+  { href: "/locations/newark", label: "Newark delivery and will-call" },
 ];
 
 const RESOURCE_HREFS = RESOURCES.map((r) => r.href);
@@ -74,6 +76,7 @@ function SearchField({
   const [active, setActive] = React.useState(-1);
   const [loading, setLoading] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const requestRef = React.useRef(0);
 
   React.useEffect(() => {
     if (autoFocus) inputRef.current?.focus();
@@ -81,17 +84,21 @@ function SearchField({
 
   React.useEffect(() => {
     const trimmed = query.trim();
+    const requestId = ++requestRef.current;
     if (trimmed.length < 2) return;
     const controller = new AbortController();
     const timer = setTimeout(() => {
       fetch(`/api/search?q=${encodeURIComponent(trimmed)}`, { signal: controller.signal })
         .then((res) => res.json())
         .then((payload) => {
+          if (requestRef.current !== requestId) return;
           setResults(payload.results ?? []);
           setActive(-1);
         })
         .catch(() => undefined)
-        .finally(() => setLoading(false));
+        .finally(() => {
+          if (requestRef.current === requestId) setLoading(false);
+        });
     }, 140);
     return () => {
       clearTimeout(timer);
@@ -147,6 +154,22 @@ function SearchField({
           className="min-w-0 flex-1 bg-transparent text-sm text-ink-1 outline-none placeholder:text-ink-4"
           aria-label="Search by SKU or model number"
         />
+        {query.length > 0 && (
+          <button
+            type="button"
+            onClick={() => {
+              setQuery("");
+              setResults([]);
+              setActive(-1);
+              setLoading(false);
+              inputRef.current?.focus();
+            }}
+            aria-label="Clear search"
+            className="grid size-9 shrink-0 place-items-center rounded-(--r-sm) text-ink-2 hover:bg-surface-2 hover:text-ink-1"
+          >
+            <X size={16} />
+          </button>
+        )}
       </div>
       {showResults && (
         <ul
@@ -223,12 +246,12 @@ function SearchPopover() {
         aria-label="Search products"
         aria-expanded={open}
         aria-haspopup="dialog"
-        className="grid size-10 place-items-center rounded-(--r-sm) text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink-1"
+        className="grid size-11 place-items-center rounded-(--r-sm) text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink-1"
       >
         <Search size={18} strokeWidth={2.2} />
       </button>
       {open && (
-        <div className="absolute right-0 top-12 z-50 w-[min(380px,calc(100vw-2rem))] rounded-(--r-md) border border-line bg-canvas p-3">
+        <div className="fixed left-4 right-4 top-[calc(var(--nav-height)+0.5rem)] z-50 rounded-(--r-md) border border-line bg-canvas p-3 sm:absolute sm:left-auto sm:right-0 sm:top-12 sm:w-[min(380px,calc(100vw-2rem))]">
           <SearchField autoFocus onNavigate={() => setOpen(false)} />
         </div>
       )}
@@ -239,7 +262,12 @@ function SearchPopover() {
 function ResourcesMenu({ pathname }: { pathname: string }) {
   const [open, setOpen] = React.useState(false);
   const wrapRef = React.useRef<HTMLDivElement>(null);
-  const active = RESOURCE_HREFS.some((href) => pathname === href || pathname.startsWith(href + "/"));
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
+  const menuRef = React.useRef<HTMLDivElement>(null);
+  const active =
+    pathname.startsWith("/guides/") ||
+    pathname.startsWith("/tools/") ||
+    RESOURCE_HREFS.some((href) => pathname === href || pathname.startsWith(href + "/"));
 
   React.useEffect(() => {
     if (!open) return;
@@ -247,7 +275,10 @@ function ResourcesMenu({ pathname }: { pathname: string }) {
       if (wrapRef.current && !wrapRef.current.contains(event.target as Node)) setOpen(false);
     };
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
     };
     document.addEventListener("mousedown", onDoc);
     document.addEventListener("keydown", onKey);
@@ -257,11 +288,35 @@ function ResourcesMenu({ pathname }: { pathname: string }) {
     };
   }, [open]);
 
+  function onMenuKeyDown(event: React.KeyboardEvent) {
+    if (!open || !menuRef.current) return;
+    const items = Array.from(menuRef.current.querySelectorAll<HTMLElement>('[role="menuitem"]'));
+    if (items.length === 0) return;
+    const current = Math.max(0, items.indexOf(document.activeElement as HTMLElement));
+    let next: number | null = null;
+    if (event.key === "ArrowDown") next = (current + 1) % items.length;
+    if (event.key === "ArrowUp") next = (current - 1 + items.length) % items.length;
+    if (event.key === "Home") next = 0;
+    if (event.key === "End") next = items.length - 1;
+    if (next !== null) {
+      event.preventDefault();
+      items[next].focus();
+    }
+  }
+
   return (
-    <div ref={wrapRef} className="relative">
+    <div ref={wrapRef} className="relative" onKeyDown={onMenuKeyDown}>
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setOpen((o) => !o)}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowDown") {
+            event.preventDefault();
+            setOpen(true);
+            window.setTimeout(() => menuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus());
+          }
+        }}
         aria-expanded={open}
         aria-haspopup="menu"
         className={`inline-flex items-center gap-1 rounded-(--r-sm) px-3 py-2 text-sm font-medium transition-colors ${
@@ -273,6 +328,7 @@ function ResourcesMenu({ pathname }: { pathname: string }) {
       </button>
       {open && (
         <div
+          ref={menuRef}
           role="menu"
           className="absolute left-0 top-11 z-50 w-64 overflow-hidden rounded-(--r-md) border border-line bg-surface-1 p-1.5"
         >
@@ -303,7 +359,7 @@ function CartButton() {
     <button
       onClick={toggle}
       aria-label={showCount ? `Open your cart (${count} ${count === 1 ? "item" : "items"})` : "Open your cart"}
-      className="relative grid size-10 place-items-center rounded-(--r-sm) border border-line-strong bg-surface-1 text-ink-1 transition-colors hover:bg-surface-2"
+      className="relative grid size-11 place-items-center rounded-(--r-sm) border border-line-strong bg-surface-1 text-ink-1 transition-colors hover:bg-surface-2"
     >
       <ShoppingCart size={18} strokeWidth={2.1} />
       {showCount && (
@@ -359,13 +415,13 @@ export function SiteNav() {
 
         {/* Right cluster */}
         <div className="ml-auto flex items-center gap-1.5 xl:ml-0">
-          <div className="hidden sm:block">
+          <div>
             <SearchPopover />
           </div>
           <Link
             href="/portal/login"
             aria-label="Account portal"
-            className="hidden size-10 place-items-center rounded-(--r-sm) text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink-1 sm:grid xl:hidden"
+            className="hidden size-11 place-items-center rounded-(--r-sm) text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink-1 sm:grid xl:hidden"
           >
             <Lock size={16} strokeWidth={2.2} />
           </Link>
@@ -380,7 +436,7 @@ export function SiteNav() {
           {/* Big-ticket, high-anxiety category — people call. The number is the CTA. */}
           <a
             href={SITE.phoneHref}
-            className="hidden h-10 items-center gap-1.5 whitespace-nowrap rounded-(--r-sm) bg-brand px-3.5 text-sm font-medium text-brand-ink transition-colors hover:bg-brand-hover md:inline-flex"
+            className="hidden h-11 items-center gap-1.5 whitespace-nowrap rounded-(--r-sm) bg-brand px-3.5 text-sm font-medium text-brand-ink transition-colors hover:bg-brand-hover md:inline-flex"
           >
             <Phone size={15} strokeWidth={2.2} />
             <span className="tnum">{SITE.phone}</span>
@@ -389,7 +445,7 @@ export function SiteNav() {
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            className="grid size-10 place-items-center rounded-(--r-sm) text-ink-1 transition-colors hover:bg-surface-2 xl:hidden"
+            className="grid size-11 place-items-center rounded-(--r-sm) text-ink-1 transition-colors hover:bg-surface-2 xl:hidden"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>

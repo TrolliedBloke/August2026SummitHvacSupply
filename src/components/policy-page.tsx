@@ -28,20 +28,31 @@ export function PolicyPage({
             {title}
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-2">{intro}</p>
-          <p className="mt-6 text-sm text-ink-3">Last updated {updated}</p>
+          <p className="mt-6 text-sm text-ink-2">Last updated {updated}</p>
         </Container>
       </section>
 
       <Container className="py-10 lg:py-14">
         <div className="max-w-3xl">
-          <div className="rounded-(--r-md) border border-copper/40 bg-copper-tint px-4 py-3 text-sm leading-relaxed text-ink-2">
-            <strong className="font-medium text-ink-1">Draft pending review.</strong>{" "}
-            This policy follows common HVAC-distribution practice and has not yet
-            been reviewed by counsel. Confirm the terms below before relying on
-            them for a purchase.
-          </div>
+          {/* The "not yet reviewed by counsel" notice is for the team, not the
+              customer, and it is deliberately dev-only. Shown publicly it did
+              two harmful things at once: it undercut the reader at the exact
+              moment they were deciding whether to trust a $2,400 purchase, and
+              it arguably weakened the very terms it sat above -- a limitation
+              of liability or a 15% restocking fee is harder to enforce against
+              someone the page told not to rely on it. Tracking review status
+              belongs in the repo, not the viewport. */}
+          {process.env.NODE_ENV !== "production" && (
+            <div className="rounded-(--r-md) border border-copper/40 bg-copper-tint px-4 py-3 text-sm leading-relaxed text-ink-2">
+              <strong className="font-medium text-ink-1">
+                Dev-only notice — not shown to customers.
+              </strong>{" "}
+              This policy follows common HVAC-distribution practice and has not
+              yet been reviewed by counsel. Get sign-off before launch.
+            </div>
+          )}
 
-          <div className="mt-8 flex flex-col gap-8">{children}</div>
+          <div className="flex flex-col gap-8">{children}</div>
 
           <div className="mt-10 rounded-(--r-md) border border-line bg-surface-2/60 px-5 py-4 text-sm leading-relaxed text-ink-2">
             <p className="font-medium text-ink-1">Questions about this policy?</p>
@@ -56,7 +67,7 @@ export function PolicyPage({
               </a>
               . {SITE.hours.split("·")[0].trim()}.
             </p>
-            <p className="mt-2 text-ink-3">{SITE.address.full}</p>
+            <p className="mt-2 text-ink-2">{SITE.address.full}</p>
           </div>
         </div>
       </Container>

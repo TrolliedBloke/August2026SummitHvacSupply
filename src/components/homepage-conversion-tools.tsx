@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, Search } from "lucide-react";
 import * as React from "react";
 import { Field, Input, Select } from "@/components/form";
 import { Button } from "@/components/ui";
+import { postJson } from "@/lib/client/post-json";
 
 const homeTypeOptions = [
   { value: "single_family", label: "Single-family" },
@@ -125,10 +126,8 @@ export function HomepageHomeownerMiniForm() {
     }
     setIsSubmitting(true);
     const form = new FormData(event.currentTarget);
-    const response = await fetch("/api/contact-requests", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    try {
+      await postJson<{ ok: boolean; error?: string }>("/api/contact-requests", {
         topic: "homeowner_one_system",
         name: String(form.get("name") ?? ""),
         email: String(form.get("email") ?? ""),
@@ -140,15 +139,13 @@ export function HomepageHomeownerMiniForm() {
           `Existing ducts: ${ducts}`,
           `Timeline: ${timeline}`,
         ].join("\n"),
-      }),
-    });
-    const payload = await response.json();
-    setIsSubmitting(false);
-    if (!response.ok || !payload.ok) {
-      setError(payload.error ?? "Could not send request.");
-      return;
+      });
+      setSent(true);
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : "Could not send request.");
+    } finally {
+      setIsSubmitting(false);
     }
-    setSent(true);
   }
 
   if (sent) {
@@ -208,8 +205,8 @@ export function HomepageHomeownerMiniForm() {
           </Field>
         </div>
       </div>
-      {error && <p className="mt-4 text-sm text-danger">{error}</p>}
-      <Button type="submit" size="lg" full className="mt-5">
+      {error && <p role="alert" className="mt-4 text-sm text-danger">{error}</p>}
+      <Button type="submit" size="lg" full className="mt-5" disabled={isSubmitting}>
         {isSubmitting ? "Sending..." : "Get Bay Area installer help"}
         <ArrowRight size={18} />
       </Button>

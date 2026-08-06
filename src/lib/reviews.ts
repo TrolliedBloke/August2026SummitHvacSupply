@@ -130,7 +130,7 @@ export const REVIEWS: Record<string, Review[]> = {
       author: "Bill A.", role: "Homeowner", rating: 5, date: "2026-03-14",
       location: "Livermore, CA", verified: true,
       title: "Drop-in replacement for our old split system",
-      body: "Reused existing ducts, new air handler in the same closet footprint. House cools evenly for the first time in 20 years and the 25C tax credit paperwork was straightforward with the AHRI cert Summit provided.",
+      body: "Reused existing ducts, with the new air handler in the same closet footprint. The house cools evenly for the first time in 20 years, and the AHRI certificate kept the equipment documentation organized.",
     },
     {
       author: "Marisol E.", role: "Contractor", rating: 4, date: "2026-01-28",

@@ -27,9 +27,10 @@ import { ProductGallery } from "@/components/product-gallery";
 import { ProductReviews, ReviewStarsInline } from "@/components/product-reviews";
 import { DeliveryEstimate } from "@/components/delivery-estimate";
 import { StickyBuyBar } from "@/components/sticky-buy-bar";
-import { getReviews, reviewSummary } from "@/lib/reviews";
+import { reviewSummary } from "@/lib/reviews";
+import { getPublishedReviews } from "@/lib/backend/reviews";
 import { accessoriesForCategory } from "@/lib/accessories";
-import { PURCHASE, REBATES, SITE, financingMonthly } from "@/lib/site";
+import { PURCHASE, REBATES, SITE } from "@/lib/site";
 import { getSeriesBackendSummary } from "@/lib/backend/services";
 import { getSeededSeriesCardSummary } from "@/lib/backend/catalog";
 import {
@@ -38,6 +39,7 @@ import {
   getStorefrontSkus,
   productHref,
 } from "@/lib/storefront/catalog";
+import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
 
 function currency(value: number) {
   return new Intl.NumberFormat("en-US", {
@@ -57,10 +59,13 @@ export async function generateMetadata({
   const { series } = await params;
   const s = getSeries(series);
   if (!s) return { title: "Product not found" };
-  return {
+  return pageMetadata({
     title: `${s.name} - ${s.family}`,
     description: `${s.tagline} ${s.description}`,
-  };
+    path: `/products/${s.slug}`,
+    image: s.image,
+    index: s.confirm.length === 0,
+  });
 }
 
 export default async function SeriesPage({ params }: PageProps<"/products/[series]">) {
@@ -77,7 +82,7 @@ export default async function SeriesPage({ params }: PageProps<"/products/[serie
   const representativeSku = storefrontSkus[0];
   const priceRange = getSeriesPriceRange(s.slug);
   const msrpBySkuId = new Map(storefrontSkus.map((sku) => [sku.id, sku.msrp]));
-  const reviews = getReviews(s.slug, s.slug);
+  const reviews = await getPublishedReviews(s.slug, s.slug);
   const ratingSummary = reviewSummary(reviews);
 
   const faqs = [
@@ -167,14 +172,14 @@ export default async function SeriesPage({ params }: PageProps<"/products/[serie
 
   return (
     <>
-      <script
+      {s.confirm.length === 0 && <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+      />}
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
       />
 
       {/* Breadcrumb (visible trail + BreadcrumbList JSON-LD) */}
@@ -237,12 +242,12 @@ export default async function SeriesPage({ params }: PageProps<"/products/[serie
                     retail · {priceRange.count} sizes up to {currency(priceRange.high)}
                   </span>
                 </div>
+                {/* Advertising a specific monthly payment triggers Regulation Z
+                    §1026.24(d) disclosure duties (APR, repayment terms, down
+                    payment). Stating that financing exists does not. */}
                 <p className="mt-1.5 text-sm text-ink-2">
-                  As low as{" "}
-                  <span className="tnum font-semibold text-ink-1">
-                    {currency(financingMonthly(priceRange.low))}/mo
-                  </span>{" "}
-                  — {PURCHASE.financingNote}.{" "}
+                  <span className="font-semibold text-ink-1">Financing available</span>{" "}
+                  on approved credit.{" "}
                   <Link href="/portal/login" className="font-medium text-brand hover:text-brand-hover">
                     Contractor? Sign in for pro pricing
                   </Link>
@@ -421,6 +426,16 @@ export default async function SeriesPage({ params }: PageProps<"/products/[serie
         </section>
 
         <ProductReviews reviews={reviews} summary={ratingSummary} />
+
+        <section className="mt-16 border-t border-line pt-7" aria-labelledby="planning-guides">
+          <h2 id="planning-guides" className="font-display text-2xl font-semibold tracking-tight text-ink-1">Project planning guides</h2>
+          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 text-sm">
+            <Link href="/tools/ahri-match-finder" className="text-ink-1 underline underline-offset-4">AHRI match finder</Link>
+            <Link href="/tools/system-sizing-estimator" className="text-ink-1 underline underline-offset-4">Sizing conversation starter</Link>
+            <Link href="/guides/bay-area-hvac-permits" className="text-ink-1 underline underline-offset-4">Bay Area permit planning</Link>
+            <Link href="/guides/r-32-r-454b-a2l-transition" className="text-ink-1 underline underline-offset-4">A2L refrigerant guide</Link>
+          </div>
+        </section>
 
         {/* FAQ — mirrors the FAQPage JSON-LD above (one content source). */}
         <section className="mt-16" aria-labelledby="series-faq">

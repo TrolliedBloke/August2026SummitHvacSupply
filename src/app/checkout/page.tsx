@@ -4,7 +4,7 @@ import { CheckoutClient, type PriceMap } from "@/components/checkout-client";
 import { getStorefrontSkus } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
 
-export const metadata = { title: "Checkout" };
+export const metadata = { title: "Checkout", robots: { index: false, follow: false } };
 
 export default async function CheckoutPage() {
   const profile = await getSessionProfile();

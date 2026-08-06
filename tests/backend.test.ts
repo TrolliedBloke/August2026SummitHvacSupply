@@ -10,7 +10,7 @@ import {
 import { createDemoOperationsData } from "../src/lib/backend/mock-data";
 import { checkoutSchema } from "../src/lib/backend/schemas";
 import { roleCanAccessAccount } from "../src/lib/backend/services";
-import sitemap from "../src/app/sitemap";
+import { categorySitemapEntries, productSitemapEntries, renderSitemapIndex } from "../src/lib/seo/sitemaps";
 import { filterStorefrontSkus, searchStorefrontSkus } from "../src/lib/storefront/catalog";
 import type { InventoryLot, OrderLine } from "../src/lib/backend/types";
 
@@ -104,10 +104,21 @@ describe("checkout validation", () => {
 });
 
 describe("SEO route inventory", () => {
-  it("includes static, homeowner, and SKU URLs in sitemap", () => {
-    const urls = sitemap().map((entry) => entry.url);
+  it("includes clean static URLs and excludes portal URLs", () => {
+    const urls = categorySitemapEntries().map((entry) => entry.url);
     assert.ok(urls.includes("https://www.summithvacsupply.com/homeowners"));
-    assert.ok(urls.includes("https://www.summithvacsupply.com/products/sku/TSC-09HA2-I3TI23"));
+    assert.ok(!urls.some((url) => url.includes("/portal")));
+  });
+
+  it("publishes only verified product records", () => {
+    const urls = productSitemapEntries().map((entry) => entry.url);
+    assert.ok(!urls.includes("https://www.summithvacsupply.com/products/sku/TSC-09HA2-I3TI23"));
+  });
+
+  it("renders a split sitemap index", () => {
+    const xml = renderSitemapIndex();
+    assert.match(xml, /sitemap-products\.xml/);
+    assert.match(xml, /sitemap-guides\.xml/);
   });
 });
 

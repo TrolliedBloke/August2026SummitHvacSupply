@@ -32,6 +32,7 @@ type QuoteState = {
 
 const QuoteCtx = React.createContext<QuoteState | null>(null);
 const STORAGE_KEY = "summit-quote-v1";
+export const MAX_CART_QUANTITY = 200;
 
 function readStoredItems(): QuoteItem[] {
   if (typeof window === "undefined") return [];
@@ -51,7 +52,12 @@ function readStoredItems(): QuoteItem[] {
         typeof (item as QuoteItem).image === "string" &&
         typeof (item as QuoteItem).unitPrice === "number" &&
         typeof (item as QuoteItem).available === "number" &&
-        typeof (item as QuoteItem).qty === "number"
+        typeof (item as QuoteItem).qty === "number" &&
+        Number.isInteger((item as QuoteItem).qty) &&
+        (item as QuoteItem).qty >= 1 &&
+        (item as QuoteItem).qty <= MAX_CART_QUANTITY &&
+        Number.isFinite((item as QuoteItem).unitPrice) &&
+        Number.isFinite((item as QuoteItem).available)
     );
   } catch {
     return [];
@@ -74,7 +80,11 @@ export function QuoteProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => {
       const existing = prev.find((i) => i.skuId === item.skuId);
       if (existing) {
-        return prev.map((i) => (i.skuId === item.skuId ? { ...i, ...item, qty: i.qty + 1 } : i));
+        return prev.map((i) =>
+          i.skuId === item.skuId
+            ? { ...i, ...item, qty: Math.min(MAX_CART_QUANTITY, i.qty + 1) }
+            : i
+        );
       }
       return [...prev, { ...item, qty: 1 }];
     });
@@ -89,9 +99,11 @@ export function QuoteProvider({ children }: { children: React.ReactNode }) {
     // NaN or junk input must never delete a line item — keep the prior qty.
     if (!Number.isFinite(qty)) return;
     setItems((prev) =>
-      prev
-        .map((i) => (i.skuId === skuId ? { ...i, qty: Math.max(0, Math.floor(qty)) } : i))
-        .filter((i) => i.qty > 0)
+      prev.map((i) =>
+        i.skuId === skuId
+          ? { ...i, qty: Math.min(MAX_CART_QUANTITY, Math.max(1, Math.floor(qty))) }
+          : i
+      )
     );
   }, []);
 

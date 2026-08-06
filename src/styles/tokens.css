@@ -1,7 +1,8 @@
 :root {
   --ink: #1C1C1A;
   --text-2: #5F5E5A;
-  --text-muted: #8A8880;
+  /* Passes WCAG AA for normal text on both --page and --surface. */
+  --text-muted: #6F6E69;
   --page: #FAFAF8;
   --surface: #FFFFFF;
   --border: #E3E1DA;

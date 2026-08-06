@@ -5,8 +5,11 @@ import Link from "next/link";
 import { Check, ArrowRight, ArrowLeft, CheckCircle2, Building2, FileBadge, TrendingUp } from "lucide-react";
 import * as React from "react";
 import { Container, Eyebrow, Button } from "@/components/ui";
+import { TestimonialSlot } from "@/components/testimonial-slot";
+import { CONTRACTOR_TESTIMONIALS } from "@/lib/testimonials";
 import { Field, Input, Textarea, Select } from "@/components/form";
 import { SITE } from "@/lib/site";
+import { postJson } from "@/lib/client/post-json";
 
 const STEPS = [
   { id: 1, label: "Company", icon: Building2 },
@@ -48,10 +51,8 @@ export default function DealersPage() {
     collectDraft(e.currentTarget);
     setIsSubmitting(true);
     setError(null);
-    const response = await fetch("/api/dealer-applications", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    try {
+      const payload = await postJson<{ ok: boolean; id?: string; error?: string }>("/api/dealer-applications", {
         company: draftRef.current.company ?? "",
         contactName: draftRef.current.contact ?? "",
         email: draftRef.current.email ?? "",
@@ -62,17 +63,15 @@ export default function DealersPage() {
         monthlyVolume: draftRef.current.volume ?? volume,
         brands: draftRef.current.brands ?? "",
         notes: draftRef.current.notes ?? "",
-      }),
-    });
-    const payload = await response.json();
-    setIsSubmitting(false);
-    if (!response.ok || !payload.ok) {
-      setError(payload.error ?? "Could not prepare account request.");
-      return;
+      });
+      setRequestId(payload.id ?? null);
+      setDone(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : "Could not prepare account request.");
+    } finally {
+      setIsSubmitting(false);
     }
-    setRequestId(payload.id ?? null);
-    setDone(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
@@ -102,6 +101,13 @@ export default function DealersPage() {
           </div>
         </Container>
       </section>
+
+      {/* Company proof stays beside the application. Demo fixtures are visibly
+          labeled in development and production remains consent-gated. */}
+      <TestimonialSlot
+        items={CONTRACTOR_TESTIMONIALS}
+        className="mx-auto w-full max-w-[1180px] px-5 pt-12 sm:px-6 lg:px-8"
+      />
 
       <Container className="py-12 lg:py-16">
         <div className="mx-auto max-w-xl">
@@ -259,12 +265,12 @@ export default function DealersPage() {
                       Continue <ArrowRight size={16} />
                     </Button>
                   ) : (
-                    <Button type="submit">
+                    <Button type="submit" disabled={isSubmitting}>
                       {isSubmitting ? "Preparing..." : "Prepare account request"} <Check size={16} strokeWidth={2.5} />
                     </Button>
                   )}
                 </div>
-                {error && <p className="mt-4 text-sm text-danger">{error}</p>}
+                {error && <p role="alert" className="mt-4 text-sm text-danger">{error}</p>}
               </form>
               <p className="mt-3 text-center text-xs text-ink-4">
                 Step {step} of 3.

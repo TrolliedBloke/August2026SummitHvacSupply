@@ -14,6 +14,7 @@ import Link from "next/link";
 import { Container, Eyebrow, Button } from "@/components/ui";
 import { Field, Input, Textarea, Select } from "@/components/form";
 import { SITE } from "@/lib/site";
+import { postJson } from "@/lib/client/post-json";
 
 export default function ContactPage() {
   const [topic, setTopic] = React.useState("");
@@ -81,25 +82,21 @@ export default function ContactPage() {
                   return;
                 }
                 const form = new FormData(e.currentTarget);
-                const response = await fetch("/api/contact-requests", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
+                try {
+                  const payload = await postJson<{ ok: boolean; id?: string; error?: string }>("/api/contact-requests", {
                     topic,
                     name: String(form.get("name") ?? ""),
                     email: String(form.get("email") ?? ""),
                     message: String(form.get("message") ?? ""),
-                  }),
-                });
-                const payload = await response.json();
-                setIsSubmitting(false);
-                if (!response.ok || !payload.ok) {
-                  setError(payload.error ?? "Could not prepare message.");
-                  return;
+                  });
+                  setRequestId(payload.id ?? null);
+                  setSent(true);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                } catch (submitError) {
+                  setError(submitError instanceof Error ? submitError.message : "Could not prepare message.");
+                } finally {
+                  setIsSubmitting(false);
                 }
-                setRequestId(payload.id ?? null);
-                setSent(true);
-                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               className="mt-8 flex flex-col gap-5"
             >
@@ -144,11 +141,11 @@ export default function ContactPage() {
                   placeholder="How can we help?"
                 />
               </Field>
-              <Button type="submit" size="lg" className="self-start">
+              <Button type="submit" size="lg" className="self-start" disabled={isSubmitting}>
                 {isSubmitting ? "Preparing..." : "Prepare request"}{" "}
                 <ArrowRight size={18} />
               </Button>
-              {error && <p className="text-sm text-danger">{error}</p>}
+              {error && <p role="alert" className="text-sm text-danger">{error}</p>}
             </form>
           )}
         </div>

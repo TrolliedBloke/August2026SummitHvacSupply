@@ -2,8 +2,10 @@
 
 import { redirect } from "next/navigation";
 import { createServerSupabase } from "./supabase-ssr";
+import { safeNextPath } from "@/lib/safe-redirect";
 
 export type AuthResult = { ok: boolean; error?: string };
+
 
 /**
  * Email/password sign-in. On success the session cookie is set by the SSR
@@ -12,7 +14,7 @@ export type AuthResult = { ok: boolean; error?: string };
 export async function signIn(_prev: AuthResult, formData: FormData): Promise<AuthResult> {
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
-  const next = String(formData.get("next") ?? "") || "/portal";
+  const next = safeNextPath(String(formData.get("next") ?? ""), "/portal");
 
   if (!email || !password) {
     return { ok: false, error: "Enter your email and password." };

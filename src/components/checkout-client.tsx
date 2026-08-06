@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Check, Truck, Store, PackageCheck, ArrowRight, Lock, RotateCcw, ShieldCheck } from "lucide-react";
-import { useQuote } from "./quote-context";
+import { MAX_CART_QUANTITY, useQuote } from "./quote-context";
 import { useFulfillment } from "./fulfillment-context";
 import { ZipGate } from "./zip-gate";
 import {
@@ -60,6 +60,7 @@ export function CheckoutClient({
   const [submitting, setSubmitting] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
+  const submitLockRef = React.useRef(false);
 
   const touch = (field: string) => setTouched((t) => ({ ...t, [field]: true }));
 
@@ -142,6 +143,8 @@ export function CheckoutClient({
   }
 
   async function placeOrder() {
+    if (submitLockRef.current) return;
+    submitLockRef.current = true;
     setSubmitting(true);
     setError(null);
     try {
@@ -179,6 +182,7 @@ export function CheckoutClient({
     } catch (e) {
       setError(e instanceof Error ? e.message : "Checkout failed");
     } finally {
+      submitLockRef.current = false;
       setSubmitting(false);
     }
   }
@@ -197,6 +201,7 @@ export function CheckoutClient({
   const showError = (field: string) => (touched[field] ? fieldErrors[field] : null);
 
   function handleSubmit() {
+    if (submitLockRef.current || submitting) return;
     if (invalidFields.length > 0) {
       // Mark everything touched so every inline message appears at once.
       setTouched({ buyerName: true, buyerEmail: true, phone: true, address: true });
@@ -256,6 +261,24 @@ export function CheckoutClient({
               </button>
             ))}
           </div>
+
+          {/* One contextual assurance, matched to the method just chosen.
+              Deliberately an operational commitment rather than a testimonial
+              or a star rating: at this step the open question is "what happens
+              after I pay", and a stranger's quote does not answer it. Freight
+              gets the cost reassurance because an unquoted LTL charge is the
+              single largest unknown in this flow. */}
+          <p className="mt-3 flex items-start gap-2 rounded-(--r-sm) bg-surface-2/70 px-3 py-2.5 text-sm leading-snug text-ink-2">
+            <ShieldCheck size={16} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
+            <span>
+              {selectedMethod === "pickup" &&
+                "We confirm your order before it leaves the counter, and stage it under your name at Newark will-call. You get a confirmed pickup window by email."}
+              {selectedMethod === "local_delivery" &&
+                "We confirm your order before dispatch and send a confirmed delivery window. Someone should be on site to receive and inspect the equipment."}
+              {selectedMethod === "freight" &&
+                "Freight is quoted and confirmed with you before your card is charged anything beyond the item total. Inspect the pallet before signing the carrier's receipt."}
+            </span>
+          </p>
         </section>
 
         {selectedMethod !== "freight" && (
@@ -391,15 +414,21 @@ export function CheckoutClient({
                   <input
                     type="number"
                     min={1}
+                    max={MAX_CART_QUANTITY}
                     value={l.qty}
                     aria-label={`Quantity for ${l.title}`}
                     onChange={(e) => {
                       // Clamp manual entry — an empty or junk value must never
                       // become NaN/0 (setQty removes lines at qty 0).
                       const n = Math.floor(Number(e.target.value));
-                      setQty(l.skuId, Number.isFinite(n) && n >= 1 ? n : 1);
+                      setQty(
+                        l.skuId,
+                        Number.isFinite(n)
+                          ? Math.min(MAX_CART_QUANTITY, Math.max(1, n))
+                          : 1
+                      );
                     }}
-                    className="tnum h-7 w-14 rounded-(--r-sm) border border-control-border bg-control-bg px-2 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/25"
+                    className="tnum h-11 w-16 rounded-(--r-sm) border border-control-border bg-control-bg px-2 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/25"
                   />
                   <span className="text-xs text-ink-3">{l.sku} × {currency(l.unit)}</span>
                 </div>
@@ -427,7 +456,7 @@ export function CheckoutClient({
 
         <div aria-live="polite">
           {error && (
-            <p className="mt-3 rounded-(--r-sm) bg-danger-tint px-3 py-2 text-sm font-medium text-danger">
+            <p role="alert" className="mt-3 rounded-(--r-sm) bg-danger-tint px-3 py-2 text-sm font-medium text-danger">
               {error}
             </p>
           )}

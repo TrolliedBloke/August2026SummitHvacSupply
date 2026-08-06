@@ -24,11 +24,11 @@ export function SiteFooter() {
                 <MapPin size={16} className="mt-0.5 shrink-0" />
                 <span>{SITE.address.full}</span>
               </div>
-              <a href={SITE.phoneHref} className="flex items-center gap-2.5 text-brand-ink/75 hover:text-brand-ink">
+              <a href={SITE.phoneHref} className="flex min-h-11 items-center gap-2.5 text-brand-ink/75 hover:text-brand-ink">
                 <Phone size={16} className="shrink-0" />
                 {SITE.phone}
               </a>
-              <a href={SITE.emailHref} className="flex items-center gap-2.5 text-brand-ink/75 hover:text-brand-ink">
+              <a href={SITE.emailHref} className="flex min-h-11 items-center gap-2.5 text-brand-ink/75 hover:text-brand-ink">
                 <Mail size={16} className="shrink-0" />
                 {SITE.email}
               </a>
@@ -54,6 +54,7 @@ export function SiteFooter() {
             <FooterLink href="/homeowners">For Homeowners</FooterLink>
             <FooterLink href="/dealers">For Contractors</FooterLink>
             <FooterLink href="/portal/login">Account Portal</FooterLink>
+            <FooterLink href="/locations/newark">Newark location</FooterLink>
           </FooterCol>
 
           <FooterCol title="Policies">
@@ -62,6 +63,8 @@ export function SiteFooter() {
             <FooterLink href="/resources">Warranty & FAQ</FooterLink>
             <FooterLink href="/privacy">Privacy Policy</FooterLink>
             <FooterLink href="/terms">Terms of Service</FooterLink>
+            <FooterLink href="/tools/model-number-decoder">Model decoder</FooterLink>
+            <FooterLink href="/guides/bay-area-hvac-permits">Permit guide</FooterLink>
           </FooterCol>
 
           <div>
@@ -110,7 +113,7 @@ function FooterCol({ title, children }: { title: string; children: React.ReactNo
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <li>
-      <Link href={href} className="text-sm text-white/65 transition-colors hover:text-white">
+      <Link href={href} className="flex min-h-11 items-center text-sm text-white/65 transition-colors hover:text-white">
         {children}
       </Link>
     </li>

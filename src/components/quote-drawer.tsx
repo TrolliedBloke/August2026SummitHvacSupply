@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { X, Minus, Plus, Trash2, FileText, Wrench } from "lucide-react";
 import * as React from "react";
-import { useQuote } from "./quote-context";
+import { MAX_CART_QUANTITY, useQuote } from "./quote-context";
 import { getStorefrontSku, productHref } from "@/lib/storefront/catalog";
 import { accessoriesForCategory, type Accessory } from "@/lib/accessories";
 import { SaveCartAsList } from "./saved-lists";
@@ -84,7 +84,7 @@ export function QuoteDrawer() {
             ref={closeRef}
             onClick={close}
             aria-label="Close cart"
-            className="grid size-9 place-items-center rounded-(--r-sm) text-ink-2 hover:bg-surface-2 hover:text-ink-1"
+            className="grid size-11 place-items-center rounded-(--r-sm) text-ink-2 hover:bg-surface-2 hover:text-ink-1"
           >
             <X size={18} />
           </button>
@@ -144,7 +144,7 @@ export function QuoteDrawer() {
                     <button
                       onClick={() => setQty(item.skuId, item.qty - 1)}
                       aria-label="Decrease quantity"
-                      className="grid size-8 place-items-center text-ink-2 hover:text-ink-1"
+                      className="grid size-11 place-items-center text-ink-2 hover:text-ink-1"
                     >
                       <Minus size={14} />
                     </button>
@@ -152,9 +152,9 @@ export function QuoteDrawer() {
                       {item.qty}
                     </span>
                     <button
-                      onClick={() => setQty(item.skuId, item.qty + 1)}
+                      onClick={() => setQty(item.skuId, Math.min(MAX_CART_QUANTITY, item.qty + 1))}
                       aria-label="Increase quantity"
-                      className="grid size-8 place-items-center text-ink-2 hover:text-ink-1"
+                      className="grid size-11 place-items-center text-ink-2 hover:text-ink-1"
                     >
                       <Plus size={14} />
                     </button>

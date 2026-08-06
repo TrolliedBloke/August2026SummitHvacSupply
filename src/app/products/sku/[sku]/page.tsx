@@ -18,11 +18,13 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { NotifyMe } from "@/components/notify-me";
 import { ProductGallery } from "@/components/product-gallery";
 import { ProductPurchasePanel } from "@/components/product-purchase-panel";
+import { StickyBuyBar } from "@/components/sticky-buy-bar";
 import { BuyBoxAssurance } from "@/components/buy-box-assurance";
 import { ReviewStarsInline } from "@/components/product-reviews";
 import { Container, LinkButton } from "@/components/ui";
 import { accessoriesForCategory } from "@/lib/accessories";
-import { getReviews, reviewSummary } from "@/lib/reviews";
+import { reviewSummary } from "@/lib/reviews";
+import { getPublishedReviews } from "@/lib/backend/reviews";
 import {
   documentHref,
   getRelatedSkus,
@@ -32,6 +34,8 @@ import {
   skuSlug,
 } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
+import { getSkuAlternatives, getSkuSeoState } from "@/lib/seo/catalog";
+import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
 
 export function generateStaticParams() {
   return getStorefrontSkus().map((sku) => ({ sku: skuSlug(sku.sku) }));
@@ -41,11 +45,14 @@ export async function generateMetadata({ params }: PageProps<"/products/sku/[sku
   const { sku: skuParam } = await params;
   const sku = getStorefrontSku(decodeURIComponent(skuParam));
   if (!sku) return { title: "SKU not found" };
-  return {
+  const seo = getSkuSeoState(sku);
+  return pageMetadata({
     title: `${sku.sku} - ${sku.title}`,
     description: `${sku.title}. ${sku.btu.toLocaleString()} BTU, ${sku.voltage}, ${sku.refrigerant}. See price and Newark availability.`,
-    alternates: { canonical: productHref(sku) },
-  };
+    path: productHref(sku),
+    image: sku.image,
+    index: seo.indexable,
+  });
 }
 
 export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]">) {
@@ -53,7 +60,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
   const sku = getStorefrontSku(decodeURIComponent(skuParam));
   if (!sku) notFound();
 
-  const reviews = getReviews(sku.id, sku.seriesSlug);
+  const reviews = await getPublishedReviews(sku.id, sku.seriesSlug);
   const summary = reviewSummary(reviews);
   const isEquipment = sku.msrp >= 500;
   const needsProfessionalInstall = isEquipment || sku.refrigerant !== "None" || sku.voltage.includes("230");
@@ -63,6 +70,8 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
   const hasRebatePath = isEquipment && (sku.title.toLowerCase().includes("heat") || sku.category === "ducted");
   const systemBuilder = isEquipment && ["ductless", "ducted", "commercial"].includes(sku.category);
   const related = getRelatedSkus(sku, 6);
+  const alternatives = getSkuAlternatives(sku, getStorefrontSkus());
+  const seo = getSkuSeoState(sku);
   const equivalent = related.find((item) => item.available > 0);
   const branches = branchStock(sku.available);
 
@@ -70,6 +79,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
     "@context": "https://schema.org",
     "@type": "Product",
     name: sku.title,
+    description: `${sku.title}, ${sku.btu.toLocaleString()} BTU, ${sku.voltage}, ${sku.refrigerant}.`,
     sku: sku.sku,
     mpn: sku.modelNumber,
     image: `${SITE.origin}${sku.image}`,
@@ -87,7 +97,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      {seo.indexable && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />}
       <div className="border-b border-line bg-surface-1">
         <Container className="py-3">
           <Breadcrumbs items={[
@@ -165,6 +175,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
         {needsJobKit && <JobKit category={sku.category} />}
         {!isEquipment && <BulkPricing sku={sku} />}
         {!isEquipment && related.length > 0 && <RelatedParts items={related.slice(0, 4)} />}
+        {isEquipment && alternatives.length > 0 && <AlternativeModels items={alternatives} />}
 
         <section className="mt-6 overflow-hidden rounded-(--r-sm) border border-line bg-surface-1" aria-label="Product details">
           <Detail title="Specifications" summary="Performance, electrical, dimensions, and identifiers." icon={<Box size={19} />}>
@@ -181,12 +192,12 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
           </Detail>
           <Detail title="Documents" summary="Submittals, manuals, wiring diagrams, and certificates." icon={<FileText size={19} />}>
             <div className="grid gap-2 sm:grid-cols-2">
-              {sku.documents.map((doc) => <a key={doc.id} href={documentHref(doc)} className="flex items-center justify-between rounded-(--r-sm) border border-line p-3 text-sm text-ink-1"><span>{doc.title}</span><span aria-hidden>Download</span></a>)}
+              {sku.documents.map((doc) => <a key={doc.id} href={documentHref(doc)} data-conversion-hook="product-document-download" className="flex items-center justify-between rounded-(--r-sm) border border-line p-3 text-sm text-ink-1"><span>{doc.title}</span><span aria-hidden>Download</span></a>)}
             </div>
           </Detail>
           {hasWarrantyWindow && <Detail title="Warranty" summary="Coverage details and registration information." icon={<ShieldCheck size={19} />}><p>{sku.warrantyCompressor} compressor coverage and {sku.warrantyParts} parts coverage. Confirm registration timing in the manufacturer warranty document.</p></Detail>}
           {needsProfessionalInstall && <Detail title="Who can install this" summary="Licensed contractor required for final installation." icon={<UserRound size={19} />}><p>Final sizing, electrical work, refrigerant work, permits, startup, and commissioning must be confirmed by a qualified local contractor.</p><Link href="/homeowners#homeowner-request" className="mt-3 inline-flex underline underline-offset-4">Get Bay Area installer help</Link></Detail>}
-          {hasCompliance && <Detail title="Compliance and permits" summary="A2L refrigerant and local code requirements." icon={<FileText size={19} />}><p>Installer must confirm current Bay Area permit, California code, Title 24, and refrigerant handling requirements for the project address.</p></Detail>}
+          {hasCompliance && <Detail title="Compliance and permits" summary="A2L refrigerant and local code requirements." icon={<FileText size={19} />}><p>Installer must confirm current Bay Area permit, California code, Title 24, and refrigerant handling requirements for the project address.</p><Link href="/guides/california-title-24-hvac-changeouts" className="mt-3 inline-flex underline underline-offset-4">Read California changeout guidance</Link></Detail>}
           {hasRebatePath && <Detail title="Rebate eligibility" summary="Check program and matched-system requirements before ordering." icon={<Check size={19} />}><p>Eligibility depends on the complete matched system, installation address, contractor documentation, and active program rules. Verify before purchase.</p><Link href="/bay-area-heat-pump-rebates" className="mt-3 inline-flex underline underline-offset-4">See Bay Area rebate guidance</Link></Detail>}
           <Detail title="Q&A" summary="Get product questions answered." icon={<CircleHelp size={19} />}><p>Need a compatibility or application check? Send the part number and job conditions to the Summit counter.</p><LinkButton href={`/contact?sku=${encodeURIComponent(sku.sku)}`} variant="secondary" className="mt-4">Ask a product question</LinkButton></Detail>
           <Detail title={`Customer reviews${summary ? ` (${summary.count})` : ""}`} summary={summary ? `${summary.average.toFixed(1)} average rating` : "No reviews yet"} icon={<Star size={19} />} id="reviews">
@@ -194,8 +205,13 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
           </Detail>
         </section>
       </Container>
+      {sku.available > 0 && <StickyBuyBar sku={sku} priceLabel={currency(sku.msrp)} />}
     </>
   );
+}
+
+function AlternativeModels({ items }: { items: NonNullable<ReturnType<typeof getStorefrontSku>>[] }) {
+  return <section className="mt-5" aria-labelledby="alternative-models"><div className="flex flex-wrap items-end justify-between gap-2"><div><h2 id="alternative-models" className="font-medium text-ink-1">Alternative models</h2><p className="mt-1 text-sm text-ink-2">Nearby capacities in the same equipment category. Confirm the final match before ordering.</p></div><Link href="/tools/ahri-match-finder" className="text-sm text-ink-1 underline underline-offset-4">Check AHRI matches</Link></div><div className="mt-3 grid gap-3 sm:grid-cols-3">{items.map((item) => <Link key={item.id} href={productHref(item)} className="rounded-(--r-sm) border border-line bg-surface-1 p-4"><span className="part-number text-sm text-ink-1">{item.sku}</span><span className="mt-2 block text-sm text-ink-2">{item.title}</span><span className={`mt-3 block text-xs ${item.available > 0 ? "text-stock-ready" : "text-ink-3"}`}>{item.available > 0 ? `${item.available} on the shelf in Newark` : "Contact the counter for lead time"}</span></Link>)}</div></section>;
 }
 
 function AudienceSplit() {

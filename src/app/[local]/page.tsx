@@ -5,6 +5,8 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Container, Eyebrow, LinkButton } from "@/components/ui";
 import { getLocalPage, LOCAL_PAGES } from "@/lib/local-pages";
 import { SITE } from "@/lib/site";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
 
 export function generateStaticParams() {
   return LOCAL_PAGES.map((page) => ({ local: page.slug }));
@@ -14,11 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/[local]">): Promi
   const { local } = await params;
   const page = getLocalPage(local);
   if (!page) return { title: "Page not found" };
-  return {
-    title: page.title,
-    description: page.description,
-    alternates: { canonical: `/${page.slug}` },
-  };
+  return pageMetadata({ title: page.title, description: page.description, path: `/${page.slug}` });
 }
 
 export default async function LocalPage({ params }: PageProps<"/[local]">) {
@@ -44,11 +42,12 @@ export default async function LocalPage({ params }: PageProps<"/[local]">) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(serviceJsonLd) }}
       />
       <section className="border-b border-line bg-surface-1">
         <Container className="py-14 lg:py-20">
-          <Eyebrow>{page.eyebrow}</Eyebrow>
+          <Breadcrumbs items={[{ label: "Resources", href: "/resources" }, { label: page.eyebrow, href: `/${page.slug}` }]} />
+          <div className="mt-5"><Eyebrow>{page.eyebrow}</Eyebrow></div>
           <h1 className="mt-3 max-w-3xl font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
             {page.h1}
           </h1>

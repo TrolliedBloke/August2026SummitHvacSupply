@@ -35,8 +35,8 @@ export default function TermsPage() {
       <PolicySection heading="Equipment must be installed correctly to stay warranted">
         <p>
           Manufacturer warranties are generally void where equipment is
-          installed by an unlicensed party, installed outside the manufacturer's
-          published specifications, or not registered within the required
+          installed by an unlicensed party, installed outside the
+          manufacturer&apos;s published specifications, or not registered within the required
           window. Refrigerant handling is federally regulated and requires EPA
           Section 608 certification. Buying a unit here does not confer the
           right to charge it yourself.
@@ -96,7 +96,7 @@ export default function TermsPage() {
 
       <PolicySection heading="Warranty disclaimer">
         <p>
-          Equipment sold here carries the manufacturer's warranty, and that
+          Equipment sold here carries the manufacturer&apos;s warranty, and that
           warranty is the exclusive remedy for a defective product. Except for
           the express commitments we make on our returns page,{" "}
           {SITE.legalName} disclaims all other warranties, express or implied,
@@ -140,7 +140,7 @@ export default function TermsPage() {
           Do not scrape, resell, or republish our catalog data, pricing, or
           documentation without written permission. Do not attempt to access
           accounts, orders, or administrative areas that are not yours. Site
-          content, layout, and product photography are ours or our suppliers';
+          content, layout, and product photography are ours or our suppliers&apos;;
           manufacturer trademarks belong to their owners.
         </p>
       </PolicySection>

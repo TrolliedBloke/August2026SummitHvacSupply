@@ -7,7 +7,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * cheap edge-level gate on /admin and the staff portal areas (defense in depth;
  * the real enforcement is RLS in Postgres).
  */
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const path = request.nextUrl.pathname;

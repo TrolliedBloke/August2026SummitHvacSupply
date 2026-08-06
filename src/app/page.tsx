@@ -13,11 +13,20 @@ import {
 } from "lucide-react";
 import { LinkButton } from "@/components/ui";
 import { SITE } from "@/lib/site";
+import { getStorefrontSkus } from "@/lib/storefront/catalog";
+
+/* Live shelf count. Was hardcoded as "16", which drifts silently the moment
+   inventory moves -- and a stock promise that turns out to be wrong is worse
+   than no promise for a supplier whose whole pitch is "pickup today". */
+function inStockCount(): number {
+  return getStorefrontSkus().filter((sku) => sku.available > 0).length;
+}
 
 export const metadata: Metadata = {
   title: "Bay area HVAC supply, parts, heat pumps, and pickup | Summit HVAC Supply",
   description:
     "Search Bay Area HVAC stock, shop TCL heat pumps and mini splits, get homeowner installer help, or use contractor will-call from Summit HVAC Supply in Newark, CA.",
+  alternates: { canonical: "/" },
 };
 
 const examples = ["TH09SVH23BW", "2.5 ton heat pump", "R-454B", "line set"];
@@ -61,7 +70,7 @@ const categories = [
 const branches = [
   {
     name: "Newark",
-    stock: "16 systems in stock",
+    stock: `${inStockCount()} systems in stock`,
     address: SITE.address.full,
     note: "Will-call until 5:00pm",
   },
@@ -88,7 +97,7 @@ const branches = [
 const proof = [
   { title: "Real stock.", body: "Updated for local fulfillment.", icon: <Package /> },
   { title: "Real people.", body: "Local help, not a call center.", icon: <Home /> },
-  { title: "Ready when you are.", body: "Order by 4pm. Pick up today.", icon: <CheckCircle2 /> },
+  { title: "Ready when you are.", body: "Order by 2:00p PT. Pick up today.", icon: <CheckCircle2 /> },
   { title: "Trade account pricing.", body: "Apply once. Save every time.", icon: <ClipboardCheck /> },
 ];
 
@@ -183,7 +192,7 @@ export default function HomePage() {
             <div className="mt-5 flex flex-col gap-2 text-[0.95rem] text-ink-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5">
               <span className="inline-flex items-center gap-2 text-brand">
                 <CheckCircle2 size={21} strokeWidth={1.8} aria-hidden="true" />
-                16 on the shelf in Newark
+                {inStockCount()} on the shelf in Newark
               </span>
               <span className="hidden sm:inline" aria-hidden="true">·</span>
               <span>Will-call until 5:00pm</span>
@@ -195,7 +204,7 @@ export default function HomePage() {
       <MobileBranchStrip />
 
       <section className="bg-canvas pb-4 pt-5 md:pb-5">
-        <CounterContainer className="grid gap-2 md:grid-cols-2">
+        <CounterContainer className="grid gap-2 lg:grid-cols-2">
           {doors.map((door) => (
             <DoorCard key={door.title} {...door} />
           ))}
@@ -295,7 +304,7 @@ function DoorCard({
         : "grid-cols-[96px_minmax(0,1fr)] md:grid-cols-[118px_minmax(0,1fr)]"
     }`}>
       <div className={`relative aspect-square w-full ${mediaSide === "right" ? "order-2" : ""}`} aria-hidden="true">
-        <Image src={image} alt="" fill preload sizes="(min-width: 768px) 190px, 120px" className="object-contain" />
+        <Image src={image} alt="" fill loading="lazy" sizes="(min-width: 768px) 190px, 120px" className="object-contain" />
       </div>
       <div className={`min-w-0 ${mediaSide === "right" ? "order-1" : ""}`}>
         <p className="text-sm font-medium text-ink-1">{eyebrow}</p>
@@ -328,7 +337,7 @@ function CategoryCard({
       data-conversion-hook="category-tile-click"
     >
       <span className="relative block aspect-square w-full" aria-hidden="true">
-        <Image src={image} alt="" fill loading="eager" sizes="(min-width: 640px) 68px, 58px" className="object-contain" />
+        <Image src={image} alt="" fill loading="lazy" sizes="(min-width: 640px) 68px, 58px" className="object-contain" />
       </span>
       <span className="min-w-0">
         <span className="block text-base font-medium leading-tight text-ink-1">{title}</span>

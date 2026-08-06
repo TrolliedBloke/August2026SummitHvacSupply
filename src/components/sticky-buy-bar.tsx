@@ -1,4 +1,8 @@
-import { AddToQuote } from "./add-to-quote";
+"use client";
+
+import { Check } from "lucide-react";
+import * as React from "react";
+import { useQuote } from "./quote-context";
 import type { StorefrontSku } from "@/lib/storefront/catalog";
 
 /* Mobile-only sticky purchase bar — keeps price + CTA in reach on long PDPs.
@@ -10,6 +14,23 @@ export function StickyBuyBar({
   sku: StorefrontSku;
   priceLabel: string;
 }) {
+  const { add } = useQuote();
+  const [added, setAdded] = React.useState(false);
+
+  function reserve() {
+    add({
+      skuId: sku.id,
+      sku: sku.sku,
+      modelNumber: sku.modelNumber,
+      title: sku.title,
+      image: sku.image,
+      unitPrice: sku.msrp,
+      available: sku.available,
+    });
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 1400);
+  }
+
   return (
     <>
       <div className="h-20 lg:hidden" aria-hidden />
@@ -17,11 +38,18 @@ export function StickyBuyBar({
         <div className="mx-auto flex w-full max-w-[1180px] items-center gap-3 px-5 py-3">
           <div className="min-w-0 flex-1">
             <p className="truncate text-xs text-ink-3">{sku.seriesName}</p>
-            <p className="tnum font-display text-lg font-semibold leading-tight text-ink-1">
+            <p className="tnum font-display text-lg font-medium leading-tight text-ink-1">
               {priceLabel}
             </p>
           </div>
-          <AddToQuote sku={sku} size="md" />
+          <button
+            type="button"
+            onClick={reserve}
+            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink"
+          >
+            {added && <Check size={16} aria-hidden="true" />}
+            {added ? "Reserved" : "Reserve for pickup"}
+          </button>
         </div>
       </div>
     </>

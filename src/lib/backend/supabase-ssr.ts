@@ -16,6 +16,15 @@ const PUBLIC_KEY =
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
+/*
+ * NOTE ON SESSION REFRESH: the proxy (src/proxy.ts) now runs only on
+ * /admin, /portal and /checkout, so it no longer refreshes the Supabase
+ * session on public routes. That is deliberate -- it kept a network round-trip
+ * out of the critical path of the homepage and every product page -- but it
+ * means a Server Component OUTSIDE those paths cannot assume a freshly
+ * refreshed cookie. Call getSessionProfile() there only for optional
+ * personalisation, never as a gate.
+ */
 export function hasSupabaseAuthEnv(): boolean {
   return Boolean(URL && PUBLIC_KEY);
 }

@@ -1,7 +1,7 @@
 import { checkoutSchema } from "./schemas";
 import { getStorefrontSku } from "@/lib/storefront/catalog";
 import { getSessionProfile } from "./auth";
-import { createServerSupabaseClient } from "./supabase";
+import { createServiceRoleSupabaseClient } from "./supabase";
 import { getStripe } from "./stripe";
 import { localDeliveryFee, resolveZone, WAREHOUSE, type FulfillmentMethod } from "./fulfillment";
 import { estimateTax } from "./pricing";
@@ -64,7 +64,9 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   const tax = payment === "card" ? estimateTax(subtotal) : 0;
   const total = round(subtotal + fee + tax);
 
-  const supabase = createServerSupabaseClient();
+  // Public checkout must use the trusted server client. The anonymous client
+  // cannot insert orders under RLS or call reserve_public_order.
+  const supabase = createServiceRoleSupabaseClient();
   const orderNumber = "SO-" + Date.now().toString(36).toUpperCase();
 
   // A placed order ends any pending abandoned-cart sequence (best-effort).
@@ -121,10 +123,17 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
       unit_price: l.unitPrice,
     }))
   );
-  if (lineError) throw new Error(lineError.message);
+  if (lineError) {
+    await supabase.from("sales_orders").delete().eq("id", order.id);
+    throw new Error(lineError.message);
+  }
 
   // 6. Reserve stock (FIFO) via the public-checkout reserve function.
-  await supabase.rpc("reserve_public_order", { p_order_id: order.id });
+  const { error: reserveError } = await supabase.rpc("reserve_public_order", { p_order_id: order.id });
+  if (reserveError) {
+    await supabase.from("sales_orders").delete().eq("id", order.id);
+    throw new Error(reserveError.message);
+  }
 
   // 7. Card payment: PaymentIntent for the order total, keyed to the order.
   let clientSecret: string | undefined;
@@ -155,7 +164,7 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
 }
 
 async function resolveDeliveryFee(zip: string | undefined, subtotal: number): Promise<number> {
-  const supabase = createServerSupabaseClient();
+  const supabase = createServiceRoleSupabaseClient();
   if (supabase && zip) {
     const { data } = await supabase
       .from("delivery_zones")

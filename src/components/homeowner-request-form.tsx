@@ -5,6 +5,7 @@ import * as React from "react";
 import { Button } from "@/components/ui";
 import { Field, Input, Select, Textarea } from "@/components/form";
 import { SITE } from "@/lib/site";
+import { postJson } from "@/lib/client/post-json";
 
 export function HomeownerRequestForm() {
   const [sent, setSent] = React.useState(false);
@@ -36,25 +37,21 @@ export function HomeownerRequestForm() {
       `Timeline: ${timeline}`,
       `Notes: ${String(form.get("message") ?? "")}`,
     ];
-    const response = await fetch("/api/contact-requests", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    try {
+      const payload = await postJson<{ ok: boolean; id?: string; error?: string }>("/api/contact-requests", {
         topic: "homeowner_one_system",
         name: String(form.get("name") ?? ""),
         email: String(form.get("email") ?? ""),
         message: detailLines.join("\n"),
-      }),
-    });
-    const payload = await response.json();
-    setIsSubmitting(false);
-    if (!response.ok || !payload.ok) {
-      setError(payload.error ?? "Could not prepare homeowner request.");
-      return;
+      });
+      setRequestId(payload.id ?? null);
+      setSent(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : "Could not prepare homeowner request.");
+    } finally {
+      setIsSubmitting(false);
     }
-    setRequestId(payload.id ?? null);
-    setSent(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   if (sent) {
@@ -163,8 +160,8 @@ export function HomeownerRequestForm() {
           </Field>
         </div>
       </div>
-      {error && <p className="mt-4 text-sm text-danger">{error}</p>}
-      <Button type="submit" size="lg" className="mt-6">
+      {error && <p role="alert" className="mt-4 text-sm text-danger">{error}</p>}
+      <Button type="submit" size="lg" className="mt-6" disabled={isSubmitting}>
         {isSubmitting ? "Preparing..." : "Get Bay Area installer help"}
         <ArrowRight size={18} />
       </Button>

@@ -11,12 +11,18 @@ import {
 } from "lucide-react";
 import { Container, Eyebrow, LinkButton } from "@/components/ui";
 import { TrustBadges } from "@/components/trust-badges";
+import { TestimonialSlot } from "@/components/testimonial-slot";
+import {
+  ABOUT_CONTRACTOR_TESTIMONIALS,
+  ABOUT_HOMEOWNER_TESTIMONIALS,
+} from "@/lib/testimonials";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About - Bay Area TCL HVAC Supply in Newark, CA",
   description:
     "Summit HVAC Supply provides Bay Area TCL heat pump and mini split equipment, homeowner guidance, installer referral, and contractor supply from Newark, CA.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
@@ -132,6 +138,19 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
+
+      {/* Company-level trust stays segmented because contractors and homeowners
+          weigh different evidence. Demo fixtures are development-only. */}
+      <Container className="flex flex-col gap-12 py-14 empty:hidden">
+        <TestimonialSlot
+          items={ABOUT_CONTRACTOR_TESTIMONIALS}
+          heading="From contractors who buy here"
+        />
+        <TestimonialSlot
+          items={ABOUT_HOMEOWNER_TESTIMONIALS}
+          heading="From homeowners we've supplied"
+        />
+      </Container>
 
       <Container className="py-14">
         <TrustBadges />

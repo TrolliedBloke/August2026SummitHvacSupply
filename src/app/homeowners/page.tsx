@@ -3,12 +3,15 @@ import { ArrowRight, CheckCircle2, Home, Ruler, ShieldCheck, Users } from "lucid
 import { Container, Eyebrow, LinkButton } from "@/components/ui";
 import { HomeownerRequestForm } from "@/components/homeowner-request-form";
 import { HeroRoutingPanel } from "@/components/homepage-conversion-tools";
+import { TestimonialSlot } from "@/components/testimonial-slot";
+import { HOMEOWNER_TESTIMONIALS } from "@/lib/testimonials";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "For Homeowners - Buy One TCL Mini Split or Heat Pump in the Bay Area",
   description:
     "Retail-friendly Bay Area guide for homeowners buying one TCL mini split or heat pump, understanding installation, rebates, and installer matching.",
+  alternates: { canonical: "/homeowners" },
 };
 
 const faq = [
@@ -126,6 +129,15 @@ export default function HomeownersPage() {
           </div>
         </Container>
       </section>
+
+      {/* Homeowner proof sits immediately before the installer-help form.
+          Demo fixtures are disclosed in development; production stays empty
+          until consented customer quotes replace them. */}
+      <TestimonialSlot
+        items={HOMEOWNER_TESTIMONIALS}
+        heading="What other Bay Area homeowners found"
+        className="border-t border-line bg-surface-1 px-5 py-14 sm:px-6 lg:px-8 [&>*]:mx-auto [&>*]:max-w-[1180px]"
+      />
 
       <section id="homeowner-request">
         <Container className="py-14 lg:py-16">

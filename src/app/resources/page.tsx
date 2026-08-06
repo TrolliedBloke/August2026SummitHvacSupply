@@ -5,12 +5,11 @@ import { FileText, BookOpen, Leaf, ArrowRight, ExternalLink } from "lucide-react
 import { Container, Eyebrow, Chip } from "@/components/ui";
 import { REBATES, SITE } from "@/lib/site";
 import { documentHref, getStorefrontSkus, productHref } from "@/lib/storefront/catalog";
+import { SEO_GUIDES } from "@/lib/seo/guides";
+import { SEO_TOOLS } from "@/lib/seo/tools";
+import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: "Resources - Spec Sheets, Install Manuals & Rebate Guides",
-  description:
-    "Download TCL HVAC spec sheets and install manuals by SKU, and get rebate guidance: Federal 25C and TECH Clean California.",
-};
+export const metadata: Metadata = pageMetadata({ title: "HVAC Resources - Documents, Tools & Bay Area Guides", description: "Download TCL HVAC documents, search AHRI and model records, and review current Bay Area permit, refrigerant, rebate, and energy-code guidance.", path: "/resources" });
 
 const FAQS: { q: string; a: string }[] = [
   {
@@ -27,7 +26,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What rebates apply to Bay Area heat pumps?",
-    a: "The Federal 25C tax credit covers up to $2,000 for qualifying heat pumps, and TECH Clean California offers additional incentives that vary by contractor enrollment and region. Confirm project-specific eligibility before a quote.",
+    a: "The federal 25C credit is not available for property placed in service after December 31, 2025. California, regional, and utility programs can change by address, contractor, equipment match, and funding status, so verify the project before ordering.",
   },
   {
     q: "Where do you deliver, and can I pick up?",
@@ -53,7 +52,7 @@ export default function ResourcesPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }}
       />
       <section className="border-b border-line bg-surface-1">
         <Container className="grid gap-10 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:py-14">
@@ -112,6 +111,13 @@ export default function ResourcesPage() {
               </Link>
             </div>
           ))}
+        </div>
+      </Container>
+
+      <Container className="pb-14">
+        <div className="grid gap-8 lg:grid-cols-2">
+          <section><h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">Equipment tools</h2><p className="mt-2 text-sm leading-6 text-ink-2">Use exact identifiers and project inputs to narrow the next step.</p><div className="mt-5 grid gap-2">{SEO_TOOLS.map((tool) => <Link key={tool.slug} href={`/tools/${tool.slug}`} className="rounded-(--r-sm) border border-line bg-surface-1 p-4"><span className="font-medium text-ink-1">{tool.title}</span><span className="mt-1 block text-sm leading-6 text-ink-2">{tool.description}</span></Link>)}</div></section>
+          <section><h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">Bay Area compliance guides</h2><p className="mt-2 text-sm leading-6 text-ink-2">Reviewed summaries with jurisdiction, effective date, pending changes, and primary sources.</p><div className="mt-5 grid gap-2">{SEO_GUIDES.map((guide) => <Link key={guide.slug} href={`/guides/${guide.slug}`} className="rounded-(--r-sm) border border-line bg-surface-1 p-4"><span className="font-medium text-ink-1">{guide.eyebrow}</span><span className="mt-1 block text-sm leading-6 text-ink-2">{guide.description}</span></Link>)}</div></section>
         </div>
       </Container>
 
@@ -201,6 +207,7 @@ function DocChip({ href, icon, label }: { href: string; icon: React.ReactNode; l
   return (
     <a
       href={href}
+      data-conversion-hook="resource-document-download"
       className="inline-flex items-center gap-1.5 rounded-(--r-sm) border border-line bg-surface-1 px-3 py-1.5 text-sm font-medium text-ink-2 transition-colors hover:border-ink-4 hover:text-ink-1"
     >
       {icon}

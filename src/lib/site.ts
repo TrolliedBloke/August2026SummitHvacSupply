@@ -50,9 +50,9 @@ export function financingMonthly(price: number): number {
 // Rebate programs surfaced in Resources — real programs, figures depend on each project.
 export const REBATES = [
   {
-    name: "Federal 25C Tax Credit",
-    detail: "Up to $2,000 for qualifying heat pumps (Energy Efficient Home Improvement Credit).",
-    confirm: false,
+    name: "Federal 25C status",
+    detail: "The Energy Efficient Home Improvement Credit ended for property placed in service after December 31, 2025.",
+    confirm: true,
   },
   {
     name: "TECH Clean California",
