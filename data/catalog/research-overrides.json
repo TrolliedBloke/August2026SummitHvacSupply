@@ -2120,6 +2120,2896 @@
           "notes": "Official Carrier Comfort FJ5 fan coil product page."
         }
       ]
+    },
+    "TCL24KHPU": {
+      "researchStatus": "verified",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL Advantage Series inverter heat pump",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 24000,
+        "heatingCapacityBtu": 24000,
+        "tonnage": 2.0,
+        "seer2": 18,
+        "eer2": 10,
+        "hspf2": 9,
+        "cop": 3.2,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "liquidLineIn": "3/8",
+        "suctionLineIn": "3/4",
+        "maxLineLengthFt": 100,
+        "maxHeightDifferenceFt": 50,
+        "modelVariant": "Top-discharge variable-speed heat pump condensing unit",
+        "mca": 14,
+        "mocp": 25,
+        "ratedAmps": 8.2,
+        "fla": 10,
+        "soundDb": 67,
+        "dimensionsText": "29-1/8 x 24-15/16 x 29-1/8 in (740 x 633 x 740 mm)",
+        "weightLbs": 137,
+        "minCoolingAmbientF": 5,
+        "maxCoolingAmbientF": 125,
+        "minHeatingAmbientF": -13
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heatingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "seer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "eer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "hspf2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cop": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "ratedAmps": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "dimensionsText": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minHeatingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Advantage Series Inverter Heat Pump System Specifications (2025)",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored series spec sheet listing all four matched IDU/ODU pairs by exact model. Served from an authorised distributor mirror because TCL's own host returns HTTP 500."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "TCL Advantage Series Outdoor Unit Installation Manual",
+          "url": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/advantage/Advantage%20Series%20Outdoor%20Unit%20Installation%20Manual.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer-hosted installation manual for the Advantage series outdoor units."
+        }
+      ],
+      "warranty": {
+        "parts": "10 years",
+        "compressor": "10 years",
+        "registrationRequired": false,
+        "transferable": null,
+        "conditions": "TCL published limited warranty for the Advantage series, residential application: 10 years parts and 10 years compressor. Commercial application terms are not stated on the series specification sheet and must be confirmed with TCL before being quoted.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "certifiedModel": null,
+        "matchedIndoor": "H24AHH17XAE",
+        "matchedOutdoor": "H24TDH17XAC",
+        "note": "TCL publishes SEER2 18 / EER2 10 / HSPF2 9 for the matched pair H24TDH17XAC + H24AHH17XAE. An AHRI reference number for this specific 24K combination was not located; the 36K pairing is certified as 215869484. Verify the reference in the AHRI directory before quoting a certified rating for this size.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H24TDH17XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - ODU in the 24K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 14,
+            "mocp": 25,
+            "seer2": 18
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 24K column. Ratings are for the matched system (H24TDH17XAC outdoor with H24AHH17XAE indoor) and are not standalone ratings for this outdoor unit. Heating capacity 24,000 BTU/h at 47F, 18,500 at 17F, 18,000 at 5F (COP 1.75). Refrigerant charge 4 lb 11.8 oz (2.15 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 3/4 gas, 25-100 ft, max elevation 50 ft. Compressor variable rotary, FLA 10 A, RLA 8.2 A; DC fan motor 1/4 HP."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The spec sheet states ENERGY STAR Cold Climate Certified = Yes for the 24K system. Do not extend the certification to this model without checking the column."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+        }
+      ]
+    },
+    "TCL24KAHU": {
+      "researchStatus": "verified",
+      "productType": "Air handler",
+      "specifications": {
+        "productFamily": "TCL Advantage Series inverter heat pump",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 24000,
+        "heatingCapacityBtu": 24000,
+        "tonnage": 2.0,
+        "seer2": 18,
+        "eer2": 10,
+        "hspf2": 9,
+        "cop": 3.2,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "liquidLineIn": "3/8",
+        "suctionLineIn": "3/4",
+        "maxLineLengthFt": 100,
+        "maxHeightDifferenceFt": 50,
+        "modelVariant": "Multi-position air handler with ECM blower and TXV",
+        "mca": 5,
+        "mocp": 15,
+        "fla": 3.8,
+        "soundDb": 57,
+        "cfm": 850,
+        "dimensionsText": "21 x 46-1/2 x 21 in (533 x 1180 x 533 mm)",
+        "weightLbs": 121,
+        "installOrientation": "Multi-position"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heatingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "seer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "eer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "hspf2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cop": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cfm": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "dimensionsText": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Advantage Series Inverter Heat Pump System Specifications (2025)",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored series spec sheet listing all four matched IDU/ODU pairs by exact model. Served from an authorised distributor mirror because TCL's own host returns HTTP 500."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "TCL Advantage Series Outdoor Unit Installation Manual",
+          "url": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/advantage/Advantage%20Series%20Outdoor%20Unit%20Installation%20Manual.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer-hosted installation manual for the Advantage series outdoor units."
+        }
+      ],
+      "warranty": {
+        "parts": "10 years",
+        "compressor": "10 years",
+        "registrationRequired": false,
+        "transferable": null,
+        "conditions": "TCL published limited warranty for the Advantage series, residential application: 10 years parts and 10 years compressor. Commercial application terms are not stated on the series specification sheet and must be confirmed with TCL before being quoted.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "certifiedModel": null,
+        "matchedIndoor": "H24AHH17XAE",
+        "matchedOutdoor": "H24TDH17XAC",
+        "note": "TCL publishes SEER2 18 / EER2 10 / HSPF2 9 for the matched pair H24TDH17XAC + H24AHH17XAE. An AHRI reference number for this specific 24K combination was not located; the 36K pairing is certified as 215869484. Verify the reference in the AHRI directory before quoting a certified rating for this size.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H24AHH17XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - IDU in the 24K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "cfm": 850,
+            "mca": 5,
+            "weightLbs": 121
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 24K column. Ratings are for the matched system (H24TDH17XAC outdoor with H24AHH17XAE indoor) and are not standalone ratings for this air handler. Heating capacity 24,000 BTU/h at 47F, 18,500 at 17F, 18,000 at 5F (COP 1.75). Refrigerant charge 4 lb 11.8 oz (2.15 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 3/4 gas, 25-100 ft, max elevation 50 ft. ECM indoor fan 1/2 HP at 1050 RPM, 3.8 FLA; external static pressure up to 0.8 in W.C.; optional electric heat available."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Spec sheet ENERGY STAR Cold Climate Certified = Yes for the 24K system."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+        }
+      ]
+    },
+    "TCL36KHPU": {
+      "researchStatus": "verified",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL Advantage Series inverter heat pump",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 34000,
+        "heatingCapacityBtu": 36000,
+        "tonnage": 3.0,
+        "seer2": 19,
+        "eer2": 10,
+        "hspf2": 9,
+        "cop": 3.2,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "liquidLineIn": "3/8",
+        "suctionLineIn": "3/4",
+        "maxLineLengthFt": 100,
+        "maxHeightDifferenceFt": 50,
+        "modelVariant": "Top-discharge variable-speed heat pump condensing unit",
+        "mca": 22,
+        "mocp": 35,
+        "ratedAmps": 10,
+        "fla": 15.8,
+        "soundDb": 68,
+        "dimensionsText": "29-1/8 x 24-15/16 x 29-1/8 in (740 x 633 x 740 mm)",
+        "weightLbs": 146,
+        "minCoolingAmbientF": 5,
+        "maxCoolingAmbientF": 125,
+        "minHeatingAmbientF": -13
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heatingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "seer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "eer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "hspf2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cop": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "ratedAmps": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "dimensionsText": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minHeatingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Advantage Series Inverter Heat Pump System Specifications (2025)",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored series spec sheet listing all four matched IDU/ODU pairs by exact model. Served from an authorised distributor mirror because TCL's own host returns HTTP 500."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "TCL Advantage Series Outdoor Unit Installation Manual",
+          "url": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/advantage/Advantage%20Series%20Outdoor%20Unit%20Installation%20Manual.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer-hosted installation manual for the Advantage series outdoor units."
+        }
+      ],
+      "warranty": {
+        "parts": "10 years",
+        "compressor": "10 years",
+        "registrationRequired": false,
+        "transferable": null,
+        "conditions": "TCL published limited warranty for the Advantage series, residential application: 10 years parts and 10 years compressor. Commercial application terms are not stated on the series specification sheet and must be confirmed with TCL before being quoted.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "certified",
+        "referenceNumber": "215869484",
+        "certifiedModel": "H36TDH18XAC with H36AHH18XAE",
+        "matchedIndoor": "H36AHH18XAE",
+        "matchedOutdoor": "H36TDH18XAC",
+        "note": "AHRI certified combination 215869484: outdoor unit H36TDH18XAC matched with indoor unit H36AHH18XAE. The SEER2 19 / EER2 10 / HSPF2 9 ratings apply to this pairing, not to either unit installed with something else.",
+        "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/submittals/advantage-series/Submittal%20Sheet%20-%20AHU%20-%2036K%20230V.pdf",
+        "sourceType": "ahri",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H36TDH18XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - ODU in the 36K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 22,
+            "mocp": 35,
+            "seer2": 19
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 36K column. Ratings are for the matched system (H36TDH18XAC outdoor with H36AHH18XAE indoor) and are not standalone ratings for this outdoor unit. Heating capacity 36,000 BTU/h at 47F, 25,000 at 17F, 26,000 at 5F (COP 1.9). Refrigerant charge 6 lb 4.5 oz (2.85 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 3/4 gas, 25-100 ft, max elevation 50 ft. Compressor variable rotary, FLA 15.8 A, RLA 10 A; DC fan motor 1/4 HP."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The spec sheet states ENERGY STAR Cold Climate Certified = Yes for the 36K system. Do not extend the certification to this model without checking the column."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+        }
+      ]
+    },
+    "TCL36KAHU": {
+      "researchStatus": "verified",
+      "productType": "Air handler",
+      "specifications": {
+        "productFamily": "TCL Advantage Series inverter heat pump",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 34000,
+        "heatingCapacityBtu": 36000,
+        "tonnage": 3.0,
+        "seer2": 19,
+        "eer2": 10,
+        "hspf2": 9,
+        "cop": 3.2,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "liquidLineIn": "3/8",
+        "suctionLineIn": "3/4",
+        "maxLineLengthFt": 100,
+        "maxHeightDifferenceFt": 50,
+        "modelVariant": "Multi-position air handler with ECM blower and TXV",
+        "mca": 5,
+        "mocp": 15,
+        "fla": 3.8,
+        "soundDb": 58,
+        "cfm": 1150,
+        "dimensionsText": "21 x 46-1/2 x 21 in (533 x 1180 x 533 mm)",
+        "weightLbs": 121,
+        "installOrientation": "Multi-position"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heatingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "seer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "eer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "hspf2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cop": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cfm": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "dimensionsText": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Advantage Series Inverter Heat Pump System Specifications (2025)",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored series spec sheet listing all four matched IDU/ODU pairs by exact model. Served from an authorised distributor mirror because TCL's own host returns HTTP 500."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "TCL Advantage Series Outdoor Unit Installation Manual",
+          "url": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/advantage/Advantage%20Series%20Outdoor%20Unit%20Installation%20Manual.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer-hosted installation manual for the Advantage series outdoor units."
+        }
+      ],
+      "warranty": {
+        "parts": "10 years",
+        "compressor": "10 years",
+        "registrationRequired": false,
+        "transferable": null,
+        "conditions": "TCL published limited warranty for the Advantage series, residential application: 10 years parts and 10 years compressor. Commercial application terms are not stated on the series specification sheet and must be confirmed with TCL before being quoted.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "certified",
+        "referenceNumber": "215869484",
+        "certifiedModel": "H36TDH18XAC with H36AHH18XAE",
+        "matchedIndoor": "H36AHH18XAE",
+        "matchedOutdoor": "H36TDH18XAC",
+        "note": "AHRI certified combination 215869484: outdoor unit H36TDH18XAC matched with indoor unit H36AHH18XAE. The SEER2 19 / EER2 10 / HSPF2 9 ratings apply to this pairing, not to either unit installed with something else.",
+        "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/submittals/advantage-series/Submittal%20Sheet%20-%20AHU%20-%2036K%20230V.pdf",
+        "sourceType": "ahri",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H36AHH18XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - IDU in the 36K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "cfm": 1150,
+            "mca": 5,
+            "weightLbs": 121
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 36K column. Ratings are for the matched system (H36TDH18XAC outdoor with H36AHH18XAE indoor) and are not standalone ratings for this air handler. Heating capacity 36,000 BTU/h at 47F, 25,000 at 17F, 26,000 at 5F (COP 1.9). Refrigerant charge 6 lb 4.5 oz (2.85 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 3/4 gas, 25-100 ft, max elevation 50 ft. ECM indoor fan 1/2 HP at 1050 RPM, 3.8 FLA; external static pressure up to 0.8 in W.C.; optional electric heat available."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Spec sheet ENERGY STAR Cold Climate Certified = Yes for the 36K system."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+        }
+      ]
+    },
+    "TCL48KHPU": {
+      "researchStatus": "verified",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL Advantage Series inverter heat pump",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 47000,
+        "heatingCapacityBtu": 47000,
+        "tonnage": 4.0,
+        "seer2": 18,
+        "eer2": 9,
+        "hspf2": 8.5,
+        "cop": 3.2,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "liquidLineIn": "3/8",
+        "suctionLineIn": "7/8",
+        "maxLineLengthFt": 100,
+        "maxHeightDifferenceFt": 50,
+        "modelVariant": "Top-discharge variable-speed heat pump condensing unit",
+        "mca": 35,
+        "mocp": 60,
+        "ratedAmps": 15.8,
+        "fla": 26,
+        "soundDb": 69,
+        "dimensionsText": "29-1/8 x 33-3/16 x 29-1/8 in (740 x 843 x 740 mm)",
+        "weightLbs": 179,
+        "minCoolingAmbientF": 5,
+        "maxCoolingAmbientF": 125,
+        "minHeatingAmbientF": -13
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heatingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "seer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "eer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "hspf2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cop": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "ratedAmps": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "dimensionsText": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minHeatingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Advantage Series Inverter Heat Pump System Specifications (2025)",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored series spec sheet listing all four matched IDU/ODU pairs by exact model. Served from an authorised distributor mirror because TCL's own host returns HTTP 500."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "TCL Advantage Series Outdoor Unit Installation Manual",
+          "url": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/advantage/Advantage%20Series%20Outdoor%20Unit%20Installation%20Manual.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer-hosted installation manual for the Advantage series outdoor units."
+        }
+      ],
+      "warranty": {
+        "parts": "10 years",
+        "compressor": "10 years",
+        "registrationRequired": false,
+        "transferable": null,
+        "conditions": "TCL published limited warranty for the Advantage series, residential application: 10 years parts and 10 years compressor. Commercial application terms are not stated on the series specification sheet and must be confirmed with TCL before being quoted.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "certifiedModel": null,
+        "matchedIndoor": "H48AHH18XAE",
+        "matchedOutdoor": "H48TDH18XAC",
+        "note": "TCL publishes SEER2 18 / EER2 9 / HSPF2 8.5 for the matched pair H48TDH18XAC + H48AHH18XAE. An AHRI reference number for this specific 48K combination was not located; the 36K pairing is certified as 215869484. Verify the reference in the AHRI directory before quoting a certified rating for this size.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H48TDH18XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - ODU in the 48K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 35,
+            "mocp": 60,
+            "seer2": 18
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 48K column. Ratings are for the matched system (H48TDH18XAC outdoor with H48AHH18XAE indoor) and are not standalone ratings for this outdoor unit. Heating capacity 47,000 BTU/h at 47F, 35,000 at 17F, 33,000 at 5F (COP 1.9). Refrigerant charge 8 lb 13.1 oz (4.00 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 7/8 gas, 25-100 ft, max elevation 50 ft. Compressor variable rotary, FLA 26 A, RLA 15.8 A; DC fan motor 1/4 HP."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The spec sheet states ENERGY STAR Cold Climate Certified = Yes for the 48K system. Do not extend the certification to this model without checking the column."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+        }
+      ]
+    },
+    "TCL48KAHU": {
+      "researchStatus": "verified",
+      "productType": "Air handler",
+      "specifications": {
+        "productFamily": "TCL Advantage Series inverter heat pump",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 47000,
+        "heatingCapacityBtu": 47000,
+        "tonnage": 4.0,
+        "seer2": 18,
+        "eer2": 9,
+        "hspf2": 8.5,
+        "cop": 3.2,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "liquidLineIn": "3/8",
+        "suctionLineIn": "7/8",
+        "maxLineLengthFt": 100,
+        "maxHeightDifferenceFt": 50,
+        "modelVariant": "Multi-position air handler with ECM blower and TXV",
+        "mca": 6,
+        "mocp": 15,
+        "fla": 5.4,
+        "soundDb": 60,
+        "cfm": 1600,
+        "dimensionsText": "21 x 56 x 24-1/2 in (533 x 1422 x 622 mm)",
+        "weightLbs": 152,
+        "installOrientation": "Multi-position"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heatingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "seer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "eer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "hspf2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cop": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cfm": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "dimensionsText": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Advantage Series Inverter Heat Pump System Specifications (2025)",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored series spec sheet listing all four matched IDU/ODU pairs by exact model. Served from an authorised distributor mirror because TCL's own host returns HTTP 500."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "TCL Advantage Series Outdoor Unit Installation Manual",
+          "url": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/advantage/Advantage%20Series%20Outdoor%20Unit%20Installation%20Manual.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer-hosted installation manual for the Advantage series outdoor units."
+        }
+      ],
+      "warranty": {
+        "parts": "10 years",
+        "compressor": "10 years",
+        "registrationRequired": false,
+        "transferable": null,
+        "conditions": "TCL published limited warranty for the Advantage series, residential application: 10 years parts and 10 years compressor. Commercial application terms are not stated on the series specification sheet and must be confirmed with TCL before being quoted.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "certifiedModel": null,
+        "matchedIndoor": "H48AHH18XAE",
+        "matchedOutdoor": "H48TDH18XAC",
+        "note": "TCL publishes SEER2 18 / EER2 9 / HSPF2 8.5 for the matched pair H48TDH18XAC + H48AHH18XAE. An AHRI reference number for this specific 48K combination was not located; the 36K pairing is certified as 215869484. Verify the reference in the AHRI directory before quoting a certified rating for this size.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H48AHH18XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - IDU in the 48K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "cfm": 1600,
+            "mca": 6,
+            "weightLbs": 152
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 48K column. Ratings are for the matched system (H48TDH18XAC outdoor with H48AHH18XAE indoor) and are not standalone ratings for this air handler. Heating capacity 47,000 BTU/h at 47F, 35,000 at 17F, 33,000 at 5F (COP 1.9). Refrigerant charge 8 lb 13.1 oz (4.00 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 7/8 gas, 25-100 ft, max elevation 50 ft. ECM indoor fan 3/4 HP at 1050 RPM, 5.4 FLA; external static pressure up to 0.8 in W.C.; optional electric heat available."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Spec sheet ENERGY STAR Cold Climate Certified = Yes for the 48K system."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+        }
+      ]
+    },
+    "TCL60KHPU": {
+      "researchStatus": "verified",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL Advantage Series inverter heat pump",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 53000,
+        "heatingCapacityBtu": 54000,
+        "tonnage": 5.0,
+        "seer2": 17,
+        "eer2": 7.5,
+        "hspf2": 8.5,
+        "cop": 3.0,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "liquidLineIn": "3/8",
+        "suctionLineIn": "7/8",
+        "maxLineLengthFt": 100,
+        "maxHeightDifferenceFt": 50,
+        "modelVariant": "Top-discharge variable-speed heat pump condensing unit",
+        "mca": 35,
+        "mocp": 60,
+        "ratedAmps": 15.8,
+        "fla": 26,
+        "soundDb": 69,
+        "dimensionsText": "29-1/8 x 33-3/16 x 29-1/8 in (740 x 843 x 740 mm)",
+        "weightLbs": 179,
+        "minCoolingAmbientF": 5,
+        "maxCoolingAmbientF": 125,
+        "minHeatingAmbientF": -13
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heatingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "seer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "eer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "hspf2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cop": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "ratedAmps": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "dimensionsText": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minHeatingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Advantage Series Inverter Heat Pump System Specifications (2025)",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored series spec sheet listing all four matched IDU/ODU pairs by exact model. Served from an authorised distributor mirror because TCL's own host returns HTTP 500."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "TCL Advantage Series Outdoor Unit Installation Manual",
+          "url": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/advantage/Advantage%20Series%20Outdoor%20Unit%20Installation%20Manual.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer-hosted installation manual for the Advantage series outdoor units."
+        }
+      ],
+      "warranty": {
+        "parts": "10 years",
+        "compressor": "10 years",
+        "registrationRequired": false,
+        "transferable": null,
+        "conditions": "TCL published limited warranty for the Advantage series, residential application: 10 years parts and 10 years compressor. Commercial application terms are not stated on the series specification sheet and must be confirmed with TCL before being quoted.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "certifiedModel": null,
+        "matchedIndoor": "H60AHH16XAE",
+        "matchedOutdoor": "H60TDH16XAC",
+        "note": "TCL publishes SEER2 17 / EER2 7.5 / HSPF2 8.5 for the matched pair H60TDH16XAC + H60AHH16XAE. An AHRI reference number for this specific 60K combination was not located; the 36K pairing is certified as 215869484. Verify the reference in the AHRI directory before quoting a certified rating for this size.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H60TDH16XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - ODU in the 60K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 35,
+            "mocp": 60,
+            "seer2": 17
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 60K column. Ratings are for the matched system (H60TDH16XAC outdoor with H60AHH16XAE indoor) and are not standalone ratings for this outdoor unit. Heating capacity 54,000 BTU/h at 47F, 38,000 at 17F, 35,000 at 5F (COP 1.9). Refrigerant charge 8 lb 13.1 oz (4.00 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 7/8 gas, 25-100 ft, max elevation 50 ft. Compressor variable rotary, FLA 26 A, RLA 15.8 A; DC fan motor 1/4 HP."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "Not ENERGY STAR Cold Climate certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The spec sheet states ENERGY STAR Cold Climate Certified = No for the 60K system. Do not extend the other sizes\u2019 certification to this model without checking the column."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+        }
+      ]
+    },
+    "TCL60KAHU": {
+      "researchStatus": "verified",
+      "productType": "Air handler",
+      "specifications": {
+        "productFamily": "TCL Advantage Series inverter heat pump",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 53000,
+        "heatingCapacityBtu": 54000,
+        "tonnage": 5.0,
+        "seer2": 17,
+        "eer2": 7.5,
+        "hspf2": 8.5,
+        "cop": 3.0,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "liquidLineIn": "3/8",
+        "suctionLineIn": "7/8",
+        "maxLineLengthFt": 100,
+        "maxHeightDifferenceFt": 50,
+        "modelVariant": "Multi-position air handler with ECM blower and TXV",
+        "mca": 6,
+        "mocp": 15,
+        "fla": 5.4,
+        "soundDb": 62,
+        "cfm": 1700,
+        "dimensionsText": "21 x 56 x 24-1/2 in (533 x 1422 x 622 mm)",
+        "weightLbs": 152,
+        "installOrientation": "Multi-position"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heatingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "seer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "eer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "hspf2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cop": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cfm": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "dimensionsText": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Advantage Series Inverter Heat Pump System Specifications (2025)",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored series spec sheet listing all four matched IDU/ODU pairs by exact model. Served from an authorised distributor mirror because TCL's own host returns HTTP 500."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "TCL Advantage Series Outdoor Unit Installation Manual",
+          "url": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/advantage/Advantage%20Series%20Outdoor%20Unit%20Installation%20Manual.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer-hosted installation manual for the Advantage series outdoor units."
+        }
+      ],
+      "warranty": {
+        "parts": "10 years",
+        "compressor": "10 years",
+        "registrationRequired": false,
+        "transferable": null,
+        "conditions": "TCL published limited warranty for the Advantage series, residential application: 10 years parts and 10 years compressor. Commercial application terms are not stated on the series specification sheet and must be confirmed with TCL before being quoted.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "certifiedModel": null,
+        "matchedIndoor": "H60AHH16XAE",
+        "matchedOutdoor": "H60TDH16XAC",
+        "note": "TCL publishes SEER2 17 / EER2 7.5 / HSPF2 8.5 for the matched pair H60TDH16XAC + H60AHH16XAE. An AHRI reference number for this specific 60K combination was not located; the 36K pairing is certified as 215869484. Verify the reference in the AHRI directory before quoting a certified rating for this size.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H60AHH16XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - IDU in the 60K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "cfm": 1700,
+            "mca": 6,
+            "weightLbs": 152
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 60K column. Ratings are for the matched system (H60TDH16XAC outdoor with H60AHH16XAE indoor) and are not standalone ratings for this air handler. Heating capacity 54,000 BTU/h at 47F, 38,000 at 17F, 35,000 at 5F (COP 1.9). Refrigerant charge 8 lb 13.1 oz (4.00 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 7/8 gas, 25-100 ft, max elevation 50 ft. ECM indoor fan 3/4 HP at 1050 RPM, 5.4 FLA; external static pressure up to 0.8 in W.C.; optional electric heat available."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "Not ENERGY STAR Cold Climate certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Spec sheet ENERGY STAR Cold Climate Certified = No for the 60K system."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+        }
+      ]
+    },
+    "TCL36KIDU": {
+      "researchStatus": "verified",
+      "productType": "Indoor unit",
+      "specifications": {
+        "productFamily": "TCL Elite Series single-zone ductless",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 36000,
+        "tonnage": 3,
+        "zones": "1",
+        "seer2": 19,
+        "eer2": 9,
+        "hspf2": 9,
+        "cop": 3.15,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "mca": 18,
+        "mocp": 30,
+        "soundDb": "36 ~ 55",
+        "weightLbs": 39.7,
+        "dimensionsText": "Indoor unit dimensions published per size in the Elite spec sheet"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "zones": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "seer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "eer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "hspf2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cop": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "dimensionsText": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Elite Series Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Elite series spec sheet listing this exact model with its AHRI certificate. Distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL ductless limited warranty: 5 years parts and 7 years compressor, extended to 10 years with registration within 60 days of installation. This term differs from TCL's Advantage central series (10/10) -- do not carry one across to the other.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "certified",
+        "referenceNumber": "215387256",
+        "certifiedModel": "H36SEH19XAE with H36SEH19XAC",
+        "matchedIndoor": "H36SEH19XAE",
+        "matchedOutdoor": "H36SEH19XAC",
+        "note": "AHRI certificate 215387256 covers the H36SEH19XAE indoor unit matched with the H36SEH19XAC outdoor unit. SEER2 19 / EER2 9 / HSPF2 9 apply to that pairing only.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+        "sourceType": "ahri",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H36SEH19XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as the indoor unit in the 36K column of the TCL Elite series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "seer2": 19,
+            "hspf2": 9,
+            "mca": 18
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Elite spec sheet 36K column: SEER2 19 / EER2 9, HSPF2 9 / COP 3.15, rated cooling 36,000 BTU/h, 208-230V 1Ph 60Hz, MCA 18 A, MOCP 30 A, factory charge R-454B 55.73 oz. Outdoor airflow 2,100 CFM, outdoor sound 63 dB(A), outdoor net weight 105.8 lb; indoor sound 36-55 dB(A), indoor net weight 39.7 lb."
+        },
+        {
+          "fieldName": "ahriReference",
+          "value": "215387256",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "ahri",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "AHRI Certificate row of the Elite spec sheet, 36K column."
+        }
+      ]
+    },
+    "TCL36KODU": {
+      "researchStatus": "verified",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL Elite Series single-zone ductless",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 36000,
+        "tonnage": 3,
+        "zones": "1",
+        "seer2": 19,
+        "eer2": 9,
+        "hspf2": 9,
+        "cop": 3.15,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "mca": 18,
+        "mocp": 30,
+        "soundDb": 63,
+        "weightLbs": 105.8,
+        "cfm": 2100
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "zones": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "seer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "eer2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "hspf2": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cop": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cfm": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Elite Series Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Elite series spec sheet listing this exact model with its AHRI certificate. Distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL ductless limited warranty: 5 years parts and 7 years compressor, extended to 10 years with registration within 60 days of installation. This term differs from TCL's Advantage central series (10/10) -- do not carry one across to the other.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "certified",
+        "referenceNumber": "215387256",
+        "certifiedModel": "H36SEH19XAE with H36SEH19XAC",
+        "matchedIndoor": "H36SEH19XAE",
+        "matchedOutdoor": "H36SEH19XAC",
+        "note": "AHRI certificate 215387256 covers the H36SEH19XAE indoor unit matched with the H36SEH19XAC outdoor unit. SEER2 19 / EER2 9 / HSPF2 9 apply to that pairing only.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+        "sourceType": "ahri",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H36SEH19XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as the outdoor unit in the 36K column of the TCL Elite series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "seer2": 19,
+            "hspf2": 9,
+            "mca": 18
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Elite spec sheet 36K column: SEER2 19 / EER2 9, HSPF2 9 / COP 3.15, rated cooling 36,000 BTU/h, 208-230V 1Ph 60Hz, MCA 18 A, MOCP 30 A, factory charge R-454B 55.73 oz. Outdoor airflow 2,100 CFM, outdoor sound 63 dB(A), outdoor net weight 105.8 lb; indoor sound 36-55 dB(A), indoor net weight 39.7 lb."
+        },
+        {
+          "fieldName": "ahriReference",
+          "value": "215387256",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "ahri",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "AHRI Certificate row of the Elite spec sheet, 36K column."
+        }
+      ]
+    },
+    "TCL24KIDU": {
+      "researchStatus": "in_progress",
+      "productType": "Indoor unit",
+      "specifications": {
+        "productFamily": "TCL BreezeIN Series single-zone ductless",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 24000,
+        "tonnage": 2,
+        "zones": "1",
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "zones": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL BreezeIN Series Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored BreezeIN series spec sheet listing this exact model with its AHRI certificate. Distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL ductless limited warranty: 5 years parts and 7 years compressor, extended to 10 years with registration within 60 days of installation. This term differs from TCL's Advantage central series (10/10) -- do not carry one across to the other.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "certified",
+        "referenceNumber": "215387262",
+        "certifiedModel": "H24SBH20XPE with H24SBH20XPC",
+        "matchedIndoor": "H24SBH20XPE",
+        "matchedOutdoor": "H24SBH20XPC",
+        "note": "AHRI certificate 215387262 covers the H24SBH20XPE indoor unit matched with the H24SBH20XPC outdoor unit.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+        "sourceType": "ahri",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H24SBH20XPE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as the indoor unit in the 24K column of the TCL BreezeIN series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Identity, refrigerant and AHRI certificate read cleanly. The numeric specification columns of this sheet use an embedded font whose digits do not map on text extraction, so SEER2/HSPF2/MCA/dimensions for this model are NOT transcribed here rather than being guessed. Re-read from the source PDF or request the model submittal from TCL to complete them."
+        },
+        {
+          "fieldName": "ahriReference",
+          "value": "215387262",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "ahri",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "AHRI Certificate row of the BreezeIN spec sheet, 24K column."
+        }
+      ]
+    },
+    "TCL24KODU": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL BreezeIN Series single-zone ductless",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 24000,
+        "tonnage": 2,
+        "zones": "1",
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "zones": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL BreezeIN Series Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored BreezeIN series spec sheet listing this exact model with its AHRI certificate. Distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL ductless limited warranty: 5 years parts and 7 years compressor, extended to 10 years with registration within 60 days of installation. This term differs from TCL's Advantage central series (10/10) -- do not carry one across to the other.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "certified",
+        "referenceNumber": "215387262",
+        "certifiedModel": "H24SBH20XPE with H24SBH20XPC",
+        "matchedIndoor": "H24SBH20XPE",
+        "matchedOutdoor": "H24SBH20XPC",
+        "note": "AHRI certificate 215387262 covers the H24SBH20XPE indoor unit matched with the H24SBH20XPC outdoor unit.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+        "sourceType": "ahri",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H24SBH20XPC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as the outdoor unit in the 24K column of the TCL BreezeIN series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Identity, refrigerant and AHRI certificate read cleanly. The numeric specification columns of this sheet use an embedded font whose digits do not map on text extraction, so SEER2/HSPF2/MCA/dimensions for this model are NOT transcribed here rather than being guessed. Re-read from the source PDF or request the model submittal from TCL to complete them."
+        },
+        {
+          "fieldName": "ahriReference",
+          "value": "215387262",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "ahri",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "AHRI Certificate row of the BreezeIN spec sheet, 24K column."
+        }
+      ]
+    },
+    "TCL18KIDU-R-454B": {
+      "researchStatus": "conflict",
+      "productType": "Indoor unit",
+      "specifications": {
+        "productFamily": "TCL ductless (series not confirmed)",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 18000,
+        "tonnage": 1.5,
+        "zones": "1"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "zones": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Elite Series Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Elite series spec sheet listing this exact model with its AHRI certificate. Distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL ductless limited warranty: 5 years parts and 7 years compressor, extended to 10 years with registration within 60 days of installation. This term differs from TCL's Advantage central series (10/10) -- do not carry one across to the other.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "conflict",
+        "referenceNumber": null,
+        "matchedIndoor": "H18SEH19XAE",
+        "matchedOutdoor": "H18SEH19XAC",
+        "note": "No AHRI certificate can be assigned until the model number is settled. TCL's 18K Elite pairing H18SEH19XAE + H18SEH19XAC is certified as 215387254; that reference must not be applied to this record while the model on the sheet reads ...17...",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+        "sourceType": "ahri",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H18SEH17XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The inventory sheet's indoor unit model H18SEH17XAE does not appear in TCL's Elite series specification sheet. The Elite 18K models are H18SEH19XAE and H18SEH19XAC (AHRI 215387254). The digits in that position are a platform code, not an efficiency rating -- H09SEH19 rates SEER2 19 while H12SEH19 rates 21 -- so ...17... cannot be read as a 17 SEER2 variant of the same unit. Either the sheet transposed 19 as 17, or this is stock from a different TCL platform. Read the rating plate before publishing or reordering."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
+        }
+      ]
+    },
+    "TCL18KODU-18SEH17XAC": {
+      "researchStatus": "conflict",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL ductless (series not confirmed)",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 18000,
+        "tonnage": 1.5,
+        "zones": "1"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "zones": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Elite Series Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Elite series spec sheet listing this exact model with its AHRI certificate. Distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL ductless limited warranty: 5 years parts and 7 years compressor, extended to 10 years with registration within 60 days of installation. This term differs from TCL's Advantage central series (10/10) -- do not carry one across to the other.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "conflict",
+        "referenceNumber": null,
+        "matchedIndoor": "H18SEH19XAE",
+        "matchedOutdoor": "H18SEH19XAC",
+        "note": "No AHRI certificate can be assigned until the model number is settled. TCL's 18K Elite pairing H18SEH19XAE + H18SEH19XAC is certified as 215387254; that reference must not be applied to this record while the model on the sheet reads ...17...",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+        "sourceType": "ahri",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H18SEH17XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The inventory sheet's outdoor unit model H18SEH17XAC does not appear in TCL's Elite series specification sheet. The Elite 18K models are H18SEH19XAE and H18SEH19XAC (AHRI 215387254). The digits in that position are a platform code, not an efficiency rating -- H09SEH19 rates SEER2 19 while H12SEH19 rates 21 -- so ...17... cannot be read as a 17 SEER2 variant of the same unit. Either the sheet transposed 19 as 17, or this is stock from a different TCL platform. Read the rating plate before publishing or reordering."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
+        }
+      ]
     }
   }
 }

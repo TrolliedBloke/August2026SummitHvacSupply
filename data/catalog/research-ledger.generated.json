@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T21:03:21.950Z",
+  "generatedAt": "2026-08-09T21:14:39.091Z",
   "records": [
     {
       "sourceRow": 2,
@@ -219,11 +219,9 @@
       "catalogSku": "TCL18KIDU-R-454B",
       "sourceSku": "TCL18KIDU",
       "modelNumber": "H18SEH17XAE",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -232,6 +230,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-10",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H18SEH17XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The inventory sheet's indoor unit model H18SEH17XAE does not appear in TCL's Elite series specification sheet. The Elite 18K models are H18SEH19XAE and H18SEH19XAC (AHRI 215387254). The digits in that position are a platform code, not an efficiency rating -- H09SEH19 rates SEER2 19 while H12SEH19 rates 21 -- so ...17... cannot be read as a 17 SEER2 variant of the same unit. Either the sheet transposed 19 as 17, or this is stock from a different TCL platform. Read the rating plate before publishing or reordering."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
         }
       ]
     },
@@ -240,11 +256,9 @@
       "catalogSku": "TCL18KODU-18SEH17XAC",
       "sourceSku": "TCL18KODU",
       "modelNumber": "H18SEH17XAC",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -253,6 +267,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-11",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H18SEH17XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The inventory sheet's outdoor unit model H18SEH17XAC does not appear in TCL's Elite series specification sheet. The Elite 18K models are H18SEH19XAE and H18SEH19XAC (AHRI 215387254). The digits in that position are a platform code, not an efficiency rating -- H09SEH19 rates SEER2 19 while H12SEH19 rates 21 -- so ...17... cannot be read as a 17 SEER2 variant of the same unit. Either the sheet transposed 19 as 17, or this is stock from a different TCL platform. Read the rating plate before publishing or reordering."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
         }
       ]
     },
@@ -303,11 +335,9 @@
       "catalogSku": "TCL24KIDU",
       "sourceSku": "TCL24KIDU",
       "modelNumber": "H24SBH20XPE",
-      "researchStatus": "csv_only",
+      "researchStatus": "in_progress",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -316,6 +346,33 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-14",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H24SBH20XPE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as the indoor unit in the 24K column of the TCL BreezeIN series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Identity, refrigerant and AHRI certificate read cleanly. The numeric specification columns of this sheet use an embedded font whose digits do not map on text extraction, so SEER2/HSPF2/MCA/dimensions for this model are NOT transcribed here rather than being guessed. Re-read from the source PDF or request the model submittal from TCL to complete them."
+        },
+        {
+          "fieldName": "ahriReference",
+          "value": "215387262",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "ahri",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "AHRI Certificate row of the BreezeIN spec sheet, 24K column."
         }
       ]
     },
@@ -324,11 +381,9 @@
       "catalogSku": "TCL24KODU",
       "sourceSku": "TCL24KODU",
       "modelNumber": "H24SBH20XPC",
-      "researchStatus": "csv_only",
+      "researchStatus": "in_progress",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -337,6 +392,33 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-15",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H24SBH20XPC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as the outdoor unit in the 24K column of the TCL BreezeIN series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Identity, refrigerant and AHRI certificate read cleanly. The numeric specification columns of this sheet use an embedded font whose digits do not map on text extraction, so SEER2/HSPF2/MCA/dimensions for this model are NOT transcribed here rather than being guessed. Re-read from the source PDF or request the model submittal from TCL to complete them."
+        },
+        {
+          "fieldName": "ahriReference",
+          "value": "215387262",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24SBH20XPC.pdf",
+          "sourceType": "ahri",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "AHRI Certificate row of the BreezeIN spec sheet, 24K column."
         }
       ]
     },
@@ -409,11 +491,9 @@
       "catalogSku": "TCL36KIDU",
       "sourceSku": "TCL36KIDU",
       "modelNumber": "H36SEH19XAE",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -422,6 +502,37 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-19",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H36SEH19XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as the indoor unit in the 36K column of the TCL Elite series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "seer2": 19,
+            "hspf2": 9,
+            "mca": 18
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Elite spec sheet 36K column: SEER2 19 / EER2 9, HSPF2 9 / COP 3.15, rated cooling 36,000 BTU/h, 208-230V 1Ph 60Hz, MCA 18 A, MOCP 30 A, factory charge R-454B 55.73 oz. Outdoor airflow 2,100 CFM, outdoor sound 63 dB(A), outdoor net weight 105.8 lb; indoor sound 36-55 dB(A), indoor net weight 39.7 lb."
+        },
+        {
+          "fieldName": "ahriReference",
+          "value": "215387256",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "ahri",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "AHRI Certificate row of the Elite spec sheet, 36K column."
         }
       ]
     },
@@ -430,11 +541,9 @@
       "catalogSku": "TCL36KODU",
       "sourceSku": "TCL36KODU",
       "modelNumber": "H36SEH19XAC",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -443,6 +552,37 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-20",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H36SEH19XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as the outdoor unit in the 36K column of the TCL Elite series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "seer2": 19,
+            "hspf2": 9,
+            "mca": 18
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Elite spec sheet 36K column: SEER2 19 / EER2 9, HSPF2 9 / COP 3.15, rated cooling 36,000 BTU/h, 208-230V 1Ph 60Hz, MCA 18 A, MOCP 30 A, factory charge R-454B 55.73 oz. Outdoor airflow 2,100 CFM, outdoor sound 63 dB(A), outdoor net weight 105.8 lb; indoor sound 36-55 dB(A), indoor net weight 39.7 lb."
+        },
+        {
+          "fieldName": "ahriReference",
+          "value": "215387256",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "ahri",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "AHRI Certificate row of the Elite spec sheet, 36K column."
         }
       ]
     },
@@ -514,11 +654,9 @@
       "catalogSku": "TCL24KAHU",
       "sourceSku": "TCL24KAHU",
       "modelNumber": "H24AHH17XAE",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -527,6 +665,46 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-24",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H24AHH17XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - IDU in the 24K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "cfm": 850,
+            "mca": 5,
+            "weightLbs": 121
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 24K column. Ratings are for the matched system (H24TDH17XAC outdoor with H24AHH17XAE indoor) and are not standalone ratings for this air handler. Heating capacity 24,000 BTU/h at 47F, 18,500 at 17F, 18,000 at 5F (COP 1.75). Refrigerant charge 4 lb 11.8 oz (2.15 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 3/4 gas, 25-100 ft, max elevation 50 ft. ECM indoor fan 1/2 HP at 1050 RPM, 3.8 FLA; external static pressure up to 0.8 in W.C.; optional electric heat available."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Spec sheet ENERGY STAR Cold Climate Certified = Yes for the 24K system."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
         }
       ]
     },
@@ -535,11 +713,9 @@
       "catalogSku": "TCL24KHPU",
       "sourceSku": "TCL24KHPU",
       "modelNumber": "H24TDH17XAC",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -548,6 +724,46 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-25",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H24TDH17XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - ODU in the 24K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 14,
+            "mocp": 25,
+            "seer2": 18
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 24K column. Ratings are for the matched system (H24TDH17XAC outdoor with H24AHH17XAE indoor) and are not standalone ratings for this outdoor unit. Heating capacity 24,000 BTU/h at 47F, 18,500 at 17F, 18,000 at 5F (COP 1.75). Refrigerant charge 4 lb 11.8 oz (2.15 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 3/4 gas, 25-100 ft, max elevation 50 ft. Compressor variable rotary, FLA 10 A, RLA 8.2 A; DC fan motor 1/4 HP."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The spec sheet states ENERGY STAR Cold Climate Certified = Yes for the 24K system. Do not extend the certification to this model without checking the column."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
         }
       ]
     },
@@ -556,11 +772,9 @@
       "catalogSku": "TCL36KAHU",
       "sourceSku": "TCL36KAHU",
       "modelNumber": "H36AHH18XAE",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -569,6 +783,46 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-26",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H36AHH18XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - IDU in the 36K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "cfm": 1150,
+            "mca": 5,
+            "weightLbs": 121
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 36K column. Ratings are for the matched system (H36TDH18XAC outdoor with H36AHH18XAE indoor) and are not standalone ratings for this air handler. Heating capacity 36,000 BTU/h at 47F, 25,000 at 17F, 26,000 at 5F (COP 1.9). Refrigerant charge 6 lb 4.5 oz (2.85 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 3/4 gas, 25-100 ft, max elevation 50 ft. ECM indoor fan 1/2 HP at 1050 RPM, 3.8 FLA; external static pressure up to 0.8 in W.C.; optional electric heat available."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Spec sheet ENERGY STAR Cold Climate Certified = Yes for the 36K system."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
         }
       ]
     },
@@ -577,11 +831,9 @@
       "catalogSku": "TCL36KHPU",
       "sourceSku": "TCL36KHPU",
       "modelNumber": "H36TDH18XAC",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -590,6 +842,46 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-27",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H36TDH18XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - ODU in the 36K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 22,
+            "mocp": 35,
+            "seer2": 19
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 36K column. Ratings are for the matched system (H36TDH18XAC outdoor with H36AHH18XAE indoor) and are not standalone ratings for this outdoor unit. Heating capacity 36,000 BTU/h at 47F, 25,000 at 17F, 26,000 at 5F (COP 1.9). Refrigerant charge 6 lb 4.5 oz (2.85 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 3/4 gas, 25-100 ft, max elevation 50 ft. Compressor variable rotary, FLA 15.8 A, RLA 10 A; DC fan motor 1/4 HP."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The spec sheet states ENERGY STAR Cold Climate Certified = Yes for the 36K system. Do not extend the certification to this model without checking the column."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
         }
       ]
     },
@@ -598,11 +890,9 @@
       "catalogSku": "TCL48KAHU",
       "sourceSku": "TCL48KAHU",
       "modelNumber": "H48AHH18XAE",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -611,6 +901,46 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-28",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H48AHH18XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - IDU in the 48K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "cfm": 1600,
+            "mca": 6,
+            "weightLbs": 152
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 48K column. Ratings are for the matched system (H48TDH18XAC outdoor with H48AHH18XAE indoor) and are not standalone ratings for this air handler. Heating capacity 47,000 BTU/h at 47F, 35,000 at 17F, 33,000 at 5F (COP 1.9). Refrigerant charge 8 lb 13.1 oz (4.00 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 7/8 gas, 25-100 ft, max elevation 50 ft. ECM indoor fan 3/4 HP at 1050 RPM, 5.4 FLA; external static pressure up to 0.8 in W.C.; optional electric heat available."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Spec sheet ENERGY STAR Cold Climate Certified = Yes for the 48K system."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
         }
       ]
     },
@@ -619,11 +949,9 @@
       "catalogSku": "TCL48KHPU",
       "sourceSku": "TCL48KHPU",
       "modelNumber": "H48TDH18XAC",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -632,6 +960,46 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-29",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H48TDH18XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - ODU in the 48K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 35,
+            "mocp": 60,
+            "seer2": 18
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 48K column. Ratings are for the matched system (H48TDH18XAC outdoor with H48AHH18XAE indoor) and are not standalone ratings for this outdoor unit. Heating capacity 47,000 BTU/h at 47F, 35,000 at 17F, 33,000 at 5F (COP 1.9). Refrigerant charge 8 lb 13.1 oz (4.00 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 7/8 gas, 25-100 ft, max elevation 50 ft. Compressor variable rotary, FLA 26 A, RLA 15.8 A; DC fan motor 1/4 HP."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "ENERGY STAR Cold Climate Certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The spec sheet states ENERGY STAR Cold Climate Certified = Yes for the 48K system. Do not extend the certification to this model without checking the column."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
         }
       ]
     },
@@ -640,11 +1008,9 @@
       "catalogSku": "TCL60KAHU",
       "sourceSku": "TCL60KAHU",
       "modelNumber": "H60AHH16XAE",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -653,6 +1019,46 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-30",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H60AHH16XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - IDU in the 60K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "cfm": 1700,
+            "mca": 6,
+            "weightLbs": 152
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 60K column. Ratings are for the matched system (H60TDH16XAC outdoor with H60AHH16XAE indoor) and are not standalone ratings for this air handler. Heating capacity 54,000 BTU/h at 47F, 38,000 at 17F, 35,000 at 5F (COP 1.9). Refrigerant charge 8 lb 13.1 oz (4.00 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 7/8 gas, 25-100 ft, max elevation 50 ft. ECM indoor fan 3/4 HP at 1050 RPM, 5.4 FLA; external static pressure up to 0.8 in W.C.; optional electric heat available."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "Not ENERGY STAR Cold Climate certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Spec sheet ENERGY STAR Cold Climate Certified = No for the 60K system."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
         }
       ]
     },
@@ -661,11 +1067,9 @@
       "catalogSku": "TCL60KHPU",
       "sourceSku": "TCL60KHPU",
       "modelNumber": "H60TDH16XAC",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -674,6 +1078,46 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-31",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "H60TDH16XAC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed as MODEL NUMBER - ODU in the 60K column of the Advantage series spec sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 35,
+            "mocp": 60,
+            "seer2": 17
+          },
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL Advantage series specification sheet, 60K column. Ratings are for the matched system (H60TDH16XAC outdoor with H60AHH16XAE indoor) and are not standalone ratings for this outdoor unit. Heating capacity 54,000 BTU/h at 47F, 38,000 at 17F, 35,000 at 5F (COP 1.9). Refrigerant charge 8 lb 13.1 oz (4.00 kg) pre-charged for 25 ft; 0.54 oz/ft beyond. Line set 3/8 liquid / 7/8 gas, 25-100 ft, max elevation 50 ft. Compressor variable rotary, FLA 26 A, RLA 15.8 A; DC fan motor 1/4 HP."
+        },
+        {
+          "fieldName": "energyStar",
+          "value": "Not ENERGY STAR Cold Climate certified",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The spec sheet states ENERGY STAR Cold Climate Certified = No for the 60K system. Do not extend the other sizes’ certification to this model without checking the column."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "10 years parts, 10 years compressor (residential)",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36TDH18XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
         }
       ]
     },
