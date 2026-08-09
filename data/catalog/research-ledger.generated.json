@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T21:18:03.331Z",
+  "generatedAt": "2026-08-09T21:20:57.648Z",
   "records": [
     {
       "sourceRow": 2,
@@ -1604,7 +1604,7 @@
       "catalogSku": "TOS09KIDU-R-410A",
       "sourceSku": "TOS09KIDU",
       "modelNumber": "TWH09ATCXB-D3DNA3AI",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -1617,6 +1617,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-32",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH09ATCXB-D3DNA3AI",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TWH09ATCXB-D3DNA3AI does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-410A single-zone families are Charmo 19 (TW09HXCA5D*), Pular 25 (TW09HXP2A1D*) and Lomo 38 (TW09HQ3D6D*). The -D3DNA pattern here matches Gree's wall-hung naming rather than any TOSOT US identifier. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -1655,7 +1673,7 @@
       "catalogSku": "TOS09KODU-R-410A",
       "sourceSku": "TOS09KODU",
       "modelNumber": "TWH09ATCXB-D3DNA3AO",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -1668,6 +1686,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-34",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH09ATCXB-D3DNA3AO",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TWH09ATCXB-D3DNA3AO does not appear anywhere in TOSOT's Technical Resource Center. Same family as the matching indoor unit; no TOSOT US submittal uses this identifier. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -1706,7 +1742,7 @@
       "catalogSku": "TOS12KIDU-R-410A",
       "sourceSku": "TOS12KIDU",
       "modelNumber": "TWH12ATCXB-D3DNA3CI",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -1719,6 +1755,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-36",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH12ATCXB-D3DNA3CI",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TWH12ATCXB-D3DNA3CI does not appear anywhere in TOSOT's Technical Resource Center. No TOSOT US submittal uses this identifier; the -D3DNA pattern is Gree-style. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -1727,7 +1781,7 @@
       "catalogSku": "TOS12KIDU-R-32",
       "sourceSku": "TOS12KIDU",
       "modelNumber": "TWH12ZR32AI",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -1740,6 +1794,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-37",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH12ZR32AI",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TWH12ZR32AI does not appear anywhere in TOSOT's Technical Resource Center. Closest published family is Zeno 17 (R32), whose 12K models are TWH12ZA32AI/AO and TWH12ZD32AI/AO. 'ZR32' is not a TOSOT-published segment. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -1748,7 +1820,7 @@
       "catalogSku": "TOS12KODU",
       "sourceSku": "TOS12KODU",
       "modelNumber": "TWH12ZR33AO",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -1761,6 +1833,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-38",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH12ZR33AO",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TWH12ZR33AO does not appear anywhere in TOSOT's Technical Resource Center. Closest published family is Zeno 17 (R32): TWH12ZA32AO / TWH12ZD32AO. Note the sheet's own indoor row reads ZR32 while this outdoor row reads ZR33, which cannot both be right for one system. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -1845,7 +1935,7 @@
       "catalogSku": "TOS18KMZODU",
       "sourceSku": "TOS18KMZODU",
       "modelNumber": "TM18R32MO",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -1858,6 +1948,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-41",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TM18R32MO",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TM18R32MO does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 multi-zone line is Multi Ultra Heat, whose 18K outdoor unit is TMH18D32MO. The sheet's TM..R32MO pattern is not published by TOSOT. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -1942,7 +2050,7 @@
       "catalogSku": "TOS-24K-AHU",
       "sourceSku": "TOS-24K-AHU",
       "modelNumber": "TUD24-R32GDU",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -1955,6 +2063,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-44",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TUD24-R32GDU",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TUD24-R32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 central air handlers are the Unix Eco series, e.g. TUD24AH2/NhG-D(U). The sheet's TUD..-R32GDU pattern is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -1963,7 +2089,7 @@
       "catalogSku": "TOS24KHPU",
       "sourceSku": "TOS24KHPU",
       "modelNumber": "TU24-32GDU",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -1976,6 +2102,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-45",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TU24-32GDU",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TU24-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 central outdoor units are Unix Eco, e.g. TUD30-24W2/NhG-D(U). The sheet's TU..-32GDU pattern is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -1984,7 +2128,7 @@
       "catalogSku": "TOS30KMZODU",
       "sourceSku": "TOS30KMZODU",
       "modelNumber": "TM30R32MO",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -1997,6 +2141,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-46",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TM30R32MO",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TM30R32MO does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 multi-zone 30K outdoor unit is TMH30D32MO. The sheet's TM..R32MO pattern is not published by TOSOT. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -2005,7 +2167,7 @@
       "catalogSku": "TOS36KAHU",
       "sourceSku": "TOS36KAHU",
       "modelNumber": "TU36-32AH2GDU",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -2018,6 +2180,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-47",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TU36-32AH2GDU",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TU36-32AH2GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 36K air handler is TUD36AH2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -2026,7 +2206,7 @@
       "catalogSku": "TOS36KHPU",
       "sourceSku": "TOS36KHPU",
       "modelNumber": "TU36-32GDU",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -2039,6 +2219,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-48",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TU36-32GDU",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TU36-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 36K central outdoor unit is TUD36-36W2/NhG-D(U). Note TOSOT also publishes an R-410A Unix 18 outdoor unit called TU36-24WADU, which is a different unit from the sheet's TU36-32GDU. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -2047,10 +2245,9 @@
       "catalogSku": "TOS42KMZODU-R-410A",
       "sourceSku": "TOS42KMZODU",
       "modelNumber": "TM42HX4O",
-      "researchStatus": "csv_only",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
       ],
@@ -2060,6 +2257,15 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-49",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TM42HX4O",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Exact match. TOSOT publishes 'Submittal - TM42HX4O' plus an exploded view and service manual under Multi Pular (R410A). Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
         }
       ]
     },
@@ -2068,7 +2274,7 @@
       "catalogSku": "TOS42KMZODU-R-454B",
       "sourceSku": "TOS42KMZODU",
       "modelNumber": "TM42R32MO",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -2081,6 +2287,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-50",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TM42R32MO",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TM42R32MO does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 multi-zone 42K outdoor unit is TMH42D32MO. Two separate problems: the identifier is not published, and the inventory sheet records this row's refrigerant as R454B while the model string itself contains R32. Those cannot both be correct. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -2089,7 +2313,7 @@
       "catalogSku": "TOS48KAHU",
       "sourceSku": "TOS48KAHU",
       "modelNumber": "TUD48-R32GDU",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -2102,6 +2326,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-51",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TUD48-R32GDU",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TUD48-R32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 48K air handler is TUD48AH2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -2110,7 +2352,7 @@
       "catalogSku": "TOS48KHPU",
       "sourceSku": "TOS48KHPU",
       "modelNumber": "TU48-32GDU",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -2123,6 +2365,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-52",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TU48-32GDU",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TU48-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 central outdoor units cover 48K via TUD60-48W2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -2131,7 +2391,7 @@
       "catalogSku": "TOS60KAHU",
       "sourceSku": "TOS60KAHU",
       "modelNumber": "TUD60-R32GDU",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -2144,6 +2404,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-53",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TUD60-R32GDU",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TUD60-R32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 60K air handler is TUD60AH2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -2152,7 +2430,7 @@
       "catalogSku": "TOS60KHPU",
       "sourceSku": "TOS60KHPU",
       "modelNumber": "TU60-32GDU",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -2165,6 +2443,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-54",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TU60-32GDU",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TU60-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 60K central outdoor unit is TUD60-48W2/NhG-D(U). TOSOT also publishes an R-410A TU60-48WADU, a different unit. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -3736,7 +4032,7 @@
       "catalogSku": "TOSCAS09K",
       "sourceSku": "TOSCAS09K",
       "modelNumber": "TM09R32BKDI",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -3749,6 +4045,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-95",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TM09R32BKDI",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TM09R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 cassettes are TKH09D32AI/TKH12D32AI/TKH18D32AI/TKH24D32AI; its R-410A cassettes are TM12HBKDI/TM18HBKDI/TM24HBKDI. The sheet's TM..R32BKDI mixes both patterns and matches neither. TOSOT publishes no 9K cassette in the R-410A line at all. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -3757,7 +4071,7 @@
       "catalogSku": "TOSCAS12K",
       "sourceSku": "TOSCAS12K",
       "modelNumber": "TM12R32BKDI",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -3770,6 +4084,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-96",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TM12R32BKDI",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TM12R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH12D32AI (R-32) or TM12HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -3778,7 +4110,7 @@
       "catalogSku": "TOSCAS18K",
       "sourceSku": "TOSCAS18K",
       "modelNumber": "TM18R32BKDI",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -3791,6 +4123,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-97",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TM18R32BKDI",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TM18R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH18D32AI (R-32) or TM18HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -3799,7 +4149,7 @@
       "catalogSku": "TOSCAS24K",
       "sourceSku": "TOSCAS24K",
       "modelNumber": "TM24R32BKDI",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -3812,6 +4162,24 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-98",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TM24R32BKDI",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TM24R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH24D32AI (R-32) or TM24HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "withheld",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
       ]
     },
@@ -3820,7 +4188,7 @@
       "catalogSku": "TOSPAN01",
       "sourceSku": "TOSPAN01",
       "modelNumber": "TF05",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -3833,6 +4201,15 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-99",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TF05",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TOSOT's Technical Resource Center publishes no submittal or exploded view for a panel numbered TF05. Panels are normally supplied against a specific cassette model, so the correct part depends on which cassette is actually stocked -- and those cassette identifiers are themselves unconfirmed. HUMAN VERIFICATION REQUIRED."
         }
       ]
     },
@@ -3841,7 +4218,7 @@
       "catalogSku": "TOSPAN02",
       "sourceSku": "TOSPAN02",
       "modelNumber": "TF06",
-      "researchStatus": "csv_only",
+      "researchStatus": "conflict",
       "missing": [
         "exact_image",
         "official_documents",
@@ -3854,6 +4231,15 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-100",
           "verifiedAt": null,
           "status": "source_record"
+        },
+        {
+          "fieldName": "modelNumber",
+          "value": "TF06",
+          "sourceUrl": "https://tosot.com/resources/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "TOSOT's Technical Resource Center publishes no submittal or exploded view for a panel numbered TF06. Panels are normally supplied against a specific cassette model, so the correct part depends on which cassette is actually stocked -- and those cassette identifiers are themselves unconfirmed. HUMAN VERIFICATION REQUIRED."
         }
       ]
     },

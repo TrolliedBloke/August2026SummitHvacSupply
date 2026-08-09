@@ -6040,16 +6040,47 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 9000,
       "zones": "1",
       "voltage": "115V",
-      "refrigerant": "R-410A"
+      "refrigerant": "R-410A",
+      "productFamily": "TOSOT (series not confirmed)",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 9000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "published",
     "quoteEligible": true,
     "purchaseEligible": true,
@@ -6067,6 +6098,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-32",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TWH09ATCXB-D3DNA3AI",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TWH09ATCXB-D3DNA3AI does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-410A single-zone families are Charmo 19 (TW09HXCA5D*), Pular 25 (TW09HXP2A1D*) and Lomo 38 (TW09HQ3D6D*). The -D3DNA pattern here matches Gree's wall-hung naming rather than any TOSOT US identifier. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -6171,16 +6220,47 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 9000,
       "zones": "1",
       "voltage": "115V",
-      "refrigerant": "R-410A"
+      "refrigerant": "R-410A",
+      "productFamily": "TOSOT (series not confirmed)",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 9000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -6199,6 +6279,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-34",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TWH09ATCXB-D3DNA3AO",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TWH09ATCXB-D3DNA3AO does not appear anywhere in TOSOT's Technical Resource Center. Same family as the matching indoor unit; no TOSOT US submittal uses this identifier. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -6303,16 +6401,47 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 12000,
       "zones": "1",
       "voltage": "208/230V",
-      "refrigerant": "R-410A"
+      "refrigerant": "R-410A",
+      "productFamily": "TOSOT (series not confirmed)",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 12000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "published",
     "quoteEligible": true,
     "purchaseEligible": true,
@@ -6330,6 +6459,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-36",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TWH12ATCXB-D3DNA3CI",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TWH12ATCXB-D3DNA3CI does not appear anywhere in TOSOT's Technical Resource Center. No TOSOT US submittal uses this identifier; the -D3DNA pattern is Gree-style. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -6363,17 +6510,48 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 12000,
       "zones": "1",
       "voltage": "208/230V",
       "refrigerant": "R-32",
-      "refrigerantClass": "A2L"
+      "refrigerantClass": "A2L",
+      "productFamily": "TOSOT (series not confirmed)",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 12000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -6391,6 +6569,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-37",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TWH12ZR32AI",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TWH12ZR32AI does not appear anywhere in TOSOT's Technical Resource Center. Closest published family is Zeno 17 (R32), whose 12K models are TWH12ZA32AI/AO and TWH12ZD32AI/AO. 'ZR32' is not a TOSOT-published segment. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -6424,17 +6620,48 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 12000,
       "zones": "1",
       "voltage": "208/230V",
       "refrigerant": "R-32",
-      "refrigerantClass": "A2L"
+      "refrigerantClass": "A2L",
+      "productFamily": "TOSOT (series not confirmed)",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 12000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "published",
     "quoteEligible": true,
     "purchaseEligible": true,
@@ -6451,6 +6678,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-38",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TWH12ZR33AO",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TWH12ZR33AO does not appear anywhere in TOSOT's Technical Resource Center. Closest published family is Zeno 17 (R32): TWH12ZA32AO / TWH12ZD32AO. Note the sheet's own indoor row reads ZR32 while this outdoor row reads ZR33, which cannot both be right for one system. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -6640,17 +6885,48 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 18000,
       "zones": "1-2",
       "voltage": "208/230V",
       "refrigerant": "R-32",
-      "refrigerantClass": "A2L"
+      "refrigerantClass": "A2L",
+      "productFamily": "TOSOT (series not confirmed)",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 18000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -6668,6 +6944,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-41",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM18R32MO",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TM18R32MO does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 multi-zone line is Multi Ultra Heat, whose 18K outdoor unit is TMH18D32MO. The sheet's TM..R32MO pattern is not published by TOSOT. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -6855,15 +7149,47 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 24000,
       "zones": "1",
-      "voltage": "208/230V"
+      "voltage": "208/230V",
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 24000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -6881,6 +7207,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-44",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TUD24-R32GDU",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TUD24-R32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 central air handlers are the Unix Eco series, e.g. TUD24AH2/NhG-D(U). The sheet's TUD..-R32GDU pattern is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -6914,15 +7258,47 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 24000,
       "zones": "1",
-      "voltage": "208/230V"
+      "voltage": "208/230V",
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 24000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -6940,6 +7316,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-45",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TU24-32GDU",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TU24-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 central outdoor units are Unix Eco, e.g. TUD30-24W2/NhG-D(U). The sheet's TU..-32GDU pattern is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -6973,17 +7367,48 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 30000,
       "zones": "2-4",
       "voltage": "208/230V",
       "refrigerant": "R-32",
-      "refrigerantClass": "A2L"
+      "refrigerantClass": "A2L",
+      "productFamily": "TOSOT (series not confirmed)",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 30000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "published",
     "quoteEligible": true,
     "purchaseEligible": true,
@@ -7000,6 +7425,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-46",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM30R32MO",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TM30R32MO does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 multi-zone 30K outdoor unit is TMH30D32MO. The sheet's TM..R32MO pattern is not published by TOSOT. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -7033,15 +7476,47 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 36000,
       "zones": "1",
-      "voltage": "208/230V"
+      "voltage": "208/230V",
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 36000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7059,6 +7534,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-47",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TU36-32AH2GDU",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TU36-32AH2GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 36K air handler is TUD36AH2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -7092,15 +7585,47 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 36000,
       "zones": "1",
-      "voltage": "208/230V"
+      "voltage": "208/230V",
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 36000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7118,6 +7643,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-48",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TU36-32GDU",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TU36-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 36K central outdoor unit is TUD36-36W2/NhG-D(U). Note TOSOT also publishes an R-410A Unix 18 outdoor unit called TU36-24WADU, which is a different unit from the sheet's TU36-32GDU. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -7149,18 +7692,81 @@
     "image": null,
     "images": [],
     "imageVerification": "unverified",
-    "documents": [],
+    "documents": [
+      {
+        "kind": "submittal",
+        "title": "TOSOT Multi Pular Submittal - TM42HX4O",
+        "url": "https://tosot.com/resources/",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Listed by exact model in the Multi Pular (R410A) section of TOSOT's Technical Resource Center, alongside an exploded view, extended ratings and the Multi Pular service manual."
+      }
+    ],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "requires_matched_combination",
+      "referenceNumber": null,
+      "note": "A multi-zone outdoor unit is certified against a specific set of indoor heads. Confirm the head selection before quoting a rating.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "voltage": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "phase": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "frequencyHz": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "discontinued": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 42000,
       "zones": "2-5",
       "voltage": "208/230V",
-      "refrigerant": "R-410A"
+      "refrigerant": "R-410A",
+      "productFamily": "TOSOT Multi Pular multi-zone (R-410A)",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 42000,
+      "phase": 1,
+      "frequencyHz": 60,
+      "discontinued": "Current in TOSOT's R-410A multi-zone line; R-410A is being phased down under the AIM Act"
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7179,6 +7785,15 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-49",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM42HX4O",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Exact match. TOSOT publishes 'Submittal - TM42HX4O' plus an exploded view and service manual under Multi Pular (R410A). Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
       }
     ]
   },
@@ -7212,17 +7827,48 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 42000,
       "zones": "2-5",
       "voltage": "208/230V",
-      "refrigerant": "R-454B",
-      "refrigerantClass": "A2L"
+      "refrigerant": "R-32",
+      "refrigerantClass": "A2L",
+      "productFamily": "TOSOT (series not confirmed)",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 42000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7240,6 +7886,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-50",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM42R32MO",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TM42R32MO does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 multi-zone 42K outdoor unit is TMH42D32MO. Two separate problems: the identifier is not published, and the inventory sheet records this row's refrigerant as R454B while the model string itself contains R32. Those cannot both be correct. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -7273,15 +7937,47 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 48000,
       "zones": "1",
-      "voltage": "208/230V"
+      "voltage": "208/230V",
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 48000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7299,6 +7995,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-51",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TUD48-R32GDU",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TUD48-R32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 48K air handler is TUD48AH2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -7332,17 +8046,48 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 48000,
       "zones": "1",
       "voltage": "208/230V",
-      "refrigerant": "R-454B",
-      "refrigerantClass": "A2L"
+      "refrigerant": "R-32",
+      "refrigerantClass": "A2L",
+      "productFamily": "TOSOT (series not confirmed)",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 48000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7360,6 +8105,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-52",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TU48-32GDU",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TU48-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 central outdoor units cover 48K via TUD60-48W2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -7393,15 +8156,47 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 60000,
       "zones": "1",
-      "voltage": "208/230V"
+      "voltage": "208/230V",
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 60000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7419,6 +8214,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-53",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TUD60-R32GDU",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TUD60-R32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 60K air handler is TUD60AH2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -7452,15 +8265,47 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 60000,
       "zones": "1",
-      "voltage": "208/230V"
+      "voltage": "208/230V",
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 60000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7478,6 +8323,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-54",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TU60-32GDU",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TU60-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 60K central outdoor unit is TUD60-48W2/NhG-D(U). TOSOT also publishes an R-410A TU60-48WADU, a different unit. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -12316,13 +13179,45 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
-      "btu": 9000
+      "btu": 9000,
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 9000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12343,6 +13238,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-95",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM09R32BKDI",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TM09R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 cassettes are TKH09D32AI/TKH12D32AI/TKH18D32AI/TKH24D32AI; its R-410A cassettes are TM12HBKDI/TM18HBKDI/TM24HBKDI. The sheet's TM..R32BKDI mixes both patterns and matches neither. TOSOT publishes no 9K cassette in the R-410A line at all. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -12376,13 +13289,45 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
-      "btu": 12000
+      "btu": 12000,
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 12000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12403,6 +13348,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-96",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM12R32BKDI",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TM12R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH12D32AI (R-32) or TM12HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -12436,13 +13399,45 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
-      "btu": 18000
+      "btu": 18000,
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 18000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12463,6 +13458,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-97",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM18R32BKDI",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TM18R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH18D32AI (R-32) or TM18HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -12496,13 +13509,45 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "conflict",
+      "referenceNumber": null,
+      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "fuelType": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
-      "btu": 24000
+      "btu": 24000,
+      "productFamily": "TOSOT (series not confirmed)",
+      "refrigerant": "R-32",
+      "fuelType": "Electric (heat pump)",
+      "coolingCapacityBtu": 24000
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12523,6 +13568,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-98",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM24R32BKDI",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TM24R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH24D32AI (R-32) or TM24HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "withheld",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
       }
     ]
   },
@@ -12556,13 +13619,27 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to a decorative panel.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
-      "btu": 9000
+      "btu": 9000,
+      "productFamily": "TOSOT cassette decorative panel"
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12583,6 +13660,15 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-99",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TF05",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TOSOT's Technical Resource Center publishes no submittal or exploded view for a panel numbered TF05. Panels are normally supplied against a specific cassette model, so the correct part depends on which cassette is actually stocked -- and those cassette identifiers are themselves unconfirmed. HUMAN VERIFICATION REQUIRED."
       }
     ]
   },
@@ -12616,13 +13702,27 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to a decorative panel.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
-      "btu": 24000
+      "btu": 24000,
+      "productFamily": "TOSOT cassette decorative panel"
     },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12643,6 +13743,15 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-100",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TF06",
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "TOSOT's Technical Resource Center publishes no submittal or exploded view for a panel numbered TF06. Panels are normally supplied against a specific cassette model, so the correct part depends on which cassette is actually stocked -- and those cassette identifiers are themselves unconfirmed. HUMAN VERIFICATION REQUIRED."
       }
     ]
   },
