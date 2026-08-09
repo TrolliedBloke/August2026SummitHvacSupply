@@ -827,6 +827,573 @@
           "notes": "Corrects the letter O in the inventory family code to Carrier's numeric zero."
         }
       ]
+    },
+    "CAR36KAHU": {
+      "researchStatus": "conflict",
+      "productType": "Air handler",
+      "specifications": {
+        "productFamily": "Carrier Comfort FJ5 fan coil",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "coolingCapacityBtu": 36000,
+        "tonnage": 3,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "mca": 5.3,
+        "mocp": 15,
+        "fla": 4.2,
+        "heightIn": "49-5/8 in (1260 mm)",
+        "widthIn": "17-5/8 in (448 mm)",
+        "depthIn": "22-1/16 in (560 mm)",
+        "weightLbs": 148,
+        "cabinetWidthIn": "17-5/8 in (448 mm)",
+        "liquidLineIn": "3/8",
+        "installOrientation": "Upflow, downflow or horizontal"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heightIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "widthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "depthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cabinetWidthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "FJ5 Product Data (catalog FJ5-01PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Physical, specification and electrical tables cover sizes 18-60."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "FJ5 Installation Instructions (catalog IM-FJ5-01)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/IM-FJ5-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Installation instructions for the FJ5 fan coil series."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "labor": null,
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "Carrier residential limited warranty: 5-year parts, extended to 10-year parts with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. See the warranty certificate for full details.",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/fan-coils/fj5/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A fan coil is rated as part of a matched system with an outdoor unit. Efficiency ratings belong to the certified combination, not to this air handler on its own. Confirm the intended outdoor unit and look up the combination in the AHRI directory.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "FJ5ANXD36L00",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The inventory sheet's model FJ5ANXD36L00 does not appear in Carrier's Table 1 (Models Available). Position 7 of the FJ5 nomenclature is cabinet width (A=14 in, B=17 in, C=21 in, D=24 in) and Carrier pairs width to capacity, so the only 3-ton models listed are: FJ5ANXB36L00, FJ5ANXB36L10, FJ5ANXB36L15. The sheet uses cabinet D on every Carrier air handler, which cannot be right for all three capacities. Read the rating plate on the unit before ordering or publishing this model."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 5.3,
+            "mocp": 15,
+            "weightLbs": 148
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Table 2 (Physical Data) and Table 11 (Electrical Data for Units without Electric Heat), size 36. Blower motor 1/2 HP multi-tap ECM. Dimensions and electrical follow the unit size and are the same for every cabinet/heater variant of that size."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/fan-coils/fj5/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/fan-coils/fj5/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier Comfort FJ5 fan coil product page."
+        }
+      ]
+    },
+    "CAR48KAHU": {
+      "researchStatus": "conflict",
+      "productType": "Air handler",
+      "specifications": {
+        "productFamily": "Carrier Comfort FJ5 fan coil",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "coolingCapacityBtu": 48000,
+        "tonnage": 4,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "mca": 7.6,
+        "mocp": 15,
+        "fla": 6.1,
+        "heightIn": "53-7/16 in (1357 mm)",
+        "widthIn": "21-1/8 in (537 mm)",
+        "depthIn": "22-1/16 in (560 mm)",
+        "weightLbs": 182,
+        "cabinetWidthIn": "21-1/8 in (537 mm)",
+        "liquidLineIn": "3/8",
+        "installOrientation": "Upflow, downflow or horizontal"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heightIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "widthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "depthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cabinetWidthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "FJ5 Product Data (catalog FJ5-01PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Physical, specification and electrical tables cover sizes 18-60."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "FJ5 Installation Instructions (catalog IM-FJ5-01)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/IM-FJ5-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Installation instructions for the FJ5 fan coil series."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "labor": null,
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "Carrier residential limited warranty: 5-year parts, extended to 10-year parts with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. See the warranty certificate for full details.",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/fan-coils/fj5/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A fan coil is rated as part of a matched system with an outdoor unit. Efficiency ratings belong to the certified combination, not to this air handler on its own. Confirm the intended outdoor unit and look up the combination in the AHRI directory.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "FJ5ANXD48L00",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The inventory sheet's model FJ5ANXD48L00 does not appear in Carrier's Table 1 (Models Available). Position 7 of the FJ5 nomenclature is cabinet width (A=14 in, B=17 in, C=21 in, D=24 in) and Carrier pairs width to capacity, so the only 4-ton models listed are: FJ5ANXC48L00, FJ5ANXC48L10, FJ5ANXC48L15, FJ5ANBC48L00. The sheet uses cabinet D on every Carrier air handler, which cannot be right for all three capacities. Read the rating plate on the unit before ordering or publishing this model."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 7.6,
+            "mocp": 15,
+            "weightLbs": 182
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Table 2 (Physical Data) and Table 11 (Electrical Data for Units without Electric Heat), size 48. Blower motor 3/4 HP multi-tap ECM. Dimensions and electrical follow the unit size and are the same for every cabinet/heater variant of that size."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/fan-coils/fj5/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/fan-coils/fj5/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier Comfort FJ5 fan coil product page."
+        }
+      ]
+    },
+    "CAR60KAHU": {
+      "researchStatus": "verified",
+      "productType": "Air handler",
+      "specifications": {
+        "productFamily": "Carrier Comfort FJ5 fan coil",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "coolingCapacityBtu": 60000,
+        "tonnage": 5,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "mca": 7.6,
+        "mocp": 15,
+        "fla": 6.1,
+        "heightIn": "59-3/16 in (1503 mm)",
+        "widthIn": "24-11/16 in (627 mm)",
+        "depthIn": "22-1/16 in (560 mm)",
+        "weightLbs": 210,
+        "cabinetWidthIn": "24-11/16 in (627 mm)",
+        "liquidLineIn": "3/8",
+        "installOrientation": "Upflow, downflow or horizontal",
+        "suctionLineIn": "7/8"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heightIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "widthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "depthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cabinetWidthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "FJ5 Product Data (catalog FJ5-01PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Physical, specification and electrical tables cover sizes 18-60."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "FJ5 Installation Instructions (catalog IM-FJ5-01)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/IM-FJ5-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Installation instructions for the FJ5 fan coil series."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "labor": null,
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "Carrier residential limited warranty: 5-year parts, extended to 10-year parts with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. See the warranty certificate for full details.",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/fan-coils/fj5/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A fan coil is rated as part of a matched system with an outdoor unit. Efficiency ratings belong to the certified combination, not to this air handler on its own. Confirm the intended outdoor unit and look up the combination in the AHRI directory.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "FJ5ANXD60L00",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed in Table 1 (Models Available) for size 60."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 7.6,
+            "mocp": 15,
+            "weightLbs": 210
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Table 2 (Physical Data) and Table 11 (Electrical Data for Units without Electric Heat), size 60. Blower motor 3/4 HP multi-tap ECM. Dimensions and electrical follow the unit size and are the same for every cabinet/heater variant of that size."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/fan-coils/fj5/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/fan-coils/fj5/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier Comfort FJ5 fan coil product page."
+        }
+      ]
     }
   }
 }
