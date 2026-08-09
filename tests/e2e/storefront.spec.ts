@@ -35,7 +35,7 @@ test("priced retail product can be added to cart without exposing internal inven
 
 test("exact-model media loads and supports multiple manufacturer views", async ({ page }) => {
   await page.goto("/products/sku/tos-18k-idu", { waitUntil: "domcontentloaded" });
-  await expect(page.getByText(/Manufacturer media verified against model TWH18AT19D6D/)).toBeVisible();
+  await expect(page.getByText(/Manufacturer media verified against model TWH18AT19D6D/).first()).toBeVisible();
   const productImage = page.getByRole("tabpanel").locator("img");
   await expect(productImage).toBeVisible();
   await expect.poll(() => productImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
