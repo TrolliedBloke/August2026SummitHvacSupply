@@ -6149,7 +6149,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
+    "ahri": {
+      "status": "not_found",
+      "referenceNumber": null,
+      "matchedIndoor": "TWH09AT19D6D",
+      "matchedOutdoor": "TWH09AT19D6DO",
+      "note": "No AHRI certificate located for the TWH09AT19D6D / TWH09AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
     "fieldSources": {},
     "specifications": {
       "btu": 9000,
@@ -6187,6 +6196,15 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official TOSOT manual model table includes this system identifier and its indoor/outdoor component identifiers."
+      },
+      {
+        "fieldName": "ahriReference",
+        "value": null,
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Cross-check against TOSOT's Technical Resource Center: TWH09AT19D6D and TWH09AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
       }
     ]
   },
@@ -6330,7 +6348,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
+    "ahri": {
+      "status": "not_found",
+      "referenceNumber": null,
+      "matchedIndoor": "TWH09AT19D6D",
+      "matchedOutdoor": "TWH09AT19D6DO",
+      "note": "No AHRI certificate located for the TWH09AT19D6D / TWH09AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
     "fieldSources": {},
     "specifications": {
       "btu": 9000
@@ -6368,6 +6395,15 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
+      },
+      {
+        "fieldName": "ahriReference",
+        "value": null,
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Cross-check against TOSOT's Technical Resource Center: TWH09AT19D6D and TWH09AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
       }
     ]
   },
@@ -6733,7 +6769,16 @@
     "imageVerification": "verified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
+    "ahri": {
+      "status": "not_found",
+      "referenceNumber": null,
+      "matchedIndoor": "TWH18AT19D6D",
+      "matchedOutdoor": "TWH18AT19D6DO",
+      "note": "No AHRI certificate located for the TWH18AT19D6D / TWH18AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
     "fieldSources": {},
     "specifications": {
       "btu": 18000,
@@ -6767,6 +6812,15 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official TOSOT manual model table includes the inventory identifier; component suffix still requires reconciliation."
+      },
+      {
+        "fieldName": "ahriReference",
+        "value": null,
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Cross-check against TOSOT's Technical Resource Center: TWH18AT19D6D and TWH18AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
       },
       {
         "fieldName": "image",
@@ -6817,7 +6871,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
+    "ahri": {
+      "status": "not_found",
+      "referenceNumber": null,
+      "matchedIndoor": "TWH18AT19D6D",
+      "matchedOutdoor": "TWH18AT19D6DO",
+      "note": "No AHRI certificate located for the TWH18AT19D6D / TWH18AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
     "fieldSources": {},
     "specifications": {
       "btu": 18000,
@@ -6852,6 +6915,15 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
+      },
+      {
+        "fieldName": "ahriReference",
+        "value": null,
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Cross-check against TOSOT's Technical Resource Center: TWH18AT19D6D and TWH18AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
       }
     ]
   },
@@ -6999,7 +7071,16 @@
     "imageVerification": "verified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
+    "ahri": {
+      "status": "not_found",
+      "referenceNumber": null,
+      "matchedIndoor": "TWH24AT19D6DI",
+      "matchedOutdoor": "TWH24AT19D6DO",
+      "note": "No AHRI certificate located for the TWH24AT19D6DI / TWH24AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
     "fieldSources": {},
     "specifications": {
       "btu": 24000,
@@ -7032,6 +7113,15 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official TOSOT manual model table identifies this exact indoor-unit model."
+      },
+      {
+        "fieldName": "ahriReference",
+        "value": null,
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Cross-check against TOSOT's Technical Resource Center: TWH24AT19D6DI and TWH24AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
       },
       {
         "fieldName": "image",
@@ -7082,7 +7172,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
+    "ahri": {
+      "status": "not_found",
+      "referenceNumber": null,
+      "matchedIndoor": "TWH24AT19D6DI",
+      "matchedOutdoor": "TWH24AT19D6DO",
+      "note": "No AHRI certificate located for the TWH24AT19D6DI / TWH24AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
+      "sourceUrl": "https://tosot.com/resources/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
     "fieldSources": {},
     "specifications": {
       "btu": 24000,
@@ -7116,6 +7215,15 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
+      },
+      {
+        "fieldName": "ahriReference",
+        "value": null,
+        "sourceUrl": "https://tosot.com/resources/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Cross-check against TOSOT's Technical Resource Center: TWH24AT19D6DI and TWH24AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
       }
     ]
   },
@@ -11077,7 +11185,7 @@
     "name": "1/4 + 3/8 50FT Line Set",
     "brand": "Unbranded",
     "category": "line-sets",
-    "productType": "Accessory",
+    "productType": "Line set",
     "description": null,
     "btu": null,
     "tonnage": null,
@@ -11097,11 +11205,44 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "liquidLineIn": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "lineSetLengthFt": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "liquidLineIn": "1/4",
+      "suctionLineIn": "3/8",
+      "lineSetLengthFt": 50,
+      "material": "Insulated copper"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11119,6 +11260,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-66",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable. Sheet note identifies this as a mini-split line set."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11132,7 +11291,7 @@
     "name": "1/4 + 5/8 50FT Line Set",
     "brand": "Unbranded",
     "category": "line-sets",
-    "productType": "Accessory",
+    "productType": "Line set",
     "description": null,
     "btu": null,
     "tonnage": null,
@@ -11152,11 +11311,44 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "liquidLineIn": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "lineSetLengthFt": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "liquidLineIn": "1/4",
+      "suctionLineIn": "5/8",
+      "lineSetLengthFt": 50,
+      "material": "Insulated copper"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11174,6 +11366,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-67",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11187,7 +11397,7 @@
     "name": "3/8 + 3/4 50FT Line Set",
     "brand": "Unbranded",
     "category": "line-sets",
-    "productType": "Accessory",
+    "productType": "Line set",
     "description": null,
     "btu": null,
     "tonnage": null,
@@ -11207,11 +11417,44 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "liquidLineIn": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "lineSetLengthFt": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "liquidLineIn": "3/8",
+      "suctionLineIn": "3/4",
+      "lineSetLengthFt": 50,
+      "material": "Insulated copper"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11229,6 +11472,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-68",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable. Sheet note identifies this as a 3-ton line set."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11242,7 +11503,7 @@
     "name": "3/8 + 7/8 50FT Line Set",
     "brand": "Unbranded",
     "category": "line-sets",
-    "productType": "Accessory",
+    "productType": "Line set",
     "description": null,
     "btu": null,
     "tonnage": null,
@@ -11262,11 +11523,44 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "liquidLineIn": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "lineSetLengthFt": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "liquidLineIn": "3/8",
+      "suctionLineIn": "7/8",
+      "lineSetLengthFt": 50,
+      "material": "Insulated copper"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11284,6 +11578,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-69",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable. Sheet note identifies this as a 5-ton line set."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11317,11 +11629,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "dimensionsText": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "dimensionsText": "36 x 36 x 3 in",
+      "modelVariant": "Equipment base pad"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11339,6 +11672,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-70",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11372,11 +11723,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "dimensionsText": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "dimensionsText": "38 x 18 x 3 in",
+      "modelVariant": "Equipment base pad"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "published",
     "quoteEligible": true,
     "purchaseEligible": true,
@@ -11393,6 +11765,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-71",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11426,11 +11816,26 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Air conditioner duct, model 414"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11448,6 +11853,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-72",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11481,11 +11904,26 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Air conditioner duct, model 415"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11503,6 +11941,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-73",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11536,11 +11992,26 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Air conditioner duct, model 4102"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11558,6 +12029,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-74",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11591,11 +12080,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "NaturalAir insulated copper coil, AK-783-50",
+      "material": "Insulated copper"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11613,6 +12123,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-75",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable. The description carries a vendor part number (AK-783-50) and a brand-like name (NaturalAir), but no manufacturer could be confirmed for it. Note this is a copper line coil, not an evaporator coil."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11646,11 +12174,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Mini split line hide cover kit",
+      "material": "White PVC"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11668,6 +12217,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-76",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11701,11 +12268,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Line hide channel piece",
+      "material": "White PVC"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11723,6 +12311,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-77",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11756,11 +12362,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "90 degree elbow for line hide",
+      "material": "PVC"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11778,6 +12405,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-78",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11811,11 +12456,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Corner cover for line hide",
+      "material": "PVC"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11833,6 +12499,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-79",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11866,11 +12550,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Coupling cover for line hide",
+      "material": "PVC"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11888,6 +12593,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-80",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11921,11 +12644,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "End cover for line hide",
+      "material": "PVC"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11943,6 +12687,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-81",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -11976,11 +12738,26 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Flexible hose"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -11998,6 +12775,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-82",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -12031,11 +12826,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "T-joint for line hide",
+      "material": "PVC"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12053,6 +12869,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-83",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -12086,11 +12920,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "material": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Cap / head cover for line hide",
+      "material": "PVC"
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12108,6 +12963,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-84",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -12141,11 +13014,38 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "dimensionsText": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "lengthFt": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Straight duct cover",
+      "dimensionsText": "3 in diameter, 6.5 ft length",
+      "lengthFt": 6.5
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12163,6 +13063,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-85",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -12196,11 +13114,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "ratedAmps": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Fused disconnect switch",
+      "ratedAmps": 30
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12218,6 +13157,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-86",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable. A 30 A fused AC disconnect. The specific listing (UL file, NEMA rating, fuse class) depends on the manufacturer, which is not recorded, so no listing claim is made."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -12251,11 +13208,32 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "lengthFt": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "15 ft wire",
+      "lengthFt": 15
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12273,6 +13251,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-87",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable. Sheet note says this is bundled with the Tosot 12K outdoor and indoor pair. Conductor count, gauge and insulation type are not recorded and are not inferred."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },
@@ -12306,11 +13302,38 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
-    "ahri": null,
-    "fieldSources": {},
-    "specifications": {},
+    "ahri": {
+      "status": "not_applicable",
+      "referenceNumber": null,
+      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
+      "sourceUrl": "data/catalog/inventory-source.csv",
+      "sourceType": "other",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "modelVariant": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "connectionSizeIn": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      },
+      "lengthFt": {
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "specifications": {
+      "modelVariant": "Non-metallic liquid tight conduit",
+      "connectionSizeIn": "1/2",
+      "lengthFt": 100
+    },
     "compatibility": [],
-    "researchStatus": "csv_only",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -12328,6 +13351,24 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-88",
         "verifiedAt": null,
         "status": "source_record"
+      },
+      {
+        "fieldName": "manufacturer",
+        "value": null,
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+      },
+      {
+        "fieldName": "specifications",
+        "value": "from_description",
+        "sourceUrl": "data/catalog/inventory-source.csv",
+        "sourceType": "other",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
       }
     ]
   },

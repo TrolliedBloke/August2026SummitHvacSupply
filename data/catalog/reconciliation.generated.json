@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T21:20:57.648Z",
+  "generatedAt": "2026-08-09T21:22:34.781Z",
   "sourceFile": "data/catalog/inventory-source.csv",
   "sourceSha256": "23baa4a388d1f87638156ea22e6851ebac4b511c8ac0e0489204050b68380349",
   "sourceRows": 100,
@@ -120,10 +120,10 @@
   "purchaseEligible": 23,
   "positiveRetailPrices": 23,
   "unknownInventory": 100,
-  "researchCsvOnly": 23,
+  "researchCsvOnly": 0,
   "researchInProgress": 28,
   "researchVerified": 19,
-  "researchConflicts": 30,
+  "researchConflicts": 53,
   "manufacturerImageCoverage": 20,
   "exactModelImageCoverage": 20,
   "needsReview": [],
@@ -904,7 +904,7 @@
       "model": null,
       "product": "1/4 + 3/8 50FT Line Set",
       "category": "line-sets",
-      "productType": "Accessory",
+      "productType": "Line set",
       "publicationStatus": "quote_only",
       "websitePath": "/products/sku/ls143850ft"
     },
@@ -916,7 +916,7 @@
       "model": null,
       "product": "1/4 + 5/8 50FT Line Set",
       "category": "line-sets",
-      "productType": "Accessory",
+      "productType": "Line set",
       "publicationStatus": "quote_only",
       "websitePath": "/products/sku/ls145850ft"
     },
@@ -928,7 +928,7 @@
       "model": null,
       "product": "3/8 + 3/4 50FT Line Set",
       "category": "line-sets",
-      "productType": "Accessory",
+      "productType": "Line set",
       "publicationStatus": "quote_only",
       "websitePath": "/products/sku/ls387450ft"
     },
@@ -940,7 +940,7 @@
       "model": null,
       "product": "3/8 + 7/8 50FT Line Set",
       "category": "line-sets",
-      "productType": "Accessory",
+      "productType": "Line set",
       "publicationStatus": "quote_only",
       "websitePath": "/products/sku/ls387850ft"
     },
