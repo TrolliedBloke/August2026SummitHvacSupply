@@ -345,3 +345,63 @@ The achievable end state without any human input is **a fully researched,
 source-backed, quote-first catalog** that a contractor can trust for model
 identity, specifications, documentation and warranty. The step from there to a
 transactional store is H1, H2 and H6.
+
+---
+
+## Appendix A — Source libraries located during research
+
+Recording these because locating a manufacturer's document library is the
+expensive part of each batch; the per-SKU lookups are fast once it is known.
+
+### Carrier (batch B1, complete)
+
+Technical documents live at `shareddocs.com/hvac/docs/1009/Public/...` and
+marketing material at `.../1010/Public/...`. That path difference is a reliable
+way to tell a product-data sheet from a brochure before opening it, which
+matters because several distributors list Carrier's Comfort Series brochure as
+an installation manual. It is not one.
+
+| Family | Catalog | Document |
+|---|---|---|
+| 26SCA5 condensers | 26SCA5-02PD | https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf |
+| 26SCA5 install | 26SCA5-1SI | https://www.shareddocs.com/hvac/docs/1009/Public/0E/26SCA5-1SI.pdf |
+| 26SCA5 wiring | 26SCA5-1W | https://www.shareddocs.com/hvac/docs/1009/Public/0F/26SCA5-1W.pdf |
+| FJ5 fan coils | FJ5-01PD | https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf |
+| FJ5 install | IM-FJ5-01 | https://www.shareddocs.com/hvac/docs/1009/Public/00/IM-FJ5-01.pdf |
+| CVAMA coils | CVAMA-01PD | https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf |
+| CVAMA spec sheet | SS-CVAMA-01 | https://www.shareddocs.com/hvac/docs/1009/Public/04/SS-CVAMA-01.pdf |
+| CVAMA install | IM-CVAMA-01 | https://www.shareddocs.com/hvac/docs/1009/Public/08/IM-CVAMA-01.pdf |
+| 58SC0B furnaces | 58SC0B-01PD | https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf |
+
+Carrier residential warranty is uniform across these families: 5-year parts,
+10-year parts with registration inside 90 days, non-transferable except where
+local law requires. Furnaces add a 20-year heat exchanger term.
+
+### TCL (batches B2-B4, next)
+
+TCL publishes per-model submittals under a predictable path:
+
+```
+https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/submittals/advantage-series/
+    Submittal Sheet - AHU - 36K 230V.pdf
+```
+
+Series spec sheet covering the Advantage line:
+`https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/advantage/Advantage%20HVAC%20Spec%20Sheet%202025.pdf`
+
+**TCL publishes AHRI certified-combination numbers in its submittals.** The
+H36AHH18XAE air handler paired with the H36TDH18XAC outdoor unit is AHRI
+reference 215869484. This is the first genuine AHRI reference found in the
+catalog, and it means the TCL central batch (B4) can carry real certified
+combination data rather than `requires_matched_combination`. Look up each pair
+rather than assuming the combination.
+
+`hvacsales@tcl.com` is the published contact for submittals that are not on the
+public site.
+
+### Tooling note
+
+PDF text extraction requires `poppler` (`brew install poppler`, installed
+during this work). Carrier and TCL both publish subset-font PDFs that return
+binary noise from naive extraction; `pdftotext -layout` reads them correctly and
+preserves the column alignment the spec tables depend on.
