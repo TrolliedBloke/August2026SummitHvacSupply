@@ -34,6 +34,14 @@ type CheckoutResult = CheckoutStatus & {
 
 export class CheckoutConflictError extends Error {}
 
+/**
+ * The order could not be attempted because a dependency (the database) is not
+ * configured or not reachable. Distinct from a conflict: nothing was written,
+ * the cart is intact, and retrying later is the correct response. Surfaces as
+ * HTTP 503, never as a confirmation.
+ */
+export class CheckoutUnavailableError extends Error {}
+
 function isTrade(role: string | undefined): boolean {
   return role === "dealer" || role === "installer" || role === "staff";
 }
@@ -79,23 +87,15 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   const supabase = createServiceRoleSupabaseClient();
   const orderNumber = "SO-" + Date.now().toString(36).toUpperCase();
 
+  // No database means no order. This previously fabricated a "confirmed" order
+  // in memory and handed the customer a confirmation token, so a single missing
+  // environment variable in production told buyers their order was placed while
+  // nothing was ever persisted and no payment was taken. An unconfigured
+  // backend is an outage, and an outage must look like one.
   if (!supabase) {
-    const prior = seededCheckoutByKey(parsed.idempotencyKey);
-    if (prior) return withToken(prior, "seeded");
-    // Seeded fallback intentionally completes the simulated transaction.
-    const status: CheckoutStatus = {
-      orderId: `so-${Date.now()}`,
-      orderNumber,
-      subtotal,
-      fee,
-      tax,
-      total,
-      payment,
-      checkoutState: "confirmed",
-    };
-    rememberSeededCheckout(parsed.idempotencyKey, status);
-    if (parsed.buyerEmail) void clearCartSnapshot(parsed.buyerEmail.toLowerCase()).catch(() => {});
-    return withToken(status, "seeded");
+    throw new CheckoutUnavailableError(
+      "We could not reach the ordering system, so nothing was charged and no order was placed. Your cart is saved -- please try again shortly."
+    );
   }
 
   const { data: existing } = await supabase
@@ -135,10 +135,14 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
     .single();
   if (error || !order) throw new Error(error?.message ?? "Order insert failed");
 
+  // Storefront ids are catalog_products keys (text), not legacy skus uuids.
+  // Writing them to sku_id raised 22P02 and killed every catalog checkout; see
+  // migration 014, which adds this column and the one-of-two check constraint.
   const { error: lineError } = await supabase.from("order_lines").insert(
     lines.map((l) => ({
       order_id: order.id,
-      sku_id: l.skuRecord.id,
+      catalog_product_id: l.skuRecord.id,
+      sku_id: null,
       description: `${l.title} (${l.sku})`,
       quantity: l.qty,
       unit_price: l.unitPrice,

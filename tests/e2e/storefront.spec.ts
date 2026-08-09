@@ -23,13 +23,17 @@ test("an unsigned payment claim cannot produce a paid confirmation", async ({ pa
   await expect(page.getByText("Payment received")).toHaveCount(0);
 });
 
-test("priced retail product can be added to cart without exposing internal inventory language", async ({ page }) => {
+test("priced product shows its price and requests availability without exposing internal inventory language", async ({ page }) => {
   await page.goto("/products/sku/tcl09kidu", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: "TCL 9K Indoor Unit" })).toBeVisible();
   await expect(page.getByRole("img", { name: /TCL 9K Indoor Unit, manufacturer product view 1/i })).toBeVisible();
   await expect(page.getByText(/availability confirmation required/i)).toHaveCount(0);
   await expect(page.getByText(/inventory source/i)).toHaveCount(0);
-  await page.getByRole("button", { name: /Add TCL 9K Indoor Unit to cart/i }).click();
+  // Stock is unknown for every SKU in the source sheet, so a priced item is not
+  // yet sellable. The buyer sees the price and requests availability; it must
+  // not offer a cart it cannot fill.
+  await expect(page.getByText("$450.00").first()).toBeVisible();
+  await page.getByRole("button", { name: /Check availability for TCL 9K Indoor Unit/i }).first().click();
   await expect(page.getByRole("link", { name: "Go to checkout" })).toBeVisible();
 });
 
