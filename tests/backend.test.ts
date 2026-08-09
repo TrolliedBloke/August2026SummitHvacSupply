@@ -88,8 +88,18 @@ describe("catalog import reconciliation", () => {
     assert.equal(new Set(skus.map((sku) => sku.sku)).size, 100);
     assert.equal(new Set(skus.map((sku) => sku.slug)).size, 100);
     assert.ok(skus.every((sku) => sku.quoteEligible));
-    assert.equal(skus.filter((sku) => sku.purchaseEligible).length, 23);
-    assert.ok(skus.every((sku) => sku.purchaseEligible === (sku.retailPrice !== null)));
+    // Nothing is sellable unless we know we hold it AND we know what it is.
+    // This previously asserted that a price alone made a SKU purchasable, which
+    // encoded the defect: 23 SKUs were buyable against zero known stock, six of
+    // them with a model number absent from the manufacturer's catalog.
+    assert.ok(
+      skus.every((sku) => !sku.purchaseEligible || (sku.availabilityVerified && sku.researchStatus !== "conflict")),
+      "a SKU is purchasable without verified stock or with an unresolved identity"
+    );
+    assert.ok(skus.every((sku) => !sku.purchaseEligible || sku.retailPrice !== null));
+    // With no real on-hand quantities in the source sheet, the correct state for
+    // the whole catalog is quote-only.
+    assert.equal(skus.filter((sku) => sku.purchaseEligible).length, 0);
     assert.ok(skus.every((sku) => sku.availabilityStatus === "unknown"));
     assert.ok(skus.every((sku) => sku.retailPrice === null || sku.retailPrice > 0));
     assert.ok(skus.every((sku) => !("unitCost" in sku)));

@@ -21,6 +21,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH09AT19D6D and TWH09AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         }
       ],
       "ahri": {
@@ -31,6 +40,15 @@
         "note": "No AHRI certificate located for the TWH09AT19D6D / TWH09AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
         "sourceUrl": "https://tosot.com/resources/",
         "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "possibleOemMapping": {
+        "line": "Tosot Select by Gree",
+        "refrigerant": "R-32",
+        "confidence": "probable",
+        "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
         "retrievedAt": "2026-08-09"
       }
     },
@@ -54,6 +72,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH09AT19D6D and TWH09AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         }
       ],
       "ahri": {
@@ -64,6 +91,15 @@
         "note": "No AHRI certificate located for the TWH09AT19D6D / TWH09AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
         "sourceUrl": "https://tosot.com/resources/",
         "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "possibleOemMapping": {
+        "line": "Tosot Select by Gree",
+        "refrigerant": "R-32",
+        "confidence": "probable",
+        "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
         "retrievedAt": "2026-08-09"
       }
     },
@@ -87,6 +123,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH18AT19D6D and TWH18AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         }
       ],
       "ahri": {
@@ -97,6 +142,15 @@
         "note": "No AHRI certificate located for the TWH18AT19D6D / TWH18AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
         "sourceUrl": "https://tosot.com/resources/",
         "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "possibleOemMapping": {
+        "line": "Tosot Select by Gree",
+        "refrigerant": "R-32",
+        "confidence": "probable",
+        "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
         "retrievedAt": "2026-08-09"
       }
     },
@@ -120,6 +174,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH18AT19D6D and TWH18AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         }
       ],
       "ahri": {
@@ -130,6 +193,15 @@
         "note": "No AHRI certificate located for the TWH18AT19D6D / TWH18AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
         "sourceUrl": "https://tosot.com/resources/",
         "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "possibleOemMapping": {
+        "line": "Tosot Select by Gree",
+        "refrigerant": "R-32",
+        "confidence": "probable",
+        "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
         "retrievedAt": "2026-08-09"
       }
     },
@@ -153,6 +225,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH24AT19D6DI and TWH24AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         }
       ],
       "ahri": {
@@ -163,6 +244,15 @@
         "note": "No AHRI certificate located for the TWH24AT19D6DI / TWH24AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
         "sourceUrl": "https://tosot.com/resources/",
         "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "possibleOemMapping": {
+        "line": "Tosot Select by Gree",
+        "refrigerant": "R-32",
+        "confidence": "probable",
+        "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
         "retrievedAt": "2026-08-09"
       }
     },
@@ -186,6 +276,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH24AT19D6DI and TWH24AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         }
       ],
       "ahri": {
@@ -196,6 +295,15 @@
         "note": "No AHRI certificate located for the TWH24AT19D6DI / TWH24AT19D6DO pairing. These identifiers were confirmed against a TOSOT owner's manual model table but do not appear in TOSOT's Technical Resource Center, which is where TOSOT publishes submittals and certified data for its US series. Until the series is identified, no certificate can be attached and no efficiency rating should be quoted.",
         "sourceUrl": "https://tosot.com/resources/",
         "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "possibleOemMapping": {
+        "line": "Tosot Select by Gree",
+        "refrigerant": "R-32",
+        "confidence": "probable",
+        "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
         "retrievedAt": "2026-08-09"
       }
     },
@@ -737,6 +845,15 @@
           "retrievedAt": "2026-08-09",
           "status": "verified",
           "notes": "Official Carrier residential product page for the 26SCA5 series."
+        },
+        {
+          "fieldName": "minCoolingAmbientF",
+          "value": "0 F with accessory kit",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Carrier states low-ambient cooling down to 0F/-18C is achieved WITH approved low-ambient accessory kits, not as a bare-unit rating. Recorded with the condition attached so it cannot be read as an unconditional operating limit."
         }
       ],
       "specifications": {
@@ -758,7 +875,7 @@
         "liquidLineIn": "3/8",
         "maxLineLengthFt": 250,
         "maxHeightDifferenceFt": 200,
-        "minCoolingAmbientF": 0
+        "minCoolingAmbientF": "0 (with approved low-ambient accessory kit)"
       },
       "fieldSources": {
         "productFamily": {
@@ -960,6 +1077,15 @@
           "retrievedAt": "2026-08-09",
           "status": "verified",
           "notes": "Official Carrier residential product page for the 26SCA5 series."
+        },
+        {
+          "fieldName": "minCoolingAmbientF",
+          "value": "0 F with accessory kit",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Carrier states low-ambient cooling down to 0F/-18C is achieved WITH approved low-ambient accessory kits, not as a bare-unit rating. Recorded with the condition attached so it cannot be read as an unconditional operating limit."
         }
       ],
       "specifications": {
@@ -981,7 +1107,7 @@
         "liquidLineIn": "3/8",
         "maxLineLengthFt": 250,
         "maxHeightDifferenceFt": 200,
-        "minCoolingAmbientF": 0
+        "minCoolingAmbientF": "0 (with approved low-ambient accessory kit)"
       },
       "fieldSources": {
         "productFamily": {
@@ -1087,7 +1213,7 @@
           "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
           "modelCoverageVerified": true,
           "retrievedAt": "2026-08-09",
-          "coverageNote": "Physical, electrical and sound tables list unit sizes 18-60 including 36, 48 and 60."
+          "coverageNote": "Covers unit size 48 of the 26SCA5 series. The size is documented; the specific catalog suffix on our sheet (W003) is not, which is the open conflict."
         },
         {
           "kind": "installation_manual",
@@ -1095,7 +1221,7 @@
           "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0E/26SCA5-1SI.pdf",
           "modelCoverageVerified": true,
           "retrievedAt": "2026-08-09",
-          "coverageNote": "Covers the 26SCA5 series, sizes 18-60."
+          "coverageNote": "Covers unit size 48 of the 26SCA5 series. The size is documented; the specific catalog suffix on our sheet (W003) is not, which is the open conflict."
         },
         {
           "kind": "wiring_diagram",
@@ -1103,7 +1229,7 @@
           "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0F/26SCA5-1W.pdf",
           "modelCoverageVerified": true,
           "retrievedAt": "2026-08-09",
-          "coverageNote": "Title states sizes 18-60."
+          "coverageNote": "Covers unit size 48 of the 26SCA5 series. The size is documented; the specific catalog suffix on our sheet (W003) is not, which is the open conflict."
         },
         {
           "kind": "brochure",
@@ -1111,7 +1237,7 @@
           "url": "https://www.shareddocs.com/hvac/docs/1010/Public/04/01-824-131-01.pdf",
           "modelCoverageVerified": true,
           "retrievedAt": "2026-08-09",
-          "coverageNote": "Marketing brochure. Named a product/installation document by several distributors; it is neither."
+          "coverageNote": "Covers unit size 48 of the 26SCA5 series. The size is documented; the specific catalog suffix on our sheet (W003) is not, which is the open conflict."
         }
       ],
       "warranty": {
@@ -1135,7 +1261,8 @@
         "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
         "sourceType": "official_document",
         "retrievedAt": "2026-08-09"
-      }
+      },
+      "conflictType": "WAREHOUSE_MODEL_VERIFICATION"
     },
     "CAR60KHPU": {
       "name": "Carrier 5 Ton Comfort Single-Stage Air Conditioner",
@@ -1183,6 +1310,15 @@
           "retrievedAt": "2026-08-09",
           "status": "verified",
           "notes": "Official Carrier residential product page for the 26SCA5 series."
+        },
+        {
+          "fieldName": "minCoolingAmbientF",
+          "value": "0 F with accessory kit",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Carrier states low-ambient cooling down to 0F/-18C is achieved WITH approved low-ambient accessory kits, not as a bare-unit rating. Recorded with the condition attached so it cannot be read as an unconditional operating limit."
         }
       ],
       "specifications": {
@@ -1204,7 +1340,7 @@
         "liquidLineIn": "3/8",
         "maxLineLengthFt": 250,
         "maxHeightDifferenceFt": 200,
-        "minCoolingAmbientF": 0
+        "minCoolingAmbientF": "0 (with approved low-ambient accessory kit)"
       },
       "fieldSources": {
         "productFamily": {
@@ -1790,7 +1926,7 @@
           "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
           "modelCoverageVerified": true,
           "retrievedAt": "2026-08-09",
-          "coverageNote": "Physical, specification and electrical tables cover sizes 18-60."
+          "coverageNote": "Covers FJ5 unit size 36. The size is documented; the cabinet-width letter on our sheet (D) is not offered at this capacity, which is the open conflict."
         },
         {
           "kind": "installation_manual",
@@ -1798,7 +1934,7 @@
           "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/IM-FJ5-01.pdf",
           "modelCoverageVerified": true,
           "retrievedAt": "2026-08-09",
-          "coverageNote": "Installation instructions for the FJ5 fan coil series."
+          "coverageNote": "Covers FJ5 unit size 36. The size is documented; the cabinet-width letter on our sheet (D) is not offered at this capacity, which is the open conflict."
         }
       ],
       "warranty": {
@@ -1853,7 +1989,8 @@
           "status": "verified",
           "notes": "Official Carrier Comfort FJ5 fan coil product page."
         }
-      ]
+      ],
+      "conflictType": "WAREHOUSE_MODEL_VERIFICATION"
     },
     "CAR48KAHU": {
       "researchStatus": "conflict",
@@ -1977,7 +2114,7 @@
           "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
           "modelCoverageVerified": true,
           "retrievedAt": "2026-08-09",
-          "coverageNote": "Physical, specification and electrical tables cover sizes 18-60."
+          "coverageNote": "Covers FJ5 unit size 48. The size is documented; the cabinet-width letter on our sheet (D) is not offered at this capacity, which is the open conflict."
         },
         {
           "kind": "installation_manual",
@@ -1985,7 +2122,7 @@
           "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/IM-FJ5-01.pdf",
           "modelCoverageVerified": true,
           "retrievedAt": "2026-08-09",
-          "coverageNote": "Installation instructions for the FJ5 fan coil series."
+          "coverageNote": "Covers FJ5 unit size 48. The size is documented; the cabinet-width letter on our sheet (D) is not offered at this capacity, which is the open conflict."
         }
       ],
       "warranty": {
@@ -2040,7 +2177,8 @@
           "status": "verified",
           "notes": "Official Carrier Comfort FJ5 fan coil product page."
         }
-      ]
+      ],
+      "conflictType": "WAREHOUSE_MODEL_VERIFICATION"
     },
     "CAR60KAHU": {
       "researchStatus": "verified",
@@ -4972,27 +5110,8 @@
           "retrievedAt": "2026-08-09"
         }
       },
-      "documents": [
-        {
-          "kind": "spec_sheet",
-          "title": "TCL Elite Series Specifications",
-          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
-          "modelCoverageVerified": true,
-          "retrievedAt": "2026-08-09",
-          "coverageNote": "TCL-authored Elite series spec sheet listing this exact model with its AHRI certificate. Distributor mirror; TCL's own host returns HTTP 500."
-        }
-      ],
-      "warranty": {
-        "parts": "5 years",
-        "compressor": "7 years",
-        "partsWithRegistration": "10 years",
-        "registrationRequired": true,
-        "registrationWindowDays": 60,
-        "conditions": "TCL ductless limited warranty: 5 years parts and 7 years compressor, extended to 10 years with registration within 60 days of installation. This term differs from TCL's Advantage central series (10/10) -- do not carry one across to the other.",
-        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
-        "sourceType": "official_document",
-        "retrievedAt": "2026-08-09"
-      },
+      "documents": [],
+      "warranty": null,
       "ahri": {
         "status": "conflict",
         "referenceNumber": null,
@@ -5021,8 +5140,18 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
+        },
+        {
+          "fieldName": "documents",
+          "value": null,
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The TCL Elite series specification sheet was previously attached to this record. It is removed: the sheet does not list this model, so it does not document it. Attaching it implied a coverage that does not exist. The Elite ductless warranty is removed for the same reason."
         }
-      ]
+      ],
+      "conflictType": "WAREHOUSE_MODEL_VERIFICATION"
     },
     "TCL18KODU-18SEH17XAC": {
       "researchStatus": "conflict",
@@ -5073,27 +5202,8 @@
           "retrievedAt": "2026-08-09"
         }
       },
-      "documents": [
-        {
-          "kind": "spec_sheet",
-          "title": "TCL Elite Series Specifications",
-          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
-          "modelCoverageVerified": true,
-          "retrievedAt": "2026-08-09",
-          "coverageNote": "TCL-authored Elite series spec sheet listing this exact model with its AHRI certificate. Distributor mirror; TCL's own host returns HTTP 500."
-        }
-      ],
-      "warranty": {
-        "parts": "5 years",
-        "compressor": "7 years",
-        "partsWithRegistration": "10 years",
-        "registrationRequired": true,
-        "registrationWindowDays": 60,
-        "conditions": "TCL ductless limited warranty: 5 years parts and 7 years compressor, extended to 10 years with registration within 60 days of installation. This term differs from TCL's Advantage central series (10/10) -- do not carry one across to the other.",
-        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
-        "sourceType": "official_document",
-        "retrievedAt": "2026-08-09"
-      },
+      "documents": [],
+      "warranty": null,
       "ahri": {
         "status": "conflict",
         "referenceNumber": null,
@@ -5122,8 +5232,18 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
+        },
+        {
+          "fieldName": "documents",
+          "value": null,
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The TCL Elite series specification sheet was previously attached to this record. It is removed: the sheet does not list this model, so it does not document it. Attaching it implied a coverage that does not exist. The Elite ductless warranty is removed for the same reason."
         }
-      ]
+      ],
+      "conflictType": "WAREHOUSE_MODEL_VERIFICATION"
     },
     "TCL18KMZODU-18FMH22XPC": {
       "researchStatus": "in_progress",
@@ -7242,7 +7362,8 @@
           "status": "conflict",
           "notes": "The inventory sheet's model cell reads 'THEY DONT MAKE IT'. There is no identifier to research. TCL's current 24K multi-zone indoor options are the Multi Match heads and cassettes. Purchasing must supply the actual model on the box, or this line should be delisted. HUMAN VERIFICATION REQUIRED."
         }
-      ]
+      ],
+      "conflictType": "PURCHASING_RECORD_VERIFICATION"
     },
     "TCLCASPAN01": {
       "researchStatus": "conflict",
@@ -7266,7 +7387,8 @@
           "status": "conflict",
           "notes": "The model cell holds the label text 'Cassette Panel 01', a column shift in the source sheet rather than a part number. TCL's cassette decorative panels carry their own model identifiers; none could be matched without the real part number. Purchasing must supply it. HUMAN VERIFICATION REQUIRED."
         }
-      ]
+      ],
+      "conflictType": "PURCHASING_RECORD_VERIFICATION"
     },
     "TCLCASPAN02": {
       "researchStatus": "conflict",
@@ -7290,7 +7412,8 @@
           "status": "conflict",
           "notes": "The model cell holds the label text 'Cassette Panel 02', a column shift in the source sheet rather than a part number. Same resolution required as TCLCASPAN01. HUMAN VERIFICATION REQUIRED."
         }
-      ]
+      ],
+      "conflictType": "PURCHASING_RECORD_VERIFICATION"
     },
     "TCLWIREDCONT": {
       "researchStatus": "in_progress",
@@ -7485,7 +7608,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS09KODU-R-410A": {
       "researchStatus": "conflict",
@@ -7547,7 +7671,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS12KIDU-R-410A": {
       "researchStatus": "conflict",
@@ -7609,7 +7734,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS12KIDU-R-32": {
       "researchStatus": "conflict",
@@ -7671,7 +7797,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS12KODU": {
       "researchStatus": "conflict",
@@ -7733,7 +7860,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "INVENTORY_CONFLICT"
     },
     "TOS18KMZODU": {
       "researchStatus": "conflict",
@@ -7794,8 +7922,27 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Gree Multi R32 (possible)",
+          "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND",
+      "possibleOemMapping": {
+        "line": "Gree Multi R32 / Tosot Select multi-zone",
+        "refrigerant": "R-32",
+        "confidence": "possible",
+        "basis": "TM..MO multi-zone naming with an R32 segment; Select's 30K equivalent is TM30D6MO.",
+        "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
     },
     "TOS30KMZODU": {
       "researchStatus": "conflict",
@@ -7856,8 +8003,27 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Gree Multi R32 (possible)",
+          "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND",
+      "possibleOemMapping": {
+        "line": "Gree Multi R32 / Tosot Select multi-zone",
+        "refrigerant": "R-32",
+        "confidence": "possible",
+        "basis": "TM..MO multi-zone naming with an R32 segment; Select's 30K equivalent is TM30D6MO.",
+        "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
     },
     "TOS42KMZODU-R-454B": {
       "researchStatus": "conflict",
@@ -7918,8 +8084,27 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Gree Multi R32 (possible)",
+          "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
         }
-      ]
+      ],
+      "conflictType": "INVENTORY_CONFLICT",
+      "possibleOemMapping": {
+        "line": "Gree Multi R32 / Tosot Select multi-zone",
+        "refrigerant": "R-32",
+        "confidence": "possible",
+        "basis": "TM..MO multi-zone naming with an R32 segment; Select's 30K equivalent is TM30D6MO.",
+        "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      }
     },
     "TOS-24K-AHU": {
       "researchStatus": "conflict",
@@ -7981,7 +8166,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS48KAHU": {
       "researchStatus": "conflict",
@@ -8043,7 +8229,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS60KAHU": {
       "researchStatus": "conflict",
@@ -8105,7 +8292,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS36KAHU": {
       "researchStatus": "conflict",
@@ -8167,7 +8355,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS24KHPU": {
       "researchStatus": "conflict",
@@ -8229,7 +8418,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS36KHPU": {
       "researchStatus": "conflict",
@@ -8291,7 +8481,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS48KHPU": {
       "researchStatus": "conflict",
@@ -8353,7 +8544,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOS60KHPU": {
       "researchStatus": "conflict",
@@ -8415,7 +8607,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOSCAS09K": {
       "researchStatus": "conflict",
@@ -8477,7 +8670,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOSCAS12K": {
       "researchStatus": "conflict",
@@ -8539,7 +8733,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOSCAS18K": {
       "researchStatus": "conflict",
@@ -8601,7 +8796,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOSCAS24K": {
       "researchStatus": "conflict",
@@ -8663,7 +8859,8 @@
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOSPAN01": {
       "researchStatus": "conflict",
@@ -8698,7 +8895,8 @@
           "status": "conflict",
           "notes": "TOSOT's Technical Resource Center publishes no submittal or exploded view for a panel numbered TF05. Panels are normally supplied against a specific cassette model, so the correct part depends on which cassette is actually stocked -- and those cassette identifiers are themselves unconfirmed. HUMAN VERIFICATION REQUIRED."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "TOSPAN02": {
       "researchStatus": "conflict",
@@ -8733,7 +8931,8 @@
           "status": "conflict",
           "notes": "TOSOT's Technical Resource Center publishes no submittal or exploded view for a panel numbered TF06. Panels are normally supplied against a specific cassette model, so the correct part depends on which cassette is actually stocked -- and those cassette identifiers are themselves unconfirmed. HUMAN VERIFICATION REQUIRED."
         }
-      ]
+      ],
+      "conflictType": "MODEL_NOT_FOUND"
     },
     "LS143850FT": {
       "researchStatus": "conflict",
@@ -8795,7 +8994,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "LS145850FT": {
       "researchStatus": "conflict",
@@ -8857,7 +9057,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "LS387450FT": {
       "researchStatus": "conflict",
@@ -8919,7 +9120,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "LS387850FT": {
       "researchStatus": "conflict",
@@ -8981,7 +9183,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "BSP36363": {
       "researchStatus": "conflict",
@@ -9031,7 +9234,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "BSP38183": {
       "researchStatus": "conflict",
@@ -9081,7 +9285,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "DCT414": {
       "researchStatus": "conflict",
@@ -9125,7 +9330,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "DCT415": {
       "researchStatus": "conflict",
@@ -9169,7 +9375,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "DCT4102": {
       "researchStatus": "conflict",
@@ -9213,7 +9420,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "NATAK78350": {
       "researchStatus": "conflict",
@@ -9263,7 +9471,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "LHCKITWHT": {
       "researchStatus": "conflict",
@@ -9313,7 +9522,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "LHCCHWHT": {
       "researchStatus": "conflict",
@@ -9363,7 +9573,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "ELBOW90": {
       "researchStatus": "conflict",
@@ -9413,7 +9624,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "CORNERCOV": {
       "researchStatus": "conflict",
@@ -9463,7 +9675,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "COUPLINGCOV": {
       "researchStatus": "conflict",
@@ -9513,7 +9726,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "ENDCOV": {
       "researchStatus": "conflict",
@@ -9563,7 +9777,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "FLEXHOSE": {
       "researchStatus": "conflict",
@@ -9607,7 +9822,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "TJOINT": {
       "researchStatus": "conflict",
@@ -9657,7 +9873,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "CAPCOVER": {
       "researchStatus": "conflict",
@@ -9707,7 +9924,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "STRAIGHTDUCTCOVER": {
       "researchStatus": "conflict",
@@ -9763,7 +9981,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "DISC-30A-FUSE": {
       "researchStatus": "conflict",
@@ -9813,7 +10032,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "WIRE-15FT": {
       "researchStatus": "conflict",
@@ -9863,7 +10083,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     },
     "COND-LT-1/2-100FT": {
       "researchStatus": "conflict",
@@ -9919,7 +10140,8 @@
           "status": "verified",
           "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
         }
-      ]
+      ],
+      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN"
     }
   }
 }

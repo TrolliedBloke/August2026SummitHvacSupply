@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T21:22:34.781Z",
+  "generatedAt": "2026-08-09T21:31:12.019Z",
   "records": [
     {
       "sourceRow": 2,
@@ -502,6 +502,8 @@
       "researchStatus": "conflict",
       "missing": [
         "exact_image",
+        "official_documents",
+        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -528,6 +530,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
+        },
+        {
+          "fieldName": "documents",
+          "value": null,
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The TCL Elite series specification sheet was previously attached to this record. It is removed: the sheet does not list this model, so it does not document it. Attaching it implied a coverage that does not exist. The Elite ductless warranty is removed for the same reason."
         }
       ]
     },
@@ -539,6 +550,8 @@
       "researchStatus": "conflict",
       "missing": [
         "exact_image",
+        "official_documents",
+        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -565,6 +578,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
+        },
+        {
+          "fieldName": "documents",
+          "value": null,
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The TCL Elite series specification sheet was previously attached to this record. It is removed: the sheet does not list this model, so it does not document it. Attaching it implied a coverage that does not exist. The Elite ductless warranty is removed for the same reason."
         }
       ]
     },
@@ -1674,6 +1696,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH09AT19D6D and TWH09AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         }
       ]
     },
@@ -1752,6 +1783,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH09AT19D6D and TWH09AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         }
       ]
     },
@@ -1909,6 +1949,15 @@
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH18AT19D6D and TWH18AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
         },
         {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
+        },
+        {
           "fieldName": "image",
           "value": {
             "exactMediaGroup": "tosot-standard-wall-18",
@@ -1963,6 +2012,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH18AT19D6D and TWH18AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         }
       ]
     },
@@ -2002,6 +2060,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Gree Multi R32 (possible)",
+          "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
         }
       ]
     },
@@ -2040,6 +2107,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH24AT19D6DI and TWH24AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         },
         {
           "fieldName": "image",
@@ -2096,6 +2172,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Cross-check against TOSOT's Technical Resource Center: TWH24AT19D6DI and TWH24AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Tosot Select by Gree (probable)",
+          "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+          "sourceType": "distributor",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
         }
       ]
     },
@@ -2213,6 +2298,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Gree Multi R32 (possible)",
+          "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
         }
       ]
     },
@@ -2359,6 +2453,15 @@
           "retrievedAt": "2026-08-09",
           "status": "conflict",
           "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+        },
+        {
+          "fieldName": "productFamily",
+          "value": "Gree Multi R32 (possible)",
+          "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
         }
       ]
     },
@@ -2640,6 +2743,15 @@
           "notes": "Official Carrier residential product page for the 26SCA5 series."
         },
         {
+          "fieldName": "minCoolingAmbientF",
+          "value": "0 F with accessory kit",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Carrier states low-ambient cooling down to 0F/-18C is achieved WITH approved low-ambient accessory kits, not as a bare-unit rating. Recorded with the condition attached so it cannot be read as an unconditional operating limit."
+        },
+        {
           "fieldName": "image",
           "value": {
             "exactMediaGroup": "carrier-26sca5",
@@ -2776,6 +2888,15 @@
           "retrievedAt": "2026-08-09",
           "status": "verified",
           "notes": "Official Carrier residential product page for the 26SCA5 series."
+        },
+        {
+          "fieldName": "minCoolingAmbientF",
+          "value": "0 F with accessory kit",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Carrier states low-ambient cooling down to 0F/-18C is achieved WITH approved low-ambient accessory kits, not as a bare-unit rating. Recorded with the condition attached so it cannot be read as an unconditional operating limit."
         },
         {
           "fieldName": "image",
@@ -2979,6 +3100,15 @@
           "retrievedAt": "2026-08-09",
           "status": "verified",
           "notes": "Official Carrier residential product page for the 26SCA5 series."
+        },
+        {
+          "fieldName": "minCoolingAmbientF",
+          "value": "0 F with accessory kit",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Carrier states low-ambient cooling down to 0F/-18C is achieved WITH approved low-ambient accessory kits, not as a bare-unit rating. Recorded with the condition attached so it cannot be read as an unconditional operating limit."
         },
         {
           "fieldName": "image",

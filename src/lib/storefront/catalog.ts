@@ -89,6 +89,7 @@ type CatalogRecord = {
   fieldSources: Record<string, { sourceUrl: string; sourceType: string; retrievedAt: string }>;
   specifications: Record<string, string | number>;
   researchStatus: "csv_only" | "in_progress" | "verified" | "conflict";
+  conflictType: string | null;
   publicationStatus: "quote_only" | "needs_review" | "published" | "archived";
   quoteEligible: boolean;
   purchaseEligible: boolean;
@@ -135,6 +136,7 @@ export type StorefrontSku = {
   bundleName: string | null;
   compatibleOutdoorSku: string | null;
   researchStatus: CatalogRecord["researchStatus"];
+  conflictType: string | null;
   publicationStatus: CatalogRecord["publicationStatus"];
   issues: string[];
   dimensions: string;
@@ -207,6 +209,7 @@ function toStorefrontSku(record: CatalogRecord): StorefrontSku {
     bundleName: record.bundleName,
     compatibleOutdoorSku: record.compatibleOutdoorSku,
     researchStatus: record.researchStatus,
+    conflictType: record.conflictType ?? null,
     publicationStatus: record.publicationStatus,
     issues: record.issues,
     dimensions: "",

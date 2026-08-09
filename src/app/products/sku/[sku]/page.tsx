@@ -14,6 +14,34 @@ import { FIELD_GROUPS, FIELD_LABELS, isFieldApplicable } from "@/lib/catalog/fie
 // Every valid slug is known at build time. Without this, an unknown slug is
 // rendered on demand and notFound() is served with HTTP 200 -- a soft 404 that
 // lets search engines index junk URLs. Unknown params now 404 outright.
+/**
+ * Conflict wording by category. A contractor needs to know what is uncertain
+ * and what we will do about it -- not that a research pipeline flagged a row.
+ * None of these expose internal tooling.
+ */
+const CONFLICT_COPY: Record<string, { heading: string; body: string }> = {
+  WAREHOUSE_MODEL_VERIFICATION: {
+    heading: "We are confirming this model number",
+    body: "This part number does not appear in the manufacturer's published model list for this capacity. We check the rating plate on the unit in Newark before accepting an order, so you do not receive the wrong configuration. The specifications below are the manufacturer's data for this capacity and may change once the model is confirmed.",
+  },
+  MODEL_NOT_FOUND: {
+    heading: "Specifications available on request",
+    body: "We have not been able to match this unit to a published manufacturer document, so we are not showing specifications we cannot stand behind. Ask us and we will confirm the exact model, ratings and documentation with the supplier before you order.",
+  },
+  INVENTORY_CONFLICT: {
+    heading: "We are confirming this unit's configuration",
+    body: "Our records carry two different values for this item, so we are verifying which is correct against the unit itself before quoting it. Ask us for the confirmed configuration.",
+  },
+  PURCHASING_RECORD_VERIFICATION: {
+    heading: "Part number being confirmed",
+    body: "We are confirming the manufacturer part number for this item against our purchase records. Contact us for the exact part before ordering.",
+  },
+  MANUFACTURER_IDENTITY_UNCERTAIN: {
+    heading: "Sold as a generic part",
+    body: "This is a standard installation part stocked without a manufacturer-branded part number. The dimensions and materials shown come from our own product description. Ask us if you need a specific brand or a certified equivalent.",
+  },
+};
+
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -103,12 +131,10 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
                 <div className="flex gap-3">
                   <AlertTriangle className="mt-0.5 shrink-0 text-copper" size={20} />
                   <div>
-                    <h2 className="font-medium text-ink-1">We are confirming this model number</h2>
+                    <h2 className="font-medium text-ink-1">{CONFLICT_COPY[sku.conflictType ?? ""]?.heading ?? "We are confirming this model number"}</h2>
                     <p className="mt-1 text-sm leading-6 text-ink-2">
-                      This part number does not match the manufacturer&apos;s published model list for this capacity.
-                      We will confirm the exact model against the unit in Newark before any order is accepted, so you
-                      do not receive the wrong configuration. Specifications below come from the manufacturer&apos;s
-                      documentation for this capacity and may change once the model is confirmed.
+                      {CONFLICT_COPY[sku.conflictType ?? ""]?.body ??
+                        "We are confirming this item against the manufacturer's records before any order is accepted."}
                     </p>
                   </div>
                 </div>

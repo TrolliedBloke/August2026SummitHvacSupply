@@ -17,6 +17,8 @@ type ResearchOverride = {
   documents?: unknown[];
   compatibility?: unknown[];
   ahri?: unknown;
+  conflictType?: string;
+  possibleOemMapping?: unknown;
   fieldSources?: Record<string, { sourceUrl: string; sourceType: string; retrievedAt: string }>;
   evidence?: Array<{ fieldName: string; value: unknown; sourceUrl: string; sourceType: string; retrievedAt: string; status: "verified" | "conflict" | "rejected"; notes?: string }>;
 };
@@ -63,6 +65,39 @@ const products = rows.map((row) => {
   const product = normalizeRow(row.sourceRow, row.raw, groups.get(normalizeIdentifier(row.raw.SKU)) ?? []);
   return applyExactMedia(applyResearchOverride(product, overrides.products[product.catalogSku]), exactMedia.groups);
 });
+// Sellability is decided AFTER research overrides, because it depends on the
+// research outcome. Three conditions, not one:
+//   - a confirmed price,
+//   - a known on-hand quantity,
+//   - an identity that is not in conflict.
+//
+// Price alone used to be enough. That let 23 SKUs be bought outright while the
+// inventory sheet knew of no stock for any of them, and six of those carried a
+// model number absent from the manufacturer's own catalog. Selling a unit we
+// cannot identify and do not know we hold charges the customer for something
+// the counter cannot fill.
+//
+// With no real quantities in the source sheet this resolves to quote-only for
+// the whole catalog, which is the correct state rather than a regression. It
+// starts publishing prices the moment real stock lands.
+for (const product of products) {
+  const identityConfirmed = product.researchStatus !== "conflict";
+  const stockKnown = product.inventoryQuantity !== null;
+  const sellable = product.publicationStatus !== "needs_review"
+    && product.retailPrice !== null
+    && identityConfirmed
+    && stockKnown;
+  if (sellable) product.publicationStatus = "published";
+  product.purchaseEligible = sellable;
+  product.quoteEligible = product.publicationStatus !== "needs_review";
+  if (!sellable && product.retailPrice !== null) {
+    product.issues = [...new Set([...product.issues,
+      !stockKnown ? "not_sellable_inventory_unknown" : "",
+      !identityConfirmed ? "not_sellable_identity_conflict" : "",
+    ].filter(Boolean))];
+  }
+}
+
 const seen = new Set<string>();
 for (const product of products) {
   let candidate = product.catalogSku;
@@ -243,7 +278,8 @@ function normalizeRow(sourceRow: number, raw: CsvRow, siblings: Array<{ sourceRo
   if (retailPrice === null) issues.push(/bundle/i.test(note ?? "") ? "bundle_component_has_no_standalone_price" : "retail_price_unverified");
   issues.push("inventory_unverified", "exact_image_unverified", "manufacturer_research_pending");
 
-  const publicationStatus = suppliedName || siblingName ? (retailPrice !== null ? "published" : "quote_only") : "needs_review";
+  const hasName = Boolean(suppliedName || siblingName);
+  const publicationStatus = (hasName ? "quote_only" : "needs_review") as "quote_only" | "needs_review" | "published";
   return {
     id: `inventory-row-${sourceRow}`,
     sourceRow,
@@ -278,6 +314,12 @@ function normalizeRow(sourceRow: number, raw: CsvRow, siblings: Array<{ sourceRo
     // AHRI certifies matched systems, not loose components. A cassette, panel,
     // line set or accessory has no certificate to find, so "not_applicable" is
     // the correct terminal state for most of this catalog -- not "not_found".
+    // Why a conflict is a conflict. "conflict" alone is not actionable for
+    // purchasing; the category says who can resolve it and how.
+    conflictType: null as string | null,
+    // A probable OEM/sub-brand line, recorded when the exact model cannot be
+    // confirmed but the naming family can. Never a substitute for verification.
+    possibleOemMapping: null as unknown,
     ahri: null as unknown,
     // Per-field provenance. A field without an entry here was derived from the
     // inventory sheet, not from a manufacturer source.
@@ -286,8 +328,10 @@ function normalizeRow(sourceRow: number, raw: CsvRow, siblings: Array<{ sourceRo
     compatibility: [],
     researchStatus: "csv_only",
     publicationStatus,
+    // Provisional. Both are recomputed after research overrides apply, where
+    // inventory and identity are known. See the sellability gate in main().
     quoteEligible: publicationStatus !== "needs_review",
-    purchaseEligible: publicationStatus === "published",
+    purchaseEligible: false,
     notes: note,
     issues: [...new Set(issues)],
     evidence: [{
@@ -324,6 +368,8 @@ function applyResearchOverride<T extends ReturnType<typeof normalizeRow>>(produc
     documents: override.documents ?? product.documents,
     compatibility: override.compatibility ?? product.compatibility,
     ahri: override.ahri ?? product.ahri,
+    conflictType: override.conflictType ?? product.conflictType,
+    possibleOemMapping: override.possibleOemMapping ?? product.possibleOemMapping,
     fieldSources: { ...product.fieldSources, ...override.fieldSources },
     evidence: [...product.evidence, ...evidence],
   } as T;

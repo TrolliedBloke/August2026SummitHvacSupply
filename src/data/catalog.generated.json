@@ -41,6 +41,8 @@
       }
     ],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -105,13 +107,14 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": "Indoor head only",
     "issues": [
       "inventory_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -213,6 +216,8 @@
       }
     ],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -277,14 +282,15 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -370,6 +376,8 @@
       }
     ],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -531,6 +539,8 @@
       }
     ],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -595,13 +605,14 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": "Bundle",
     "issues": [
       "inventory_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -703,6 +714,8 @@
       }
     ],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -861,6 +874,8 @@
       }
     ],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -925,15 +940,16 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -1022,6 +1038,8 @@
       }
     ],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -1086,14 +1104,15 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": "Outdoor condenser only",
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -1195,6 +1214,8 @@
       }
     ],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -1343,27 +1364,10 @@
     "image": null,
     "images": [],
     "imageVerification": "unverified",
-    "documents": [
-      {
-        "kind": "spec_sheet",
-        "title": "TCL Elite Series Specifications",
-        "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
-        "modelCoverageVerified": true,
-        "retrievedAt": "2026-08-09",
-        "coverageNote": "TCL-authored Elite series spec sheet listing this exact model with its AHRI certificate. Distributor mirror; TCL's own host returns HTTP 500."
-      }
-    ],
-    "warranty": {
-      "parts": "5 years",
-      "compressor": "7 years",
-      "partsWithRegistration": "10 years",
-      "registrationRequired": true,
-      "registrationWindowDays": 60,
-      "conditions": "TCL ductless limited warranty: 5 years parts and 7 years compressor, extended to 10 years with registration within 60 days of installation. This term differs from TCL's Advantage central series (10/10) -- do not carry one across to the other.",
-      "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
-      "sourceType": "official_document",
-      "retrievedAt": "2026-08-09"
-    },
+    "documents": [],
+    "warranty": null,
+    "conflictType": "WAREHOUSE_MODEL_VERIFICATION",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -1459,6 +1463,15 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
+      },
+      {
+        "fieldName": "documents",
+        "value": null,
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The TCL Elite series specification sheet was previously attached to this record. It is removed: the sheet does not list this model, so it does not document it. Attaching it implied a coverage that does not exist. The Elite ductless warranty is removed for the same reason."
       }
     ]
   },
@@ -1490,27 +1503,10 @@
     "image": null,
     "images": [],
     "imageVerification": "unverified",
-    "documents": [
-      {
-        "kind": "spec_sheet",
-        "title": "TCL Elite Series Specifications",
-        "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
-        "modelCoverageVerified": true,
-        "retrievedAt": "2026-08-09",
-        "coverageNote": "TCL-authored Elite series spec sheet listing this exact model with its AHRI certificate. Distributor mirror; TCL's own host returns HTTP 500."
-      }
-    ],
-    "warranty": {
-      "parts": "5 years",
-      "compressor": "7 years",
-      "partsWithRegistration": "10 years",
-      "registrationRequired": true,
-      "registrationWindowDays": 60,
-      "conditions": "TCL ductless limited warranty: 5 years parts and 7 years compressor, extended to 10 years with registration within 60 days of installation. This term differs from TCL's Advantage central series (10/10) -- do not carry one across to the other.",
-      "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
-      "sourceType": "official_document",
-      "retrievedAt": "2026-08-09"
-    },
+    "documents": [],
+    "warranty": null,
+    "conflictType": "WAREHOUSE_MODEL_VERIFICATION",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -1605,6 +1601,15 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
+      },
+      {
+        "fieldName": "documents",
+        "value": null,
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36SEH19XAC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "The TCL Elite series specification sheet was previously attached to this record. It is removed: the sheet does not list this model, so it does not document it. Attaching it implied a coverage that does not exist. The Elite ductless warranty is removed for the same reason."
       }
     ]
   },
@@ -1647,6 +1652,8 @@
       }
     ],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -1711,15 +1718,16 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -1815,6 +1823,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -1994,6 +2004,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "certified",
       "referenceNumber": "215387262",
@@ -2072,14 +2084,15 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -2166,6 +2179,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "certified",
       "referenceNumber": "215387262",
@@ -2320,6 +2335,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "PURCHASING_RECORD_VERIFICATION",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -2338,14 +2355,16 @@
     },
     "compatibility": [],
     "researchStatus": "conflict",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown",
+      "not_sellable_identity_conflict"
     ],
     "evidence": [
       {
@@ -2395,6 +2414,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -2459,15 +2480,16 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -2536,6 +2558,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -2607,15 +2631,16 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -2711,6 +2736,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "certified",
       "referenceNumber": "215387256",
@@ -2843,14 +2870,15 @@
     },
     "compatibility": [],
     "researchStatus": "verified",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -2941,6 +2969,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "certified",
       "referenceNumber": "215387256",
@@ -3153,6 +3183,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -3217,15 +3249,16 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -3294,6 +3327,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -3365,15 +3400,16 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -3469,6 +3505,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -3540,14 +3578,15 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -3650,6 +3689,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -3831,15 +3872,16 @@
     },
     "compatibility": [],
     "researchStatus": "verified",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": "Just write 0 as ODU and AHU are bundled together",
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -3946,6 +3988,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -4254,6 +4298,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "certified",
       "referenceNumber": "215869484",
@@ -4435,15 +4481,16 @@
     },
     "compatibility": [],
     "researchStatus": "verified",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -4550,6 +4597,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "certified",
       "referenceNumber": "215869484",
@@ -4858,6 +4907,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -5039,15 +5090,16 @@
     },
     "compatibility": [],
     "researchStatus": "verified",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -5154,6 +5206,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -5462,6 +5516,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -5643,15 +5699,16 @@
     },
     "compatibility": [],
     "researchStatus": "verified",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown"
     ],
     "evidence": [
       {
@@ -5758,6 +5815,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -6040,6 +6099,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -6081,16 +6142,18 @@
     },
     "compatibility": [],
     "researchStatus": "conflict",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": "Bundled price thats why theres a 0",
     "issues": [
       "product_type_inferred",
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown",
+      "not_sellable_identity_conflict"
     ],
     "evidence": [
       {
@@ -6149,6 +6212,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": {
+      "line": "Tosot Select by Gree",
+      "refrigerant": "R-32",
+      "confidence": "probable",
+      "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+      "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+      "sourceType": "distributor",
+      "retrievedAt": "2026-08-09"
+    },
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -6205,6 +6278,15 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Cross-check against TOSOT's Technical Resource Center: TWH09AT19D6D and TWH09AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+      },
+      {
+        "fieldName": "productFamily",
+        "value": "Tosot Select by Gree (probable)",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
       }
     ]
   },
@@ -6238,6 +6320,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -6348,6 +6432,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": {
+      "line": "Tosot Select by Gree",
+      "refrigerant": "R-32",
+      "confidence": "probable",
+      "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+      "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+      "sourceType": "distributor",
+      "retrievedAt": "2026-08-09"
+    },
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -6404,6 +6498,15 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Cross-check against TOSOT's Technical Resource Center: TWH09AT19D6D and TWH09AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+      },
+      {
+        "fieldName": "productFamily",
+        "value": "Tosot Select by Gree (probable)",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
       }
     ]
   },
@@ -6437,6 +6540,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -6478,16 +6583,18 @@
     },
     "compatibility": [],
     "researchStatus": "conflict",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "product_type_inferred",
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown",
+      "not_sellable_identity_conflict"
     ],
     "evidence": [
       {
@@ -6546,6 +6653,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -6656,6 +6765,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "INVENTORY_CONFLICT",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -6698,15 +6809,17 @@
     },
     "compatibility": [],
     "researchStatus": "conflict",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": "Bundled with indoor unit",
     "issues": [
       "product_type_inferred",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown",
+      "not_sellable_identity_conflict"
     ],
     "evidence": [
       {
@@ -6769,6 +6882,16 @@
     "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": {
+      "line": "Tosot Select by Gree",
+      "refrigerant": "R-32",
+      "confidence": "probable",
+      "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+      "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+      "sourceType": "distributor",
+      "retrievedAt": "2026-08-09"
+    },
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -6823,6 +6946,15 @@
         "notes": "Cross-check against TOSOT's Technical Resource Center: TWH18AT19D6D and TWH18AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
       },
       {
+        "fieldName": "productFamily",
+        "value": "Tosot Select by Gree (probable)",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
+      },
+      {
         "fieldName": "image",
         "value": {
           "exactMediaGroup": "tosot-standard-wall-18",
@@ -6871,6 +7003,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": {
+      "line": "Tosot Select by Gree",
+      "refrigerant": "R-32",
+      "confidence": "probable",
+      "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+      "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+      "sourceType": "distributor",
+      "retrievedAt": "2026-08-09"
+    },
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -6924,6 +7066,15 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Cross-check against TOSOT's Technical Resource Center: TWH18AT19D6D and TWH18AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+      },
+      {
+        "fieldName": "productFamily",
+        "value": "Tosot Select by Gree (probable)",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
       }
     ]
   },
@@ -6957,6 +7108,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": {
+      "line": "Gree Multi R32 / Tosot Select multi-zone",
+      "refrigerant": "R-32",
+      "confidence": "possible",
+      "basis": "TM..MO multi-zone naming with an R32 segment; Select's 30K equivalent is TM30D6MO.",
+      "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -7034,6 +7195,15 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "productFamily",
+        "value": "Gree Multi R32 (possible)",
+        "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
       }
     ]
   },
@@ -7071,6 +7241,16 @@
     "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": {
+      "line": "Tosot Select by Gree",
+      "refrigerant": "R-32",
+      "confidence": "probable",
+      "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+      "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+      "sourceType": "distributor",
+      "retrievedAt": "2026-08-09"
+    },
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -7124,6 +7304,15 @@
         "notes": "Cross-check against TOSOT's Technical Resource Center: TWH24AT19D6DI and TWH24AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
       },
       {
+        "fieldName": "productFamily",
+        "value": "Tosot Select by Gree (probable)",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
+      },
+      {
         "fieldName": "image",
         "value": {
           "exactMediaGroup": "tosot-standard-wall-24",
@@ -7172,6 +7361,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": {
+      "line": "Tosot Select by Gree",
+      "refrigerant": "R-32",
+      "confidence": "probable",
+      "basis": "Naming segments and refrigerant match the Select line; exact model submittal not located.",
+      "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+      "sourceType": "distributor",
+      "retrievedAt": "2026-08-09"
+    },
     "ahri": {
       "status": "not_found",
       "referenceNumber": null,
@@ -7224,6 +7423,15 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Cross-check against TOSOT's Technical Resource Center: TWH24AT19D6DI and TWH24AT19D6DO are absent from every published series (Zeno 17, Charmo, Pular, Clivia, Lomo, Multi Ultra Heat, Multi Pular, Unix). The owner's-manual evidence establishes the model exists; it does not establish which US series it belongs to or that it is AHRI certified for this market."
+      },
+      {
+        "fieldName": "productFamily",
+        "value": "Tosot Select by Gree (probable)",
+        "sourceUrl": "https://www.theacoutlet.com/tm30d6mo-3twh09at19d6di-tosot-select-by-gree-30-000-btu-21-seer2-r-32-3-zone-ductless-hyper-heat-mini-split-heat-pump-system-9k-9k-9k.html",
+        "sourceType": "distributor",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
       }
     ]
   },
@@ -7257,6 +7465,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -7366,6 +7576,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -7475,6 +7687,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": {
+      "line": "Gree Multi R32 / Tosot Select multi-zone",
+      "refrigerant": "R-32",
+      "confidence": "possible",
+      "basis": "TM..MO multi-zone naming with an R32 segment; Select's 30K equivalent is TM30D6MO.",
+      "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -7517,15 +7739,17 @@
     },
     "compatibility": [],
     "researchStatus": "conflict",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "product_type_inferred",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown",
+      "not_sellable_identity_conflict"
     ],
     "evidence": [
       {
@@ -7551,6 +7775,15 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "productFamily",
+        "value": "Gree Multi R32 (possible)",
+        "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
       }
     ]
   },
@@ -7584,6 +7817,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -7693,6 +7928,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -7811,6 +8048,8 @@
       }
     ],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -7935,6 +8174,16 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "INVENTORY_CONFLICT",
+    "possibleOemMapping": {
+      "line": "Gree Multi R32 / Tosot Select multi-zone",
+      "refrigerant": "R-32",
+      "confidence": "possible",
+      "basis": "TM..MO multi-zone naming with an R32 segment; Select's 30K equivalent is TM30D6MO.",
+      "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+      "sourceType": "manufacturer",
+      "retrievedAt": "2026-08-09"
+    },
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -8012,6 +8261,15 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "productFamily",
+        "value": "Gree Multi R32 (possible)",
+        "sourceUrl": "https://www.greecomfort.com/our-products/multi-r32/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
       }
     ]
   },
@@ -8045,6 +8303,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -8154,6 +8414,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -8264,6 +8526,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -8373,6 +8637,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -8489,7 +8755,7 @@
         "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
         "modelCoverageVerified": true,
         "retrievedAt": "2026-08-09",
-        "coverageNote": "Physical, specification and electrical tables cover sizes 18-60."
+        "coverageNote": "Covers FJ5 unit size 36. The size is documented; the cabinet-width letter on our sheet (D) is not offered at this capacity, which is the open conflict."
       },
       {
         "kind": "installation_manual",
@@ -8497,7 +8763,7 @@
         "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/IM-FJ5-01.pdf",
         "modelCoverageVerified": true,
         "retrievedAt": "2026-08-09",
-        "coverageNote": "Installation instructions for the FJ5 fan coil series."
+        "coverageNote": "Covers FJ5 unit size 36. The size is documented; the cabinet-width letter on our sheet (D) is not offered at this capacity, which is the open conflict."
       }
     ],
     "warranty": {
@@ -8512,6 +8778,8 @@
       "sourceType": "manufacturer",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": "WAREHOUSE_MODEL_VERIFICATION",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -8779,6 +9047,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -8905,7 +9175,7 @@
       "liquidLineIn": "3/8",
       "maxLineLengthFt": 250,
       "maxHeightDifferenceFt": 200,
-      "minCoolingAmbientF": 0
+      "minCoolingAmbientF": "0 (with approved low-ambient accessory kit)"
     },
     "compatibility": [],
     "researchStatus": "verified",
@@ -8969,6 +9239,15 @@
         "notes": "Official Carrier residential product page for the 26SCA5 series."
       },
       {
+        "fieldName": "minCoolingAmbientF",
+        "value": "0 F with accessory kit",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Carrier states low-ambient cooling down to 0F/-18C is achieved WITH approved low-ambient accessory kits, not as a bare-unit rating. Recorded with the condition attached so it cannot be read as an unconditional operating limit."
+      },
+      {
         "fieldName": "image",
         "value": {
           "exactMediaGroup": "carrier-26sca5",
@@ -9022,7 +9301,7 @@
         "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/FJ5-01PD.pdf",
         "modelCoverageVerified": true,
         "retrievedAt": "2026-08-09",
-        "coverageNote": "Physical, specification and electrical tables cover sizes 18-60."
+        "coverageNote": "Covers FJ5 unit size 48. The size is documented; the cabinet-width letter on our sheet (D) is not offered at this capacity, which is the open conflict."
       },
       {
         "kind": "installation_manual",
@@ -9030,7 +9309,7 @@
         "url": "https://www.shareddocs.com/hvac/docs/1009/Public/00/IM-FJ5-01.pdf",
         "modelCoverageVerified": true,
         "retrievedAt": "2026-08-09",
-        "coverageNote": "Installation instructions for the FJ5 fan coil series."
+        "coverageNote": "Covers FJ5 unit size 48. The size is documented; the cabinet-width letter on our sheet (D) is not offered at this capacity, which is the open conflict."
       }
     ],
     "warranty": {
@@ -9045,6 +9324,8 @@
       "sourceType": "manufacturer",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": "WAREHOUSE_MODEL_VERIFICATION",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -9271,7 +9552,7 @@
         "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
         "modelCoverageVerified": true,
         "retrievedAt": "2026-08-09",
-        "coverageNote": "Physical, electrical and sound tables list unit sizes 18-60 including 36, 48 and 60."
+        "coverageNote": "Covers unit size 48 of the 26SCA5 series. The size is documented; the specific catalog suffix on our sheet (W003) is not, which is the open conflict."
       },
       {
         "kind": "installation_manual",
@@ -9279,7 +9560,7 @@
         "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0E/26SCA5-1SI.pdf",
         "modelCoverageVerified": true,
         "retrievedAt": "2026-08-09",
-        "coverageNote": "Covers the 26SCA5 series, sizes 18-60."
+        "coverageNote": "Covers unit size 48 of the 26SCA5 series. The size is documented; the specific catalog suffix on our sheet (W003) is not, which is the open conflict."
       },
       {
         "kind": "wiring_diagram",
@@ -9287,7 +9568,7 @@
         "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0F/26SCA5-1W.pdf",
         "modelCoverageVerified": true,
         "retrievedAt": "2026-08-09",
-        "coverageNote": "Title states sizes 18-60."
+        "coverageNote": "Covers unit size 48 of the 26SCA5 series. The size is documented; the specific catalog suffix on our sheet (W003) is not, which is the open conflict."
       },
       {
         "kind": "brochure",
@@ -9295,7 +9576,7 @@
         "url": "https://www.shareddocs.com/hvac/docs/1010/Public/04/01-824-131-01.pdf",
         "modelCoverageVerified": true,
         "retrievedAt": "2026-08-09",
-        "coverageNote": "Marketing brochure. Named a product/installation document by several distributors; it is neither."
+        "coverageNote": "Covers unit size 48 of the 26SCA5 series. The size is documented; the specific catalog suffix on our sheet (W003) is not, which is the open conflict."
       }
     ],
     "warranty": {
@@ -9312,6 +9593,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": "WAREHOUSE_MODEL_VERIFICATION",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -9438,7 +9721,7 @@
       "liquidLineIn": "3/8",
       "maxLineLengthFt": 250,
       "maxHeightDifferenceFt": 200,
-      "minCoolingAmbientF": 0
+      "minCoolingAmbientF": "0 (with approved low-ambient accessory kit)"
     },
     "compatibility": [],
     "researchStatus": "conflict",
@@ -9500,6 +9783,15 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official Carrier residential product page for the 26SCA5 series."
+      },
+      {
+        "fieldName": "minCoolingAmbientF",
+        "value": "0 F with accessory kit",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Carrier states low-ambient cooling down to 0F/-18C is achieved WITH approved low-ambient accessory kits, not as a bare-unit rating. Recorded with the condition attached so it cannot be read as an unconditional operating limit."
       },
       {
         "fieldName": "image",
@@ -9586,6 +9878,8 @@
       "sourceType": "manufacturer",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -9806,6 +10100,8 @@
       "sourceType": "manufacturer",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -10079,6 +10375,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -10205,7 +10503,7 @@
       "liquidLineIn": "3/8",
       "maxLineLengthFt": 250,
       "maxHeightDifferenceFt": 200,
-      "minCoolingAmbientF": 0
+      "minCoolingAmbientF": "0 (with approved low-ambient accessory kit)"
     },
     "compatibility": [],
     "researchStatus": "verified",
@@ -10267,6 +10565,15 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official Carrier residential product page for the 26SCA5 series."
+      },
+      {
+        "fieldName": "minCoolingAmbientF",
+        "value": "0 F with accessory kit",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Carrier states low-ambient cooling down to 0F/-18C is achieved WITH approved low-ambient accessory kits, not as a bare-unit rating. Recorded with the condition attached so it cannot be read as an unconditional operating limit."
       },
       {
         "fieldName": "image",
@@ -10353,6 +10660,8 @@
       "sourceType": "manufacturer",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -10582,6 +10891,8 @@
       "sourceType": "manufacturer",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -10795,6 +11106,8 @@
       "sourceType": "manufacturer",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -11011,6 +11324,8 @@
       "sourceType": "manufacturer",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -11205,6 +11520,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -11311,6 +11628,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -11417,6 +11736,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -11523,6 +11844,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -11629,6 +11952,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -11723,6 +12048,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -11749,15 +12076,17 @@
     },
     "compatibility": [],
     "researchStatus": "conflict",
-    "publicationStatus": "published",
+    "publicationStatus": "quote_only",
     "quoteEligible": true,
-    "purchaseEligible": true,
+    "purchaseEligible": false,
     "notes": null,
     "issues": [
       "brand_inferred_from_identifier",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending"
+      "manufacturer_research_pending",
+      "not_sellable_inventory_unknown",
+      "not_sellable_identity_conflict"
     ],
     "evidence": [
       {
@@ -11816,6 +12145,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -11904,6 +12235,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -11992,6 +12325,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -12080,6 +12415,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -12174,6 +12511,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -12268,6 +12607,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -12362,6 +12703,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -12456,6 +12799,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -12550,6 +12895,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -12644,6 +12991,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -12738,6 +13087,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -12826,6 +13177,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -12920,6 +13273,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -13014,6 +13369,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -13114,6 +13471,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -13208,6 +13567,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -13302,6 +13663,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -13423,6 +13786,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -13589,6 +13954,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -13755,6 +14122,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -13921,6 +14290,8 @@
       "sourceType": "official_document",
       "retrievedAt": "2026-08-09"
     },
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "requires_matched_combination",
       "referenceNumber": null,
@@ -14066,6 +14437,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "PURCHASING_RECORD_VERIFICATION",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -14143,6 +14516,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "PURCHASING_RECORD_VERIFICATION",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -14220,6 +14595,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -14330,6 +14707,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -14440,6 +14819,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -14550,6 +14931,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "conflict",
       "referenceNumber": null,
@@ -14660,6 +15043,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -14743,6 +15128,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": "MODEL_NOT_FOUND",
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
@@ -14826,6 +15213,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "conflictType": null,
+    "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,

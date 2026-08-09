@@ -11,7 +11,12 @@ import { cleanupExpiredCheckouts } from "@/lib/backend/checkout";
  */
 function authorized(request: Request): boolean {
   const secret = process.env.CRON_SECRET;
-  if (!secret) return true;
+  // Fail closed. This route sends real email to real customers -- back-in-stock
+  // alerts and abandoned-cart sequences -- and releases checkout reservations.
+  // Returning true when CRON_SECRET is absent meant that in any deployment where
+  // the variable was forgotten, an anonymous GET could send the entire mailing.
+  // Outside development, no secret means no dispatch.
+  if (!secret) return process.env.NODE_ENV !== "production";
   return request.headers.get("authorization") === `Bearer ${secret}`;
 }
 
