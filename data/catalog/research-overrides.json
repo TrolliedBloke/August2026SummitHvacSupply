@@ -5010,6 +5010,2220 @@
           "notes": "Elite 18K specifications are deliberately NOT copied onto this record. Applying H18SEH19 data to a unit labelled H18SEH17 would be exactly the family-substitution error this catalogue is meant to prevent."
         }
       ]
+    },
+    "TCL18KMZODU-18FMH22XPC": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL Multi Match Series",
+        "modelVariant": "Multi-zone (free match) outdoor unit",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 18000,
+        "minCoolingAmbientF": 5,
+        "maxCoolingAmbientF": 136,
+        "minHeatingAmbientF": -13
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minHeatingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Multi Match Series Product Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Multi Match series sheet served for this model by an authorised distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL Multi Match limited warranty as printed on the series specification sheet: 5 years parts, 7 years compressor, extended to 10 years with registration within 60 days of installation.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A multi-zone outdoor unit has no standalone rating. AHRI certifies the outdoor unit against a specific combination of indoor heads, so the certificate depends on how this system is configured. Confirm the head selection, then look the combination up in the AHRI directory.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H18FMH22XPC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL serves the Multi Match series specification sheet against this exact model identifier."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5 years parts, 7 years compressor, 10 years with registration within 60 days",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Warranty line printed on the Multi Match series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The specification tables in TCL's Multi Match sheet are embedded as images, so no numeric values (SEER2, MCA, MOCP, dimensions, weight, sound) can be read from it by text extraction. They are left unpopulated rather than estimated. To complete them, request the model submittal from hvacsales@tcl.com or read the tables visually from the source PDF."
+        },
+        {
+          "fieldName": "operatingRange",
+          "value": "Heating -13F to 75F, cooling 5F to 136F",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Wide Temperature Operation section: standard base pan heater, heating down to -13F, cooling to 136F."
+        }
+      ]
+    },
+    "TCL-27K-MZ-ODU-R-454B": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL Multi Match Series",
+        "modelVariant": "Multi-zone (free match) outdoor unit",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 27000,
+        "minCoolingAmbientF": 5,
+        "maxCoolingAmbientF": 136,
+        "minHeatingAmbientF": -13
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minHeatingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Multi Match Series Product Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Multi Match series sheet served for this model by an authorised distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL Multi Match limited warranty as printed on the series specification sheet: 5 years parts, 7 years compressor, extended to 10 years with registration within 60 days of installation.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A multi-zone outdoor unit has no standalone rating. AHRI certifies the outdoor unit against a specific combination of indoor heads, so the certificate depends on how this system is configured. Confirm the head selection, then look the combination up in the AHRI directory.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H27FMH22XPC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL serves the Multi Match series specification sheet against this exact model identifier."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5 years parts, 7 years compressor, 10 years with registration within 60 days",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Warranty line printed on the Multi Match series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The specification tables in TCL's Multi Match sheet are embedded as images, so no numeric values (SEER2, MCA, MOCP, dimensions, weight, sound) can be read from it by text extraction. They are left unpopulated rather than estimated. To complete them, request the model submittal from hvacsales@tcl.com or read the tables visually from the source PDF."
+        },
+        {
+          "fieldName": "operatingRange",
+          "value": "Heating -13F to 75F, cooling 5F to 136F",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Wide Temperature Operation section: standard base pan heater, heating down to -13F, cooling to 136F."
+        }
+      ]
+    },
+    "TCL36KMZODU-R-454B": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL Multi Match Series",
+        "modelVariant": "Multi-zone (free match) outdoor unit",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 36000,
+        "minCoolingAmbientF": 5,
+        "maxCoolingAmbientF": 136,
+        "minHeatingAmbientF": -13
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minHeatingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Multi Match Series Product Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Multi Match series sheet served for this model by an authorised distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL Multi Match limited warranty as printed on the series specification sheet: 5 years parts, 7 years compressor, extended to 10 years with registration within 60 days of installation.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A multi-zone outdoor unit has no standalone rating. AHRI certifies the outdoor unit against a specific combination of indoor heads, so the certificate depends on how this system is configured. Confirm the head selection, then look the combination up in the AHRI directory.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H36FMH21XPC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL serves the Multi Match series specification sheet against this exact model identifier."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5 years parts, 7 years compressor, 10 years with registration within 60 days",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Warranty line printed on the Multi Match series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The specification tables in TCL's Multi Match sheet are embedded as images, so no numeric values (SEER2, MCA, MOCP, dimensions, weight, sound) can be read from it by text extraction. They are left unpopulated rather than estimated. To complete them, request the model submittal from hvacsales@tcl.com or read the tables visually from the source PDF."
+        },
+        {
+          "fieldName": "operatingRange",
+          "value": "Heating -13F to 75F, cooling 5F to 136F",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H36FMH21XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Wide Temperature Operation section: standard base pan heater, heating down to -13F, cooling to 136F."
+        }
+      ]
+    },
+    "TCL42KMZODU": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL Multi Match Series",
+        "modelVariant": "Multi-zone (free match) outdoor unit",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 42000,
+        "minCoolingAmbientF": 5,
+        "maxCoolingAmbientF": 136,
+        "minHeatingAmbientF": -13
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxCoolingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minHeatingAmbientF": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Multi Match Series Product Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Multi Match series sheet served for this model by an authorised distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL Multi Match limited warranty as printed on the series specification sheet: 5 years parts, 7 years compressor, extended to 10 years with registration within 60 days of installation.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A multi-zone outdoor unit has no standalone rating. AHRI certifies the outdoor unit against a specific combination of indoor heads, so the certificate depends on how this system is configured. Confirm the head selection, then look the combination up in the AHRI directory.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H42FMH20XPC",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL serves the Multi Match series specification sheet against this exact model identifier."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5 years parts, 7 years compressor, 10 years with registration within 60 days",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Warranty line printed on the Multi Match series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The specification tables in TCL's Multi Match sheet are embedded as images, so no numeric values (SEER2, MCA, MOCP, dimensions, weight, sound) can be read from it by text extraction. They are left unpopulated rather than estimated. To complete them, request the model submittal from hvacsales@tcl.com or read the tables visually from the source PDF."
+        },
+        {
+          "fieldName": "operatingRange",
+          "value": "Heating -13F to 75F, cooling 5F to 136F",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H42FMH20XPC.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Wide Temperature Operation section: standard base pan heater, heating down to -13F, cooling to 136F."
+        }
+      ]
+    },
+    "TCLCAS9K": {
+      "researchStatus": "in_progress",
+      "productType": "Ceiling cassette",
+      "specifications": {
+        "productFamily": "TCL Multi Match Series",
+        "modelVariant": "Four-way ceiling cassette indoor unit",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 9000
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Multi Match Series Product Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Multi Match series sheet served for this model by an authorised distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL Multi Match limited warranty as printed on the series specification sheet: 5 years parts, 7 years compressor, extended to 10 years with registration within 60 days of installation.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A cassette indoor unit is rated only as part of a certified combination with an outdoor unit. No standalone AHRI reference exists for the head on its own.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H09CSHU1XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL serves the Multi Match series specification sheet against this exact model identifier."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5 years parts, 7 years compressor, 10 years with registration within 60 days",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Warranty line printed on the Multi Match series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H09CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The specification tables in TCL's Multi Match sheet are embedded as images, so no numeric values (SEER2, MCA, MOCP, dimensions, weight, sound) can be read from it by text extraction. They are left unpopulated rather than estimated. To complete them, request the model submittal from hvacsales@tcl.com or read the tables visually from the source PDF."
+        }
+      ]
+    },
+    "TCLCAS12K": {
+      "researchStatus": "in_progress",
+      "productType": "Ceiling cassette",
+      "specifications": {
+        "productFamily": "TCL Multi Match Series",
+        "modelVariant": "Four-way ceiling cassette indoor unit",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 12000
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Multi Match Series Product Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Multi Match series sheet served for this model by an authorised distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL Multi Match limited warranty as printed on the series specification sheet: 5 years parts, 7 years compressor, extended to 10 years with registration within 60 days of installation.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A cassette indoor unit is rated only as part of a certified combination with an outdoor unit. No standalone AHRI reference exists for the head on its own.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H12CSHU1XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL serves the Multi Match series specification sheet against this exact model identifier."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5 years parts, 7 years compressor, 10 years with registration within 60 days",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Warranty line printed on the Multi Match series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H12CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The specification tables in TCL's Multi Match sheet are embedded as images, so no numeric values (SEER2, MCA, MOCP, dimensions, weight, sound) can be read from it by text extraction. They are left unpopulated rather than estimated. To complete them, request the model submittal from hvacsales@tcl.com or read the tables visually from the source PDF."
+        }
+      ]
+    },
+    "TCLCAS18K": {
+      "researchStatus": "in_progress",
+      "productType": "Ceiling cassette",
+      "specifications": {
+        "productFamily": "TCL Multi Match Series",
+        "modelVariant": "Four-way ceiling cassette indoor unit",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 18000
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Multi Match Series Product Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Multi Match series sheet served for this model by an authorised distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL Multi Match limited warranty as printed on the series specification sheet: 5 years parts, 7 years compressor, extended to 10 years with registration within 60 days of installation.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A cassette indoor unit is rated only as part of a certified combination with an outdoor unit. No standalone AHRI reference exists for the head on its own.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H18CSHU1XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL serves the Multi Match series specification sheet against this exact model identifier."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5 years parts, 7 years compressor, 10 years with registration within 60 days",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Warranty line printed on the Multi Match series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H18CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The specification tables in TCL's Multi Match sheet are embedded as images, so no numeric values (SEER2, MCA, MOCP, dimensions, weight, sound) can be read from it by text extraction. They are left unpopulated rather than estimated. To complete them, request the model submittal from hvacsales@tcl.com or read the tables visually from the source PDF."
+        }
+      ]
+    },
+    "TCLCAS24K": {
+      "researchStatus": "in_progress",
+      "productType": "Ceiling cassette",
+      "specifications": {
+        "productFamily": "TCL Multi Match Series",
+        "modelVariant": "Four-way ceiling cassette indoor unit",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 24000
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "spec_sheet",
+          "title": "TCL Multi Match Series Product Specifications",
+          "url": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "TCL-authored Multi Match series sheet served for this model by an authorised distributor mirror; TCL's own host returns HTTP 500."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "compressor": "7 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 60,
+        "conditions": "TCL Multi Match limited warranty as printed on the series specification sheet: 5 years parts, 7 years compressor, extended to 10 years with registration within 60 days of installation.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H27FMH22XPC.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "A cassette indoor unit is rated only as part of a certified combination with an outdoor unit. No standalone AHRI reference exists for the head on its own.",
+        "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "H24CSHU1XAE",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL serves the Multi Match series specification sheet against this exact model identifier."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5 years parts, 7 years compressor, 10 years with registration within 60 days",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Warranty line printed on the Multi Match series specification sheet."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://www.afsupply.com/pub/media/catalog/product/TCL/spec/H24CSHU1XAE.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "The specification tables in TCL's Multi Match sheet are embedded as images, so no numeric values (SEER2, MCA, MOCP, dimensions, weight, sound) can be read from it by text extraction. They are left unpopulated rather than estimated. To complete them, request the model submittal from hvacsales@tcl.com or read the tables visually from the source PDF."
+        }
+      ]
+    },
+    "TCL09KIDU": {
+      "researchStatus": "in_progress",
+      "productType": "Indoor unit",
+      "specifications": {
+        "productFamily": "TCL T-PRO Series ductless",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 9000,
+        "voltage": "115V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by TCL's R-454B lines"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_page",
+          "title": "TCL T-PRO TSC-09HA1/I3TI22 official product page",
+          "url": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer product page for the T-PRO model. Specification tables render client-side and are not machine-readable."
+        }
+      ],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate was located for the T-PRO R-410A line. TCL's current A2L lines publish certificates on their spec sheets; this legacy platform does not. Do not carry an Elite or BreezeIN certificate onto this model.",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TSC-09HA1/I3TI22",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL publishes an official US product page for this T-PRO model. TCL's T-PRO model number designates the SYSTEM, not one cabinet: distributors list this unit as 'TSC-18HA2/I3TI21-O/I' where -O is the outdoor section and -I the indoor section. That is why the inventory sheet carries the same identifier on both the indoor and outdoor rows; it is not a duplication error. When ordering a single cabinet, specify the -I or -O suffix."
+        },
+        {
+          "fieldName": "refrigerant",
+          "value": "R-410A",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL's US product pages for the T-PRO line render their specification tables client-side, so no numeric values could be read from the official page by document fetch. SEER2/EER2/HSPF2, electrical and dimensional data are left unpopulated rather than taken from a retailer listing, because retailer figures for this line disagree with each other across sizes. Request the T-PRO submittal from hvacsales@tcl.com to complete them."
+        },
+        {
+          "fieldName": "warranty",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+        }
+      ]
+    },
+    "TCL09KODU": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL T-PRO Series ductless",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 9000,
+        "voltage": "115V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by TCL's R-454B lines"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_page",
+          "title": "TCL T-PRO TSC-09HA1/I3TI22 official product page",
+          "url": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer product page for the T-PRO model. Specification tables render client-side and are not machine-readable."
+        }
+      ],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate was located for the T-PRO R-410A line. TCL's current A2L lines publish certificates on their spec sheets; this legacy platform does not. Do not carry an Elite or BreezeIN certificate onto this model.",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TSC-09HA1/I3TI22",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL publishes an official US product page for this T-PRO model. TCL's T-PRO model number designates the SYSTEM, not one cabinet: distributors list this unit as 'TSC-18HA2/I3TI21-O/I' where -O is the outdoor section and -I the indoor section. That is why the inventory sheet carries the same identifier on both the indoor and outdoor rows; it is not a duplication error. When ordering a single cabinet, specify the -I or -O suffix."
+        },
+        {
+          "fieldName": "refrigerant",
+          "value": "R-410A",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL's US product pages for the T-PRO line render their specification tables client-side, so no numeric values could be read from the official page by document fetch. SEER2/EER2/HSPF2, electrical and dimensional data are left unpopulated rather than taken from a retailer listing, because retailer figures for this line disagree with each other across sizes. Request the T-PRO submittal from hvacsales@tcl.com to complete them."
+        },
+        {
+          "fieldName": "warranty",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+        }
+      ]
+    },
+    "TCL09KMZIDU": {
+      "researchStatus": "in_progress",
+      "productType": "Indoor unit",
+      "specifications": {
+        "productFamily": "TCL T-PRO Series ductless",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 9000,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by TCL's R-454B lines"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_page",
+          "title": "TCL T-PRO TSC-09HA2/I3TI23-I official product page",
+          "url": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer product page for the T-PRO model. Specification tables render client-side and are not machine-readable."
+        }
+      ],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate was located for the T-PRO R-410A line. TCL's current A2L lines publish certificates on their spec sheets; this legacy platform does not. Do not carry an Elite or BreezeIN certificate onto this model.",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TSC-09HA2/I3TI23-I",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL publishes an official US product page for this T-PRO model. TCL's T-PRO model number designates the SYSTEM, not one cabinet: distributors list this unit as 'TSC-18HA2/I3TI21-O/I' where -O is the outdoor section and -I the indoor section. That is why the inventory sheet carries the same identifier on both the indoor and outdoor rows; it is not a duplication error. When ordering a single cabinet, specify the -I or -O suffix."
+        },
+        {
+          "fieldName": "refrigerant",
+          "value": "R-410A",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL's US product pages for the T-PRO line render their specification tables client-side, so no numeric values could be read from the official page by document fetch. SEER2/EER2/HSPF2, electrical and dimensional data are left unpopulated rather than taken from a retailer listing, because retailer figures for this line disagree with each other across sizes. Request the T-PRO submittal from hvacsales@tcl.com to complete them."
+        },
+        {
+          "fieldName": "warranty",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+        }
+      ]
+    },
+    "TCL12KIDU": {
+      "researchStatus": "in_progress",
+      "productType": "Indoor unit",
+      "specifications": {
+        "productFamily": "TCL T-PRO Series ductless",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 12000,
+        "voltage": "115V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by TCL's R-454B lines"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_page",
+          "title": "TCL T-PRO TSC-12HA1/I3TI22 official product page",
+          "url": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer product page for the T-PRO model. Specification tables render client-side and are not machine-readable."
+        }
+      ],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate was located for the T-PRO R-410A line. TCL's current A2L lines publish certificates on their spec sheets; this legacy platform does not. Do not carry an Elite or BreezeIN certificate onto this model.",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TSC-12HA1/I3TI22",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL publishes an official US product page for this T-PRO model. TCL's T-PRO model number designates the SYSTEM, not one cabinet: distributors list this unit as 'TSC-18HA2/I3TI21-O/I' where -O is the outdoor section and -I the indoor section. That is why the inventory sheet carries the same identifier on both the indoor and outdoor rows; it is not a duplication error. When ordering a single cabinet, specify the -I or -O suffix."
+        },
+        {
+          "fieldName": "refrigerant",
+          "value": "R-410A",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL's US product pages for the T-PRO line render their specification tables client-side, so no numeric values could be read from the official page by document fetch. SEER2/EER2/HSPF2, electrical and dimensional data are left unpopulated rather than taken from a retailer listing, because retailer figures for this line disagree with each other across sizes. Request the T-PRO submittal from hvacsales@tcl.com to complete them."
+        },
+        {
+          "fieldName": "warranty",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+        }
+      ]
+    },
+    "TCL12KODU": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL T-PRO Series ductless",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 12000,
+        "voltage": "115V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by TCL's R-454B lines"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_page",
+          "title": "TCL T-PRO TSC-12HA1/I3TI22 official product page",
+          "url": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer product page for the T-PRO model. Specification tables render client-side and are not machine-readable."
+        }
+      ],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate was located for the T-PRO R-410A line. TCL's current A2L lines publish certificates on their spec sheets; this legacy platform does not. Do not carry an Elite or BreezeIN certificate onto this model.",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TSC-12HA1/I3TI22",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL publishes an official US product page for this T-PRO model. TCL's T-PRO model number designates the SYSTEM, not one cabinet: distributors list this unit as 'TSC-18HA2/I3TI21-O/I' where -O is the outdoor section and -I the indoor section. That is why the inventory sheet carries the same identifier on both the indoor and outdoor rows; it is not a duplication error. When ordering a single cabinet, specify the -I or -O suffix."
+        },
+        {
+          "fieldName": "refrigerant",
+          "value": "R-410A",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL's US product pages for the T-PRO line render their specification tables client-side, so no numeric values could be read from the official page by document fetch. SEER2/EER2/HSPF2, electrical and dimensional data are left unpopulated rather than taken from a retailer listing, because retailer figures for this line disagree with each other across sizes. Request the T-PRO submittal from hvacsales@tcl.com to complete them."
+        },
+        {
+          "fieldName": "warranty",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+        }
+      ]
+    },
+    "TCL12KMZIDU": {
+      "researchStatus": "in_progress",
+      "productType": "Indoor unit",
+      "specifications": {
+        "productFamily": "TCL T-PRO Series ductless",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 12000,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by TCL's R-454B lines"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_page",
+          "title": "TCL T-PRO TSC-12HA2/I3TI23-I official product page",
+          "url": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer product page for the T-PRO model. Specification tables render client-side and are not machine-readable."
+        }
+      ],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate was located for the T-PRO R-410A line. TCL's current A2L lines publish certificates on their spec sheets; this legacy platform does not. Do not carry an Elite or BreezeIN certificate onto this model.",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TSC-12HA2/I3TI23-I",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL publishes an official US product page for this T-PRO model. TCL's T-PRO model number designates the SYSTEM, not one cabinet: distributors list this unit as 'TSC-18HA2/I3TI21-O/I' where -O is the outdoor section and -I the indoor section. That is why the inventory sheet carries the same identifier on both the indoor and outdoor rows; it is not a duplication error. When ordering a single cabinet, specify the -I or -O suffix."
+        },
+        {
+          "fieldName": "refrigerant",
+          "value": "R-410A",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL's US product pages for the T-PRO line render their specification tables client-side, so no numeric values could be read from the official page by document fetch. SEER2/EER2/HSPF2, electrical and dimensional data are left unpopulated rather than taken from a retailer listing, because retailer figures for this line disagree with each other across sizes. Request the T-PRO submittal from hvacsales@tcl.com to complete them."
+        },
+        {
+          "fieldName": "warranty",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+        }
+      ]
+    },
+    "TCL18KIDU-R-410A": {
+      "researchStatus": "in_progress",
+      "productType": "Indoor unit",
+      "specifications": {
+        "productFamily": "TCL T-PRO Series ductless",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 18000,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by TCL's R-454B lines"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_page",
+          "title": "TCL T-PRO TSC-18HA2/I3TI21 official product page",
+          "url": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer product page for the T-PRO model. Specification tables render client-side and are not machine-readable."
+        }
+      ],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate was located for the T-PRO R-410A line. TCL's current A2L lines publish certificates on their spec sheets; this legacy platform does not. Do not carry an Elite or BreezeIN certificate onto this model.",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TSC-18HA2/I3TI21",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL publishes an official US product page for this T-PRO model. TCL's T-PRO model number designates the SYSTEM, not one cabinet: distributors list this unit as 'TSC-18HA2/I3TI21-O/I' where -O is the outdoor section and -I the indoor section. That is why the inventory sheet carries the same identifier on both the indoor and outdoor rows; it is not a duplication error. When ordering a single cabinet, specify the -I or -O suffix."
+        },
+        {
+          "fieldName": "refrigerant",
+          "value": "R-410A",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL's US product pages for the T-PRO line render their specification tables client-side, so no numeric values could be read from the official page by document fetch. SEER2/EER2/HSPF2, electrical and dimensional data are left unpopulated rather than taken from a retailer listing, because retailer figures for this line disagree with each other across sizes. Request the T-PRO submittal from hvacsales@tcl.com to complete them."
+        },
+        {
+          "fieldName": "warranty",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+        }
+      ]
+    },
+    "TCL18KODU-R-410A": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL T-PRO Series ductless",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 18000,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by TCL's R-454B lines"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_page",
+          "title": "TCL T-PRO TSC-18HA2/I3TI21 official product page",
+          "url": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer product page for the T-PRO model. Specification tables render client-side and are not machine-readable."
+        }
+      ],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate was located for the T-PRO R-410A line. TCL's current A2L lines publish certificates on their spec sheets; this legacy platform does not. Do not carry an Elite or BreezeIN certificate onto this model.",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TSC-18HA2/I3TI21",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL publishes an official US product page for this T-PRO model. TCL's T-PRO model number designates the SYSTEM, not one cabinet: distributors list this unit as 'TSC-18HA2/I3TI21-O/I' where -O is the outdoor section and -I the indoor section. That is why the inventory sheet carries the same identifier on both the indoor and outdoor rows; it is not a duplication error. When ordering a single cabinet, specify the -I or -O suffix."
+        },
+        {
+          "fieldName": "refrigerant",
+          "value": "R-410A",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL's US product pages for the T-PRO line render their specification tables client-side, so no numeric values could be read from the official page by document fetch. SEER2/EER2/HSPF2, electrical and dimensional data are left unpopulated rather than taken from a retailer listing, because retailer figures for this line disagree with each other across sizes. Request the T-PRO submittal from hvacsales@tcl.com to complete them."
+        },
+        {
+          "fieldName": "warranty",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+        }
+      ]
+    },
+    "TCL18KMZODU-R-410A": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL T-PRO Series ductless",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 18000,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by TCL's R-454B lines"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_page",
+          "title": "TCL T-PRO TSC-18HA2/I3TI21 official product page",
+          "url": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Manufacturer product page for the T-PRO model. Specification tables render client-side and are not machine-readable."
+        }
+      ],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate was located for the T-PRO R-410A line. TCL's current A2L lines publish certificates on their spec sheets; this legacy platform does not. Do not carry an Elite or BreezeIN certificate onto this model.",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TSC-18HA2/I3TI21",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL publishes an official US product page for this T-PRO model. TCL's T-PRO model number designates the SYSTEM, not one cabinet: distributors list this unit as 'TSC-18HA2/I3TI21-O/I' where -O is the outdoor section and -I the indoor section. That is why the inventory sheet carries the same identifier on both the indoor and outdoor rows; it is not a duplication error. When ordering a single cabinet, specify the -I or -O suffix."
+        },
+        {
+          "fieldName": "refrigerant",
+          "value": "R-410A",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        },
+        {
+          "fieldName": "specifications",
+          "value": "partial",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "TCL's US product pages for the T-PRO line render their specification tables client-side, so no numeric values could be read from the official page by document fetch. SEER2/EER2/HSPF2, electrical and dimensional data are left unpopulated rather than taken from a retailer listing, because retailer figures for this line disagree with each other across sizes. Request the T-PRO submittal from hvacsales@tcl.com to complete them."
+        },
+        {
+          "fieldName": "warranty",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-9-000-btu-tsc-09ha2-i3ti23",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+        }
+      ]
+    },
+    "TCL-27K-MZ-ODU-R-410A": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL multi-zone (legacy R-410A platform)",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 27000,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by the R-454B Multi Match line"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate located for this legacy R-410A multi-zone outdoor unit. Multi-zone certificates depend on the head combination in any case.",
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TUM-27HA2/I2I22-21ES",
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No TCL product page, spec sheet or submittal could be located for this exact model. The TUM- prefix does not appear in TCL's current US documentation, which uses the H..FMH..XPC Multi Match identifiers. This is most likely discontinued pre-A2L stock. Identity is taken from the inventory sheet only and is UNVERIFIED against any manufacturer source. This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        }
+      ]
+    },
+    "TCL36KMZODU-R-410A": {
+      "researchStatus": "in_progress",
+      "productType": "Outdoor unit",
+      "specifications": {
+        "productFamily": "TCL multi-zone (legacy R-410A platform)",
+        "refrigerant": "R-410A",
+        "fuelType": "Electric (heat pump)",
+        "coolingCapacityBtu": 36000,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "discontinued": "Legacy R-410A platform; superseded by the R-454B Multi Match line"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "discontinued": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [],
+      "warranty": null,
+      "ahri": {
+        "status": "not_found",
+        "referenceNumber": null,
+        "note": "No AHRI certificate located for this legacy R-410A multi-zone outdoor unit. Multi-zone certificates depend on the head combination in any case.",
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TUM36HA2/I2I21-21ES",
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "No TCL product page, spec sheet or submittal could be located for this exact model. The TUM- prefix does not appear in TCL's current US documentation, which uses the H..FMH..XPC Multi Match identifiers. This is most likely discontinued pre-A2L stock. Identity is taken from the inventory sheet only and is UNVERIFIED against any manufacturer source. This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+        }
+      ]
+    },
+    "TCL24KMZIDU": {
+      "researchStatus": "conflict",
+      "documents": [],
+      "warranty": null,
+      "ahri": {
+        "status": "not_applicable",
+        "referenceNumber": null,
+        "note": "Cannot be determined without a model identifier.",
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The inventory sheet's model cell reads 'THEY DONT MAKE IT'. There is no identifier to research. TCL's current 24K multi-zone indoor options are the Multi Match heads and cassettes. Purchasing must supply the actual model on the box, or this line should be delisted. HUMAN VERIFICATION REQUIRED."
+        }
+      ]
+    },
+    "TCLCASPAN01": {
+      "researchStatus": "conflict",
+      "documents": [],
+      "warranty": null,
+      "ahri": {
+        "status": "not_applicable",
+        "referenceNumber": null,
+        "note": "Cannot be determined without a model identifier.",
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The model cell holds the label text 'Cassette Panel 01', a column shift in the source sheet rather than a part number. TCL's cassette decorative panels carry their own model identifiers; none could be matched without the real part number. Purchasing must supply it. HUMAN VERIFICATION REQUIRED."
+        }
+      ]
+    },
+    "TCLCASPAN02": {
+      "researchStatus": "conflict",
+      "documents": [],
+      "warranty": null,
+      "ahri": {
+        "status": "not_applicable",
+        "referenceNumber": null,
+        "note": "Cannot be determined without a model identifier.",
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": null,
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "The model cell holds the label text 'Cassette Panel 02', a column shift in the source sheet rather than a part number. Same resolution required as TCLCASPAN01. HUMAN VERIFICATION REQUIRED."
+        }
+      ]
+    },
+    "TCLWIREDCONT": {
+      "researchStatus": "in_progress",
+      "productType": "Control",
+      "specifications": {
+        "productFamily": "TCL wired wall controller",
+        "modelVariant": "Wired controller for TCL ductless and cassette indoor units",
+        "voltage": "24V"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "modelVariant": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [],
+      "warranty": null,
+      "ahri": {
+        "status": "not_applicable",
+        "referenceNumber": null,
+        "note": "AHRI certification does not apply to a control or thermostat.",
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "XK-120D2-50",
+          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "XK-120D2 is a wired-controller identifier used across several Chinese-manufactured ductless platforms, including units built by TCL. No TCL-hosted product page, manual or compatibility list for XK-120D2-50 could be located, so the exact compatibility set is UNVERIFIED. Confirm which indoor units it drives before selling it as a match; the 24V figure is the control voltage TCL publishes for its indoor units, not a value read for this part."
+        }
+      ]
     }
   }
 }
