@@ -6,7 +6,7 @@ import { useQuote } from "./quote-context";
 import type { StorefrontSku } from "@/lib/storefront/catalog";
 
 /* The single action that repeats across cards, product pages, and the strip.
-   Confirms inline (no toast) — fast, calm feedback for a field contractor. */
+   Confirms inline (no toast), fast, calm feedback for a field contractor. */
 export function AddToQuote({
   sku,
   size = "md",

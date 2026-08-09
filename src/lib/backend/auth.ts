@@ -12,7 +12,7 @@ export type SessionProfile = {
 
 /**
  * Returns the current user's profile (id, role, account) or null if signed out.
- * Reads `user_profiles` as the authenticated user — RLS allows reading self.
+ * Reads `user_profiles` as the authenticated user -- RLS allows reading self.
  */
 export async function getSessionProfile(): Promise<SessionProfile | null> {
   const supabase = await createServerSupabase();

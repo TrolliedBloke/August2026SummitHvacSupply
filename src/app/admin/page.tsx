@@ -153,7 +153,7 @@ export default async function AdminPage() {
         </Panel>
       </section>
 
-      {/* First-party conversion signals — never CVR alone. */}
+      {/* First-party conversion signals -- never CVR alone. */}
       <section className="mt-6 grid gap-6 lg:grid-cols-2">
         <Panel title="Conversion events" icon={<BarChart3 size={18} />} action="Last 30 days">
           {events.counts.length === 0 ? (

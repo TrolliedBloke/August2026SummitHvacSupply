@@ -4,7 +4,7 @@ import { createServiceRoleSupabaseClient } from "./supabase";
 /**
  * Saved lists ("truck stock") for signed-in accounts. Supabase when the 007
  * migration is applied; in-memory fallback otherwise, same convention as the
- * rest of lib/backend. Items are catalog snapshots — checkout reprices
+ * rest of lib/backend. Items are catalog snapshots -- checkout reprices
  * server-side, so a stale unitPrice here is cosmetic, never charged.
  */
 

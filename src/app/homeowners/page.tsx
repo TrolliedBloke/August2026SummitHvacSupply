@@ -79,7 +79,7 @@ export default function HomeownersPage() {
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            {/* Relocated from the homepage hero — ZIP + role routing earns its
+            {/* Relocated from the homepage hero -- ZIP + role routing earns its
                 keep here, inside the installer-matching flow. */}
             <HeroRoutingPanel />
             <div className="overflow-hidden rounded-(--r-md) border border-line bg-canvas shadow-[var(--shadow-sm)]">

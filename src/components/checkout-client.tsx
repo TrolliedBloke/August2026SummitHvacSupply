@@ -16,7 +16,7 @@ import { estimateTax, round2 } from "@/lib/backend/pricing";
 import { PURCHASE } from "@/lib/site";
 import { track } from "@/lib/track";
 
-/* One input treatment for the whole checkout — visible focus ring included
+/* One input treatment for the whole checkout -- visible focus ring included
    (plain `outline-none` would defeat the global :focus-visible ring). */
 const inputCls =
   "h-11 w-full rounded-(--r-sm) border border-control-border bg-control-bg px-3 text-sm text-ink-1 " +
@@ -67,7 +67,7 @@ export function CheckoutClient({
 
   // Cart-recovery capture: once we have a plausible email, snapshot the cart
   // server-side so an abandoned checkout can get the 3-email sequence.
-  // Best-effort — failures never surface to the buyer.
+  // Best-effort -- failures never surface to the buyer.
   const snapshotCart = React.useCallback(
     (emailValue: string) => {
       if (!/.+@.+\..+/.test(emailValue) || items.length === 0) return;
@@ -91,7 +91,7 @@ export function CheckoutClient({
   );
 
   // Prices come straight from the catalog (via the server-provided price map),
-  // the same source the server charges from — no client-side markup.
+  // the same source the server charges from -- no client-side markup.
   const priced = items.map((i) => {
     const entry = prices[i.skuId];
     const unit = trade ? entry?.dealer ?? i.unitPrice : entry?.retail ?? i.unitPrice;
@@ -182,11 +182,11 @@ export function CheckoutClient({
 
   const needsAddress = selectedMethod === "local_delivery";
 
-  // Per-field validation — surfaced inline so the buyer always knows what's
+  // Per-field validation -- surfaced inline so the buyer always knows what's
   // missing instead of staring at a dead button.
   const fieldErrors: Record<string, string | null> = {
     buyerName: buyerName.trim().length > 1 ? null : "Enter your full name.",
-    buyerEmail: /.+@.+\..+/.test(buyerEmail) ? null : "Enter a valid email — your order confirmation goes here.",
+    buyerEmail: /.+@.+\..+/.test(buyerEmail) ? null : "Enter a valid email. Your order confirmation goes here.",
     phone: phone.replace(/\D/g, "").length >= 7 ? null : "Enter a phone number we can reach you at.",
     address: !needsAddress || address.trim().length > 4 ? null : "Enter the delivery street address, city, and ZIP.",
     window: selectedMethod === "freight" || windows.some((window) => window.id === windowSlot)
@@ -416,7 +416,7 @@ export function CheckoutClient({
                     value={l.qty}
                     aria-label={`Quantity for ${l.title}`}
                     onChange={(e) => {
-                      // Clamp manual entry — an empty or junk value must never
+                      // Clamp manual entry -- an empty or junk value must never
                       // become NaN/0 (setQty removes lines at qty 0).
                       const n = Math.floor(Number(e.target.value));
                       setQty(
@@ -482,11 +482,11 @@ export function CheckoutClient({
               : "Secure card payment on the next step."}
         </p>
 
-        {/* Trust peaks at payment — restate the guarantees right at the button. */}
+        {/* Trust peaks at payment -- restate the guarantees right at the button. */}
         <ul className="mt-4 flex flex-col gap-2 border-t border-line pt-4 text-xs text-ink-2">
           <li className="flex items-center gap-2">
             <Lock size={13} className="shrink-0 text-brand" />
-            Secure payment powered by Stripe — card details never touch our servers
+            Secure payment powered by Stripe. Card details never touch our servers
           </li>
           <li className="flex items-center gap-2">
             <RotateCcw size={13} className="shrink-0 text-brand" />
@@ -494,7 +494,7 @@ export function CheckoutClient({
           </li>
           <li className="flex items-center gap-2">
             <ShieldCheck size={13} className="shrink-0 text-brand" />
-            {PURCHASE.guarantee} — wrong or damaged units replaced free
+            {PURCHASE.guarantee}. Wrong or damaged units replaced free
           </li>
         </ul>
       </aside>

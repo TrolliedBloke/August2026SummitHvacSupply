@@ -52,7 +52,7 @@ export function SavedListsPanel() {
       ) : lists.length === 0 ? (
         <p className="text-sm leading-relaxed text-ink-3">
           No lists yet. Build a cart, then use &ldquo;Save cart as list&rdquo; in the cart
-          drawer — one click restocks the truck next time.
+          drawer, one click restocks the truck next time.
         </p>
       ) : (
         <div className="divide-y divide-line">
@@ -120,7 +120,7 @@ export function SaveCartAsList({ items }: { items: SavedListItem[] }) {
   }
 
   if (state === "done") {
-    return <p className="text-xs font-medium text-eco-ink">List saved — find it in your portal.</p>;
+    return <p className="text-xs font-medium text-eco-ink">List saved, find it in your portal.</p>;
   }
 
   if (!open) {

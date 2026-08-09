@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { SkuCard } from "./sku-card";
 import { getStorefrontSkus, type StorefrontSku } from "@/lib/storefront/catalog";
 
-/* One representative unit per series lane, cheapest in-stock first — the
+/* One representative unit per series lane, cheapest in-stock first -- the
    homepage sells actual systems with actual prices, not abstractions. */
 const FEATURED_SERIES = ["mini-splits", "central-heat-pumps", "air-handlers", "installation-supplies"];
 

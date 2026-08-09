@@ -1,4 +1,4 @@
-"use client"; // Root fallback — replaces the entire document when the shell itself fails.
+"use client"; // Root fallback, replaces the entire document when the shell itself fails.
 
 export default function GlobalError({
   error,
@@ -23,7 +23,7 @@ export default function GlobalError({
         <div style={{ textAlign: "center", padding: "2rem", maxWidth: 480 }}>
           <h1 style={{ fontSize: "1.5rem", margin: 0 }}>Summit HVAC Supply is briefly unavailable</h1>
           <p style={{ marginTop: 12, lineHeight: 1.6, color: "dimgray" }}>
-            Please try again — or call <a href="tel:+14159884445" style={{ color: "black", fontWeight: 500 }}>(415) 988-4445</a> and
+            Please try again, or call <a href="tel:+14159884445" style={{ color: "black", fontWeight: 500 }}>(415) 988-4445</a> and
             we&apos;ll help you by phone.
           </p>
           {error.digest && (

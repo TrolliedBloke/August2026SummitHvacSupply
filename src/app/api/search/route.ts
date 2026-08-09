@@ -19,7 +19,7 @@ export async function GET(request: Request) {
   }));
 
   // Zero-result queries are a list of what buyers want that we don't carry
-  // (or can't match) — free market research, logged best-effort.
+  // (or can't match) -- free market research, logged best-effort.
   if (results.length === 0 && q.trim().length >= 3) {
     void recordEvent("search_zero_results", "/search", { q: q.trim().slice(0, 120) });
   }

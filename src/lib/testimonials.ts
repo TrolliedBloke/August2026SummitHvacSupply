@@ -1,5 +1,5 @@
 /**
- * Company testimonials — SEGMENTED BY AUDIENCE, and separate from product
+ * Company testimonials -- SEGMENTED BY AUDIENCE, and separate from product
  * reviews (which live in the database via migration 009).
  *
  * ─────────────────────────────────────────────────────────────────────────
@@ -15,15 +15,15 @@
  *     company: "Company LLC",
  *     city: "Fremont, CA",
  *     trade: "Mechanical contractor",
- *     consented: true,       // REQUIRED — see below
+ *     consented: true,       // REQUIRED -- see below
  *   });
  *
  * ─────────────────────────────────────────────────────────────────────────
- *  RULES — these are not stylistic
+ *  RULES -- these are not stylistic
  * ─────────────────────────────────────────────────────────────────────────
  * 1. Production entries must be real people who actually said this. Inventing a testimonial and
  *    attributing it to a named business is a deceptive endorsement under the
- *    FTC's rule on consumer reviews and testimonials (16 CFR Part 465) — the
+ *    FTC's rule on consumer reviews and testimonials (16 CFR Part 465) -- the
  *    same rule that made the placeholder product reviews unshippable.
  * 2. `consented: true` means that person agreed to be quoted publicly, by
  *    name and company. Entries without it are filtered out at render time.
@@ -39,7 +39,7 @@
 export type Testimonial = {
   quote: string;
   name: string;
-  /** Contractors only. Omit for homeowners — publish only what they agreed to. */
+  /** Contractors only. Omit for homeowners -- publish only what they agreed to. */
   company?: string;
   city: string;
   /** e.g. "Mechanical contractor", "Homeowner", "Property manager". */

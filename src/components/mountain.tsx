@@ -1,6 +1,6 @@
 /* Outdoors motifs pulled straight from the logo: the snow-cap notch and the
    twin-peak ridgeline. Reused across the homepage so the page speaks the same
-   visual language as the mark. Both are inline SVG — no image weight. */
+   visual language as the mark. Both are inline SVG, no image weight. */
 
 export function SnowCap({
   tone = "pine",

@@ -45,7 +45,7 @@ export function PolicyPage({
           {process.env.NODE_ENV !== "production" && (
             <div className="rounded-(--r-md) border border-copper/40 bg-copper-tint px-4 py-3 text-sm leading-relaxed text-ink-2">
               <strong className="font-medium text-ink-1">
-                Dev-only notice — not shown to customers.
+                Dev-only notice, not shown to customers.
               </strong>{" "}
               This policy follows common HVAC-distribution practice and has not
               yet been reviewed by counsel. Get sign-off before launch.

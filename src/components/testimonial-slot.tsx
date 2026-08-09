@@ -7,7 +7,7 @@ import { publishable, type Testimonial } from "@/lib/testimonials";
  *
  * Returns null when there is nothing consented to show, so a page with no
  * testimonials collapses cleanly instead of leaving an empty container or a
- * "coming soon" placeholder — an empty proof box reads worse than no box.
+ * "coming soon" placeholder -- an empty proof box reads worse than no box.
  */
 export function TestimonialSlot({
   items,

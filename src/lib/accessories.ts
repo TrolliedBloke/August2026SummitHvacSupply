@@ -2,7 +2,7 @@ import type { Category } from "@/lib/products";
 
 /**
  * Companion items commonly needed alongside a system. These are real accessory
- * categories (not fabricated SKUs) surfaced to lift attach rate — the team
+ * categories (not fabricated SKUs) surfaced to lift attach rate -- the team
  * prices and confirms exact parts on the quote. Filtered by the product's
  * category so a ducted air handler doesn't suggest a mini-split line set.
  */
@@ -35,7 +35,7 @@ export const ACCESSORIES: Accessory[] = [
   {
     key: "surge-protector",
     name: "HVAC surge protector",
-    blurb: "Protects the inverter board from utility spikes — cheap insurance.",
+    blurb: "Protects the inverter board from utility spikes. Cheap insurance.",
     categories: "all",
   },
   {

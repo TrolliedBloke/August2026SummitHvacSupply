@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site";
  * configured, an in-memory fallback otherwise (so the demo flow works with no
  * DB), and best-effort sends that never break a user-facing request.
  *
- * No discounts anywhere in the sequence by design — the levers are stock
+ * No discounts anywhere in the sequence by design -- the levers are stock
  * urgency and expert help, not coupons that erode margin.
  */
 
@@ -57,7 +57,7 @@ export async function subscribeBackInStock(email: string, skuId: string): Promis
     else stored = true;
   }
   if (!stored) {
-    // No DB, or table missing pre-migration — memory keeps the demo working.
+    // No DB, or table missing pre-migration -- memory keeps the demo working.
     memSubs.set(`${email}:${sku.id}`, {
       email, skuId: sku.id, skuCode: sku.sku, createdAt: Date.now(), notifiedAt: null,
     });
@@ -78,7 +78,7 @@ export async function dispatchBackInStock(): Promise<{ sent: number }> {
       `Back in stock: ${sku.title}`,
       emailShell(
         `<h2 style="font-size: 20px; margin: 8px 0;">${sku.title} is back in Newark.</h2>
-         <p style="line-height: 1.6;">${sku.sku} · ${sku.btu.toLocaleString()} BTU · <strong>${sku.available} in stock</strong> — will-call pickup available today.</p>
+         <p style="line-height: 1.6;">${sku.sku} · ${sku.btu.toLocaleString()} BTU · <strong>${sku.available} in stock</strong>, will-call pickup available today.</p>
          <p style="line-height: 1.6;">Retail ${money(sku.msrp)}. Stock moves; if this one matters for a job, grab it.</p>
          <p style="margin-top: 20px;"><a href="${baseUrl()}${productHref(sku)}" style="background: green; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">View ${sku.sku}</a></p>`,
         unsubscribeUrl
@@ -144,7 +144,7 @@ export async function saveCartSnapshot(email: string, items: SnapshotItem[]): Pr
   }
 }
 
-/** Called from placeOrder — a completed order ends the sequence. */
+/** Called from placeOrder -- a completed order ends the sequence. */
 export async function clearCartSnapshot(email: string): Promise<void> {
   const supabase = createServiceRoleSupabaseClient();
   if (supabase) {
@@ -159,14 +159,14 @@ export async function clearCartSnapshot(email: string): Promise<void> {
 
 /* The 3-email sequence: stage thresholds in minutes since capture. */
 const STAGES = [
-  { afterMinutes: 60, subject: "Your Summit cart is saved — stock is holding" },
+  { afterMinutes: 60, subject: "Your Summit cart is saved, stock is holding" },
   { afterMinutes: 24 * 60, subject: "Still in stock in Newark (and what the whole project costs)" },
   { afterMinutes: 72 * 60, subject: "Want a human to sanity-check the sizing?" },
 ];
 
 function stageBody(stage: number, items: SnapshotItem[], subtotal: number): string {
   const lines = items
-    .map((i) => `<li style="margin: 4px 0;">${i.qty}× ${i.title} — ${money(i.unitPrice * i.qty)}</li>`)
+    .map((i) => `<li style="margin: 4px 0;">${i.qty}× ${i.title}, ${money(i.unitPrice * i.qty)}</li>`)
     .join("");
   const cartBlock = `<ul style="padding-left: 18px; line-height: 1.6;">${lines}</ul>
     <p><strong>Subtotal: ${money(subtotal)}</strong></p>
@@ -174,14 +174,14 @@ function stageBody(stage: number, items: SnapshotItem[], subtotal: number): stri
 
   if (stage === 0) {
     return `<h2 style="font-size: 20px; margin: 8px 0;">Your cart is saved.</h2>
-      <p style="line-height: 1.6;">Everything below is on the shelf in Newark right now — same-day will-call or Bay Area delivery.</p>${cartBlock}`;
+      <p style="line-height: 1.6;">Everything below is on the shelf in Newark right now, same-day will-call or Bay Area delivery.</p>${cartBlock}`;
   }
   if (stage === 1) {
-    return `<h2 style="font-size: 20px; margin: 8px 0;">Still in stock — and here's the honest all-in math.</h2>
-      <p style="line-height: 1.6;">Equipment + line set + licensed C-20 install + permit typically lands at <strong>$2,200–$3,600 all-in</strong> for a single-zone system — versus $6,800+ on a full-service quote. Your warranty stays intact with licensed installation.</p>${cartBlock}`;
+    return `<h2 style="font-size: 20px; margin: 8px 0;">Still in stock, and here's the honest all-in math.</h2>
+      <p style="line-height: 1.6;">Equipment + line set + licensed C-20 install + permit typically lands at <strong>$2,200–$3,600 all-in</strong> for a single-zone system, versus $6,800+ on a full-service quote. Your warranty stays intact with licensed installation.</p>${cartBlock}`;
   }
   return `<h2 style="font-size: 20px; margin: 8px 0;">Not sure it's the right size?</h2>
-    <p style="line-height: 1.6;">That's the #1 reason people pause — and the easiest to settle. Text us a photo of the room or the old unit's model plate at <strong>${SITE.phone}</strong> and we'll sanity-check the sizing before you spend a dollar. No pressure either way.</p>${cartBlock}`;
+    <p style="line-height: 1.6;">That's the #1 reason people pause, and the easiest to settle. Text us a photo of the room or the old unit's model plate at <strong>${SITE.phone}</strong> and we'll sanity-check the sizing before you spend a dollar. No pressure either way.</p>${cartBlock}`;
 }
 
 /**

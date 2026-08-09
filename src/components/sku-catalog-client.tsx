@@ -81,7 +81,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
     router.push(pathname, { scroll: false });
   }
 
-  // Count only real filters — sorting alone shouldn't offer "Clear".
+  // Count only real filters -- sorting alone shouldn't offer "Clear".
   const activeCount = Array.from(params.keys()).filter((k) => k !== "sort").length;
 
   const searchForm = (
@@ -168,7 +168,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
 
   return (
     <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
-      {/* Desktop sidebar — hidden below lg so mobile reaches products first. */}
+      {/* Desktop sidebar -- hidden below lg so mobile reaches products first. */}
       <aside className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
         {searchForm}
         <div className="mt-6 flex items-center justify-between">
@@ -278,7 +278,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
             <ZeroResultsLogger query={filters.q} />
             <h2 className="font-display text-xl font-semibold text-ink-1">No SKUs match those filters.</h2>
             <p className="mt-2 text-sm text-ink-2">
-              Clear filters or search by model number — or text a photo of the old
+              Clear filters or search by model number. Or text a photo of the old
               unit&apos;s model plate to {SITE.phone} and we&apos;ll match it for you.
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
@@ -309,7 +309,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
   );
 }
 
-/* Logs the miss once per query — the empty state doubles as market research. */
+/* Logs the miss once per query -- the empty state doubles as market research. */
 function ZeroResultsLogger({ query }: { query?: string }) {
   React.useEffect(() => {
     if (query && query.trim().length >= 3) {

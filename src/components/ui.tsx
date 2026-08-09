@@ -1,7 +1,7 @@
 import Link from "next/link";
 import * as React from "react";
 
-/* Shared primitives. One button system, one chip system — reused everywhere
+/* Shared primitives. One button system, one chip system -- reused everywhere
    so the surface treatment stays consistent (skill: same border weight, radius,
    shadow depth across cards/controls). */
 
@@ -135,7 +135,7 @@ export function Container({
   );
 }
 
-/* Plain semibold label — the old all-caps letterspaced mono eyebrow read as
+/* Plain semibold label -- the old all-caps letterspaced mono eyebrow read as
    SaaS-dashboard chrome; a supply house says it straight. */
 export function Eyebrow({ children }: { children: React.ReactNode }) {
   return (

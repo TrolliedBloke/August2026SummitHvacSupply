@@ -3,7 +3,7 @@
 import { BellRing, Check } from "lucide-react";
 import * as React from "react";
 
-/* Back-in-stock capture — replaces the dead-end "Backorder" state with the
+/* Back-in-stock capture -- replaces the dead-end "Backorder" state with the
    highest-intent email flow there is (~6.7% conversion per Klaviyo data). */
 export function NotifyMe({ skuId, compact = false }: { skuId: string; compact?: boolean }) {
   const [email, setEmail] = React.useState("");
@@ -43,7 +43,7 @@ export function NotifyMe({ skuId, compact = false }: { skuId: string; compact?: 
       {!compact && (
         <p className="mb-2 flex items-center gap-1.5 text-sm font-medium text-ink-1">
           <BellRing size={15} className="text-copper" />
-          On backorder — get one email when it lands in Newark.
+          On backorder, get one email when it lands in Newark.
         </p>
       )}
       <div className="flex gap-2">

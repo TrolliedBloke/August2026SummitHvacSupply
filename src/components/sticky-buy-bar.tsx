@@ -5,7 +5,7 @@ import * as React from "react";
 import { useQuote } from "./quote-context";
 import type { StorefrontSku } from "@/lib/storefront/catalog";
 
-/* Mobile-only sticky purchase bar — keeps price + CTA in reach on long PDPs.
+/* Mobile-only sticky purchase bar -- keeps price + CTA in reach on long PDPs.
    Renders its own end-of-flow spacer so the fixed bar never covers content. */
 export function StickyBuyBar({
   sku,

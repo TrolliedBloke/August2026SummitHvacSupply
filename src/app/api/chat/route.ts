@@ -27,12 +27,12 @@ function rateLimited(ip: string): boolean {
   return entry.count > 20;
 }
 
-const OFFLINE_MESSAGE = `Our AI assistant is offline right now. For instant help, call or text ${SITE.phone} (${SITE.hours}) — texting is fastest during business hours.`;
+const OFFLINE_MESSAGE = `Our AI assistant is offline right now. For instant help, call or text ${SITE.phone} (${SITE.hours}). Texting is fastest during business hours.`;
 
 export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
   if (rateLimited(ip)) {
-    return new Response("Too many messages — give it a minute, or call us.", { status: 429 });
+    return new Response("Too many messages, give it a minute, or call us.", { status: 429 });
   }
 
   let sessionId = "";
@@ -104,7 +104,7 @@ export async function POST(request: Request) {
         }
         const final = await messageStream.finalMessage();
         if (final.stop_reason === "refusal" && assistantText.length === 0) {
-          const msg = `I can't help with that one — call or text ${SITE.phone} and a human will.`;
+          const msg = `I can't help with that one. Call or text ${SITE.phone} and a human will.`;
           assistantText = msg;
           controller.enqueue(encoder.encode(msg));
         }

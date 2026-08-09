@@ -8,7 +8,7 @@
 //  - Anything still listed in each series' `confirm` array (e.g. HSPF2, exact
 //    warranty terms) needs spec-sheet confirmation before launch.
 //  - Warranty terms vary by SKU/region (commonly 7-yr compressor / 5-yr parts,
-//    10-yr on cassette & central) — always shown with a confirm flag.
+//    10-yr on cassette & central) -- always shown with a confirm flag.
 
 export type StockState = "ready" | "lead";
 export type Category = "ductless" | "ducted" | "commercial" | "ventilation";
@@ -36,7 +36,7 @@ export type Series = {
   warrantyCompressor: string;
   warrantyParts: string;
   stock: StockState;
-  leadTime: string; // e.g. "In stock — ships today" or "5-7 business days"
+  leadTime: string; // e.g. "In stock, ships today" or "5-7 business days"
   highlights: string[];
   // Internal launch-readiness notes for spec keys that need source confirmation.
   confirm: SpecKey[];

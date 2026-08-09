@@ -1,7 +1,7 @@
 /**
  * Product reviews registry.
  *
- * IMPORTANT — populate ONLY with real, consented customer reviews. Keyed by
+ * IMPORTANT -- populate ONLY with real, consented customer reviews. Keyed by
  * SKU id first, then by series slug as a fallback so a review can apply to a
  * whole series. While a product has no real reviews it shows a "no reviews yet"
  * state and emits NO AggregateRating: fabricated ratings violate FTC endorsement
@@ -30,7 +30,7 @@ export type Review = {
 };
 
 /**
- * ⚠️ PLACEHOLDER DATA — sample reviews added at the owner's request so the
+ * ⚠️ PLACEHOLDER DATA -- sample reviews added at the owner's request so the
  * review UI has content to show during pre-launch demos. REPLACE with real,
  * consented customer reviews before the production deploy: publishing
  * fabricated reviews (and the AggregateRating schema they emit) violates FTC
@@ -42,7 +42,7 @@ export const REVIEWS: Record<string, Review[]> = {
       author: "Marcus T.", role: "Homeowner", rating: 5, date: "2026-05-18",
       location: "Fremont, CA", verified: true,
       title: "Garage office is finally usable year-round",
-      body: "Bought the 12k for a converted garage office. Picked it up at the Newark counter Saturday morning, my installer had it running by Sunday. Dead quiet on low — the mini fridge is louder than this thing.",
+      body: "Bought the 12k for a converted garage office. Picked it up at the Newark counter Saturday morning, my installer had it running by Sunday. Dead quiet on low, the mini fridge is louder than this thing.",
     },
     {
       author: "Dana R.", role: "Installer", rating: 5, date: "2026-03-02",
@@ -54,7 +54,7 @@ export const REVIEWS: Record<string, Review[]> = {
       author: "Priya S.", role: "Homeowner", rating: 4, date: "2025-11-09",
       location: "Union City, CA", verified: true,
       title: "Great unit, remote could be better",
-      body: "Heats our back bedroom fine even on cold January mornings. Only gripe is the remote menu takes some learning — the TCL app is honestly easier. Summit answered my sizing question by text before I ordered.",
+      body: "Heats our back bedroom fine even on cold January mornings. Only gripe is the remote menu takes some learning, the TCL app is honestly easier. Summit answered my sizing question by text before I ordered.",
     },
   ],
   freshin: [
@@ -62,7 +62,7 @@ export const REVIEWS: Record<string, Review[]> = {
       author: "Alan W.", role: "Homeowner", rating: 5, date: "2026-04-22",
       location: "Palo Alto, CA", verified: true,
       title: "The fresh-air intake is the real deal",
-      body: "Got this for a home office because of the ventilation feature. CO2 on my monitor stays under 700 ppm with the intake on — used to hit 1,200 by mid-afternoon with the door closed.",
+      body: "Got this for a home office because of the ventilation feature. CO2 on my monitor stays under 700 ppm with the intake on. Used to hit 1,200 by mid-afternoon with the door closed.",
     },
     {
       author: "Reyna C.", role: "Installer", rating: 4, date: "2026-01-15",
@@ -96,7 +96,7 @@ export const REVIEWS: Record<string, Review[]> = {
       author: "Gus P.", role: "Contractor", rating: 5, date: "2026-05-30",
       location: "Santa Clara, CA", verified: true,
       title: "Restaurant TI, passed inspection first try",
-      body: "Spec'd two 48k cassettes for a restaurant tenant improvement. Summit had the AHRI certs and submittal PDFs on the product page — plan checker took them without a single RFI. That alone saved me a week.",
+      body: "Spec'd two 48k cassettes for a restaurant tenant improvement. Summit had the AHRI certs and submittal PDFs on the product page. The plan checker took them without a single RFI. That alone saved me a week.",
     },
     {
       author: "Irene L.", role: "Procurement", rating: 4, date: "2026-02-08",
@@ -116,13 +116,13 @@ export const REVIEWS: Record<string, Review[]> = {
       author: "Felix N.", role: "Installer", rating: 4, date: "2025-12-19",
       location: "Daly City, CA", verified: true,
       title: "Good manifold layout, watch line lengths",
-      body: "Branch box placement is flexible and the manifold is well labeled. Just mind the max line-set lengths on the far zones — the spec sheet on Summit's site has the table, read it before you bid.",
+      body: "Branch box placement is flexible and the manifold is well labeled. Just mind the max line-set lengths on the far zones. The spec sheet on Summit's site has the table; read it before you bid.",
     },
     {
       author: "Carmen V.", role: "Homeowner", rating: 3, date: "2025-09-25",
       location: "Richmond, CA", verified: true,
       title: "Works well, sizing took two tries",
-      body: "First installer quoted zones too small for our west-facing rooms. Summit's team caught it when we called to confirm the order and suggested bumping two heads up a size. Right call — but I wish that guidance came standard, not on a phone call.",
+      body: "First installer quoted zones too small for our west-facing rooms. Summit's team caught it when we called to confirm the order and suggested bumping two heads up a size. Right call, but I wish that guidance came standard, not on a phone call.",
     },
   ],
   "central-system": [

@@ -218,7 +218,7 @@ function SearchField({
 }
 
 /* Desktop search: an icon trigger that opens a popover. One search surface for
-   the whole site — the catalog page keeps its own dedicated sidebar search. */
+   the whole site, the catalog page keeps its own dedicated sidebar search. */
 function SearchPopover() {
   const [open, setOpen] = React.useState(false);
   const wrapRef = React.useRef<HTMLDivElement>(null);
@@ -353,7 +353,7 @@ function ResourcesMenu({ pathname }: { pathname: string }) {
 function CartButton() {
   const { count, toggle } = useQuote();
   // The count comes from localStorage (client-only), so defer showing it until
-  // after mount — otherwise SSR (count 0) and hydration (real count) mismatch.
+  // after mount -- otherwise SSR (count 0) and hydration (real count) mismatch.
   const mounted = useClientMounted();
   const showCount = mounted && count > 0;
   return (
@@ -384,7 +384,7 @@ export function SiteNav() {
       <nav className="mx-auto flex h-[var(--nav-height)] w-full max-w-[var(--counter-max)] items-center gap-4 px-5 sm:px-6 lg:px-[var(--counter-pad)]">
         <Wordmark />
 
-        {/* Inline nav appears at xl, exactly where the hamburger hides — the two
+        {/* Inline nav appears at xl, exactly where the hamburger hides -- the two
             switch at the same breakpoint so navigation is never unreachable. */}
         <ul className="hidden flex-1 items-center gap-0.5 xl:flex">
           {PRIMARY.map((item) => (
@@ -434,7 +434,7 @@ export function SiteNav() {
             Account
           </Link>
           <CartButton />
-          {/* Big-ticket, high-anxiety category — people call. The number is the CTA. */}
+          {/* Big-ticket, high-anxiety category -- people call. The number is the CTA. */}
           <a
             href={SITE.phoneHref}
             className="hidden h-11 items-center gap-1.5 whitespace-nowrap rounded-(--r-sm) bg-brand px-3.5 text-sm font-medium text-brand-ink transition-colors hover:bg-brand-hover md:inline-flex"
@@ -453,7 +453,7 @@ export function SiteNav() {
         </div>
       </nav>
 
-      {/* Mobile / tablet sheet — available at every width below xl. */}
+      {/* Mobile / tablet sheet -- available at every width below xl. */}
       {mobileOpen && (
         <div className="border-t border-line bg-canvas xl:hidden">
           <div className="mx-auto flex w-full max-w-[var(--counter-max)] flex-col px-5 py-4 sm:px-6">

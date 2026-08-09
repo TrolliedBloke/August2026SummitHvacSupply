@@ -20,7 +20,7 @@ export default function ShippingPage() {
         <PolicyList
           items={[
             <>
-              <strong className="font-medium text-ink-1">Will-call pickup — free.</strong>{" "}
+              <strong className="font-medium text-ink-1">Will-call pickup is free.</strong>{" "}
               After staff confirms the item is ready, schedule pickup at{" "}
               {SITE.address.full}. {SITE.hours.split("·")[0].trim()}. This is
               the fastest and cheapest option, and the only one with no freight
@@ -72,7 +72,7 @@ export default function ShippingPage() {
         />
         <p>
           Inspect before signing. What you write on the delivery receipt
-          determines whether a damaged unit is replaced free — the details are
+          determines whether a damaged unit is replaced free. The details are
           on the <PolicyLink href="/returns">returns page</PolicyLink>.
         </p>
       </PolicySection>
@@ -106,7 +106,7 @@ export default function ShippingPage() {
           Account holders can stage will-call orders for a specific crew or job
           and pick up without re-quoting. If you need a standing delivery day or
           a scheduled drop for a multi-unit job, call the counter and we will
-          set it up — see{" "}
+          set it up. See{" "}
           <PolicyLink href="/dealers">contractor accounts</PolicyLink>.
         </p>
       </PolicySection>

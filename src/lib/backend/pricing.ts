@@ -6,7 +6,7 @@
  * Catalog prices themselves live on each SKU:
  *   - retail  = sku.msrp        (homeowners / guests, paid by card)
  *   - trade   = sku.dealerPrice (signed-in dealers / installers, net terms)
- * There is intentionally no derived markup here — the numbers come straight
+ * There is intentionally no derived markup here -- the numbers come straight
  * from the catalog record.
  */
 

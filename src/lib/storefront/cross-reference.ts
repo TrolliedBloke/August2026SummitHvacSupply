@@ -4,7 +4,7 @@
  * plate lands on the right replacement.
  *
  * ⚠️ SHIPS EMPTY BY DESIGN. Populating this is a catalog-content job that
- * must be done from verified AHRI match-ups — never guessed. Add entries as
+ * must be done from verified AHRI match-ups -- never guessed. Add entries as
  * `"competitor model": ["sku-id", ...]` (keys are normalized on lookup, so
  * dashes/case/spacing don't matter).
  */

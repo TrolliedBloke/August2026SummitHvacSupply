@@ -58,7 +58,7 @@
   box-sizing: border-box;
 }
 
-/* Default border color lives in the base layer — unlayered it would beat
+/* Default border color lives in the base layer -- unlayered it would beat
    every border-color utility (layered styles lose to unlayered ones). */
 @layer base {
   * {

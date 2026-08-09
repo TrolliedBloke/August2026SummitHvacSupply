@@ -1,6 +1,6 @@
 import * as React from "react";
 
-/* Form primitives — inset control surface (darker than card), brand focus ring.
+/* Form primitives -- inset control surface (darker than card), brand focus ring.
    Inputs are "wells" that receive content, per the depth system. */
 
 export function Field({

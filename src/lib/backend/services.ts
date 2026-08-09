@@ -330,7 +330,7 @@ export type ReorderItem = {
 
 /**
  * Resolve a past order's lines against the CURRENT catalog for one-click
- * reorder ("Buy Again"). Prices come from today's catalog by tier — the
+ * reorder ("Buy Again"). Prices come from today's catalog by tier -- the
  * original order's prices are only used to flag changes. Lines whose SKU no
  * longer exists are counted, not silently dropped.
  */
@@ -341,7 +341,7 @@ export function getReorderItems(
 ): { orderNumber: string; items: ReorderItem[]; unresolved: number } | null {
   const order = data.salesOrders.find((candidate) => candidate.id === orderId);
   if (!order) return null;
-  // Only staff or the owning account may reorder — a 404 to everyone else.
+  // Only staff or the owning account may reorder -- a 404 to everyone else.
   if (!roleCanAccessAccount(role, accountId ?? "", order.accountId)) return null;
   const trade = role === "dealer" || role === "installer" || role === "staff";
   const lines = data.orderLines.filter((line) => line.orderId === orderId);

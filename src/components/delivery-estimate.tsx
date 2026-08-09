@@ -3,7 +3,7 @@
 import { CalendarCheck } from "lucide-react";
 import * as React from "react";
 
-/* Concrete delivery date for the buy box — "ships today" is a policy,
+/* Concrete delivery date for the buy box -- "ships today" is a policy,
    "Get it by Thu, Jul 16" is a promise, and promises convert. Computed on the
    client after mount (the pages are statically generated, so a server-rendered
    date would go stale and mismatch on hydration). */
@@ -26,7 +26,7 @@ function addBusinessDays(from: Date, days: number): Date {
 }
 
 export function DeliveryEstimate({ inStock = true }: { inStock?: boolean }) {
-  // Render only after mount — pages are static, so a server-computed date
+  // Render only after mount -- pages are static, so a server-computed date
   // would go stale and mismatch on hydration.
   const mounted = React.useSyncExternalStore(
     React.useCallback(() => () => undefined, []),
@@ -57,7 +57,7 @@ export function DeliveryEstimate({ inStock = true }: { inStock?: boolean }) {
       <CalendarCheck size={16} className="mt-0.5 shrink-0 text-brand" />
       <span>
         Get it by <span className="font-semibold text-ink-1">{fmt.format(deliveryBy)}</span> with
-        Bay Area delivery — or pick up {shipsToday ? "today" : fmt.format(shipDay)} at Newark
+        Bay Area delivery, or pick up {shipsToday ? "today" : fmt.format(shipDay)} at Newark
         will-call{shipsToday ? " (order by 2:00p PT)" : ""}.
       </span>
     </p>

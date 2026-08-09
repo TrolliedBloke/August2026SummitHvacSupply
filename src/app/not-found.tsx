@@ -9,7 +9,7 @@ export default function NotFound() {
     <Container className="py-20 lg:py-28">
       <div className="mx-auto max-w-xl text-center">
         <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-copper">
-          404 — page not found
+          404: page not found
         </p>
         <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
           That page moved, or the model number changed.
@@ -20,7 +20,7 @@ export default function NotFound() {
           <a href={SITE.phoneHref} className="font-medium text-brand hover:text-brand-hover">
             {SITE.phone}
           </a>{" "}
-          — we&apos;ll find the part.
+          and we&apos;ll find the part.
         </p>
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
           <LinkButton href="/products" size="lg">

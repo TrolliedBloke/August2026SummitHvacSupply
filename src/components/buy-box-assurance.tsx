@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CalendarClock, CreditCard, RotateCcw, ShieldCheck } from "lucide-react";
 import { PURCHASE } from "@/lib/site";
 
-/* Purchase-assurance rail — the four answers a buyer needs before committing
+/* Purchase-assurance rail -- the four answers a buyer needs before committing
    to a four-figure order: financing, returns, guarantee, and delivery timing.
    Sits directly under the CTA on every buy box (series + SKU pages). */
 export function BuyBoxAssurance({ price, className = "" }: { price?: number; className?: string }) {
@@ -22,7 +22,7 @@ export function BuyBoxAssurance({ price, className = "" }: { price?: number; cla
           <AssuranceRow icon={<CreditCard size={16} />}>
             <span className="font-medium text-ink-1">Financing available</span>{" "}
             <span className="text-ink-2">
-              — on approved credit. Ask the counter for current terms.
+              on approved credit. Ask the counter for current terms.
             </span>
           </AssuranceRow>
         )}
@@ -38,7 +38,7 @@ export function BuyBoxAssurance({ price, className = "" }: { price?: number; cla
         </AssuranceRow>
         <AssuranceRow icon={<ShieldCheck size={16} />}>
           <span className="font-medium text-ink-1">{PURCHASE.guarantee}</span>{" "}
-          <span className="text-ink-2">— wrong or damaged units replaced free</span>
+          <span className="text-ink-2">wrong or damaged units replaced free</span>
         </AssuranceRow>
         <AssuranceRow icon={<CalendarClock size={16} />}>
           <Link href="/shipping" className="text-ink-2 underline underline-offset-4">

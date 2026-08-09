@@ -1,4 +1,4 @@
-// Real business facts — single source of truth. No placeholder social links anywhere.
+// Real business facts -- single source of truth. No placeholder social links anywhere.
 export const SITE = {
   name: "Summit HVAC Supply",
   legalName: "Summit HVAC Supply",
@@ -25,7 +25,7 @@ export const SITE = {
 } as const;
 
 /**
- * Purchase assurance policy — single source of truth for the buy box, checkout,
+ * Purchase assurance policy -- single source of truth for the buy box, checkout,
  * and FAQ. Terms are set by Summit; update here and every surface follows.
  */
 export const PURCHASE = {
@@ -38,7 +38,7 @@ export const PURCHASE = {
     "Return unopened equipment within 30 days for a full refund. Opened or special-order items may carry a 15% restocking fee. Damaged-in-transit units are replaced free.",
   guarantee: "Ships-right guarantee",
   guaranteeDetail:
-    "Wrong, damaged, or DOA unit? We replace it at no cost — a photo and the serial number is all we need.",
+    "Wrong, damaged, or DOA unit? We replace it at no cost. A photo and the serial number is all we need.",
   delivery: "Newark will-call, Bay Area delivery, and freight are confirmed with each quote",
 } as const;
 
@@ -47,7 +47,7 @@ export function financingMonthly(price: number): number {
   return Math.max(1, Math.round(price / PURCHASE.financingTermMonths));
 }
 
-// Rebate programs surfaced in Resources — real programs, figures depend on each project.
+// Rebate programs surfaced in Resources -- real programs, figures depend on each project.
 export const REBATES = [
   {
     name: "Federal 25C status",

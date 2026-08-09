@@ -28,7 +28,7 @@ export default function ReturnsPage() {
               <strong className="font-medium text-ink-1">15% restocking fee</strong>.
             </>,
             <>
-              Damaged in transit? We replace it free — but you must note the
+              Damaged in transit? We replace it free, but you must note the
               damage <strong className="font-medium text-ink-1">before signing</strong>{" "}
               the freight receipt.
             </>,
@@ -37,7 +37,7 @@ export default function ReturnsPage() {
         />
       </PolicySection>
 
-      <PolicySection heading="Freight damage — inspect before you sign">
+      <PolicySection heading="Freight damage: inspect before you sign">
         <p>
           This is the one step that costs customers the most money, so it is
           worth being blunt about it. When an LTL freight carrier delivers a
@@ -79,18 +79,18 @@ export default function ReturnsPage() {
         <PolicyList
           items={[
             <>
-              <strong className="font-medium text-ink-1">Unopened, resalable equipment</strong>{" "}
-              in original packaging with all literature and accessories — full
+              <strong className="font-medium text-ink-1">Unopened, resalable equipment:</strong>{" "}
+              in original packaging with all literature and accessories. Full
               refund within 30 days of delivery or pickup.
             </>,
             <>
-              <strong className="font-medium text-ink-1">Opened but uninstalled equipment</strong>{" "}
-              — refund less a 15% restocking fee, provided the unit is complete,
+              <strong className="font-medium text-ink-1">Opened but uninstalled equipment:</strong>{" "}
+              refund less a 15% restocking fee, provided the unit is complete,
               undamaged, and never charged, wired, or mounted.
             </>,
             <>
-              <strong className="font-medium text-ink-1">Parts and accessories</strong>{" "}
-              — 30 days, unopened, in resalable condition.
+              <strong className="font-medium text-ink-1">Parts and accessories:</strong>{" "}
+              30 days, unopened, in resalable condition.
             </>,
           ]}
         />
@@ -111,13 +111,13 @@ export default function ReturnsPage() {
               defective or damaged.
             </>,
             <>
-              <strong className="font-medium text-ink-1">Refrigerant</strong>{" "}
-              — cylinders that have been opened or partially used cannot be
+              <strong className="font-medium text-ink-1">Refrigerant:</strong>{" "}
+              cylinders that have been opened or partially used cannot be
               accepted back for safety and regulatory reasons.
             </>,
             <>
-              <strong className="font-medium text-ink-1">Electrical components</strong>{" "}
-              — boards, motors, and controls that have been installed and
+              <strong className="font-medium text-ink-1">Electrical components:</strong>{" "}
+              boards, motors, and controls that have been installed and
               energized. A failed board is a warranty claim.
             </>,
             <>Items returned after 30 days without prior authorization.</>,
@@ -127,8 +127,8 @@ export default function ReturnsPage() {
 
       <PolicySection heading="Who pays return freight">
         <p>
-          If the return is our error — wrong item shipped, unit arrived damaged
-          or dead on arrival, or the product did not match its listing — we pay
+          If the return is our error (wrong item shipped, unit arrived damaged
+          or dead on arrival, or the product did not match its listing) we pay
           the freight both ways and there is no restocking fee.
         </p>
         <p>
@@ -180,7 +180,7 @@ export default function ReturnsPage() {
         <p>
           A return sends a product back for a refund. A warranty claim repairs
           or replaces a product that failed in service. Once equipment is
-          installed, warranty is the applicable path — see the{" "}
+          installed, warranty is the applicable path. See the{" "}
           <PolicyLink href="/resources">Resources</PolicyLink> page for
           manufacturer warranty terms and registration, or{" "}
           <PolicyLink href="/contact">contact us</PolicyLink> and we will route

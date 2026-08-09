@@ -1,10 +1,10 @@
 import { Truck, Clock } from "lucide-react";
 import { type Series, btuLabel } from "@/lib/products";
 
-/* SIGNATURE ELEMENT — the Spec & Stock strip.
+/* SIGNATURE ELEMENT -- the Spec & Stock strip.
    A horizontal data rail (mono, tabular) of the four numbers a contractor
    decides on, terminated by a live stock chip. It appears on every product
-   card, every product page, and (future) the reorder portal — one consistent
+   card, every product page, and (future) the reorder portal, one consistent
    object across the whole site. Numbers are tabular mono so columns align. */
 
 function StockChip({ series }: { series: Series }) {

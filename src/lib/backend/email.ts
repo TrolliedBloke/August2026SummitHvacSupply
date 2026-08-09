@@ -20,7 +20,7 @@ async function send(to: string, subject: string, html: string): Promise<void> {
   if (!to) return;
   if (!resend) {
     // No API key (yet): log instead of dropping silently, so dev flows are visible.
-    console.log(`[email skipped — no RESEND_API_KEY] to=${to} subject="${subject}"`);
+    console.log(`[email skipped, no RESEND_API_KEY] to=${to} subject="${subject}"`);
     return;
   }
   try {

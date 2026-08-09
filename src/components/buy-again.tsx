@@ -5,7 +5,7 @@ import * as React from "react";
 import { useQuote } from "./quote-context";
 
 /**
- * One-click reorder from portal order history — the load-bearing feature of
+ * One-click reorder from portal order history -- the load-bearing feature of
  * contractor stickiness. Reconstitutes a past order into the live cart at
  * current prices (checkout reprices server-side regardless) and surfaces
  * price changes and backorders instead of hiding them.

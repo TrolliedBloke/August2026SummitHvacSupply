@@ -7,7 +7,7 @@ import { SITE } from "@/lib/site";
 
 /**
  * AI chat widget. Honest labeling ("AI assistant") plus a first-class exit to
- * humans — the promise an AI can keep is instant answers, not empathy.
+ * humans -- the promise an AI can keep is instant answers, not empathy.
  * Streams from /api/chat; degrades to a call/text handoff without a key.
  */
 
@@ -153,7 +153,7 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Launcher — sits above the sticky mobile buy bar */}
+      {/* Launcher -- sits above the sticky mobile buy bar */}
       {!open && (
         <button
           ref={launcherRef}
@@ -184,7 +184,7 @@ export function ChatWidget() {
               </span>
               <div>
                 <p className="text-sm font-semibold text-ink-1">Summit assistant</p>
-                <p className="text-[11px] text-ink-3">AI assistant — instant answers, 24/7</p>
+                <p className="text-[11px] text-ink-3">AI assistant for instant answers, 24/7</p>
               </div>
             </div>
             <button
@@ -202,7 +202,7 @@ export function ChatWidget() {
             {messages.length === 0 && (
               <div>
                 <p className="text-sm leading-relaxed text-ink-2">
-                  Sizing, stock, pricing, permits, installers — ask away. I answer
+                  Sizing, stock, pricing, permits, installers. Ask away. I answer
                   from the live catalog, and a human is one text away.
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">

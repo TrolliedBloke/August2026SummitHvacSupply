@@ -10,13 +10,13 @@ import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE } from "@/lib/site";
 
-// Body: Inter — neutral, legible at small sizes for spec-dense pages.
+// Body: Inter -- neutral, legible at small sizes for spec-dense pages.
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-// Display: Inter Tight — the weight and tight tracking of a distributor
+// Display: Inter Tight -- the weight and tight tracking of a distributor
 // catalog without the geometric SaaS-dashboard vocabulary. Shares rendering
 // DNA with Inter, so the two families never fight.
 const grotesk = Inter_Tight({ subsets: ["latin"], variable: "--font-grotesk", display: "swap" });
-// Data: JetBrains Mono — tabular figures so spec rails and tables align.
+// Data: JetBrains Mono -- tabular figures so spec rails and tables align.
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-jb", display: "swap" });
 
 export const metadata: Metadata = {

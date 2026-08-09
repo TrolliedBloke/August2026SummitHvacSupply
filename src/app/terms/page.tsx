@@ -86,7 +86,7 @@ export default function TermsPage() {
       <PolicySection heading="Delivery, risk of loss, and returns">
         <p>
           Risk of loss passes on delivery to you or your carrier. Inspect
-          shipments before signing — what you write on the delivery receipt
+          shipments before signing. What you write on the delivery receipt
           controls whether damage can be recovered. Full detail is on the{" "}
           <PolicyLink href="/shipping">shipping</PolicyLink> and{" "}
           <PolicyLink href="/returns">returns</PolicyLink> pages, which are part
@@ -114,7 +114,7 @@ export default function TermsPage() {
       <PolicySection heading="Limitation of liability">
         <p>
           To the fullest extent permitted by law, {SITE.legalName} is not liable
-          for indirect, incidental, special, or consequential damages — including
+          for indirect, incidental, special, or consequential damages, including
           lost profits, property damage, or costs arising from installation,
           removal, or downtime. Our total liability for any claim relating to a
           product is limited to the amount you paid for that product.

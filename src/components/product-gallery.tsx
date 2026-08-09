@@ -54,7 +54,7 @@ export function ProductGallery({ images, title }: { images: string[]; title: str
   return (
     <div>
       <div id={`${galleryId}-panel`} role="tabpanel" aria-labelledby={`${galleryId}-tab-${active}`} className="relative aspect-[1.7/1] overflow-hidden rounded-(--r-md) border border-line bg-surface-2 sm:aspect-[1.22/1]">
-        <Image src={current.src} alt={`${title} — manufacturer family view ${active + 1}`} fill loading={active === 0 ? "eager" : "lazy"} sizes="(min-width: 1024px) 48vw, 100vw" className="object-contain p-5 sm:p-12" />
+        <Image src={current.src} alt={`${title}, manufacturer family view ${active + 1}`} fill loading={active === 0 ? "eager" : "lazy"} sizes="(min-width: 1024px) 48vw, 100vw" className="object-contain p-5 sm:p-12" />
         {slides.length > 1 && <GalleryButton label="Previous view" className="left-3" onClick={() => move(-1)}><ChevronLeft size={20} /></GalleryButton>}
         {slides.length > 1 && <GalleryButton label="Next view" className="right-3" onClick={() => move(1)}><ChevronRight size={20} /></GalleryButton>}
         <button ref={openerRef} type="button" onClick={() => setZoomed(true)} aria-label="Open large product image" className="absolute bottom-3 right-3 grid size-11 place-items-center rounded-(--r-sm) border border-line bg-surface-1 text-ink-1">

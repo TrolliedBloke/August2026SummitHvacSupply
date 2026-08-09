@@ -1,4 +1,4 @@
-/* Route-level loading skeleton — neutral blocks matching the page rhythm
+/* Route-level loading skeleton -- neutral blocks matching the page rhythm
    (header band + card grid), so navigation feels instant instead of blank. */
 export default function Loading() {
   return (

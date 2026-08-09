@@ -44,7 +44,7 @@ export function allowUnauthenticatedAdmin(): boolean {
   );
 }
 
-/** Browser client — for client components (login form, etc.). */
+/** Browser client -- for client components (login form, etc.). */
 export function createClientSupabase(): SupabaseClient | null {
   if (!URL || !PUBLIC_KEY) return null;
   return createBrowserClient(URL, PUBLIC_KEY);

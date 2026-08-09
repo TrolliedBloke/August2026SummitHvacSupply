@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-/* The quote list is the contractor's working cart — but it never "checks out".
+/* The quote list is the contractor's working cart -- but it never "checks out".
    It collects SKUs to request pricing/availability on. Persisted to
    localStorage so a contractor building a job over the day doesn't lose it. */
 
@@ -106,7 +106,7 @@ export function QuoteProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setQty = React.useCallback((skuId: string, qty: number) => {
-    // NaN or junk input must never delete a line item — keep the prior qty.
+    // NaN or junk input must never delete a line item -- keep the prior qty.
     if (!Number.isFinite(qty)) return;
     setItems((prev) =>
       prev.map((i) =>

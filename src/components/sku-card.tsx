@@ -35,8 +35,8 @@ export function SkuCard({ sku, priority = false }: { sku: StorefrontSku; priorit
         </div>
         <dl className="grid grid-cols-3 gap-px overflow-hidden rounded-(--r-sm) border border-line bg-line text-center">
           <Spec label="Price" value={sku.retailPrice !== null ? currency(sku.retailPrice) : "Request"} />
-          <Spec label="Capacity" value={sku.btu ? `${sku.btu.toLocaleString()} BTU` : "—"} />
-          <Spec label="Voltage" value={sku.voltage || "—"} />
+          <Spec label="Capacity" value={sku.btu ? `${sku.btu.toLocaleString()} BTU` : "Not listed"} />
+          <Spec label="Voltage" value={sku.voltage || "Not listed"} />
         </dl>
         <div className="mt-auto flex flex-wrap items-center gap-3">
           <AddToQuote sku={sku} size="sm" />

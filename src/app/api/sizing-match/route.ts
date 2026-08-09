@@ -82,7 +82,7 @@ export async function POST(request: Request) {
         </p>
         <p style="margin:16px 0 0;color:#888;font-size:12px">
           You received this because you asked us to email your sizing result on ${SITE.origin}.
-          It is a one-time message — you are not subscribed to anything.
+          It is a one-time message. You are not subscribed to anything.
         </p>
       </div>`;
 

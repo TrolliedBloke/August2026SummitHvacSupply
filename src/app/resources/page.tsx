@@ -18,7 +18,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Can a homeowner buy a single mini split or heat pump?",
-    a: "Yes. Homeowners can request a quote for one system and get plain-English guidance plus Bay Area installer matching — no trade account or SKU fluency required.",
+    a: "Yes. Homeowners can request a quote for one system and get plain-English guidance plus Bay Area installer matching, no trade account or SKU fluency required.",
   },
   {
     q: "How do contractors get pro pricing?",
@@ -184,7 +184,7 @@ export default function ResourcesPage() {
         </div>
       </Container>
 
-      {/* FAQ — plain answers for buyers and AI assistants (FAQPage schema above) */}
+      {/* FAQ -- plain answers for buyers and AI assistants (FAQPage schema above) */}
       <Container className="pb-20">
         <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">
           Frequently asked questions

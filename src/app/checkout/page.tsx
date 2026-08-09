@@ -27,7 +27,7 @@ export default async function CheckoutPage() {
       </p>
       {/* The cart lives in localStorage, so the order summary genuinely cannot
           be server-rendered. With JS off the client never mounts and the
-          skeleton would sit there forever — this gives that user a way to
+          skeleton would sit there forever, this gives that user a way to
           finish the order instead of a dead page. */}
       <noscript>
         <div className="mt-8 rounded-(--r-md) border border-line bg-surface-2/60 px-5 py-4">

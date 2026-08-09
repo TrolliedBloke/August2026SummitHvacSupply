@@ -58,7 +58,7 @@ export default function PrivacyPage() {
               about, and account activity.
             </>,
             <>
-              To operate and improve the site — understanding which products get
+              To operate and improve the site, understanding which products get
               searched for, which pages fail people, and where checkout breaks.
             </>,
             <>To meet tax, warranty, and legal recordkeeping obligations.</>,
@@ -76,8 +76,8 @@ export default function PrivacyPage() {
           providers are contractually limited to using it for that purpose.
         </p>
         <p>
-          We will also disclose information where legally required — subpoena,
-          court order, or a lawful government request — and in connection with a
+          We will also disclose information where legally required (subpoena,
+          court order, or a lawful government request) and in connection with a
           merger or sale of the business, in which case we will say so here.
         </p>
       </PolicySection>
@@ -106,12 +106,11 @@ export default function PrivacyPage() {
             <>
               <strong className="font-medium text-ink-1">Opt out</strong> of sale
               or sharing. As stated above, we do not sell or share personal
-              information, so there is nothing to opt out of — but the right
+              information, so there is nothing to opt out of, but the right
               stands if that ever changes.
             </>,
             <>
-              <strong className="font-medium text-ink-1">Non-discrimination</strong>{" "}
-              — exercising these rights will not change your pricing or the
+              <strong className="font-medium text-ink-1">Non-discrimination</strong>. Exercising these rights will not change your pricing or the
               service you get.
             </>,
           ]}
@@ -133,8 +132,8 @@ export default function PrivacyPage() {
 
       <PolicySection heading="Email and marketing">
         <p>
-          Transactional email — order confirmations, shipping notices, back-in-stock
-          alerts you requested — is part of the service. Marketing email is
+          Transactional email (order confirmations, shipping notices, back-in-stock
+          alerts you requested) is part of the service. Marketing email is
           separate and every message includes a one-click unsubscribe link that
           works without logging in. Unsubscribing from marketing does not stop
           order-related messages.
@@ -155,7 +154,7 @@ export default function PrivacyPage() {
           We keep order and tax records as long as law requires, and account
           information for as long as your account is open. Data is transmitted
           over encrypted connections and access is limited to staff who need it.
-          No system is perfectly secure, and we will not claim otherwise — if a
+          No system is perfectly secure, and we will not claim otherwise. If a
           breach affects your information we will notify you as required by
           California law.
         </p>
