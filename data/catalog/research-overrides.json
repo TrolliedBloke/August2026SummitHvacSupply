@@ -86,46 +86,496 @@
       ]
     },
     "CAR36KCOIL": {
-      "researchStatus": "in_progress",
+      "researchStatus": "verified",
       "evidence": [
         {
-          "fieldName": "productFamily",
-          "value": "CVAMA",
-          "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
-          "sourceType": "manufacturer_product_page",
+          "fieldName": "modelNumber",
+          "value": "CVAMA3617XMA",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished."
+          "notes": "Listed by exact model in the CVAMA product data model table at 3 tons."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "tonnage": 3,
+            "suctionLineIn": "3/4",
+            "weightLbs": 35.7
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Model/connection table and dimensional table. Net weight 35.7 lb, shipping weight 42.0 lb. Liquid connection 3/8 in across the series."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/evaporator-coils/cvama/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/evaporator-coils/cvama/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier CVAMA product page."
         }
-      ]
+      ],
+      "productType": "Evaporator coil",
+      "specifications": {
+        "productFamily": "Carrier CVAMA multipoise cased V coil",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "coolingCapacityBtu": 36000,
+        "tonnage": 3,
+        "suctionLineIn": "3/4",
+        "liquidLineIn": "3/8",
+        "heightIn": "19-7/16 in (494.5 mm)",
+        "widthIn": "17-1/2 in (444.5 mm)",
+        "depthIn": "15-3/4 in (400.3 mm)",
+        "cabinetWidthIn": "17-1/2 in (444.5 mm)",
+        "weightLbs": 35.7,
+        "installOrientation": "Multipoise: upflow, downflow or horizontal"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heightIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "widthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "depthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cabinetWidthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "CVAMA Product Data (catalog CVAMA-01PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Model, physical and dimensional tables list this exact model."
+        },
+        {
+          "kind": "spec_sheet",
+          "title": "CVAMA Specification Sheet (catalog SS-CVAMA-01)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/04/SS-CVAMA-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "CVAMA series specification sheet."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "CVAMA Installation Instructions (catalog IM-CVAMA-01)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/IM-CVAMA-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Installation instructions for the CVAMA multipoise cased V coil."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "Carrier residential limited warranty: 5-year parts, extended to 10-year parts with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. See the warranty certificate for full details.",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/evaporator-coils/cvama/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "An evaporator coil carries no standalone efficiency rating. SEER2/EER2 belong to the certified combination of this coil with a specific outdoor unit. Confirm the intended condenser and look the combination up in the AHRI directory before quoting a rating.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
     },
     "CAR48KCOIL": {
-      "researchStatus": "in_progress",
+      "researchStatus": "verified",
       "evidence": [
         {
-          "fieldName": "productFamily",
-          "value": "CVAMA",
-          "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
-          "sourceType": "manufacturer_product_page",
+          "fieldName": "modelNumber",
+          "value": "CVAMA4821XMA",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished."
+          "notes": "Listed by exact model in the CVAMA product data model table at 4 tons."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "tonnage": 4,
+            "suctionLineIn": "7/8",
+            "weightLbs": 40.2
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Model/connection table and dimensional table. Net weight 40.2 lb, shipping weight 47.4 lb. Liquid connection 3/8 in across the series."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/evaporator-coils/cvama/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/evaporator-coils/cvama/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier CVAMA product page."
         }
-      ]
+      ],
+      "productType": "Evaporator coil",
+      "specifications": {
+        "productFamily": "Carrier CVAMA multipoise cased V coil",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "coolingCapacityBtu": 48000,
+        "tonnage": 4,
+        "suctionLineIn": "7/8",
+        "liquidLineIn": "3/8",
+        "heightIn": "21-15/16 in (557.9 mm)",
+        "widthIn": "21 in (533.4 mm)",
+        "depthIn": "19-1/4 in (489.2 mm)",
+        "cabinetWidthIn": "21 in (533.4 mm)",
+        "weightLbs": 40.2,
+        "installOrientation": "Multipoise: upflow, downflow or horizontal"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heightIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "widthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "depthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cabinetWidthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "CVAMA Product Data (catalog CVAMA-01PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Model, physical and dimensional tables list this exact model."
+        },
+        {
+          "kind": "spec_sheet",
+          "title": "CVAMA Specification Sheet (catalog SS-CVAMA-01)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/04/SS-CVAMA-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "CVAMA series specification sheet."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "CVAMA Installation Instructions (catalog IM-CVAMA-01)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/IM-CVAMA-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Installation instructions for the CVAMA multipoise cased V coil."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "Carrier residential limited warranty: 5-year parts, extended to 10-year parts with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. See the warranty certificate for full details.",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/evaporator-coils/cvama/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "An evaporator coil carries no standalone efficiency rating. SEER2/EER2 belong to the certified combination of this coil with a specific outdoor unit. Confirm the intended condenser and look the combination up in the AHRI directory before quoting a rating.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
     },
     "CAR60KCOIL": {
-      "researchStatus": "in_progress",
+      "researchStatus": "verified",
       "evidence": [
         {
-          "fieldName": "productFamily",
-          "value": "CVAMA",
-          "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
-          "sourceType": "manufacturer_product_page",
+          "fieldName": "modelNumber",
+          "value": "CVAMA6021XMA",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished."
+          "notes": "Listed by exact model in the CVAMA product data model table at 5 tons."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "tonnage": 5,
+            "suctionLineIn": "7/8",
+            "weightLbs": 49.6
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Model/connection table and dimensional table. Net weight 49.6 lb, shipping weight 58.5 lb. Liquid connection 3/8 in across the series."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/evaporator-coils/cvama/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/evaporator-coils/cvama/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier CVAMA product page."
         }
-      ]
+      ],
+      "productType": "Evaporator coil",
+      "specifications": {
+        "productFamily": "Carrier CVAMA multipoise cased V coil",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "coolingCapacityBtu": 60000,
+        "tonnage": 5,
+        "suctionLineIn": "7/8",
+        "liquidLineIn": "3/8",
+        "heightIn": "29-3/4 in (755.3 mm)",
+        "widthIn": "21 in (533.4 mm)",
+        "depthIn": "19-1/4 in (489.2 mm)",
+        "cabinetWidthIn": "21 in (533.4 mm)",
+        "weightLbs": 49.6,
+        "installOrientation": "Multipoise: upflow, downflow or horizontal"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heightIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "widthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "depthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cabinetWidthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "CVAMA Product Data (catalog CVAMA-01PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Model, physical and dimensional tables list this exact model."
+        },
+        {
+          "kind": "spec_sheet",
+          "title": "CVAMA Specification Sheet (catalog SS-CVAMA-01)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/04/SS-CVAMA-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "CVAMA series specification sheet."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "CVAMA Installation Instructions (catalog IM-CVAMA-01)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/IM-CVAMA-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Installation instructions for the CVAMA multipoise cased V coil."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "Carrier residential limited warranty: 5-year parts, extended to 10-year parts with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. See the warranty certificate for full details.",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/evaporator-coils/cvama/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "An evaporator coil carries no standalone efficiency rating. SEER2/EER2 belong to the certified combination of this coil with a specific outdoor unit. Confirm the intended condenser and look the combination up in the AHRI directory before quoting a rating.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0A/CVAMA-01PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
     },
     "CAR36KHPU": {
       "name": "Carrier 3 Ton Comfort Single-Stage Air Conditioner",
@@ -799,34 +1249,310 @@
     "CAR70KFUR": {
       "modelNumber": "58SC0B070M17--12",
       "name": "Carrier Comfort 80% AFUE 70,000 BTU Gas Furnace",
-      "researchStatus": "in_progress",
+      "researchStatus": "verified",
       "evidence": [
         {
           "fieldName": "modelNumber",
           "value": "58SC0B070M17--12",
-          "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
-          "sourceType": "manufacturer_product_page",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Corrects the letter O in the inventory family code to Carrier's numeric zero."
+          "notes": "Unit size 070M17--12 appears in the dimensional and ratings tables. Nomenclature decodes as 58=80% non-condensing, S=single stage, C=Comfort tier, 0=80% AFUE, B=major series, 070=70,000 BTU heating input, M=multi-speed constant-torque ECM, width and airflow from the trailing digits. The inventory sheet's earlier spelling used a letter O in place of the zero in 58SC0B."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "afue": 80,
+            "heatingInputBtu": 70000,
+            "cfm": 1110
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Ratings and blower tables, unit size 070M17--12: 1110 CFM heating airflow at rated ESP, 155-1160 CFM cooling range, motor 4.4 FLA, shipping weight 124 lb. Outlet 15-7/8 in (403 mm), inlet 16 in (406 mm), flue collar 11-9/16 in (294 mm), 4 in vent connection. Certified temperature rise range and output capacity are published per size; output not transcribed here because the extracted table row could not be read unambiguously."
+        },
+        {
+          "fieldName": "fuelType",
+          "value": "Natural gas",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Product data: shipped for natural gas, field-convertible to propane with a factory-authorized listed accessory kit."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/furnaces/58sc/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/furnaces/58sc/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier Comfort 80 58SC product page."
         }
-      ]
+      ],
+      "productType": "Furnace",
+      "specifications": {
+        "productFamily": "Carrier Comfort 80 58SC0B, 4-way multipoise",
+        "fuelType": "Natural gas (field-convertible to propane with a listed Carrier kit)",
+        "afue": 80,
+        "heatingInputBtu": 70000,
+        "voltage": "115V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "fla": 4.4,
+        "cabinetWidthIn": "17-1/2 in (445 mm)",
+        "weightLbs": 124,
+        "cfm": 1110,
+        "installOrientation": "4-way multipoise: upflow, downflow, horizontal left or horizontal right"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "afue": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heatingInputBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cabinetWidthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cfm": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "58SC0B / 58SC1B Product Data (catalog 58SC0B-01PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Dimensional, ratings and blower tables list this exact unit size."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "heatExchanger": "20 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "Carrier residential gas furnace limited warranty: 5-year parts and 20-year heat exchanger, parts extended to 10 years with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. Heat exchanger term is specific to furnaces. Confirm the exact certificate for this model before quoting a term to a customer.",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/furnaces/58sc/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "not_applicable",
+        "referenceNumber": null,
+        "note": "AHRI certified-combination ratings apply to matched cooling systems. A gas furnace is rated by AFUE under the DOE test procedure, not by an AHRI SEER2 combination, so no AHRI reference applies to this unit on its own.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
     },
     "CAR90KFUR": {
       "modelNumber": "58SC0B090M21--20",
       "name": "Carrier Comfort 80% AFUE 90,000 BTU Gas Furnace",
-      "researchStatus": "in_progress",
+      "researchStatus": "verified",
       "evidence": [
         {
           "fieldName": "modelNumber",
           "value": "58SC0B090M21--20",
-          "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
-          "sourceType": "manufacturer_product_page",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Corrects the letter O in the inventory family code to Carrier's numeric zero."
+          "notes": "Unit size 090M21--20 appears in the dimensional and ratings tables. Nomenclature decodes as 58=80% non-condensing, S=single stage, C=Comfort tier, 0=80% AFUE, B=major series, 090=90,000 BTU heating input, M=multi-speed constant-torque ECM, width and airflow from the trailing digits. The inventory sheet's earlier spelling used a letter O in place of the zero in 58SC0B."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "afue": 80,
+            "heatingInputBtu": 90000,
+            "cfm": 1645
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Ratings and blower tables, unit size 090M21--20: 1645 CFM heating airflow at rated ESP, 325-2315 CFM cooling range, motor 11.5 FLA, shipping weight 147 lb. Outlet 19-3/8 in (492 mm), inlet 19-1/2 in (495 mm), flue collar 13-5/16 in (338 mm), 4 in vent connection. Certified temperature rise range and output capacity are published per size; output not transcribed here because the extracted table row could not be read unambiguously."
+        },
+        {
+          "fieldName": "fuelType",
+          "value": "Natural gas",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Product data: shipped for natural gas, field-convertible to propane with a factory-authorized listed accessory kit."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/furnaces/58sc/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/furnaces/58sc/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier Comfort 80 58SC product page."
         }
-      ]
+      ],
+      "productType": "Furnace",
+      "specifications": {
+        "productFamily": "Carrier Comfort 80 58SC0B, 4-way multipoise",
+        "fuelType": "Natural gas (field-convertible to propane with a listed Carrier kit)",
+        "afue": 80,
+        "heatingInputBtu": 90000,
+        "voltage": "115V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "fla": 11.5,
+        "cabinetWidthIn": "21 in (533 mm)",
+        "weightLbs": 147,
+        "cfm": 1645,
+        "installOrientation": "4-way multipoise: upflow, downflow, horizontal left or horizontal right"
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fuelType": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "afue": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "heatingInputBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cabinetWidthIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "weightLbs": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cfm": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "installOrientation": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "58SC0B / 58SC1B Product Data (catalog 58SC0B-01PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Dimensional, ratings and blower tables list this exact unit size."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "heatExchanger": "20 years",
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "Carrier residential gas furnace limited warranty: 5-year parts and 20-year heat exchanger, parts extended to 10 years with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. Heat exchanger term is specific to furnaces. Confirm the exact certificate for this model before quoting a term to a customer.",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/furnaces/58sc/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "not_applicable",
+        "referenceNumber": null,
+        "note": "AHRI certified-combination ratings apply to matched cooling systems. A gas furnace is rated by AFUE under the DOE test procedure, not by an AHRI SEER2 combination, so no AHRI reference applies to this unit on its own.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/0B/58SC0B-01PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
     },
     "CAR36KAHU": {
       "researchStatus": "conflict",

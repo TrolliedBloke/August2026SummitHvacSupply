@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BadgeCheck, Box, Download, FileText, ImageOff, PackageCheck, ShieldCheck, UserRoundCheck } from "lucide-react";
+import { AlertTriangle, BadgeCheck, Box, Download, FileText, ImageOff, PackageCheck, ShieldCheck, UserRoundCheck } from "lucide-react";
 import { AddToQuote } from "@/components/add-to-quote";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductGallery } from "@/components/product-gallery";
@@ -93,6 +93,27 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
             <p className="part-number mt-5 text-sm text-ink-3">SKU {sku.sku}</p>
             <h1 id="product-title" className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">{sku.title}</h1>
             <p className="part-number mt-3 text-sm text-ink-2">{sku.modelNumber ? `Manufacturer model ${sku.modelNumber}` : "Manufacturer model not supplied"}</p>
+
+            {/* A conflict means the model number on our inventory sheet could
+                not be found in the manufacturer's own model tables. Saying so
+                is the difference between a contractor catching it here and
+                catching it when the wrong unit arrives on the job. */}
+            {sku.researchStatus === "conflict" && (
+              <div className="mt-4 rounded-(--r-md) border border-copper/40 bg-copper-tint p-4">
+                <div className="flex gap-3">
+                  <AlertTriangle className="mt-0.5 shrink-0 text-copper" size={20} />
+                  <div>
+                    <h2 className="font-medium text-ink-1">We are confirming this model number</h2>
+                    <p className="mt-1 text-sm leading-6 text-ink-2">
+                      This part number does not match the manufacturer&apos;s published model list for this capacity.
+                      We will confirm the exact model against the unit in Newark before any order is accepted, so you
+                      do not receive the wrong configuration. Specifications below come from the manufacturer&apos;s
+                      documentation for this capacity and may change once the model is confirmed.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="mt-6 border-y border-line py-5">
               <p className="text-sm text-ink-3">Price</p>

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T21:02:43.283Z",
+  "generatedAt": "2026-08-09T21:03:21.950Z",
   "sourceFile": "data/catalog/inventory-source.csv",
   "sourceSha256": "23baa4a388d1f87638156ea22e6851ebac4b511c8ac0e0489204050b68380349",
   "sourceRows": 100,
@@ -121,8 +121,8 @@
   "positiveRetailPrices": 23,
   "unknownInventory": 100,
   "researchCsvOnly": 76,
-  "researchInProgress": 18,
-  "researchVerified": 3,
+  "researchInProgress": 13,
+  "researchVerified": 8,
   "researchConflicts": 3,
   "manufacturerImageCoverage": 20,
   "exactModelImageCoverage": 20,
