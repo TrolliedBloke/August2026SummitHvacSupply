@@ -23,6 +23,9 @@ const LEGACY_SERIES_REDIRECTS: Array<[string, string]> = [
 ];
 
 const nextConfig: NextConfig = {
+  // Release checks can build beside a running local dev server without both
+  // processes clearing and rewriting the same .next directory.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   async redirects() {
     return LEGACY_SERIES_REDIRECTS.map(([slug, category]) => ({
       source: `/products/${slug}`,

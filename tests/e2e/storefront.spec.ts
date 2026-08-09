@@ -26,7 +26,12 @@ test("an unsigned payment claim cannot produce a paid confirmation", async ({ pa
 test("actual product page is quote-first and does not invent commerce facts", async ({ page }) => {
   await page.goto("/products/sku/tcl09kidu", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: "TCL 9K Indoor Unit" })).toBeVisible();
-  await expect(page.locator("main").getByText("Exact product image not yet verified")).toBeVisible();
+  await expect(page.getByText(/Official manufacturer family photography/)).toBeVisible();
+  const productImage = page.getByRole("tabpanel").locator("img");
+  await expect(productImage).toBeVisible();
+  await expect.poll(() => productImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  await page.getByRole("button", { name: "Next view" }).click();
+  await expect(page.getByRole("tab", { name: /Manufacturer product view 2/ })).toHaveAttribute("aria-selected", "true");
   await expect(page.getByRole("heading", { name: "Availability confirmation required" })).toBeVisible();
   await expect(page.getByRole("button", { name: /Add .* to quote/i })).toBeVisible();
   await expect(page.getByText(/in stock/i)).toHaveCount(0);
