@@ -180,7 +180,7 @@ export function SystemSizer({ skus }: { skus: SizerSku[] }) {
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm font-semibold text-ink-1">{sku.title}</span>
               <span className="block text-xs text-ink-3">
-                {sku.btu.toLocaleString()} BTU · availability confirmation required
+                {sku.btu.toLocaleString()} BTU · {sku.retailPrice !== null ? "retail ordering" : "contact for price"}
               </span>
             </span>
             <span className="text-right">

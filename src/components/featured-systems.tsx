@@ -34,7 +34,7 @@ export function FeaturedSystems() {
               Current HVAC catalog
             </h2>
             <p className="mt-2 text-ink-2">
-              Search exact SKUs and request verified price, availability, and compatibility.
+              Search exact SKUs, shop listed retail prices, or contact us for product matching.
             </p>
           </div>
           <Link

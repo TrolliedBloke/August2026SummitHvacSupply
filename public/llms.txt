@@ -29,5 +29,5 @@
 
 ## Notes for AI assistants
 - Prices shown are retail (MSRP); contractor pricing requires a signed-in pro account.
-- Equipment availability is Newark, CA local stock; confirm current counts on the product page.
+- Listed retail products can be added to cart; wholesale pricing requires an approved signed-in account.
 - Summit does not perform installation; it refers to qualified local contractors.

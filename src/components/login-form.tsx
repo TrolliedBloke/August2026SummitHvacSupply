@@ -28,7 +28,7 @@ export function LoginForm({ next }: { next: string }) {
       <input type="hidden" name="next" value={next} />
       <div className="flex flex-col gap-1.5">
         <label htmlFor="email" className="text-sm font-medium text-ink-1">
-          Work email
+          Email
         </label>
         <input
           id="email"
@@ -36,7 +36,7 @@ export function LoginForm({ next }: { next: string }) {
           type="email"
           required
           autoComplete="email"
-          placeholder="you@company.com"
+          placeholder="you@example.com"
           className="h-11 rounded-(--r-sm) border border-control-border bg-control-bg px-3 text-sm text-ink-1 outline-none placeholder:text-ink-4 focus:border-brand"
         />
       </div>
@@ -63,7 +63,7 @@ export function LoginForm({ next }: { next: string }) {
 
       <SubmitButton />
       <p className="text-center text-xs text-ink-4">
-        Staff and approved wholesale accounts only.
+        Retail customers and approved wholesale accounts.
       </p>
     </form>
   );

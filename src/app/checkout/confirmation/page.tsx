@@ -89,7 +89,7 @@ function ConfirmationInner() {
 
         {order.checkoutState === "confirmed" && order.payment === "net_terms" && <NextStep icon={<Store size={18} />} title="Invoiced to your account" body={`${currency(order.total)} on net terms. Your confirmed order is ready for staging.`} />}
         {order.checkoutState === "confirmed" && order.payment === "freight_quote" && <NextStep icon={<PackageCheck size={18} />} title="Freight quote on the way" body={`We'll email a freight quote for your ${currency(order.subtotal)} order before any charge.`} />}
-        {order.checkoutState === "paid" && <NextStep icon={<Truck size={18} />} title="We're staging your order" body="You'll get an email with your confirmed pickup or delivery window." />}
+        {order.checkoutState === "paid" && <NextStep icon={<Truck size={18} />} title="Your order is being processed" body="You'll get an email with your pickup or delivery details." />}
 
         <div className="mt-8 flex flex-wrap gap-3">
           {failed && <Link href="/checkout" className="inline-flex h-11 items-center rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink">Return to checkout</Link>}

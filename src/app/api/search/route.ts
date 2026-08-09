@@ -15,6 +15,7 @@ export async function GET(request: Request) {
     unitType: sku.unitType,
     available: sku.available,
     availabilityStatus: sku.availabilityStatus,
+    purchaseEligible: sku.purchaseEligible,
     href: productHref(sku),
   }));
 

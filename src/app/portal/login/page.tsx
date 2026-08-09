@@ -52,20 +52,21 @@ export default async function PortalLoginPage({
             <span className="grid size-10 place-items-center rounded-(--r-md) bg-brand-tint text-brand">
               <Lock size={20} />
             </span>
-            <Chip tone="copper">Wholesale portal</Chip>
+            <Chip tone="copper">Customer account</Chip>
           </div>
           <h1 className="mt-5 font-display text-3xl font-semibold tracking-tight text-ink-1">
             Sign in
           </h1>
           <p className="mt-2 text-ink-2">
-            Account pricing, order history, reorder tools, invoices, and support cases for approved wholesale customers.
+            Access orders, saved equipment, account details, and the tools available for your account type.
           </p>
 
           <LoginForm next={target} />
 
           <p className="mt-4 text-center text-xs text-ink-4">
             Need an account?{" "}
-            <Link href="/dealers" className="text-ink-2">Apply for wholesale</Link>
+            <Link href="/account/create" className="text-ink-2">Create a retail account</Link>
+            {" · "}<Link href="/dealers" className="text-ink-2">Apply for wholesale</Link>
             {" · "}Call{" "}
             <a href={SITE.phoneHref} className="text-ink-2">{SITE.phone}</a>
           </p>
@@ -92,31 +93,9 @@ export default async function PortalLoginPage({
               );
             })}
           </div>
-          <Link
-            href="/portal/dealer"
-            className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-hover"
-          >
-            Open seeded dealer account
-            <ArrowRight size={15} />
-          </Link>
-          <div className="mt-4 grid gap-2 sm:grid-cols-2">
-            <MiniPortal href="/portal/installer" icon={<RefreshCw size={15} />} label="Installer" />
-            <MiniPortal href="/portal/homeowner" icon={<ShieldAlert size={15} />} label="Homeowner" />
-          </div>
+          <Link href="/dealers" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-hover">Apply for wholesale <ArrowRight size={15} /></Link>
         </div>
       </div>
     </Container>
-  );
-}
-
-function MiniPortal({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
-  return (
-    <Link
-      href={href}
-      className="inline-flex items-center justify-center gap-1.5 rounded-(--r-sm) border border-line bg-surface-1 px-3 py-2 text-xs font-medium text-ink-2 transition-colors hover:border-ink-4 hover:text-ink-1"
-    >
-      {icon}
-      {label}
-    </Link>
   );
 }

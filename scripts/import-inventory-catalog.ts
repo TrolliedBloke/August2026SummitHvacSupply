@@ -4,6 +4,10 @@ import path from "node:path";
 
 type CsvRow = Record<string, string>;
 type ResearchOverride = {
+  name?: string;
+  modelNumber?: string;
+  category?: string;
+  productType?: string;
   researchStatus?: "in_progress" | "verified" | "conflict";
   specifications?: Record<string, string | number>;
   warranty?: Record<string, unknown> | null;
@@ -12,17 +16,13 @@ type ResearchOverride = {
   imageVerification?: "unverified" | "manufacturer_family" | "verified";
   documents?: unknown[];
   compatibility?: unknown[];
+  ahri?: unknown;
+  fieldSources?: Record<string, { sourceUrl: string; sourceType: string; retrievedAt: string }>;
   evidence?: Array<{ fieldName: string; value: unknown; sourceUrl: string; sourceType: string; retrievedAt: string; status: "verified" | "conflict" | "rejected"; notes?: string }>;
 };
-type MediaFamily = {
+type ExactMediaGroup = {
   id: string;
-  match: {
-    brand?: string;
-    categories?: string[];
-    productTypes?: string[];
-    skuContains?: string[];
-    excludeSkuContains?: string[];
-  };
+  skus: string[];
   sourceUrl: string;
   retrievedAt: string;
   notes: string;
@@ -41,7 +41,7 @@ const costPath = path.join(root, "data/catalog/costs.generated.json");
 const reportPath = path.join(root, "data/catalog/reconciliation.generated.json");
 const researchLedgerPath = path.join(root, "data/catalog/research-ledger.generated.json");
 const overridesPath = path.join(root, "data/catalog/research-overrides.json");
-const mediaFamiliesPath = path.join(root, "data/catalog/media-families.json");
+const exactMediaPath = path.join(root, "data/catalog/exact-media.json");
 
 const text = await readFile(sourcePath, "utf8");
 const matrix = parseCsv(text);
@@ -58,10 +58,10 @@ for (const row of rows) {
 }
 
 const overrides = JSON.parse(await readFile(overridesPath, "utf8")) as { products: Record<string, ResearchOverride> };
-const mediaFamilies = JSON.parse(await readFile(mediaFamiliesPath, "utf8")) as { families: MediaFamily[] };
+const exactMedia = JSON.parse(await readFile(exactMediaPath, "utf8")) as { groups: ExactMediaGroup[] };
 const products = rows.map((row) => {
   const product = normalizeRow(row.sourceRow, row.raw, groups.get(normalizeIdentifier(row.raw.SKU)) ?? []);
-  return applyMediaFamily(applyResearchOverride(product, overrides.products[product.catalogSku]), mediaFamilies.families);
+  return applyExactMedia(applyResearchOverride(product, overrides.products[product.catalogSku]), exactMedia.groups);
 });
 const seen = new Set<string>();
 for (const product of products) {
@@ -243,7 +243,7 @@ function normalizeRow(sourceRow: number, raw: CsvRow, siblings: Array<{ sourceRo
   if (retailPrice === null) issues.push(/bundle/i.test(note ?? "") ? "bundle_component_has_no_standalone_price" : "retail_price_unverified");
   issues.push("inventory_unverified", "exact_image_unverified", "manufacturer_research_pending");
 
-  const publicationStatus = suppliedName || siblingName ? "quote_only" : "needs_review";
+  const publicationStatus = suppliedName || siblingName ? (retailPrice !== null ? "published" : "quote_only") : "needs_review";
   return {
     id: `inventory-row-${sourceRow}`,
     sourceRow,
@@ -275,12 +275,19 @@ function normalizeRow(sourceRow: number, raw: CsvRow, siblings: Array<{ sourceRo
     imageVerification: "unverified",
     documents: [],
     warranty: null,
+    // AHRI certifies matched systems, not loose components. A cassette, panel,
+    // line set or accessory has no certificate to find, so "not_applicable" is
+    // the correct terminal state for most of this catalog -- not "not_found".
+    ahri: null as unknown,
+    // Per-field provenance. A field without an entry here was derived from the
+    // inventory sheet, not from a manufacturer source.
+    fieldSources: {} as Record<string, { sourceUrl: string; sourceType: string; retrievedAt: string }>,
     specifications: compactObject({ btu, zones: clean(raw.Zones), voltage: normalizeVoltage(clean(raw.Voltage)), refrigerant, refrigerantClass }),
     compatibility: [],
     researchStatus: "csv_only",
     publicationStatus,
-    quoteEligible: publicationStatus === "quote_only",
-    purchaseEligible: false,
+    quoteEligible: publicationStatus !== "needs_review",
+    purchaseEligible: publicationStatus === "published",
     notes: note,
     issues: [...new Set(issues)],
     evidence: [{
@@ -304,6 +311,10 @@ function applyResearchOverride<T extends ReturnType<typeof normalizeRow>>(produc
   }
   return {
     ...product,
+    name: override.name ?? product.name,
+    modelNumber: override.modelNumber ?? product.modelNumber,
+    category: override.category ?? product.category,
+    productType: override.productType ?? product.productType,
     researchStatus: override.researchStatus ?? product.researchStatus,
     specifications: { ...product.specifications, ...override.specifications },
     warranty: override.warranty ?? product.warranty,
@@ -312,42 +323,34 @@ function applyResearchOverride<T extends ReturnType<typeof normalizeRow>>(produc
     imageVerification: override.imageVerification ?? product.imageVerification,
     documents: override.documents ?? product.documents,
     compatibility: override.compatibility ?? product.compatibility,
+    ahri: override.ahri ?? product.ahri,
+    fieldSources: { ...product.fieldSources, ...override.fieldSources },
     evidence: [...product.evidence, ...evidence],
   } as T;
 }
 
-function applyMediaFamily<T extends ReturnType<typeof normalizeRow>>(product: T, families: MediaFamily[]): T {
+function applyExactMedia<T extends ReturnType<typeof normalizeRow>>(product: T, groups: ExactMediaGroup[]): T {
   if (product.imageVerification === "verified") return product;
-  const family = families.find((candidate) => mediaFamilyMatches(product, candidate));
-  if (!family) return product;
+  const group = groups.find((candidate) => candidate.skus.includes(product.catalogSku));
+  if (!group) return product;
+  if (group.images.length === 0) throw new Error(`${group.id}: exact media group has no images`);
   return {
     ...product,
-    image: family.images[0] ?? null,
-    images: family.images,
-    imageVerification: "manufacturer_family",
+    image: group.images[0],
+    images: group.images,
+    imageVerification: "verified",
     researchStatus: product.researchStatus === "csv_only" ? "in_progress" : product.researchStatus,
-    issues: [...new Set([...product.issues, "manufacturer_family_image_not_exact_model_cabinet"])],
+    issues: product.issues.filter((issue) => issue !== "exact_image_unverified"),
     evidence: [...product.evidence, {
       fieldName: "image",
-      value: { mediaFamily: family.id, localPaths: family.images, exactModelVerified: false },
-      sourceUrl: family.sourceUrl,
+      value: { exactMediaGroup: group.id, localPaths: group.images, exactModelVerified: true },
+      sourceUrl: group.sourceUrl,
       sourceType: "manufacturer_product_page",
-      retrievedAt: family.retrievedAt,
+      retrievedAt: group.retrievedAt,
       status: "verified",
-      notes: family.notes,
+      notes: group.notes,
     }],
   } as T;
-}
-
-function mediaFamilyMatches(product: ReturnType<typeof normalizeRow>, family: MediaFamily): boolean {
-  const match = family.match;
-  if (match.brand && product.brand !== match.brand) return false;
-  if (match.categories && !match.categories.includes(product.category)) return false;
-  if (match.productTypes && !match.productTypes.includes(product.productType)) return false;
-  const sku = product.catalogSku.toUpperCase();
-  if (match.skuContains && !match.skuContains.some((token) => sku.includes(token.toUpperCase()))) return false;
-  if (match.excludeSkuContains?.some((token) => sku.includes(token.toUpperCase()))) return false;
-  return true;
 }
 
 function clean(value: string | null | undefined): string | null {

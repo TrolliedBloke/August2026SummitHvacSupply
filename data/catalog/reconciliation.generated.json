@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T20:22:44.430Z",
+  "generatedAt": "2026-08-09T20:56:04.910Z",
   "sourceFile": "data/catalog/inventory-source.csv",
   "sourceSha256": "23baa4a388d1f87638156ea22e6851ebac4b511c8ac0e0489204050b68380349",
   "sourceRows": 100,
@@ -117,15 +117,15 @@
     }
   ],
   "quoteEligible": 100,
-  "purchaseEligible": 0,
+  "purchaseEligible": 23,
   "positiveRetailPrices": 23,
   "unknownInventory": 100,
-  "researchCsvOnly": 23,
-  "researchInProgress": 77,
-  "researchVerified": 0,
-  "researchConflicts": 0,
-  "manufacturerImageCoverage": 77,
-  "exactModelImageCoverage": 0,
+  "researchCsvOnly": 76,
+  "researchInProgress": 21,
+  "researchVerified": 2,
+  "researchConflicts": 1,
+  "manufacturerImageCoverage": 20,
+  "exactModelImageCoverage": 20,
   "needsReview": [],
   "rowMapping": [
     {
@@ -137,7 +137,7 @@
       "product": "TCL 9K Indoor Unit",
       "category": "mini-splits",
       "productType": "Indoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl09kidu"
     },
     {
@@ -149,7 +149,7 @@
       "product": "TCL 9K Indoor Unit (MZ Config)",
       "category": "mini-splits",
       "productType": "Indoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl09kmzidu"
     },
     {
@@ -173,7 +173,7 @@
       "product": "TCL 12K Indoor Unit",
       "category": "mini-splits",
       "productType": "Indoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl12kidu"
     },
     {
@@ -197,7 +197,7 @@
       "product": "TCL 12K Indoor Unit (MZ Config)",
       "category": "mini-splits",
       "productType": "Indoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl12kmzidu"
     },
     {
@@ -209,7 +209,7 @@
       "product": "TCL 18K Indoor Unit",
       "category": "mini-splits",
       "productType": "Indoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl18kidu-r-410a"
     },
     {
@@ -257,7 +257,7 @@
       "product": "TCL 18k MZ Outdoor Condenser",
       "category": "mini-splits",
       "productType": "Outdoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl18kmzodu-r-410a"
     },
     {
@@ -281,7 +281,7 @@
       "product": "TCL 24k Indoor Unit",
       "category": "mini-splits",
       "productType": "Indoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl24kidu"
     },
     {
@@ -305,7 +305,7 @@
       "product": "TCL 24k Indoor Unit (MZ Config)",
       "category": "mini-splits",
       "productType": "Indoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl24kmzidu"
     },
     {
@@ -317,7 +317,7 @@
       "product": "TCL 27k MZ Outdoor Condenser",
       "category": "mini-splits",
       "productType": "Outdoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl-27k-mz-odu-r-410a"
     },
     {
@@ -329,7 +329,7 @@
       "product": "TCL 27k MZ Outdoor Condenser",
       "category": "mini-splits",
       "productType": "Outdoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl-27k-mz-odu-r-454b"
     },
     {
@@ -341,7 +341,7 @@
       "product": "TCL 36k Indoor Unit",
       "category": "mini-splits",
       "productType": "Indoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl36kidu"
     },
     {
@@ -365,7 +365,7 @@
       "product": "TCL 36k MZ Outdoor Condenser",
       "category": "mini-splits",
       "productType": "Outdoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl36kmzodu-r-410a"
     },
     {
@@ -377,7 +377,7 @@
       "product": "TCL 36k MZ Outdoor Condenser",
       "category": "mini-splits",
       "productType": "Outdoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl36kmzodu-r-454b"
     },
     {
@@ -389,7 +389,7 @@
       "product": "TCL 42k MZ Outdoor Condenser",
       "category": "mini-splits",
       "productType": "Outdoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl42kmzodu"
     },
     {
@@ -401,7 +401,7 @@
       "product": "TCL 2 Ton Air Handler",
       "category": "air-handlers",
       "productType": "Air handler",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl24kahu"
     },
     {
@@ -425,7 +425,7 @@
       "product": "TCL 3 Ton Air Handler",
       "category": "air-handlers",
       "productType": "Air handler",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl36kahu"
     },
     {
@@ -449,7 +449,7 @@
       "product": "TCL 4 Ton Air Handler",
       "category": "air-handlers",
       "productType": "Air handler",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl48kahu"
     },
     {
@@ -473,7 +473,7 @@
       "product": "TCL 5 Ton Air Handler",
       "category": "air-handlers",
       "productType": "Air handler",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tcl60kahu"
     },
     {
@@ -497,7 +497,7 @@
       "product": "Tosot 9K Indoor Unit",
       "category": "mini-splits",
       "productType": "Indoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tos09kidu-r-410a"
     },
     {
@@ -545,7 +545,7 @@
       "product": "Tosot 12K Indoor Unit",
       "category": "mini-splits",
       "productType": "Indoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tos12kidu-r-410a"
     },
     {
@@ -569,7 +569,7 @@
       "product": "Tosot 12K Outdoor Condenser",
       "category": "mini-splits",
       "productType": "Outdoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tos12kodu"
     },
     {
@@ -665,7 +665,7 @@
       "product": "Tosot 30K Multi-Zone Outdoor Unit",
       "category": "mini-splits",
       "productType": "Outdoor unit",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/tos30kmzodu"
     },
     {
@@ -782,7 +782,7 @@
       "catalogSku": "CAR36KHPU",
       "manufacturer": "Carrier",
       "model": "26SCA536W023",
-      "product": "Carrier 3 Ton Outdoor Condenser",
+      "product": "Carrier 3 Ton Comfort Single-Stage Air Conditioner",
       "category": "central-air-conditioners",
       "productType": "Outdoor unit",
       "publicationStatus": "quote_only",
@@ -806,7 +806,7 @@
       "catalogSku": "CAR48KHPU",
       "manufacturer": "Carrier",
       "model": "26SCA548W003",
-      "product": "Carrier 4 Ton Outdoor Condenser",
+      "product": "Carrier 4 Ton Comfort Single-Stage Air Conditioner",
       "category": "central-air-conditioners",
       "productType": "Outdoor unit",
       "publicationStatus": "quote_only",
@@ -842,7 +842,7 @@
       "catalogSku": "CAR60KHPU",
       "manufacturer": "Carrier",
       "model": "26SCA560W003",
-      "product": "Carrier 5 Ton Outdoor Condenser",
+      "product": "Carrier 5 Ton Comfort Single-Stage Air Conditioner",
       "category": "central-air-conditioners",
       "productType": "Outdoor unit",
       "publicationStatus": "quote_only",
@@ -877,8 +877,8 @@
       "sourceSku": "CAR70KFUR",
       "catalogSku": "CAR70KFUR",
       "manufacturer": "Carrier",
-      "model": "58SCOB070M17--12",
-      "product": "Carrier 70k BTU Furnace",
+      "model": "58SC0B070M17--12",
+      "product": "Carrier Comfort 80% AFUE 70,000 BTU Gas Furnace",
       "category": "furnaces",
       "productType": "Furnace",
       "publicationStatus": "quote_only",
@@ -889,8 +889,8 @@
       "sourceSku": "CAR90KFUR",
       "catalogSku": "CAR90KFUR",
       "manufacturer": "Carrier",
-      "model": "58SCOB090M21--20",
-      "product": "Carrier 90k BTU Furnace",
+      "model": "58SC0B090M21--20",
+      "product": "Carrier Comfort 80% AFUE 90,000 BTU Gas Furnace",
       "category": "furnaces",
       "productType": "Furnace",
       "publicationStatus": "quote_only",
@@ -965,7 +965,7 @@
       "product": "38x18x3 Base Pad",
       "category": "installation-supplies",
       "productType": "Accessory",
-      "publicationStatus": "quote_only",
+      "publicationStatus": "published",
       "websitePath": "/products/sku/bsp38183"
     },
     {

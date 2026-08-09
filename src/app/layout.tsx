@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s · Summit HVAC Supply",
   },
   description:
-    "Search TCL, TOSOT, Carrier, central HVAC, mini-split, furnace, cassette, and installation-supply models. Request verified pricing and availability from Newark, CA.",
+    "Shop TCL, TOSOT, Carrier, central HVAC, mini-split, furnace, cassette, and installation-supply models from Summit HVAC Supply in Newark, CA.",
   keywords: [
     "Bay Area heat pumps",
     "Bay Area mini split supply",

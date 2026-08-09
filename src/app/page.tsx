@@ -58,7 +58,7 @@ const categories = [
 const branches = [
   {
     name: "Newark",
-    stock: "Availability confirmed by quote",
+    stock: "Retail pickup and trade orders",
     address: SITE.address.full,
     note: "Will-call until 5:00pm",
   },
@@ -85,7 +85,7 @@ const branches = [
 const proof = [
   { title: "Exact models.", body: "Search the current SKU catalog.", icon: <Package /> },
   { title: "Real people.", body: "Local help, not a call center.", icon: <Home /> },
-  { title: "Verified before order.", body: "Price and availability confirmed first.", icon: <CheckCircle2 /> },
+  { title: "Retail + wholesale.", body: "Shop retail or sign in for trade tools.", icon: <CheckCircle2 /> },
   { title: "Trade account quotes.", body: "Account pricing is verified by staff.", icon: <ClipboardCheck /> },
 ];
 
@@ -135,7 +135,7 @@ export default function HomePage() {
               Verify before you order.
             </h1>
             <p className="mt-3 text-[1.02rem] leading-7 text-ink-1">
-              Current catalog. Local support. Quote-first accuracy.
+              Retail checkout. Wholesale account pricing. Local support.
             </p>
 
             <form
@@ -180,7 +180,7 @@ export default function HomePage() {
             <div className="mt-5 flex flex-col gap-2 text-[0.95rem] text-ink-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5">
               <span className="inline-flex items-center gap-2 text-brand">
                 <CheckCircle2 size={21} strokeWidth={1.8} aria-hidden="true" />
-                Availability confirmed before order
+                Retail ordering available online
               </span>
               <span className="hidden sm:inline" aria-hidden="true">·</span>
               <span>Will-call until 5:00pm</span>

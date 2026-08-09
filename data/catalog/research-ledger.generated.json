@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T20:22:44.430Z",
+  "generatedAt": "2026-08-09T20:56:04.910Z",
   "records": [
     {
       "sourceRow": 2,
@@ -22,18 +22,18 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "tcl-ductless",
+            "exactMediaGroup": "tcl-tpro-indoor-9",
             "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
+              "/products/catalog-official/tcl-tpro-indoor-front.webp",
+              "/products/catalog-official/tcl-tpro-indoor-angle.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
+          "notes": "Official TCL TSC-09HA1/I3TI22 page publishes these two indoor-head views. The outdoor-unit row sharing the system model number is intentionally not mapped to indoor photography."
         }
       ]
     },
@@ -42,8 +42,9 @@
       "catalogSku": "TCL09KMZIDU",
       "sourceSku": "TCL09KMZIDU",
       "modelNumber": "TSC-09HA2/I3TI23-I",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -54,22 +55,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-3",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -78,8 +63,9 @@
       "catalogSku": "TCL09KODU",
       "sourceSku": "TCL09KODU",
       "modelNumber": "TSC-09HA1/I3TI22",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -90,22 +76,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-4",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -130,18 +100,18 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "tcl-ductless",
+            "exactMediaGroup": "tcl-tpro-indoor-12",
             "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
+              "/products/catalog-official/tcl-tpro-indoor-front.webp",
+              "/products/catalog-official/tcl-tpro-indoor-angle.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-12-000-btu-tsc-12ha1-i3ti22",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
+          "notes": "Official TCL TSC-12HA1/I3TI22 page publishes these two indoor-head views. The outdoor-unit row sharing the system model number is intentionally not mapped to indoor photography."
         }
       ]
     },
@@ -150,8 +120,9 @@
       "catalogSku": "TCL12KODU",
       "sourceSku": "TCL12KODU",
       "modelNumber": "TSC-12HA1/I3TI22",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -162,22 +133,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-6",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -186,8 +141,9 @@
       "catalogSku": "TCL12KMZIDU",
       "sourceSku": "TCL12KMZIDU",
       "modelNumber": "TSC-12HA2/I3TI23-I",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -198,22 +154,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-7",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -238,18 +178,18 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "tcl-ductless",
+            "exactMediaGroup": "tcl-tpro-indoor-18",
             "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
+              "/products/catalog-official/tcl-tpro-indoor-front.webp",
+              "/products/catalog-official/tcl-tpro-indoor-angle.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
+          "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-18-000-btu-tsc-18ha2-i3ti21",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
+          "notes": "Official TCL TSC-18HA2/I3TI21 page publishes these two indoor-head views. Outdoor-unit rows sharing the system model number are intentionally not mapped to indoor photography."
         }
       ]
     },
@@ -258,8 +198,9 @@
       "catalogSku": "TCL18KODU-R-410A",
       "sourceSku": "TCL18KODU",
       "modelNumber": "TSC-18HA2/I3TI21",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -270,22 +211,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-9",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -294,8 +219,9 @@
       "catalogSku": "TCL18KIDU-R-454B",
       "sourceSku": "TCL18KIDU",
       "modelNumber": "H18SEH17XAE",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -306,22 +232,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-10",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -330,8 +240,9 @@
       "catalogSku": "TCL18KODU-18SEH17XAC",
       "sourceSku": "TCL18KODU",
       "modelNumber": "H18SEH17XAC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -342,22 +253,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-11",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -366,8 +261,9 @@
       "catalogSku": "TCL18KMZODU-R-410A",
       "sourceSku": "TCL18KMZODU",
       "modelNumber": "TSC-18HA2/I3TI21",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -378,22 +274,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-12",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -402,8 +282,9 @@
       "catalogSku": "TCL18KMZODU-18FMH22XPC",
       "sourceSku": "TCL18kmzodu",
       "modelNumber": "H18FMH22XPC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -414,22 +295,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-13",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -438,8 +303,9 @@
       "catalogSku": "TCL24KIDU",
       "sourceSku": "TCL24KIDU",
       "modelNumber": "H24SBH20XPE",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -450,22 +316,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-14",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -474,8 +324,9 @@
       "catalogSku": "TCL24KODU",
       "sourceSku": "TCL24KODU",
       "modelNumber": "H24SBH20XPC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -486,22 +337,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-15",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -510,9 +345,10 @@
       "catalogSku": "TCL24KMZIDU",
       "sourceSku": "TCL24KMZIDU",
       "modelNumber": null,
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
         "exact_identity",
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -523,22 +359,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-16",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -547,8 +367,9 @@
       "catalogSku": "TCL-27K-MZ-ODU-R-410A",
       "sourceSku": "TCL-27K-MZ-ODU",
       "modelNumber": "TUM-27HA2/I2I22-21ES",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -559,22 +380,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-17",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -583,8 +388,9 @@
       "catalogSku": "TCL-27K-MZ-ODU-R-454B",
       "sourceSku": "TCL-27K-MZ-ODU",
       "modelNumber": "H27FMH22XPC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -595,22 +401,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-18",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -619,8 +409,9 @@
       "catalogSku": "TCL36KIDU",
       "sourceSku": "TCL36KIDU",
       "modelNumber": "H36SEH19XAE",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -631,22 +422,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-19",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -655,8 +430,9 @@
       "catalogSku": "TCL36KODU",
       "sourceSku": "TCL36KODU",
       "modelNumber": "H36SEH19XAC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -667,22 +443,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-20",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -691,8 +451,9 @@
       "catalogSku": "TCL36KMZODU-R-410A",
       "sourceSku": "TCL36KMZODU",
       "modelNumber": "TUM36HA2/I2I21-21ES",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -703,22 +464,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-21",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -727,8 +472,9 @@
       "catalogSku": "TCL36KMZODU-R-454B",
       "sourceSku": "TCL36KMZODU",
       "modelNumber": "H36FMH21XPC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -739,22 +485,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-22",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -763,8 +493,9 @@
       "catalogSku": "TCL42KMZODU",
       "sourceSku": "TCL42KMZODU",
       "modelNumber": "H42FMH20XPC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -775,22 +506,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-23",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-ductless",
-            "localPaths": [
-              "/products/catalog-official/tcl-ductless-family.webp",
-              "/products/catalog-official/tcl-multi-match-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
         }
       ]
     },
@@ -799,8 +514,9 @@
       "catalogSku": "TCL24KAHU",
       "sourceSku": "TCL24KAHU",
       "modelNumber": "H24AHH17XAE",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -811,21 +527,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-24",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-advantage",
-            "localPaths": [
-              "/products/catalog-official/tcl-advantage-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
         }
       ]
     },
@@ -834,8 +535,9 @@
       "catalogSku": "TCL24KHPU",
       "sourceSku": "TCL24KHPU",
       "modelNumber": "H24TDH17XAC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -846,21 +548,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-25",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-advantage",
-            "localPaths": [
-              "/products/catalog-official/tcl-advantage-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
         }
       ]
     },
@@ -869,8 +556,9 @@
       "catalogSku": "TCL36KAHU",
       "sourceSku": "TCL36KAHU",
       "modelNumber": "H36AHH18XAE",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -881,21 +569,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-26",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-advantage",
-            "localPaths": [
-              "/products/catalog-official/tcl-advantage-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
         }
       ]
     },
@@ -904,8 +577,9 @@
       "catalogSku": "TCL36KHPU",
       "sourceSku": "TCL36KHPU",
       "modelNumber": "H36TDH18XAC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -916,21 +590,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-27",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-advantage",
-            "localPaths": [
-              "/products/catalog-official/tcl-advantage-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
         }
       ]
     },
@@ -939,8 +598,9 @@
       "catalogSku": "TCL48KAHU",
       "sourceSku": "TCL48KAHU",
       "modelNumber": "H48AHH18XAE",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -951,21 +611,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-28",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-advantage",
-            "localPaths": [
-              "/products/catalog-official/tcl-advantage-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
         }
       ]
     },
@@ -974,8 +619,9 @@
       "catalogSku": "TCL48KHPU",
       "sourceSku": "TCL48KHPU",
       "modelNumber": "H48TDH18XAC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -986,21 +632,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-29",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-advantage",
-            "localPaths": [
-              "/products/catalog-official/tcl-advantage-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
         }
       ]
     },
@@ -1009,8 +640,9 @@
       "catalogSku": "TCL60KAHU",
       "sourceSku": "TCL60KAHU",
       "modelNumber": "H60AHH16XAE",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1021,21 +653,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-30",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-advantage",
-            "localPaths": [
-              "/products/catalog-official/tcl-advantage-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
         }
       ]
     },
@@ -1044,8 +661,9 @@
       "catalogSku": "TCL60KHPU",
       "sourceSku": "TCL60KHPU",
       "modelNumber": "H60TDH16XAC",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1056,21 +674,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-31",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-advantage",
-            "localPaths": [
-              "/products/catalog-official/tcl-advantage-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
         }
       ]
     },
@@ -1079,8 +682,9 @@
       "catalogSku": "TOS09KIDU-R-410A",
       "sourceSku": "TOS09KIDU",
       "modelNumber": "TWH09ATCXB-D3DNA3AI",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1091,23 +695,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-32",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-wall-mounted",
-            "localPaths": [
-              "/products/catalog-official/tosot-wall-front.webp",
-              "/products/catalog-official/tosot-wall-angle.webp",
-              "/products/catalog-official/tosot-wall-detail.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT wall-mounted family multi-angle photography."
         }
       ]
     },
@@ -1118,6 +705,7 @@
       "modelNumber": "TWH09AT19D6D",
       "researchStatus": "in_progress",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1137,23 +725,6 @@
           "retrievedAt": "2026-08-09",
           "status": "verified",
           "notes": "Official TOSOT manual model table includes this system identifier and its indoor/outdoor component identifiers."
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-wall-mounted",
-            "localPaths": [
-              "/products/catalog-official/tosot-wall-front.webp",
-              "/products/catalog-official/tosot-wall-angle.webp",
-              "/products/catalog-official/tosot-wall-detail.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT wall-mounted family multi-angle photography."
         }
       ]
     },
@@ -1162,8 +733,9 @@
       "catalogSku": "TOS09KODU-R-410A",
       "sourceSku": "TOS09KODU",
       "modelNumber": "TWH09ATCXB-D3DNA3AO",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1174,23 +746,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-34",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-single-zone-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-singlezone-front.webp",
-              "/products/catalog-official/tosot-singlezone-angle.webp",
-              "/products/catalog-official/tosot-singlezone-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT single-zone condenser family multi-angle photography."
         }
       ]
     },
@@ -1201,6 +756,7 @@
       "modelNumber": "TWH09AT19D6DO",
       "researchStatus": "in_progress",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1220,23 +776,6 @@
           "retrievedAt": "2026-08-09",
           "status": "verified",
           "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-single-zone-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-singlezone-front.webp",
-              "/products/catalog-official/tosot-singlezone-angle.webp",
-              "/products/catalog-official/tosot-singlezone-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT single-zone condenser family multi-angle photography."
         }
       ]
     },
@@ -1245,8 +784,9 @@
       "catalogSku": "TOS12KIDU-R-410A",
       "sourceSku": "TOS12KIDU",
       "modelNumber": "TWH12ATCXB-D3DNA3CI",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1257,23 +797,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-36",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-wall-mounted",
-            "localPaths": [
-              "/products/catalog-official/tosot-wall-front.webp",
-              "/products/catalog-official/tosot-wall-angle.webp",
-              "/products/catalog-official/tosot-wall-detail.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT wall-mounted family multi-angle photography."
         }
       ]
     },
@@ -1282,8 +805,9 @@
       "catalogSku": "TOS12KIDU-R-32",
       "sourceSku": "TOS12KIDU",
       "modelNumber": "TWH12ZR32AI",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1294,23 +818,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-37",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-wall-mounted",
-            "localPaths": [
-              "/products/catalog-official/tosot-wall-front.webp",
-              "/products/catalog-official/tosot-wall-angle.webp",
-              "/products/catalog-official/tosot-wall-detail.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT wall-mounted family multi-angle photography."
         }
       ]
     },
@@ -1319,8 +826,9 @@
       "catalogSku": "TOS12KODU",
       "sourceSku": "TOS12KODU",
       "modelNumber": "TWH12ZR33AO",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1331,23 +839,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-38",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-single-zone-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-singlezone-front.webp",
-              "/products/catalog-official/tosot-singlezone-angle.webp",
-              "/products/catalog-official/tosot-singlezone-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT single-zone condenser family multi-angle photography."
         }
       ]
     },
@@ -1381,19 +872,19 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "tosot-wall-mounted",
+            "exactMediaGroup": "tosot-standard-wall-18",
             "localPaths": [
               "/products/catalog-official/tosot-wall-front.webp",
               "/products/catalog-official/tosot-wall-angle.webp",
               "/products/catalog-official/tosot-wall-detail.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
-          "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
+          "sourceUrl": "https://tosotcomfort.com/models/18k-standard",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official TOSOT wall-mounted family multi-angle photography."
+          "notes": "Official TOSOT product page explicitly lists TWH18AT19D6DI/TWH18AT19D6D and uses these three indoor-unit views."
         }
       ]
     },
@@ -1404,6 +895,7 @@
       "modelNumber": "TWH18AT19D6DO",
       "researchStatus": "in_progress",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1423,23 +915,6 @@
           "retrievedAt": "2026-08-09",
           "status": "verified",
           "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-single-zone-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-singlezone-front.webp",
-              "/products/catalog-official/tosot-singlezone-angle.webp",
-              "/products/catalog-official/tosot-singlezone-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT single-zone condenser family multi-angle photography."
         }
       ]
     },
@@ -1448,8 +923,9 @@
       "catalogSku": "TOS18KMZODU",
       "sourceSku": "TOS18KMZODU",
       "modelNumber": "TM18R32MO",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1460,23 +936,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-41",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-multi-zone-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-multizone-front.webp",
-              "/products/catalog-official/tosot-multizone-angle.webp",
-              "/products/catalog-official/tosot-multizone-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/48k",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT multi-zone condenser family multi-angle photography."
         }
       ]
     },
@@ -1510,19 +969,19 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "tosot-wall-mounted",
+            "exactMediaGroup": "tosot-standard-wall-24",
             "localPaths": [
               "/products/catalog-official/tosot-wall-front.webp",
               "/products/catalog-official/tosot-wall-angle.webp",
               "/products/catalog-official/tosot-wall-detail.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official TOSOT wall-mounted family multi-angle photography."
+          "notes": "Official TOSOT product page explicitly lists TWH24AT19D6DI/TWH24AT19D6D and publishes the same indoor-unit views as the 18K model page."
         }
       ]
     },
@@ -1533,6 +992,7 @@
       "modelNumber": "TWH24AT19D6DO",
       "researchStatus": "in_progress",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1552,23 +1012,6 @@
           "retrievedAt": "2026-08-09",
           "status": "verified",
           "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-single-zone-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-singlezone-front.webp",
-              "/products/catalog-official/tosot-singlezone-angle.webp",
-              "/products/catalog-official/tosot-singlezone-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT single-zone condenser family multi-angle photography."
         }
       ]
     },
@@ -1577,8 +1020,9 @@
       "catalogSku": "TOS-24K-AHU",
       "sourceSku": "TOS-24K-AHU",
       "modelNumber": "TUD24-R32GDU",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1589,23 +1033,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-44",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-central-handler",
-            "localPaths": [
-              "/products/catalog-official/tosot-central-handler-front.webp",
-              "/products/catalog-official/tosot-central-handler-angle.webp",
-              "/products/catalog-official/tosot-central-handler-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/2-3-ton-4",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT central air-handler family multi-angle photography."
         }
       ]
     },
@@ -1614,8 +1041,9 @@
       "catalogSku": "TOS24KHPU",
       "sourceSku": "TOS24KHPU",
       "modelNumber": "TU24-32GDU",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1626,23 +1054,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-45",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-central-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-central-condenser-front.webp",
-              "/products/catalog-official/tosot-central-condenser-angle.webp",
-              "/products/catalog-official/tosot-central-condenser-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/2-3-ton",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT NOVA central condenser family multi-angle photography."
         }
       ]
     },
@@ -1651,8 +1062,9 @@
       "catalogSku": "TOS30KMZODU",
       "sourceSku": "TOS30KMZODU",
       "modelNumber": "TM30R32MO",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1663,23 +1075,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-46",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-multi-zone-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-multizone-front.webp",
-              "/products/catalog-official/tosot-multizone-angle.webp",
-              "/products/catalog-official/tosot-multizone-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/48k",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT multi-zone condenser family multi-angle photography."
         }
       ]
     },
@@ -1688,8 +1083,9 @@
       "catalogSku": "TOS36KAHU",
       "sourceSku": "TOS36KAHU",
       "modelNumber": "TU36-32AH2GDU",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1700,23 +1096,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-47",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-central-handler",
-            "localPaths": [
-              "/products/catalog-official/tosot-central-handler-front.webp",
-              "/products/catalog-official/tosot-central-handler-angle.webp",
-              "/products/catalog-official/tosot-central-handler-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/2-3-ton-4",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT central air-handler family multi-angle photography."
         }
       ]
     },
@@ -1725,8 +1104,9 @@
       "catalogSku": "TOS36KHPU",
       "sourceSku": "TOS36KHPU",
       "modelNumber": "TU36-32GDU",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1737,23 +1117,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-48",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-central-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-central-condenser-front.webp",
-              "/products/catalog-official/tosot-central-condenser-angle.webp",
-              "/products/catalog-official/tosot-central-condenser-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/2-3-ton",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT NOVA central condenser family multi-angle photography."
         }
       ]
     },
@@ -1762,8 +1125,9 @@
       "catalogSku": "TOS42KMZODU-R-410A",
       "sourceSku": "TOS42KMZODU",
       "modelNumber": "TM42HX4O",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1774,23 +1138,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-49",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-multi-zone-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-multizone-front.webp",
-              "/products/catalog-official/tosot-multizone-angle.webp",
-              "/products/catalog-official/tosot-multizone-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/48k",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT multi-zone condenser family multi-angle photography."
         }
       ]
     },
@@ -1799,8 +1146,9 @@
       "catalogSku": "TOS42KMZODU-R-454B",
       "sourceSku": "TOS42KMZODU",
       "modelNumber": "TM42R32MO",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1811,23 +1159,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-50",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-multi-zone-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-multizone-front.webp",
-              "/products/catalog-official/tosot-multizone-angle.webp",
-              "/products/catalog-official/tosot-multizone-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/48k",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT multi-zone condenser family multi-angle photography."
         }
       ]
     },
@@ -1836,8 +1167,9 @@
       "catalogSku": "TOS48KAHU",
       "sourceSku": "TOS48KAHU",
       "modelNumber": "TUD48-R32GDU",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1848,23 +1180,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-51",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-central-handler",
-            "localPaths": [
-              "/products/catalog-official/tosot-central-handler-front.webp",
-              "/products/catalog-official/tosot-central-handler-angle.webp",
-              "/products/catalog-official/tosot-central-handler-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/2-3-ton-4",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT central air-handler family multi-angle photography."
         }
       ]
     },
@@ -1873,8 +1188,9 @@
       "catalogSku": "TOS48KHPU",
       "sourceSku": "TOS48KHPU",
       "modelNumber": "TU48-32GDU",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1885,23 +1201,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-52",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-central-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-central-condenser-front.webp",
-              "/products/catalog-official/tosot-central-condenser-angle.webp",
-              "/products/catalog-official/tosot-central-condenser-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/2-3-ton",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT NOVA central condenser family multi-angle photography."
         }
       ]
     },
@@ -1910,8 +1209,9 @@
       "catalogSku": "TOS60KAHU",
       "sourceSku": "TOS60KAHU",
       "modelNumber": "TUD60-R32GDU",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1922,23 +1222,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-53",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-central-handler",
-            "localPaths": [
-              "/products/catalog-official/tosot-central-handler-front.webp",
-              "/products/catalog-official/tosot-central-handler-angle.webp",
-              "/products/catalog-official/tosot-central-handler-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/2-3-ton-4",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT central air-handler family multi-angle photography."
         }
       ]
     },
@@ -1947,8 +1230,9 @@
       "catalogSku": "TOS60KHPU",
       "sourceSku": "TOS60KHPU",
       "modelNumber": "TU60-32GDU",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -1959,23 +1243,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-54",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-central-condenser",
-            "localPaths": [
-              "/products/catalog-official/tosot-central-condenser-front.webp",
-              "/products/catalog-official/tosot-central-condenser-angle.webp",
-              "/products/catalog-official/tosot-central-condenser-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/2-3-ton",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT NOVA central condenser family multi-angle photography."
         }
       ]
     },
@@ -2000,17 +1267,17 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-fj5",
+            "exactMediaGroup": "carrier-fj5",
             "localPaths": [
               "/products/catalog-official/carrier-fj5-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/fj5/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier FJ5 fan-coil family image."
+          "notes": "Carrier publishes one official FJ5 fan-coil image for the 36K, 48K, and 60K suffixes listed in the model family."
         }
       ]
     },
@@ -2019,10 +1286,8 @@
       "catalogSku": "CAR36KHPU",
       "sourceSku": "CAR36KHPU",
       "modelNumber": "26SCA536W023",
-      "researchStatus": "in_progress",
+      "researchStatus": "verified",
       "missing": [
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -2033,19 +1298,60 @@
           "status": "source_record"
         },
         {
+          "fieldName": "modelNumber",
+          "value": "26SCA536W023",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed in the CATALOG ORDERING NUMBERS table for size 36. Nomenclature position 11 (Special Feature) = 2 = Coil Optimization."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 17.6,
+            "mocp": 30,
+            "soundDb": 69,
+            "cfm": 3800
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Physical Data and Electrical Data tables, unit size 36. Factory charge 5.3 lb (2.40 kg); condenser coil 23.7 sq ft, 25 FPI, 1 row(s), 7 circuits; fan 1/10 HP at 825 RPM."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5-year parts, 10-year with registration within 90 days",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Limited Warranty section of the product data."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier residential product page for the 26SCA5 series."
+        },
+        {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-26sca5",
+            "exactMediaGroup": "carrier-26sca5",
             "localPaths": [
               "/products/catalog-official/carrier-26sca5-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/us/en/residential/air-conditioners/26sca5/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier 26SCA5 family image. Cabinet height varies by capacity."
+          "notes": "Carrier publishes one official 26SCA5 product image for the 36K, 48K, and 60K suffixes. Exact suffixes are verified in Carrier model tables; cabinet height varies by capacity."
         }
       ]
     },
@@ -2070,17 +1376,17 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-fj5",
+            "exactMediaGroup": "carrier-fj5",
             "localPaths": [
               "/products/catalog-official/carrier-fj5-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/fj5/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier FJ5 fan-coil family image."
+          "notes": "Carrier publishes one official FJ5 fan-coil image for the 36K, 48K, and 60K suffixes listed in the model family."
         }
       ]
     },
@@ -2089,10 +1395,8 @@
       "catalogSku": "CAR48KHPU",
       "sourceSku": "CAR48KHPU",
       "modelNumber": "26SCA548W003",
-      "researchStatus": "in_progress",
+      "researchStatus": "conflict",
       "missing": [
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -2103,19 +1407,60 @@
           "status": "source_record"
         },
         {
+          "fieldName": "modelNumber",
+          "value": "26SCA548W003",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Carrier's CATALOG ORDERING NUMBERS table lists size 48 as 26SCA548W013, not 26SCA548W003. The inventory sheet's model does not appear anywhere in Carrier's product data. Position 11 of the nomenclature is Special Feature: 0=Standard, 1=Compressor Electrical Rating Change, 2=Coil Optimization. Do not publish or reorder against this model until the unit on the shelf is physically checked."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 29.1,
+            "mocp": 40,
+            "soundDb": 75,
+            "cfm": 3100
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Physical Data and Electrical Data tables, unit size 48. Factory charge 5.7 lb (2.58 kg); condenser coil 17.7 sq ft, 20 FPI, 2 row(s), 8 circuits; fan 1/5 HP at 1100 RPM."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5-year parts, 10-year with registration within 90 days",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Limited Warranty section of the product data."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier residential product page for the 26SCA5 series."
+        },
+        {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-26sca5",
+            "exactMediaGroup": "carrier-26sca5",
             "localPaths": [
               "/products/catalog-official/carrier-26sca5-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/us/en/residential/air-conditioners/26sca5/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier 26SCA5 family image. Cabinet height varies by capacity."
+          "notes": "Carrier publishes one official 26SCA5 product image for the 36K, 48K, and 60K suffixes. Exact suffixes are verified in Carrier model tables; cabinet height varies by capacity."
         }
       ]
     },
@@ -2149,18 +1494,18 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-cvama",
+            "exactMediaGroup": "carrier-cvama",
             "localPaths": [
               "/products/catalog-official/carrier-cvama-front.webp",
               "/products/catalog-official/carrier-cvama-cutaway.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier CVAMA exterior and cutaway family views."
+          "notes": "Carrier publishes the same exterior and cutaway views for the CVAMA model family containing all three exact inventory suffixes."
         }
       ]
     },
@@ -2185,17 +1530,17 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-fj5",
+            "exactMediaGroup": "carrier-fj5",
             "localPaths": [
               "/products/catalog-official/carrier-fj5-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/fj5/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier FJ5 fan-coil family image."
+          "notes": "Carrier publishes one official FJ5 fan-coil image for the 36K, 48K, and 60K suffixes listed in the model family."
         }
       ]
     },
@@ -2204,10 +1549,8 @@
       "catalogSku": "CAR60KHPU",
       "sourceSku": "CAR60KHPU",
       "modelNumber": "26SCA560W003",
-      "researchStatus": "in_progress",
+      "researchStatus": "verified",
       "missing": [
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -2218,19 +1561,60 @@
           "status": "source_record"
         },
         {
+          "fieldName": "modelNumber",
+          "value": "26SCA560W003",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed in the CATALOG ORDERING NUMBERS table for size 60. Nomenclature position 11 (Special Feature) = 0 = Standard."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 31.1,
+            "mocp": 50,
+            "soundDb": 75,
+            "cfm": 3900
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Physical Data and Electrical Data tables, unit size 60. Factory charge 7.9 lb (3.58 kg); condenser coil 22.0 sq ft, 20 FPI, 2 row(s), 9 circuits; fan 1/4 HP at 1100 RPM."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5-year parts, 10-year with registration within 90 days",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Limited Warranty section of the product data."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier residential product page for the 26SCA5 series."
+        },
+        {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-26sca5",
+            "exactMediaGroup": "carrier-26sca5",
             "localPaths": [
               "/products/catalog-official/carrier-26sca5-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/us/en/residential/air-conditioners/26sca5/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier 26SCA5 family image. Cabinet height varies by capacity."
+          "notes": "Carrier publishes one official 26SCA5 product image for the 36K, 48K, and 60K suffixes. Exact suffixes are verified in Carrier model tables; cabinet height varies by capacity."
         }
       ]
     },
@@ -2264,18 +1648,18 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-cvama",
+            "exactMediaGroup": "carrier-cvama",
             "localPaths": [
               "/products/catalog-official/carrier-cvama-front.webp",
               "/products/catalog-official/carrier-cvama-cutaway.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier CVAMA exterior and cutaway family views."
+          "notes": "Carrier publishes the same exterior and cutaway views for the CVAMA model family containing all three exact inventory suffixes."
         }
       ]
     },
@@ -2309,18 +1693,18 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-cvama",
+            "exactMediaGroup": "carrier-cvama",
             "localPaths": [
               "/products/catalog-official/carrier-cvama-front.webp",
               "/products/catalog-official/carrier-cvama-cutaway.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier CVAMA exterior and cutaway family views."
+          "notes": "Carrier publishes the same exterior and cutaway views for the CVAMA model family containing all three exact inventory suffixes."
         }
       ]
     },
@@ -2328,7 +1712,7 @@
       "sourceRow": 64,
       "catalogSku": "CAR70KFUR",
       "sourceSku": "CAR70KFUR",
-      "modelNumber": "58SCOB070M17--12",
+      "modelNumber": "58SC0B070M17--12",
       "researchStatus": "in_progress",
       "missing": [
         "official_documents",
@@ -2343,19 +1727,28 @@
           "status": "source_record"
         },
         {
+          "fieldName": "modelNumber",
+          "value": "58SC0B070M17--12",
+          "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
+          "sourceType": "manufacturer_product_page",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Corrects the letter O in the inventory family code to Carrier's numeric zero."
+        },
+        {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-58sc0",
+            "exactMediaGroup": "carrier-58sc0",
             "localPaths": [
               "/products/catalog-official/carrier-58sc0-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier 58SC0 furnace family image. The inventory uses letter O where Carrier uses zero in the family code; exact suffix remains under review."
+          "notes": "Carrier publishes one official 58SC0 furnace image for both exact output/cabinet suffixes."
         }
       ]
     },
@@ -2363,7 +1756,7 @@
       "sourceRow": 65,
       "catalogSku": "CAR90KFUR",
       "sourceSku": "CAR90KFUR",
-      "modelNumber": "58SCOB090M21--20",
+      "modelNumber": "58SC0B090M21--20",
       "researchStatus": "in_progress",
       "missing": [
         "official_documents",
@@ -2378,19 +1771,28 @@
           "status": "source_record"
         },
         {
+          "fieldName": "modelNumber",
+          "value": "58SC0B090M21--20",
+          "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
+          "sourceType": "manufacturer_product_page",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Corrects the letter O in the inventory family code to Carrier's numeric zero."
+        },
+        {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "carrier-58sc0",
+            "exactMediaGroup": "carrier-58sc0",
             "localPaths": [
               "/products/catalog-official/carrier-58sc0-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
           "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official Carrier 58SC0 furnace family image. The inventory uses letter O where Carrier uses zero in the family code; exact suffix remains under review."
+          "notes": "Carrier publishes one official 58SC0 furnace image for both exact output/cabinet suffixes."
         }
       ]
     },
@@ -2921,17 +2323,17 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "tcl-light-commercial",
+            "exactMediaGroup": "tcl-cassette-r454b",
             "localPaths": [
               "/products/catalog-official/tcl-light-commercial-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
-          "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
+          "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/light-commercial/Light%20Commercial%20HVAC%20SpecSheet%202025.pdf",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
+          "notes": "Official TCL model matrix explicitly lists all four cassette models and publishes the same cassette product photography for the capacity range."
         }
       ]
     },
@@ -2956,17 +2358,17 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "tcl-light-commercial",
+            "exactMediaGroup": "tcl-cassette-r454b",
             "localPaths": [
               "/products/catalog-official/tcl-light-commercial-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
-          "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
+          "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/light-commercial/Light%20Commercial%20HVAC%20SpecSheet%202025.pdf",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
+          "notes": "Official TCL model matrix explicitly lists all four cassette models and publishes the same cassette product photography for the capacity range."
         }
       ]
     },
@@ -2991,17 +2393,17 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "tcl-light-commercial",
+            "exactMediaGroup": "tcl-cassette-r454b",
             "localPaths": [
               "/products/catalog-official/tcl-light-commercial-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
-          "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
+          "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/light-commercial/Light%20Commercial%20HVAC%20SpecSheet%202025.pdf",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
+          "notes": "Official TCL model matrix explicitly lists all four cassette models and publishes the same cassette product photography for the capacity range."
         }
       ]
     },
@@ -3026,17 +2428,17 @@
         {
           "fieldName": "image",
           "value": {
-            "mediaFamily": "tcl-light-commercial",
+            "exactMediaGroup": "tcl-cassette-r454b",
             "localPaths": [
               "/products/catalog-official/tcl-light-commercial-family.webp"
             ],
-            "exactModelVerified": false
+            "exactModelVerified": true
           },
-          "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
+          "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/light-commercial/Light%20Commercial%20HVAC%20SpecSheet%202025.pdf",
           "sourceType": "manufacturer_product_page",
           "retrievedAt": "2026-08-09",
           "status": "verified",
-          "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
+          "notes": "Official TCL model matrix explicitly lists all four cassette models and publishes the same cassette product photography for the capacity range."
         }
       ]
     },
@@ -3045,9 +2447,10 @@
       "catalogSku": "TCLCASPAN01",
       "sourceSku": "TCLCASPAN01",
       "modelNumber": null,
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
         "exact_identity",
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -3058,21 +2461,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-93",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-light-commercial",
-            "localPaths": [
-              "/products/catalog-official/tcl-light-commercial-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
         }
       ]
     },
@@ -3081,9 +2469,10 @@
       "catalogSku": "TCLCASPAN02",
       "sourceSku": "TCLCASPAN02",
       "modelNumber": null,
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
         "exact_identity",
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -3094,21 +2483,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-94",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-light-commercial",
-            "localPaths": [
-              "/products/catalog-official/tcl-light-commercial-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
         }
       ]
     },
@@ -3117,8 +2491,9 @@
       "catalogSku": "TOSCAS09K",
       "sourceSku": "TOSCAS09K",
       "modelNumber": "TM09R32BKDI",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -3129,23 +2504,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-95",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-cassette",
-            "localPaths": [
-              "/products/catalog-official/tosot-cassette-front.webp",
-              "/products/catalog-official/tosot-cassette-angle.webp",
-              "/products/catalog-official/tosot-cassette-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
         }
       ]
     },
@@ -3154,8 +2512,9 @@
       "catalogSku": "TOSCAS12K",
       "sourceSku": "TOSCAS12K",
       "modelNumber": "TM12R32BKDI",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -3166,23 +2525,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-96",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-cassette",
-            "localPaths": [
-              "/products/catalog-official/tosot-cassette-front.webp",
-              "/products/catalog-official/tosot-cassette-angle.webp",
-              "/products/catalog-official/tosot-cassette-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
         }
       ]
     },
@@ -3191,8 +2533,9 @@
       "catalogSku": "TOSCAS18K",
       "sourceSku": "TOSCAS18K",
       "modelNumber": "TM18R32BKDI",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -3203,23 +2546,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-97",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-cassette",
-            "localPaths": [
-              "/products/catalog-official/tosot-cassette-front.webp",
-              "/products/catalog-official/tosot-cassette-angle.webp",
-              "/products/catalog-official/tosot-cassette-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
         }
       ]
     },
@@ -3228,8 +2554,9 @@
       "catalogSku": "TOSCAS24K",
       "sourceSku": "TOSCAS24K",
       "modelNumber": "TM24R32BKDI",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -3240,23 +2567,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-98",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-cassette",
-            "localPaths": [
-              "/products/catalog-official/tosot-cassette-front.webp",
-              "/products/catalog-official/tosot-cassette-angle.webp",
-              "/products/catalog-official/tosot-cassette-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
         }
       ]
     },
@@ -3265,8 +2575,9 @@
       "catalogSku": "TOSPAN01",
       "sourceSku": "TOSPAN01",
       "modelNumber": "TF05",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -3277,23 +2588,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-99",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-cassette",
-            "localPaths": [
-              "/products/catalog-official/tosot-cassette-front.webp",
-              "/products/catalog-official/tosot-cassette-angle.webp",
-              "/products/catalog-official/tosot-cassette-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
         }
       ]
     },
@@ -3302,8 +2596,9 @@
       "catalogSku": "TOSPAN02",
       "sourceSku": "TOSPAN02",
       "modelNumber": "TF06",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -3314,23 +2609,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-100",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tosot-cassette",
-            "localPaths": [
-              "/products/catalog-official/tosot-cassette-front.webp",
-              "/products/catalog-official/tosot-cassette-angle.webp",
-              "/products/catalog-official/tosot-cassette-side.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
         }
       ]
     },
@@ -3339,8 +2617,9 @@
       "catalogSku": "TCLWIREDCONT",
       "sourceSku": "TCLWIREDCONT",
       "modelNumber": "XK-120D2-50",
-      "researchStatus": "in_progress",
+      "researchStatus": "csv_only",
       "missing": [
+        "exact_image",
         "official_documents",
         "manufacturer_warranty",
         "compatibility_evidence"
@@ -3351,21 +2630,6 @@
           "sourceReference": "data/catalog/inventory-source.csv#row-101",
           "verifiedAt": null,
           "status": "source_record"
-        },
-        {
-          "fieldName": "image",
-          "value": {
-            "mediaFamily": "tcl-light-commercial",
-            "localPaths": [
-              "/products/catalog-official/tcl-light-commercial-family.webp"
-            ],
-            "exactModelVerified": false
-          },
-          "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
-          "sourceType": "manufacturer_product_page",
-          "retrievedAt": "2026-08-09",
-          "status": "verified",
-          "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
         }
       ]
     }

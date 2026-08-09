@@ -3,39 +3,830 @@
   "products": {
     "TOS09KIDU-R-32": {
       "researchStatus": "in_progress",
-      "evidence": [{ "fieldName": "modelNumber", "value": "TWH09AT19D6D", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table includes this system identifier and its indoor/outdoor component identifiers." }]
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH09AT19D6D",
+          "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true",
+          "sourceType": "manufacturer_owner_manual",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official TOSOT manual model table includes this system identifier and its indoor/outdoor component identifiers."
+        }
+      ]
     },
     "TOS09KODU-09AT19D6DO": {
       "researchStatus": "in_progress",
-      "evidence": [{ "fieldName": "modelNumber", "value": "TWH09AT19D6DO", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model." }]
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH09AT19D6DO",
+          "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true",
+          "sourceType": "manufacturer_owner_manual",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
+        }
+      ]
     },
     "TOS-18K-IDU": {
       "researchStatus": "in_progress",
-      "evidence": [{ "fieldName": "modelNumber", "value": "TWH18AT19D6D", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table includes the inventory identifier; component suffix still requires reconciliation." }]
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH18AT19D6D",
+          "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true",
+          "sourceType": "manufacturer_owner_manual",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official TOSOT manual model table includes the inventory identifier; component suffix still requires reconciliation."
+        }
+      ]
     },
     "TOS18KODU": {
       "researchStatus": "in_progress",
-      "evidence": [{ "fieldName": "modelNumber", "value": "TWH18AT19D6DO", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model." }]
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH18AT19D6DO",
+          "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true",
+          "sourceType": "manufacturer_owner_manual",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
+        }
+      ]
     },
     "TOS24KIDU": {
       "researchStatus": "in_progress",
-      "evidence": [{ "fieldName": "modelNumber", "value": "TWH24AT19D6DI", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table identifies this exact indoor-unit model." }]
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH24AT19D6DI",
+          "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true",
+          "sourceType": "manufacturer_owner_manual",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official TOSOT manual model table identifies this exact indoor-unit model."
+        }
+      ]
     },
     "TOS24KODU": {
       "researchStatus": "in_progress",
-      "evidence": [{ "fieldName": "modelNumber", "value": "TWH24AT19D6DO", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model." }]
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "TWH24AT19D6DO",
+          "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true",
+          "sourceType": "manufacturer_owner_manual",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
+        }
+      ]
     },
     "CAR36KCOIL": {
       "researchStatus": "in_progress",
-      "evidence": [{ "fieldName": "productFamily", "value": "CVAMA", "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/", "sourceType": "manufacturer_product_page", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished." }]
+      "evidence": [
+        {
+          "fieldName": "productFamily",
+          "value": "CVAMA",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
+          "sourceType": "manufacturer_product_page",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished."
+        }
+      ]
     },
     "CAR48KCOIL": {
       "researchStatus": "in_progress",
-      "evidence": [{ "fieldName": "productFamily", "value": "CVAMA", "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/", "sourceType": "manufacturer_product_page", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished." }]
+      "evidence": [
+        {
+          "fieldName": "productFamily",
+          "value": "CVAMA",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
+          "sourceType": "manufacturer_product_page",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished."
+        }
+      ]
     },
     "CAR60KCOIL": {
       "researchStatus": "in_progress",
-      "evidence": [{ "fieldName": "productFamily", "value": "CVAMA", "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/", "sourceType": "manufacturer_product_page", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished." }]
+      "evidence": [
+        {
+          "fieldName": "productFamily",
+          "value": "CVAMA",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
+          "sourceType": "manufacturer_product_page",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished."
+        }
+      ]
+    },
+    "CAR36KHPU": {
+      "name": "Carrier 3 Ton Comfort Single-Stage Air Conditioner",
+      "category": "central-air-conditioners",
+      "productType": "Outdoor unit",
+      "researchStatus": "verified",
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "26SCA536W023",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed in the CATALOG ORDERING NUMBERS table for size 36. Nomenclature position 11 (Special Feature) = 2 = Coil Optimization."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 17.6,
+            "mocp": 30,
+            "soundDb": 69,
+            "cfm": 3800
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Physical Data and Electrical Data tables, unit size 36. Factory charge 5.3 lb (2.40 kg); condenser coil 23.7 sq ft, 25 FPI, 1 row(s), 7 circuits; fan 1/10 HP at 825 RPM."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5-year parts, 10-year with registration within 90 days",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Limited Warranty section of the product data."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier residential product page for the 26SCA5 series."
+        }
+      ],
+      "specifications": {
+        "productFamily": "Carrier Comfort 26SCA5",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "coolingCapacityBtu": 36000,
+        "tonnage": 3,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "mca": 17.6,
+        "mocp": 30,
+        "ratedAmps": 13.5,
+        "fla": 0.7,
+        "soundDb": 69,
+        "cfm": 3800,
+        "suctionLineIn": "7/8",
+        "liquidLineIn": "3/8",
+        "maxLineLengthFt": 250,
+        "maxHeightDifferenceFt": 200,
+        "minCoolingAmbientF": 0
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "ratedAmps": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cfm": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "26SCA5 Product Data (catalog 26SCA5-02PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Physical, electrical and sound tables list unit sizes 18-60 including 36, 48 and 60."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "26SCA5 Installation Instructions (catalog 26SCA5-1SI)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0E/26SCA5-1SI.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Covers the 26SCA5 series, sizes 18-60."
+        },
+        {
+          "kind": "wiring_diagram",
+          "title": "26SCA5 Wiring Diagram, sizes 18-60",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0F/26SCA5-1W.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Title states sizes 18-60."
+        },
+        {
+          "kind": "brochure",
+          "title": "Comfort Series Air Conditioners brochure (models 26SCA5, 26SCA4)",
+          "url": "https://www.shareddocs.com/hvac/docs/1010/Public/04/01-824-131-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Marketing brochure. Named a product/installation document by several distributors; it is neither."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "compressor": "Included in parts coverage",
+        "coil": "Included in parts coverage",
+        "labor": null,
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "5-year parts limited warranty including compressor and coil. 10-year parts limited warranty with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. Applies to the original purchaser and is not available to subsequent owners except where local law requires. See the warranty certificate for full details.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "Carrier states ratings are matched-system dependent and directs users to the AHRI directory for current ratings. SEER2/EER2 for this condenser depend on the indoor coil or air handler it is paired with, so no standalone efficiency rating is published for the outdoor unit alone.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "CAR48KHPU": {
+      "name": "Carrier 4 Ton Comfort Single-Stage Air Conditioner",
+      "category": "central-air-conditioners",
+      "productType": "Outdoor unit",
+      "researchStatus": "conflict",
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "26SCA548W003",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "conflict",
+          "notes": "Carrier's CATALOG ORDERING NUMBERS table lists size 48 as 26SCA548W013, not 26SCA548W003. The inventory sheet's model does not appear anywhere in Carrier's product data. Position 11 of the nomenclature is Special Feature: 0=Standard, 1=Compressor Electrical Rating Change, 2=Coil Optimization. Do not publish or reorder against this model until the unit on the shelf is physically checked."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 29.1,
+            "mocp": 40,
+            "soundDb": 75,
+            "cfm": 3100
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Physical Data and Electrical Data tables, unit size 48. Factory charge 5.7 lb (2.58 kg); condenser coil 17.7 sq ft, 20 FPI, 2 row(s), 8 circuits; fan 1/5 HP at 1100 RPM."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5-year parts, 10-year with registration within 90 days",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Limited Warranty section of the product data."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier residential product page for the 26SCA5 series."
+        }
+      ],
+      "specifications": {
+        "productFamily": "Carrier Comfort 26SCA5",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "coolingCapacityBtu": 48000,
+        "tonnage": 4,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "mca": 29.1,
+        "mocp": 40,
+        "ratedAmps": 22.4,
+        "fla": 1.05,
+        "soundDb": 75,
+        "cfm": 3100,
+        "suctionLineIn": "7/8",
+        "liquidLineIn": "3/8",
+        "maxLineLengthFt": 250,
+        "maxHeightDifferenceFt": 200,
+        "minCoolingAmbientF": 0
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "ratedAmps": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cfm": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "26SCA5 Product Data (catalog 26SCA5-02PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Physical, electrical and sound tables list unit sizes 18-60 including 36, 48 and 60."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "26SCA5 Installation Instructions (catalog 26SCA5-1SI)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0E/26SCA5-1SI.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Covers the 26SCA5 series, sizes 18-60."
+        },
+        {
+          "kind": "wiring_diagram",
+          "title": "26SCA5 Wiring Diagram, sizes 18-60",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0F/26SCA5-1W.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Title states sizes 18-60."
+        },
+        {
+          "kind": "brochure",
+          "title": "Comfort Series Air Conditioners brochure (models 26SCA5, 26SCA4)",
+          "url": "https://www.shareddocs.com/hvac/docs/1010/Public/04/01-824-131-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Marketing brochure. Named a product/installation document by several distributors; it is neither."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "compressor": "Included in parts coverage",
+        "coil": "Included in parts coverage",
+        "labor": null,
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "5-year parts limited warranty including compressor and coil. 10-year parts limited warranty with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. Applies to the original purchaser and is not available to subsequent owners except where local law requires. See the warranty certificate for full details.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "Carrier states ratings are matched-system dependent and directs users to the AHRI directory for current ratings. SEER2/EER2 for this condenser depend on the indoor coil or air handler it is paired with, so no standalone efficiency rating is published for the outdoor unit alone.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "CAR60KHPU": {
+      "name": "Carrier 5 Ton Comfort Single-Stage Air Conditioner",
+      "category": "central-air-conditioners",
+      "productType": "Outdoor unit",
+      "researchStatus": "verified",
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "26SCA560W003",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Listed in the CATALOG ORDERING NUMBERS table for size 60. Nomenclature position 11 (Special Feature) = 0 = Standard."
+        },
+        {
+          "fieldName": "specifications",
+          "value": {
+            "mca": 31.1,
+            "mocp": 50,
+            "soundDb": 75,
+            "cfm": 3900
+          },
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Physical Data and Electrical Data tables, unit size 60. Factory charge 7.9 lb (3.58 kg); condenser coil 22.0 sq ft, 20 FPI, 2 row(s), 9 circuits; fan 1/4 HP at 1100 RPM."
+        },
+        {
+          "fieldName": "warranty",
+          "value": "5-year parts, 10-year with registration within 90 days",
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Limited Warranty section of the product data."
+        },
+        {
+          "fieldName": "productUrl",
+          "value": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceUrl": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+          "sourceType": "manufacturer",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Official Carrier residential product page for the 26SCA5 series."
+        }
+      ],
+      "specifications": {
+        "productFamily": "Carrier Comfort 26SCA5",
+        "refrigerant": "R-454B",
+        "refrigerantClass": "A2L",
+        "coolingCapacityBtu": 60000,
+        "tonnage": 5,
+        "voltage": "208/230V",
+        "phase": 1,
+        "frequencyHz": 60,
+        "mca": 31.1,
+        "mocp": 50,
+        "ratedAmps": 23.7,
+        "fla": 1.52,
+        "soundDb": 75,
+        "cfm": 3900,
+        "suctionLineIn": "7/8",
+        "liquidLineIn": "3/8",
+        "maxLineLengthFt": 250,
+        "maxHeightDifferenceFt": 200,
+        "minCoolingAmbientF": 0
+      },
+      "fieldSources": {
+        "productFamily": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerant": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "refrigerantClass": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "coolingCapacityBtu": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "tonnage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "voltage": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "phase": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "frequencyHz": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mca": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "mocp": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "ratedAmps": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "fla": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "soundDb": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "cfm": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "suctionLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "liquidLineIn": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxLineLengthFt": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "maxHeightDifferenceFt": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        },
+        "minCoolingAmbientF": {
+          "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-09"
+        }
+      },
+      "documents": [
+        {
+          "kind": "product_data",
+          "title": "26SCA5 Product Data (catalog 26SCA5-02PD)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Physical, electrical and sound tables list unit sizes 18-60 including 36, 48 and 60."
+        },
+        {
+          "kind": "installation_manual",
+          "title": "26SCA5 Installation Instructions (catalog 26SCA5-1SI)",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0E/26SCA5-1SI.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Covers the 26SCA5 series, sizes 18-60."
+        },
+        {
+          "kind": "wiring_diagram",
+          "title": "26SCA5 Wiring Diagram, sizes 18-60",
+          "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0F/26SCA5-1W.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Title states sizes 18-60."
+        },
+        {
+          "kind": "brochure",
+          "title": "Comfort Series Air Conditioners brochure (models 26SCA5, 26SCA4)",
+          "url": "https://www.shareddocs.com/hvac/docs/1010/Public/04/01-824-131-01.pdf",
+          "modelCoverageVerified": true,
+          "retrievedAt": "2026-08-09",
+          "coverageNote": "Marketing brochure. Named a product/installation document by several distributors; it is neither."
+        }
+      ],
+      "warranty": {
+        "parts": "5 years",
+        "partsWithRegistration": "10 years",
+        "compressor": "Included in parts coverage",
+        "coil": "Included in parts coverage",
+        "labor": null,
+        "registrationRequired": true,
+        "registrationWindowDays": 90,
+        "transferable": false,
+        "conditions": "5-year parts limited warranty including compressor and coil. 10-year parts limited warranty with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. Applies to the original purchaser and is not available to subsequent owners except where local law requires. See the warranty certificate for full details.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ahri": {
+        "status": "requires_matched_combination",
+        "referenceNumber": null,
+        "note": "Carrier states ratings are matched-system dependent and directs users to the AHRI directory for current ratings. SEER2/EER2 for this condenser depend on the indoor coil or air handler it is paired with, so no standalone efficiency rating is published for the outdoor unit alone.",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
+    },
+    "CAR70KFUR": {
+      "modelNumber": "58SC0B070M17--12",
+      "name": "Carrier Comfort 80% AFUE 70,000 BTU Gas Furnace",
+      "researchStatus": "in_progress",
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "58SC0B070M17--12",
+          "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
+          "sourceType": "manufacturer_product_page",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Corrects the letter O in the inventory family code to Carrier's numeric zero."
+        }
+      ]
+    },
+    "CAR90KFUR": {
+      "modelNumber": "58SC0B090M21--20",
+      "name": "Carrier Comfort 80% AFUE 90,000 BTU Gas Furnace",
+      "researchStatus": "in_progress",
+      "evidence": [
+        {
+          "fieldName": "modelNumber",
+          "value": "58SC0B090M21--20",
+          "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
+          "sourceType": "manufacturer_product_page",
+          "retrievedAt": "2026-08-09",
+          "status": "verified",
+          "notes": "Corrects the letter O in the inventory family code to Carrier's numeric zero."
+        }
+      ]
     }
   }
 }

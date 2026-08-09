@@ -15,8 +15,7 @@ export function SkuCard({ sku, priority = false }: { sku: StorefrontSku; priorit
       <Link href={productHref(sku)} className="relative flex aspect-[16/10] items-center justify-center bg-surface-2">
         {sku.imageVerified ? (
           <>
-            <Image src={sku.image} alt={`${sku.title} manufacturer family image`} fill loading={priority ? "eager" : "lazy"} sizes="(min-width: 1024px) 360px, 100vw" className="object-contain p-4" />
-            {!sku.imageExactModel && <span className="absolute bottom-2 left-2 rounded-full border border-line bg-surface-1/95 px-2 py-1 text-[10px] font-medium text-ink-2">Manufacturer family image</span>}
+            <Image src={sku.image} alt={`${sku.title}, model ${sku.modelNumber}`} fill loading={priority ? "eager" : "lazy"} sizes="(min-width: 1024px) 360px, 100vw" className="object-contain p-4" />
           </>
         ) : (
           <span className="flex flex-col items-center gap-2 text-ink-3"><ImageOff size={28} aria-hidden="true" /><span className="text-xs">Exact image being verified</span></span>
@@ -26,7 +25,7 @@ export function SkuCard({ sku, priority = false }: { sku: StorefrontSku; priorit
         <div className="flex flex-wrap items-center gap-2">
           <Chip tone="neutral">{sku.brand}</Chip>
           <Chip tone="neutral">{sku.categoryLabel}</Chip>
-          <Chip tone="lead">Availability confirmation required</Chip>
+          <Chip tone={sku.purchaseEligible ? "eco" : "lead"}>{sku.purchaseEligible ? "Available to order" : "Contact for price"}</Chip>
         </div>
         <div>
           <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-3">SKU {sku.sku}</p>

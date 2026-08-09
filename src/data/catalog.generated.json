@@ -24,14 +24,16 @@
     "retailPrice": 450,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
+    "image": "/products/catalog-official/tcl-tpro-indoor-front.webp",
     "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
+      "/products/catalog-official/tcl-tpro-indoor-front.webp",
+      "/products/catalog-official/tcl-tpro-indoor-angle.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000,
       "zones": "1",
@@ -40,15 +42,13 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": "Indoor head only",
     "issues": [
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -60,18 +60,18 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "tcl-ductless",
+          "exactMediaGroup": "tcl-tpro-indoor-9",
           "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
+            "/products/catalog-official/tcl-tpro-indoor-front.webp",
+            "/products/catalog-official/tcl-tpro-indoor-angle.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
+        "notes": "Official TCL TSC-09HA1/I3TI22 page publishes these two indoor-head views. The outdoor-unit row sharing the system model number is intentionally not mapped to indoor photography."
       }
     ]
   },
@@ -100,14 +100,13 @@
     "retailPrice": 200,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000,
       "zones": "1",
@@ -115,16 +114,15 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -132,22 +130,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-3",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -176,14 +158,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000,
       "zones": "1",
@@ -191,7 +172,7 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -200,8 +181,7 @@
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -209,22 +189,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-4",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -253,14 +217,16 @@
     "retailPrice": 500,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
+    "image": "/products/catalog-official/tcl-tpro-indoor-front.webp",
     "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
+      "/products/catalog-official/tcl-tpro-indoor-front.webp",
+      "/products/catalog-official/tcl-tpro-indoor-angle.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 12000,
       "zones": "1",
@@ -269,15 +235,13 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": "Bundle",
     "issues": [
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -289,18 +253,18 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "tcl-ductless",
+          "exactMediaGroup": "tcl-tpro-indoor-12",
           "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
+            "/products/catalog-official/tcl-tpro-indoor-front.webp",
+            "/products/catalog-official/tcl-tpro-indoor-angle.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-12-000-btu-tsc-12ha1-i3ti22",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
+        "notes": "Official TCL TSC-12HA1/I3TI22 page publishes these two indoor-head views. The outdoor-unit row sharing the system model number is intentionally not mapped to indoor photography."
       }
     ]
   },
@@ -329,14 +293,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 12000,
       "zones": "1",
@@ -344,7 +307,7 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -353,8 +316,7 @@
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -362,22 +324,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-6",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -406,14 +352,13 @@
     "retailPrice": 200,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 12000,
       "zones": "1",
@@ -421,17 +366,16 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -439,22 +383,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-7",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -483,14 +411,16 @@
     "retailPrice": 850,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
+    "image": "/products/catalog-official/tcl-tpro-indoor-front.webp",
     "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
+      "/products/catalog-official/tcl-tpro-indoor-front.webp",
+      "/products/catalog-official/tcl-tpro-indoor-angle.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000,
       "zones": "1",
@@ -499,16 +429,14 @@
     },
     "compatibility": [],
     "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": "Outdoor condenser only",
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -520,18 +448,18 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "tcl-ductless",
+          "exactMediaGroup": "tcl-tpro-indoor-18",
           "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
+            "/products/catalog-official/tcl-tpro-indoor-front.webp",
+            "/products/catalog-official/tcl-tpro-indoor-angle.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-18-000-btu-tsc-18ha2-i3ti21",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
+        "notes": "Official TCL TSC-18HA2/I3TI21 page publishes these two indoor-head views. Outdoor-unit rows sharing the system model number are intentionally not mapped to indoor photography."
       }
     ]
   },
@@ -560,14 +488,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000,
       "zones": "1",
@@ -575,7 +502,7 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -585,8 +512,7 @@
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -594,22 +520,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-9",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -638,14 +548,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000,
       "zones": "1",
@@ -654,7 +563,7 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -664,8 +573,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -673,22 +581,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-10",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -717,20 +609,19 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000,
       "zones": "1"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -740,8 +631,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -749,22 +639,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-11",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -793,14 +667,13 @@
     "retailPrice": 1450,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000,
       "zones": "2",
@@ -808,17 +681,16 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -826,22 +698,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-12",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -870,19 +726,18 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -897,8 +752,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -906,22 +760,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-13",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -950,14 +788,13 @@
     "retailPrice": 1400,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000,
       "zones": "2-3",
@@ -966,16 +803,15 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -983,22 +819,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-14",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -1027,14 +847,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000,
       "zones": "2-3",
@@ -1043,7 +862,7 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -1052,8 +871,7 @@
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1061,22 +879,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-15",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -1105,14 +907,13 @@
     "retailPrice": 200,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000,
       "zones": "2-3",
@@ -1121,16 +922,15 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1138,22 +938,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-16",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -1182,14 +966,13 @@
     "retailPrice": 1299,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 27000,
       "zones": "3",
@@ -1197,17 +980,16 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1215,22 +997,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-17",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -1259,14 +1025,13 @@
     "retailPrice": 1650,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 27000,
       "zones": "3",
@@ -1275,17 +1040,16 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1293,22 +1057,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-18",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -1337,14 +1085,13 @@
     "retailPrice": 1700,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 36000,
       "zones": "1",
@@ -1352,16 +1099,15 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1369,22 +1115,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-19",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -1413,14 +1143,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 36000,
       "zones": "1",
@@ -1428,7 +1157,7 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -1437,8 +1166,7 @@
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1446,22 +1174,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-20",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -1490,14 +1202,13 @@
     "retailPrice": 1599,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 36000,
       "zones": "3-4",
@@ -1505,17 +1216,16 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1523,22 +1233,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-21",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -1567,14 +1261,13 @@
     "retailPrice": 1900,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 36000,
       "zones": "3-4",
@@ -1583,17 +1276,16 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1601,22 +1293,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-22",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -1645,14 +1321,13 @@
     "retailPrice": 2199,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-ductless-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-ductless-family.webp",
-      "/products/catalog-official/tcl-multi-match-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 42000,
       "zones": "4-5",
@@ -1661,16 +1336,15 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1678,22 +1352,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-23",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-ductless",
-          "localPaths": [
-            "/products/catalog-official/tcl-ductless-family.webp",
-            "/products/catalog-official/tcl-multi-match-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL ductless and multi-match family photography; not an exact component claim."
       }
     ]
   },
@@ -1722,13 +1380,13 @@
     "retailPrice": 2500,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-advantage-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-advantage-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000,
       "zones": "1",
@@ -1737,17 +1395,16 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": "Just write 0 as ODU and AHU are bundled together",
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1755,21 +1412,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-24",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-advantage",
-          "localPaths": [
-            "/products/catalog-official/tcl-advantage-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
       }
     ]
   },
@@ -1798,13 +1440,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-advantage-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-advantage-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000,
       "zones": "1",
@@ -1813,7 +1455,7 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -1822,8 +1464,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1831,21 +1472,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-25",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-advantage",
-          "localPaths": [
-            "/products/catalog-official/tcl-advantage-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
       }
     ]
   },
@@ -1874,13 +1500,13 @@
     "retailPrice": 2900,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-advantage-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-advantage-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 36000,
       "zones": "1",
@@ -1889,17 +1515,16 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1907,21 +1532,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-26",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-advantage",
-          "localPaths": [
-            "/products/catalog-official/tcl-advantage-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
       }
     ]
   },
@@ -1950,13 +1560,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-advantage-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-advantage-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 36000,
       "zones": "1",
@@ -1965,7 +1575,7 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -1974,8 +1584,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -1983,21 +1592,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-27",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-advantage",
-          "localPaths": [
-            "/products/catalog-official/tcl-advantage-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
       }
     ]
   },
@@ -2026,13 +1620,13 @@
     "retailPrice": 3300,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-advantage-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-advantage-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 48000,
       "zones": "1",
@@ -2041,17 +1635,16 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2059,21 +1652,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-28",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-advantage",
-          "localPaths": [
-            "/products/catalog-official/tcl-advantage-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
       }
     ]
   },
@@ -2102,13 +1680,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-advantage-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-advantage-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 48000,
       "zones": "1",
@@ -2117,7 +1695,7 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -2126,8 +1704,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2135,21 +1712,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-29",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-advantage",
-          "localPaths": [
-            "/products/catalog-official/tcl-advantage-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
       }
     ]
   },
@@ -2178,13 +1740,13 @@
     "retailPrice": 3500,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-advantage-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-advantage-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 60000,
       "zones": "1",
@@ -2193,17 +1755,16 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2211,21 +1772,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-30",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-advantage",
-          "localPaths": [
-            "/products/catalog-official/tcl-advantage-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
       }
     ]
   },
@@ -2254,13 +1800,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-advantage-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-advantage-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 60000,
       "zones": "1",
@@ -2269,7 +1815,7 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -2278,8 +1824,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2287,21 +1832,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-31",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-advantage",
-          "localPaths": [
-            "/products/catalog-official/tcl-advantage-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/tcl-advantage-series",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL Advantage family image. Capacity-specific cabinet dimensions may vary."
       }
     ]
   },
@@ -2330,15 +1860,13 @@
     "retailPrice": 500,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-wall-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-wall-front.webp",
-      "/products/catalog-official/tosot-wall-angle.webp",
-      "/products/catalog-official/tosot-wall-detail.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000,
       "zones": "1",
@@ -2346,18 +1874,17 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": "Bundled price thats why theres a 0",
     "issues": [
       "product_type_inferred",
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2365,23 +1892,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-32",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-wall-mounted",
-          "localPaths": [
-            "/products/catalog-official/tosot-wall-front.webp",
-            "/products/catalog-official/tosot-wall-angle.webp",
-            "/products/catalog-official/tosot-wall-detail.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT wall-mounted family multi-angle photography."
       }
     ]
   },
@@ -2410,15 +1920,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-wall-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-wall-front.webp",
-      "/products/catalog-official/tosot-wall-angle.webp",
-      "/products/catalog-official/tosot-wall-detail.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000,
       "zones": "1",
@@ -2438,8 +1946,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2456,23 +1963,6 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official TOSOT manual model table includes this system identifier and its indoor/outdoor component identifiers."
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-wall-mounted",
-          "localPaths": [
-            "/products/catalog-official/tosot-wall-front.webp",
-            "/products/catalog-official/tosot-wall-angle.webp",
-            "/products/catalog-official/tosot-wall-detail.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT wall-mounted family multi-angle photography."
       }
     ]
   },
@@ -2501,15 +1991,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-singlezone-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-singlezone-front.webp",
-      "/products/catalog-official/tosot-singlezone-angle.webp",
-      "/products/catalog-official/tosot-singlezone-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000,
       "zones": "1",
@@ -2517,7 +2005,7 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -2528,8 +2016,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2537,23 +2024,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-34",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-single-zone-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-singlezone-front.webp",
-            "/products/catalog-official/tosot-singlezone-angle.webp",
-            "/products/catalog-official/tosot-singlezone-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT single-zone condenser family multi-angle photography."
       }
     ]
   },
@@ -2582,15 +2052,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-singlezone-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-singlezone-front.webp",
-      "/products/catalog-official/tosot-singlezone-angle.webp",
-      "/products/catalog-official/tosot-singlezone-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000
     },
@@ -2610,8 +2078,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2628,23 +2095,6 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-single-zone-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-singlezone-front.webp",
-            "/products/catalog-official/tosot-singlezone-angle.webp",
-            "/products/catalog-official/tosot-singlezone-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT single-zone condenser family multi-angle photography."
       }
     ]
   },
@@ -2673,15 +2123,13 @@
     "retailPrice": 550,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-wall-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-wall-front.webp",
-      "/products/catalog-official/tosot-wall-angle.webp",
-      "/products/catalog-official/tosot-wall-detail.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 12000,
       "zones": "1",
@@ -2689,18 +2137,17 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "product_type_inferred",
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2708,23 +2155,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-36",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-wall-mounted",
-          "localPaths": [
-            "/products/catalog-official/tosot-wall-front.webp",
-            "/products/catalog-official/tosot-wall-angle.webp",
-            "/products/catalog-official/tosot-wall-detail.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT wall-mounted family multi-angle photography."
       }
     ]
   },
@@ -2753,15 +2183,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-wall-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-wall-front.webp",
-      "/products/catalog-official/tosot-wall-angle.webp",
-      "/products/catalog-official/tosot-wall-detail.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 12000,
       "zones": "1",
@@ -2770,7 +2198,7 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -2780,8 +2208,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2789,23 +2216,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-37",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-wall-mounted",
-          "localPaths": [
-            "/products/catalog-official/tosot-wall-front.webp",
-            "/products/catalog-official/tosot-wall-angle.webp",
-            "/products/catalog-official/tosot-wall-detail.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT wall-mounted family multi-angle photography."
       }
     ]
   },
@@ -2834,15 +2244,13 @@
     "retailPrice": 550,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-singlezone-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-singlezone-front.webp",
-      "/products/catalog-official/tosot-singlezone-angle.webp",
-      "/products/catalog-official/tosot-singlezone-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 12000,
       "zones": "1",
@@ -2851,17 +2259,16 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": "Bundled with indoor unit",
     "issues": [
       "product_type_inferred",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2869,23 +2276,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-38",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-single-zone-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-singlezone-front.webp",
-            "/products/catalog-official/tosot-singlezone-angle.webp",
-            "/products/catalog-official/tosot-singlezone-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT single-zone condenser family multi-angle photography."
       }
     ]
   },
@@ -2920,9 +2310,11 @@
       "/products/catalog-official/tosot-wall-angle.webp",
       "/products/catalog-official/tosot-wall-detail.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000,
       "zones": "1",
@@ -2938,9 +2330,7 @@
       "product_type_inferred",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -2961,19 +2351,19 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "tosot-wall-mounted",
+          "exactMediaGroup": "tosot-standard-wall-18",
           "localPaths": [
             "/products/catalog-official/tosot-wall-front.webp",
             "/products/catalog-official/tosot-wall-angle.webp",
             "/products/catalog-official/tosot-wall-detail.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
-        "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
+        "sourceUrl": "https://tosotcomfort.com/models/18k-standard",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official TOSOT wall-mounted family multi-angle photography."
+        "notes": "Official TOSOT product page explicitly lists TWH18AT19D6DI/TWH18AT19D6D and uses these three indoor-unit views."
       }
     ]
   },
@@ -3002,15 +2392,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-singlezone-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-singlezone-front.webp",
-      "/products/catalog-official/tosot-singlezone-angle.webp",
-      "/products/catalog-official/tosot-singlezone-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000,
       "zones": "1",
@@ -3027,8 +2415,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3045,23 +2432,6 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-single-zone-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-singlezone-front.webp",
-            "/products/catalog-official/tosot-singlezone-angle.webp",
-            "/products/catalog-official/tosot-singlezone-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT single-zone condenser family multi-angle photography."
       }
     ]
   },
@@ -3090,15 +2460,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-multizone-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-multizone-front.webp",
-      "/products/catalog-official/tosot-multizone-angle.webp",
-      "/products/catalog-official/tosot-multizone-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000,
       "zones": "1-2",
@@ -3107,7 +2475,7 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -3117,8 +2485,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3126,23 +2493,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-41",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-multi-zone-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-multizone-front.webp",
-            "/products/catalog-official/tosot-multizone-angle.webp",
-            "/products/catalog-official/tosot-multizone-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/48k",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT multi-zone condenser family multi-angle photography."
       }
     ]
   },
@@ -3177,9 +2527,11 @@
       "/products/catalog-official/tosot-wall-angle.webp",
       "/products/catalog-official/tosot-wall-detail.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000,
       "zones": "1",
@@ -3194,9 +2546,7 @@
     "issues": [
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3217,19 +2567,19 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "tosot-wall-mounted",
+          "exactMediaGroup": "tosot-standard-wall-24",
           "localPaths": [
             "/products/catalog-official/tosot-wall-front.webp",
             "/products/catalog-official/tosot-wall-angle.webp",
             "/products/catalog-official/tosot-wall-detail.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official TOSOT wall-mounted family multi-angle photography."
+        "notes": "Official TOSOT product page explicitly lists TWH24AT19D6DI/TWH24AT19D6D and publishes the same indoor-unit views as the 18K model page."
       }
     ]
   },
@@ -3258,15 +2608,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-singlezone-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-singlezone-front.webp",
-      "/products/catalog-official/tosot-singlezone-angle.webp",
-      "/products/catalog-official/tosot-singlezone-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000,
       "zones": "1",
@@ -3282,8 +2630,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3300,23 +2647,6 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model."
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-single-zone-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-singlezone-front.webp",
-            "/products/catalog-official/tosot-singlezone-angle.webp",
-            "/products/catalog-official/tosot-singlezone-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT single-zone condenser family multi-angle photography."
       }
     ]
   },
@@ -3345,22 +2675,20 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-central-handler-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-central-handler-front.webp",
-      "/products/catalog-official/tosot-central-handler-angle.webp",
-      "/products/catalog-official/tosot-central-handler-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000,
       "zones": "1",
       "voltage": "208/230V"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -3370,8 +2698,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3379,23 +2706,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-44",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-central-handler",
-          "localPaths": [
-            "/products/catalog-official/tosot-central-handler-front.webp",
-            "/products/catalog-official/tosot-central-handler-angle.webp",
-            "/products/catalog-official/tosot-central-handler-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/2-3-ton-4",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT central air-handler family multi-angle photography."
       }
     ]
   },
@@ -3424,22 +2734,20 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-central-condenser-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-central-condenser-front.webp",
-      "/products/catalog-official/tosot-central-condenser-angle.webp",
-      "/products/catalog-official/tosot-central-condenser-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000,
       "zones": "1",
       "voltage": "208/230V"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -3449,8 +2757,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3458,23 +2765,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-45",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-central-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-central-condenser-front.webp",
-            "/products/catalog-official/tosot-central-condenser-angle.webp",
-            "/products/catalog-official/tosot-central-condenser-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/2-3-ton",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT NOVA central condenser family multi-angle photography."
       }
     ]
   },
@@ -3503,15 +2793,13 @@
     "retailPrice": 2600,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-multizone-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-multizone-front.webp",
-      "/products/catalog-official/tosot-multizone-angle.webp",
-      "/products/catalog-official/tosot-multizone-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 30000,
       "zones": "2-4",
@@ -3520,17 +2808,16 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
-    "publicationStatus": "quote_only",
+    "researchStatus": "csv_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "product_type_inferred",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3538,23 +2825,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-46",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-multi-zone-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-multizone-front.webp",
-            "/products/catalog-official/tosot-multizone-angle.webp",
-            "/products/catalog-official/tosot-multizone-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/48k",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT multi-zone condenser family multi-angle photography."
       }
     ]
   },
@@ -3583,22 +2853,20 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-central-handler-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-central-handler-front.webp",
-      "/products/catalog-official/tosot-central-handler-angle.webp",
-      "/products/catalog-official/tosot-central-handler-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 36000,
       "zones": "1",
       "voltage": "208/230V"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -3608,8 +2876,7 @@
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3617,23 +2884,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-47",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-central-handler",
-          "localPaths": [
-            "/products/catalog-official/tosot-central-handler-front.webp",
-            "/products/catalog-official/tosot-central-handler-angle.webp",
-            "/products/catalog-official/tosot-central-handler-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/2-3-ton-4",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT central air-handler family multi-angle photography."
       }
     ]
   },
@@ -3662,22 +2912,20 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-central-condenser-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-central-condenser-front.webp",
-      "/products/catalog-official/tosot-central-condenser-angle.webp",
-      "/products/catalog-official/tosot-central-condenser-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 36000,
       "zones": "1",
       "voltage": "208/230V"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -3687,8 +2935,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3696,23 +2943,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-48",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-central-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-central-condenser-front.webp",
-            "/products/catalog-official/tosot-central-condenser-angle.webp",
-            "/products/catalog-official/tosot-central-condenser-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/2-3-ton",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT NOVA central condenser family multi-angle photography."
       }
     ]
   },
@@ -3741,15 +2971,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-multizone-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-multizone-front.webp",
-      "/products/catalog-official/tosot-multizone-angle.webp",
-      "/products/catalog-official/tosot-multizone-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 42000,
       "zones": "2-5",
@@ -3757,7 +2985,7 @@
       "refrigerant": "R-410A"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -3768,8 +2996,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3777,23 +3004,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-49",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-multi-zone-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-multizone-front.webp",
-            "/products/catalog-official/tosot-multizone-angle.webp",
-            "/products/catalog-official/tosot-multizone-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/48k",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT multi-zone condenser family multi-angle photography."
       }
     ]
   },
@@ -3822,15 +3032,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-multizone-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-multizone-front.webp",
-      "/products/catalog-official/tosot-multizone-angle.webp",
-      "/products/catalog-official/tosot-multizone-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 42000,
       "zones": "2-5",
@@ -3839,7 +3047,7 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -3849,8 +3057,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3858,23 +3065,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-50",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-multi-zone-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-multizone-front.webp",
-            "/products/catalog-official/tosot-multizone-angle.webp",
-            "/products/catalog-official/tosot-multizone-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/48k",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT multi-zone condenser family multi-angle photography."
       }
     ]
   },
@@ -3903,22 +3093,20 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-central-handler-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-central-handler-front.webp",
-      "/products/catalog-official/tosot-central-handler-angle.webp",
-      "/products/catalog-official/tosot-central-handler-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 48000,
       "zones": "1",
       "voltage": "208/230V"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -3928,8 +3116,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -3937,23 +3124,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-51",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-central-handler",
-          "localPaths": [
-            "/products/catalog-official/tosot-central-handler-front.webp",
-            "/products/catalog-official/tosot-central-handler-angle.webp",
-            "/products/catalog-official/tosot-central-handler-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/2-3-ton-4",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT central air-handler family multi-angle photography."
       }
     ]
   },
@@ -3982,15 +3152,13 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-central-condenser-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-central-condenser-front.webp",
-      "/products/catalog-official/tosot-central-condenser-angle.webp",
-      "/products/catalog-official/tosot-central-condenser-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 48000,
       "zones": "1",
@@ -3999,7 +3167,7 @@
       "refrigerantClass": "A2L"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -4009,8 +3177,7 @@
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4018,23 +3185,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-52",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-central-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-central-condenser-front.webp",
-            "/products/catalog-official/tosot-central-condenser-angle.webp",
-            "/products/catalog-official/tosot-central-condenser-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/2-3-ton",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT NOVA central condenser family multi-angle photography."
       }
     ]
   },
@@ -4063,22 +3213,20 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-central-handler-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-central-handler-front.webp",
-      "/products/catalog-official/tosot-central-handler-angle.webp",
-      "/products/catalog-official/tosot-central-handler-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 60000,
       "zones": "1",
       "voltage": "208/230V"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -4088,8 +3236,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4097,23 +3244,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-53",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-central-handler",
-          "localPaths": [
-            "/products/catalog-official/tosot-central-handler-front.webp",
-            "/products/catalog-official/tosot-central-handler-angle.webp",
-            "/products/catalog-official/tosot-central-handler-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/2-3-ton-4",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT central air-handler family multi-angle photography."
       }
     ]
   },
@@ -4142,22 +3272,20 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-central-condenser-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-central-condenser-front.webp",
-      "/products/catalog-official/tosot-central-condenser-angle.webp",
-      "/products/catalog-official/tosot-central-condenser-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 60000,
       "zones": "1",
       "voltage": "208/230V"
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -4167,8 +3295,7 @@
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4176,23 +3303,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-54",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-central-condenser",
-          "localPaths": [
-            "/products/catalog-official/tosot-central-condenser-front.webp",
-            "/products/catalog-official/tosot-central-condenser-angle.webp",
-            "/products/catalog-official/tosot-central-condenser-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/2-3-ton",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT NOVA central condenser family multi-angle photography."
       }
     ]
   },
@@ -4225,9 +3335,11 @@
     "images": [
       "/products/catalog-official/carrier-fj5-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 36000,
       "zones": "1",
@@ -4243,9 +3355,7 @@
       "product_type_inferred",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4257,17 +3367,17 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-fj5",
+          "exactMediaGroup": "carrier-fj5",
           "localPaths": [
             "/products/catalog-official/carrier-fj5-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/fj5/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier FJ5 fan-coil family image."
+        "notes": "Carrier publishes one official FJ5 fan-coil image for the 36K, 48K, and 60K suffixes listed in the model family."
       }
     ]
   },
@@ -4278,7 +3388,7 @@
     "catalogSku": "CAR36KHPU",
     "slug": "car36khpu",
     "modelNumber": "26SCA536W023",
-    "name": "Carrier 3 Ton Outdoor Condenser",
+    "name": "Carrier 3 Ton Comfort Single-Stage Air Conditioner",
     "brand": "Carrier",
     "category": "central-air-conditioners",
     "productType": "Outdoor unit",
@@ -4300,18 +3410,185 @@
     "images": [
       "/products/catalog-official/carrier-26sca5-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
-    "documents": [],
-    "warranty": null,
+    "imageVerification": "verified",
+    "documents": [
+      {
+        "kind": "product_data",
+        "title": "26SCA5 Product Data (catalog 26SCA5-02PD)",
+        "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Physical, electrical and sound tables list unit sizes 18-60 including 36, 48 and 60."
+      },
+      {
+        "kind": "installation_manual",
+        "title": "26SCA5 Installation Instructions (catalog 26SCA5-1SI)",
+        "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0E/26SCA5-1SI.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Covers the 26SCA5 series, sizes 18-60."
+      },
+      {
+        "kind": "wiring_diagram",
+        "title": "26SCA5 Wiring Diagram, sizes 18-60",
+        "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0F/26SCA5-1W.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Title states sizes 18-60."
+      },
+      {
+        "kind": "brochure",
+        "title": "Comfort Series Air Conditioners brochure (models 26SCA5, 26SCA4)",
+        "url": "https://www.shareddocs.com/hvac/docs/1010/Public/04/01-824-131-01.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Marketing brochure. Named a product/installation document by several distributors; it is neither."
+      }
+    ],
+    "warranty": {
+      "parts": "5 years",
+      "partsWithRegistration": "10 years",
+      "compressor": "Included in parts coverage",
+      "coil": "Included in parts coverage",
+      "labor": null,
+      "registrationRequired": true,
+      "registrationWindowDays": 90,
+      "transferable": false,
+      "conditions": "5-year parts limited warranty including compressor and coil. 10-year parts limited warranty with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. Applies to the original purchaser and is not available to subsequent owners except where local law requires. See the warranty certificate for full details.",
+      "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+      "sourceType": "official_document",
+      "retrievedAt": "2026-08-09"
+    },
+    "ahri": {
+      "status": "requires_matched_combination",
+      "referenceNumber": null,
+      "note": "Carrier states ratings are matched-system dependent and directs users to the AHRI directory for current ratings. SEER2/EER2 for this condenser depend on the indoor coil or air handler it is paired with, so no standalone efficiency rating is published for the outdoor unit alone.",
+      "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+      "sourceType": "official_document",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerantClass": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "tonnage": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "voltage": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "phase": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "frequencyHz": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "mca": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "mocp": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ratedAmps": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "fla": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "soundDb": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "cfm": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "liquidLineIn": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "maxLineLengthFt": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "maxHeightDifferenceFt": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "minCoolingAmbientF": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 36000,
       "zones": "1",
       "voltage": "208/230V",
       "refrigerant": "R-454B",
-      "refrigerantClass": "A2L"
+      "refrigerantClass": "A2L",
+      "productFamily": "Carrier Comfort 26SCA5",
+      "coolingCapacityBtu": 36000,
+      "tonnage": 3,
+      "phase": 1,
+      "frequencyHz": 60,
+      "mca": 17.6,
+      "mocp": 30,
+      "ratedAmps": 13.5,
+      "fla": 0.7,
+      "soundDb": 69,
+      "cfm": 3800,
+      "suctionLineIn": "7/8",
+      "liquidLineIn": "3/8",
+      "maxLineLengthFt": 250,
+      "maxHeightDifferenceFt": 200,
+      "minCoolingAmbientF": 0
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -4321,9 +3598,7 @@
       "category_corrected_from_official_model_family",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4333,19 +3608,60 @@
         "status": "source_record"
       },
       {
+        "fieldName": "modelNumber",
+        "value": "26SCA536W023",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Listed in the CATALOG ORDERING NUMBERS table for size 36. Nomenclature position 11 (Special Feature) = 2 = Coil Optimization."
+      },
+      {
+        "fieldName": "specifications",
+        "value": {
+          "mca": 17.6,
+          "mocp": 30,
+          "soundDb": 69,
+          "cfm": 3800
+        },
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Physical Data and Electrical Data tables, unit size 36. Factory charge 5.3 lb (2.40 kg); condenser coil 23.7 sq ft, 25 FPI, 1 row(s), 7 circuits; fan 1/10 HP at 825 RPM."
+      },
+      {
+        "fieldName": "warranty",
+        "value": "5-year parts, 10-year with registration within 90 days",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Limited Warranty section of the product data."
+      },
+      {
+        "fieldName": "productUrl",
+        "value": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Official Carrier residential product page for the 26SCA5 series."
+      },
+      {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-26sca5",
+          "exactMediaGroup": "carrier-26sca5",
           "localPaths": [
             "/products/catalog-official/carrier-26sca5-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/us/en/residential/air-conditioners/26sca5/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier 26SCA5 family image. Cabinet height varies by capacity."
+        "notes": "Carrier publishes one official 26SCA5 product image for the 36K, 48K, and 60K suffixes. Exact suffixes are verified in Carrier model tables; cabinet height varies by capacity."
       }
     ]
   },
@@ -4378,9 +3694,11 @@
     "images": [
       "/products/catalog-official/carrier-fj5-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 48000,
       "zones": "1",
@@ -4396,9 +3714,7 @@
       "product_type_inferred",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4410,17 +3726,17 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-fj5",
+          "exactMediaGroup": "carrier-fj5",
           "localPaths": [
             "/products/catalog-official/carrier-fj5-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/fj5/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier FJ5 fan-coil family image."
+        "notes": "Carrier publishes one official FJ5 fan-coil image for the 36K, 48K, and 60K suffixes listed in the model family."
       }
     ]
   },
@@ -4431,7 +3747,7 @@
     "catalogSku": "CAR48KHPU",
     "slug": "car48khpu",
     "modelNumber": "26SCA548W003",
-    "name": "Carrier 4 Ton Outdoor Condenser",
+    "name": "Carrier 4 Ton Comfort Single-Stage Air Conditioner",
     "brand": "Carrier",
     "category": "central-air-conditioners",
     "productType": "Outdoor unit",
@@ -4453,16 +3769,185 @@
     "images": [
       "/products/catalog-official/carrier-26sca5-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
-    "documents": [],
-    "warranty": null,
+    "imageVerification": "verified",
+    "documents": [
+      {
+        "kind": "product_data",
+        "title": "26SCA5 Product Data (catalog 26SCA5-02PD)",
+        "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Physical, electrical and sound tables list unit sizes 18-60 including 36, 48 and 60."
+      },
+      {
+        "kind": "installation_manual",
+        "title": "26SCA5 Installation Instructions (catalog 26SCA5-1SI)",
+        "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0E/26SCA5-1SI.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Covers the 26SCA5 series, sizes 18-60."
+      },
+      {
+        "kind": "wiring_diagram",
+        "title": "26SCA5 Wiring Diagram, sizes 18-60",
+        "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0F/26SCA5-1W.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Title states sizes 18-60."
+      },
+      {
+        "kind": "brochure",
+        "title": "Comfort Series Air Conditioners brochure (models 26SCA5, 26SCA4)",
+        "url": "https://www.shareddocs.com/hvac/docs/1010/Public/04/01-824-131-01.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Marketing brochure. Named a product/installation document by several distributors; it is neither."
+      }
+    ],
+    "warranty": {
+      "parts": "5 years",
+      "partsWithRegistration": "10 years",
+      "compressor": "Included in parts coverage",
+      "coil": "Included in parts coverage",
+      "labor": null,
+      "registrationRequired": true,
+      "registrationWindowDays": 90,
+      "transferable": false,
+      "conditions": "5-year parts limited warranty including compressor and coil. 10-year parts limited warranty with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. Applies to the original purchaser and is not available to subsequent owners except where local law requires. See the warranty certificate for full details.",
+      "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+      "sourceType": "official_document",
+      "retrievedAt": "2026-08-09"
+    },
+    "ahri": {
+      "status": "requires_matched_combination",
+      "referenceNumber": null,
+      "note": "Carrier states ratings are matched-system dependent and directs users to the AHRI directory for current ratings. SEER2/EER2 for this condenser depend on the indoor coil or air handler it is paired with, so no standalone efficiency rating is published for the outdoor unit alone.",
+      "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+      "sourceType": "official_document",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerantClass": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "tonnage": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "voltage": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "phase": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "frequencyHz": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "mca": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "mocp": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ratedAmps": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "fla": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "soundDb": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "cfm": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "liquidLineIn": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "maxLineLengthFt": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "maxHeightDifferenceFt": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "minCoolingAmbientF": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 48000,
       "zones": "1",
-      "voltage": "208/230V"
+      "voltage": "208/230V",
+      "productFamily": "Carrier Comfort 26SCA5",
+      "refrigerant": "R-454B",
+      "refrigerantClass": "A2L",
+      "coolingCapacityBtu": 48000,
+      "tonnage": 4,
+      "phase": 1,
+      "frequencyHz": 60,
+      "mca": 29.1,
+      "mocp": 40,
+      "ratedAmps": 22.4,
+      "fla": 1.05,
+      "soundDb": 75,
+      "cfm": 3100,
+      "suctionLineIn": "7/8",
+      "liquidLineIn": "3/8",
+      "maxLineLengthFt": 250,
+      "maxHeightDifferenceFt": 200,
+      "minCoolingAmbientF": 0
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "conflict",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -4472,9 +3957,7 @@
       "category_corrected_from_official_model_family",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4484,19 +3967,60 @@
         "status": "source_record"
       },
       {
+        "fieldName": "modelNumber",
+        "value": "26SCA548W003",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "conflict",
+        "notes": "Carrier's CATALOG ORDERING NUMBERS table lists size 48 as 26SCA548W013, not 26SCA548W003. The inventory sheet's model does not appear anywhere in Carrier's product data. Position 11 of the nomenclature is Special Feature: 0=Standard, 1=Compressor Electrical Rating Change, 2=Coil Optimization. Do not publish or reorder against this model until the unit on the shelf is physically checked."
+      },
+      {
+        "fieldName": "specifications",
+        "value": {
+          "mca": 29.1,
+          "mocp": 40,
+          "soundDb": 75,
+          "cfm": 3100
+        },
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Physical Data and Electrical Data tables, unit size 48. Factory charge 5.7 lb (2.58 kg); condenser coil 17.7 sq ft, 20 FPI, 2 row(s), 8 circuits; fan 1/5 HP at 1100 RPM."
+      },
+      {
+        "fieldName": "warranty",
+        "value": "5-year parts, 10-year with registration within 90 days",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Limited Warranty section of the product data."
+      },
+      {
+        "fieldName": "productUrl",
+        "value": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Official Carrier residential product page for the 26SCA5 series."
+      },
+      {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-26sca5",
+          "exactMediaGroup": "carrier-26sca5",
           "localPaths": [
             "/products/catalog-official/carrier-26sca5-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/us/en/residential/air-conditioners/26sca5/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier 26SCA5 family image. Cabinet height varies by capacity."
+        "notes": "Carrier publishes one official 26SCA5 product image for the 36K, 48K, and 60K suffixes. Exact suffixes are verified in Carrier model tables; cabinet height varies by capacity."
       }
     ]
   },
@@ -4530,9 +4054,11 @@
       "/products/catalog-official/carrier-cvama-front.webp",
       "/products/catalog-official/carrier-cvama-cutaway.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 48000,
       "zones": "1",
@@ -4547,9 +4073,7 @@
     "issues": [
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4570,18 +4094,18 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-cvama",
+          "exactMediaGroup": "carrier-cvama",
           "localPaths": [
             "/products/catalog-official/carrier-cvama-front.webp",
             "/products/catalog-official/carrier-cvama-cutaway.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier CVAMA exterior and cutaway family views."
+        "notes": "Carrier publishes the same exterior and cutaway views for the CVAMA model family containing all three exact inventory suffixes."
       }
     ]
   },
@@ -4614,9 +4138,11 @@
     "images": [
       "/products/catalog-official/carrier-fj5-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 60000,
       "zones": "1",
@@ -4632,9 +4158,7 @@
       "product_type_inferred",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4646,17 +4170,17 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-fj5",
+          "exactMediaGroup": "carrier-fj5",
           "localPaths": [
             "/products/catalog-official/carrier-fj5-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/fj5/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier FJ5 fan-coil family image."
+        "notes": "Carrier publishes one official FJ5 fan-coil image for the 36K, 48K, and 60K suffixes listed in the model family."
       }
     ]
   },
@@ -4667,7 +4191,7 @@
     "catalogSku": "CAR60KHPU",
     "slug": "car60khpu",
     "modelNumber": "26SCA560W003",
-    "name": "Carrier 5 Ton Outdoor Condenser",
+    "name": "Carrier 5 Ton Comfort Single-Stage Air Conditioner",
     "brand": "Carrier",
     "category": "central-air-conditioners",
     "productType": "Outdoor unit",
@@ -4689,16 +4213,185 @@
     "images": [
       "/products/catalog-official/carrier-26sca5-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
-    "documents": [],
-    "warranty": null,
+    "imageVerification": "verified",
+    "documents": [
+      {
+        "kind": "product_data",
+        "title": "26SCA5 Product Data (catalog 26SCA5-02PD)",
+        "url": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Physical, electrical and sound tables list unit sizes 18-60 including 36, 48 and 60."
+      },
+      {
+        "kind": "installation_manual",
+        "title": "26SCA5 Installation Instructions (catalog 26SCA5-1SI)",
+        "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0E/26SCA5-1SI.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Covers the 26SCA5 series, sizes 18-60."
+      },
+      {
+        "kind": "wiring_diagram",
+        "title": "26SCA5 Wiring Diagram, sizes 18-60",
+        "url": "https://www.shareddocs.com/hvac/docs/1009/Public/0F/26SCA5-1W.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Title states sizes 18-60."
+      },
+      {
+        "kind": "brochure",
+        "title": "Comfort Series Air Conditioners brochure (models 26SCA5, 26SCA4)",
+        "url": "https://www.shareddocs.com/hvac/docs/1010/Public/04/01-824-131-01.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-09",
+        "coverageNote": "Marketing brochure. Named a product/installation document by several distributors; it is neither."
+      }
+    ],
+    "warranty": {
+      "parts": "5 years",
+      "partsWithRegistration": "10 years",
+      "compressor": "Included in parts coverage",
+      "coil": "Included in parts coverage",
+      "labor": null,
+      "registrationRequired": true,
+      "registrationWindowDays": 90,
+      "transferable": false,
+      "conditions": "5-year parts limited warranty including compressor and coil. 10-year parts limited warranty with registration within 90 days of original installation, except where warranty benefits cannot be conditioned on registration. Applies to the original purchaser and is not available to subsequent owners except where local law requires. See the warranty certificate for full details.",
+      "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+      "sourceType": "official_document",
+      "retrievedAt": "2026-08-09"
+    },
+    "ahri": {
+      "status": "requires_matched_combination",
+      "referenceNumber": null,
+      "note": "Carrier states ratings are matched-system dependent and directs users to the AHRI directory for current ratings. SEER2/EER2 for this condenser depend on the indoor coil or air handler it is paired with, so no standalone efficiency rating is published for the outdoor unit alone.",
+      "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+      "sourceType": "official_document",
+      "retrievedAt": "2026-08-09"
+    },
+    "fieldSources": {
+      "productFamily": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerant": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "refrigerantClass": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "coolingCapacityBtu": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "tonnage": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "voltage": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "phase": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "frequencyHz": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "mca": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "mocp": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "ratedAmps": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "fla": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "soundDb": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "cfm": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "liquidLineIn": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "maxLineLengthFt": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "maxHeightDifferenceFt": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      },
+      "minCoolingAmbientF": {
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09"
+      }
+    },
     "specifications": {
       "btu": 60000,
       "zones": "1",
-      "voltage": "208/230V"
+      "voltage": "208/230V",
+      "productFamily": "Carrier Comfort 26SCA5",
+      "refrigerant": "R-454B",
+      "refrigerantClass": "A2L",
+      "coolingCapacityBtu": 60000,
+      "tonnage": 5,
+      "phase": 1,
+      "frequencyHz": 60,
+      "mca": 31.1,
+      "mocp": 50,
+      "ratedAmps": 23.7,
+      "fla": 1.52,
+      "soundDb": 75,
+      "cfm": 3900,
+      "suctionLineIn": "7/8",
+      "liquidLineIn": "3/8",
+      "maxLineLengthFt": 250,
+      "maxHeightDifferenceFt": 200,
+      "minCoolingAmbientF": 0
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -4708,9 +4401,7 @@
       "category_corrected_from_official_model_family",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4720,19 +4411,60 @@
         "status": "source_record"
       },
       {
+        "fieldName": "modelNumber",
+        "value": "26SCA560W003",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Listed in the CATALOG ORDERING NUMBERS table for size 60. Nomenclature position 11 (Special Feature) = 0 = Standard."
+      },
+      {
+        "fieldName": "specifications",
+        "value": {
+          "mca": 31.1,
+          "mocp": 50,
+          "soundDb": 75,
+          "cfm": 3900
+        },
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Physical Data and Electrical Data tables, unit size 60. Factory charge 7.9 lb (3.58 kg); condenser coil 22.0 sq ft, 20 FPI, 2 row(s), 9 circuits; fan 1/4 HP at 1100 RPM."
+      },
+      {
+        "fieldName": "warranty",
+        "value": "5-year parts, 10-year with registration within 90 days",
+        "sourceUrl": "https://www.shareddocs.com/hvac/docs/1009/Public/08/26SCA5-02PD.pdf",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Limited Warranty section of the product data."
+      },
+      {
+        "fieldName": "productUrl",
+        "value": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+        "sourceUrl": "https://www.carrier.com/residential/en/us/products/air-conditioners/26sca5/",
+        "sourceType": "manufacturer",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Official Carrier residential product page for the 26SCA5 series."
+      },
+      {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-26sca5",
+          "exactMediaGroup": "carrier-26sca5",
           "localPaths": [
             "/products/catalog-official/carrier-26sca5-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/us/en/residential/air-conditioners/26sca5/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier 26SCA5 family image. Cabinet height varies by capacity."
+        "notes": "Carrier publishes one official 26SCA5 product image for the 36K, 48K, and 60K suffixes. Exact suffixes are verified in Carrier model tables; cabinet height varies by capacity."
       }
     ]
   },
@@ -4766,9 +4498,11 @@
       "/products/catalog-official/carrier-cvama-front.webp",
       "/products/catalog-official/carrier-cvama-cutaway.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 36000,
       "zones": "1",
@@ -4784,9 +4518,7 @@
       "product_type_inferred",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4807,18 +4539,18 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-cvama",
+          "exactMediaGroup": "carrier-cvama",
           "localPaths": [
             "/products/catalog-official/carrier-cvama-front.webp",
             "/products/catalog-official/carrier-cvama-cutaway.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier CVAMA exterior and cutaway family views."
+        "notes": "Carrier publishes the same exterior and cutaway views for the CVAMA model family containing all three exact inventory suffixes."
       }
     ]
   },
@@ -4852,9 +4584,11 @@
       "/products/catalog-official/carrier-cvama-front.webp",
       "/products/catalog-official/carrier-cvama-cutaway.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 60000,
       "zones": "1",
@@ -4870,9 +4604,7 @@
       "product_type_inferred",
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4893,18 +4625,18 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-cvama",
+          "exactMediaGroup": "carrier-cvama",
           "localPaths": [
             "/products/catalog-official/carrier-cvama-front.webp",
             "/products/catalog-official/carrier-cvama-cutaway.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier CVAMA exterior and cutaway family views."
+        "notes": "Carrier publishes the same exterior and cutaway views for the CVAMA model family containing all three exact inventory suffixes."
       }
     ]
   },
@@ -4914,8 +4646,8 @@
     "sourceSku": "CAR70KFUR",
     "catalogSku": "CAR70KFUR",
     "slug": "car70kfur",
-    "modelNumber": "58SCOB070M17--12",
-    "name": "Carrier 70k BTU Furnace",
+    "modelNumber": "58SC0B070M17--12",
+    "name": "Carrier Comfort 80% AFUE 70,000 BTU Gas Furnace",
     "brand": "Carrier",
     "category": "furnaces",
     "productType": "Furnace",
@@ -4937,9 +4669,11 @@
     "images": [
       "/products/catalog-official/carrier-58sc0-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 70000
     },
@@ -4956,9 +4690,7 @@
       "btu_inferred_from_product_name",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -4968,19 +4700,28 @@
         "status": "source_record"
       },
       {
+        "fieldName": "modelNumber",
+        "value": "58SC0B070M17--12",
+        "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Corrects the letter O in the inventory family code to Carrier's numeric zero."
+      },
+      {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-58sc0",
+          "exactMediaGroup": "carrier-58sc0",
           "localPaths": [
             "/products/catalog-official/carrier-58sc0-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier 58SC0 furnace family image. The inventory uses letter O where Carrier uses zero in the family code; exact suffix remains under review."
+        "notes": "Carrier publishes one official 58SC0 furnace image for both exact output/cabinet suffixes."
       }
     ]
   },
@@ -4990,8 +4731,8 @@
     "sourceSku": "CAR90KFUR",
     "catalogSku": "CAR90KFUR",
     "slug": "car90kfur",
-    "modelNumber": "58SCOB090M21--20",
-    "name": "Carrier 90k BTU Furnace",
+    "modelNumber": "58SC0B090M21--20",
+    "name": "Carrier Comfort 80% AFUE 90,000 BTU Gas Furnace",
     "brand": "Carrier",
     "category": "furnaces",
     "productType": "Furnace",
@@ -5013,9 +4754,11 @@
     "images": [
       "/products/catalog-official/carrier-58sc0-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 90000
     },
@@ -5032,9 +4775,7 @@
       "btu_inferred_from_product_name",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -5044,19 +4785,28 @@
         "status": "source_record"
       },
       {
+        "fieldName": "modelNumber",
+        "value": "58SC0B090M21--20",
+        "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-09",
+        "status": "verified",
+        "notes": "Corrects the letter O in the inventory family code to Carrier's numeric zero."
+      },
+      {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "carrier-58sc0",
+          "exactMediaGroup": "carrier-58sc0",
           "localPaths": [
             "/products/catalog-official/carrier-58sc0-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
         "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official Carrier 58SC0 furnace family image. The inventory uses letter O where Carrier uses zero in the family code; exact suffix remains under review."
+        "notes": "Carrier publishes one official 58SC0 furnace image for both exact output/cabinet suffixes."
       }
     ]
   },
@@ -5090,6 +4840,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5143,6 +4895,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5196,6 +4950,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5249,6 +5005,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5302,6 +5060,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5355,12 +5115,14 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
-    "publicationStatus": "quote_only",
+    "publicationStatus": "published",
     "quoteEligible": true,
-    "purchaseEligible": false,
+    "purchaseEligible": true,
     "notes": null,
     "issues": [
       "brand_inferred_from_identifier",
@@ -5407,6 +5169,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5460,6 +5224,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5513,6 +5279,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5566,6 +5334,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5619,6 +5389,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5672,6 +5444,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5725,6 +5499,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5778,6 +5554,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5831,6 +5609,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5884,6 +5664,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5937,6 +5719,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -5990,6 +5774,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -6043,6 +5829,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -6096,6 +5884,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -6149,6 +5939,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -6202,6 +5994,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -6255,6 +6049,8 @@
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
     "researchStatus": "csv_only",
@@ -6307,9 +6103,11 @@
     "images": [
       "/products/catalog-official/tcl-light-commercial-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000
     },
@@ -6326,9 +6124,7 @@
       "btu_inferred_from_product_name",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -6340,17 +6136,17 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "tcl-light-commercial",
+          "exactMediaGroup": "tcl-cassette-r454b",
           "localPaths": [
             "/products/catalog-official/tcl-light-commercial-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
-        "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
+        "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/light-commercial/Light%20Commercial%20HVAC%20SpecSheet%202025.pdf",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
+        "notes": "Official TCL model matrix explicitly lists all four cassette models and publishes the same cassette product photography for the capacity range."
       }
     ]
   },
@@ -6383,9 +6179,11 @@
     "images": [
       "/products/catalog-official/tcl-light-commercial-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 12000
     },
@@ -6402,9 +6200,7 @@
       "btu_inferred_from_product_name",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -6416,17 +6212,17 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "tcl-light-commercial",
+          "exactMediaGroup": "tcl-cassette-r454b",
           "localPaths": [
             "/products/catalog-official/tcl-light-commercial-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
-        "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
+        "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/light-commercial/Light%20Commercial%20HVAC%20SpecSheet%202025.pdf",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
+        "notes": "Official TCL model matrix explicitly lists all four cassette models and publishes the same cassette product photography for the capacity range."
       }
     ]
   },
@@ -6459,9 +6255,11 @@
     "images": [
       "/products/catalog-official/tcl-light-commercial-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000
     },
@@ -6478,9 +6276,7 @@
       "btu_inferred_from_product_name",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -6492,17 +6288,17 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "tcl-light-commercial",
+          "exactMediaGroup": "tcl-cassette-r454b",
           "localPaths": [
             "/products/catalog-official/tcl-light-commercial-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
-        "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
+        "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/light-commercial/Light%20Commercial%20HVAC%20SpecSheet%202025.pdf",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
+        "notes": "Official TCL model matrix explicitly lists all four cassette models and publishes the same cassette product photography for the capacity range."
       }
     ]
   },
@@ -6535,9 +6331,11 @@
     "images": [
       "/products/catalog-official/tcl-light-commercial-family.webp"
     ],
-    "imageVerification": "manufacturer_family",
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000
     },
@@ -6554,9 +6352,7 @@
       "btu_inferred_from_product_name",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -6568,17 +6364,17 @@
       {
         "fieldName": "image",
         "value": {
-          "mediaFamily": "tcl-light-commercial",
+          "exactMediaGroup": "tcl-cassette-r454b",
           "localPaths": [
             "/products/catalog-official/tcl-light-commercial-family.webp"
           ],
-          "exactModelVerified": false
+          "exactModelVerified": true
         },
-        "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
+        "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/light-commercial/Light%20Commercial%20HVAC%20SpecSheet%202025.pdf",
         "sourceType": "manufacturer_product_page",
         "retrievedAt": "2026-08-09",
         "status": "verified",
-        "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
+        "notes": "Official TCL model matrix explicitly lists all four cassette models and publishes the same cassette product photography for the capacity range."
       }
     ]
   },
@@ -6607,18 +6403,18 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-light-commercial-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-light-commercial-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -6632,8 +6428,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -6641,21 +6436,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-93",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-light-commercial",
-          "localPaths": [
-            "/products/catalog-official/tcl-light-commercial-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
       }
     ]
   },
@@ -6684,18 +6464,18 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-light-commercial-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-light-commercial-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -6709,8 +6489,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -6718,21 +6497,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-94",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-light-commercial",
-          "localPaths": [
-            "/products/catalog-official/tcl-light-commercial-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
       }
     ]
   },
@@ -6761,20 +6525,18 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-cassette-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-cassette-front.webp",
-      "/products/catalog-official/tosot-cassette-angle.webp",
-      "/products/catalog-official/tosot-cassette-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -6787,8 +6549,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -6796,23 +6557,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-95",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-cassette",
-          "localPaths": [
-            "/products/catalog-official/tosot-cassette-front.webp",
-            "/products/catalog-official/tosot-cassette-angle.webp",
-            "/products/catalog-official/tosot-cassette-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
       }
     ]
   },
@@ -6841,20 +6585,18 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-cassette-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-cassette-front.webp",
-      "/products/catalog-official/tosot-cassette-angle.webp",
-      "/products/catalog-official/tosot-cassette-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 12000
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -6867,8 +6609,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -6876,23 +6617,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-96",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-cassette",
-          "localPaths": [
-            "/products/catalog-official/tosot-cassette-front.webp",
-            "/products/catalog-official/tosot-cassette-angle.webp",
-            "/products/catalog-official/tosot-cassette-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
       }
     ]
   },
@@ -6921,20 +6645,18 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-cassette-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-cassette-front.webp",
-      "/products/catalog-official/tosot-cassette-angle.webp",
-      "/products/catalog-official/tosot-cassette-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 18000
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -6947,8 +6669,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -6956,23 +6677,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-97",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-cassette",
-          "localPaths": [
-            "/products/catalog-official/tosot-cassette-front.webp",
-            "/products/catalog-official/tosot-cassette-angle.webp",
-            "/products/catalog-official/tosot-cassette-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
       }
     ]
   },
@@ -7001,20 +6705,18 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-cassette-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-cassette-front.webp",
-      "/products/catalog-official/tosot-cassette-angle.webp",
-      "/products/catalog-official/tosot-cassette-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7027,8 +6729,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -7036,23 +6737,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-98",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-cassette",
-          "localPaths": [
-            "/products/catalog-official/tosot-cassette-front.webp",
-            "/products/catalog-official/tosot-cassette-angle.webp",
-            "/products/catalog-official/tosot-cassette-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
       }
     ]
   },
@@ -7081,20 +6765,18 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-cassette-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-cassette-front.webp",
-      "/products/catalog-official/tosot-cassette-angle.webp",
-      "/products/catalog-official/tosot-cassette-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 9000
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7107,8 +6789,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -7116,23 +6797,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-99",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-cassette",
-          "localPaths": [
-            "/products/catalog-official/tosot-cassette-front.webp",
-            "/products/catalog-official/tosot-cassette-angle.webp",
-            "/products/catalog-official/tosot-cassette-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
       }
     ]
   },
@@ -7161,20 +6825,18 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tosot-cassette-front.webp",
-    "images": [
-      "/products/catalog-official/tosot-cassette-front.webp",
-      "/products/catalog-official/tosot-cassette-angle.webp",
-      "/products/catalog-official/tosot-cassette-side.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {
       "btu": 24000
     },
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7187,8 +6849,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -7196,23 +6857,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-100",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tosot-cassette",
-          "localPaths": [
-            "/products/catalog-official/tosot-cassette-front.webp",
-            "/products/catalog-official/tosot-cassette-angle.webp",
-            "/products/catalog-official/tosot-cassette-side.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://tosotcomfort.com/models/12k-8-way-cassette",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TOSOT cassette family multi-angle photography; panel configuration may vary."
       }
     ]
   },
@@ -7241,16 +6885,16 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": "/products/catalog-official/tcl-light-commercial-family.webp",
-    "images": [
-      "/products/catalog-official/tcl-light-commercial-family.webp"
-    ],
-    "imageVerification": "manufacturer_family",
+    "image": null,
+    "images": [],
+    "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
+    "ahri": null,
+    "fieldSources": {},
     "specifications": {},
     "compatibility": [],
-    "researchStatus": "in_progress",
+    "researchStatus": "csv_only",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
@@ -7262,8 +6906,7 @@
       "retail_price_unverified",
       "inventory_unverified",
       "exact_image_unverified",
-      "manufacturer_research_pending",
-      "manufacturer_family_image_not_exact_model_cabinet"
+      "manufacturer_research_pending"
     ],
     "evidence": [
       {
@@ -7271,21 +6914,6 @@
         "sourceReference": "data/catalog/inventory-source.csv#row-101",
         "verifiedAt": null,
         "status": "source_record"
-      },
-      {
-        "fieldName": "image",
-        "value": {
-          "mediaFamily": "tcl-light-commercial",
-          "localPaths": [
-            "/products/catalog-official/tcl-light-commercial-family.webp"
-          ],
-          "exactModelVerified": false
-        },
-        "sourceUrl": "https://us.tcl.com/pages/hvac-light-commercial",
-        "sourceType": "manufacturer_product_page",
-        "retrievedAt": "2026-08-09",
-        "status": "verified",
-        "notes": "Official TCL light-commercial family lineup; individual components and panels may differ."
       }
     ]
   }

@@ -18,6 +18,45 @@ export const CATALOG_CATEGORIES = [
 export type CatalogCategory = (typeof CATALOG_CATEGORIES)[number]["value"];
 export type CatalogAvailability = "unknown" | "in_stock" | "low_stock" | "out_of_stock" | "lead_time";
 
+export type CatalogWarranty = {
+  parts?: string | null;
+  partsWithRegistration?: string | null;
+  compressor?: string | null;
+  coil?: string | null;
+  heatExchanger?: string | null;
+  labor?: string | null;
+  registrationRequired?: boolean;
+  registrationWindowDays?: number | null;
+  transferable?: boolean;
+  conditions?: string;
+  sourceUrl?: string;
+  sourceType?: string;
+  retrievedAt?: string;
+};
+
+export type CatalogAhri = {
+  /** `requires_matched_combination` is the honest state for a condenser sold
+   *  alone: its SEER2 depends on the indoor coil it is paired with. */
+  status: "certified" | "requires_matched_combination" | "not_applicable" | "not_found";
+  referenceNumber?: string | null;
+  certifiedModel?: string | null;
+  matchedIndoor?: string | null;
+  matchedOutdoor?: string | null;
+  note?: string;
+  sourceUrl?: string;
+  sourceType?: string;
+  retrievedAt?: string;
+};
+
+export type CatalogDocument = {
+  kind: string;
+  title: string;
+  url: string;
+  modelCoverageVerified: boolean;
+  retrievedAt?: string;
+  coverageNote?: string;
+};
+
 type CatalogRecord = {
   id: string;
   sourceRow: number;
@@ -44,8 +83,10 @@ type CatalogRecord = {
   image: string | null;
   images: string[];
   imageVerification: "unverified" | "manufacturer_family" | "verified";
-  documents: Array<{ id: string; kind: SkuDocument["kind"]; title: string; storagePath: string }>;
-  warranty: null | { compressor?: string; parts?: string; sourceUrl: string };
+  documents: CatalogDocument[];
+  warranty: null | CatalogWarranty;
+  ahri: null | CatalogAhri;
+  fieldSources: Record<string, { sourceUrl: string; sourceType: string; retrievedAt: string }>;
   specifications: Record<string, string | number>;
   researchStatus: "csv_only" | "in_progress" | "verified" | "conflict";
   publicationStatus: "quote_only" | "needs_review" | "published" | "archived";
@@ -102,7 +143,11 @@ export type StorefrontSku = {
   warrantyCompressor: string;
   warrantyParts: string;
   certifications: string[];
-  documents: SkuDocument[];
+  documents: CatalogDocument[];
+  warranty: CatalogWarranty | null;
+  ahri: CatalogAhri | null;
+  specifications: Record<string, string | number>;
+  fieldSources: Record<string, { sourceUrl: string; sourceType: string; retrievedAt: string }>;
   warehouse: { code: string; name: string; address: string };
 };
 
@@ -170,7 +215,11 @@ function toStorefrontSku(record: CatalogRecord): StorefrontSku {
     warrantyCompressor: record.warranty?.compressor ?? "",
     warrantyParts: record.warranty?.parts ?? "",
     certifications: [],
-    documents: record.documents.map((document) => ({ ...document, skuId: record.id })),
+    documents: record.documents ?? [],
+    warranty: record.warranty ?? null,
+    ahri: record.ahri ?? null,
+    specifications: record.specifications ?? {},
+    fieldSources: record.fieldSources ?? {},
     warehouse: { code: "NWK", name: "Newark Fulfillment Center", address: "Newark, CA" },
   };
 }

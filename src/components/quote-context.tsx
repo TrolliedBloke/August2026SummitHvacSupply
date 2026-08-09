@@ -2,9 +2,8 @@
 
 import * as React from "react";
 
-/* The quote list is the contractor's working cart -- but it never "checks out".
-   It collects SKUs to request pricing/availability on. Persisted to
-   localStorage so a contractor building a job over the day doesn't lose it. */
+/* One persisted cart supports both retail checkout and price-request lines.
+   Priced products can check out; unpriced or mixed carts route to a request. */
 
 export type QuoteItem = {
   skuId: string;

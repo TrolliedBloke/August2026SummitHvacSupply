@@ -13,7 +13,7 @@ export default async function CheckoutPage() {
   const trade = profile?.role === "dealer" || profile?.role === "installer" || profile?.role === "staff";
 
   const prices: PriceMap = Object.fromEntries(
-    getStorefrontSkus().map((sku) => [sku.id, { dealer: sku.dealerPrice, retail: sku.msrp }])
+    getStorefrontSkus().map((sku) => [sku.id, { dealer: sku.dealerPrice > 0 ? sku.dealerPrice : sku.msrp, retail: sku.msrp }])
   );
 
   return (

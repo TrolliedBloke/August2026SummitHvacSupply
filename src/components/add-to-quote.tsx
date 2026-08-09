@@ -34,11 +34,12 @@ export function AddToQuote({
   }
 
   const sizing = size === "sm" ? "h-9 px-3 text-sm" : "h-11 px-5 text-[15px]";
+  const purchasable = sku.purchaseEligible && sku.retailPrice !== null;
 
   return (
     <button
       onClick={handle}
-      aria-label={`Add ${sku.title} to quote`}
+      aria-label={`${purchasable ? "Add" : "Request price for"} ${sku.title}${purchasable ? " to cart" : ""}`}
       className={`inline-flex items-center justify-center gap-2 rounded-(--r-sm) font-medium
         transition-[background-color,box-shadow] duration-150 ease-out active:translate-y-px
         ${full ? "w-full" : ""} ${sizing}
@@ -49,7 +50,7 @@ export function AddToQuote({
         }`}
     >
       {added ? <Check size={16} strokeWidth={2.5} /> : <Plus size={16} strokeWidth={2.5} />}
-      {added ? "Added to quote" : "Add to quote"}
+      {added ? (purchasable ? "Added to cart" : "Added to request") : (purchasable ? "Add to cart" : "Request price")}
     </button>
   );
 }

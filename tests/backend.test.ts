@@ -88,7 +88,8 @@ describe("catalog import reconciliation", () => {
     assert.equal(new Set(skus.map((sku) => sku.sku)).size, 100);
     assert.equal(new Set(skus.map((sku) => sku.slug)).size, 100);
     assert.ok(skus.every((sku) => sku.quoteEligible));
-    assert.ok(skus.every((sku) => !sku.purchaseEligible));
+    assert.equal(skus.filter((sku) => sku.purchaseEligible).length, 23);
+    assert.ok(skus.every((sku) => sku.purchaseEligible === (sku.retailPrice !== null)));
     assert.ok(skus.every((sku) => sku.availabilityStatus === "unknown"));
     assert.ok(skus.every((sku) => sku.retailPrice === null || sku.retailPrice > 0));
     assert.ok(skus.every((sku) => !("unitCost" in sku)));
@@ -118,17 +119,33 @@ describe("catalog import reconciliation", () => {
     assert.ok(costs.records.some((record) => (record.unitCost ?? 0) > 0));
   });
 
-  it("uses manufacturer-backed imagery for every branded product without fabricating unbranded stock", async () => {
+  it("publishes only exact-model mapped imagery and never falls back to a broad family assignment", async () => {
     const skus = getStorefrontSkus();
     const branded = skus.filter((sku) => sku.brand !== "Unbranded");
+    const verified = branded.filter((sku) => sku.imageVerified);
     assert.equal(branded.length, 77);
-    assert.ok(branded.every((sku) => sku.imageVerified && sku.images.length > 0));
+    assert.equal(verified.length, 20);
+    assert.ok(verified.every((sku) => sku.imageExactModel && sku.images.length > 0));
+    assert.ok(branded.filter((sku) => !sku.imageVerified).every((sku) => sku.images.length === 0));
     assert.ok(skus.filter((sku) => sku.brand === "Unbranded").every((sku) => !sku.imageVerified && sku.images.length === 0));
-    assert.equal(catalogReconciliation.manufacturerImageCoverage, 77);
-    assert.equal(catalogReconciliation.exactModelImageCoverage, 0);
-    for (const image of new Set(branded.flatMap((sku) => sku.images))) {
+    assert.equal(catalogReconciliation.manufacturerImageCoverage, 20);
+    assert.equal(catalogReconciliation.exactModelImageCoverage, 20);
+    for (const image of new Set(verified.flatMap((sku) => sku.images))) {
       const bytes = await readFile(new URL(`../public${image}`, import.meta.url));
       assert.ok(bytes.length > 1000, `${image} is missing or unexpectedly small`);
+    }
+  });
+
+  it("documents every intentionally shared exact-model image", async () => {
+    const config = JSON.parse(await readFile(new URL("../data/catalog/exact-media.json", import.meta.url), "utf8")) as { groups: Array<{ skus: string[]; images: string[] }> };
+    const byImage = new Map<string, string[]>();
+    for (const sku of getStorefrontSkus().filter((item) => item.imageVerified)) {
+      for (const image of sku.images) byImage.set(image, [...(byImage.get(image) ?? []), sku.sku]);
+    }
+    for (const [image, skus] of byImage) {
+      if (skus.length < 2) continue;
+      const documented = new Set(config.groups.filter((group) => group.images.includes(image)).flatMap((group) => group.skus));
+      assert.ok(skus.every((sku) => documented.has(sku)), `${image} is duplicated without a manufacturer-backed mapping`);
     }
   });
 

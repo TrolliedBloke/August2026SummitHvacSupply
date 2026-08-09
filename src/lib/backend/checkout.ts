@@ -149,11 +149,16 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
     throw new Error(lineError.message);
   }
 
-  // 6. Reserve stock (FIFO) via the public-checkout reserve function.
-  const { error: reserveError } = await supabase.rpc("reserve_public_order", { p_order_id: order.id });
-  if (reserveError) {
-    await supabase.from("sales_orders").delete().eq("id", order.id);
-    throw new Error(reserveError.message);
+  // 6. Reserve FIFO stock where this catalog item is inventory-tracked. Summit
+  // also sells orderable products that are not quantity-tracked in the source
+  // catalog; those become normal pending sales orders instead of failing a
+  // public checkout merely because no inventory lot exists.
+  if (lines.some((line) => line.skuRecord.availabilityVerified)) {
+    const { error: reserveError } = await supabase.rpc("reserve_public_order", { p_order_id: order.id });
+    if (reserveError) {
+      await supabase.from("sales_orders").delete().eq("id", order.id);
+      throw new Error(reserveError.message);
+    }
   }
 
   // 7. Card payment: PaymentIntent for the order total, keyed to the order.

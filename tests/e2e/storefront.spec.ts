@@ -23,20 +23,31 @@ test("an unsigned payment claim cannot produce a paid confirmation", async ({ pa
   await expect(page.getByText("Payment received")).toHaveCount(0);
 });
 
-test("actual product page is quote-first and does not invent commerce facts", async ({ page }) => {
+test("priced retail product can be added to cart without exposing internal inventory language", async ({ page }) => {
   await page.goto("/products/sku/tcl09kidu", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: "TCL 9K Indoor Unit" })).toBeVisible();
-  await expect(page.getByText(/Official manufacturer family photography/)).toBeVisible();
+  await expect(page.getByRole("img", { name: /TCL 9K Indoor Unit, manufacturer product view 1/i })).toBeVisible();
+  await expect(page.getByText(/availability confirmation required/i)).toHaveCount(0);
+  await expect(page.getByText(/inventory source/i)).toHaveCount(0);
+  await page.getByRole("button", { name: /Add TCL 9K Indoor Unit to cart/i }).click();
+  await expect(page.getByRole("link", { name: "Go to checkout" })).toBeVisible();
+});
+
+test("exact-model media loads and supports multiple manufacturer views", async ({ page }) => {
+  await page.goto("/products/sku/tos-18k-idu", { waitUntil: "domcontentloaded" });
+  await expect(page.getByText(/Manufacturer media verified against model TWH18AT19D6D/)).toBeVisible();
   const productImage = page.getByRole("tabpanel").locator("img");
   await expect(productImage).toBeVisible();
   await expect.poll(() => productImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   await page.getByRole("button", { name: "Next view" }).click();
   await expect(page.getByRole("tab", { name: /Manufacturer product view 2/ })).toHaveAttribute("aria-selected", "true");
-  await expect(page.getByRole("heading", { name: "Availability confirmation required" })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Add .* to quote/i })).toBeVisible();
-  await expect(page.getByText(/in stock/i)).toHaveCount(0);
-  await expect(page.getByText("$0.00", { exact: true })).toHaveCount(0);
-  await expect(page.getByRole("button", { name: /add to cart/i })).toHaveCount(0);
+});
+
+test("account entry separates retail signup from wholesale application", async ({ page }) => {
+  await page.goto("/account", { waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("heading", { name: "One store, the right account for you" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Create retail account" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Apply for wholesale" })).toBeVisible();
 });
 
 for (const viewport of [

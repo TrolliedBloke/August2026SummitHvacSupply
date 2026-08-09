@@ -8,13 +8,13 @@ import { MAX_CART_QUANTITY, useQuote } from "./quote-context";
 import { productHref } from "@/lib/storefront/catalog";
 import { SaveCartAsList } from "./saved-lists";
 
-/* Right-side quote list for products that still require staff-verified price,
-   availability, fulfillment, and compatibility. */
+/* Shared cart for retail checkout and sales-assisted equipment requests. */
 export function QuoteDrawer() {
   const { items, isOpen, close, setQty, remove, clear, count } = useQuote();
   const panelRef = React.useRef<HTMLElement>(null);
   const closeRef = React.useRef<HTMLButtonElement>(null);
   const previousFocus = React.useRef<HTMLElement | null>(null);
+  const readyForCheckout = items.length > 0 && items.every((item) => item.unitPrice > 0);
 
   // Lock scroll + close on Escape while open.
   React.useEffect(() => {
@@ -73,16 +73,16 @@ export function QuoteDrawer() {
         <header className="flex items-center justify-between border-b border-line px-5 py-4">
           <div className="flex flex-col">
             <h2 id="quote-drawer-title" className="font-display text-lg font-semibold tracking-tight text-ink-1">
-              Your quote list
+              Your cart
             </h2>
             <span className="text-xs text-ink-3">
-              {count} {count === 1 ? "unit" : "units"} · no stock is reserved yet
+              {count} {count === 1 ? "item" : "items"}
             </span>
           </div>
           <button
             ref={closeRef}
             onClick={close}
-            aria-label="Close quote list"
+            aria-label="Close cart"
             className="grid size-11 place-items-center rounded-(--r-sm) text-ink-2 hover:bg-surface-2 hover:text-ink-1"
           >
             <X size={18} />
@@ -95,8 +95,7 @@ export function QuoteDrawer() {
               <FileText size={22} />
             </span>
             <p className="text-sm text-ink-2">
-              Your quote list is empty. Add exact catalog items, then request
-              verified pricing and availability in one step.
+              Your cart is empty. Browse equipment and supplies by exact SKU or model number.
             </p>
             <Link
               href="/products"
@@ -169,11 +168,11 @@ export function QuoteDrawer() {
 
             <footer className="border-t border-line bg-surface-2 px-5 py-4">
               <Link
-                href="/quote"
+                href={readyForCheckout ? "/checkout" : "/quote"}
                 onClick={close}
                 className="flex h-12 w-full items-center justify-center gap-2 rounded-(--r-sm) bg-brand text-[15px] font-medium text-brand-ink shadow-[var(--shadow-sm)] transition-colors hover:bg-brand-hover"
               >
-                Request verified price + availability
+                {readyForCheckout ? "Go to checkout" : "Request pricing"}
               </Link>
               <Link
                 href="/contact"
@@ -186,7 +185,7 @@ export function QuoteDrawer() {
                 onClick={clear}
                 className="mt-2 w-full text-center text-xs text-ink-3 hover:text-danger"
               >
-                Clear quote list
+                Clear cart
               </button>
             </footer>
           </>

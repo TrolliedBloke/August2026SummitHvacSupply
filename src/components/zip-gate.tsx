@@ -4,8 +4,7 @@ import * as React from "react";
 import { MapPin, Check } from "lucide-react";
 import { useFulfillment } from "./fulfillment-context";
 
-/* Compact delivery-area lookup. Product inventory remains explicitly unknown
-   until staff confirms the quote. */
+/* Compact delivery-area lookup. */
 
 export function ZipGate({ className = "" }: { className?: string }) {
   const { zip, zone, setZip } = useFulfillment();
@@ -25,7 +24,7 @@ export function ZipGate({ className = "" }: { className?: string }) {
       {zip && zone ? (
         <span className="inline-flex items-center gap-1.5 text-sm text-ink-2">
           <Check size={14} className="text-eco" strokeWidth={2.5} />
-          Delivery area: <span className="font-medium text-ink-1">{zone.label}</span> ({zip}). Product availability is confirmed by quote.
+          Delivery area: <span className="font-medium text-ink-1">{zone.label}</span> ({zip}). Options appear at checkout.
           <button
             type="button"
             onClick={() => {

@@ -1,0 +1,85 @@
+{
+  "policy": "Every mapping is keyed to an exact catalog SKU. Shared files are allowed only when the manufacturer source explicitly lists every mapped model and presents the same photography for them.",
+  "groups": [
+    {
+      "id": "tcl-tpro-indoor-9",
+      "skus": ["TCL09KIDU"],
+      "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-9-000-btu-tsc-09ha1-i3ti22",
+      "retrievedAt": "2026-08-09",
+      "notes": "Official TCL TSC-09HA1/I3TI22 page publishes these two indoor-head views. The outdoor-unit row sharing the system model number is intentionally not mapped to indoor photography.",
+      "images": ["/products/catalog-official/tcl-tpro-indoor-front.webp", "/products/catalog-official/tcl-tpro-indoor-angle.webp"]
+    },
+    {
+      "id": "tcl-tpro-indoor-12",
+      "skus": ["TCL12KIDU"],
+      "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-115v-12-000-btu-tsc-12ha1-i3ti22",
+      "retrievedAt": "2026-08-09",
+      "notes": "Official TCL TSC-12HA1/I3TI22 page publishes these two indoor-head views. The outdoor-unit row sharing the system model number is intentionally not mapped to indoor photography.",
+      "images": ["/products/catalog-official/tcl-tpro-indoor-front.webp", "/products/catalog-official/tcl-tpro-indoor-angle.webp"]
+    },
+    {
+      "id": "tcl-tpro-indoor-18",
+      "skus": ["TCL18KIDU-R-410A"],
+      "sourceUrl": "https://us.tcl.com/products/mini-split-air-conditioner-t-pro-230v-18-000-btu-tsc-18ha2-i3ti21",
+      "retrievedAt": "2026-08-09",
+      "notes": "Official TCL TSC-18HA2/I3TI21 page publishes these two indoor-head views. Outdoor-unit rows sharing the system model number are intentionally not mapped to indoor photography.",
+      "images": ["/products/catalog-official/tcl-tpro-indoor-front.webp", "/products/catalog-official/tcl-tpro-indoor-angle.webp"]
+    },
+    {
+      "id": "tosot-standard-wall-18",
+      "skus": ["TOS-18K-IDU"],
+      "sourceUrl": "https://tosotcomfort.com/models/18k-standard",
+      "retrievedAt": "2026-08-09",
+      "notes": "Official TOSOT product page explicitly lists TWH18AT19D6DI/TWH18AT19D6D and uses these three indoor-unit views.",
+      "images": ["/products/catalog-official/tosot-wall-front.webp", "/products/catalog-official/tosot-wall-angle.webp", "/products/catalog-official/tosot-wall-detail.webp"]
+    },
+    {
+      "id": "tosot-standard-wall-24",
+      "skus": ["TOS24KIDU"],
+      "sourceUrl": "https://tosotcomfort.com/models/24k-standard-2",
+      "retrievedAt": "2026-08-09",
+      "notes": "Official TOSOT product page explicitly lists TWH24AT19D6DI/TWH24AT19D6D and publishes the same indoor-unit views as the 18K model page.",
+      "images": ["/products/catalog-official/tosot-wall-front.webp", "/products/catalog-official/tosot-wall-angle.webp", "/products/catalog-official/tosot-wall-detail.webp"]
+    },
+    {
+      "id": "carrier-26sca5",
+      "skus": ["CAR36KHPU", "CAR48KHPU", "CAR60KHPU"],
+      "sourceUrl": "https://www.carrier.com/us/en/residential/air-conditioners/26sca5/",
+      "retrievedAt": "2026-08-09",
+      "notes": "Carrier publishes one official 26SCA5 product image for the 36K, 48K, and 60K suffixes. Exact suffixes are verified in Carrier model tables; cabinet height varies by capacity.",
+      "images": ["/products/catalog-official/carrier-26sca5-family.webp"]
+    },
+    {
+      "id": "carrier-fj5",
+      "skus": ["CAR36KAHU", "CAR48KAHU", "CAR60KAHU"],
+      "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/fj5/",
+      "retrievedAt": "2026-08-09",
+      "notes": "Carrier publishes one official FJ5 fan-coil image for the 36K, 48K, and 60K suffixes listed in the model family.",
+      "images": ["/products/catalog-official/carrier-fj5-family.webp"]
+    },
+    {
+      "id": "carrier-cvama",
+      "skus": ["CAR36KCOIL", "CAR48KCOIL", "CAR60KCOIL"],
+      "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/",
+      "retrievedAt": "2026-08-09",
+      "notes": "Carrier publishes the same exterior and cutaway views for the CVAMA model family containing all three exact inventory suffixes.",
+      "images": ["/products/catalog-official/carrier-cvama-front.webp", "/products/catalog-official/carrier-cvama-cutaway.webp"]
+    },
+    {
+      "id": "carrier-58sc0",
+      "skus": ["CAR70KFUR", "CAR90KFUR"],
+      "sourceUrl": "https://www.carrier.com/us/en/residential/furnaces/58sc0/",
+      "retrievedAt": "2026-08-09",
+      "notes": "Carrier publishes one official 58SC0 furnace image for both exact output/cabinet suffixes.",
+      "images": ["/products/catalog-official/carrier-58sc0-family.webp"]
+    },
+    {
+      "id": "tcl-cassette-r454b",
+      "skus": ["TCLCAS9K", "TCLCAS12K", "TCLCAS18K", "TCLCAS24K"],
+      "sourceUrl": "https://www.tcl.com/usca/content/dam/tcl/product/hvac/documents/light-commercial/Light%20Commercial%20HVAC%20SpecSheet%202025.pdf",
+      "retrievedAt": "2026-08-09",
+      "notes": "Official TCL model matrix explicitly lists all four cassette models and publishes the same cassette product photography for the capacity range.",
+      "images": ["/products/catalog-official/tcl-light-commercial-family.webp"]
+    }
+  ]
+}

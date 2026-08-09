@@ -59,6 +59,7 @@ type SearchResult = {
   voltage: string;
   available: number;
   availabilityStatus: string;
+  purchaseEligible: boolean;
   href: string;
 };
 
@@ -206,7 +207,7 @@ function SearchField({
                 </span>
                 <span className="mt-0.5 block text-sm font-medium text-ink-1">{result.title}</span>
                 <span className="mt-0.5 block text-xs text-ink-3">
-                  {result.modelNumber}{result.btu ? ` · ${result.btu.toLocaleString()} BTU` : ""}{result.voltage ? ` · ${result.voltage}` : ""} · {result.availabilityStatus === "unknown" ? "availability confirmation required" : result.availabilityStatus.replaceAll("_", " ")}
+                  {result.modelNumber}{result.btu ? ` · ${result.btu.toLocaleString()} BTU` : ""}{result.voltage ? ` · ${result.voltage}` : ""} · {result.purchaseEligible ? "available to order" : "contact for price"}
                 </span>
               </Link>
             </li>
@@ -359,7 +360,7 @@ function CartButton() {
   return (
     <button
       onClick={toggle}
-      aria-label={showCount ? `Open your quote list (${count} ${count === 1 ? "item" : "items"})` : "Open your quote list"}
+      aria-label={showCount ? `Open your cart (${count} ${count === 1 ? "item" : "items"})` : "Open your cart"}
       className="relative grid size-11 place-items-center rounded-(--r-sm) border border-line-strong bg-surface-1 text-ink-1 transition-colors hover:bg-surface-2"
     >
       <ClipboardList size={18} strokeWidth={2.1} />
@@ -420,14 +421,14 @@ export function SiteNav() {
             <SearchPopover />
           </div>
           <Link
-            href="/portal/login"
+            href="/account"
             aria-label="Account portal"
             className="hidden size-11 place-items-center rounded-(--r-sm) text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink-1 sm:grid xl:hidden"
           >
             <Lock size={16} strokeWidth={2.2} />
           </Link>
           <Link
-            href="/portal/login"
+            href="/account"
             className="hidden items-center gap-1.5 rounded-(--r-sm) px-2.5 py-2 text-sm font-medium text-ink-2 transition-colors hover:text-ink-1 xl:inline-flex"
           >
             <Lock size={14} strokeWidth={2.2} />
@@ -507,7 +508,7 @@ export function SiteNav() {
                   Get help
                 </Link>
                 <Link
-                  href="/portal/login"
+                  href="/account"
                   onClick={closeMobile}
                   className="flex h-11 items-center justify-center gap-1.5 rounded-(--r-sm) border border-line-strong bg-surface-1 text-sm font-medium text-ink-1"
                 >

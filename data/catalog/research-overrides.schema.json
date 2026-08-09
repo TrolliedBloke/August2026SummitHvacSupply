@@ -10,6 +10,10 @@
       "additionalProperties": {
         "type": "object",
         "properties": {
+          "name": { "type": "string" },
+          "modelNumber": { "type": "string" },
+          "category": { "type": "string" },
+          "productType": { "type": "string" },
           "researchStatus": { "enum": ["in_progress", "verified", "conflict"] },
           "specifications": { "type": "object" },
           "warranty": { "type": ["object", "null"] },

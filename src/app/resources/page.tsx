@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FileText, BookOpen, Leaf, ArrowRight, ExternalLink } from "lucide-react";
 import { Container, Eyebrow, Chip } from "@/components/ui";
 import { REBATES, SITE } from "@/lib/site";
-import { documentHref, getStorefrontSkus, productHref } from "@/lib/storefront/catalog";
+import { getStorefrontSkus, productHref } from "@/lib/storefront/catalog";
 import { SEO_GUIDES } from "@/lib/seo/guides";
 import { SEO_TOOLS } from "@/lib/seo/tools";
 import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
@@ -153,12 +153,14 @@ export default function ResourcesPage() {
                 <p className="mt-1 text-xs text-ink-3">{sku.modelNumber} · {sku.btu.toLocaleString()} BTU · {sku.voltage}</p>
               </div>
               <div className="flex flex-wrap gap-2">
+                {/* Documents now link to the manufacturer's own hosted file,
+                    verified to cover this model, rather than a generated stub. */}
                 {sku.documents.map((doc) => (
                   <DocChip
-                    key={doc.id}
-                    href={documentHref(doc)}
-                    icon={doc.kind === "spec_sheet" ? <FileText size={14} /> : <BookOpen size={14} />}
-                    label={doc.kind === "spec_sheet" ? "Spec sheet" : "Install manual"}
+                    key={doc.url}
+                    href={doc.url}
+                    icon={doc.kind === "installation_manual" ? <BookOpen size={14} /> : <FileText size={14} />}
+                    label={doc.title}
                   />
                 ))}
               </div>
