@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
-import { SERIES } from "@/lib/products";
+import { getCatalogFacets } from "@/lib/storefront/catalog";
 
 export function SiteFooter() {
   return (
@@ -40,9 +40,13 @@ export function SiteFooter() {
           </div>
 
           <FooterCol title="Products">
-            {SERIES.map((s) => (
-              <FooterLink key={s.slug} href={`/products/${s.slug}`}>
-                {s.name}
+            {/* Only categories that actually hold stock-listed SKUs. A fixed
+                slice of the category constant linked to "Central systems",
+                which has no products, while hiding cassettes, line sets,
+                controls and installation supplies -- 35 of the 100 SKUs. */}
+            {getCatalogFacets().categories.map((category) => (
+              <FooterLink key={category.value} href={`/products?category=${category.value}`}>
+                {category.label}
               </FooterLink>
             ))}
           </FooterCol>
@@ -89,7 +93,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-7 flex flex-col gap-2 border-t border-brand-ink/20 pt-5 text-xs text-brand-ink/70 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Summit HVAC Supply. Bay Area TCL HVAC supply from Newark, CA.</p>
+          <p>© {new Date().getFullYear()} Summit HVAC Supply. Bay Area HVAC equipment supply from Newark, CA.</p>
           <p className="text-white/70">
             Equipment supply only. Installation is handled by qualified local contractors.
           </p>

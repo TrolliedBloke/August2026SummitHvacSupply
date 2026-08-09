@@ -38,6 +38,15 @@ export type EventSummary = {
   zeroResultQueries: string[];
 };
 
+export async function analyticsPersistenceHealth(): Promise<{ healthy: boolean; detail: string }> {
+  const supabase = createServiceRoleSupabaseClient();
+  if (!supabase) return { healthy: false, detail: "Supabase persistence is not configured" };
+  const { error } = await supabase.from("site_events").select("id", { head: true, count: "exact" }).limit(1);
+  return error
+    ? { healthy: false, detail: `site_events unavailable: ${error.message}` }
+    : { healthy: true, detail: "site_events is writable and queryable" };
+}
+
 /** Last-30-days rollup for the admin metrics card. */
 export async function getEventSummary(): Promise<EventSummary> {
   const supabase = createServiceRoleSupabaseClient();

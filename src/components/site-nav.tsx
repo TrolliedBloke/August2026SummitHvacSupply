@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Lock, Search, ChevronDown, Phone, ShoppingCart } from "lucide-react";
+import { Menu, X, Lock, Search, ChevronDown, Phone, ClipboardList } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
 import { SITE } from "@/lib/site";
@@ -58,6 +58,7 @@ type SearchResult = {
   btu: number;
   voltage: string;
   available: number;
+  availabilityStatus: string;
   href: string;
 };
 
@@ -205,7 +206,7 @@ function SearchField({
                 </span>
                 <span className="mt-0.5 block text-sm font-medium text-ink-1">{result.title}</span>
                 <span className="mt-0.5 block text-xs text-ink-3">
-                  {result.modelNumber} · {result.btu.toLocaleString()} BTU · {result.voltage} · {result.available} available
+                  {result.modelNumber}{result.btu ? ` · ${result.btu.toLocaleString()} BTU` : ""}{result.voltage ? ` · ${result.voltage}` : ""} · {result.availabilityStatus === "unknown" ? "availability confirmation required" : result.availabilityStatus.replaceAll("_", " ")}
                 </span>
               </Link>
             </li>
@@ -358,10 +359,10 @@ function CartButton() {
   return (
     <button
       onClick={toggle}
-      aria-label={showCount ? `Open your cart (${count} ${count === 1 ? "item" : "items"})` : "Open your cart"}
+      aria-label={showCount ? `Open your quote list (${count} ${count === 1 ? "item" : "items"})` : "Open your quote list"}
       className="relative grid size-11 place-items-center rounded-(--r-sm) border border-line-strong bg-surface-1 text-ink-1 transition-colors hover:bg-surface-2"
     >
-      <ShoppingCart size={18} strokeWidth={2.1} />
+      <ClipboardList size={18} strokeWidth={2.1} />
       {showCount && (
         <span className="tnum absolute -right-1.5 -top-1.5 grid min-w-[18px] place-items-center rounded-full bg-brand px-1 font-mono text-[10px] font-medium leading-[18px] text-brand-ink">
           {count}

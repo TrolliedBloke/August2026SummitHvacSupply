@@ -11,14 +11,14 @@ export function ProductCatalog() {
     <>
       <section className="border-b border-line bg-surface-1">
         <Container className="py-12 lg:py-14">
-          <Eyebrow>The TCL lineup</Eyebrow>
+          <Eyebrow>Wholesale + retail HVAC catalog</Eyebrow>
           <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
-            Find the right SKU, by model, BTU, stock, and documents.
+            Find equipment and supplies by SKU, model, brand, and capacity.
           </h1>
           <p className="mt-3 max-w-2xl text-ink-2">
-            Search by SKU or model number, filter by capacity and unit type, then
-            verify price, Newark stock, certifications, and PDF documents before
-            adding items to a quote or reserve order.
+            The catalog reflects our current inventory list. Availability, exact
+            imagery, compatibility, and manufacturer documents are confirmed before
+            an order is accepted. Add any product to a quote for a verified response.
           </p>
           <div className="mt-5">
             <ZipGate />

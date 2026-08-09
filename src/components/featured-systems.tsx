@@ -5,19 +5,20 @@ import { getStorefrontSkus, type StorefrontSku } from "@/lib/storefront/catalog"
 
 /* One representative unit per series lane, cheapest in-stock first — the
    homepage sells actual systems with actual prices, not abstractions. */
-const FEATURED_SERIES = ["breezein", "multi-zone", "central-system", "light-commercial"];
+const FEATURED_SERIES = ["mini-splits", "central-heat-pumps", "air-handlers", "installation-supplies"];
 
 export function getFeaturedSkus(): StorefrontSku[] {
   const skus = getStorefrontSkus();
   return FEATURED_SERIES.map((slug) =>
     skus
-      .filter((sku) => sku.seriesSlug === slug && sku.available > 0)
-      .sort((a, b) => a.msrp - b.msrp)[0]
+      .filter((sku) => sku.seriesSlug === slug)
+      .sort((a, b) => (a.retailPrice ?? Number.POSITIVE_INFINITY) - (b.retailPrice ?? Number.POSITIVE_INFINITY))[0]
   ).filter((sku): sku is StorefrontSku => Boolean(sku));
 }
 
 export function startingPrice(): number {
-  return Math.min(...getStorefrontSkus().map((sku) => sku.msrp));
+  const prices = getStorefrontSkus().flatMap((sku) => sku.retailPrice === null ? [] : [sku.retailPrice]);
+  return prices.length ? Math.min(...prices) : 0;
 }
 
 export function FeaturedSystems() {
@@ -30,10 +31,10 @@ export function FeaturedSystems() {
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1 sm:text-3xl">
-              In stock in Newark right now
+              Current HVAC catalog
             </h2>
             <p className="mt-2 text-ink-2">
-              Real units, real prices — same-day will-call pickup or Bay Area delivery.
+              Search exact SKUs and request verified price, availability, and compatibility.
             </p>
           </div>
           <Link

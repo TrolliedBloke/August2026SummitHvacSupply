@@ -8,6 +8,11 @@ import { pageMetadata } from "@/lib/seo/metadata";
 import { getSeoTool, SEO_TOOLS } from "@/lib/seo/tools";
 import { getStorefrontSkus, productHref } from "@/lib/storefront/catalog";
 
+// Every valid slug is known at build time. Without this, an unknown slug is
+// rendered on demand and notFound() is served with HTTP 200 -- a soft 404 that
+// lets search engines index junk URLs. Unknown params now 404 outright.
+export const dynamicParams = false;
+
 export function generateStaticParams() { return SEO_TOOLS.map((tool) => ({ slug: tool.slug })); }
 export async function generateMetadata({ params }: PageProps<"/tools/[slug]">): Promise<Metadata> { const { slug } = await params; const tool = getSeoTool(slug); return tool ? pageMetadata({ title: tool.title, description: tool.description, path: `/tools/${tool.slug}` }) : { title: "Tool not found" }; }
 

@@ -206,6 +206,18 @@ export const getSeriesCardSummaries = unstable_cache(loadSeriesCardSummaries, ["
 
 export async function createQuoteRequest(input: unknown) {
   const parsed = quoteRequestSchema.parse(input);
+  const canonicalLines = parsed.lines.map((line) => {
+    const product = getStorefrontSku(line.skuId) ?? getStorefrontSku(line.sku);
+    if (!product || !product.quoteEligible) throw new Error(`Product ${line.sku} is not available for quoting.`);
+    return {
+      skuId: product.id,
+      sku: product.sku,
+      modelNumber: product.modelNumber,
+      productName: product.title,
+      quantity: line.quantity,
+    };
+  });
+  const canonicalRequest = { ...parsed, lines: canonicalLines };
   const supabase = createServerSupabaseClient();
 
   if (supabase) {
@@ -220,9 +232,9 @@ export async function createQuoteRequest(input: unknown) {
         need: parsed.need,
       });
     if (error) throw new Error(error.message);
-    if (parsed.lines.length > 0) {
+    if (canonicalLines.length > 0) {
       const { error: lineError } = await supabase.from("quote_request_lines").insert(
-        parsed.lines.map((line) => ({
+        canonicalLines.map((line) => ({
           quote_request_id: id,
           series_slug: line.sku,
           product_name: `${line.productName} (${line.modelNumber})`,
@@ -237,7 +249,7 @@ export async function createQuoteRequest(input: unknown) {
   return {
     id: `qr-${Date.now()}`,
     mode: "seeded" as const,
-    prepared: toPreparedQuote(parsed),
+    prepared: toPreparedQuote(canonicalRequest),
   };
 }
 

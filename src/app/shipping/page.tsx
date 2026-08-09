@@ -21,21 +21,21 @@ export default function ShippingPage() {
           items={[
             <>
               <strong className="font-medium text-ink-1">Will-call pickup — free.</strong>{" "}
-              Order by 2:00p PT and pick up the same day at{" "}
+              After staff confirms the item is ready, schedule pickup at{" "}
               {SITE.address.full}. {SITE.hours.split("·")[0].trim()}. This is
               the fastest and cheapest option, and the only one with no freight
               risk at all.
             </>,
             <>
               <strong className="font-medium text-ink-1">Bay Area jobsite delivery.</strong>{" "}
-              1–3 business days to {SITE.serviceArea}. Free to Newark; other
-              cities are quoted by delivery zone at checkout.
+              Timing and fees to {SITE.serviceArea} are confirmed on the quote
+              before the order is accepted.
             </>,
             <>
               <strong className="font-medium text-ink-1">LTL freight.</strong>{" "}
               Curbside delivery beyond our local radius, including{" "}
-              {SITE.broaderServiceArea}. Cost is quoted after the order is
-              placed and confirmed with you before anything is charged.
+              {SITE.broaderServiceArea}. Cost and carrier timing are quoted
+              before the order is accepted or anything is charged.
             </>,
           ]}
         />
@@ -81,14 +81,12 @@ export default function ShippingPage() {
         <PolicyList
           items={[
             <>
-              <strong className="font-medium text-ink-1">In stock in Newark:</strong>{" "}
-              same-day will-call if ordered by 2:00p PT; 1–3 business days for
-              Bay Area delivery.
+              <strong className="font-medium text-ink-1">Staff-confirmed Newark inventory:</strong>{" "}
+              the quote states the available pickup window and local-delivery estimate.
             </>,
             <>
-              <strong className="font-medium text-ink-1">In stock, freight:</strong>{" "}
-              typically 3–7 business days in transit depending on distance, plus
-              carrier scheduling for the delivery appointment.
+              <strong className="font-medium text-ink-1">Freight:</strong>{" "}
+              carrier timing is quoted by destination and equipment class.
             </>,
             <>
               <strong className="font-medium text-ink-1">Special order:</strong>{" "}
@@ -98,9 +96,8 @@ export default function ShippingPage() {
           ]}
         />
         <p className="text-ink-3">
-          Stock counts shown on product pages reflect Newark shelf inventory. If
-          a unit is committed to another order between your checkout and our
-          pick, we call you the same day rather than letting the order sit.
+          The current imported catalog does not publish shelf counts. Staff confirms
+          inventory, reservation terms, and fulfillment timing before accepting an order.
         </p>
       </PolicySection>
 

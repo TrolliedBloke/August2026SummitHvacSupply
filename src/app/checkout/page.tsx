@@ -3,10 +3,12 @@ import { Container } from "@/components/ui";
 import { CheckoutClient, type PriceMap } from "@/components/checkout-client";
 import { getStorefrontSkus } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
+import { redirect } from "next/navigation";
 
 export const metadata = { title: "Checkout", robots: { index: false, follow: false } };
 
 export default async function CheckoutPage() {
+  if (!getStorefrontSkus().some((sku) => sku.purchaseEligible)) redirect("/quote");
   const profile = await getSessionProfile();
   const trade = profile?.role === "dealer" || profile?.role === "installer" || profile?.role === "staff";
 

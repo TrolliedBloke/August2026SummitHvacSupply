@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { dispatchAbandonedCarts, dispatchBackInStock } from "@/lib/backend/lifecycle";
+import { cleanupExpiredCheckouts } from "@/lib/backend/checkout";
 
 /**
  * Runs both lifecycle flows. Vercel cron hits GET hourly (vercel.json).
@@ -15,11 +16,12 @@ function authorized(request: Request): boolean {
 }
 
 async function run(advanceMinutes = 0) {
-  const [stock, carts] = await Promise.all([
+  const [stock, carts, expiredCheckouts] = await Promise.all([
     dispatchBackInStock(),
     dispatchAbandonedCarts(advanceMinutes),
+    cleanupExpiredCheckouts(),
   ]);
-  return { ok: true, backInStockSent: stock.sent, cartEmailsSent: carts.sent };
+  return { ok: true, backInStockSent: stock.sent, cartEmailsSent: carts.sent, expiredCheckouts };
 }
 
 export async function GET(request: Request) {

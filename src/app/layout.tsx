@@ -22,22 +22,22 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-jb", di
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.origin),
   title: {
-    default: "Summit HVAC Supply - Bay Area TCL Heat Pumps & Mini Splits",
+    default: "Summit HVAC Supply - Bay Area HVAC Equipment Catalog",
     template: "%s · Summit HVAC Supply",
   },
   description:
-    "Bay Area TCL heat pumps, mini splits, installer help, and contractor supply from Newark, CA. Buy one system, request Bay Area installer matching, or open a pro account.",
+    "Search TCL, TOSOT, Carrier, central HVAC, mini-split, furnace, cassette, and installation-supply models. Request verified pricing and availability from Newark, CA.",
   keywords: [
     "Bay Area heat pumps",
     "Bay Area mini split supply",
-    "TCL HVAC Bay Area",
+    "HVAC equipment Bay Area",
     "Newark HVAC supply",
     "Bay Area heat pump installer help",
   ],
   openGraph: {
-    title: "Summit HVAC Supply - Bay Area TCL HVAC",
+    title: "Summit HVAC Supply - Bay Area HVAC Equipment",
     description:
-      "Local TCL heat pumps and mini splits for Bay Area homeowners, property teams, and contractors.",
+      "HVAC equipment catalog and quote support for Bay Area homeowners, property teams, and contractors.",
     type: "website",
     siteName: SITE.name,
   },
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     areaServed: SITE.serviceArea,
   };
   return (
-    <html lang="en" className={`${inter.variable} ${grotesk.variable} ${mono.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${grotesk.variable} ${mono.variable}`}>
       <body className="min-h-dvh antialiased">
         <script
           type="application/ld+json"

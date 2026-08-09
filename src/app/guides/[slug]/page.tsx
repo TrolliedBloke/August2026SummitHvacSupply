@@ -7,6 +7,11 @@ import { Container, Eyebrow, LinkButton } from "@/components/ui";
 import { getSeoGuide, SEO_GUIDES } from "@/lib/seo/guides";
 import { pageMetadata } from "@/lib/seo/metadata";
 
+// Every valid slug is known at build time. Without this, an unknown slug is
+// rendered on demand and notFound() is served with HTTP 200 -- a soft 404 that
+// lets search engines index junk URLs. Unknown params now 404 outright.
+export const dynamicParams = false;
+
 export function generateStaticParams() { return SEO_GUIDES.map((guide) => ({ slug: guide.slug })); }
 
 export async function generateMetadata({ params }: PageProps<"/guides/[slug]">): Promise<Metadata> {

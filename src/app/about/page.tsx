@@ -10,7 +10,6 @@ import {
   Users,
 } from "lucide-react";
 import { Container, Eyebrow, LinkButton } from "@/components/ui";
-import { TrustBadges } from "@/components/trust-badges";
 import { TestimonialSlot } from "@/components/testimonial-slot";
 import {
   ABOUT_CONTRACTOR_TESTIMONIALS,
@@ -19,9 +18,9 @@ import {
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About - Bay Area TCL HVAC Supply in Newark, CA",
+  title: "About - Bay Area HVAC Equipment Supply in Newark, CA",
   description:
-    "Summit HVAC Supply provides Bay Area TCL heat pump and mini split equipment, homeowner guidance, installer referral, and contractor supply from Newark, CA.",
+    "Summit HVAC Supply provides HVAC equipment quote support, homeowner guidance, installer referral, and contractor supply from Newark, CA.",
   alternates: { canonical: "/about" },
 };
 
@@ -33,12 +32,12 @@ export default function AboutPage() {
           <div>
             <Eyebrow>About Summit HVAC Supply</Eyebrow>
             <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
-              Local TCL HVAC supply for Bay Area homes, properties, and pros.
+              Local HVAC equipment support for Bay Area homes, properties, and pros.
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-ink-2">
-              We supply TCL heat pumps and mini splits from Newark, California.
+              We quote TCL, TOSOT, Carrier, and installation-supply products from Newark, California.
               Homeowners can ask about one system and installer help; contractors
-              still get fast SKU availability, documents, and account pricing.
+              get exact-model search, document requests, and account quote support.
               Installation is handled by qualified local contractors.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -68,13 +67,13 @@ export default function AboutPage() {
         <div className="grid gap-px overflow-hidden rounded-(--r-md) border border-line bg-line md:grid-cols-3">
           <Pillar
             icon={<Truck size={20} />}
-            title="Stocked Locally"
-            body="Core TCL systems are stocked in Newark for Bay Area will-call, delivery coordination, and fast job support."
+            title="Local fulfillment review"
+            body="Newark will-call, Bay Area delivery, and freight options are confirmed against the exact product and current inventory before order acceptance."
           />
           <Pillar
             icon={<ShieldCheck size={20} />}
-            title="Backed by Certification"
-            body="AHRI-certified equipment and ENERGY STAR models, with warranty support and clear spec data on every product."
+            title="Evidence before claims"
+            body="Exact-model certifications, warranty terms, documents, and compatibility publish only after their official sources are verified."
           />
           <Pillar
             icon={<Users size={20} />}
@@ -152,9 +151,6 @@ export default function AboutPage() {
         />
       </Container>
 
-      <Container className="py-14">
-        <TrustBadges />
-      </Container>
     </>
   );
 }

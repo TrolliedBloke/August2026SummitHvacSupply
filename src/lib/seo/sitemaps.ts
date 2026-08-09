@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { LOCAL_PAGES } from "@/lib/local-pages";
-import { SERIES } from "@/lib/products";
 import { SITE } from "@/lib/site";
 import { getSkuSeoState } from "@/lib/seo/catalog";
 import { getStorefrontSkus, productHref } from "@/lib/storefront/catalog";
@@ -20,12 +19,8 @@ export function productSitemapEntries(): MetadataRoute.Sitemap {
     }));
 }
 export function seriesSitemapEntries(): MetadataRoute.Sitemap {
-  return SERIES.filter((series) => series.confirm.length === 0).map((series) => ({
-    url: `${SITE.origin}/products/${series.slug}`,
-    lastModified: changed,
-    changeFrequency: "weekly" as const,
-    priority: 0.75,
-  }));
+  // Legacy series pages contain intentional demo content and are not product truth.
+  return [];
 }
 
 export function categorySitemapEntries(): MetadataRoute.Sitemap {
@@ -82,7 +77,7 @@ export function renderUrlSet(entries: MetadataRoute.Sitemap) {
 }
 
 export function renderSitemapIndex() {
-  const names = ["products", "series", "categories", "locations", "guides"];
+  const names = ["products", "categories", "locations", "guides"];
   const body = names
     .map((name) => `<sitemap><loc>${SITE.origin}/sitemap-${name}.xml</loc><lastmod>${changed.toISOString()}</lastmod></sitemap>`)
     .join("");

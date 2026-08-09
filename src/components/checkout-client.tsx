@@ -45,7 +45,7 @@ export function CheckoutClient({
   accountName: string | null;
 }) {
   const router = useRouter();
-  const { items, setQty, clear } = useQuote();
+  const { items, hydrated, setQty, clear } = useQuote();
   const { zip } = useFulfillment();
 
   const [method, setMethod] = React.useState<FulfillmentMethod>("pickup");
@@ -61,6 +61,7 @@ export function CheckoutClient({
   const [error, setError] = React.useState<string | null>(null);
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
   const submitLockRef = React.useRef(false);
+  const idempotencyKeyRef = React.useRef<string | null>(null);
 
   const touch = (field: string) => setTouched((t) => ({ ...t, [field]: true }));
 
@@ -89,15 +90,6 @@ export function CheckoutClient({
     [items]
   );
 
-  // Cart contents come from localStorage (client-only). Render nothing until
-  // mounted so SSR (always empty) and the client don't disagree — otherwise
-  // React logs a hydration mismatch and regenerates the whole tree.
-  const mounted = React.useSyncExternalStore(
-    React.useCallback(() => () => undefined, []),
-    () => true,
-    () => false
-  );
-
   // Prices come straight from the catalog (via the server-provided price map),
   // the same source the server charges from — no client-side markup.
   const priced = items.map((i) => {
@@ -118,7 +110,7 @@ export function CheckoutClient({
   const total = round2(subtotal + fee + tax);
   const windows = fulfillmentWindows(selectedMethod, zip);
 
-  if (!mounted) {
+  if (!hydrated) {
     return (
       <div className="mt-8 grid gap-4" aria-busy="true" aria-label="Loading checkout">
         <div className="h-24 animate-pulse rounded-(--r-md) bg-surface-2" />
@@ -148,10 +140,12 @@ export function CheckoutClient({
     setSubmitting(true);
     setError(null);
     try {
+      idempotencyKeyRef.current ??= crypto.randomUUID();
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          idempotencyKey: idempotencyKeyRef.current,
           items: items.map((i) => ({
             skuId: i.skuId,
             sku: i.sku,
@@ -174,11 +168,10 @@ export function CheckoutClient({
       const data = await res.json();
       if (!data.ok) throw new Error(data.error ?? "Checkout failed");
 
-      // Hand the result to the confirmation page (incl. any Stripe clientSecret).
-      track("checkout_completed", { total, method: selectedMethod });
+      track(data.checkoutState === "confirmed" ? "checkout_completed" : "payment_pending", { total, method: selectedMethod });
       sessionStorage.setItem("summit-last-order", JSON.stringify(data));
-      clear();
-      router.push(`/checkout/confirmation?order=${encodeURIComponent(data.orderNumber)}`);
+      if (data.checkoutState === "confirmed") clear();
+      router.push(`/checkout/confirmation?token=${encodeURIComponent(data.confirmationToken)}`);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Checkout failed");
     } finally {
@@ -196,6 +189,9 @@ export function CheckoutClient({
     buyerEmail: /.+@.+\..+/.test(buyerEmail) ? null : "Enter a valid email — your order confirmation goes here.",
     phone: phone.replace(/\D/g, "").length >= 7 ? null : "Enter a phone number we can reach you at.",
     address: !needsAddress || address.trim().length > 4 ? null : "Enter the delivery street address, city, and ZIP.",
+    window: selectedMethod === "freight" || windows.some((window) => window.id === windowSlot)
+      ? null
+      : "Choose an available fulfillment window.",
   };
   const invalidFields = Object.entries(fieldErrors).filter(([, msg]) => msg !== null);
   const showError = (field: string) => (touched[field] ? fieldErrors[field] : null);
@@ -204,7 +200,7 @@ export function CheckoutClient({
     if (submitLockRef.current || submitting) return;
     if (invalidFields.length > 0) {
       // Mark everything touched so every inline message appears at once.
-      setTouched({ buyerName: true, buyerEmail: true, phone: true, address: true });
+      setTouched({ buyerName: true, buyerEmail: true, phone: true, address: true, window: true });
       setError(
         invalidFields.length === 1
           ? "One field needs attention before we can place the order."
@@ -289,19 +285,21 @@ export function CheckoutClient({
             <div className="mt-3 flex flex-wrap gap-2">
               {windows.map((w) => (
                 <button
-                  key={w}
+                  key={w.id}
                   type="button"
-                  onClick={() => setWindowSlot(w)}
+                  aria-pressed={windowSlot === w.id}
+                  onClick={() => { setWindowSlot(w.id); touch("window"); }}
                   className={`rounded-(--r-sm) border px-3 py-2 text-sm transition-colors ${
-                    windowSlot === w
+                    windowSlot === w.id
                       ? "border-brand bg-brand-tint text-ink-1"
                       : "border-line bg-surface-1 text-ink-2 hover:border-line-strong"
                   }`}
                 >
-                  {w}
+                  {w.label}
                 </button>
               ))}
             </div>
+            {showError("window") && <p className="mt-2 text-xs font-medium text-danger">{fieldErrors.window}</p>}
           </section>
         )}
 

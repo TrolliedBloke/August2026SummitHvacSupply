@@ -15,12 +15,13 @@ import {
   type CatalogFilters,
   type SortKey,
   type StorefrontSku,
+  type CatalogCategory,
 } from "@/lib/storefront/catalog";
-import type { Category } from "@/lib/products";
 import { SITE } from "@/lib/site";
 import { track } from "@/lib/track";
 
 type Facets = ReturnType<typeof getCatalogFacets>;
+const PAGE_SIZE = 24;
 
 export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; facets: Facets }) {
   const router = useRouter();
@@ -28,6 +29,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
   const params = useSearchParams();
   const [query, setQuery] = React.useState(params.get("q") ?? "");
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [visibility, setVisibility] = React.useState({ key: "", count: PAGE_SIZE });
   const drawerCloseRef = React.useRef<HTMLButtonElement>(null);
 
   // Mobile filter drawer: scroll lock + Escape to close.
@@ -47,16 +49,20 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
 
   const filters: CatalogFilters = {
     q: params.get("q") ?? undefined,
-    category: (params.get("category") as Category | null) ?? "all",
+    category: (params.get("category") as CatalogCategory | null) ?? "all",
+    brand: params.get("brand") ?? undefined,
     btu: params.get("btu") ?? undefined,
     voltage: params.get("voltage") ?? undefined,
     unitType: params.get("unitType") ?? undefined,
+    refrigerant: params.get("refrigerant") ?? undefined,
+    pricing: (params.get("pricing") as CatalogFilters["pricing"]) ?? "all",
     stock: (params.get("stock") as CatalogFilters["stock"]) ?? "all",
-    minSeer: params.get("minSeer") ? Number(params.get("minSeer")) : undefined,
   };
 
   const sort = (params.get("sort") as SortKey | null) ?? "relevance";
   const filtered = sortStorefrontSkus(filterStorefrontSkus(filters), sort);
+  const filterKey = params.toString();
+  const visibleCount = visibility.key === filterKey ? visibility.count : PAGE_SIZE;
 
   function setParam(key: string, value?: string) {
     const next = new URLSearchParams(params.toString());
@@ -105,6 +111,12 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
           ))}
         </Select>
       </FilterGroup>
+      <FilterGroup label="Brand">
+        <Select value={filters.brand ?? "all"} onChange={(value) => setParam("brand", value)}>
+          <option value="all">All brands</option>
+          {facets.brands.map((brand) => <option key={brand} value={brand}>{brand}</option>)}
+        </Select>
+      </FilterGroup>
       <FilterGroup label="Capacity">
         <Select value={filters.btu ?? "all"} onChange={(value) => setParam("btu", value)}>
           <option value="all">Any BTU</option>
@@ -129,12 +141,26 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
           ))}
         </Select>
       </FilterGroup>
+      <FilterGroup label="Refrigerant">
+        <Select value={filters.refrigerant ?? "all"} onChange={(value) => setParam("refrigerant", value)}>
+          <option value="all">Any refrigerant</option>
+          {facets.refrigerants.map((refrigerant) => <option key={refrigerant} value={refrigerant}>{refrigerant}</option>)}
+        </Select>
+      </FilterGroup>
+      <FilterGroup label="Pricing">
+        <Select value={filters.pricing ?? "all"} onChange={(value) => setParam("pricing", value)}>
+          <option value="all">All pricing states</option>
+          <option value="priced">Published price</option>
+          <option value="quote">Request price</option>
+        </Select>
+      </FilterGroup>
       <FilterGroup label="Stock">
         <Select value={filters.stock ?? "all"} onChange={(value) => setParam("stock", value)}>
           <option value="all">Any stock status</option>
-          <option value="ready">Ready</option>
-          <option value="low">Low stock</option>
-          <option value="backorder">Backorder</option>
+          <option value="unknown">Confirmation required</option>
+          <option value="in_stock">In stock</option>
+          <option value="low_stock">Low stock</option>
+          <option value="out_of_stock">Out of stock</option>
         </Select>
       </FilterGroup>
     </>
@@ -263,11 +289,20 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
             </div>
           </div>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2">
-            {filtered.map((sku, index) => (
-              <SkuCard key={sku.id} sku={sku} priority={index < 2} />
-            ))}
-          </div>
+          <>
+            <div className="grid gap-6 lg:grid-cols-2">
+              {filtered.slice(0, visibleCount).map((sku, index) => (
+                <SkuCard key={sku.id} sku={sku} priority={index < 4} />
+              ))}
+            </div>
+            {visibleCount < filtered.length && (
+              <div className="mt-8 flex justify-center">
+                <Button type="button" onClick={() => setVisibility({ key: filterKey, count: visibleCount + PAGE_SIZE })}>
+                  Show more ({filtered.length - visibleCount} remaining)
+                </Button>
+              </div>
+            )}
+          </>
         )}
       </section>
     </div>

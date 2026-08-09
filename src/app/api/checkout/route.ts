@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-import { placeOrder } from "@/lib/backend/checkout";
+import { CheckoutConflictError, placeOrder } from "@/lib/backend/checkout";
 
 export async function POST(request: Request) {
   try {
@@ -13,6 +13,9 @@ export async function POST(request: Request) {
         { ok: false, error: "Invalid checkout", issues: error.issues },
         { status: 400 }
       );
+    }
+    if (error instanceof CheckoutConflictError) {
+      return NextResponse.json({ ok: false, error: error.message }, { status: 409 });
     }
     return NextResponse.json(
       { ok: false, error: error instanceof Error ? error.message : "Checkout failed" },

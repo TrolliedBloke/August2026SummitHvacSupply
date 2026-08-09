@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Exact-model catalog research overrides",
+  "type": "object",
+  "required": ["products"],
+  "properties": {
+    "products": {
+      "type": "object",
+      "description": "Keyed by generated catalog SKU. Only add a field after exact-model verification.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "researchStatus": { "enum": ["in_progress", "verified", "conflict"] },
+          "specifications": { "type": "object" },
+          "warranty": { "type": ["object", "null"] },
+          "image": { "type": ["string", "null"] },
+          "images": { "type": "array", "items": { "type": "string" } },
+          "imageVerification": { "enum": ["unverified", "manufacturer_family", "verified"] },
+          "documents": { "type": "array" },
+          "compatibility": { "type": "array" },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["fieldName", "value", "sourceUrl", "sourceType", "retrievedAt", "status"],
+              "properties": {
+                "fieldName": { "type": "string" },
+                "value": {},
+                "sourceUrl": { "type": "string", "format": "uri" },
+                "sourceType": { "type": "string" },
+                "retrievedAt": { "type": "string", "format": "date" },
+                "status": { "enum": ["verified", "conflict", "rejected"] },
+                "notes": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

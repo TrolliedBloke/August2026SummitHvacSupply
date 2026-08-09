@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "tsx --test tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "catalog:import": "tsx scripts/import-inventory-catalog.ts",
+    "catalog:sync": "tsx scripts/sync-production-catalog.ts",
     "seed:staff": "tsx scripts/create-staff-user.ts"
   },
   "dependencies": {
@@ -25,6 +28,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

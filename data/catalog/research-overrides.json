@@ -1,0 +1,41 @@
+{
+  "$schema": "./research-overrides.schema.json",
+  "products": {
+    "TOS09KIDU-R-32": {
+      "researchStatus": "in_progress",
+      "evidence": [{ "fieldName": "modelNumber", "value": "TWH09AT19D6D", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table includes this system identifier and its indoor/outdoor component identifiers." }]
+    },
+    "TOS09KODU-09AT19D6DO": {
+      "researchStatus": "in_progress",
+      "evidence": [{ "fieldName": "modelNumber", "value": "TWH09AT19D6DO", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model." }]
+    },
+    "TOS-18K-IDU": {
+      "researchStatus": "in_progress",
+      "evidence": [{ "fieldName": "modelNumber", "value": "TWH18AT19D6D", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table includes the inventory identifier; component suffix still requires reconciliation." }]
+    },
+    "TOS18KODU": {
+      "researchStatus": "in_progress",
+      "evidence": [{ "fieldName": "modelNumber", "value": "TWH18AT19D6DO", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model." }]
+    },
+    "TOS24KIDU": {
+      "researchStatus": "in_progress",
+      "evidence": [{ "fieldName": "modelNumber", "value": "TWH24AT19D6DI", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table identifies this exact indoor-unit model." }]
+    },
+    "TOS24KODU": {
+      "researchStatus": "in_progress",
+      "evidence": [{ "fieldName": "modelNumber", "value": "TWH24AT19D6DO", "sourceUrl": "https://www.tosotcomfort.com/_files/ugd/6915f5_0c483c4e406a413386d6647ef79f0584.pdf?index=true", "sourceType": "manufacturer_owner_manual", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official TOSOT manual model table identifies this exact outdoor-unit model." }]
+    },
+    "CAR36KCOIL": {
+      "researchStatus": "in_progress",
+      "evidence": [{ "fieldName": "productFamily", "value": "CVAMA", "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/", "sourceType": "manufacturer_product_page", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished." }]
+    },
+    "CAR48KCOIL": {
+      "researchStatus": "in_progress",
+      "evidence": [{ "fieldName": "productFamily", "value": "CVAMA", "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/", "sourceType": "manufacturer_product_page", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished." }]
+    },
+    "CAR60KCOIL": {
+      "researchStatus": "in_progress",
+      "evidence": [{ "fieldName": "productFamily", "value": "CVAMA", "sourceUrl": "https://www.carrier.com/residential/en/us/decommisioningarchieves/cvama/", "sourceType": "manufacturer_product_page", "retrievedAt": "2026-08-09", "status": "verified", "notes": "Official Carrier family page verifies CVAMA as a multipoise cased V evaporator-coil family; size-specific data remains unpublished." }]
+    }
+  }
+}

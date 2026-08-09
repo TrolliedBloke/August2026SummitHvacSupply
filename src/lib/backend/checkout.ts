@@ -3,9 +3,17 @@ import { getStorefrontSku } from "@/lib/storefront/catalog";
 import { getSessionProfile } from "./auth";
 import { createServiceRoleSupabaseClient } from "./supabase";
 import { getStripe } from "./stripe";
-import { localDeliveryFee, resolveZone, WAREHOUSE, type FulfillmentMethod } from "./fulfillment";
+import { isFulfillmentWindowAvailable, localDeliveryFee, resolveZone, WAREHOUSE, type FulfillmentMethod } from "./fulfillment";
 import { estimateTax } from "./pricing";
 import { clearCartSnapshot } from "./lifecycle";
+import { createOrderToken } from "./order-token";
+import {
+  rememberSeededCheckout,
+  seededCheckoutByOrder,
+  seededCheckoutByKey,
+  type CheckoutState,
+  type CheckoutStatus,
+} from "./checkout-state";
 
 /**
  * Places an order from the cart with a chosen fulfillment method.
@@ -19,17 +27,12 @@ import { clearCartSnapshot } from "./lifecycle";
  *    terms (invoice later). Guests/homeowners pay now by card.
  */
 
-type CheckoutResult = {
+type CheckoutResult = CheckoutStatus & {
   mode: "supabase" | "seeded";
-  orderId: string;
-  orderNumber: string;
-  subtotal: number;
-  fee: number;
-  tax: number;
-  total: number;
-  payment: "card" | "net_terms" | "freight_quote";
-  clientSecret?: string;
+  confirmationToken: string;
 };
+
+export class CheckoutConflictError extends Error {}
 
 function isTrade(role: string | undefined): boolean {
   return role === "dealer" || role === "installer" || role === "staff";
@@ -40,11 +43,18 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   const profile = await getSessionProfile();
   const trade = isTrade(profile?.role);
 
+  if (parsed.method !== "freight" && !isFulfillmentWindowAvailable(parsed.method, parsed.zip ?? null, parsed.window!)) {
+    throw new CheckoutConflictError("That fulfillment window is no longer available. Choose another time.");
+  }
+
   // 1. Price every line server-side, by tier.
   const lines = parsed.items.map((item) => {
     const sku = getStorefrontSku(item.skuId);
     if (!sku) throw new Error(`Unknown SKU: ${item.sku}`);
-    const unit = trade ? sku.dealerPrice : sku.msrp;
+    if (!sku.purchaseEligible || sku.retailPrice === null) {
+      throw new CheckoutConflictError(`${sku.sku} requires a verified quote before purchase.`);
+    }
+    const unit = trade && sku.dealerPrice > 0 ? sku.dealerPrice : sku.retailPrice;
     return { ...item, skuRecord: sku, unitPrice: unit, lineTotal: unit * item.qty };
   });
   const subtotal = round(lines.reduce((sum, l) => sum + l.lineTotal, 0));
@@ -69,15 +79,11 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   const supabase = createServiceRoleSupabaseClient();
   const orderNumber = "SO-" + Date.now().toString(36).toUpperCase();
 
-  // A placed order ends any pending abandoned-cart sequence (best-effort).
-  if (parsed.buyerEmail) {
-    void clearCartSnapshot(parsed.buyerEmail.toLowerCase()).catch(() => {});
-  }
-
   if (!supabase) {
-    // Seeded fallback: no DB. Return a simulated order so the UI flow works.
-    return {
-      mode: "seeded",
+    const prior = seededCheckoutByKey(parsed.idempotencyKey);
+    if (prior) return withToken(prior, "seeded");
+    // Seeded fallback intentionally completes the simulated transaction.
+    const status: CheckoutStatus = {
       orderId: `so-${Date.now()}`,
       orderNumber,
       subtotal,
@@ -85,8 +91,19 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
       tax,
       total,
       payment,
+      checkoutState: "confirmed",
     };
+    rememberSeededCheckout(parsed.idempotencyKey, status);
+    if (parsed.buyerEmail) void clearCartSnapshot(parsed.buyerEmail.toLowerCase()).catch(() => {});
+    return withToken(status, "seeded");
   }
+
+  const { data: existing } = await supabase
+    .from("sales_orders")
+    .select("id, order_number, subtotal, total, fulfillment_fee, payment_mode, checkout_state, payment_intent_id")
+    .eq("checkout_idempotency_key", parsed.idempotencyKey)
+    .maybeSingle();
+  if (existing) return existingCheckoutResult(existing);
 
   // 5. Insert the order + lines (service-role; validated above).
   const { data: order, error } = await supabase
@@ -109,6 +126,10 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
       buyer_email: parsed.buyerEmail ?? null,
       buyer_phone: parsed.phone ?? null,
       buyer_company: parsed.company ?? null,
+      checkout_state: payment === "card" ? "checkout_started" : "confirmed",
+      checkout_idempotency_key: parsed.idempotencyKey,
+      reservation_expires_at: payment === "card" ? new Date(Date.now() + 30 * 60_000).toISOString() : null,
+      payment_mode: payment,
     })
     .select("id")
     .single();
@@ -140,18 +161,35 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   if (payment === "card") {
     const stripe = getStripe();
     if (stripe && total > 0) {
-      const intent = await stripe.paymentIntents.create({
-        amount: Math.round(total * 100),
-        currency: "usd",
-        automatic_payment_methods: { enabled: true },
-        metadata: { order_id: order.id, order_number: orderNumber },
-      });
-      clientSecret = intent.client_secret ?? undefined;
+      try {
+        const intent = await stripe.paymentIntents.create({
+          amount: Math.round(total * 100),
+          currency: "usd",
+          automatic_payment_methods: { enabled: true },
+          metadata: { order_id: order.id, order_number: orderNumber },
+        }, { idempotencyKey: parsed.idempotencyKey });
+        clientSecret = intent.client_secret ?? undefined;
+        await supabase.from("sales_orders").update({
+          checkout_state: "payment_pending",
+          payment_intent_id: intent.id,
+          checkout_updated_at: new Date().toISOString(),
+        }).eq("id", order.id);
+      } catch (error) {
+        await supabase.rpc("release_checkout_order", { p_order_id: order.id, p_state: "payment_failed" });
+        throw error;
+      }
+    } else {
+      await supabase.rpc("release_checkout_order", { p_order_id: order.id, p_state: "payment_failed" });
+      throw new Error("Card payment is temporarily unavailable. Your cart has been preserved.");
     }
   }
 
-  return {
-    mode: "supabase",
+  const checkoutState: CheckoutState = payment === "card" ? "payment_pending" : "confirmed";
+  if (checkoutState === "confirmed" && parsed.buyerEmail) {
+    void clearCartSnapshot(parsed.buyerEmail.toLowerCase()).catch(() => {});
+  }
+
+  return withToken({
     orderId: order.id,
     orderNumber,
     subtotal,
@@ -159,7 +197,77 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
     tax,
     total,
     payment,
+    checkoutState,
     clientSecret,
+  }, "supabase");
+}
+
+type ExistingOrder = {
+  id: string;
+  order_number: string;
+  subtotal: number | string;
+  total: number | string;
+  fulfillment_fee: number | string;
+  payment_mode: CheckoutStatus["payment"];
+  checkout_state: CheckoutState;
+  payment_intent_id: string | null;
+};
+
+async function existingCheckoutResult(order: ExistingOrder): Promise<CheckoutResult> {
+  let clientSecret: string | undefined;
+  if (order.payment_intent_id && order.checkout_state === "payment_pending") {
+    const stripe = getStripe();
+    const intent = stripe ? await stripe.paymentIntents.retrieve(order.payment_intent_id) : null;
+    clientSecret = intent?.client_secret ?? undefined;
+  }
+  const subtotal = Number(order.subtotal);
+  const fee = Number(order.fulfillment_fee);
+  const total = Number(order.total);
+  return withToken({
+    orderId: order.id,
+    orderNumber: order.order_number,
+    subtotal,
+    fee,
+    tax: round(total - subtotal - fee),
+    total,
+    payment: order.payment_mode,
+    checkoutState: order.checkout_state,
+    clientSecret,
+  }, "supabase");
+}
+
+function withToken(status: CheckoutStatus, mode: CheckoutResult["mode"]): CheckoutResult {
+  return { ...status, mode, confirmationToken: createOrderToken(status.orderId) };
+}
+
+export async function cleanupExpiredCheckouts(): Promise<number> {
+  const supabase = createServiceRoleSupabaseClient();
+  if (!supabase) return 0;
+  const { data, error } = await supabase.rpc("expire_stale_checkout_orders");
+  if (error) throw new Error(error.message);
+  return Number(data ?? 0);
+}
+
+export async function getCheckoutStatus(orderId: string): Promise<CheckoutStatus | null> {
+  const supabase = createServiceRoleSupabaseClient();
+  if (!supabase) return seededCheckoutByOrder(orderId);
+  const { data, error } = await supabase
+    .from("sales_orders")
+    .select("id, order_number, subtotal, total, fulfillment_fee, payment_mode, checkout_state, payment_intent_id")
+    .eq("id", orderId)
+    .maybeSingle();
+  if (error || !data) return null;
+  const result = await existingCheckoutResult(data as ExistingOrder);
+  return {
+    orderId: result.orderId,
+    orderNumber: result.orderNumber,
+    subtotal: result.subtotal,
+    fee: result.fee,
+    tax: result.tax,
+    total: result.total,
+    payment: result.payment,
+    checkoutState: result.checkoutState,
+    clientSecret: result.clientSecret,
   };
 }
 

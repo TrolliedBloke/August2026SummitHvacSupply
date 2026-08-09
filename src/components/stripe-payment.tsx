@@ -16,7 +16,7 @@ function getStripePromise() {
   return stripePromise;
 }
 
-function PayForm({ orderNumber }: { orderNumber: string }) {
+function PayForm({ confirmationToken }: { confirmationToken: string }) {
   const stripe = useStripe();
   const elements = useElements();
   const [submitting, setSubmitting] = React.useState(false);
@@ -30,7 +30,7 @@ function PayForm({ orderNumber }: { orderNumber: string }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${window.location.origin}/checkout/confirmation?order=${encodeURIComponent(orderNumber)}&status=paid`,
+        return_url: `${window.location.origin}/checkout/confirmation?token=${encodeURIComponent(confirmationToken)}`,
       },
     });
     if (error) {
@@ -56,10 +56,10 @@ function PayForm({ orderNumber }: { orderNumber: string }) {
 
 export function StripePayment({
   clientSecret,
-  orderNumber,
+  confirmationToken,
 }: {
   clientSecret: string;
-  orderNumber: string;
+  confirmationToken: string;
 }) {
   const promise = getStripePromise();
   if (!promise) {
@@ -72,7 +72,7 @@ export function StripePayment({
   }
   return (
     <Elements stripe={promise} options={{ clientSecret, appearance: { theme: "flat" } }}>
-      <PayForm orderNumber={orderNumber} />
+      <PayForm confirmationToken={confirmationToken} />
     </Elements>
   );
 }

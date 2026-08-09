@@ -26,7 +26,7 @@ export function AddToQuote({
       modelNumber: sku.modelNumber,
       title: sku.title,
       image: sku.image,
-      unitPrice: sku.dealerPrice,
+      unitPrice: sku.retailPrice ?? 0,
       available: sku.available,
     });
     setAdded(true);
@@ -38,7 +38,7 @@ export function AddToQuote({
   return (
     <button
       onClick={handle}
-      aria-label={`Add ${sku.title} to cart`}
+      aria-label={`Add ${sku.title} to quote`}
       className={`inline-flex items-center justify-center gap-2 rounded-(--r-sm) font-medium
         transition-[background-color,box-shadow] duration-150 ease-out active:translate-y-px
         ${full ? "w-full" : ""} ${sizing}
@@ -49,7 +49,7 @@ export function AddToQuote({
         }`}
     >
       {added ? <Check size={16} strokeWidth={2.5} /> : <Plus size={16} strokeWidth={2.5} />}
-      {added ? "Added to cart" : "Add to Cart"}
+      {added ? "Added to quote" : "Add to quote"}
     </button>
   );
 }

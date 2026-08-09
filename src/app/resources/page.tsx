@@ -9,7 +9,7 @@ import { SEO_GUIDES } from "@/lib/seo/guides";
 import { SEO_TOOLS } from "@/lib/seo/tools";
 import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = pageMetadata({ title: "HVAC Resources - Documents, Tools & Bay Area Guides", description: "Download TCL HVAC documents, search AHRI and model records, and review current Bay Area permit, refrigerant, rebate, and energy-code guidance.", path: "/resources" });
+export const metadata: Metadata = pageMetadata({ title: "HVAC Resources - Tools & Bay Area Guides", description: "Search model records and review Bay Area permit, refrigerant, rebate, and energy-code guidance. Exact-model documents publish only after verification.", path: "/resources" });
 
 const FAQS: { q: string; a: string }[] = [
   {
@@ -18,11 +18,11 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Can a homeowner buy a single mini split or heat pump?",
-    a: "Yes. Homeowners can buy one system and get plain-English guidance plus Bay Area installer matching — no trade account or SKU fluency required.",
+    a: "Yes. Homeowners can request a quote for one system and get plain-English guidance plus Bay Area installer matching — no trade account or SKU fluency required.",
   },
   {
     q: "How do contractors get pro pricing?",
-    a: "Open a contractor account and sign in. Retail (MSRP) shows publicly; contractor pricing and net terms appear after your pro account is approved and you are signed in.",
+    a: "Open a contractor account and sign in. Staff confirms account-specific pricing and any approved net terms before an order is accepted.",
   },
   {
     q: "What rebates apply to Bay Area heat pumps?",
@@ -30,15 +30,16 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Where do you deliver, and can I pick up?",
-    a: "Free will-call pickup is available same-day in Newark, CA. We coordinate local delivery across the Bay Area (San Jose, Oakland, Fremont, San Francisco, the Peninsula, East Bay, South Bay, North Bay) and offer LTL freight, quoted after the order.",
+    a: "Newark will-call, local Bay Area delivery, and LTL freight may be available. Staff confirms inventory, timing, and fees for the exact quote before an order is accepted.",
   },
   {
-    q: "Are TCL systems certified and warrantied?",
-    a: "The lineup is AHRI Certified and ENERGY STAR listed, with ETL Intertek certification. Warranties are stated per SKU (for example, 7-year compressor / 5-year parts on core BreezeIN models).",
+    q: "Where can I find certifications and warranty terms?",
+    a: "Exact-model certifications, warranty terms, and registration requirements appear only after Summit verifies them against official manufacturer or AHRI evidence. Request the documents when they are not yet published.",
   },
 ];
 
 export default function ResourcesPage() {
+  const documentedSkus = getStorefrontSkus().filter((sku) => sku.documents.length > 0);
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -59,11 +60,11 @@ export default function ResourcesPage() {
           <div>
             <Eyebrow>Resources</Eyebrow>
             <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
-              Everything you need to spec, install, and close the rebate.
+              Tools and evidence for a better equipment decision.
             </h1>
             <p className="mt-3 max-w-2xl text-ink-2">
-              SKU-level spec sheets, install manuals, and current rebate guidance in one place,
-              so you spend less time hunting for documents and more time on the roof.
+              Search exact identifiers, review current guidance, and request exact-model documents.
+              Unverified files and claims stay unpublished.
             </p>
           </div>
           <div className="relative min-h-[260px] overflow-hidden rounded-(--r-md) border border-line bg-surface-2 shadow-[var(--shadow-sm)]">
@@ -127,10 +128,17 @@ export default function ResourcesPage() {
           Spec sheets &amp; install manuals
         </h2>
         <p className="mt-2 text-sm text-ink-3">
-          Download exact support documents for the SKU you are quoting.
+          Exact-model documents appear here only after their model match and source are verified.
         </p>
         <div className="mt-6 overflow-hidden rounded-(--r-md) border border-line">
-          {getStorefrontSkus().map((sku, i) => (
+          {documentedSkus.length === 0 && (
+            <div className="bg-surface-1 p-6">
+              <p className="font-medium text-ink-1">No exact-model documents are published yet.</p>
+              <p className="mt-2 text-sm leading-6 text-ink-2">The imported catalog remains quote-ready while manufacturer documents are verified. Send the SKU or OEM model and we will locate the correct file without substituting a similar product.</p>
+              <Link href="/contact" className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand">Request a document <ArrowRight size={15} /></Link>
+            </div>
+          )}
+          {documentedSkus.map((sku, i) => (
             <div
               key={sku.id}
               className={`flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between ${

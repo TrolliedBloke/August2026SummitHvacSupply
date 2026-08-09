@@ -33,6 +33,13 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Acquisition cost. This repository is public, so anything carrying what Summit
+# pays per unit stays out of it. Both files are ops inputs only: the Next build
+# reads src/data/catalog.generated.json (cost-free) and never these, and
+# `npm run catalog:sync` reads them from the operator's working copy.
+/data/catalog/costs.generated.json
+/data/catalog/inventory-source.csv
+
 # vercel
 .vercel
 

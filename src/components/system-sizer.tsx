@@ -5,10 +5,8 @@ import Link from "next/link";
 import { ArrowRight, Ruler } from "lucide-react";
 import * as React from "react";
 
-/* The hero tool. Baymard's product-finding research puts abandonment at
-   67–90% when buyers can't work out which product fits, vs 17–33% with a
-   working finder — so this returns actual in-stock SKUs, not a lead form.
-   Sizing bands are the standard public rule of thumb (9k ≈ 400 sq ft,
+/* A catalog-narrowing aid, not a compatibility or availability promise.
+   Sizing bands are a public rule of thumb (9k ≈ 400 sq ft,
    12k ≈ 550, 18k ≈ 750, 24k ≈ 1,000); the installer's Manual J is the
    real number and we say so. */
 
@@ -18,6 +16,7 @@ export type SizerSku = {
   title: string;
   btu: number;
   msrp: number;
+  retailPrice?: number | null;
   seriesSlug: string;
   image: string;
   available: number;
@@ -47,21 +46,20 @@ function btuForArea(area: number): number {
 }
 
 function recommend(skus: SizerSku[], scope: Scope, area: number, ducts: boolean): SizerSku[] {
-  const inStock = skus.filter((sku) => sku.available > 0);
-  const bySeries = (slug: string) =>
-    inStock.filter((sku) => sku.seriesSlug === slug).sort((a, b) => a.msrp - b.msrp);
+  const byCategory = (slug: string) =>
+    skus.filter((sku) => sku.seriesSlug === slug).sort((a, b) => a.msrp - b.msrp);
 
   if (scope === "whole") {
-    const lane = ducts ? bySeries("central-system") : bySeries("multi-zone");
+    const lane = ducts ? byCategory("central-systems") : byCategory("mini-splits");
     return lane.slice(0, 2);
   }
   if (scope === "few") {
-    return bySeries("multi-zone").slice(0, 2);
+    return byCategory("mini-splits").filter((sku) => sku.title.toLowerCase().includes("mz")).slice(0, 2);
   }
-  // Single room: closest in-stock single-zone units at or above the target BTU.
+  // Single room: closest catalog mini-split records to the target BTU.
   const target = btuForArea(area);
-  return inStock
-    .filter((sku) => ["breezein", "freshin", "elite"].includes(sku.seriesSlug))
+  return skus
+    .filter((sku) => sku.seriesSlug === "mini-splits")
     .sort(
       (a, b) =>
         Math.abs(a.btu - target) - Math.abs(b.btu - target) || a.msrp - b.msrp
@@ -94,7 +92,7 @@ export function SystemSizer({ skus }: { skus: SizerSku[] }) {
           <p className="font-display text-lg font-semibold tracking-tight text-ink-1">
             What size do I need?
           </p>
-          <p className="text-xs text-ink-3">30 seconds — returns real units in stock.</p>
+          <p className="text-xs text-ink-3">Narrow the catalog; staff confirms the final match.</p>
         </div>
       </div>
 
@@ -182,12 +180,12 @@ export function SystemSizer({ skus }: { skus: SizerSku[] }) {
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm font-semibold text-ink-1">{sku.title}</span>
               <span className="block text-xs text-ink-3">
-                {sku.btu.toLocaleString()} BTU · {sku.available} in stock · pickup today
+                {sku.btu.toLocaleString()} BTU · availability confirmation required
               </span>
             </span>
             <span className="text-right">
               <span className="tnum block font-display text-base font-semibold text-ink-1">
-                {currency(sku.msrp)}
+                {(sku.retailPrice ?? (sku.msrp > 0 ? sku.msrp : null)) !== null ? currency(sku.retailPrice ?? sku.msrp) : "Request price"}
               </span>
               <span className="inline-flex items-center gap-0.5 text-xs font-medium text-brand">
                 View <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />

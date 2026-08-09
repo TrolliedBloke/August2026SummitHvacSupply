@@ -19,6 +19,7 @@ export type QuoteItem = {
 
 type QuoteState = {
   items: QuoteItem[];
+  hydrated: boolean;
   isOpen: boolean;
   count: number;
   add: (item: Omit<QuoteItem, "qty">) => void;
@@ -65,16 +66,25 @@ function readStoredItems(): QuoteItem[] {
 }
 
 export function QuoteProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = React.useState<QuoteItem[]>(readStoredItems);
+  const [items, setItems] = React.useState<QuoteItem[]>([]);
+  const [hydrated, setHydrated] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
 
   React.useEffect(() => {
+    queueMicrotask(() => {
+      setItems(readStoredItems());
+      setHydrated(true);
+    });
+  }, []);
+
+  React.useEffect(() => {
+    if (!hydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch {
       /* ignore */
     }
-  }, [items]);
+  }, [hydrated, items]);
 
   const add = React.useCallback((item: Omit<QuoteItem, "qty">) => {
     setItems((prev) => {
@@ -116,6 +126,7 @@ export function QuoteProvider({ children }: { children: React.ReactNode }) {
 
   const value: QuoteState = {
     items,
+    hydrated,
     isOpen,
     count,
     add,

@@ -116,22 +116,129 @@ export function fulfillmentPromise(zip: string | null, inStock: boolean): string
   return "In stock, pickup today or freight";
 }
 
-/** Next handful of pickup/delivery windows for the slot picker. */
-export function fulfillmentWindows(method: FulfillmentMethod, zip: string | null): string[] {
+export type FulfillmentWindow = {
+  /** Stable, server-verifiable identifier: the UTC start instant. */
+  id: string;
+  label: string;
+  startAt: string;
+  endAt: string;
+};
+
+const WAREHOUSE_TIME_ZONE = "America/Los_Angeles";
+const SAME_DAY_CUTOFF_HOUR = 14;
+const PREP_MINUTES = 60;
+const SLOT_HOURS: Array<[number, number]> = [[7, 9], [9, 11], [12, 14], [14, 16]];
+
+/**
+ * Available warehouse windows, calculated in Pacific time. Past slots,
+ * weekends, warehouse holidays, and same-day slots after cutoff are omitted.
+ * `now` is injectable so both server validation and tests are deterministic.
+ */
+export function fulfillmentWindows(
+  method: FulfillmentMethod,
+  zip: string | null,
+  now = new Date()
+): FulfillmentWindow[] {
+  if (method === "freight") return [];
   const zone = resolveZone(zip);
-  const sameDayOk = method === "pickup" || (zone ? zone.leadTimeHours <= 8 : false);
-  const days = ["today", "tomorrow", "in 2 days"];
-  const slots = ["7:00-9:00 AM", "9:00-11:00 AM", "12:00-2:00 PM", "2:00-4:00 PM"];
-  const out: string[] = [];
-  const startDay = sameDayOk ? 0 : 1;
-  for (let d = startDay; d < days.length; d++) {
-    for (const s of slots) out.push(`${capitalize(days[d])}, ${s}`);
+  const sameDayEligible = method === "pickup" || Boolean(zone && zone.leadTimeHours <= 8);
+  const today = pacificParts(now);
+  const earliest = new Date(now.getTime() + PREP_MINUTES * 60_000);
+  const out: FulfillmentWindow[] = [];
+
+  for (let offset = 0; offset < 14 && out.length < 8; offset += 1) {
+    const date = addUtcDays(today.year, today.month, today.day, offset);
+    if (isWeekend(date) || isWarehouseHoliday(date)) continue;
+    if (offset === 0 && (!sameDayEligible || today.hour >= SAME_DAY_CUTOFF_HOUR)) continue;
+
+    for (const [startHour, endHour] of SLOT_HOURS) {
+      const start = pacificDateToUtc(date.year, date.month, date.day, startHour);
+      if (start < earliest) continue;
+      const end = pacificDateToUtc(date.year, date.month, date.day, endHour);
+      out.push({
+        id: start.toISOString(),
+        label: formatWindowLabel(start, end, offset),
+        startAt: start.toISOString(),
+        endAt: end.toISOString(),
+      });
+      if (out.length === 8) break;
+    }
   }
-  return out.slice(0, 8);
+  return out;
 }
 
-function capitalize(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1);
+export function isFulfillmentWindowAvailable(
+  method: FulfillmentMethod,
+  zip: string | null,
+  windowId: string,
+  now = new Date()
+): boolean {
+  return fulfillmentWindows(method, zip, now).some((window) => window.id === windowId);
+}
+
+type DateParts = { year: number; month: number; day: number; hour: number };
+
+function pacificParts(date: Date): DateParts {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: WAREHOUSE_TIME_ZONE,
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const get = (type: string) => Number(parts.find((part) => part.type === type)?.value);
+  return { year: get("year"), month: get("month"), day: get("day"), hour: get("hour") };
+}
+
+function addUtcDays(year: number, month: number, day: number, offset: number) {
+  const date = new Date(Date.UTC(year, month - 1, day + offset));
+  return { year: date.getUTCFullYear(), month: date.getUTCMonth() + 1, day: date.getUTCDate() };
+}
+
+/** Convert a Pacific wall-clock time to its UTC instant, including DST. */
+function pacificDateToUtc(year: number, month: number, day: number, hour: number): Date {
+  const desired = Date.UTC(year, month - 1, day, hour);
+  let guess = desired;
+  for (let i = 0; i < 2; i += 1) {
+    const actual = pacificParts(new Date(guess));
+    const actualWallTime = Date.UTC(actual.year, actual.month - 1, actual.day, actual.hour);
+    guess += desired - actualWallTime;
+  }
+  return new Date(guess);
+}
+
+function isWeekend(date: { year: number; month: number; day: number }) {
+  const weekday = new Date(Date.UTC(date.year, date.month - 1, date.day)).getUTCDay();
+  return weekday === 0 || weekday === 6;
+}
+
+function isWarehouseHoliday(date: { year: number; month: number; day: number }) {
+  const key = `${date.month}-${date.day}`;
+  if (["1-1", "7-4", "12-25"].includes(key)) return true;
+  // Thanksgiving: fourth Thursday in November.
+  if (date.month === 11) {
+    const weekday = new Date(Date.UTC(date.year, 10, date.day)).getUTCDay();
+    if (weekday === 4 && date.day >= 22 && date.day <= 28) return true;
+  }
+  return false;
+}
+
+function formatWindowLabel(start: Date, end: Date, dayOffset: number) {
+  const day = dayOffset === 0
+    ? "Today"
+    : new Intl.DateTimeFormat("en-US", {
+        timeZone: WAREHOUSE_TIME_ZONE,
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+      }).format(start);
+  const time = (date: Date) => new Intl.DateTimeFormat("en-US", {
+    timeZone: WAREHOUSE_TIME_ZONE,
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(date);
+  return `${day}, ${time(start)}–${time(end)} PT`;
 }
 
 export const FULFILLMENT_LABEL: Record<FulfillmentMethod, string> = {

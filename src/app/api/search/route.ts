@@ -14,6 +14,7 @@ export async function GET(request: Request) {
     voltage: sku.voltage,
     unitType: sku.unitType,
     available: sku.available,
+    availabilityStatus: sku.availabilityStatus,
     href: productHref(sku),
   }));
 

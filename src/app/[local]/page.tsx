@@ -8,6 +8,11 @@ import { SITE } from "@/lib/site";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
 
+// Every valid slug is known at build time. Without this, an unknown slug is
+// rendered on demand and notFound() is served with HTTP 200 -- a soft 404 that
+// lets search engines index junk URLs. Unknown params now 404 outright.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return LOCAL_PAGES.map((page) => ({ local: page.slug }));
 }

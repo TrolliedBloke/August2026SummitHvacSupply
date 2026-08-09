@@ -4,18 +4,15 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import * as React from "react";
 
-export type GallerySpec = { label: string; value: string };
-
-export function ProductGallery({ images, title, specs }: { images: string[]; title: string; specs: GallerySpec[] }) {
-  const slides = [
-    ...images.map((src) => ({ kind: "photo" as const, src, label: "Product view" })),
-    { kind: "dimensions" as const, label: "Dimensions" },
-  ];
+export function ProductGallery({ images, title }: { images: string[]; title: string }) {
+  const slides = images.map((src, index) => ({ src, label: `Manufacturer product view ${index + 1}` }));
   const [active, setActive] = React.useState(0);
   const [zoomed, setZoomed] = React.useState(false);
   const dialogRef = React.useRef<HTMLDivElement>(null);
   const closeRef = React.useRef<HTMLButtonElement>(null);
   const openerRef = React.useRef<HTMLButtonElement>(null);
+  const tabRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
+  const galleryId = React.useId();
   const current = slides[active];
   const move = (direction: number) => setActive((value) => (value + direction + slides.length) % slides.length);
 
@@ -56,28 +53,47 @@ export function ProductGallery({ images, title, specs }: { images: string[]; tit
 
   return (
     <div>
-      <div className="relative aspect-[1.7/1] overflow-hidden rounded-(--r-md) border border-line bg-surface-2 sm:aspect-[1.22/1]">
-        {current.kind === "photo" ? (
-          <Image src={current.src} alt={title} fill loading="eager" sizes="(min-width: 1024px) 48vw, 100vw" className="object-contain p-5 sm:p-12" />
-        ) : (
-          <DimensionalView title={title} specs={specs} />
-        )}
-        <GalleryButton label="Previous view" className="left-3" onClick={() => move(-1)}><ChevronLeft size={20} /></GalleryButton>
-        <GalleryButton label="Next view" className="right-3" onClick={() => move(1)}><ChevronRight size={20} /></GalleryButton>
-        {current.kind === "photo" && (
-          <button ref={openerRef} type="button" onClick={() => setZoomed(true)} aria-label="Open large product image" className="absolute bottom-3 right-3 grid size-11 place-items-center rounded-(--r-sm) border border-line bg-surface-1 text-ink-1">
-            <Maximize2 size={17} />
-          </button>
-        )}
+      <div id={`${galleryId}-panel`} role="tabpanel" aria-labelledby={`${galleryId}-tab-${active}`} className="relative aspect-[1.7/1] overflow-hidden rounded-(--r-md) border border-line bg-surface-2 sm:aspect-[1.22/1]">
+        <Image src={current.src} alt={`${title} — manufacturer family view ${active + 1}`} fill loading={active === 0 ? "eager" : "lazy"} sizes="(min-width: 1024px) 48vw, 100vw" className="object-contain p-5 sm:p-12" />
+        {slides.length > 1 && <GalleryButton label="Previous view" className="left-3" onClick={() => move(-1)}><ChevronLeft size={20} /></GalleryButton>}
+        {slides.length > 1 && <GalleryButton label="Next view" className="right-3" onClick={() => move(1)}><ChevronRight size={20} /></GalleryButton>}
+        <button ref={openerRef} type="button" onClick={() => setZoomed(true)} aria-label="Open large product image" className="absolute bottom-3 right-3 grid size-11 place-items-center rounded-(--r-sm) border border-line bg-surface-1 text-ink-1">
+          <Maximize2 size={17} />
+        </button>
       </div>
       <div className="mt-4 hidden grid-cols-5 gap-3 sm:grid" role="tablist" aria-label="Product media">
         {slides.map((slide, index) => (
-          <button key={`${slide.label}-${index}`} type="button" role="tab" aria-selected={active === index} onClick={() => setActive(index)} className={`relative aspect-square overflow-hidden rounded-(--r-sm) border bg-surface-1 ${active === index ? "border-ink-1" : "border-line"}`}>
-            {slide.kind === "photo" ? <Image src={slide.src} alt="" fill sizes="90px" className="object-contain p-2" /> : <span className="px-1 font-mono text-[10px] text-ink-2">Dimensions</span>}
+          <button
+            key={`${slide.label}-${index}`}
+            ref={(node) => { tabRefs.current[index] = node; }}
+            id={`${galleryId}-tab-${index}`}
+            type="button"
+            role="tab"
+            aria-label={`${slide.label} ${index + 1} of ${slides.length}`}
+            aria-selected={active === index}
+            aria-controls={`${galleryId}-panel`}
+            tabIndex={active === index ? 0 : -1}
+            onClick={() => setActive(index)}
+            onKeyDown={(event) => {
+              const keys: Record<string, number> = {
+                ArrowRight: (index + 1) % slides.length,
+                ArrowLeft: (index - 1 + slides.length) % slides.length,
+                Home: 0,
+                End: slides.length - 1,
+              };
+              const next = keys[event.key];
+              if (next === undefined) return;
+              event.preventDefault();
+              setActive(next);
+              tabRefs.current[next]?.focus();
+            }}
+            className={`relative aspect-square overflow-hidden rounded-(--r-sm) border bg-surface-1 ${active === index ? "border-ink-1" : "border-line"}`}
+          >
+            <Image src={slide.src} alt="" fill sizes="90px" className="object-contain p-2" />
           </button>
         ))}
       </div>
-      {zoomed && current.kind === "photo" && (
+      {zoomed && (
         <div ref={dialogRef} className="fixed inset-0 z-[80] grid place-items-center bg-[var(--ink-panel)]/90 p-5" role="dialog" aria-modal="true" aria-labelledby="product-zoom-title" onClick={() => setZoomed(false)}>
           <h2 id="product-zoom-title" className="sr-only">Large image of {title}</h2>
           <button ref={closeRef} type="button" aria-label="Close large image" className="absolute right-5 top-5 grid size-11 place-items-center rounded-(--r-sm) bg-surface-1 text-ink-1" onClick={() => setZoomed(false)}><X size={20} /></button>
@@ -92,16 +108,4 @@ export function ProductGallery({ images, title, specs }: { images: string[]; tit
 
 function GalleryButton({ label, className, onClick, children }: { label: string; className: string; onClick: () => void; children: React.ReactNode }) {
   return <button type="button" aria-label={label} onClick={onClick} className={`absolute top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-line bg-surface-1 text-ink-1 ${className}`}>{children}</button>;
-}
-
-function DimensionalView({ title, specs }: { title: string; specs: GallerySpec[] }) {
-  return (
-    <div className="absolute inset-0 grid place-content-center p-8 text-center">
-      <div className="mx-auto h-28 w-52 border border-ink-1" aria-hidden />
-      <p className="mt-5 font-mono text-sm text-ink-1">{title}</p>
-      <dl className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-left">
-        {specs.map((spec) => <div key={spec.label}><dt className="text-xs text-ink-3">{spec.label}</dt><dd className="mt-0.5 font-mono text-sm text-ink-1">{spec.value}</dd></div>)}
-      </dl>
-    </div>
-  );
 }

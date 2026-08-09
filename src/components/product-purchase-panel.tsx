@@ -22,7 +22,7 @@ export function ProductPurchasePanel({ sku }: { sku: StorefrontSku }) {
         <label className="block w-28 text-sm text-ink-2">
           Quantity
           <span className="mt-1 flex h-12 items-center rounded-(--r-sm) border border-line bg-surface-1">
-            <button type="button" aria-label="Decrease quantity" className="grid h-full w-9 place-items-center" onClick={() => setQuantity((value) => Math.max(1, value - 1))}><Minus size={15} /></button>
+            <button type="button" aria-label="Decrease quantity" className="grid h-full min-w-11 place-items-center" onClick={() => setQuantity((value) => Math.max(1, value - 1))}><Minus size={15} /></button>
             <input aria-label="Quantity" inputMode="numeric" min={1} max={MAX_CART_QUANTITY} value={quantity} onChange={(event) => setQuantity(Math.min(MAX_CART_QUANTITY, Math.max(1, Number(event.target.value) || 1)))} className="min-w-0 flex-1 bg-transparent text-center font-mono text-sm outline-none" />
             <button type="button" aria-label="Increase quantity" className="grid h-full w-11 place-items-center" onClick={() => setQuantity((value) => Math.min(MAX_CART_QUANTITY, value + 1))}><Plus size={15} /></button>
           </span>

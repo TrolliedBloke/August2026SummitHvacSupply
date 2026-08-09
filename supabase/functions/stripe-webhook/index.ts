@@ -53,6 +53,10 @@ Deno.serve(async (request) => {
         console.error("mark_order_paid failed:", error.message);
         return new Response("Order update failed", { status: 500 });
       }
+      const { data: order } = await supabase.from("sales_orders").select("buyer_email").eq("id", orderId).single();
+      if (order?.buyer_email) {
+        await supabase.from("cart_snapshots").update({ completed_at: new Date().toISOString() }).eq("email", order.buyer_email.toLowerCase());
+      }
     }
 
     if (invoiceId) {
@@ -79,6 +83,21 @@ Deno.serve(async (request) => {
         });
       } catch {
         /* ignore */
+      }
+    }
+  }
+
+  if (event.type === "payment_intent.payment_failed" || event.type === "payment_intent.canceled") {
+    const pi = event.data.object as Stripe.PaymentIntent;
+    const orderId = pi.metadata?.order_id;
+    if (orderId) {
+      const { error } = await supabase.rpc("release_checkout_order", {
+        p_order_id: orderId,
+        p_state: "payment_failed",
+      });
+      if (error) {
+        console.error("release_checkout_order failed:", error.message);
+        return new Response("Order release failed", { status: 500 });
       }
     }
   }

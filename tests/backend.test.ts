@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import {
   availableForSku,
@@ -9,9 +10,11 @@ import {
 } from "../src/lib/backend/math";
 import { createDemoOperationsData } from "../src/lib/backend/mock-data";
 import { checkoutSchema } from "../src/lib/backend/schemas";
-import { roleCanAccessAccount } from "../src/lib/backend/services";
+import { fulfillmentWindows, isFulfillmentWindowAvailable } from "../src/lib/backend/fulfillment";
+import { createQuoteRequest, roleCanAccessAccount } from "../src/lib/backend/services";
 import { categorySitemapEntries, productSitemapEntries, renderSitemapIndex } from "../src/lib/seo/sitemaps";
-import { filterStorefrontSkus, searchStorefrontSkus } from "../src/lib/storefront/catalog";
+import { filterStorefrontSkus, getStorefrontSku, getStorefrontSkus, searchStorefrontSkus } from "../src/lib/storefront/catalog";
+import { catalogHealth, catalogReconciliation } from "../src/lib/catalog/reconciliation";
 import type { InventoryLot, OrderLine } from "../src/lib/backend/types";
 
 describe("backend inventory math", () => {
@@ -57,19 +60,136 @@ describe("backend inventory math", () => {
 });
 
 describe("storefront SKU discovery", () => {
-  it("searches by SKU, model, title, BTU, voltage, and series", () => {
-    assert.equal(searchStorefrontSkus("TSC-09HA2/I3TI23")[0]?.sku, "TSC-09HA2/I3TI23");
-    assert.equal(searchStorefrontSkus("TSC-09HA2/I3TI23")[0]?.modelNumber, "TSC-09HA2/I3TI23");
-    assert.ok(searchStorefrontSkus("Hyper-Heat Pump").some((sku) => sku.sku === "TSC-09HA2/I3TI23"));
+  it("searches the imported inventory by SKU, OEM model, brand, BTU, voltage, and refrigerant", () => {
+    assert.equal(searchStorefrontSkus("TCL09KIDU")[0]?.sku, "TCL09KIDU");
+    assert.ok(searchStorefrontSkus("TSC-09HA1/I3TI22").some((sku) => sku.sku === "TCL09KIDU"));
+    assert.ok(searchStorefrontSkus("Tosot").every((sku) => sku.brand === "Tosot"));
     assert.ok(searchStorefrontSkus("24000").some((sku) => sku.btu === 24000));
     assert.ok(searchStorefrontSkus("208/230V").length > 0);
-    assert.ok(searchStorefrontSkus("BreezeIN").some((sku) => sku.seriesSlug === "breezein"));
+    assert.ok(searchStorefrontSkus("R-454B").some((sku) => sku.refrigerant === "R-454B"));
   });
 
   it("filters by stable catalog facets", () => {
-    assert.ok(filterStorefrontSkus({ category: "ductless" }).every((sku) => sku.category === "ductless"));
+    assert.ok(filterStorefrontSkus({ category: "mini-splits" }).every((sku) => sku.category === "mini-splits"));
+    assert.ok(filterStorefrontSkus({ brand: "Carrier" }).every((sku) => sku.brand === "Carrier"));
     assert.ok(filterStorefrontSkus({ btu: "large" }).every((sku) => sku.btu >= 36000));
-    assert.ok(filterStorefrontSkus({ stock: "ready" }).every((sku) => sku.stockStatus === "ready"));
+    assert.ok(filterStorefrontSkus({ stock: "unknown" }).every((sku) => sku.availabilityStatus === "unknown"));
+    assert.ok(filterStorefrontSkus({ pricing: "quote" }).every((sku) => sku.retailPrice === null));
+  });
+});
+
+describe("catalog import reconciliation", () => {
+  it("maps every source row to one unique public record without exposing false commerce state", () => {
+    const skus = getStorefrontSkus();
+    const health = catalogHealth();
+    assert.equal(health.healthy, true);
+    assert.equal(health.sourceRows, 100);
+    assert.equal(health.generatedRecords, 100);
+    assert.equal(new Set(skus.map((sku) => sku.sku)).size, 100);
+    assert.equal(new Set(skus.map((sku) => sku.slug)).size, 100);
+    assert.ok(skus.every((sku) => sku.quoteEligible));
+    assert.ok(skus.every((sku) => !sku.purchaseEligible));
+    assert.ok(skus.every((sku) => sku.availabilityStatus === "unknown"));
+    assert.ok(skus.every((sku) => sku.retailPrice === null || sku.retailPrice > 0));
+    assert.ok(skus.every((sku) => !("unitCost" in sku)));
+  });
+
+  it("keeps acquisition cost out of the browser-reachable catalog", async () => {
+    // The projection dropping unitCost is not enough on its own: a JSON import
+    // is bundled whole, so any "use client" module that reaches the catalog
+    // publishes every key in the file. Assert on the raw published data, not
+    // on the mapped shape.
+    const raw = JSON.parse(
+      await readFile(new URL("../src/data/catalog.generated.json", import.meta.url), "utf8")
+    ) as Array<Record<string, unknown>>;
+    assert.equal(raw.length, 100);
+    const costKeys = ["unitCost", "unit_cost", "cost", "margin"];
+    for (const record of raw) {
+      for (const key of costKeys) {
+        assert.ok(!(key in record), `${String(record.catalogSku)} still publishes "${key}"`);
+      }
+    }
+
+    // ...and the costs themselves must still exist, server-side only.
+    const costs = JSON.parse(
+      await readFile(new URL("../data/catalog/costs.generated.json", import.meta.url), "utf8")
+    ) as { records: Array<{ unitCost: number | null }> };
+    assert.equal(costs.records.length, 100);
+    assert.ok(costs.records.some((record) => (record.unitCost ?? 0) > 0));
+  });
+
+  it("uses manufacturer-backed imagery for every branded product without fabricating unbranded stock", async () => {
+    const skus = getStorefrontSkus();
+    const branded = skus.filter((sku) => sku.brand !== "Unbranded");
+    assert.equal(branded.length, 77);
+    assert.ok(branded.every((sku) => sku.imageVerified && sku.images.length > 0));
+    assert.ok(skus.filter((sku) => sku.brand === "Unbranded").every((sku) => !sku.imageVerified && sku.images.length === 0));
+    assert.equal(catalogReconciliation.manufacturerImageCoverage, 77);
+    assert.equal(catalogReconciliation.exactModelImageCoverage, 0);
+    for (const image of new Set(branded.flatMap((sku) => sku.images))) {
+      const bytes = await readFile(new URL(`../public${image}`, import.meta.url));
+      assert.ok(bytes.length > 1000, `${image} is missing or unexpectedly small`);
+    }
+  });
+
+  it("does not market Carrier 26SCA5 air conditioners as heat pumps", () => {
+    const carrierCondensers = getStorefrontSkus().filter((sku) => sku.modelNumber.startsWith("26SCA5"));
+    assert.equal(carrierCondensers.length, 3);
+    assert.ok(carrierCondensers.every((sku) => sku.category === "central-air-conditioners"));
+  });
+
+  it("does not file accessories or parts under equipment categories", () => {
+    const skus = getStorefrontSkus();
+    const bySku = (code: string) => skus.find((sku) => sku.sku === code);
+    // A copper line coil is not an evaporator coil, and a line-hide cover kit
+    // is not a mini split. Both were miscategorised by name-keyword matching.
+    assert.equal(bySku("NATAK78350")?.category, "installation-supplies");
+    assert.equal(bySku("LHCKITWHT")?.category, "installation-supplies");
+    // Every evaporator coil in the sheet is a Carrier cased coil.
+    assert.ok(skus.filter((sku) => sku.category === "evaporator-coils").every((sku) => sku.brand === "Carrier"));
+    // A blank category cell must not demote an outdoor condenser to supplies.
+    assert.equal(bySku("TOS09KODU-09AT19D6DO")?.category, "mini-splits");
+    assert.equal(skus.filter((sku) => sku.category === "air-handlers").length, 11);
+  });
+
+  it("never publishes sheet prose as a manufacturer model number", () => {
+    const skus = getStorefrontSkus();
+    for (const sku of skus) {
+      if (!sku.modelNumber) continue;
+      assert.ok(
+        (sku.modelNumber.match(/\s/g) ?? []).length <= 1 && /\d/.test(sku.modelNumber),
+        `${sku.sku} publishes "${sku.modelNumber}" as a model number`
+      );
+    }
+    // "Cassette Panel 01" and "THEY DONT MAKE IT" are label text, not part numbers.
+    assert.equal(skus.find((sku) => sku.sku === "TCLCASPAN01")?.modelNumber, "");
+    assert.equal(skus.find((sku) => sku.sku === "TCL24KMZIDU")?.modelNumber, "");
+  });
+
+  it("finds equipment by the words contractors actually type", () => {
+    const hits = (query: string) => searchStorefrontSkus(query).map((sku) => sku.sku);
+    assert.ok(hits("3 ton heat pump").length > 0, "3 ton heat pump returned nothing");
+    assert.ok(hits("5 ton condenser").length > 0, "5 ton condenser returned nothing");
+    assert.ok(hits("gas furnace").length > 0, "gas furnace returned nothing");
+    assert.ok(hits("thermostat").includes("TCLWIREDCONT"));
+    // Exact identifiers must still win outright.
+    assert.equal(hits("TSC-09HA1/I3TI22")[0], "TCL09KIDU");
+    assert.equal(hits("zzzznotarealquery").length, 0);
+  });
+
+  it("preserves all collision rows as reviewable, distinct variants", () => {
+    assert.equal(catalogReconciliation.collisionGroups, 9);
+    assert.ok(catalogReconciliation.collisionRows.every((group) => group.sourceRows.length === group.generatedSkus.length));
+    assert.ok(catalogReconciliation.collisionRows.every((group) => new Set(group.generatedSkus).size === group.generatedSkus.length));
+  });
+
+  it("removes spreadsheet formulas and normalizes fields supported by the row itself", () => {
+    const publicCatalog = JSON.stringify(getStorefrontSkus());
+    assert.doesNotMatch(publicCatalog, /#(?:N\/A|NAME|REF|VALUE)|=Ai\(|THEY DONT MAKE IT/i);
+    assert.equal(getStorefrontSku("TCL12KMZIDU")?.productType, "Indoor unit");
+    assert.equal(getStorefrontSku("TCLCAS9K")?.btu, 9000);
+    assert.equal(getStorefrontSku("CAR60KCOIL")?.category, "evaporator-coils");
+    assert.equal(getStorefrontSku("TCL24KMZIDU")?.modelNumber, "");
   });
 });
 
@@ -84,8 +204,10 @@ describe("checkout validation", () => {
 
   it("accepts SKU-level reserve checkout payloads", () => {
     const parsed = checkoutSchema.parse({
+      idempotencyKey: "f6c3bea4-2315-4ca8-b4a2-d7139d411780",
       items: [validItem],
       method: "pickup",
+      window: "2026-08-05T16:00:00.000Z",
       buyerName: "Andre Lewis",
       buyerEmail: "andre@example.com",
       phone: "(415) 555-0199",
@@ -100,6 +222,44 @@ describe("checkout validation", () => {
         method: "pickup",
       })
     );
+  });
+});
+
+describe("quote request catalog authority", () => {
+  it("accepts actual quote-eligible SKUs and ignores spoofed display data", async () => {
+    const result = await createQuoteRequest({
+      name: "Test Buyer",
+      email: "buyer@example.com",
+      need: "Confirm pricing and availability.",
+      lines: [{ skuId: "inventory-row-2", sku: "FAKE", modelNumber: "FAKE", productName: "Fake title", quantity: 2 }],
+    });
+    assert.equal(result.mode, "seeded");
+    if (result.mode === "seeded") assert.deepEqual(result.prepared, { customer: "Test Buyer", lineCount: 1, unitCount: 2 });
+  });
+
+  it("rejects products that are not in the production catalog", async () => {
+    await assert.rejects(() => createQuoteRequest({
+      name: "Test Buyer",
+      email: "buyer@example.com",
+      need: "Quote an unknown product.",
+      lines: [{ skuId: "unknown", sku: "unknown", modelNumber: "", productName: "Unknown", quantity: 1 }],
+    }), /not available for quoting/);
+  });
+});
+
+describe("fulfillment windows", () => {
+  it("omits elapsed same-day slots and validates returned identifiers", () => {
+    const now = new Date("2026-08-05T19:30:00.000Z"); // 12:30 PM Pacific
+    const windows = fulfillmentWindows("pickup", "94560", now);
+    assert.ok(windows.length > 0);
+    assert.ok(windows.every((window) => new Date(window.startAt) > now));
+    assert.equal(isFulfillmentWindowAvailable("pickup", "94560", windows[0].id, now), true);
+  });
+
+  it("does not offer same-day pickup after the Pacific cutoff", () => {
+    const now = new Date("2026-08-05T22:30:00.000Z"); // 3:30 PM Pacific
+    const windows = fulfillmentWindows("pickup", "94560", now);
+    assert.ok(windows.every((window) => !window.label.startsWith("Today")));
   });
 });
 

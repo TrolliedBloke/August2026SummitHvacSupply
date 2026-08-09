@@ -1,19 +1,19 @@
 import { z } from "zod";
 
 export const quoteRequestLineSchema = z.object({
-  skuId: z.string().min(1),
-  sku: z.string().min(1),
-  modelNumber: z.string().min(1),
-  productName: z.string().min(1),
+  skuId: z.string().min(1).max(120),
+  sku: z.string().min(1).max(120),
+  modelNumber: z.string().max(160),
+  productName: z.string().min(1).max(240),
   quantity: z.number().int().min(1).max(200),
 });
 
 export const quoteRequestSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().optional(),
-  need: z.string().min(5),
-  lines: z.array(quoteRequestLineSchema).default([]),
+  name: z.string().min(2).max(120),
+  email: z.string().email().max(254),
+  phone: z.string().max(40).optional(),
+  need: z.string().min(5).max(5000),
+  lines: z.array(quoteRequestLineSchema).max(100).default([]),
 });
 
 export const dealerApplicationSchema = z.object({
@@ -30,6 +30,7 @@ export const dealerApplicationSchema = z.object({
 });
 
 export const checkoutSchema = z.object({
+  idempotencyKey: z.uuid(),
   items: z
     .array(
       z.object({
@@ -64,6 +65,9 @@ export const checkoutSchema = z.object({
   }
   if (!value.phone || value.phone.trim().length < 7) {
     ctx.addIssue({ code: "custom", path: ["phone"], message: "Phone is required for order follow-up." });
+  }
+  if (value.method !== "freight" && !value.window) {
+    ctx.addIssue({ code: "custom", path: ["window"], message: "Choose an available fulfillment window." });
   }
 });
 

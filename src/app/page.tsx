@@ -13,23 +13,15 @@ import {
 } from "lucide-react";
 import { LinkButton } from "@/components/ui";
 import { SITE } from "@/lib/site";
-import { getStorefrontSkus } from "@/lib/storefront/catalog";
-
-/* Live shelf count. Was hardcoded as "16", which drifts silently the moment
-   inventory moves -- and a stock promise that turns out to be wrong is worse
-   than no promise for a supplier whose whole pitch is "pickup today". */
-function inStockCount(): number {
-  return getStorefrontSkus().filter((sku) => sku.available > 0).length;
-}
 
 export const metadata: Metadata = {
   title: "Bay area HVAC supply, parts, heat pumps, and pickup | Summit HVAC Supply",
   description:
-    "Search Bay Area HVAC stock, shop TCL heat pumps and mini splits, get homeowner installer help, or use contractor will-call from Summit HVAC Supply in Newark, CA.",
+    "Search TCL, Tosot, Carrier, mini-split, central HVAC, furnace, cassette, and installation supply SKUs from Summit HVAC Supply.",
   alternates: { canonical: "/" },
 };
 
-const examples = ["TH09SVH23BW", "2.5 ton heat pump", "R-454B", "line set"];
+const examples = ["TCL09KIDU", "TOS42KMZODU", "Carrier 3 ton", "line set"];
 
 const doors = [
   {
@@ -53,24 +45,20 @@ const doors = [
 ];
 
 const categories = [
-  { title: "Heat pumps", body: "Air source and hybrid", href: "/products/central-system", image: "/site/sketches/heat-pump.png" },
-  { title: "Air conditioners", body: "Central ac systems", href: "/products/light-commercial", image: "/site/sketches/air-conditioner.png" },
-  { title: "Furnaces", body: "Gas, electric, and modular", href: "/products", image: "/site/sketches/furnace.png" },
-  { title: "Ductless systems", body: "Wall, multi-zone, and accessories", href: "/products/breezein", image: "/site/sketches/ductless.png" },
-  { title: "Indoor air quality", body: "Filters, purifiers, humidifiers", href: "/products/freshin", image: "/site/sketches/indoor-air-quality.png" },
-  { title: "Water heating", body: "Tank, tankless, and parts", href: "/products", image: "/site/sketches/water-heating.png" },
-  { title: "Refrigerant and A2L", body: "R-410A, R-454B, and more", href: "/resources", image: "/site/sketches/refrigerant.png" },
-  { title: "Parts and supplies", body: "Controls, capacitors, and more", href: "/products", image: "/site/sketches/parts-supplies.png" },
-  { title: "Sheet metal", body: "Duct, fittings, and accessories", href: "/products", image: "/site/sketches/sheet-metal.png" },
-  { title: "Tools and equipment", body: "Testing, recovery, and install tools", href: "/products", image: "/site/sketches/tools-equipment.png" },
-  { title: "Thermostats and controls", body: "Programmable, smart, and IAQ", href: "/products", image: "/site/sketches/thermostat-controls.png" },
-  { title: "Clearance", body: "Closeouts and overstock deals", href: "/products", image: "/site/sketches/clearance.png" },
+  { title: "Mini splits", body: "Indoor, outdoor, and multi-zone units", href: "/products?category=mini-splits", image: "/site/sketches/ductless.png" },
+  { title: "Central heat pumps", body: "TCL, Tosot, and Carrier equipment", href: "/products?category=central-heat-pumps", image: "/site/sketches/heat-pump.png" },
+  { title: "Air handlers", body: "2- through 5-ton air handlers", href: "/products?category=air-handlers", image: "/site/sketches/air-conditioner.png" },
+  { title: "Evaporator coils", body: "Carrier central-system coils", href: "/products?category=evaporator-coils", image: "/site/sketches/indoor-air-quality.png" },
+  { title: "Furnaces", body: "Carrier furnace equipment", href: "/products?category=furnaces", image: "/site/sketches/furnace.png" },
+  { title: "Cassettes", body: "Cassette units, panels, and controls", href: "/products?category=cassettes", image: "/site/sketches/thermostat-controls.png" },
+  { title: "Line sets", body: "Copper line sets by connection size", href: "/products?category=line-sets", image: "/site/sketches/refrigerant.png" },
+  { title: "Installation supplies", body: "Pads, covers, fittings, wire, and conduit", href: "/products?category=installation-supplies", image: "/site/sketches/parts-supplies.png" },
 ];
 
 const branches = [
   {
     name: "Newark",
-    stock: `${inStockCount()} systems in stock`,
+    stock: "Availability confirmed by quote",
     address: SITE.address.full,
     note: "Will-call until 5:00pm",
   },
@@ -95,16 +83,16 @@ const branches = [
 ];
 
 const proof = [
-  { title: "Real stock.", body: "Updated for local fulfillment.", icon: <Package /> },
+  { title: "Exact models.", body: "Search the current SKU catalog.", icon: <Package /> },
   { title: "Real people.", body: "Local help, not a call center.", icon: <Home /> },
-  { title: "Ready when you are.", body: "Order by 2:00p PT. Pick up today.", icon: <CheckCircle2 /> },
-  { title: "Trade account pricing.", body: "Apply once. Save every time.", icon: <ClipboardCheck /> },
+  { title: "Verified before order.", body: "Price and availability confirmed first.", icon: <CheckCircle2 /> },
+  { title: "Trade account quotes.", body: "Account pricing is verified by staff.", icon: <ClipboardCheck /> },
 ];
 
 const compliance = [
   "Equipment supply only. Installation is handled by qualified local contractors.",
   "Installer confirms sizing, permits, labor, and final scope before equipment is ordered.",
-  "AHRI, energy star, ETL, and NEEP documents stay close to the product decision.",
+  "AHRI, ENERGY STAR, ETL, and NEEP claims publish only after exact-model verification.",
 ];
 
 export default function HomePage() {
@@ -142,12 +130,12 @@ export default function HomePage() {
         <CounterContainer className="pb-3 pt-8 md:pb-5 md:pt-10">
           <div className="max-w-[780px]">
             <h1 className="max-w-[640px] font-display text-[2.35rem] font-medium leading-[1] tracking-normal text-ink-1 sm:text-[3.35rem] lg:text-[3.75rem]">
-              Parts on the shelf.
+              Find the exact HVAC model.
               <br />
-              Pickup today.
+              Verify before you order.
             </h1>
             <p className="mt-3 text-[1.02rem] leading-7 text-ink-1">
-              Bay Area stock. Local pickup. Real people.
+              Current catalog. Local support. Quote-first accuracy.
             </p>
 
             <form
@@ -192,7 +180,7 @@ export default function HomePage() {
             <div className="mt-5 flex flex-col gap-2 text-[0.95rem] text-ink-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5">
               <span className="inline-flex items-center gap-2 text-brand">
                 <CheckCircle2 size={21} strokeWidth={1.8} aria-hidden="true" />
-                {inStockCount()} on the shelf in Newark
+                Availability confirmed before order
               </span>
               <span className="hidden sm:inline" aria-hidden="true">·</span>
               <span>Will-call until 5:00pm</span>

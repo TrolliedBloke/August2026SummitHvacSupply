@@ -8,8 +8,8 @@ export async function generateMetadata({ searchParams }: PageProps<"/products">)
   const query = await searchParams;
   const hasFacet = Object.values(query).some((value) => value !== undefined && value !== "" && value !== "all");
   return pageMetadata({
-    title: "TCL HVAC SKUs - Search Stock, Specs & Pricing",
-    description: "Search Summit HVAC Supply SKUs by model, BTU, voltage, unit type, stock, documents, and contractor pricing.",
+    title: "HVAC Equipment & Supplies - Search by SKU or Model",
+    description: "Search Summit HVAC Supply products by SKU, OEM model, brand, equipment type, capacity, voltage, refrigerant, and pricing status.",
     path: "/products",
     index: !hasFacet,
   });

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
 import { Container, LinkButton } from "@/components/ui";
-import { SERIES } from "@/lib/products";
+import { getCatalogFacets } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
 
 export default function NotFound() {
@@ -34,16 +34,19 @@ export default function NotFound() {
 
       <div className="mx-auto mt-14 max-w-2xl">
         <h2 className="text-center font-mono text-xs font-semibold uppercase tracking-[0.14em] text-ink-3">
-          Popular series
+          Browse categories
         </h2>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-          {SERIES.slice(0, 6).map((s) => (
-            <li key={s.slug}>
+          {/* Categories that hold SKUs. The fixed slice offered "Central
+              systems", which has no products -- a dead end reached from a
+              page the visitor already landed on by mistake. */}
+          {getCatalogFacets().categories.slice(0, 6).map((category) => (
+            <li key={category.value}>
               <Link
-                href={`/products/${s.slug}`}
+                href={`/products?category=${category.value}`}
                 className="group flex items-center justify-between rounded-(--r-sm) border border-line bg-surface-1 px-4 py-3 text-sm font-medium text-ink-1 transition-colors hover:border-line-strong hover:bg-surface-2"
               >
-                {s.name}
+                {category.label}
                 <ArrowRight size={15} className="text-ink-3 group-hover:text-brand" />
               </Link>
             </li>

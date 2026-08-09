@@ -11,7 +11,7 @@ import { SITE } from "@/lib/site";
 import { postJson } from "@/lib/client/post-json";
 
 export default function QuotePage() {
-  const { items, count } = useQuote();
+  const { items, count, hydrated } = useQuote();
   const [sent, setSent] = React.useState(false);
   const [requestId, setRequestId] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -56,8 +56,8 @@ export default function QuotePage() {
             Tell us what you need. We&apos;ll prepare pricing &amp; lead times.
           </h1>
           <p className="mt-3 text-ink-2">
-            Four fields, no account required. A real person replies, usually same
-            business day.
+            Four fields, no account required. Staff reviews the exact identifiers,
+            price, availability, and fulfillment before following up.
           </p>
 
           {sent ? (
@@ -101,7 +101,7 @@ export default function QuotePage() {
                   name="need"
                   required
                   rows={4}
-                  placeholder="e.g. (3) 24k BreezeIN heads + condensers for a Bay Area changeout, plus lead time on the Elite 9k."
+                  placeholder="e.g. (3) TCL24KIDU units for a Bay Area changeout, plus verified outdoor-unit compatibility and lead time."
                 />
               </Field>
               <Button type="submit" size="lg" className="self-start" disabled={isSubmitting}>
@@ -121,6 +121,7 @@ export default function QuotePage() {
                 src="/site/generated/spec-workbench-documents.jpg"
                 alt="HVAC quote preparation with spec sheets and installation materials"
                 fill
+                preload
                 sizes="(min-width: 1024px) 380px, 100vw"
                 className="object-cover"
               />
@@ -134,7 +135,9 @@ export default function QuotePage() {
             <h2 className="font-display text-sm font-semibold text-ink-1">
               On your quote list
             </h2>
-            {items.length === 0 ? (
+            {!hydrated ? (
+              <div className="mt-3 h-12 animate-pulse rounded-(--r-sm) bg-surface-2" aria-label="Loading quote list" />
+            ) : items.length === 0 ? (
               <p className="mt-2 text-sm text-ink-3">
                 Nothing added yet. That is fine, just describe what you need above.
                 Or{" "}
