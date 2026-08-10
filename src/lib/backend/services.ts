@@ -24,6 +24,7 @@ import type {
   Sku,
 } from "./types";
 import type { SeriesCardSummary } from "./catalog";
+import { loadPortalData } from "./portal";
 import { getStorefrontSku } from "@/lib/storefront/catalog";
 
 const data = createDemoOperationsData();
@@ -111,28 +112,60 @@ export async function getPortalOverview(profile: {
   accountId: string | null;
 }): Promise<PortalOverview> {
   const role = profile.role;
+  const inventory = inventoryBySku();
 
-  if (process.env.NODE_ENV === "production" && !hasSupabaseEnv()) {
-    throw new PortalUnavailableError(
-      "Portal data is unavailable right now. No account information could be loaded."
-    );
-  }
+  // Product suggestions are catalog data, identical for everyone and containing
+  // nothing account-specific, so they stay sourced from the catalog fixture.
+  const recommendedSkus = data.skus.slice(0, role === "homeowner" ? 3 : 6).map((sku) => ({
+    ...sku,
+    available: inventory.get(sku.id)?.available ?? 0,
+    seriesName: seriesName(sku.seriesSlug),
+  }));
 
-  // Scope to the caller's own account. A signed-in user with no account has no
-  // account-scoped records -- not someone else's.
-  const account =
-    data.accounts.find((candidate) => candidate.id === profile.accountId) ??
-    (process.env.NODE_ENV === "production" ? null : data.accounts[0]);
-
-  if (!account) {
+  // A signed-in user with no account has no account-scoped records. Saying so
+  // is correct; showing a fixture account's orders is not.
+  if (!profile.accountId) {
     throw new PortalUnavailableError(
       "This login is not linked to a wholesale account yet. Contact us to finish account setup."
     );
   }
 
+  if (hasSupabaseEnv()) {
+    // Real, account-scoped data. Every query filters on the authenticated
+    // profile's account_id -- see loadPortalData.
+    const portal = await loadPortalData(profile.accountId, role);
+    return {
+      role,
+      account: portal.account,
+      userName: profile.name,
+      priceTier: portal.account.priceTier,
+      quotes: portal.quotes,
+      orders: portal.orders,
+      invoices: portal.invoices,
+      tasks: portal.tasks,
+      rmas: portal.rmas,
+      warrantyClaims: portal.warrantyClaims,
+      rebateCases: portal.rebateCases,
+      recommendedSkus,
+    };
+  }
+
+  // No database configured. Production must never fabricate account data.
+  if (process.env.NODE_ENV === "production") {
+    throw new PortalUnavailableError(
+      "Portal data is unavailable right now. No account information could be loaded."
+    );
+  }
+
+  // Development only, and still scoped to the caller's own account id.
+  const account = data.accounts.find((candidate) => candidate.id === profile.accountId);
+  if (!account) {
+    throw new PortalUnavailableError(
+      "This login is not linked to a wholesale account yet. Contact us to finish account setup."
+    );
+  }
   const accountScoped = <T extends { accountId: string }>(items: T[]) =>
     role === "staff" ? items : items.filter((item) => item.accountId === account.id);
-  const inventory = inventoryBySku();
 
   return {
     role,
@@ -146,11 +179,7 @@ export async function getPortalOverview(profile: {
     rmas: accountScoped(data.rmas),
     warrantyClaims: accountScoped(data.warrantyClaims),
     rebateCases: accountScoped(data.rebateCases),
-    recommendedSkus: data.skus.slice(0, role === "homeowner" ? 3 : 6).map((sku) => ({
-      ...sku,
-      available: inventory.get(sku.id)?.available ?? 0,
-      seriesName: seriesName(sku.seriesSlug),
-    })),
+    recommendedSkus,
   };
 }
 

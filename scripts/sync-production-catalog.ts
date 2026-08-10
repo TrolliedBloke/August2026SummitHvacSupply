@@ -1,6 +1,17 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
+import WebSocket from "ws";
+
+// supabase-js constructs a realtime client eagerly, and realtime-js THROWS on
+// Node < 22 because there is no global WebSocket. This script only makes REST
+// calls, but the throw happens at createClient() before any of them -- which is
+// why `npm run catalog:sync` exited 1 having written nothing, printing only the
+// realtime advisory. Supplying the polyfill is the fix the error itself
+// prescribes. Node 22 makes this unnecessary.
+if (!(globalThis as { WebSocket?: unknown }).WebSocket) {
+  (globalThis as { WebSocket?: unknown }).WebSocket = WebSocket;
+}
 
 type GeneratedProduct = {
   id: string;

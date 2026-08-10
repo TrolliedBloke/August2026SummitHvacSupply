@@ -130,6 +130,82 @@ describe("live: anonymous cannot execute operational RPCs", { skip }, () => {
   }
 });
 
+describe("live: tables added by migrations 005-014 are not anon-readable", { skip }, () => {
+  // These were created after the first lockdown. Supabase's default privileges
+  // grant anon full DML on every new table in `public`, so each migration is an
+  // opportunity to reopen the hole -- which is exactly what happened with
+  // mark_order_paid. These assertions catch it next time.
+  const mustBeClosed = [
+    "contact_requests",
+    "order_payments",
+    "back_in_stock_subscriptions",
+    "cart_snapshots",
+    "chat_transcripts",
+    "site_events",
+    "saved_lists",
+    "catalog_product_costs",
+    "catalog_product_trade_pricing",
+    "catalog_import_runs",
+  ];
+
+  for (const table of mustBeClosed) {
+    it(`${table} is not readable`, async () => {
+      const r = await anonGet(`${table}?select=*&limit=1`);
+      assert.ok(r.status !== 200 || r.body === "[]", `${table} leaked: ${r.body.slice(0, 120)}`);
+    });
+  }
+
+  it("catalog_products serves the public catalog", async () => {
+    const r = await anonGet("catalog_products?select=catalog_sku,name&limit=1");
+    assert.equal(r.status, 200);
+    assert.notEqual(r.body, "[]");
+  });
+
+  it("catalog_products carries no cost or trade-price column", async () => {
+    for (const column of ["contractor_price", "unit_cost", "cost"]) {
+      const r = await anonGet(`catalog_products?select=${column}&limit=1`);
+      assert.notEqual(r.status, 200, `catalog_products.${column} is selectable`);
+    }
+  });
+});
+
+describe("live: functions added by migrations 006-014 are not anon-executable", { skip }, () => {
+  const cases: Array<[string, unknown]> = [
+    ["mark_order_paid", { p_order_id: DEAD_UUID, p_amount: 0, p_stripe_event_id: null }],
+    ["release_checkout_order", { p_order_id: DEAD_UUID, p_state: "expired" }],
+    ["expire_stale_checkout_orders", {}],
+    ["reserve_public_order", { p_order_id: DEAD_UUID }],
+    ["advance_fulfillment", { p_order_id: DEAD_UUID, p_status: "delivered" }],
+    ["handle_new_retail_user", {}],
+  ];
+
+  for (const [name, args] of cases) {
+    it(`${name} is refused`, async () => {
+      const status = await anonRpc(name, args);
+      assert.ok(status >= 400, `${name} was reachable (HTTP ${status})`);
+    });
+  }
+});
+
+describe("live: unknown inventory can never be purchasable", { skip }, () => {
+  it("no catalog_products row is purchase_eligible without verified inventory", async () => {
+    // The DB CHECK enforces this, but the check is only as good as the data
+    // that got past it; assert the actual served state.
+    const r = await anonGet(
+      "catalog_products?select=catalog_sku,purchase_eligible,inventory_status,inventory_quantity&purchase_eligible=is.true"
+    );
+    assert.equal(r.status, 200);
+    const rows = JSON.parse(r.body) as Array<{
+      inventory_status: string;
+      inventory_quantity: number | null;
+    }>;
+    for (const row of rows) {
+      assert.notEqual(row.inventory_status, "unknown");
+      assert.notEqual(row.inventory_quantity, null);
+    }
+  });
+});
+
 describe("live: anonymous cannot write", { skip }, () => {
   it("cannot INSERT a quote request directly", async () => {
     // Must use return=minimal: with return=representation this fails for a

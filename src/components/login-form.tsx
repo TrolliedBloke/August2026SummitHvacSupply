@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import * as React from "react";
 import { useFormStatus } from "react-dom";
 import { LogIn } from "lucide-react";
@@ -41,9 +42,14 @@ export function LoginForm({ next }: { next: string }) {
         />
       </div>
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="password" className="text-sm font-medium text-ink-1">
-          Password
-        </label>
+        <div className="flex items-baseline justify-between">
+          <label htmlFor="password" className="text-sm font-medium text-ink-1">
+            Password
+          </label>
+          <Link href="/portal/forgot-password" className="text-xs text-ink-2 underline">
+            Forgot password?
+          </Link>
+        </div>
         <input
           id="password"
           name="password"
