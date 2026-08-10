@@ -28,8 +28,11 @@ export async function POST(request: Request) {
     const list = await createSavedList(profile.userId, String(name ?? ""), clean);
     return NextResponse.json({ ok: true, list });
   } catch (error) {
+    // Log the real cause server-side; never return it. Provider and
+    // Postgres messages carry table, column and constraint names.
+    console.error("[api/saved-lists] failed", error);
     return NextResponse.json(
-      { ok: false, error: error instanceof Error ? error.message : "Save failed" },
+      { ok: false, error: "Save failed" },
       { status: 500 }
     );
   }

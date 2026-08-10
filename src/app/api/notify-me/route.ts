@@ -10,8 +10,11 @@ export async function POST(request: Request) {
     await subscribeBackInStock(email.trim().toLowerCase(), skuId);
     return NextResponse.json({ ok: true });
   } catch (error) {
+    // Log the real cause server-side; never return it. Provider and
+    // Postgres messages carry table, column and constraint names.
+    console.error("[api/notify-me] failed", error);
     return NextResponse.json(
-      { ok: false, error: error instanceof Error ? error.message : "Subscription failed" },
+      { ok: false, error: "Subscription failed" },
       { status: 500 }
     );
   }

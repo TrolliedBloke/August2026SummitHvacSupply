@@ -25,9 +25,12 @@ export async function POST(request: Request) {
     const result = await createQuoteRequest(payload);
     return NextResponse.json({ ok: true, ...result });
   } catch (error) {
+    // Log the real cause server-side; never return it. Provider and
+    // Postgres messages carry table, column and constraint names.
+    console.error("[api/quote-requests] failed", error);
     if (error instanceof ZodError) {
       return NextResponse.json({ ok: false, error: "Invalid quote request", issues: error.issues }, { status: 400 });
     }
-    return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : "Quote request failed" }, { status: 500 });
+    return NextResponse.json({ ok: false, error: "Quote request failed" }, { status: 500 });
   }
 }

@@ -94,8 +94,11 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true });
   } catch (error) {
+    // Log the real cause server-side; never return it. Provider and
+    // Postgres messages carry table, column and constraint names.
+    console.error("[api/sizing-match] failed", error);
     return NextResponse.json(
-      { ok: false, error: error instanceof Error ? error.message : "Could not send" },
+      { ok: false, error: "Could not send" },
       { status: 500 }
     );
   }
