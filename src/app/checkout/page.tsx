@@ -13,7 +13,11 @@ export default async function CheckoutPage() {
   const trade = profile?.role === "dealer" || profile?.role === "installer" || profile?.role === "staff";
 
   const prices: PriceMap = Object.fromEntries(
-    getStorefrontSkus().map((sku) => [sku.id, { dealer: sku.dealerPrice > 0 ? sku.dealerPrice : sku.msrp, retail: sku.msrp }])
+    getStorefrontSkus().map((sku) => [
+      sku.id,
+      // Falls back to retail when no trade price is on file.
+      { dealer: sku.dealerPrice !== null && sku.dealerPrice > 0 ? sku.dealerPrice : sku.msrp, retail: sku.msrp },
+    ])
   );
 
   return (

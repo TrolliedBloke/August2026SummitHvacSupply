@@ -80,9 +80,52 @@ export async function getOperationsOverview(): Promise<OperationsOverview> {
   return buildOperationsOverview(data);
 }
 
-export async function getPortalOverview(role: PersonaRole): Promise<PortalOverview> {
-  const user = data.users.find((candidate) => candidate.role === role) ?? data.users[0];
-  const account = data.accounts.find((candidate) => candidate.id === user.accountId) ?? data.accounts[0];
+/**
+ * Raised when the portal cannot serve real account data. The portal shows an
+ * explicit unavailable state rather than another account's records.
+ */
+export class PortalUnavailableError extends Error {}
+
+/**
+ * Portal data for ONE authenticated identity.
+ *
+ * Previously this took only a role and looked the "user" up by role from a
+ * shared demo fixture, so every dealer who ever signed in saw the same
+ * fabricated account, orders, invoices and inventory -- and `accountScoped`
+ * filtered against that fixture account rather than the caller's own.
+ *
+ * It now takes the authenticated profile and scopes to `profile.accountId`.
+ * The underlying store is still the seeded fixture, which is why production
+ * refuses to serve it: real account-backed queries against Supabase are not
+ * implemented yet, and inventing data for a signed-in dealer is worse than an
+ * honest error.
+ */
+export async function getPortalOverview(profile: {
+  userId: string;
+  name: string;
+  role: PersonaRole;
+  accountId: string | null;
+}): Promise<PortalOverview> {
+  const role = profile.role;
+
+  if (process.env.NODE_ENV === "production" && !hasSupabaseEnv()) {
+    throw new PortalUnavailableError(
+      "Portal data is unavailable right now. No account information could be loaded."
+    );
+  }
+
+  // Scope to the caller's own account. A signed-in user with no account has no
+  // account-scoped records -- not someone else's.
+  const account =
+    data.accounts.find((candidate) => candidate.id === profile.accountId) ??
+    (process.env.NODE_ENV === "production" ? null : data.accounts[0]);
+
+  if (!account) {
+    throw new PortalUnavailableError(
+      "This login is not linked to a wholesale account yet. Contact us to finish account setup."
+    );
+  }
+
   const accountScoped = <T extends { accountId: string }>(items: T[]) =>
     role === "staff" ? items : items.filter((item) => item.accountId === account.id);
   const inventory = inventoryBySku();
@@ -90,7 +133,7 @@ export async function getPortalOverview(role: PersonaRole): Promise<PortalOvervi
   return {
     role,
     account,
-    userName: user.name,
+    userName: profile.name,
     priceTier: account.priceTier,
     quotes: accountScoped(data.quotes),
     orders: accountScoped(data.salesOrders),
@@ -147,7 +190,11 @@ async function loadSeriesCardSummaries(): Promise<Record<string, SeriesCardSumma
   const [{ data: seriesRows, error: seriesError }, { data: skuRows, error: skuError }, { data: lotRows, error: lotError }] =
     await Promise.all([
       supabase.from("product_series").select("id, slug"),
-      supabase.from("skus").select("id, series_id, dealer_price"),
+      // dealer_price is deliberately NOT selected. This runs on the public
+      // (anon) client, and migration 015 revokes that column from anon because
+      // it was world-readable. Nothing renders startingDealerPrice, so the
+      // public path has no reason to carry trade pricing at all.
+      supabase.from("skus").select("id, series_id"),
       supabase.from("inventory_lots").select("sku_id, on_hand, reserved"),
     ]);
 
@@ -180,7 +227,9 @@ async function loadSeriesCardSummaries(): Promise<Record<string, SeriesCardSumma
     };
     existing.skuCount += 1;
     existing.availableUnits += availableBySku.get(sku.id) ?? 0;
-    existing.startingDealerPrice = Math.min(existing.startingDealerPrice, Number(sku.dealer_price));
+    // Left at its initial value: trade pricing is not readable from the public
+    // client and is not displayed on series cards. The field is normalised to 0
+    // below rather than reporting a price this path cannot legitimately know.
     summaries.set(slug, existing);
   }
 
@@ -353,7 +402,8 @@ export function getReorderItems(
       unresolved++;
       continue;
     }
-    const unit = trade ? sku.dealerPrice : sku.msrp;
+    // Retail is the floor when no trade price exists; reorder must never quote 0.
+    const unit = trade && sku.dealerPrice !== null && sku.dealerPrice > 0 ? sku.dealerPrice : sku.msrp;
     items.push({
       skuId: sku.id,
       sku: sku.sku,

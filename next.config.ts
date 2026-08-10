@@ -26,6 +26,9 @@ const nextConfig: NextConfig = {
   // Release checks can build beside a running local dev server without both
   // processes clearing and rewriting the same .next directory.
   distDir: process.env.NEXT_DIST_DIR || ".next",
+  // Stop advertising the framework. Verified still present after the security
+  // headers landed: `X-Powered-By: Next.js` on every response.
+  poweredByHeader: false,
   // Baseline security headers. None were set: no HSTS, no clickjacking
   // protection, no MIME-sniffing protection, and a Referer that leaked full
   // URLs cross-origin.
@@ -46,7 +49,12 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' https://js.stripe.com",
+              // 'unsafe-eval' is added in development ONLY. React's dev build
+              // uses eval() for debugging features (rebuilding call stacks
+              // across environments) and the dev overlay fails loudly without
+              // it -- verified in the browser console. React never uses eval()
+              // in a production build, so the production policy stays strict.
+              `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://js.stripe.com`,
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob:",
               "font-src 'self' data:",

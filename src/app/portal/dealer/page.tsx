@@ -11,7 +11,7 @@ export const metadata = {
 export default async function DealerPortalPage() {
   const profile = await requireUser("/portal/dealer");
   if (profile.role !== "dealer") redirect(profile.role === "staff" ? "/admin" : "/portal");
-  const overview = await getPortalOverview(profile.role);
+  const overview = await getPortalOverview(profile);
   return (
     <Container className="py-10 lg:py-14">
       <PortalDashboard overview={overview} />

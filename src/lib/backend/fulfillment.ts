@@ -20,6 +20,8 @@ export const WAREHOUSE = {
   id: "50000000-0000-0000-0000-000000000001",
   name: "Newark Fulfillment Center",
   city: "Newark, CA",
+  /** Point of sale for will-call pickup, and so the tax destination for it. */
+  zip: "94560",
 };
 
 /** Bay Area zones served from Newark. Mirrors supabase/seed.sql delivery_zones. */

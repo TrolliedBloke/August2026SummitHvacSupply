@@ -7,13 +7,7 @@ import { isFulfillmentWindowAvailable, localDeliveryFee, resolveZone, WAREHOUSE,
 import { estimateTax } from "./pricing";
 import { clearCartSnapshot } from "./lifecycle";
 import { createOrderToken } from "./order-token";
-import {
-  rememberSeededCheckout,
-  seededCheckoutByOrder,
-  seededCheckoutByKey,
-  type CheckoutState,
-  type CheckoutStatus,
-} from "./checkout-state";
+import { type CheckoutState, type CheckoutStatus } from "./checkout-state";
 
 /**
  * Places an order from the cart with a chosen fulfillment method.
@@ -62,7 +56,8 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
     if (!sku.purchaseEligible || sku.retailPrice === null) {
       throw new CheckoutConflictError(`${sku.sku} requires a verified quote before purchase.`);
     }
-    const unit = trade && sku.dealerPrice > 0 ? sku.dealerPrice : sku.retailPrice;
+    // No trade price on file means the trade buyer pays retail, not zero.
+    const unit = trade && sku.dealerPrice !== null && sku.dealerPrice > 0 ? sku.dealerPrice : sku.retailPrice;
     return { ...item, skuRecord: sku, unitPrice: unit, lineTotal: unit * item.qty };
   });
   const subtotal = round(lines.reduce((sum, l) => sum + l.lineTotal, 0));
@@ -79,7 +74,23 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
 
   // 4. Estimated sales tax applies only to card checkout (homeowners/guests).
   //    Trade net-terms orders are taxed on the invoice; freight is quoted.
-  const tax = payment === "card" ? estimateTax(subtotal) : 0;
+  //
+  //    The destination decides the rate: will-call is taxed at the Newark hub,
+  //    local delivery at the delivery ZIP. estimateTax returns null outside the
+  //    one jurisdiction this rate is valid for, and an uncomputable tax must
+  //    stop the sale rather than be charged as 0 -- undercharging tax is a
+  //    liability Summit absorbs, not the customer.
+  let tax = 0;
+  if (payment === "card") {
+    const destinationZip = parsed.method === "pickup" ? WAREHOUSE.zip : parsed.zip;
+    const computed = estimateTax(subtotal, destinationZip);
+    if (computed === null) {
+      throw new CheckoutConflictError(
+        "We cannot calculate sales tax for that delivery address online. Request a quote and we will confirm tax and freight."
+      );
+    }
+    tax = computed;
+  }
   const total = round(subtotal + fee + tax);
 
   // Public checkout must use the trusted server client. The anonymous client
@@ -259,7 +270,10 @@ export async function cleanupExpiredCheckouts(): Promise<number> {
 
 export async function getCheckoutStatus(orderId: string): Promise<CheckoutStatus | null> {
   const supabase = createServiceRoleSupabaseClient();
-  if (!supabase) return seededCheckoutByOrder(orderId);
+  // Without a database there is no order to report on. Returning a seeded
+  // status here would show a confirmation page for an order that does not
+  // exist; null renders "not found", which is true.
+  if (!supabase) return null;
   const { data, error } = await supabase
     .from("sales_orders")
     .select("id, order_number, subtotal, total, fulfillment_fee, payment_mode, checkout_state, payment_intent_id")

@@ -73,6 +73,32 @@ export const checkoutSchema = z.object({
 
 export type CheckoutInput = z.infer<typeof checkoutSchema>;
 
+/**
+ * Cart snapshot input. The endpoint is public and unauthenticated, so every
+ * field here is attacker controlled and only `skuId`/`qty` are actually used --
+ * title and price are re-derived from the server catalog in saveCartSnapshot.
+ * They are still bounded so a caller cannot post megabytes of junk that later
+ * lands in an email body.
+ */
+export const cartSnapshotSchema = z.object({
+  email: z.string().email().max(254),
+  items: z
+    .array(
+      z.object({
+        skuId: z.string().min(1).max(120),
+        sku: z.string().max(120).optional(),
+        title: z.string().max(240).optional(),
+        modelNumber: z.string().max(160).optional(),
+        qty: z.number().int().min(1).max(200),
+        // Accepted for backwards compatibility with older clients and then
+        // ignored: pricing is never taken from the browser.
+        unitPrice: z.number().nonnegative().max(1_000_000).optional(),
+      })
+    )
+    .min(1)
+    .max(50),
+});
+
 export const contactRequestSchema = z.object({
   topic: z.string().min(1),
   name: z.string().min(2),

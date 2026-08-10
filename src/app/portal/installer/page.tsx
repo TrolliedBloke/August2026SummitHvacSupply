@@ -11,7 +11,7 @@ export const metadata = {
 export default async function InstallerPortalPage() {
   const profile = await requireUser("/portal/installer");
   if (profile.role !== "installer") redirect(profile.role === "staff" ? "/admin" : "/portal");
-  const overview = await getPortalOverview(profile.role);
+  const overview = await getPortalOverview(profile);
   return (
     <Container className="py-10 lg:py-14">
       <PortalDashboard overview={overview} />

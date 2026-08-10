@@ -16,26 +16,54 @@ type FulfillmentState = {
 const Ctx = React.createContext<FulfillmentState | null>(null);
 const KEY = "summit-zip-v1";
 
+/* localStorage as an external store.
+ *
+ * Reading it in a useState initialiser made the first client render disagree
+ * with the server HTML for any visitor with a saved ZIP -- a real hydration
+ * mismatch on /products, because the server cannot know the stored value.
+ * useSyncExternalStore is the supported fix: React renders the SERVER snapshot
+ * (null) during hydration and swaps to the client snapshot immediately after,
+ * without a cascading setState inside an effect. */
+
+const ZIP_EVENT = "summit-zip-change";
+
+function subscribe(onChange: () => void): () => void {
+  window.addEventListener(ZIP_EVENT, onChange);
+  // `storage` fires when another tab changes the value, keeping tabs in sync.
+  window.addEventListener("storage", onChange);
+  return () => {
+    window.removeEventListener(ZIP_EVENT, onChange);
+    window.removeEventListener("storage", onChange);
+  };
+}
+
+function getSnapshot(): string | null {
+  try {
+    return localStorage.getItem(KEY);
+  } catch {
+    // Storage can be unavailable (private mode, blocked cookies).
+    return null;
+  }
+}
+
+/** The server has no storage, so it always renders "no ZIP set". */
+function getServerSnapshot(): string | null {
+  return null;
+}
+
 export function FulfillmentProvider({ children }: { children: React.ReactNode }) {
-  const [zip, setZipState] = React.useState<string | null>(() => {
-    if (typeof window === "undefined") return null;
-    try {
-      const stored = localStorage.getItem(KEY);
-      return stored || null;
-    } catch {
-      return null;
-    }
-  });
+  const zip = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const setZip = React.useCallback((next: string | null) => {
     const clean = next ? next.replace(/[^0-9]/g, "").slice(0, 5) : null;
-    setZipState(clean && clean.length === 5 ? clean : null);
     try {
       if (clean && clean.length === 5) localStorage.setItem(KEY, clean);
       else localStorage.removeItem(KEY);
     } catch {
       /* ignore */
     }
+    // Notify this tab; `storage` only fires in OTHER tabs.
+    window.dispatchEvent(new Event(ZIP_EVENT));
   }, []);
 
   const value: FulfillmentState = {

@@ -122,7 +122,8 @@ export type StorefrontSku = {
   refrigerantClass: "A2L" | null;
   retailPrice: number | null;
   msrp: number;
-  dealerPrice: number;
+  /** null = no trade price on file. Never 0, which reads as a real price. */
+  dealerPrice: number | null;
   image: string;
   images: string[];
   imageVerified: boolean;
@@ -140,7 +141,8 @@ export type StorefrontSku = {
   publicationStatus: CatalogRecord["publicationStatus"];
   issues: string[];
   dimensions: string;
-  weightLbs: number;
+  /** null = not researched. Never 0, which reads as a real weight. */
+  weightLbs: number | null;
   ahriReference: string;
   warrantyCompressor: string;
   warrantyParts: string;
@@ -169,6 +171,41 @@ function categoryLabel(category: CatalogCategory): string {
   return CATALOG_CATEGORIES.find((item) => item.value === category)?.label ?? "HVAC products";
 }
 
+/**
+ * Dimensions as researched, or "" when nothing was found.
+ *
+ * Research records these two different ways depending on the source: a single
+ * `dimensionsText` string lifted from a spec sheet, or discrete height/width/
+ * depth numbers. Both are read here so that a product page shows real
+ * measurements when they exist instead of a blank row.
+ *
+ * `dimensionsText` values already carry their unit, so appending another "in"
+ * produced strings like `33-1/16 in x 12-3/8 in in`. Only the numeric form gets
+ * a unit added.
+ */
+function deriveDimensions(specs: Record<string, string | number>): string {
+  const text = specs.dimensionsText;
+  if (typeof text === "string" && text.trim()) return text.trim();
+
+  const height = specs.heightIn;
+  const width = specs.widthIn;
+  const depth = specs.depthIn;
+  if (height && width && depth) return `${height} x ${width} x ${depth} in`;
+  return "";
+}
+
+/**
+ * An AHRI reference is only meaningful when a certificate was actually located
+ * for this model. `requires_matched_combination` means the rating depends on
+ * the pairing, `not_applicable` means no certificate exists to find, and
+ * `conflict` means the identity is disputed -- none of those may present a
+ * reference number as though it certified this product.
+ */
+function deriveAhriReference(ahri: CatalogAhri | null): string {
+  if (!ahri || ahri.status !== "certified") return "";
+  return ahri.referenceNumber ?? "";
+}
+
 function toStorefrontSku(record: CatalogRecord): StorefrontSku {
   const price = record.retailPrice ?? 0;
   return {
@@ -194,8 +231,12 @@ function toStorefrontSku(record: CatalogRecord): StorefrontSku {
     refrigerantClass: record.refrigerantClass ?? null,
     retailPrice: record.retailPrice,
     msrp: price,
-    // Contractor pricing has not been supplied. Never derive it from unit cost.
-    dealerPrice: 0,
+    // Contractor pricing has not been supplied for the production catalog and
+    // is never derived from unit cost. `null` -- not 0 -- so that "no trade
+    // price on file" cannot be read as "this product is free to dealers".
+    // Trade pricing lives in catalog_product_trade_pricing (migration 015) and
+    // is readable only by trade roles.
+    dealerPrice: null,
     image: record.image ?? "/logo-summit.svg",
     images: record.images ?? (record.image ? [record.image] : []),
     imageVerified: record.imageVerification !== "unverified" && Boolean(record.image),
@@ -212,9 +253,12 @@ function toStorefrontSku(record: CatalogRecord): StorefrontSku {
     conflictType: record.conflictType ?? null,
     publicationStatus: record.publicationStatus,
     issues: record.issues,
-    dimensions: "",
-    weightLbs: 0,
-    ahriReference: "",
+    // Real researched values where they exist. These three were hardcoded to
+    // empty/zero, which both hid genuine research from the product page and
+    // made every record fail the SEO gate that requires them.
+    dimensions: deriveDimensions(record.specifications ?? {}),
+    weightLbs: typeof record.specifications?.weightLbs === "number" ? record.specifications.weightLbs : null,
+    ahriReference: deriveAhriReference(record.ahri ?? null),
     warrantyCompressor: record.warranty?.compressor ?? "",
     warrantyParts: record.warranty?.parts ?? "",
     certifications: [],

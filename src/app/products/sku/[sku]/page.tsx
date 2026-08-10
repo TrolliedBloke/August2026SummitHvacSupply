@@ -7,8 +7,9 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductGallery } from "@/components/product-gallery";
 import { Container, LinkButton } from "@/components/ui";
 import { getRelatedSkus, getStorefrontSku, getStorefrontSkus, productHref, skuSlug } from "@/lib/storefront/catalog";
-import { getSkuSeoState } from "@/lib/seo/catalog";
-import { pageMetadata } from "@/lib/seo/metadata";
+import { buildProductSchema, getSkuSeoState } from "@/lib/seo/catalog";
+import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
+import { SITE } from "@/lib/site";
 import { FIELD_GROUPS, FIELD_LABELS, isFieldApplicable } from "@/lib/catalog/field-manifest";
 
 // Every valid slug is known at build time. Without this, an unknown slug is
@@ -96,8 +97,18 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
     ["Bundle / kit", sku.bundleName],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
+  // Only indexable records publish structured data; buildProductSchema returns
+  // null for conflicted or incomplete ones.
+  const productSchema = buildProductSchema(sku, SITE.origin);
+
   return (
     <>
+      {productSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(productSchema) }}
+        />
+      )}
       <div className="border-b border-line bg-surface-1">
         <Container className="py-3"><Breadcrumbs items={[{ label: "Products", href: "/products" }, { label: sku.categoryLabel, href: `/products?category=${sku.category}` }, { label: sku.sku, href: productHref(sku) }]} /></Container>
       </div>

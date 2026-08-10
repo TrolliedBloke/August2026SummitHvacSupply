@@ -72,7 +72,10 @@ export async function dispatchBackInStock(): Promise<{ sent: number }> {
 
   const notify = async (email: string, skuId: string, unsubscribeUrl: string) => {
     const sku = getStorefrontSku(skuId);
-    if (!sku || sku.available <= 0) return false;
+    // "Back in stock" states a quantity as fact, so it requires a verified
+    // count -- not merely a non-zero number carried over from an unverified
+    // source. Without verification the subscription stays pending.
+    if (!sku || !sku.availabilityVerified || sku.available <= 0) return false;
     await sendEmail(
       email,
       `Back in stock: ${sku.title}`,
@@ -120,8 +123,41 @@ export async function dispatchBackInStock(): Promise<{ sent: number }> {
 
 /* ---------------------------------------------------------------- abandoned cart */
 
-export async function saveCartSnapshot(email: string, items: SnapshotItem[]): Promise<void> {
-  if (!/.+@.+\..+/.test(email) || items.length === 0) return;
+/**
+ * Rebuild every line from the server catalog.
+ *
+ * The caller supplies only a SKU id and a quantity that we are willing to
+ * believe; the title, part number and unit price are looked up here. Previously
+ * the client's own `title` and `unitPrice` were stored verbatim and then
+ * rendered into an email, which let anyone post arbitrary text and prices to an
+ * arbitrary address over Summit's sending domain. Unknown SKUs are dropped
+ * rather than stored, so a snapshot can only ever describe real products.
+ */
+function resolveSnapshotItems(items: Array<{ skuId: string; qty: number }>): SnapshotItem[] {
+  const resolved: SnapshotItem[] = [];
+  for (const item of items) {
+    const sku = getStorefrontSku(item.skuId);
+    if (!sku) continue;
+    resolved.push({
+      skuId: sku.id,
+      sku: sku.sku,
+      title: sku.title,
+      qty: item.qty,
+      // Quote-only products have no public price; they contribute 0 to the
+      // subtotal rather than a fabricated one.
+      unitPrice: sku.retailPrice ?? 0,
+    });
+  }
+  return resolved;
+}
+
+export async function saveCartSnapshot(
+  email: string,
+  rawItems: Array<{ skuId: string; qty: number }>
+): Promise<void> {
+  if (!/.+@.+\..+/.test(email)) return;
+  const items = resolveSnapshotItems(rawItems);
+  if (items.length === 0) return;
   const subtotal = items.reduce((s, i) => s + i.unitPrice * i.qty, 0);
   const supabase = createServiceRoleSupabaseClient();
   let stored = false;
@@ -157,27 +193,75 @@ export async function clearCartSnapshot(email: string): Promise<void> {
   if (cart) cart.completedAt = Date.now();
 }
 
-/* The 3-email sequence: stage thresholds in minutes since capture. */
+/** Cart titles and SKUs originate from a public endpoint, so they are attacker
+ *  controlled and must never reach an email body as raw HTML. */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/**
+ * Stock urgency may only be claimed when every line in the cart has a verified
+ * on-hand quantity. The catalog currently carries no verified quantities, so
+ * this returns false for every real cart and the neutral copy is used.
+ *
+ * The previous sequence hard-coded "stock is holding" and "Still in stock in
+ * Newark" into subject lines and bodies. With inventory unknown for all 100
+ * products, every one of those sends was an unverifiable stock claim to a
+ * customer.
+ */
+function cartStockIsVerified(items: SnapshotItem[]): boolean {
+  if (items.length === 0) return false;
+  return items.every((item) => {
+    const sku = getStorefrontSku(item.skuId);
+    return Boolean(sku?.availabilityVerified) && (sku?.available ?? 0) >= item.qty;
+  });
+}
+
+/* The 3-email sequence: stage thresholds in minutes since capture. Subjects
+ * depend on whether stock is actually verified, so no code path can promise
+ * availability the warehouse has not confirmed. */
 const STAGES = [
-  { afterMinutes: 60, subject: "Your Summit cart is saved, stock is holding" },
-  { afterMinutes: 24 * 60, subject: "Still in stock in Newark (and what the whole project costs)" },
-  { afterMinutes: 72 * 60, subject: "Want a human to sanity-check the sizing?" },
+  {
+    afterMinutes: 60,
+    subject: (verified: boolean) =>
+      verified ? "Your Summit cart is saved, stock is holding" : "Your Summit cart is saved",
+  },
+  {
+    afterMinutes: 24 * 60,
+    subject: (verified: boolean) =>
+      verified
+        ? "Still in stock in Newark (and what the whole project costs)"
+        : "What your project costs all-in",
+  },
+  { afterMinutes: 72 * 60, subject: () => "Want a human to sanity-check the sizing?" },
 ];
 
 function stageBody(stage: number, items: SnapshotItem[], subtotal: number): string {
+  const stockVerified = cartStockIsVerified(items);
   const lines = items
-    .map((i) => `<li style="margin: 4px 0;">${i.qty}× ${i.title}, ${money(i.unitPrice * i.qty)}</li>`)
+    .map((i) => `<li style="margin: 4px 0;">${i.qty}× ${escapeHtml(i.title)}, ${money(i.unitPrice * i.qty)}</li>`)
     .join("");
   const cartBlock = `<ul style="padding-left: 18px; line-height: 1.6;">${lines}</ul>
     <p><strong>Subtotal: ${money(subtotal)}</strong></p>
     <p style="margin-top: 20px;"><a href="${baseUrl()}/checkout" style="background: green; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">Finish checkout</a></p>`;
 
   if (stage === 0) {
+    const availability = stockVerified
+      ? "Everything below is on the shelf in Newark right now, same-day will-call or Bay Area delivery."
+      : "We confirm availability and lead time with the warehouse before any order is accepted, so nothing ships or bills until it is confirmed.";
     return `<h2 style="font-size: 20px; margin: 8px 0;">Your cart is saved.</h2>
-      <p style="line-height: 1.6;">Everything below is on the shelf in Newark right now, same-day will-call or Bay Area delivery.</p>${cartBlock}`;
+      <p style="line-height: 1.6;">${availability}</p>${cartBlock}`;
   }
   if (stage === 1) {
-    return `<h2 style="font-size: 20px; margin: 8px 0;">Still in stock, and here's the honest all-in math.</h2>
+    const heading = stockVerified
+      ? "Still in stock, and here's the honest all-in math."
+      : "Here's the honest all-in math.";
+    return `<h2 style="font-size: 20px; margin: 8px 0;">${heading}</h2>
       <p style="line-height: 1.6;">Equipment + line set + licensed C-20 install + permit typically lands at <strong>$2,200–$3,600 all-in</strong> for a single-zone system, versus $6,800+ on a full-service quote. Your warranty stays intact with licensed installation.</p>${cartBlock}`;
   }
   return `<h2 style="font-size: 20px; margin: 8px 0;">Not sure it's the right size?</h2>
@@ -203,7 +287,7 @@ export async function dispatchAbandonedCarts(advanceMinutes = 0): Promise<{ sent
     if (ageMinutes < STAGES[stage].afterMinutes) return false;
     await sendEmail(
       cart.email,
-      STAGES[stage].subject,
+      STAGES[stage].subject(cartStockIsVerified(cart.items)),
       emailShell(stageBody(stage, cart.items, cart.subtotal), unsubscribeUrl)
     );
     return true;

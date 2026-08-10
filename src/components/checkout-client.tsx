@@ -10,6 +10,7 @@ import { ZipGate } from "./zip-gate";
 import {
   fulfillmentOptions,
   fulfillmentWindows,
+  WAREHOUSE,
   type FulfillmentMethod,
 } from "@/lib/backend/fulfillment";
 import { estimateTax, round2 } from "@/lib/backend/pricing";
@@ -106,7 +107,12 @@ export function CheckoutClient({
   // Homeowners/guests paying by card get an estimated CA tax line; trade
   // net-terms orders are taxed on the invoice, and freight is quoted separately.
   const taxable = !trade && selectedMethod !== "freight";
-  const tax = taxable ? estimateTax(subtotal) : 0;
+  // Same destination rule as the server (checkout.ts), so the displayed total
+  // always equals the charged total. null = outside the supported jurisdiction.
+  const taxDestinationZip = selectedMethod === "pickup" ? WAREHOUSE.zip : zip;
+  const estimatedTax = taxable ? estimateTax(subtotal, taxDestinationZip) : 0;
+  const taxUnavailable = taxable && estimatedTax === null;
+  const tax = estimatedTax ?? 0;
   const total = round2(subtotal + fee + tax);
   const windows = fulfillmentWindows(selectedMethod, zip);
 
@@ -441,8 +447,10 @@ export function CheckoutClient({
             label={selectedMethod === "freight" ? "Freight" : selectedMethod === "pickup" ? "Pickup" : "Delivery"}
             value={selectedMethod === "freight" ? "Quoted" : fee === 0 ? "Free" : currency(fee)}
           />
-          {taxable ? (
+          {taxable && !taxUnavailable ? (
             <Row label="Estimated sales tax" value={currency(tax)} />
+          ) : taxUnavailable ? (
+            <Row label="Sales tax" value="Quoted for this address" />
           ) : trade ? (
             <Row label="Sales tax" value="On invoice" />
           ) : null}

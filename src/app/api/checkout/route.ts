@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-import { CheckoutConflictError, placeOrder } from "@/lib/backend/checkout";
+import { CheckoutConflictError, CheckoutUnavailableError, placeOrder } from "@/lib/backend/checkout";
 
 export async function POST(request: Request) {
   try {
@@ -17,8 +17,17 @@ export async function POST(request: Request) {
     if (error instanceof CheckoutConflictError) {
       return NextResponse.json({ ok: false, error: error.message }, { status: 409 });
     }
+    // 503, not 500: nothing was written and the client may safely retry the
+    // same idempotency key.
+    if (error instanceof CheckoutUnavailableError) {
+      return NextResponse.json({ ok: false, error: error.message, retryable: true }, { status: 503 });
+    }
+    // Everything else is unexpected. Log the real cause server-side and return
+    // a fixed string -- the previous code echoed `error.message`, publishing raw
+    // Postgres and Stripe errors (constraint names, column names) to the client.
+    console.error("[checkout] unhandled failure", error);
     return NextResponse.json(
-      { ok: false, error: error instanceof Error ? error.message : "Checkout failed" },
+      { ok: false, error: "Checkout could not be completed. No charge was made." },
       { status: 500 }
     );
   }
