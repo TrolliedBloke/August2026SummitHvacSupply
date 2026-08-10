@@ -52,7 +52,10 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   // 1. Price every line server-side, by tier.
   const lines = parsed.items.map((item) => {
     const sku = getStorefrontSku(item.skuId);
-    if (!sku) throw new Error(`Unknown SKU: ${item.sku}`);
+    // A SKU the catalog does not contain is a bad request, not a server fault.
+    // Throwing a plain Error surfaced it as a 500, which both misreports the
+    // cause and makes a tampered cart look like an outage in monitoring.
+    if (!sku) throw new CheckoutConflictError("One of the items in your cart is no longer available.");
     if (!sku.purchaseEligible || sku.retailPrice === null) {
       throw new CheckoutConflictError(`${sku.sku} requires a verified quote before purchase.`);
     }

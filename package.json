@@ -7,11 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --test tests/*.test.ts",
+    "test": "tsx --test tests/backend.test.ts tests/remediation.test.ts",
     "test:e2e": "playwright test",
     "catalog:import": "tsx scripts/import-inventory-catalog.ts",
     "catalog:sync": "tsx scripts/sync-production-catalog.ts",
-    "seed:staff": "tsx scripts/create-staff-user.ts"
+    "seed:staff": "tsx scripts/create-staff-user.ts",
+    "test:security": "tsx --test tests/security.live.test.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.111.0",

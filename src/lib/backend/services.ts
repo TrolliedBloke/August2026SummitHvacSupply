@@ -8,7 +8,11 @@ import {
   dealerApplicationSchema,
   quoteRequestSchema,
 } from "./schemas";
-import { createServerSupabaseClient, hasSupabaseEnv } from "./supabase";
+import {
+  createServerSupabaseClient,
+  createServiceRoleSupabaseClient,
+  hasSupabaseEnv,
+} from "./supabase";
 import type {
   Account,
   ContactRequestInput,
@@ -267,7 +271,13 @@ export async function createQuoteRequest(input: unknown) {
     };
   });
   const canonicalRequest = { ...parsed, lines: canonicalLines };
-  const supabase = createServerSupabaseClient();
+  // Public form writes use the SERVICE ROLE, not the anon client.
+  // The anon key is in the browser, so an anon INSERT policy means anyone can
+  // POST straight to /rest/v1/<table> and skip this function entirely --
+  // no zod validation, no rate limit, no canonical SKU resolution. Writing as
+  // the service role lets migration 017 revoke anon INSERT, which makes this
+  // server action the only way in.
+  const supabase = createServiceRoleSupabaseClient();
 
   if (supabase) {
     const id = crypto.randomUUID();
@@ -304,7 +314,13 @@ export async function createQuoteRequest(input: unknown) {
 
 export async function createDealerApplication(input: unknown) {
   const parsed = dealerApplicationSchema.parse(input);
-  const supabase = createServerSupabaseClient();
+  // Public form writes use the SERVICE ROLE, not the anon client.
+  // The anon key is in the browser, so an anon INSERT policy means anyone can
+  // POST straight to /rest/v1/<table> and skip this function entirely --
+  // no zod validation, no rate limit, no canonical SKU resolution. Writing as
+  // the service role lets migration 017 revoke anon INSERT, which makes this
+  // server action the only way in.
+  const supabase = createServiceRoleSupabaseClient();
 
   if (supabase) {
     const id = crypto.randomUUID();
@@ -337,7 +353,13 @@ export async function createDealerApplication(input: unknown) {
 
 export async function createContactRequest(input: unknown) {
   const parsed = contactRequestSchema.parse(input);
-  const supabase = createServerSupabaseClient();
+  // Public form writes use the SERVICE ROLE, not the anon client.
+  // The anon key is in the browser, so an anon INSERT policy means anyone can
+  // POST straight to /rest/v1/<table> and skip this function entirely --
+  // no zod validation, no rate limit, no canonical SKU resolution. Writing as
+  // the service role lets migration 017 revoke anon INSERT, which makes this
+  // server action the only way in.
+  const supabase = createServiceRoleSupabaseClient();
 
   if (supabase) {
     const id = crypto.randomUUID();

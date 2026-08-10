@@ -20,7 +20,15 @@ create table if not exists catalog_products (
   compatible_outdoor_sku text,
   bundle_name text,
   retail_price numeric(12,2),
-  contractor_price numeric(12,2),
+  -- contractor_price deliberately does NOT live here. This table is published
+  -- to anon by the "public read publishable catalog" policy below, and RLS is
+  -- row level -- a readable row exposes every column -- so trade pricing stored
+  -- here would be world-readable the moment it was populated. It lives in
+  -- catalog_product_trade_pricing (migration 015), which no anon policy grants.
+  --
+  -- Removed from the column list rather than dropped in 015, so the ordering of
+  -- 011 and 015 cannot matter: there is never a window where the column exists
+  -- on a publicly readable table.
   inventory_quantity integer,
   inventory_status text not null default 'unknown'
     check (inventory_status in ('unknown', 'in_stock', 'low_stock', 'out_of_stock', 'lead_time')),
@@ -64,6 +72,18 @@ create table if not exists catalog_product_costs (
   unit_cost numeric(12,2),
   updated_at timestamptz not null default now(),
   check (unit_cost is null or unit_cost > 0)
+);
+
+-- Trade pricing, isolated for the same reason as cost. Created here rather than
+-- in a later migration so there is no ordering in which catalog_products exists
+-- while trade pricing has nowhere protected to live.
+create table if not exists catalog_product_trade_pricing (
+  product_id text primary key references catalog_products(id) on delete cascade,
+  contractor_price numeric(12,2),
+  price_tier text not null default 'standard',
+  effective_from date not null default current_date,
+  updated_at timestamptz not null default now(),
+  check (contractor_price is null or contractor_price > 0)
 );
 
 create table if not exists catalog_product_media (
@@ -118,6 +138,7 @@ create index if not exists catalog_products_category_idx on catalog_products(cat
 alter table catalog_products enable row level security;
 alter table catalog_product_evidence enable row level security;
 alter table catalog_product_costs enable row level security;
+alter table catalog_product_trade_pricing enable row level security;
 alter table catalog_product_media enable row level security;
 alter table catalog_product_documents enable row level security;
 alter table catalog_product_relationships enable row level security;
@@ -132,6 +153,18 @@ create policy "public read verified relationships" on catalog_product_relationsh
 create policy "staff manage catalog products" on catalog_products for all using (current_profile_role() = 'staff') with check (current_profile_role() = 'staff');
 create policy "staff manage catalog evidence" on catalog_product_evidence for all using (current_profile_role() = 'staff') with check (current_profile_role() = 'staff');
 create policy "staff manage catalog costs" on catalog_product_costs for all using (current_profile_role() = 'staff') with check (current_profile_role() = 'staff');
+
+-- Trade pricing: no anon policy at all, so unauthenticated callers get an empty
+-- result rather than a filtered one. Trade roles read; only staff write.
+create policy "trade reads trade pricing" on catalog_product_trade_pricing
+  for select using (current_profile_role() in ('dealer', 'installer', 'staff'));
+create policy "staff manages trade pricing" on catalog_product_trade_pricing
+  for all using (current_profile_role() = 'staff')
+  with check (current_profile_role() = 'staff');
+
+-- Neither cost nor trade pricing is ever reachable through the public API.
+revoke all on catalog_product_costs from anon, authenticated;
+revoke all on catalog_product_trade_pricing from anon;
 create policy "staff manage catalog media" on catalog_product_media for all using (current_profile_role() = 'staff') with check (current_profile_role() = 'staff');
 create policy "staff manage catalog documents" on catalog_product_documents for all using (current_profile_role() = 'staff') with check (current_profile_role() = 'staff');
 create policy "staff manage catalog relationships" on catalog_product_relationships for all using (current_profile_role() = 'staff') with check (current_profile_role() = 'staff');
