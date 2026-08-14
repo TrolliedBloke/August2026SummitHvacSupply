@@ -14,14 +14,14 @@ Release scope: public retail catalog with an approved-account wholesale path. Pr
 
 ## Product media
 
-- [x] Exactly 20 records have locally hosted, manufacturer-published media mapped by catalog SKU.
+- [x] Exactly 55 records have locally hosted, manufacturer-published media mapped by catalog SKU.
 - [x] Multiple manufacturer views are used where the exact product page supplies them.
 - [x] The broad family-image fallback was removed; no unrelated component image is reused merely because brand and category match.
 - [x] No generated product render is presented as an actual item.
 - [x] The 23 unbranded accessories retain an honest unavailable-image state pending Summit warehouse photography.
 - [x] Every published media file exists locally and is tested during CI.
 - [ ] Photograph the exact unbranded accessories and packaging in Summit's warehouse.
-- [ ] Continue exact-model research for the 57 branded records that still have no publishable exact image.
+- [ ] Continue exact-model research for the 22 branded records that still have no publishable exact image.
 
 ## Application and security
 

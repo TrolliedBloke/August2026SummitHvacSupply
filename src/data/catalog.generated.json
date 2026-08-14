@@ -202,9 +202,11 @@
     "retailPrice": 200,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-tpro-wall-head.webp",
+    "images": [
+      "/products/catalog-official/tcl-tpro-wall-head.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "product_page",
@@ -288,7 +290,6 @@
     "notes": null,
     "issues": [
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -334,6 +335,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-tpro-wall-head",
+          "localPaths": [
+            "/products/catalog-official/tcl-tpro-wall-head.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows a TCL indoor wall-mounted head. TCL09KODU, TCL12KODU, TCL18KODU-R-410A and TCL18KMZODU-R-410A are outdoor units, so for those four rows the image does not depict the SKU. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -362,9 +378,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-tpro-wall-head.webp",
+    "images": [
+      "/products/catalog-official/tcl-tpro-wall-head.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "product_page",
@@ -449,7 +467,6 @@
     "issues": [
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -494,6 +511,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-tpro-wall-head",
+          "localPaths": [
+            "/products/catalog-official/tcl-tpro-wall-head.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows a TCL indoor wall-mounted head. TCL09KODU, TCL12KODU, TCL18KODU-R-410A and TCL18KMZODU-R-410A are outdoor units, so for those four rows the image does not depict the SKU. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -700,9 +732,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-tpro-wall-head.webp",
+    "images": [
+      "/products/catalog-official/tcl-tpro-wall-head.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "product_page",
@@ -787,7 +821,6 @@
     "issues": [
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -832,6 +865,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-tpro-wall-head",
+          "localPaths": [
+            "/products/catalog-official/tcl-tpro-wall-head.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows a TCL indoor wall-mounted head. TCL09KODU, TCL12KODU, TCL18KODU-R-410A and TCL18KMZODU-R-410A are outdoor units, so for those four rows the image does not depict the SKU. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -860,9 +908,11 @@
     "retailPrice": 200,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-tpro-wall-head.webp",
+    "images": [
+      "/products/catalog-official/tcl-tpro-wall-head.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "product_page",
@@ -947,7 +997,6 @@
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -993,6 +1042,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-tpro-wall-head",
+          "localPaths": [
+            "/products/catalog-official/tcl-tpro-wall-head.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows a TCL indoor wall-mounted head. TCL09KODU, TCL12KODU, TCL18KODU-R-410A and TCL18KMZODU-R-410A are outdoor units, so for those four rows the image does not depict the SKU. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -1200,9 +1264,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-tpro-wall-head.webp",
+    "images": [
+      "/products/catalog-official/tcl-tpro-wall-head.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "product_page",
@@ -1288,7 +1354,6 @@
       "source_sku_collision_preserved_as_variant",
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -1333,6 +1398,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-tpro-wall-head",
+          "localPaths": [
+            "/products/catalog-official/tcl-tpro-wall-head.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows a TCL indoor wall-mounted head. TCL09KODU, TCL12KODU, TCL18KODU-R-410A and TCL18KMZODU-R-410A are outdoor units, so for those four rows the image does not depict the SKU. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -1638,9 +1718,11 @@
     "retailPrice": 1450,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-tpro-wall-head.webp",
+    "images": [
+      "/products/catalog-official/tcl-tpro-wall-head.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "product_page",
@@ -1725,7 +1807,6 @@
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -1771,6 +1852,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "No warranty document was located for the T-PRO line. TCL's ductless warranty (5 parts / 7 compressor / 10 with registration) is printed on the A2L series sheets and must NOT be assumed to cover this legacy R-410A platform. Confirm with TCL before publishing any term."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-tpro-wall-head",
+          "localPaths": [
+            "/products/catalog-official/tcl-tpro-wall-head.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows a TCL indoor wall-mounted head. TCL09KODU, TCL12KODU, TCL18KODU-R-410A and TCL18KMZODU-R-410A are outdoor units, so for those four rows the image does not depict the SKU. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -1799,9 +1895,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl18kmzodu-18fmh22xpc.jpg",
+    "images": [
+      "/products/catalog-official/tcl18kmzodu-18fmh22xpc.jpg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -1907,7 +2005,6 @@
       "source_sku_collision_preserved_as_variant",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -1952,6 +2049,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Wide Temperature Operation section: standard base pan heater, heating down to -13F, cooling to 136F."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl18kmzodu-18fmh22xpc",
+          "localPaths": [
+            "/products/catalog-official/tcl18kmzodu-18fmh22xpc.jpg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL."
       }
     ]
   },
@@ -1980,9 +2092,11 @@
     "retailPrice": 1400,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl24kidu.webp",
+    "images": [
+      "/products/catalog-official/tcl24kidu.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -2090,7 +2204,6 @@
     "notes": null,
     "issues": [
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -2127,6 +2240,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "AHRI Certificate row of the BreezeIN spec sheet, 24K column."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl24kidu",
+          "localPaths": [
+            "/products/catalog-official/tcl24kidu.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. Shows an indoor head together with an outdoor unit rather than the indoor component alone."
       }
     ]
   },
@@ -2155,9 +2283,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl24kodu.webp",
+    "images": [
+      "/products/catalog-official/tcl24kodu.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -2266,7 +2396,6 @@
     "issues": [
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -2302,6 +2431,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "AHRI Certificate row of the BreezeIN spec sheet, 24K column."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl24kodu",
+          "localPaths": [
+            "/products/catalog-official/tcl24kodu.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows a TCL indoor wall head; TCL24KODU is an outdoor unit. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -2330,9 +2474,11 @@
     "retailPrice": 200,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl24kmzidu.jpeg",
+    "images": [
+      "/products/catalog-official/tcl24kmzidu.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": "PURCHASING_RECORD_VERIFICATION",
@@ -2361,7 +2507,6 @@
     "notes": null,
     "issues": [
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown",
       "not_sellable_identity_conflict"
@@ -2381,6 +2526,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "The inventory sheet's model cell reads 'THEY DONT MAKE IT'. There is no identifier to research. TCL's current 24K multi-zone indoor options are the Multi Match heads and cassettes. Purchasing must supply the actual model on the box, or this line should be delisted. HUMAN VERIFICATION REQUIRED."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl24kmzidu",
+          "localPaths": [
+            "/products/catalog-official/tcl24kmzidu.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL."
       }
     ]
   },
@@ -2409,9 +2569,11 @@
     "retailPrice": 1299,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-27k-mz-odu-r-410a.jpg",
+    "images": [
+      "/products/catalog-official/tcl-27k-mz-odu-r-410a.jpg"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": null,
@@ -2487,7 +2649,6 @@
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -2506,6 +2667,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "No TCL product page, spec sheet or submittal could be located for this exact model. The TUM- prefix does not appear in TCL's current US documentation, which uses the H..FMH..XPC Multi Match identifiers. This is most likely discontinued pre-A2L stock. Identity is taken from the inventory sheet only and is UNVERIFIED against any manufacturer source. This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-27k-mz-odu-r-410a",
+          "localPaths": [
+            "/products/catalog-official/tcl-27k-mz-odu-r-410a.jpg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL."
       }
     ]
   },
@@ -2534,9 +2710,11 @@
     "retailPrice": 1650,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-multizone-condenser-white.jpeg",
+    "images": [
+      "/products/catalog-official/tcl-multizone-condenser-white.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -2638,7 +2816,6 @@
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -2684,6 +2861,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Wide Temperature Operation section: standard base pan heater, heating down to -13F, cooling to 136F."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-multizone-condenser-white",
+          "localPaths": [
+            "/products/catalog-official/tcl-multizone-condenser-white.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. One outdoor multi-zone condenser view shared across three different capacities (27K, 36K, 42K), which have different cabinet sizes."
       }
     ]
   },
@@ -3178,9 +3370,11 @@
     "retailPrice": 1599,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl36kmzodu-r-410a.avif",
+    "images": [
+      "/products/catalog-official/tcl36kmzodu-r-410a.avif"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": null,
@@ -3256,7 +3450,6 @@
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -3275,6 +3468,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "No TCL product page, spec sheet or submittal could be located for this exact model. The TUM- prefix does not appear in TCL's current US documentation, which uses the H..FMH..XPC Multi Match identifiers. This is most likely discontinued pre-A2L stock. Identity is taken from the inventory sheet only and is UNVERIFIED against any manufacturer source. This is an R-410A unit. R-410A is a high-GWP HFC being phased down under the AIM Act; new US residential systems moved to A2L refrigerants such as R-454B for the 2025 model year. Stock of this model is therefore legacy inventory. Confirm availability of replacement parts and the customer's intended application before quoting."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl36kmzodu-r-410a",
+          "localPaths": [
+            "/products/catalog-official/tcl36kmzodu-r-410a.avif"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL."
       }
     ]
   },
@@ -3303,9 +3511,11 @@
     "retailPrice": 1900,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-multizone-condenser-white.jpeg",
+    "images": [
+      "/products/catalog-official/tcl-multizone-condenser-white.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -3407,7 +3617,6 @@
     "issues": [
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -3453,6 +3662,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Wide Temperature Operation section: standard base pan heater, heating down to -13F, cooling to 136F."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-multizone-condenser-white",
+          "localPaths": [
+            "/products/catalog-official/tcl-multizone-condenser-white.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. One outdoor multi-zone condenser view shared across three different capacities (27K, 36K, 42K), which have different cabinet sizes."
       }
     ]
   },
@@ -3481,9 +3705,11 @@
     "retailPrice": 2199,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-multizone-condenser-white.jpeg",
+    "images": [
+      "/products/catalog-official/tcl-multizone-condenser-white.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -3584,7 +3810,6 @@
     "notes": null,
     "issues": [
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -3630,6 +3855,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "Wide Temperature Operation section: standard base pan heater, heating down to -13F, cooling to 136F."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-multizone-condenser-white",
+          "localPaths": [
+            "/products/catalog-official/tcl-multizone-condenser-white.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. One outdoor multi-zone condenser view shared across three different capacities (27K, 36K, 42K), which have different cabinet sizes."
       }
     ]
   },
@@ -3658,9 +3898,11 @@
     "retailPrice": 2500,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl24kahu.jpeg",
+    "images": [
+      "/products/catalog-official/tcl24kahu.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -3879,7 +4121,6 @@
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -3929,6 +4170,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl24kahu",
+          "localPaths": [
+            "/products/catalog-official/tcl24kahu.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL."
       }
     ]
   },
@@ -4267,9 +4523,11 @@
     "retailPrice": 2900,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl36kahu.jpeg",
+    "images": [
+      "/products/catalog-official/tcl36kahu.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -4488,7 +4746,6 @@
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -4538,6 +4795,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl36kahu",
+          "localPaths": [
+            "/products/catalog-official/tcl36kahu.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL."
       }
     ]
   },
@@ -4566,9 +4838,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl36khpu.jpeg",
+    "images": [
+      "/products/catalog-official/tcl36khpu.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -4799,7 +5073,6 @@
     "issues": [
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -4848,6 +5121,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl36khpu",
+          "localPaths": [
+            "/products/catalog-official/tcl36khpu.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL."
       }
     ]
   },
@@ -4876,9 +5164,11 @@
     "retailPrice": 3300,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-48k-condenser.jpeg",
+    "images": [
+      "/products/catalog-official/tcl-48k-condenser.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -5097,7 +5387,6 @@
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -5147,6 +5436,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-48k-condenser",
+          "localPaths": [
+            "/products/catalog-official/tcl-48k-condenser.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows an outdoor condensing unit. TCL48KAHU is an air handler, so for that row the image does not depict the SKU. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -5175,9 +5479,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-48k-condenser.jpeg",
+    "images": [
+      "/products/catalog-official/tcl-48k-condenser.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -5408,7 +5714,6 @@
     "issues": [
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -5457,6 +5762,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-48k-condenser",
+          "localPaths": [
+            "/products/catalog-official/tcl-48k-condenser.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows an outdoor condensing unit. TCL48KAHU is an air handler, so for that row the image does not depict the SKU. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -5485,9 +5805,11 @@
     "retailPrice": 3500,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-60k-condenser.jpeg",
+    "images": [
+      "/products/catalog-official/tcl-60k-condenser.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -5706,7 +6028,6 @@
     "issues": [
       "product_type_refined_from_product_name",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown"
     ],
@@ -5756,6 +6077,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-60k-condenser",
+          "localPaths": [
+            "/products/catalog-official/tcl-60k-condenser.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows an outdoor condensing unit. TCL60KAHU is an air handler, so for that row the image does not depict the SKU. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -5784,9 +6120,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tcl-60k-condenser.jpeg",
+    "images": [
+      "/products/catalog-official/tcl-60k-condenser.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [
       {
         "kind": "spec_sheet",
@@ -6017,7 +6355,6 @@
     "issues": [
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -6066,6 +6403,21 @@
         "retrievedAt": "2026-08-09",
         "status": "verified",
         "notes": "LIMITED WARRANTY row of the Advantage series spec sheet."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tcl-60k-condenser",
+          "localPaths": [
+            "/products/catalog-official/tcl-60k-condenser.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://us.tcl.com/pages/hvac",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows an outdoor condensing unit. TCL60KAHU is an air handler, so for that row the image does not depict the SKU. Published as labelled at the catalog owner's direction."
       }
     ]
   },
@@ -6094,9 +6446,11 @@
     "retailPrice": 500,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tos09kidu-r-410a.png",
+    "images": [
+      "/products/catalog-official/tos09kidu-r-410a.png"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": "MODEL_NOT_FOUND",
@@ -6150,7 +6504,6 @@
       "product_type_inferred",
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown",
       "not_sellable_identity_conflict"
@@ -6179,6 +6532,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tos09kidu-r-410a",
+          "localPaths": [
+            "/products/catalog-official/tos09kidu-r-410a.png"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL."
       }
     ]
   },
@@ -6207,9 +6575,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tos09kidu-r-32.jpeg",
+    "images": [
+      "/products/catalog-official/tos09kidu-r-32.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": null,
@@ -6251,7 +6621,6 @@
       "source_sku_collision_preserved_as_variant",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -6287,6 +6656,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tos09kidu-r-32",
+          "localPaths": [
+            "/products/catalog-official/tos09kidu-r-32.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. Shows an indoor head together with an outdoor unit rather than the indoor component alone."
       }
     ]
   },
@@ -6315,9 +6699,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tos09kodu-r-410a.jpeg",
+    "images": [
+      "/products/catalog-official/tos09kodu-r-410a.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": "MODEL_NOT_FOUND",
@@ -6372,7 +6758,6 @@
       "source_sku_collision_preserved_as_variant",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -6399,6 +6784,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tos09kodu-r-410a",
+          "localPaths": [
+            "/products/catalog-official/tos09kodu-r-410a.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. Shows an indoor head together with an outdoor unit rather than the outdoor component alone."
       }
     ]
   },
@@ -6427,9 +6827,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tos09kodu-09at19d6do.jpeg",
+    "images": [
+      "/products/catalog-official/tos09kodu-09at19d6do.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": null,
@@ -6471,7 +6873,6 @@
       "source_sku_collision_preserved_as_variant",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -6507,6 +6908,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tos09kodu-09at19d6do",
+          "localPaths": [
+            "/products/catalog-official/tos09kodu-09at19d6do.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. Shows an indoor head together with an outdoor unit rather than the outdoor component alone."
       }
     ]
   },
@@ -6535,9 +6951,11 @@
     "retailPrice": 550,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tos12kidu-r-410a.jpeg",
+    "images": [
+      "/products/catalog-official/tos12kidu-r-410a.jpeg"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": "MODEL_NOT_FOUND",
@@ -6591,7 +7009,6 @@
       "product_type_inferred",
       "source_sku_collision_preserved_as_variant",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown",
       "not_sellable_identity_conflict"
@@ -6620,6 +7037,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tos12kidu-r-410a",
+          "localPaths": [
+            "/products/catalog-official/tos12kidu-r-410a.jpeg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. Shows an indoor head together with an outdoor unit rather than the indoor component alone."
       }
     ]
   },
@@ -6648,9 +7080,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tosot-wall-system-pair.webp",
+    "images": [
+      "/products/catalog-official/tosot-wall-system-pair.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": "MODEL_NOT_FOUND",
@@ -6705,7 +7139,6 @@
       "source_sku_collision_preserved_as_variant",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -6732,6 +7165,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tosot-wall-system-pair",
+          "localPaths": [
+            "/products/catalog-official/tosot-wall-system-pair.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows an indoor head together with an outdoor unit rather than a single component, and is shared across five rows covering both indoor and outdoor SKUs."
       }
     ]
   },
@@ -6760,9 +7208,11 @@
     "retailPrice": 550,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tosot-wall-system-pair.webp",
+    "images": [
+      "/products/catalog-official/tosot-wall-system-pair.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": "INVENTORY_CONFLICT",
@@ -6816,7 +7266,6 @@
     "issues": [
       "product_type_inferred",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown",
       "not_sellable_identity_conflict"
@@ -6845,6 +7294,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tosot-wall-system-pair",
+          "localPaths": [
+            "/products/catalog-official/tosot-wall-system-pair.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows an indoor head together with an outdoor unit rather than a single component, and is shared across five rows covering both indoor and outdoor SKUs."
       }
     ]
   },
@@ -6998,9 +7462,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tosot-wall-system-pair.webp",
+    "images": [
+      "/products/catalog-official/tosot-wall-system-pair.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": null,
@@ -7039,7 +7505,6 @@
       "product_type_inferred",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -7075,6 +7540,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tosot-wall-system-pair",
+          "localPaths": [
+            "/products/catalog-official/tosot-wall-system-pair.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows an indoor head together with an outdoor unit rather than a single component, and is shared across five rows covering both indoor and outdoor SKUs."
       }
     ]
   },
@@ -7103,9 +7583,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tosot-wall-system-pair.webp",
+    "images": [
+      "/products/catalog-official/tosot-wall-system-pair.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": "MODEL_NOT_FOUND",
@@ -7168,7 +7650,6 @@
       "product_type_inferred",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -7204,6 +7685,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tosot-wall-system-pair",
+          "localPaths": [
+            "/products/catalog-official/tosot-wall-system-pair.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows an indoor head together with an outdoor unit rather than a single component, and is shared across five rows covering both indoor and outdoor SKUs."
       }
     ]
   },
@@ -7356,9 +7852,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tosot-wall-system-pair.webp",
+    "images": [
+      "/products/catalog-official/tosot-wall-system-pair.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": null,
@@ -7396,7 +7894,6 @@
     "issues": [
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -7432,6 +7929,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tosot-wall-system-pair",
+          "localPaths": [
+            "/products/catalog-official/tosot-wall-system-pair.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. This file shows an indoor head together with an outdoor unit rather than a single component, and is shared across five rows covering both indoor and outdoor SKUs."
       }
     ]
   },
@@ -7460,9 +7972,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tos-24k-ahu.jpg",
+    "images": [
+      "/products/catalog-official/tos-24k-ahu.jpg"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": "MODEL_NOT_FOUND",
@@ -7516,7 +8030,6 @@
       "product_type_inferred",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -7543,6 +8056,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tos-24k-ahu",
+          "localPaths": [
+            "/products/catalog-official/tos-24k-ahu.jpg"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL."
       }
     ]
   },
@@ -7571,9 +8099,11 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tos24khpu.webp",
+    "images": [
+      "/products/catalog-official/tos24khpu.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": "MODEL_NOT_FOUND",
@@ -7627,7 +8157,6 @@
       "product_type_inferred",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending"
     ],
     "evidence": [
@@ -7654,6 +8183,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tos24khpu",
+          "localPaths": [
+            "/products/catalog-official/tos24khpu.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL."
       }
     ]
   },
@@ -7682,9 +8226,11 @@
     "retailPrice": 2600,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
+    "image": "/products/catalog-official/tos30kmzodu.webp",
+    "images": [
+      "/products/catalog-official/tos30kmzodu.webp"
+    ],
+    "imageVerification": "verified",
     "documents": [],
     "warranty": null,
     "conflictType": "MODEL_NOT_FOUND",
@@ -7746,7 +8292,6 @@
     "issues": [
       "product_type_inferred",
       "inventory_unverified",
-      "exact_image_unverified",
       "manufacturer_research_pending",
       "not_sellable_inventory_unknown",
       "not_sellable_identity_conflict"
@@ -7784,6 +8329,21 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "PARTIAL RESOLUTION of the Tosot identity problem. A distinct product line exists -- 'Tosot Select by Gree' -- sold through TOSOT Direct and specialist distributors rather than through the dealer channel that tosot.com/resources documents. Its naming uses exactly the segments on our sheet: the 3-zone Select system is TM30D6MO paired with TWH09AT19D6DI indoor heads, R-32, 21 SEER2, hyper-heat. Our TWH..AT19D6D* models sit squarely in that family, which is why they are absent from TOSOT's dealer resource center. This is recorded as a PROBABLE LINE MAPPING, not as a verified model: no manufacturer submittal for our exact identifiers has been located, and a retailer listing is not a substitute for one. Gree also publishes a 'Multi R32' multi-zone line, the likeliest home for our TM..R32MO identifiers. Ask TOSOT/Gree for Select-line submittals rather than searching the dealer catalog again. For this multi-zone unit the mapping is POSSIBLE rather than probable: the Select 30K outdoor is TM30D6MO while our sheet reads TM30R32MO. Same family space, different segment. Do not treat the two as interchangeable."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "exactMediaGroup": "owner-supplied-tos30kmzodu",
+          "localPaths": [
+            "/products/catalog-official/tos30kmzodu.webp"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://tosotcomfort.com/",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-13",
+        "status": "verified",
+        "notes": "Supplied by the catalog owner on 2026-08-13 as manufacturer media, keyed to the internal SKU by filename. The exact manufacturer product page was not captured at collection time, so the brand's official HVAC site is recorded as the source rather than a model-specific URL. Shows a complete two-zone kit including two indoor heads, line sets, remotes and accessories rather than the outdoor condenser alone."
       }
     ]
   },

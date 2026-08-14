@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-09T21:31:12.019Z",
+  "generatedAt": "2026-08-14T00:52:42.595Z",
   "sourceFile": "data/catalog/inventory-source.csv",
-  "sourceSha256": "23baa4a388d1f87638156ea22e6851ebac4b511c8ac0e0489204050b68380349",
+  "sourceSha256": "28e8c1cbfbf363a31f3a185740c2404476eb863b2708ecbe04ee353f9fbb0111",
   "sourceRows": 100,
   "generatedRecords": 100,
   "normalizedIdentifiers": 91,
@@ -124,8 +124,8 @@
   "researchInProgress": 28,
   "researchVerified": 19,
   "researchConflicts": 53,
-  "manufacturerImageCoverage": 20,
-  "exactModelImageCoverage": 20,
+  "manufacturerImageCoverage": 55,
+  "exactModelImageCoverage": 55,
   "needsReview": [],
   "rowMapping": [
     {

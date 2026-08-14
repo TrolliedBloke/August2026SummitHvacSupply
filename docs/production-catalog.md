@@ -57,7 +57,7 @@ Server checkout canonicalizes every cart line and enforces price and publication
 - 91 normalized source identifiers and nine collision groups are preserved as distinct variants pending human confirmation.
 - 23 rows contain a positive source sell price; no `$0` price is published.
 - Inventory quantity is unknown for all 100 records; the 23 positively priced records are purchase eligible and all 100 can be sent to sales.
-- Exact manufacturer-backed imagery covers 20 records. The importer publishes no family-image fallback: the remaining 57 branded records and 23 unbranded accessories intentionally show a neutral photo-coming-soon state until exact evidence or warehouse photography is available.
+- Exact manufacturer-backed imagery covers 55 records. The importer publishes no family-image fallback: the remaining 22 branded records and 23 unbranded accessories intentionally show a neutral photo-coming-soon state until exact evidence or warehouse photography is available.
 - Retail customers may create an account and purchase priced items. Wholesale users must apply and receive staff approval before wholesale access is granted.
 - No database sync or deployment is performed automatically by the importer.
 

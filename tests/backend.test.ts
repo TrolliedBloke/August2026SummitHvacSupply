@@ -134,12 +134,12 @@ describe("catalog import reconciliation", () => {
     const branded = skus.filter((sku) => sku.brand !== "Unbranded");
     const verified = branded.filter((sku) => sku.imageVerified);
     assert.equal(branded.length, 77);
-    assert.equal(verified.length, 20);
+    assert.equal(verified.length, 55);
     assert.ok(verified.every((sku) => sku.imageExactModel && sku.images.length > 0));
     assert.ok(branded.filter((sku) => !sku.imageVerified).every((sku) => sku.images.length === 0));
     assert.ok(skus.filter((sku) => sku.brand === "Unbranded").every((sku) => !sku.imageVerified && sku.images.length === 0));
-    assert.equal(catalogReconciliation.manufacturerImageCoverage, 20);
-    assert.equal(catalogReconciliation.exactModelImageCoverage, 20);
+    assert.equal(catalogReconciliation.manufacturerImageCoverage, 55);
+    assert.equal(catalogReconciliation.exactModelImageCoverage, 55);
     for (const image of new Set(verified.flatMap((sku) => sku.images))) {
       const bytes = await readFile(new URL(`../public${image}`, import.meta.url));
       assert.ok(bytes.length > 1000, `${image} is missing or unexpectedly small`);
