@@ -1,8 +1,3 @@
 {
-  "crons": [
-    {
-      "path": "/api/lifecycle/dispatch",
-      "schedule": "0 * * * *"
-    }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json"
 }
