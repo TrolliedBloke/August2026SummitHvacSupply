@@ -49,3 +49,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Agent skill packs installed locally via `npx skills add` (e.g. Stripe docs).
+# Vendored third-party instructions, re-installable on demand, and mirrored into
+# several per-tool directories -- not source.
+.agents/
+.claude/skills/
+.junie/
+skills-lock.json

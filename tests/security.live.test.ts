@@ -146,6 +146,7 @@ describe("live: tables added by migrations 005-014 are not anon-readable", { ski
     "catalog_product_costs",
     "catalog_product_trade_pricing",
     "catalog_import_runs",
+    "payment_disputes",
   ];
 
   for (const table of mustBeClosed) {
@@ -177,6 +178,34 @@ describe("live: functions added by migrations 006-014 are not anon-executable", 
     ["reserve_public_order", { p_order_id: DEAD_UUID }],
     ["advance_fulfillment", { p_order_id: DEAD_UUID, p_status: "delivered" }],
     ["handle_new_retail_user", {}],
+    // Migration 020. These move money in the opposite direction to
+    // mark_order_paid/apply_payment, so an anon caller could zero out an
+    // invoice balance or hand an account an unearned credit.
+    [
+      "reverse_payment",
+      {
+        p_invoice_id: DEAD_UUID,
+        p_amount: 1,
+        p_method: "stripe_refund",
+        p_reference: null,
+        p_stripe_event_id: null,
+      },
+    ],
+    ["reverse_order_payment", { p_order_id: DEAD_UUID, p_amount: 1, p_stripe_event_id: null }],
+    [
+      "record_payment_dispute",
+      {
+        p_stripe_dispute_id: "du_test",
+        p_payment_intent_id: null,
+        p_amount: 1,
+        p_reason: null,
+        p_status: "needs_response",
+        p_evidence_due_by: null,
+        p_order_id: null,
+        p_invoice_id: null,
+        p_stripe_event_id: null,
+      },
+    ],
   ];
 
   for (const [name, args] of cases) {

@@ -21,6 +21,29 @@ const supabase = createClient(
   { auth: { persistSession: false } }
 );
 
+/**
+ * Refund and dispute events carry a payment_intent reference, but the order and
+ * invoice ids live in that PaymentIntent's metadata -- the same metadata the
+ * checkout path sets when it creates the intent. Resolving through the
+ * PaymentIntent rather than the Charge keeps one source of truth for both.
+ */
+async function resolveTargets(
+  paymentIntent: string | Stripe.PaymentIntent | null
+): Promise<{ orderId?: string; invoiceId?: string }> {
+  if (!paymentIntent) return {};
+
+  const pi =
+    typeof paymentIntent === "string"
+      ? await stripe.paymentIntents.retrieve(paymentIntent)
+      : paymentIntent;
+  const metadata: Record<string, string> = pi.metadata ?? {};
+
+  return {
+    orderId: metadata.order_id || undefined,
+    invoiceId: metadata.invoice_id || undefined,
+  };
+}
+
 Deno.serve(async (request) => {
   const signature = request.headers.get("stripe-signature");
   if (!signature) return new Response("Missing signature", { status: 400 });
@@ -84,6 +107,80 @@ Deno.serve(async (request) => {
       } catch {
         /* ignore */
       }
+    }
+  }
+
+  // A refund issued from the Stripe dashboard used to hit nothing at all, so
+  // the ledger kept showing money the customer no longer had. Reverse it.
+  //
+  // Keyed on refund.created, not charge.refunded, deliberately. charge.refunded
+  // reports a cumulative amount_refunded and (verified against the API) does not
+  // embed the refunds list, so recovering a single refund's delta means listing
+  // refunds -- which returns the newest one and therefore mis-attributes two
+  // partial refunds issued in quick succession. refund.created delivers the one
+  // refund that actually happened, with its own id and amount.
+  if (event.type === "refund.created") {
+    const refund = event.data.object as Stripe.Refund;
+
+    // A refund can fail after creation; only succeeded money has left.
+    if (refund.status !== "succeeded") {
+      return new Response(JSON.stringify({ received: true, skipped: refund.status }), {
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const { orderId, invoiceId } = await resolveTargets(refund.payment_intent);
+
+    if (invoiceId) {
+      const { error } = await supabase.rpc("reverse_payment", {
+        p_invoice_id: invoiceId,
+        p_amount: refund.amount / 100,
+        p_method: "stripe_refund",
+        p_reference: refund.id,
+        p_stripe_event_id: refund.id, // per-refund, not per-event: see migration 020
+      });
+      if (error) {
+        console.error("reverse_payment failed:", error.message);
+        return new Response("Ledger reversal failed", { status: 500 });
+      }
+    } else if (orderId) {
+      const { error } = await supabase.rpc("reverse_order_payment", {
+        p_order_id: orderId,
+        p_amount: refund.amount / 100,
+        p_stripe_event_id: refund.id,
+      });
+      if (error) {
+        console.error("reverse_order_payment failed:", error.message);
+        return new Response("Order reversal failed", { status: 500 });
+      }
+    }
+  }
+
+  // Disputes hold the money rather than returning it, and carry an evidence
+  // deadline. Record them for staff instead of touching the ledger.
+  if (event.type.startsWith("charge.dispute.")) {
+    const dispute = event.data.object as Stripe.Dispute;
+    const { orderId, invoiceId } = await resolveTargets(dispute.payment_intent);
+
+    const { error } = await supabase.rpc("record_payment_dispute", {
+      p_stripe_dispute_id: dispute.id,
+      p_payment_intent_id:
+        typeof dispute.payment_intent === "string"
+          ? dispute.payment_intent
+          : dispute.payment_intent?.id ?? null,
+      p_amount: dispute.amount / 100,
+      p_reason: dispute.reason,
+      p_status: dispute.status,
+      p_evidence_due_by: dispute.evidence_details?.due_by
+        ? new Date(dispute.evidence_details.due_by * 1000).toISOString()
+        : null,
+      p_order_id: orderId ?? null,
+      p_invoice_id: invoiceId ?? null,
+      p_stripe_event_id: event.id,
+    });
+    if (error) {
+      console.error("record_payment_dispute failed:", error.message);
+      return new Response("Dispute record failed", { status: 500 });
     }
   }
 
