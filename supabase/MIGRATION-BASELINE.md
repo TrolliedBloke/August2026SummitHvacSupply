@@ -1,6 +1,45 @@
 # Migration baseline — read before running `supabase db push`
 
-Status as of 2026-08-10, project `cswrezdcwdqnhwplmddr` (named "crm").
+Status as of 2026-08-21, project `cswrezdcwdqnhwplmddr` (named "crm").
+
+## 2026-08-21 — ledger repaired, 020 and 021 applied
+
+`supabase migration list` showed 005–012, 014, 018 and 019 as local-only, plus
+ten remote-only entries `20260810031727`–`20260810032828`. Those ten were the
+2026-08-10 session applying 005–019 under generated names, so the *schema* was
+correct and only the *ledger* disagreed.
+
+Verified before touching anything, since the doc alone is not evidence: every
+table from 005–012 returns 200 over PostgREST, `mark_order_paid`,
+`expire_stale_checkout_orders` and `apply_payment` all exist, and 020's objects
+did not. Confirming the database really was at 019 is what made repair the right
+move instead of a replay — replaying 005–019 over an already-migrated database
+is how you find out which migrations are not idempotent, in production.
+
+    supabase migration repair --status applied  005 006 007 008 009 010 011 012 014 018 019
+    supabase migration repair --status reverted 20260810031727 … 20260810032828
+    supabase db push        # applied 020 only
+
+`--status reverted` edits the ledger only. It runs no down-migration, so the
+schema those ten entries recorded is untouched.
+
+### 020 shipped the wrong revoke — trap #2, again
+
+020 wrote `revoke execute … from anon, authenticated`, which is the documented
+no-op in "The three privilege traps" below. Confirmed exploitable against
+production: an anon PostgREST call reached `reverse_payment`'s body, and
+`record_payment_dispute` returned 200 having inserted a row. With the anon key
+shipping in the browser bundle, anyone could have zeroed an invoice balance or
+credited an account that never paid.
+
+The in-function guard `current_profile_role() is distinct from 'staff' and
+auth.uid() is not null` does not close this and never could: anon has no uid, so
+the AND is false and nothing raises. It rejects signed-in non-staff users only.
+Grants are the sole control separating anon from service_role.
+
+021 revokes from PUBLIC, matching 016. `npm run test:security` now passes 42/42,
+the three new assertions included. **Run it after every migration**, not at the
+end of a batch — running it directly after 020 would have caught this.
 
 ## What was wrong
 
