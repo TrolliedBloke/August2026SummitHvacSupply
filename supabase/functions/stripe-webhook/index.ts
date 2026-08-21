@@ -12,14 +12,29 @@
 import Stripe from "npm:stripe";
 import { createClient } from "npm:@supabase/supabase-js";
 
-const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!);
-const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET")!;
+/**
+ * Secrets are pasted into a dashboard by hand, and a copied line brings its
+ * newline with it. A trailing "\n" on the signing secret makes every signature
+ * check fail with "Invalid signature" -- indistinguishable from a forged
+ * request, and it cost a long debugging session here. None of these values can
+ * legitimately contain surrounding whitespace, so trim them all.
+ *
+ * Note the failure is silent on the Stripe key: `new Stripe(k)` does not
+ * validate the key, so a whitespace-damaged key constructs happily and only
+ * fails later at the first API call.
+ */
+function env(name: string): string {
+  const raw = Deno.env.get(name);
+  if (!raw?.trim()) throw new Error(`${name} is not set`);
+  return raw.trim();
+}
 
-const supabase = createClient(
-  Deno.env.get("SUPABASE_URL")!,
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-  { auth: { persistSession: false } }
-);
+const stripe = new Stripe(env("STRIPE_SECRET_KEY"));
+const webhookSecret = env("STRIPE_WEBHOOK_SECRET");
+
+const supabase = createClient(env("SUPABASE_URL"), env("SUPABASE_SERVICE_ROLE_KEY"), {
+  auth: { persistSession: false },
+});
 
 /**
  * Refund and dispute events carry a payment_intent reference, but the order and
