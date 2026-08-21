@@ -11,6 +11,7 @@
     "test:e2e": "playwright test",
     "catalog:import": "tsx scripts/import-inventory-catalog.ts",
     "catalog:sync": "tsx scripts/sync-production-catalog.ts",
+    "inventory:quickbooks": "tsx scripts/sync-quickbooks-inventory.ts",
     "seed:staff": "tsx scripts/create-staff-user.ts",
     "test:security": "tsx --test tests/security.live.test.ts"
   },
