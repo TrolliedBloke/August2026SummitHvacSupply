@@ -276,7 +276,21 @@ function normalizeRow(sourceRow: number, raw: CsvRow, siblings: Array<{ sourceRo
   const catalogSku = collision ? `${sourceSku.toUpperCase()}-${variantToken}` : sourceSku.toUpperCase();
   if (collision) issues.push("source_sku_collision_preserved_as_variant");
   if (retailPrice === null) issues.push(/bundle/i.test(note ?? "") ? "bundle_component_has_no_standalone_price" : "retail_price_unverified");
-  issues.push("inventory_unverified", "exact_image_unverified", "manufacturer_research_pending");
+
+  // `Current Stock` is the only physical count in the sheet, and it was being
+  // ignored entirely -- inventoryStatus was hardcoded to "unknown", so no row
+  // could ever become purchasable no matter what an operator typed.
+  //
+  // Reading it is safe because clean() already maps #N/A, blanks, "-" and the
+  // sheet's other error values to null, so a quantity survives only when
+  // someone actually wrote a number. Absent a number we still say "unknown",
+  // which availability.ts refuses to sell. That invariant is the point: this
+  // reads a count, it does not invent one.
+  const inventoryQuantity = numeric(raw["Current Stock"]);
+  const inventoryStatus: "unknown" | "in_stock" | "out_of_stock" =
+    inventoryQuantity === null ? "unknown" : inventoryQuantity > 0 ? "in_stock" : "out_of_stock";
+  if (inventoryQuantity === null) issues.push("inventory_unverified");
+  issues.push("exact_image_unverified", "manufacturer_research_pending");
 
   const hasName = Boolean(suppliedName || siblingName);
   const publicationStatus = (hasName ? "quote_only" : "needs_review") as "quote_only" | "needs_review" | "published";
@@ -304,8 +318,8 @@ function normalizeRow(sourceRow: number, raw: CsvRow, siblings: Array<{ sourceRo
     warehouseLocation: clean(raw.Location),
     retailPrice,
     unitCost,
-    inventoryQuantity: null,
-    inventoryStatus: "unknown",
+    inventoryQuantity,
+    inventoryStatus,
     image: null,
     images: [],
     imageVerification: "unverified",
