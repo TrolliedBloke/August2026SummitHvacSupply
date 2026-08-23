@@ -24,15 +24,18 @@ function currency(value: number) {
   }).format(value);
 }
 
-/** The spec slot: two or three short facts on one monospace line, the way the
-    counter labels a box. A2L rides along here rather than taking its own row. */
+/** The spec slot: exactly two facts on one monospace line, the way the counter
+    labels a box ("50 FT · A2L RATED"). Capacity leads; the second slot goes to
+    the refrigerant class when there is one, because on this catalog A2L is the
+    fact that decides whether a contractor may install the unit at all, and
+    otherwise to voltage. A third fact overflows 190px and gets ellipsized,
+    which loses the A2L flag -- the one thing that must not be hidden. */
 function specLine(sku: StorefrontSku): string {
-  const parts: string[] = [];
-  if (sku.btu) parts.push(`${sku.btu.toLocaleString("en-US")} BTU`);
-  if (sku.voltage) parts.push(sku.voltage);
-  if (parts.length === 0 && sku.dimensions) parts.push(sku.dimensions);
-  if (sku.refrigerantClass === "A2L") parts.push("A2L rated");
-  return parts.join("  ·  ");
+  const capacity = sku.btu
+    ? `${sku.btu.toLocaleString("en-US")} BTU`
+    : sku.dimensions || "";
+  const qualifier = sku.refrigerantClass === "A2L" ? "A2L rated" : sku.voltage;
+  return [capacity, qualifier].filter(Boolean).join("  ·  ");
 }
 
 export function CounterStock() {
@@ -42,7 +45,7 @@ export function CounterStock() {
   if (skus.length === 0) return null;
 
   return (
-    <section className="bg-canvas pb-2 pt-9">
+    <section className="bg-canvas pb-2 pt-6">
       <CounterWidth>
         <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
           <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1.5">
@@ -68,7 +71,7 @@ export function CounterStock() {
           </Link>
         </div>
 
-        <div className="mt-5 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {skus.map((sku) => (
             <StockCard key={sku.id} sku={sku} />
           ))}
@@ -88,7 +91,7 @@ function StockCard({ sku }: { sku: StorefrontSku }) {
     <article className="flex flex-col rounded-(--r-md) border border-line bg-surface-1 p-3">
       <Link
         href={productHref(sku)}
-        className="relative mb-2.5 block aspect-[13/5] w-full overflow-hidden"
+        className="relative mb-2.5 block aspect-[2/1] w-full overflow-hidden"
       >
         <Image
           src={sku.image}

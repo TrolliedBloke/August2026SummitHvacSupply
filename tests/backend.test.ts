@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import {
@@ -121,12 +122,21 @@ describe("catalog import reconciliation", () => {
       }
     }
 
-    // ...and the costs themselves must still exist, server-side only.
-    const costs = JSON.parse(
-      await readFile(new URL("../data/catalog/costs.generated.json", import.meta.url), "utf8")
-    ) as { records: Array<{ unitCost: number | null }> };
-    assert.equal(costs.records.length, 100);
-    assert.ok(costs.records.some((record) => (record.unitCost ?? 0) > 0));
+    // ...and where the operator has the cost file, it must still hold real
+    // costs server-side. That file is gitignored on purpose -- this repository
+    // is public -- so it is absent in a fresh clone and in CI. Reading it
+    // unconditionally made this test throw ENOENT for everyone except the
+    // operator, which meant the assertion above stopped guarding anything.
+    // The published-catalog check runs always; this half runs when there is
+    // something to check.
+    const costPath = new URL("../data/catalog/costs.generated.json", import.meta.url);
+    if (existsSync(costPath)) {
+      const costs = JSON.parse(await readFile(costPath, "utf8")) as {
+        records: Array<{ unitCost: number | null }>;
+      };
+      assert.equal(costs.records.length, 100);
+      assert.ok(costs.records.some((record) => (record.unitCost ?? 0) > 0));
+    }
   });
 
   it("publishes only exact-model mapped imagery and never falls back to a broad family assignment", async () => {

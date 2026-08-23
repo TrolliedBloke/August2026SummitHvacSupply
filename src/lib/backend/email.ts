@@ -15,12 +15,23 @@ function getResend(): Resend | null {
   return key ? new Resend(key) : null;
 }
 
+/** "someone@example.com" -> "s***@example.com". Enough to debug a flow, not
+    enough to leak a customer list into stdout. */
+function redactEmail(address: string): string {
+  const [user, domain] = address.split("@");
+  if (!domain) return "***";
+  return `${user.slice(0, 1)}***@${domain}`;
+}
+
 async function send(to: string, subject: string, html: string): Promise<void> {
   const resend = getResend();
   if (!to) return;
   if (!resend) {
-    // No API key (yet): log instead of dropping silently, so dev flows are visible.
-    console.log(`[email skipped, no RESEND_API_KEY] to=${to} subject="${subject}"`);
+    // No API key (yet): warn instead of dropping silently, so dev flows stay
+    // visible. This is a misconfiguration, not information, so it is warn --
+    // and the recipient is redacted, because an unset key in production would
+    // otherwise write every customer address into the log stream.
+    console.warn(`[email skipped, no RESEND_API_KEY] to=${redactEmail(to)} subject="${subject}"`);
     return;
   }
   try {

@@ -130,7 +130,7 @@ export default function HomePage() {
 
       <section className="bg-canvas">
         <CounterContainer className="pb-2 pt-8 md:pt-10">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10">
             <div className="min-w-0">
               <h1 className="counter-heading text-[2.1rem] leading-[1.02] text-ink-1 sm:text-[2.6rem]">
                 Find it. Verify it.
@@ -145,7 +145,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-3">
               <FulfillmentCard />
               <TradePricingCard />
             </div>

@@ -13,7 +13,12 @@ export default defineConfig({
     screenshot: "only-on-failure",
   },
   webServer: {
-    command: "NEXT_DIST_DIR=.next-e2e npm run build && NEXT_DIST_DIR=.next-e2e npm run start -- --hostname 127.0.0.1 --port 3100",
+    // The dist dir is passed via `env`, not a "VAR=value cmd" prefix. That
+    // prefix is POSIX shell syntax; Playwright spawns this through the platform
+    // shell, so on Windows cmd.exe read "NEXT_DIST_DIR" as a command name and
+    // the whole suite failed to start. `env` applies on every platform.
+    command: "npm run build && npm run start -- --hostname 127.0.0.1 --port 3100",
+    env: { NEXT_DIST_DIR: ".next-e2e" },
     url: "http://127.0.0.1:3100",
     reuseExistingServer: false,
     timeout: 180_000,

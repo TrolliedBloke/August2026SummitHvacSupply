@@ -19,7 +19,7 @@
   --nav-height: 54px;
   /* Content column. Matches the 1180px Container used by the rest of the site,
      so there is one body width rather than two competing ones. */
-  --counter-max: 1180px;
+  --counter-max: 1236px;
   /* The nav sits wider than the body column: logo and account controls run
      closer to the viewport edge than the content they sit above. */
   --nav-max: 1400px;

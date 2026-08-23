@@ -1,12 +1,20 @@
 import type { MetadataRoute } from "next";
 import { LOCAL_PAGES } from "@/lib/local-pages";
 import { SITE } from "@/lib/site";
+import { catalogReconciliation } from "@/lib/catalog/reconciliation";
 import { getSkuSeoState } from "@/lib/seo/catalog";
 import { getStorefrontSkus, productHref } from "@/lib/storefront/catalog";
 
 export type SitemapEntry = MetadataRoute.Sitemap[number];
 
-const changed = new Date("2026-08-05T00:00:00.000Z");
+/**
+ * lastmod. This was a hardcoded date, so every entry in every sitemap reported
+ * the same frozen timestamp no matter how often the catalog was regenerated --
+ * which tells a crawler the site never changes and suppresses recrawls. It now
+ * tracks the catalog build, the one timestamp that actually moves when product
+ * data changes. Editorial routes below keep their own cadence.
+ */
+const changed = new Date(catalogReconciliation.generatedAt);
 
 export function productSitemapEntries(): MetadataRoute.Sitemap {
   return getStorefrontSkus()

@@ -70,31 +70,31 @@ function SearchTab() {
           <label htmlFor="counter-search" className="sr-only">
             Search by part number, model number, or product
           </label>
-          <div className="flex min-w-0 flex-1 items-center gap-2 rounded-(--r-sm) border border-line-strong bg-surface-1 px-3">
+          <div className="flex min-w-0 flex-1 items-center gap-1.5 rounded-(--r-sm) border border-line-strong bg-surface-1 px-2.5">
             <Search size={17} strokeWidth={1.8} className="shrink-0 text-ink-3" aria-hidden="true" />
             <input
               id="counter-search"
               name="q"
               type="search"
               placeholder="Part #, model #, or product"
-              className="min-w-0 flex-1 bg-transparent py-2.5 font-mono text-sm text-ink-1 outline-none placeholder:text-ink-4"
+              className="min-w-0 flex-1 bg-transparent py-2.5 font-mono text-[12px] text-ink-1 outline-none placeholder:text-ink-4"
             />
           </div>
           <button
             type="submit"
-            className="h-11 shrink-0 rounded-(--r-sm) bg-brand px-6 text-sm font-medium text-brand-ink transition-colors duration-150 hover:bg-brand-hover"
+            className="h-11 shrink-0 rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink transition-colors duration-150 hover:bg-brand-hover"
           >
             Search
           </button>
         </form>
 
-        <div className="mt-3.5 flex flex-wrap items-center gap-2 text-sm text-ink-2">
-          <span>Popular parts:</span>
+        <div className="mt-3.5 flex flex-wrap items-center gap-1.5 text-sm text-ink-2">
+          <span className="w-full">Popular parts:</span>
           {EXAMPLES.map((example) => (
             <Link
               key={example}
               href={`/products?q=${encodeURIComponent(example)}`}
-              className="part-number rounded-(--r-sm) border border-line px-2 py-1 text-xs text-ink-1 transition-colors duration-150 hover:border-line-strong"
+              className="part-number rounded-(--r-sm) border border-line px-1.5 py-1 text-[11px] text-ink-1 transition-colors duration-150 hover:border-line-strong"
             >
               {example}
             </Link>
@@ -102,7 +102,7 @@ function SearchTab() {
         </div>
       </section>
 
-      <section className="min-w-0 md:border-l md:border-line md:pl-8">
+      <section className="min-w-0 md:border-l md:border-line md:pl-4">
         <h2 className="text-[0.95rem] font-medium text-ink-1">Verify compatibility</h2>
         <p className="mt-1.5 text-sm leading-6 text-ink-2">
           Enter the model number from the equipment nameplate.
@@ -116,11 +116,11 @@ function SearchTab() {
             name="q"
             type="search"
             placeholder="Equipment model number"
-            className="min-w-0 flex-1 rounded-(--r-sm) border border-line-strong bg-surface-1 px-3 py-2.5 font-mono text-sm text-ink-1 outline-none placeholder:text-ink-4"
+            className="min-w-0 flex-1 rounded-(--r-sm) border border-line-strong bg-surface-1 px-2 py-2.5 font-mono text-[12px] text-ink-1 outline-none placeholder:text-ink-4"
           />
           <button
             type="submit"
-            className="h-11 shrink-0 rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-sm font-medium text-ink-1 transition-colors duration-150 hover:bg-surface-2"
+            className="h-11 shrink-0 rounded-(--r-sm) border border-line-strong bg-surface-1 px-2 text-[12px] font-medium text-ink-1 transition-colors duration-150 hover:bg-surface-2"
           >
             Find matching parts
           </button>
