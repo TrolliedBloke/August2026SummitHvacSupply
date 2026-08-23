@@ -7,6 +7,7 @@
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
   --color-ink-panel: var(--ink-panel);
+  --color-band: var(--band);
 
   --color-ink-1: var(--ink-1);
   --color-ink-2: var(--ink-2);
@@ -49,6 +50,7 @@
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-grotesk), var(--font-inter), sans-serif;
+  --font-condensed: var(--font-condensed-archivo), var(--font-grotesk), sans-serif;
   --font-mono: var(--font-mono-jb), ui-monospace, monospace;
 }
 
@@ -104,5 +106,16 @@ body {
 
 .part-number {
   font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Counter heading -- bold condensed uppercase. Used for the landing page
+   section titles ("NEWARK BRANCH", "AVAILABLE FROM NEWARK"). Tracking is
+   tightened because condensed caps otherwise read as loose at display size. */
+.counter-heading {
+  font-family: var(--font-condensed-archivo), var(--font-grotesk), sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
   font-variant-numeric: tabular-nums lining-nums;
 }

@@ -8,10 +8,14 @@ import {
   ClipboardCheck,
   Home,
   Package,
-  Search,
   Truck,
 } from "lucide-react";
 import { LinkButton } from "@/components/ui";
+import { CounterPanel } from "@/components/home/counter-panel";
+import { CounterStock } from "@/components/home/counter-stock";
+import { FulfillmentCard } from "@/components/home/fulfillment-card";
+import { TradePricingCard } from "@/components/home/trade-pricing-card";
+import { A2lStrip, HelpStrip } from "@/components/home/a2l-strip";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -20,8 +24,6 @@ export const metadata: Metadata = {
     "Search TCL, Tosot, Carrier, mini-split, central HVAC, furnace, cassette, and installation supply SKUs from Summit HVAC Supply.",
   alternates: { canonical: "/" },
 };
-
-const examples = ["TCL09KIDU", "TOS42KMZODU", "Carrier 3 ton", "line set"];
 
 const doors = [
   {
@@ -126,68 +128,36 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
       />
 
-      <section className="border-b border-line bg-canvas">
-        <CounterContainer className="pb-3 pt-8 md:pb-5 md:pt-10">
-          <div className="max-w-[780px]">
-            <h1 className="max-w-[640px] font-display text-[2.35rem] font-medium leading-[1] tracking-normal text-ink-1 sm:text-[3.35rem] lg:text-[3.75rem]">
-              Find the exact HVAC model.
-              <br />
-              Verify before you order.
-            </h1>
-            <p className="mt-3 text-[1.02rem] leading-7 text-ink-1">
-              Retail checkout. Wholesale account pricing. Local support.
-            </p>
-
-            <form
-              action="/products"
-              className="mt-5 flex max-w-[720px] flex-col gap-3 overflow-hidden rounded-(--r-sm) border border-line-strong bg-surface-1 p-3 sm:flex-row sm:items-center"
-              data-conversion-hook="homepage-search-start"
-            >
-              <div className="flex min-w-0 flex-1 items-center gap-3">
-                <Search size={28} strokeWidth={1.7} className="ml-2 shrink-0 text-ink-1" aria-hidden="true" />
-                <label htmlFor="home-search" className="sr-only">
-                  Search by part number, model, or keyword
-                </label>
-                <input
-                  id="home-search"
-                  name="q"
-                  type="search"
-                  placeholder="Part #, model, or keyword"
-                  className="min-w-0 flex-1 bg-transparent px-2 font-mono text-[0.95rem] text-ink-1 outline-none placeholder:text-ink-4"
-                />
+      <section className="bg-canvas">
+        <CounterContainer className="pb-2 pt-8 md:pt-10">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
+            <div className="min-w-0">
+              <h1 className="counter-heading text-[2.1rem] leading-[1.02] text-ink-1 sm:text-[2.6rem]">
+                Find it. Verify it.
+                <br />
+                Get it today.
+              </h1>
+              <p className="mt-3 text-[0.98rem] leading-7 text-ink-2">
+                Search by part number, equipment model, or product.
+              </p>
+              <div className="mt-5">
+                <CounterPanel />
               </div>
-              <button
-                type="submit"
-                className="h-12 w-full rounded-(--r-sm) bg-brand px-7 text-sm font-medium text-brand-ink transition-colors duration-150 sm:w-auto"
-              >
-                Search
-              </button>
-            </form>
-
-            <div className="mt-4 flex max-w-full flex-wrap items-center gap-x-4 gap-y-2 overflow-hidden text-sm text-ink-2">
-              <span>Examples:</span>
-              {examples.map((example) => (
-                <Link
-                  key={example}
-                  href={`/products?q=${encodeURIComponent(example)}`}
-                  className="part-number underline underline-offset-4"
-                >
-                  {example}
-                </Link>
-              ))}
             </div>
 
-            <div className="mt-5 flex flex-col gap-2 text-[0.95rem] text-ink-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5">
-              <span className="inline-flex items-center gap-2 text-brand">
-                <CheckCircle2 size={21} strokeWidth={1.8} aria-hidden="true" />
-                Retail ordering available online
-              </span>
-              <span className="hidden sm:inline" aria-hidden="true">·</span>
-              <span>Will-call until 5:00pm</span>
+            <div className="flex flex-col gap-2.5">
+              <FulfillmentCard />
+              <TradePricingCard />
             </div>
           </div>
         </CounterContainer>
       </section>
+
+      <CounterStock />
+
+      <A2lStrip />
+
+      <HelpStrip />
 
       <MobileBranchStrip />
 

@@ -42,6 +42,28 @@ export const PURCHASE = {
   delivery: "Newark will-call, Bay Area delivery, and freight are confirmed with each quote",
 } as const;
 
+/**
+ * Fulfillment facts shown on the landing page and /delivery. Single source of
+ * truth so the branch card, the product cards, and the delivery page can never
+ * disagree about a cutoff or a ready time.
+ *
+ * TODO(summit-ops): every value below is shaped to the right length but is NOT
+ * confirmed by the counter. Replace each one with the real operating number
+ * before launch, or drop the line entirely. Do not let these ship as final.
+ */
+export const FULFILLMENT = {
+  /** TODO(summit-ops): confirm the real will-call pick-and-stage time. */
+  pickupReady: "Will-call ready in 30 min",
+  /** TODO(summit-ops): confirm the real next-day delivery order cutoff. */
+  deliveryCutoff: "2:00 PM",
+  deliveryLine: "for next-day delivery",
+  /** Shown under both fulfillment rows on product cards. */
+  bothMethods: "Pickup or delivery",
+  mapsHref: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    "5437 Central Ave., Suite 10, Newark, CA 94560"
+  )}`,
+} as const;
+
 /** Rough monthly-payment estimate for the buy box ("as low as $/mo"). */
 export function financingMonthly(price: number): number {
   return Math.max(1, Math.round(price / PURCHASE.financingTermMonths));

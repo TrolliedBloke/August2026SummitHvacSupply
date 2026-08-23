@@ -7,12 +7,22 @@
   --surface: #FFFFFF;
   --border: #E3E1DA;
   --green: #1B7A3D;
+  /* Warm band tint for full-width callout strips. Sampled by eye from the
+     approved reference -- it is the one surface tone outside the
+     page/surface pair, and it is a tint, never a text or icon color.
+     TODO(summit-design): confirm this hex against the source design file. */
+  --band: #F5F0E8;
 
   --radius-control: 6px;
   --radius-card: 12px;
   --border-hairline: 0.5px solid var(--border);
   --nav-height: 54px;
-  --counter-max: 1368px;
+  /* Content column. Matches the 1180px Container used by the rest of the site,
+     so there is one body width rather than two competing ones. */
+  --counter-max: 1180px;
+  /* The nav sits wider than the body column: logo and account controls run
+     closer to the viewport edge than the content they sit above. */
+  --nav-max: 1400px;
   --counter-pad: 36px;
   --transition-fast: 150ms;
 

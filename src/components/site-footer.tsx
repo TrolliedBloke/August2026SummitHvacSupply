@@ -63,7 +63,8 @@ export function SiteFooter() {
 
           <FooterCol title="Policies">
             <FooterLink href="/returns">Returns & Refunds</FooterLink>
-            <FooterLink href="/shipping">Shipping & Delivery</FooterLink>
+            <FooterLink href="/delivery">Delivery & Pickup</FooterLink>
+            <FooterLink href="/shipping">Shipping & Returns</FooterLink>
             <FooterLink href="/resources">Warranty & FAQ</FooterLink>
             <FooterLink href="/privacy">Privacy Policy</FooterLink>
             <FooterLink href="/terms">Terms of Service</FooterLink>

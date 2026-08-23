@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Archivo_Narrow, Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { QuoteProvider } from "@/components/quote-context";
 import { FulfillmentProvider } from "@/components/fulfillment-context";
@@ -16,6 +16,10 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 // catalog without the geometric SaaS-dashboard vocabulary. Shares rendering
 // DNA with Inter, so the two families never fight.
 const grotesk = Inter_Tight({ subsets: ["latin"], variable: "--font-grotesk", display: "swap" });
+// Counter headings: Archivo Narrow -- the bold condensed uppercase used for
+// section titles on the landing page. Narrow enough that a four-word heading
+// holds one line at the counter width without shrinking the type.
+const condensed = Archivo_Narrow({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-condensed-archivo", display: "swap" });
 // Data: JetBrains Mono -- tabular figures so spec rails and tables align.
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-jb", display: "swap" });
 
@@ -69,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     areaServed: SITE.serviceArea,
   };
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${grotesk.variable} ${mono.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${grotesk.variable} ${condensed.variable} ${mono.variable}`}>
       <body className="min-h-dvh antialiased">
         <script
           type="application/ld+json"

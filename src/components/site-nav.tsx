@@ -3,17 +3,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Lock, Search, ChevronDown, Phone, ClipboardList } from "lucide-react";
+import { Menu, X, Lock, Search, ChevronDown, Phone, ShoppingCart, MapPin } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
 import { SITE } from "@/lib/site";
 
-/* Primary nav is capped at 5 top-level targets. Rebates + Bay Area delivery
-   live under the Resources menu so the bar never overflows. */
+/* Primary nav mirrors how the counter is organized: equipment first, then the
+   parts that go with it, then brand. Every target is a real catalog view --
+   nothing here lands on an empty result set. */
 const PRIMARY = [
-  { href: "/products", label: "Shop systems" },
-  { href: "/homeowners", label: "For homeowners" },
-  { href: "/dealers", label: "For contractors" },
+  { href: "/products", label: "Equipment" },
+  { href: "/products?category=installation-supplies", label: "Parts & supplies" },
+  { href: "/products?category=line-sets", label: "Tools & consumables" },
+  { href: "/brands", label: "Brands" },
 ];
 
 const RESOURCES = [
@@ -68,9 +70,13 @@ type SearchResult = {
 function SearchField({
   onNavigate,
   autoFocus = false,
+  inline = false,
 }: {
   onNavigate?: () => void;
   autoFocus?: boolean;
+  /** Inline lives in the nav bar, so results float over the page instead of
+      pushing the bar taller as the user types. */
+  inline?: boolean;
 }) {
   const router = useRouter();
   const [query, setQuery] = React.useState("");
@@ -139,8 +145,8 @@ function SearchField({
   }
 
   return (
-    <div>
-      <div className="flex h-11 items-center gap-2 rounded-(--r-sm) border border-line-strong bg-surface-1 px-3 focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/25">
+    <div className={inline ? "relative w-full" : undefined}>
+      <div className={`flex items-center gap-2 rounded-(--r-sm) border border-line-strong bg-surface-1 px-3 focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/25 ${inline ? "h-10" : "h-11"}`}>
         <Search size={16} className="shrink-0 text-ink-3" />
         <input
           ref={inputRef}
@@ -152,7 +158,7 @@ function SearchField({
           aria-controls={resultsId}
           aria-autocomplete="list"
           aria-activedescendant={active >= 0 ? `${resultsId}-${active}` : undefined}
-          placeholder="Search model or SKU"
+          placeholder="Search part # or model"
           className="min-w-0 flex-1 bg-transparent text-sm text-ink-1 outline-none placeholder:text-ink-4"
           aria-label="Search by SKU or model number"
         />
@@ -178,7 +184,9 @@ function SearchField({
           id={resultsId}
           role="listbox"
           aria-label="Search results"
-          className="mt-2 max-h-[60vh] overflow-y-auto overflow-hidden rounded-(--r-md) border border-line bg-surface-1"
+          className={`max-h-[60vh] overflow-y-auto overflow-hidden rounded-(--r-md) border border-line bg-surface-1 ${
+            inline ? "absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 shadow-[0_8px_24px_rgba(28,28,26,0.10)]" : "mt-2"
+          }`}
         >
           {loading && results.length === 0 && (
             <li className="px-3 py-3 text-sm text-ink-3">Searching…</li>
@@ -363,7 +371,7 @@ function CartButton() {
       aria-label={showCount ? `Open your cart (${count} ${count === 1 ? "item" : "items"})` : "Open your cart"}
       className="relative grid size-11 place-items-center rounded-(--r-sm) border border-line-strong bg-surface-1 text-ink-1 transition-colors hover:bg-surface-2"
     >
-      <ClipboardList size={18} strokeWidth={2.1} />
+      <ShoppingCart size={18} strokeWidth={2.1} />
       {showCount && (
         <span className="tnum absolute -right-1.5 -top-1.5 grid min-w-[18px] place-items-center rounded-full bg-brand px-1 font-mono text-[10px] font-medium leading-[18px] text-brand-ink">
           {count}
@@ -378,22 +386,35 @@ export function SiteNav() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const closeMobile = () => setMobileOpen(false);
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
+  // Highlight the section, not the filter. Three primary entries share the
+  // /products path and differ only by query string, which the server cannot
+  // see -- resolving them client-side meant a post-hydration state flip that
+  // raced anything reading the nav. Matching on pathname alone is decided at
+  // render time, identical on server and client, and only ever marks one
+  // entry: the first whose path matches wins.
+  const activeHref = PRIMARY.map((item) => item.href).find((href) => {
+    const path = href.split("?")[0];
+    return pathname === path || pathname.startsWith(path + "/");
+  });
+
+  const isActive = (href: string) => href === activeHref;
 
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-surface-1">
-      <nav className="mx-auto flex h-[var(--nav-height)] w-full max-w-[var(--counter-max)] items-center gap-4 px-5 sm:px-6 lg:px-[var(--counter-pad)]">
+    <header className="sticky top-0 z-30 border-b-2 border-brand bg-surface-1">
+      <nav className="mx-auto flex h-[var(--nav-height)] w-full max-w-[var(--nav-max)] items-center gap-3 px-5 sm:px-6 lg:px-[var(--counter-pad)]">
         <Wordmark />
 
         {/* Inline nav appears at xl, exactly where the hamburger hides -- the two
             switch at the same breakpoint so navigation is never unreachable. */}
-        <ul className="hidden flex-1 items-center gap-0.5 xl:flex">
+        <ul className="hidden min-w-0 flex-1 items-center gap-0.5 xl:flex">
           {PRIMARY.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`whitespace-nowrap rounded-(--r-sm) px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive(item.href) ? "text-ink-1 underline underline-offset-4" : "text-ink-1 hover:bg-surface-2"
+                className={`whitespace-nowrap border-b-2 px-2.5 py-2 text-sm font-medium transition-colors ${
+                  isActive(item.href)
+                    ? "border-brand text-brand"
+                    : "border-transparent text-ink-1 hover:text-brand"
                 }`}
               >
                 {item.label}
@@ -403,23 +424,30 @@ export function SiteNav() {
           <li>
             <ResourcesMenu pathname={pathname} />
           </li>
-          <li>
-            <Link
-              href="/contact"
-              className={`whitespace-nowrap rounded-(--r-sm) px-3 py-2 text-sm font-medium transition-colors ${
-                isActive("/contact") ? "text-ink-1 underline underline-offset-4" : "text-ink-1 hover:bg-surface-2"
-              }`}
-            >
-              Contact
-            </Link>
-          </li>
         </ul>
 
         {/* Right cluster */}
         <div className="ml-auto flex items-center gap-1.5 xl:ml-0">
-          <div>
+          {/* At xl the search is a persistent field: on a parts site the search
+              box is the primary control, and hiding it behind an icon costs a
+              click on the most-used path. Below xl it collapses to the popover
+              so the bar still fits. */}
+          <div className="hidden w-[190px] xl:block 2xl:w-[260px]">
+            <SearchField inline />
+          </div>
+          <div className="xl:hidden">
             <SearchPopover />
           </div>
+          {/* Branch selector. It says "Newark" and nothing more -- the site does
+              not geolocate, so it must not claim to have detected anything. */}
+          <Link
+            href="/locations/newark"
+            className="hidden items-center gap-1.5 whitespace-nowrap rounded-(--r-sm) px-2.5 py-2 text-sm font-medium text-ink-1 transition-colors hover:text-brand xl:inline-flex"
+          >
+            <MapPin size={15} strokeWidth={2.2} />
+            Newark
+            <ChevronDown size={14} strokeWidth={2.2} className="text-ink-3" />
+          </Link>
           <Link
             href="/account"
             aria-label="Account portal"
@@ -438,7 +466,7 @@ export function SiteNav() {
           {/* Big-ticket, high-anxiety category -- people call. The number is the CTA. */}
           <a
             href={SITE.phoneHref}
-            className="hidden h-11 items-center gap-1.5 whitespace-nowrap rounded-(--r-sm) bg-brand px-3.5 text-sm font-medium text-brand-ink transition-colors hover:bg-brand-hover md:inline-flex"
+            className="hidden h-11 items-center gap-1.5 whitespace-nowrap rounded-(--r-sm) border border-line-strong bg-surface-1 px-3.5 text-sm font-medium text-ink-1 transition-colors hover:bg-surface-2 md:inline-flex"
           >
             <Phone size={15} strokeWidth={2.2} />
             <span className="tnum">{SITE.phone}</span>
