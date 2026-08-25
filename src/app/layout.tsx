@@ -9,6 +9,7 @@ import { AnalyticsListener } from "@/components/analytics-listener";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/next";
 
 // Body: Inter -- neutral, legible at small sizes for spec-dense pages.
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AnalyticsListener />
           </QuoteProvider>
         </FulfillmentProvider>
+        <Analytics />
       </body>
     </html>
   );
