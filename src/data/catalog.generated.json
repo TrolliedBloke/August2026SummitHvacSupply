@@ -15545,7 +15545,6 @@
     "purchaseEligible": false,
     "notes": null,
     "issues": [
-      "product_type_inferred",
       "category_inferred",
       "btu_inferred_from_product_name",
       "retail_price_unverified",
@@ -15864,7 +15863,6 @@
     "purchaseEligible": false,
     "notes": null,
     "issues": [
-      "product_type_inferred",
       "category_inferred",
       "btu_inferred_from_product_name",
       "retail_price_unverified",
@@ -16183,7 +16181,6 @@
     "purchaseEligible": false,
     "notes": null,
     "issues": [
-      "product_type_inferred",
       "category_inferred",
       "btu_inferred_from_product_name",
       "retail_price_unverified",
@@ -16515,7 +16512,6 @@
     "purchaseEligible": false,
     "notes": null,
     "issues": [
-      "product_type_inferred",
       "category_inferred",
       "btu_inferred_from_product_name",
       "retail_price_unverified",
