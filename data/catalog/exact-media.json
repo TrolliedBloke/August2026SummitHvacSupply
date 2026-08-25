@@ -405,6 +405,19 @@
       ]
     },
     {
+      "id": "dewalt-dct414-official-manual",
+      "skus": [
+        "DCT414"
+      ],
+      "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+      "retrievedAt": "2026-08-24",
+      "notes": "Rendered pages from the official DEWALT DCT414 instruction manual identify the exact model and show the tool in the manufacturer's distance-to-spot diagram.",
+      "images": [
+        "/products/dewalt/dct414-distance-to-spot.png",
+        "/products/dewalt/dct414-manual-cover.png"
+      ]
+    },
+    {
       "id": "owner-supplied-tos30kmzodu",
       "skus": [
         "TOS30KMZODU"

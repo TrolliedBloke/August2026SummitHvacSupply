@@ -11,6 +11,8 @@
         "type": "object",
         "properties": {
           "name": { "type": "string" },
+          "brand": { "type": "string" },
+          "description": { "type": "string" },
           "modelNumber": { "type": "string" },
           "category": { "type": "string" },
           "productType": { "type": "string" },
@@ -19,9 +21,14 @@
           "warranty": { "type": ["object", "null"] },
           "image": { "type": ["string", "null"] },
           "images": { "type": "array", "items": { "type": "string" } },
+          "referenceImages": { "type": "array", "items": { "type": "string" } },
           "imageVerification": { "enum": ["unverified", "manufacturer_family", "verified"] },
           "documents": { "type": "array" },
           "compatibility": { "type": "array" },
+          "ahri": {},
+          "conflictType": { "type": ["string", "null"] },
+          "possibleOemMapping": {},
+          "fieldSources": { "type": "object" },
           "evidence": {
             "type": "array",
             "items": {

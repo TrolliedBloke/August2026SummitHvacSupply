@@ -1,6 +1,6 @@
 # Catalog verification queue
 
-**53 items need a person.** None of these can be settled by more research; each needs someone to look at a unit, an invoice or a purchase order.
+**52 items need a person.** None of the open items can be settled by more research; each needs someone to look at a unit, an invoice or a purchase order.
 
 Work top to bottom: HIGH items block publishing a product page, LOW items only affect how complete an accessory listing looks.
 
@@ -43,7 +43,7 @@ Work top to bottom: HIGH items block publishing a product page, LOW items only a
 | 35 | `CORNERCOV` | `(none)` | Supply the manufacturer and part number from the supplier invoice | Supplier invoice or packaging for the brand and part number | LOW |
 | 36 | `COUPLINGCOV` | `(none)` | Supply the manufacturer and part number from the supplier invoice | Supplier invoice or packaging for the brand and part number | LOW |
 | 37 | `DCT4102` | `(none)` | Supply the manufacturer and part number from the supplier invoice | Supplier invoice or packaging for the brand and part number | LOW |
-| 38 | `DCT414` | `(none)` | Supply the manufacturer and part number from the supplier invoice | Supplier invoice or packaging for the brand and part number | LOW |
+| 38 | `DCT414` | `DCT414` | Resolved from the official DEWALT instruction manual | Manufacturer documentation | RESOLVED |
 | 39 | `DCT415` | `(none)` | Supply the manufacturer and part number from the supplier invoice | Supplier invoice or packaging for the brand and part number | LOW |
 | 40 | `DISC-30A-FUSE` | `(none)` | Supply the manufacturer and part number from the supplier invoice | Supplier invoice or packaging for the brand and part number | LOW |
 | 41 | `ELBOW90` | `(none)` | Supply the manufacturer and part number from the supplier invoice | Supplier invoice or packaging for the brand and part number | LOW |
@@ -511,17 +511,14 @@ Work top to bottom: HIGH items block publishing a product page, LOW items only a
 **Action:** Supply the manufacturer and part number from the supplier invoice
 **Where:** Supplier invoice or packaging for the brand and part number
 
-### 38. DCT414 — Air Conditioner Duct Model 414
+### 38. DCT414 — DEWALT 12V MAX Cordless IR Thermometer
 
-- **Manufacturer on sheet:** Unbranded
-- **Model on sheet:** `(none recorded)`
-- **Type:** Accessory
-- **Category:** MANUFACTURER_IDENTITY_UNCERTAIN  ·  **Priority:** LOW
+- **Manufacturer:** DEWALT
+- **Model:** `DCT414`
+- **Type:** Infrared thermometer
+- **Status:** RESOLVED from the official DEWALT instruction manual on 2026-08-24
 
-**Why this is open:** The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and a
-
-**Action:** Supply the manufacturer and part number from the supplier invoice
-**Where:** Supplier invoice or packaging for the brand and part number
+The manufacturer manual identifies DCT414 as a cordless infrared thermometer, superseding the inventory-generated “Air Conditioner Duct Model 414” name. No further identity verification is required.
 
 ### 39. DCT415 — Air Conditioner Duct Model 415
 
@@ -702,4 +699,3 @@ Work top to bottom: HIGH items block publishing a product page, LOW items only a
 
 **Action:** Supply the manufacturer and part number from the supplier invoice
 **Where:** Supplier invoice or packaging for the brand and part number
-

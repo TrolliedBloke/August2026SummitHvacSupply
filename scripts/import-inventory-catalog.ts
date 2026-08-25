@@ -5,6 +5,8 @@ import path from "node:path";
 type CsvRow = Record<string, string>;
 type ResearchOverride = {
   name?: string;
+  brand?: string;
+  description?: string;
   modelNumber?: string;
   category?: string;
   productType?: string;
@@ -13,11 +15,12 @@ type ResearchOverride = {
   warranty?: Record<string, unknown> | null;
   image?: string | null;
   images?: string[];
+  referenceImages?: string[];
   imageVerification?: "unverified" | "manufacturer_family" | "verified";
   documents?: unknown[];
   compatibility?: unknown[];
   ahri?: unknown;
-  conflictType?: string;
+  conflictType?: string | null;
   possibleOemMapping?: unknown;
   fieldSources?: Record<string, { sourceUrl: string; sourceType: string; retrievedAt: string }>;
   evidence?: Array<{ fieldName: string; value: unknown; sourceUrl: string; sourceType: string; retrievedAt: string; status: "verified" | "conflict" | "rejected"; notes?: string }>;
@@ -370,6 +373,8 @@ function applyResearchOverride<T extends ReturnType<typeof normalizeRow>>(produc
   return {
     ...product,
     name: override.name ?? product.name,
+    brand: override.brand ?? product.brand,
+    description: override.description ?? product.description,
     modelNumber: override.modelNumber ?? product.modelNumber,
     category: override.category ?? product.category,
     productType: override.productType ?? product.productType,
@@ -378,13 +383,20 @@ function applyResearchOverride<T extends ReturnType<typeof normalizeRow>>(produc
     warranty: override.warranty ?? product.warranty,
     image: overrideImages[0] ?? product.image,
     images: overrideImages.length > 0 ? overrideImages : product.images,
+    referenceImages: override.referenceImages ?? [],
     imageVerification: override.imageVerification ?? product.imageVerification,
     documents: override.documents ?? product.documents,
     compatibility: override.compatibility ?? product.compatibility,
     ahri: override.ahri ?? product.ahri,
-    conflictType: override.conflictType ?? product.conflictType,
+    conflictType: override.conflictType === undefined ? product.conflictType : override.conflictType,
     possibleOemMapping: override.possibleOemMapping ?? product.possibleOemMapping,
     fieldSources: { ...product.fieldSources, ...override.fieldSources },
+    issues: product.issues.filter((issue) => {
+      if (override.brand && ["brand_inferred_from_identifier", "manufacturer_research_pending"].includes(issue)) return false;
+      if (override.imageVerification === "verified" && issue === "exact_image_unverified") return false;
+      if (override.researchStatus === "verified" && issue === "not_sellable_identity_conflict") return false;
+      return true;
+    }),
     evidence: [...product.evidence, ...evidence],
   } as T;
 }

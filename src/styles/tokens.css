@@ -16,7 +16,10 @@
   --radius-control: 6px;
   --radius-card: 12px;
   --border-hairline: 0.5px solid var(--border);
-  --nav-height: 54px;
+  /* Sticky header height. Three tiers at xl; the utility strip drops below md
+     and the category row below xl, so the value steps down with them. Anything
+     that parks itself under the header offsets by this token. */
+  --nav-height: 64px;
   /* Content column. Matches the 1180px Container used by the rest of the site,
      so there is one body width rather than two competing ones. */
   --counter-max: 1236px;
@@ -61,4 +64,18 @@
   --shadow-sm: none;
   --shadow-md: none;
   --shadow-lg: none;
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* Utility strip appears. */
+    --nav-height: 101px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    /* Category row appears. */
+    --nav-height: 154px;
+  }
 }

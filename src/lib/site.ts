@@ -34,8 +34,13 @@ export const PURCHASE = {
   financingDisclosure:
     "Financing offered through third-party lending partners. 0% intro APR for 12 months, then 9.99–24.99% APR, on approved credit. Estimated payment assumes a 60-month term.",
   returns: "30-day returns on unopened equipment",
+  restockingFeePercent: 15,
+  /** Days an RMA stays valid. Returns arriving later go back to the counter. */
+  rmaValidDays: 15,
+  /** Carrier deadline for concealed freight damage. Ours matches theirs. */
+  concealedDamageDays: 5,
   returnsDetail:
-    "Return unopened equipment within 30 days for a full refund. Opened or special-order items may carry a 15% restocking fee. Damaged-in-transit units are replaced free.",
+    "Return unopened equipment within 30 days for a full refund. Opened but uninstalled equipment is refunded less a 15% restocking fee. Special-order items and installed equipment are not returnable. Damaged-in-transit units are replaced free.",
   guarantee: "Ships-right guarantee",
   guaranteeDetail:
     "Wrong, damaged, or DOA unit? We replace it at no cost. A photo and the serial number is all we need.",

@@ -187,7 +187,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
       {/* Mobile: search + a sticky Filters button; products render immediately. */}
       <div className="flex flex-col gap-3 lg:hidden">
         {searchForm}
-        <div className="sticky top-[68px] z-20 -mx-1 px-1">
+        <div className="sticky top-[calc(var(--nav-height)+0.5rem)] z-20 -mx-1 px-1">
           <button
             type="button"
             onClick={() => setDrawerOpen(true)}

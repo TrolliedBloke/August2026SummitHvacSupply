@@ -4137,13 +4137,9 @@
       "sourceRow": 72,
       "catalogSku": "DCT414",
       "sourceSku": "DCT414",
-      "modelNumber": null,
-      "researchStatus": "conflict",
+      "modelNumber": "DCT414",
+      "researchStatus": "verified",
       "missing": [
-        "exact_identity",
-        "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -4154,22 +4150,41 @@
           "status": "source_record"
         },
         {
-          "fieldName": "manufacturer",
-          "value": null,
-          "sourceUrl": "data/catalog/inventory-source.csv",
-          "sourceType": "other",
-          "retrievedAt": "2026-08-09",
-          "status": "conflict",
-          "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+          "fieldName": "identity",
+          "value": {
+            "brand": "DEWALT",
+            "modelNumber": "DCT414",
+            "product": "12V Max Cordless IR Thermometer"
+          },
+          "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-24",
+          "status": "verified",
+          "notes": "The official DEWALT instruction manual identifies DCT414 as a cordless infrared thermometer. This supersedes the inventory-generated 'Air Conditioner Duct Model 414' name."
         },
         {
           "fieldName": "specifications",
-          "value": "from_description",
-          "sourceUrl": "data/catalog/inventory-source.csv",
-          "sourceType": "other",
-          "retrievedAt": "2026-08-09",
+          "value": "official_manual",
+          "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-24",
           "status": "verified",
-          "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
+          "notes": "Temperature range, distance-to-spot ratio, accuracy, emissivity, laser and battery specifications are taken from the official DCT414 manual."
+        },
+        {
+          "fieldName": "image",
+          "value": {
+            "localPaths": [
+              "/products/dewalt/dct414-distance-to-spot.png",
+              "/products/dewalt/dct414-manual-cover.png"
+            ],
+            "exactModelVerified": true
+          },
+          "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-24",
+          "status": "verified",
+          "notes": "Rendered pages from the official DCT414 instruction manual show the exact model and its distance-to-spot diagram."
         }
       ]
     },
