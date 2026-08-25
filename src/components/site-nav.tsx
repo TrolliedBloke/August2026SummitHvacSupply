@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Lock, Search, ChevronDown, ShoppingCart, MapPin } from "lucide-react";
+import { Menu, X, Lock, Search, ShoppingCart, MapPin } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
 import { SITE } from "@/lib/site";
@@ -37,7 +37,7 @@ const RESOURCE_HREFS = RESOURCES.map((r) => r.href);
 /* Shared by every row-3 entry so the run reads as an even rhythm: the spacing
    is padding carried by each item, not a fixed gap between labels of very
    different widths. */
-const NAV_ITEM = "whitespace-nowrap rounded-(--r-sm) px-3.5 py-2 text-[15px] font-medium transition-colors";
+const NAV_ITEM = "whitespace-nowrap rounded-(--r-sm) px-5 py-2 text-[15px] font-medium transition-colors";
 
 function useClientMounted() {
   return React.useSyncExternalStore(
@@ -315,9 +315,9 @@ function AllProductsMenu() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-haspopup="menu"
-        className={`${NAV_ITEM} inline-flex items-center gap-3 text-ink-1 hover:bg-surface-2`}
+        className={`${NAV_ITEM} inline-flex items-center gap-4 text-ink-1 hover:bg-surface-2`}
       >
-        <Menu size={20} strokeWidth={ICON_STROKE} aria-hidden="true" />
+        <Menu size={22} strokeWidth={2} aria-hidden="true" />
         All products
       </button>
       {open && (
@@ -397,12 +397,11 @@ function ResourcesMenu({ pathname }: { pathname: string }) {
         }}
         aria-expanded={open}
         aria-haspopup="menu"
-        className={`${NAV_ITEM} inline-flex items-center gap-1.5 ${
+        className={`${NAV_ITEM} inline-flex items-center ${
           active || open ? "text-ink-1 underline underline-offset-4" : "text-ink-1 hover:bg-surface-2"
         }`}
       >
         Resources
-        <ChevronDown size={15} strokeWidth={ICON_STROKE} className={`transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
         <div
@@ -528,11 +527,10 @@ export function SiteNav() {
         <div className="mx-auto flex w-full max-w-[var(--nav-max)] items-center px-5 py-1.5 sm:px-6 lg:px-[var(--counter-pad)]">
           {/* The trigger sits left of the divider; every destination link sits
               right of it, so the distinction is legible at a glance. */}
-          <div className="-ml-3.5">
+          <div className="-ml-5">
             <AllProductsMenu />
           </div>
-          <span aria-hidden="true" className="mx-4 h-5 w-px shrink-0 bg-line" />
-          <ul className="flex min-w-0 items-center">
+          <ul className="ml-6 flex min-w-0 items-center">
             {PRIMARY.map((item) => (
               <li key={item.href}>
                 <Link
