@@ -67,7 +67,7 @@ This is the work that turns a 100-row spreadsheet into a catalog. It runs in par
 
 ---
 
-## Phase 2 — Engineering cleanup (mostly done 2026-08-24)
+## Phase 2 — Engineering cleanup (done 2026-08-25, bar two dashboard toggles)
 
 **2.1 — Add metadata to the pages missing it. — DONE 2026-08-24.**
 
@@ -77,9 +77,26 @@ Three pages, not four. `/products/[series]` calls `notFound()` unconditionally a
 
 *Verified:* each of the three serves a distinct `<title>`, description, and canonical.
 
-**2.2 — Apply `supabase/migrations/022_review_requests.sql`.** The day-14 review request depends on `fulfilled_at` and `review_request_sent_at`. Until the migration runs, the dispatcher finds nothing and silently sends zero.
+**2.2 — Apply `supabase/migrations/022_review_requests.sql`. — APPLIED 2026-08-25.**
 
-*Verification:* mark an order delivered, confirm `fulfilled_at` is stamped, then `POST /api/lifecycle/dispatch` with `{ "advanceDays": 14 }` and confirm `reviewRequestsSent` is non-zero.
+Applied to project `cswrezdcwdqnhwplmddr` (named "crm" in the dashboard — it is the Summit database; the name is misleading). It followed 021 with no gap.
+
+One thing worth recording: before replacing `advance_fulfillment` I read the *live* function definition rather than assuming the repo's 006 version was current. Migration 016 (`lock_operational_rpc`) could plausibly have hardened it since, and a `create or replace` built from the older body would have silently reverted that. It had not been changed — but the check is the reason this was safe, and the same check belongs in front of any future `create or replace`.
+
+*Verified live:* 2 columns added, partial index created, function body now stamps `fulfilled_at`. The one pre-existing order has `fulfilled_at IS NULL`, confirming the deliberate no-backfill behaviour — it will never receive a review request.
+
+*Still to verify, by a human:* mark a real order delivered and confirm `fulfilled_at` stamps, then `POST /api/lifecycle/dispatch` with `{ "advanceDays": 14 }`. **Not done here on purpose** — that dispatch sends real email to a real customer, which is not an agent's call to make.
+
+**2.4 — Database advisors, run after the 022 DDL. — NEW.**
+
+The security linter surfaced one genuinely actionable item and a set of understood ones.
+
+- **Leaked password protection is disabled.** Supabase can check new passwords against HaveIBeenPwned. It is a dashboard toggle, it costs nothing, and the portal accepts customer passwords today. **Turn it on.**
+- `pg_net` sits in the `public` schema. Migration 019 already restricted its permissions, so the remaining exposure is schema placement rather than access. Low priority, non-trivial to move.
+- Six tables report `rls_enabled_no_policy` at INFO. That is the intended posture, not a gap: they are service-role-only and 008 deliberately adds no anon policies. Deny-by-default with no policy is the strictest state, and the linter cannot tell it apart from an oversight.
+- Nine `SECURITY DEFINER` functions are flagged as callable by signed-in users, including `advance_fulfillment`. Each calls `assert_staff()` as its first statement, which the linter cannot see. Worth a periodic re-read of that list to confirm every entry still guards itself — the lint is a useful prompt even though today's answer is "intentional".
+
+None of these were introduced by 022; the flags on `advance_fulfillment` predate it.
 
 **2.3 — Confirm `SHOW_PLACEHOLDER_REVIEWS` is unset in production. — Repo side clear; hosting still to check.**
 
