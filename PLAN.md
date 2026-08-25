@@ -67,17 +67,25 @@ This is the work that turns a 100-row spreadsheet into a catalog. It runs in par
 
 ---
 
-## Phase 2 — Engineering cleanup (~2 hours, all of it mechanical)
+## Phase 2 — Engineering cleanup (mostly done 2026-08-24)
 
-**2.1 — Add metadata to the four indexable pages missing it.** `/contact`, `/quote`, `/dealers` and the `/products/[series]` template define neither `metadata` nor `generateMetadata`, so they inherit the layout default and compete with each other in results. The other five without metadata are auth pages and correctly noindex. Four `pageMetadata()` calls; the helper already exists.
+**2.1 — Add metadata to the pages missing it. — DONE 2026-08-24.**
 
-*Verification:* every non-auth `page.tsx` exports one of the two.
+Three pages, not four. `/products/[series]` calls `notFound()` unconditionally and generates zero static params — it is a deliberate 404 route and correctly has no metadata. The earlier count was wrong.
+
+`/contact`, `/quote` and `/dealers` are all `"use client"`, and a client component cannot export `metadata`, so each got a sibling `layout.tsx` carrying a `pageMetadata()` call. That is the standard fix and the only reason those files exist.
+
+*Verified:* each of the three serves a distinct `<title>`, description, and canonical.
 
 **2.2 — Apply `supabase/migrations/022_review_requests.sql`.** The day-14 review request depends on `fulfilled_at` and `review_request_sent_at`. Until the migration runs, the dispatcher finds nothing and silently sends zero.
 
 *Verification:* mark an order delivered, confirm `fulfilled_at` is stamped, then `POST /api/lifecycle/dispatch` with `{ "advanceDays": 14 }` and confirm `reviewRequestsSent` is non-zero.
 
-**2.3 — Confirm `SHOW_PLACEHOLDER_REVIEWS` is unset in production.** The sample reviews in `src/lib/reviews.ts` are correctly gated and the file warns loudly. This is a one-line environment check, not a code change.
+**2.3 — Confirm `SHOW_PLACEHOLDER_REVIEWS` is unset in production. — Repo side clear; hosting still to check.**
+
+Audited: the flag appears in no env file, no config, and no CI definition — the repo ships no `.env` at all. The gate is also stronger than the plan implied. `placeholderReviewsAllowed()` refuses in production *unless* the flag is explicitly `"true"`, so the default is safe and this is a real control rather than a reminder to tidy up.
+
+Remaining: confirm the variable is absent from the hosting environment's dashboard. That is the one place a value could exist that the repo cannot see.
 
 ---
 
@@ -85,9 +93,26 @@ This is the work that turns a 100-row spreadsheet into a catalog. It runs in par
 
 **3.1 — Have counsel read `/returns`, `/privacy`, `/terms` and `/shipping`.**
 
-All four are written to common HVAC-distribution practice and none has been reviewed. The returns page now states a 15% restocking fee, a 15-day RMA window, a 5-business-day concealed-damage deadline, and who pays freight in each direction — real money terms that have to be enforceable. Every page carries a dev-only banner saying it is unreviewed; that banner is for the team and never renders in production.
+All four are written to common HVAC-distribution practice and none has been reviewed. Every page carries a dev-only banner saying so; that banner is for the team and never renders in production.
 
-California specifics worth raising: Civil Code §1723 conspicuous-posting requirements, and whether the CCPA threshold applies.
+This is not a formality. These pages now make specific, enforceable promises about money, and the site charges cards against them.
+
+**Specific questions to put to counsel:**
+
+| Page | The question |
+|---|---|
+| Returns | Is a **15% restocking fee** enforceable as written, and is it disclosed early enough? California requires a retailer's return policy to be conspicuously posted (Civ. Code §1723) — a footer link may not clear that bar for a term that takes 15% of a $2,400 order. |
+| Returns | The **15-day RMA window** and **5-business-day concealed-damage deadline** shift real risk onto the buyer. Confirm both are defensible and that the freight-damage language matches what the carriers' tariffs actually allow us to recover. |
+| Returns | "**Special-order items are not returnable**" is close to absolute. Confirm it survives contact with consumer-protection law when the buyer is a homeowner rather than a trade account. |
+| Returns | We refund **goods and tax but not outbound freight** on a change of mind. Confirm that split is disclosed before payment, not only after. |
+| Terms | Limitation of liability, warranty disclaimers, and the venue/arbitration clause — the standard set, and the reason a lawyer reads this at all. |
+| Privacy | Whether Summit meets a **CCPA/CPRA** threshold, and if so what the notice, opt-out, and deletion obligations are. Do not assume the answer; it turns on revenue and data volume. |
+| Privacy | What the **Stripe** relationship makes us with respect to payment data, and whether the current notice describes it accurately. |
+| Shipping | That the delivery terms do not contradict the returns page once Phase 0.2 replaces the placeholder figures. |
+
+**Two audiences, one policy.** The site sells to both licensed contractors and homeowners. Consumer-protection rules that do not reach a B2B trade sale may well reach the homeowner buying one heat pump, and the current pages do not distinguish. Worth asking whether they should.
+
+**Sequencing note:** Phase 0.2 changes delivery figures that the shipping page cites. Send counsel the pages *after* 0.2 lands, or expect to pay for a second read.
 
 ---
 
