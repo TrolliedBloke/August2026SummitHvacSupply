@@ -12077,6 +12077,11 @@
     "inventoryStatus": "unknown",
     "image": null,
     "images": [],
+    "referenceImages": [
+      "/products/catalog-supplier/ls143850ft-reference-1.jpg",
+      "/products/catalog-supplier/ls143850ft-reference-2.jpg",
+      "/products/catalog-supplier/ls143850ft-reference-3.jpg"
+    ],
     "imageVerification": "unverified",
     "documents": [],
     "warranty": null,
@@ -12681,12 +12686,12 @@
     "sourceSku": "DCT414",
     "catalogSku": "DCT414",
     "slug": "dct414",
-    "modelNumber": null,
-    "name": "Air Conditioner Duct Model 414",
-    "brand": "Unbranded",
+    "modelNumber": "DCT414",
+    "name": "DEWALT 12V MAX Cordless IR Thermometer",
+    "brand": "DEWALT",
     "category": "installation-supplies",
-    "productType": "Accessory",
-    "description": null,
+    "productType": "Infrared thermometer",
+    "description": "Cordless non-contact infrared thermometer for measuring surface temperatures. It features adjustable emissivity, a 12:1 distance-to-spot ratio and a Class 2 laser for target alignment, and is powered by a DEWALT 12V MAX lithium-ion battery.",
     "btu": null,
     "tonnage": null,
     "zones": null,
@@ -12700,43 +12705,82 @@
     "retailPrice": null,
     "inventoryQuantity": null,
     "inventoryStatus": "unknown",
-    "image": null,
-    "images": [],
-    "imageVerification": "unverified",
-    "documents": [],
-    "warranty": null,
-    "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+    "image": "/products/dewalt/dct414-distance-to-spot.png",
+    "images": [
+      "/products/dewalt/dct414-distance-to-spot.png",
+      "/products/dewalt/dct414-manual-cover.png"
+    ],
+    "imageVerification": "verified",
+    "documents": [
+      {
+        "kind": "manual",
+        "title": "DEWALT DCT414 Instruction Manual",
+        "url": "/documents/dewalt-dct414-instruction-manual.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-24",
+        "coverageNote": "Official DEWALT manual explicitly identifies model DCT414 and provides operating instructions and specifications."
+      }
+    ],
+    "warranty": {
+      "parts": "3-year limited warranty",
+      "conditions": "The official instruction manual also lists one year of free service and a 90-day money-back guarantee. Coverage and eligibility are subject to DEWALT's regional warranty terms.",
+      "registrationRequired": false,
+      "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+      "sourceType": "official_document",
+      "retrievedAt": "2026-08-24"
+    },
+    "conflictType": null,
     "possibleOemMapping": null,
     "ahri": {
       "status": "not_applicable",
       "referenceNumber": null,
-      "note": "AHRI certification does not apply to line sets, pads, covers, conduit or electrical accessories.",
-      "sourceUrl": "data/catalog/inventory-source.csv",
-      "sourceType": "other",
-      "retrievedAt": "2026-08-09"
+      "note": "AHRI certification does not apply to handheld temperature measurement tools.",
+      "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+      "sourceType": "official_document",
+      "retrievedAt": "2026-08-24"
     },
     "fieldSources": {
+      "brand": {
+        "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-24"
+      },
+      "modelNumber": {
+        "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-24"
+      },
       "modelVariant": {
-        "sourceUrl": "data/catalog/inventory-source.csv",
-        "sourceType": "other",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-24"
+      },
+      "specifications": {
+        "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-24"
       }
     },
     "specifications": {
-      "modelVariant": "Air conditioner duct, model 414"
+      "productFamily": "12V MAX cordless temperature measurement",
+      "modelVariant": "DCT414 infrared thermometer",
+      "temperatureRange": "-20°F to 932°F (-29°C to 500°C)",
+      "distanceToSpotRatio": "Approximately 12:1",
+      "measurementAccuracy": "±1.5% or ±1.5°C, whichever is greater",
+      "emissivityRange": "0.1 to 1.0, adjustable in 0.01 increments",
+      "laserClassification": "Class 2 laser product; <1 mW",
+      "laserWavelength": "620–690 nm visible",
+      "powerSource": "DEWALT 12V MAX lithium-ion battery"
     },
     "compatibility": [],
-    "researchStatus": "conflict",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
     "notes": null,
     "issues": [
-      "brand_inferred_from_identifier",
       "retail_price_unverified",
-      "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending"
+      "inventory_unverified"
     ],
     "evidence": [
       {
@@ -12746,22 +12790,41 @@
         "status": "source_record"
       },
       {
-        "fieldName": "manufacturer",
-        "value": null,
-        "sourceUrl": "data/catalog/inventory-source.csv",
-        "sourceType": "other",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+        "fieldName": "identity",
+        "value": {
+          "brand": "DEWALT",
+          "modelNumber": "DCT414",
+          "product": "12V Max Cordless IR Thermometer"
+        },
+        "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-24",
+        "status": "verified",
+        "notes": "The official DEWALT instruction manual identifies DCT414 as a cordless infrared thermometer. This supersedes the inventory-generated 'Air Conditioner Duct Model 414' name."
       },
       {
         "fieldName": "specifications",
-        "value": "from_description",
-        "sourceUrl": "data/catalog/inventory-source.csv",
-        "sourceType": "other",
-        "retrievedAt": "2026-08-09",
+        "value": "official_manual",
+        "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-24",
         "status": "verified",
-        "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
+        "notes": "Temperature range, distance-to-spot ratio, accuracy, emissivity, laser and battery specifications are taken from the official DCT414 manual."
+      },
+      {
+        "fieldName": "image",
+        "value": {
+          "localPaths": [
+            "/products/dewalt/dct414-distance-to-spot.png",
+            "/products/dewalt/dct414-manual-cover.png"
+          ],
+          "exactModelVerified": true
+        },
+        "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+        "sourceType": "official_document",
+        "retrievedAt": "2026-08-24",
+        "status": "verified",
+        "notes": "Rendered pages from the official DCT414 instruction manual show the exact model and its distance-to-spot diagram."
       }
     ]
   },

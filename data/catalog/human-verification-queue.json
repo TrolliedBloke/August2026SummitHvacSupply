@@ -1,17 +1,17 @@
 {
   "generatedAt": "2026-08-09",
-  "totalOpen": 53,
+  "totalOpen": 52,
   "byType": {
     "INVENTORY_CONFLICT": 2,
     "MODEL_NOT_FOUND": 20,
     "WAREHOUSE_MODEL_VERIFICATION": 5,
     "PURCHASING_RECORD_VERIFICATION": 3,
-    "MANUFACTURER_IDENTITY_UNCERTAIN": 23
+    "MANUFACTURER_IDENTITY_UNCERTAIN": 22
   },
   "byPriority": {
     "HIGH": 27,
     "MEDIUM": 3,
-    "LOW": 23
+    "LOW": 22
   },
   "items": [
     {
@@ -534,17 +534,17 @@
     },
     {
       "sku": "DCT414",
-      "manufacturer": "Unbranded",
-      "model": null,
-      "name": "Air Conditioner Duct Model 414",
-      "productType": "Accessory",
-      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+      "manufacturer": "DEWALT",
+      "model": "DCT414",
+      "name": "DEWALT 12V MAX Cordless IR Thermometer",
+      "productType": "Infrared thermometer",
+      "conflictType": null,
       "priority": "LOW",
-      "whereToCheck": "Supplier invoice or packaging for the brand and part number",
-      "actionRequired": "Supply the manufacturer and part number from the supplier invoice",
-      "possibleValue": "",
-      "whyConflicted": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and a",
-      "status": "OPEN"
+      "whereToCheck": "Official DEWALT DCT414 instruction manual",
+      "actionRequired": "None — identity verified from manufacturer documentation",
+      "possibleValue": "DEWALT DCT414",
+      "whyConflicted": "Resolved: the official DEWALT instruction manual identifies DCT414 as a 12V MAX cordless infrared thermometer, superseding the inventory-generated duct name.",
+      "status": "RESOLVED"
     },
     {
       "sku": "DCT415",

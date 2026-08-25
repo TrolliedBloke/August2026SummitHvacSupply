@@ -66,6 +66,13 @@ export type ResearchFieldKey =
   | "dimensionsText"
   | "lengthFt"
   | "gaugeOrRating"
+  | "temperatureRange"
+  | "distanceToSpotRatio"
+  | "measurementAccuracy"
+  | "emissivityRange"
+  | "laserClassification"
+  | "laserWavelength"
+  | "powerSource"
   | "zones";
 
 const IDENTITY: ResearchFieldKey[] = ["productFamily", "modelVariant", "discontinued", "successorModel"];
@@ -113,6 +120,11 @@ export const FIELD_MANIFEST: Record<string, ResearchFieldKey[]> = {
   ],
   "Cassette panel": [...IDENTITY, ...PHYSICAL, "material", "dimensionsText"],
   Control: [...IDENTITY, "voltage", "material", "dimensionsText", ...PHYSICAL],
+  "Infrared thermometer": [
+    ...IDENTITY,
+    "temperatureRange", "distanceToSpotRatio", "measurementAccuracy",
+    "emissivityRange", "laserClassification", "laserWavelength", "powerSource",
+  ],
   "Line set": [
     ...IDENTITY, "liquidLineIn", "suctionLineIn", "lineSetLengthFt", "lengthFt",
     "material", "gaugeOrRating", "weightLbs", "dimensionsText",
@@ -173,6 +185,13 @@ export const FIELD_LABELS: Record<ResearchFieldKey, { label: string; unit?: stri
   dimensionsText: { label: "Dimensions" },
   lengthFt: { label: "Length", unit: "ft" },
   gaugeOrRating: { label: "Gauge / rating" },
+  temperatureRange: { label: "Temperature range" },
+  distanceToSpotRatio: { label: "Distance-to-spot ratio" },
+  measurementAccuracy: { label: "Measurement accuracy" },
+  emissivityRange: { label: "Emissivity" },
+  laserClassification: { label: "Laser classification" },
+  laserWavelength: { label: "Laser wavelength" },
+  powerSource: { label: "Power source" },
   zones: { label: "Zones" },
 };
 
@@ -194,6 +213,10 @@ export const FIELD_GROUPS: Array<{ heading: string; fields: ResearchFieldKey[] }
     fields: ["liquidLineIn", "suctionLineIn", "lineSetLengthFt", "maxLineLengthFt", "maxHeightDifferenceFt", "connectionSizeIn"],
   },
   { heading: "Operating range", fields: ["minCoolingAmbientF", "maxCoolingAmbientF", "minHeatingAmbientF"] },
+  {
+    heading: "Measurement",
+    fields: ["temperatureRange", "distanceToSpotRatio", "measurementAccuracy", "emissivityRange", "laserClassification", "laserWavelength", "powerSource"],
+  },
 ];
 
 export function fieldsForProductType(productType: string): ResearchFieldKey[] {

@@ -82,6 +82,7 @@ type CatalogRecord = {
   inventoryStatus: CatalogAvailability;
   image: string | null;
   images: string[];
+  referenceImages?: string[];
   imageVerification: "unverified" | "manufacturer_family" | "verified";
   documents: CatalogDocument[];
   warranty: null | CatalogWarranty;
@@ -126,6 +127,7 @@ export type StorefrontSku = {
   dealerPrice: number | null;
   image: string;
   images: string[];
+  referenceImages: string[];
   imageVerified: boolean;
   imageExactModel: boolean;
   available: number;
@@ -239,6 +241,7 @@ function toStorefrontSku(record: CatalogRecord): StorefrontSku {
     dealerPrice: null,
     image: record.image ?? "/logo-summit.svg",
     images: record.images ?? (record.image ? [record.image] : []),
+    referenceImages: record.referenceImages ?? [],
     imageVerified: record.imageVerification !== "unverified" && Boolean(record.image),
     imageExactModel: record.imageVerification === "verified" && Boolean(record.image),
     available: record.inventoryQuantity ?? 0,
