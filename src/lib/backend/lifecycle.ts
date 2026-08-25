@@ -350,3 +350,116 @@ export async function unsubscribeByToken(kind: "stock" | "cart", token: string):
     .select("id");
   return Boolean(data && data.length > 0);
 }
+
+/* ---------------------------------------------------------------- review request */
+
+/**
+ * Days between handover and the ask. Two weeks is deliberate: long enough that
+ * a heat pump has actually been run through a few cycles and the reviewer has
+ * something real to say, short enough that the purchase is still recent.
+ */
+const REVIEW_REQUEST_DELAY_DAYS = 14;
+
+type DeliveredOrder = {
+  id: string;
+  orderNumber: string;
+  buyerName: string | null;
+  buyerEmail: string;
+  productId: string | null;
+  productTitle: string | null;
+};
+
+function reviewRequestBody(order: DeliveredOrder): string {
+  const greeting = order.buyerName ? `Hi ${escapeHtml(order.buyerName.split(" ")[0])},` : "Hi,";
+  const href = `${baseUrl()}/review?order=${encodeURIComponent(order.orderNumber)}${
+    order.productId ? `&sku=${encodeURIComponent(order.productId)}` : ""
+  }`;
+  const subject = order.productTitle
+    ? `the ${escapeHtml(order.productTitle)}`
+    : "your order";
+
+  return `<h2 style="font-size: 20px; margin: 8px 0;">How did ${subject} work out?</h2>
+    <p style="line-height: 1.6;">${greeting}</p>
+    <p style="line-height: 1.6;">You picked up order ${escapeHtml(order.orderNumber)} about two weeks ago. If it's installed and running, a couple of sentences about how it went would genuinely help the next person sizing the same system.</p>
+    <p style="line-height: 1.6;">We publish reviews as written, good or bad, after a human reads them. We don't edit them and we don't offer anything in exchange.</p>
+    <p style="margin-top: 20px;"><a href="${href}" style="background: green; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">Write a review</a></p>
+    <p style="line-height: 1.6; margin-top: 20px;">If something went wrong instead, reply to this email or call ${SITE.phone} and we'll deal with it directly -- that's more useful to us than a review.</p>`;
+}
+
+/**
+ * Ask for a review 14 days after handover (PLAN.md 2.3).
+ *
+ * Only orders that actually reached the customer qualify: 'delivered' or
+ * 'picked_up', with fulfilled_at stamped by advance_fulfillment (migration
+ * 022). Orders fulfilled before that migration have a null fulfilled_at and
+ * are skipped on purpose -- back-filling would mail the entire order history
+ * on the first run.
+ *
+ * review_request_sent_at is written whether or not the send succeeded, so a
+ * failing address cannot put the dispatcher in a retry loop that hammers the
+ * mail provider on every cron tick.
+ *
+ * `advanceDays` (testing only) pretends every order is that much older.
+ */
+export async function dispatchReviewRequests(advanceDays = 0): Promise<{ sent: number }> {
+  const supabase = createServiceRoleSupabaseClient();
+  // No in-memory fallback: unlike carts and stock alerts, this flow reads real
+  // fulfilled orders. With no database there is nothing to ask about.
+  if (!supabase) return { sent: 0 };
+
+  const cutoff = new Date(
+    Date.now() + advanceDays * 86_400_000 - REVIEW_REQUEST_DELAY_DAYS * 86_400_000
+  ).toISOString();
+
+  const { data: rows } = await supabase
+    .from("sales_orders")
+    .select("id, order_number, buyer_name, buyer_email, fulfilled_at")
+    .in("fulfillment_status", ["delivered", "picked_up"])
+    .is("review_request_sent_at", null)
+    .not("buyer_email", "is", null)
+    .not("fulfilled_at", "is", null)
+    .lte("fulfilled_at", cutoff);
+
+  if (!rows?.length) return { sent: 0 };
+
+  let sent = 0;
+  for (const row of rows) {
+    // First line is the one we ask about. Multi-line orders are common but a
+    // single, concrete question converts better than "review your 6 items".
+    const { data: line } = await supabase
+      .from("order_lines")
+      .select("catalog_product_id, description")
+      .eq("order_id", row.id)
+      .not("catalog_product_id", "is", null)
+      .limit(1)
+      .maybeSingle();
+
+    const productId = (line as { catalog_product_id: string | null } | null)?.catalog_product_id ?? null;
+    const order: DeliveredOrder = {
+      id: row.id,
+      orderNumber: row.order_number,
+      buyerName: row.buyer_name,
+      buyerEmail: row.buyer_email,
+      productId,
+      productTitle: productId ? (getStorefrontSku(productId)?.title ?? null) : null,
+    };
+
+    try {
+      await sendEmail(
+        order.buyerEmail,
+        order.productTitle ? `How's the ${order.productTitle} running?` : "How did your Summit order work out?",
+        emailShell(reviewRequestBody(order))
+      );
+      sent++;
+    } catch (error) {
+      console.error("[lifecycle] review request send failed", { orderId: order.id, error });
+    }
+
+    await supabase
+      .from("sales_orders")
+      .update({ review_request_sent_at: new Date().toISOString() })
+      .eq("id", order.id);
+  }
+
+  return { sent };
+}

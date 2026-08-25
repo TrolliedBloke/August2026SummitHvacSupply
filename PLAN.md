@@ -2,6 +2,39 @@
 
 **Date:** 2026-08-02 · Supersedes the backlog in `AUDIT-2026-08-02.md`, which has been corrected after a second verification pass.
 
+## Status — 2026-08-24 implementation pass
+
+Audited every item against the tree before touching anything. Most of the plan had already shipped.
+
+| Item | Status |
+|---|---|
+| 0.1 RLS on the five 007 tables | **Done** — `supabase/migrations/008_storefront_growth_rls.sql`. Went further than planned: default DENY with no anon policies at all, since every path is service-role. |
+| 0.2 Admin gate fails closed | **Done** — `admin/layout.tsx` gates on `requireStaff()` behind `allowUnauthenticatedAdmin()`; `proxy.ts` checks `role !== 'staff'`. |
+| 1.1–1.3 Returns / privacy / terms / shipping | **Done** — all four pages exist. Policy wording is human-authored and out of scope for an agent pass. |
+| 1.4 Surface it at the decision point | **Done** — `buy-box-assurance.tsx` carries the returns line and links `/returns`; footer carries all four policy links. |
+| 2.1 Narrow the middleware matcher | **Done** — `proxy.ts` matches only `/admin`, `/portal`, `/checkout`. |
+| 2.2 Server-render the checkout shell | **Done** — headings and copy render server-side, with a `<noscript>` carrying the will-call number. |
+| 2.3 Start earning reviews | **Done this pass.** See below. |
+| 3.1 Chat widget keyboard operability | **Done** — Escape, focus trap, and focus restore all present. |
+| 3.2 `priority` → `preload` | **Done this pass** — one real call site remained, `locations/newark/page.tsx`. The `sku-card`/`product-card` hits were pass-through props, as the audit note predicted. |
+| 3.3 Soft-404 question | **Resolved — no defect.** It was dev-server streaming, exactly as suspected. Against `next start`: `/fake-xyz123`, `/products/sku/notarealsku`, and `/guides/nope` all return **404**; `/` returns 200. No code changed. |
+
+### 2.3 as built
+
+Day-14 post-delivery review request, plus the page it has to land on — an email asking for a review is worthless without somewhere to write one, and `submitReview()` existed with no caller.
+
+- `supabase/migrations/022_review_requests.sql` — adds `fulfilled_at` and `review_request_sent_at`. Neither existed, so "14 days after delivery" was not expressible. `advance_fulfillment` now stamps `fulfilled_at` on the first transition to `delivered`/`picked_up`, and `coalesce` keeps the original handover time if staff re-save.
+- `dispatchReviewRequests()` in `lib/backend/lifecycle.ts`, wired into the existing hourly cron at `/api/lifecycle/dispatch`. Rows predating the migration have a null `fulfilled_at` and are skipped **on purpose** — back-filling would mail the entire order history on the first run.
+- `/review` page + `/api/reviews` (rate limited, 5 per 5 min). Product title is resolved from the catalog, never from the URL.
+
+Honouring "do not seed `AggregateRating`": nothing here publishes. Submissions land as `pending` for a human, and `reviews.ts` still suppresses aggregate schema until real reviews exist.
+
+### Not done
+
+**Phase 1 policy wording.** The pages exist; whether their terms are the ones Summit will honour is a question for a human with authority over policy, per the plan's own warning. Unreviewed.
+
+---
+
 ## What the re-verification changed
 
 Four of the original findings did not survive a closer look. Recording this because the plan is smaller than the audit implied, and because it shows which claims were grep artefacts rather than defects.
