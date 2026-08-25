@@ -8354,11 +8354,11 @@
     "catalogSku": "TOS36KAHU",
     "slug": "tos36kahu",
     "modelNumber": "TU36-32AH2GDU",
-    "name": "Tosot 3 Ton Air Handler",
+    "name": "TOSOT NOVA 3 Ton Air Handler",
     "brand": "Tosot",
     "category": "air-handlers",
     "productType": "Air handler",
-    "description": null,
+    "description": "NOVA multi-position central ducted air handler for the 2-3 ton R32 heat-pump platform. The manufacturer submittal pairs model TU36-32AH2GDU with outdoor unit TU36-32GDU.",
     "btu": 36000,
     "tonnage": 3,
     "zones": "1",
@@ -8375,61 +8375,86 @@
     "image": null,
     "images": [],
     "imageVerification": "unverified",
-    "documents": [],
-    "warranty": null,
-    "conflictType": "MODEL_NOT_FOUND",
+    "documents": [
+      {
+        "kind": "submittal",
+        "title": "TOSOT TU36-32AH2GDU / TU36-32GDU Submittal Data",
+        "url": "/documents/tosot-tu36-32gdu-submittal.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-25",
+        "coverageNote": "Official seven-page matched-system submittal covering both the indoor and outdoor models."
+      }
+    ],
+    "warranty": {
+      "parts": "10 years",
+      "conditions": "TOSOT's NOVA product page states 10-year parts and compressor coverage for the matched system. Confirm registration and eligibility requirements before quoting coverage.",
+      "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-air-handler-2-to-3-ton",
+      "sourceType": "manufacturer_product_page",
+      "retrievedAt": "2026-08-25"
+    },
+    "conflictType": null,
     "possibleOemMapping": null,
     "ahri": {
-      "status": "conflict",
+      "status": "requires_matched_combination",
       "referenceNumber": null,
-      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
-      "sourceUrl": "https://tosot.com/resources/",
-      "sourceType": "manufacturer",
-      "retrievedAt": "2026-08-09"
+      "matchedIndoor": "TU36-32AH2GDU",
+      "matchedOutdoor": "TU36-32GDU",
+      "note": "Efficiency ratings apply to the documented TU36-32AH2GDU / TU36-32GDU matched system; an indoor unit does not carry a standalone system rating.",
+      "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-air-handler-2-to-3-ton",
+      "sourceType": "manufacturer_product_page",
+      "retrievedAt": "2026-08-25"
     },
     "fieldSources": {
       "productFamily": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc46eec016b1a2778c18f6_TU36-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       },
-      "refrigerant": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+      "modelVariant": {
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc46eec016b1a2778c18f6_TU36-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       },
-      "fuelType": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
-      },
-      "coolingCapacityBtu": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+      "specifications": {
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc46eec016b1a2778c18f6_TU36-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       }
     },
     "specifications": {
       "btu": 36000,
       "zones": "1",
-      "voltage": "208/230V",
-      "productFamily": "TOSOT (series not confirmed)",
+      "voltage": "208-230V",
+      "productFamily": "TOSOT NOVA Central Ducted",
       "refrigerant": "R-32",
       "fuelType": "Electric (heat pump)",
-      "coolingCapacityBtu": 36000
+      "coolingCapacityBtu": 34000,
+      "modelVariant": "TU36-32AH2GDU indoor unit; matched with TU36-32GDU",
+      "heatingCapacityBtu": 34000,
+      "phase": "1",
+      "frequencyHz": 60,
+      "ratedAmps": 14,
+      "mca": 5.3,
+      "mocp": 15,
+      "cfm": 1050,
+      "widthIn": 21.25,
+      "heightIn": 48.1875,
+      "depthIn": 21.25,
+      "weightLbs": 163.1,
+      "installOrientation": "Multi-position",
+      "liquidLineIn": 0.375,
+      "suctionLineIn": 0.75
     },
     "compatibility": [],
-    "researchStatus": "conflict",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
     "notes": "AHU + HPU are bundle",
     "issues": [
-      "product_type_inferred",
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending"
+      "exact_image_unverified"
     ],
     "evidence": [
       {
@@ -8441,20 +8466,20 @@
       {
         "fieldName": "modelNumber",
         "value": "TU36-32AH2GDU",
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "TU36-32AH2GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 36K air handler is TUD36AH2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-air-handler-2-to-3-ton",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "TOSOT's live NOVA 2-3 ton air-handler page lists exact model TU36-32AH2GDU and links the combined submittal."
       },
       {
         "fieldName": "specifications",
-        "value": "withheld",
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+        "value": "official_submittal",
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc46eec016b1a2778c18f6_TU36-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "The manufacturer submittal explicitly covers TU36-32AH2GDU and provides the indoor-unit electrical, airflow, dimensional and connection data."
       }
     ]
   },
@@ -8465,11 +8490,11 @@
     "catalogSku": "TOS36KHPU",
     "slug": "tos36khpu",
     "modelNumber": "TU36-32GDU",
-    "name": "Tosot 3 Ton Outdoor Condenser",
+    "name": "TOSOT NOVA 3 Ton Outdoor Condenser",
     "brand": "Tosot",
     "category": "central-heat-pumps",
     "productType": "Outdoor unit",
-    "description": null,
+    "description": "NOVA R32 inverter central ducted heat-pump condenser for the 2-3 ton platform. The manufacturer submittal pairs model TU36-32GDU with indoor air handler TU36-32AH2GDU.",
     "btu": 36000,
     "tonnage": 3,
     "zones": "1",
@@ -8486,61 +8511,95 @@
     "image": null,
     "images": [],
     "imageVerification": "unverified",
-    "documents": [],
-    "warranty": null,
-    "conflictType": "MODEL_NOT_FOUND",
+    "documents": [
+      {
+        "kind": "submittal",
+        "title": "TOSOT TU36-32AH2GDU / TU36-32GDU Submittal Data",
+        "url": "/documents/tosot-tu36-32gdu-submittal.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-25",
+        "coverageNote": "Official seven-page matched-system submittal covering both the indoor and outdoor models."
+      }
+    ],
+    "warranty": {
+      "parts": "10 years",
+      "compressor": "10 years",
+      "conditions": "TOSOT's NOVA product page states 10-year parts and compressor coverage. Confirm registration and eligibility requirements before quoting coverage.",
+      "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-condenser-2-to-3-ton",
+      "sourceType": "manufacturer_product_page",
+      "retrievedAt": "2026-08-25"
+    },
+    "conflictType": null,
     "possibleOemMapping": null,
     "ahri": {
-      "status": "conflict",
+      "status": "requires_matched_combination",
       "referenceNumber": null,
-      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
-      "sourceUrl": "https://tosot.com/resources/",
-      "sourceType": "manufacturer",
-      "retrievedAt": "2026-08-09"
+      "matchedIndoor": "TU36-32AH2GDU",
+      "matchedOutdoor": "TU36-32GDU",
+      "note": "Published efficiency values are for the TU36-32AH2GDU / TU36-32GDU matched combination.",
+      "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-condenser-2-to-3-ton",
+      "sourceType": "manufacturer_product_page",
+      "retrievedAt": "2026-08-25"
     },
     "fieldSources": {
       "productFamily": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc46eec016b1a2778c18f6_TU36-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       },
-      "refrigerant": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+      "modelVariant": {
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc46eec016b1a2778c18f6_TU36-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       },
-      "fuelType": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
-      },
-      "coolingCapacityBtu": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+      "specifications": {
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc46eec016b1a2778c18f6_TU36-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       }
     },
     "specifications": {
       "btu": 36000,
       "zones": "1",
-      "voltage": "208/230V",
-      "productFamily": "TOSOT (series not confirmed)",
+      "voltage": "208-230V",
+      "productFamily": "TOSOT NOVA Central Ducted",
       "refrigerant": "R-32",
       "fuelType": "Electric (heat pump)",
-      "coolingCapacityBtu": 36000
+      "coolingCapacityBtu": 34000,
+      "modelVariant": "TU36-32GDU outdoor unit; matched with TU36-32AH2GDU",
+      "heatingCapacityBtu": 34000,
+      "seer2": 19,
+      "eer2": 11.7,
+      "hspf2": 8.5,
+      "cop": 3.47,
+      "phase": "1",
+      "frequencyHz": 60,
+      "ratedAmps": 14,
+      "mca": 27.7,
+      "mocp": 30,
+      "widthIn": 36.25,
+      "heightIn": 29.375,
+      "depthIn": 14.5625,
+      "weightLbs": 124.6,
+      "soundDb": 60,
+      "liquidLineIn": 0.375,
+      "suctionLineIn": 0.75,
+      "maxLineLengthFt": 98,
+      "maxHeightDifferenceFt": 49,
+      "minCoolingAmbientF": 5,
+      "maxCoolingAmbientF": 118,
+      "minHeatingAmbientF": 5
     },
     "compatibility": [],
-    "researchStatus": "conflict",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
     "notes": null,
     "issues": [
-      "product_type_inferred",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending"
+      "exact_image_unverified"
     ],
     "evidence": [
       {
@@ -8552,20 +8611,20 @@
       {
         "fieldName": "modelNumber",
         "value": "TU36-32GDU",
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "TU36-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 36K central outdoor unit is TUD36-36W2/NhG-D(U). Note TOSOT also publishes an R-410A Unix 18 outdoor unit called TU36-24WADU, which is a different unit from the sheet's TU36-32GDU. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-condenser-2-to-3-ton",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "TOSOT's live NOVA 2-3 ton condenser page lists exact model TU36-32GDU and links the combined submittal."
       },
       {
         "fieldName": "specifications",
-        "value": "withheld",
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+        "value": "official_submittal",
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc46eec016b1a2778c18f6_TU36-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "The manufacturer submittal explicitly covers TU36-32GDU and provides matched performance, outdoor electrical, dimensional, piping and operating-range data."
       }
     ]
   },
@@ -9174,11 +9233,11 @@
     "catalogSku": "TOS60KHPU",
     "slug": "tos60khpu",
     "modelNumber": "TU60-32GDU",
-    "name": "Tosot 5 Ton Outdoor Condenser",
+    "name": "TOSOT NOVA 5 Ton Outdoor Condenser",
     "brand": "Tosot",
     "category": "central-heat-pumps",
     "productType": "Outdoor unit",
-    "description": null,
+    "description": "NOVA R32 inverter central ducted heat-pump condenser for the 4-5 ton platform. The manufacturer submittal pairs model TU60-32GDU with indoor air handler TU60-32AH2GDU.",
     "btu": 60000,
     "tonnage": 5,
     "zones": "1",
@@ -9195,61 +9254,95 @@
     "image": null,
     "images": [],
     "imageVerification": "unverified",
-    "documents": [],
-    "warranty": null,
-    "conflictType": "MODEL_NOT_FOUND",
+    "documents": [
+      {
+        "kind": "submittal",
+        "title": "TOSOT TU60-32AH2GDU / TU60-32GDU Submittal Data",
+        "url": "/documents/tosot-tu60-32gdu-submittal.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-25",
+        "coverageNote": "Official seven-page matched-system submittal covering both the indoor and outdoor models."
+      }
+    ],
+    "warranty": {
+      "parts": "10 years",
+      "compressor": "10 years",
+      "conditions": "TOSOT's NOVA product page states 10-year parts and compressor coverage. Confirm registration and eligibility requirements before quoting coverage.",
+      "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-condenser-4-to-5-ton",
+      "sourceType": "manufacturer_product_page",
+      "retrievedAt": "2026-08-25"
+    },
+    "conflictType": null,
     "possibleOemMapping": null,
     "ahri": {
-      "status": "conflict",
+      "status": "requires_matched_combination",
       "referenceNumber": null,
-      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
-      "sourceUrl": "https://tosot.com/resources/",
-      "sourceType": "manufacturer",
-      "retrievedAt": "2026-08-09"
+      "matchedIndoor": "TU60-32AH2GDU",
+      "matchedOutdoor": "TU60-32GDU",
+      "note": "Published efficiency values are for the TU60-32AH2GDU / TU60-32GDU matched combination.",
+      "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-condenser-4-to-5-ton",
+      "sourceType": "manufacturer_product_page",
+      "retrievedAt": "2026-08-25"
     },
     "fieldSources": {
       "productFamily": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc474220caee4038bfdb4d_TU60-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       },
-      "refrigerant": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+      "modelVariant": {
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc474220caee4038bfdb4d_TU60-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       },
-      "fuelType": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
-      },
-      "coolingCapacityBtu": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+      "specifications": {
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc474220caee4038bfdb4d_TU60-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       }
     },
     "specifications": {
       "btu": 60000,
       "zones": "1",
-      "voltage": "208/230V",
-      "productFamily": "TOSOT (series not confirmed)",
+      "voltage": "208-230V",
+      "productFamily": "TOSOT NOVA Central Ducted",
       "refrigerant": "R-32",
       "fuelType": "Electric (heat pump)",
-      "coolingCapacityBtu": 60000
+      "coolingCapacityBtu": 54000,
+      "modelVariant": "TU60-32GDU outdoor unit; matched with TU60-32AH2GDU",
+      "heatingCapacityBtu": 54000,
+      "seer2": 19,
+      "eer2": 11.7,
+      "hspf2": 9.5,
+      "cop": 3.4,
+      "phase": "1",
+      "frequencyHz": 60,
+      "ratedAmps": 21.1,
+      "mca": 39.9,
+      "mocp": 45,
+      "widthIn": 35.4375,
+      "heightIn": 49.625,
+      "depthIn": 13.375,
+      "weightLbs": 214,
+      "soundDb": 63,
+      "liquidLineIn": 0.375,
+      "suctionLineIn": 0.75,
+      "maxLineLengthFt": 98,
+      "maxHeightDifferenceFt": 49,
+      "minCoolingAmbientF": 5,
+      "maxCoolingAmbientF": 118,
+      "minHeatingAmbientF": 5
     },
     "compatibility": [],
-    "researchStatus": "conflict",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
     "notes": "bundled with furnace and coil",
     "issues": [
-      "product_type_inferred",
       "bundle_component_has_no_standalone_price",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending"
+      "exact_image_unverified"
     ],
     "evidence": [
       {
@@ -9261,20 +9354,20 @@
       {
         "fieldName": "modelNumber",
         "value": "TU60-32GDU",
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "TU60-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 60K central outdoor unit is TUD60-48W2/NhG-D(U). TOSOT also publishes an R-410A TU60-48WADU, a different unit. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+        "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-condenser-4-to-5-ton",
+        "sourceType": "manufacturer_product_page",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "TOSOT's live NOVA 4-5 ton condenser page lists exact model TU60-32GDU and links the combined submittal."
       },
       {
         "fieldName": "specifications",
-        "value": "withheld",
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+        "value": "official_submittal",
+        "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc474220caee4038bfdb4d_TU60-32GDU.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "The manufacturer submittal explicitly covers TU60-32GDU and provides matched performance, outdoor electrical, dimensional, piping and operating-range data."
       }
     ]
   },
@@ -15216,17 +15309,33 @@
     "image": null,
     "images": [],
     "imageVerification": "unverified",
-    "documents": [],
-    "warranty": null,
-    "conflictType": "MODEL_NOT_FOUND",
+    "documents": [
+      {
+        "kind": "submittal",
+        "title": "Tosot TM09R32BKDI submittal data",
+        "url": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "localPath": "/documents/tosot-tm09r32bkdi-submittal.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-25",
+        "coverageNote": "Three-page submittal naming this exact model on every page."
+      }
+    ],
+    "warranty": {
+      "parts": "5 years",
+      "registrationRequired": false,
+      "conditions": "Limited 5-year parts warranty, per the manufacturer submittal.",
+      "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+      "sourceType": "manufacturer_submittal"
+    },
+    "conflictType": null,
     "possibleOemMapping": null,
     "ahri": {
-      "status": "conflict",
+      "status": "not_published",
       "referenceNumber": null,
-      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
-      "sourceUrl": "https://tosot.com/resources/",
-      "sourceType": "manufacturer",
-      "retrievedAt": "2026-08-09"
+      "note": "The submittal states ratings are tested to AHRI 210/240 but prints no certificate number. An indoor unit is certified as part of a matched system, so the reference belongs to the pairing.",
+      "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+      "sourceType": "manufacturer_submittal",
+      "retrievedAt": "2026-08-25"
     },
     "fieldSources": {
       "productFamily": {
@@ -15235,9 +15344,9 @@
         "retrievedAt": "2026-08-09"
       },
       "refrigerant": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       },
       "fuelType": {
         "sourceUrl": "https://tosot.com/resources/",
@@ -15245,33 +15354,203 @@
         "retrievedAt": "2026-08-09"
       },
       "coolingCapacityBtu": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "heatingCapacityBtu": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "powerSupply": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "voltageMinMax": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "dischargePattern": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "airflowCfm": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "soundPressureDbA": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "gasPipeIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "liquidPipeIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "connectionMethod": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "drainConnectionIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "dimensionsIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "netWeightLb": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "condensatePump": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "decorativeGrille": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "modelNumber": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "image": {
+        "sourceUrl": "https://tosotclima.com/product/r32-ceiling-cassette-indoor-units/",
+        "sourceType": "manufacturer_site",
+        "retrievedAt": "2026-08-25"
+      },
+      "voltage": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "phase": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "frequencyHz": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "fla": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "widthIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "depthIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "heightIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "weightLbs": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "soundDb": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "cfm": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "liquidLineIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "installOrientation": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       }
     },
     "specifications": {
       "btu": 9000,
       "productFamily": "TOSOT (series not confirmed)",
-      "refrigerant": "R-32",
+      "refrigerant": "R32",
       "fuelType": "Electric (heat pump)",
-      "coolingCapacityBtu": 9000
+      "coolingCapacityBtu": 9000,
+      "heatingCapacityBtu": 11000,
+      "powerSupply": "208-230V / 1Ph / 60Hz",
+      "voltageMinMax": "187/253 V",
+      "dischargePattern": "8-way",
+      "airflowCfm": "330/318/288/265/247/224/206",
+      "soundPressureDbA": "40/38/36/34/32/30/29",
+      "gasPipeIn": "3/8",
+      "liquidPipeIn": "1/4",
+      "connectionMethod": "Flare",
+      "drainConnectionIn": 0.98,
+      "dimensionsIn": "22.44 x 22.44 x 10.43 (W x D x H)",
+      "netWeightLb": 37.5,
+      "condensatePump": "Internal drain pump included",
+      "decorativeGrille": "Sold separately",
+      "voltage": "208-230",
+      "phase": 1,
+      "frequencyHz": 60,
+      "fla": 0.97,
+      "widthIn": 22.44,
+      "depthIn": 22.44,
+      "heightIn": 10.43,
+      "weightLbs": 37.5,
+      "soundDb": 40,
+      "cfm": 330,
+      "liquidLineIn": "1/4",
+      "suctionLineIn": "3/8",
+      "installOrientation": "Ceiling recessed"
     },
     "compatibility": [],
-    "researchStatus": "conflict",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
     "notes": null,
     "issues": [
-      "brand_inferred_from_identifier",
       "product_type_inferred",
       "category_inferred",
       "btu_inferred_from_product_name",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending"
+      "exact_image_unverified"
     ],
     "evidence": [
       {
@@ -15281,15 +15560,6 @@
         "status": "source_record"
       },
       {
-        "fieldName": "modelNumber",
-        "value": "TM09R32BKDI",
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "TM09R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 cassettes are TKH09D32AI/TKH12D32AI/TKH18D32AI/TKH24D32AI; its R-410A cassettes are TM12HBKDI/TM18HBKDI/TM24HBKDI. The sheet's TM..R32BKDI mixes both patterns and matches neither. TOSOT publishes no 9K cassette in the R-410A line at all. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
-      },
-      {
         "fieldName": "specifications",
         "value": "withheld",
         "sourceUrl": "https://tosot.com/resources/",
@@ -15297,7 +15567,37 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM09R32BKDI",
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "Tosot publishes this exact model number on its own domain with a three-page submittal. Clears the previous MODEL_NOT_FOUND flag: the model was never missing, it had simply not been looked up at the manufacturer."
+      },
+      {
+        "fieldName": "coolingCapacityBtu",
+        "value": 9000,
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM09R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "Rated cooling capacity from the manufacturer spec table."
+      },
+      {
+        "fieldName": "image",
+        "value": "/products/tosot/8-way-cassette-indoor-unit.webp",
+        "sourceUrl": "https://tosotclima.com/product/r32-ceiling-cassette-indoor-units/",
+        "sourceType": "manufacturer_site",
+        "retrievedAt": "2026-08-25",
+        "status": "conflict",
+        "notes": "Manufacturer photography for the 8-way cassette line, covering all four capacities rather than this one. Held as a reference image only: this catalog publishes exact-model imagery and does not fall back to a family shot, which tests/backend.test.ts enforces. An exact-model photo is still outstanding."
       }
+    ],
+    "referenceImages": [
+      "/products/tosot/8-way-cassette-indoor-unit.webp"
     ]
   },
   {
@@ -15328,17 +15628,33 @@
     "image": null,
     "images": [],
     "imageVerification": "unverified",
-    "documents": [],
-    "warranty": null,
-    "conflictType": "MODEL_NOT_FOUND",
+    "documents": [
+      {
+        "kind": "submittal",
+        "title": "Tosot TM12R32BKDI submittal data",
+        "url": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "localPath": "/documents/tosot-tm12r32bkdi-submittal.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-25",
+        "coverageNote": "Three-page submittal naming this exact model on every page."
+      }
+    ],
+    "warranty": {
+      "parts": "5 years",
+      "registrationRequired": false,
+      "conditions": "Limited 5-year parts warranty, per the manufacturer submittal.",
+      "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+      "sourceType": "manufacturer_submittal"
+    },
+    "conflictType": null,
     "possibleOemMapping": null,
     "ahri": {
-      "status": "conflict",
+      "status": "not_published",
       "referenceNumber": null,
-      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
-      "sourceUrl": "https://tosot.com/resources/",
-      "sourceType": "manufacturer",
-      "retrievedAt": "2026-08-09"
+      "note": "The submittal states ratings are tested to AHRI 210/240 but prints no certificate number. An indoor unit is certified as part of a matched system, so the reference belongs to the pairing.",
+      "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+      "sourceType": "manufacturer_submittal",
+      "retrievedAt": "2026-08-25"
     },
     "fieldSources": {
       "productFamily": {
@@ -15347,9 +15663,9 @@
         "retrievedAt": "2026-08-09"
       },
       "refrigerant": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       },
       "fuelType": {
         "sourceUrl": "https://tosot.com/resources/",
@@ -15357,33 +15673,203 @@
         "retrievedAt": "2026-08-09"
       },
       "coolingCapacityBtu": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "heatingCapacityBtu": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "powerSupply": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "voltageMinMax": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "dischargePattern": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "airflowCfm": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "soundPressureDbA": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "gasPipeIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "liquidPipeIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "connectionMethod": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "drainConnectionIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "dimensionsIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "netWeightLb": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "condensatePump": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "decorativeGrille": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "modelNumber": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "image": {
+        "sourceUrl": "https://tosotclima.com/product/r32-ceiling-cassette-indoor-units/",
+        "sourceType": "manufacturer_site",
+        "retrievedAt": "2026-08-25"
+      },
+      "voltage": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "phase": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "frequencyHz": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "fla": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "widthIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "depthIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "heightIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "weightLbs": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "soundDb": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "cfm": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "liquidLineIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "installOrientation": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       }
     },
     "specifications": {
       "btu": 12000,
       "productFamily": "TOSOT (series not confirmed)",
-      "refrigerant": "R-32",
+      "refrigerant": "R32",
       "fuelType": "Electric (heat pump)",
-      "coolingCapacityBtu": 12000
+      "coolingCapacityBtu": 12000,
+      "heatingCapacityBtu": 12000,
+      "powerSupply": "208-230V / 1Ph / 60Hz",
+      "voltageMinMax": "187/253 V",
+      "dischargePattern": "8-way",
+      "airflowCfm": "330/318/288/265/247/224/206",
+      "soundPressureDbA": "40/38/36/34/32/30/29",
+      "gasPipeIn": "3/8",
+      "liquidPipeIn": "1/4",
+      "connectionMethod": "Flare",
+      "drainConnectionIn": 0.98,
+      "dimensionsIn": "22.44 x 22.44 x 10.43 (W x D x H)",
+      "netWeightLb": 37.5,
+      "condensatePump": "Internal drain pump included",
+      "decorativeGrille": "Sold separately",
+      "voltage": "208-230",
+      "phase": 1,
+      "frequencyHz": 60,
+      "fla": 0.97,
+      "widthIn": 22.44,
+      "depthIn": 22.44,
+      "heightIn": 10.43,
+      "weightLbs": 37.5,
+      "soundDb": 40,
+      "cfm": 330,
+      "liquidLineIn": "1/4",
+      "suctionLineIn": "3/8",
+      "installOrientation": "Ceiling recessed"
     },
     "compatibility": [],
-    "researchStatus": "conflict",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
     "notes": null,
     "issues": [
-      "brand_inferred_from_identifier",
       "product_type_inferred",
       "category_inferred",
       "btu_inferred_from_product_name",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending"
+      "exact_image_unverified"
     ],
     "evidence": [
       {
@@ -15393,15 +15879,6 @@
         "status": "source_record"
       },
       {
-        "fieldName": "modelNumber",
-        "value": "TM12R32BKDI",
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "TM12R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH12D32AI (R-32) or TM12HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
-      },
-      {
         "fieldName": "specifications",
         "value": "withheld",
         "sourceUrl": "https://tosot.com/resources/",
@@ -15409,7 +15886,37 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM12R32BKDI",
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "Tosot publishes this exact model number on its own domain with a three-page submittal. Clears the previous MODEL_NOT_FOUND flag: the model was never missing, it had simply not been looked up at the manufacturer."
+      },
+      {
+        "fieldName": "coolingCapacityBtu",
+        "value": 12000,
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM12R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "Rated cooling capacity from the manufacturer spec table."
+      },
+      {
+        "fieldName": "image",
+        "value": "/products/tosot/8-way-cassette-indoor-unit.webp",
+        "sourceUrl": "https://tosotclima.com/product/r32-ceiling-cassette-indoor-units/",
+        "sourceType": "manufacturer_site",
+        "retrievedAt": "2026-08-25",
+        "status": "conflict",
+        "notes": "Manufacturer photography for the 8-way cassette line, covering all four capacities rather than this one. Held as a reference image only: this catalog publishes exact-model imagery and does not fall back to a family shot, which tests/backend.test.ts enforces. An exact-model photo is still outstanding."
       }
+    ],
+    "referenceImages": [
+      "/products/tosot/8-way-cassette-indoor-unit.webp"
     ]
   },
   {
@@ -15440,17 +15947,33 @@
     "image": null,
     "images": [],
     "imageVerification": "unverified",
-    "documents": [],
-    "warranty": null,
-    "conflictType": "MODEL_NOT_FOUND",
+    "documents": [
+      {
+        "kind": "submittal",
+        "title": "Tosot TM18R32BKDI submittal data",
+        "url": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "localPath": "/documents/tosot-tm18r32bkdi-submittal.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-25",
+        "coverageNote": "Three-page submittal naming this exact model on every page."
+      }
+    ],
+    "warranty": {
+      "parts": "5 years",
+      "registrationRequired": false,
+      "conditions": "Limited 5-year parts warranty, per the manufacturer submittal.",
+      "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+      "sourceType": "manufacturer_submittal"
+    },
+    "conflictType": null,
     "possibleOemMapping": null,
     "ahri": {
-      "status": "conflict",
+      "status": "not_published",
       "referenceNumber": null,
-      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
-      "sourceUrl": "https://tosot.com/resources/",
-      "sourceType": "manufacturer",
-      "retrievedAt": "2026-08-09"
+      "note": "The submittal states ratings are tested to AHRI 210/240 but prints no certificate number. An indoor unit is certified as part of a matched system, so the reference belongs to the pairing.",
+      "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+      "sourceType": "manufacturer_submittal",
+      "retrievedAt": "2026-08-25"
     },
     "fieldSources": {
       "productFamily": {
@@ -15459,9 +15982,9 @@
         "retrievedAt": "2026-08-09"
       },
       "refrigerant": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       },
       "fuelType": {
         "sourceUrl": "https://tosot.com/resources/",
@@ -15469,33 +15992,203 @@
         "retrievedAt": "2026-08-09"
       },
       "coolingCapacityBtu": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "heatingCapacityBtu": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "powerSupply": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "voltageMinMax": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "dischargePattern": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "airflowCfm": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "soundPressureDbA": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "gasPipeIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "liquidPipeIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "connectionMethod": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "drainConnectionIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "dimensionsIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "netWeightLb": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "condensatePump": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "decorativeGrille": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "modelNumber": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "image": {
+        "sourceUrl": "https://tosotclima.com/product/r32-ceiling-cassette-indoor-units/",
+        "sourceType": "manufacturer_site",
+        "retrievedAt": "2026-08-25"
+      },
+      "voltage": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "phase": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "frequencyHz": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "fla": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "widthIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "depthIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "heightIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "weightLbs": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "soundDb": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "cfm": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "liquidLineIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "installOrientation": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       }
     },
     "specifications": {
       "btu": 18000,
       "productFamily": "TOSOT (series not confirmed)",
-      "refrigerant": "R-32",
+      "refrigerant": "R32",
       "fuelType": "Electric (heat pump)",
-      "coolingCapacityBtu": 18000
+      "coolingCapacityBtu": 14400,
+      "heatingCapacityBtu": 16000,
+      "powerSupply": "208-230V / 1Ph / 60Hz",
+      "voltageMinMax": "187/253 V",
+      "dischargePattern": "8-way",
+      "airflowCfm": "383/318/288/265/247/224/206",
+      "soundPressureDbA": "43/38/35/34/32/30/29",
+      "gasPipeIn": "3/8",
+      "liquidPipeIn": "1/4",
+      "connectionMethod": "Flare",
+      "drainConnectionIn": 0.98,
+      "dimensionsIn": "22.44 x 22.44 x 10.43 (W x D x H)",
+      "netWeightLb": 37.5,
+      "condensatePump": "Internal drain pump included",
+      "decorativeGrille": "Sold separately",
+      "voltage": "208-230",
+      "phase": 1,
+      "frequencyHz": 60,
+      "fla": 0.97,
+      "widthIn": 22.44,
+      "depthIn": 22.44,
+      "heightIn": 10.43,
+      "weightLbs": 37.5,
+      "soundDb": 43,
+      "cfm": 383,
+      "liquidLineIn": "1/4",
+      "suctionLineIn": "3/8",
+      "installOrientation": "Ceiling recessed"
     },
     "compatibility": [],
-    "researchStatus": "conflict",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
     "notes": null,
     "issues": [
-      "brand_inferred_from_identifier",
       "product_type_inferred",
       "category_inferred",
       "btu_inferred_from_product_name",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending"
+      "exact_image_unverified"
     ],
     "evidence": [
       {
@@ -15505,15 +16198,6 @@
         "status": "source_record"
       },
       {
-        "fieldName": "modelNumber",
-        "value": "TM18R32BKDI",
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "TM18R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH18D32AI (R-32) or TM18HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
-      },
-      {
         "fieldName": "specifications",
         "value": "withheld",
         "sourceUrl": "https://tosot.com/resources/",
@@ -15521,7 +16205,50 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM18R32BKDI",
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "Tosot publishes this exact model number on its own domain with a three-page submittal. Clears the previous MODEL_NOT_FOUND flag: the model was never missing, it had simply not been looked up at the manufacturer."
+      },
+      {
+        "fieldName": "coolingCapacityBtu",
+        "value": 14400,
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "Rated cooling capacity from the manufacturer spec table."
+      },
+      {
+        "fieldName": "image",
+        "value": "/products/tosot/8-way-cassette-indoor-unit.webp",
+        "sourceUrl": "https://tosotclima.com/product/r32-ceiling-cassette-indoor-units/",
+        "sourceType": "manufacturer_site",
+        "retrievedAt": "2026-08-25",
+        "status": "conflict",
+        "notes": "Manufacturer photography for the 8-way cassette line, covering all four capacities rather than this one. Held as a reference image only: this catalog publishes exact-model imagery and does not fall back to a family shot, which tests/backend.test.ts enforces. An exact-model photo is still outstanding."
+      },
+      {
+        "fieldName": "coolingCapacityBtu",
+        "value": {
+          "catalogName": 18000,
+          "ratedCooling": 14400,
+          "ratedHeating": 16000
+        },
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM18R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "conflict",
+        "notes": "The catalog record is named 18000 BTU and the record's top-level btu field carries that number, but the manufacturer rates this model at 14400 BTU cooling and 16000 BTU heating. The product page prints the name figure as 'Capacity', so it currently overstates cooling. The btu field is not overridable from this file -- it comes from the inventory sheet -- so it needs correcting at source."
       }
+    ],
+    "referenceImages": [
+      "/products/tosot/8-way-cassette-indoor-unit.webp"
     ]
   },
   {
@@ -15552,17 +16279,33 @@
     "image": null,
     "images": [],
     "imageVerification": "unverified",
-    "documents": [],
-    "warranty": null,
-    "conflictType": "MODEL_NOT_FOUND",
+    "documents": [
+      {
+        "kind": "submittal",
+        "title": "Tosot TM24R32BKDI submittal data",
+        "url": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "localPath": "/documents/tosot-tm24r32bkdi-submittal.pdf",
+        "modelCoverageVerified": true,
+        "retrievedAt": "2026-08-25",
+        "coverageNote": "Three-page submittal naming this exact model on every page."
+      }
+    ],
+    "warranty": {
+      "parts": "5 years",
+      "registrationRequired": false,
+      "conditions": "Limited 5-year parts warranty, per the manufacturer submittal.",
+      "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+      "sourceType": "manufacturer_submittal"
+    },
+    "conflictType": null,
     "possibleOemMapping": null,
     "ahri": {
-      "status": "conflict",
+      "status": "not_published",
       "referenceNumber": null,
-      "note": "No AHRI reference can be assigned while the model identity is unresolved.",
-      "sourceUrl": "https://tosot.com/resources/",
-      "sourceType": "manufacturer",
-      "retrievedAt": "2026-08-09"
+      "note": "The submittal states ratings are tested to AHRI 210/240 but prints no certificate number. An indoor unit is certified as part of a matched system, so the reference belongs to the pairing.",
+      "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+      "sourceType": "manufacturer_submittal",
+      "retrievedAt": "2026-08-25"
     },
     "fieldSources": {
       "productFamily": {
@@ -15571,9 +16314,9 @@
         "retrievedAt": "2026-08-09"
       },
       "refrigerant": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       },
       "fuelType": {
         "sourceUrl": "https://tosot.com/resources/",
@@ -15581,33 +16324,203 @@
         "retrievedAt": "2026-08-09"
       },
       "coolingCapacityBtu": {
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09"
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "heatingCapacityBtu": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "powerSupply": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "voltageMinMax": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "dischargePattern": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "airflowCfm": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "soundPressureDbA": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "gasPipeIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "liquidPipeIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "connectionMethod": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "drainConnectionIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "dimensionsIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "netWeightLb": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "condensatePump": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "decorativeGrille": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "modelNumber": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "image": {
+        "sourceUrl": "https://tosotclima.com/product/r32-ceiling-cassette-indoor-units/",
+        "sourceType": "manufacturer_site",
+        "retrievedAt": "2026-08-25"
+      },
+      "voltage": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "phase": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "frequencyHz": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "fla": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "widthIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "depthIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "heightIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "weightLbs": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "soundDb": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "cfm": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "liquidLineIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "suctionLineIn": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
+      },
+      "installOrientation": {
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25"
       }
     },
     "specifications": {
       "btu": 24000,
       "productFamily": "TOSOT (series not confirmed)",
-      "refrigerant": "R-32",
+      "refrigerant": "R32",
       "fuelType": "Electric (heat pump)",
-      "coolingCapacityBtu": 24000
+      "coolingCapacityBtu": 22000,
+      "heatingCapacityBtu": 24000,
+      "powerSupply": "208-230V / 1Ph / 60Hz",
+      "voltageMinMax": "187/253 V",
+      "dischargePattern": "8-way",
+      "airflowCfm": "647/618/559/536/512/488/471",
+      "soundPressureDbA": "44/42/41/40/39/38/37",
+      "gasPipeIn": "5/8",
+      "liquidPipeIn": "1/4",
+      "connectionMethod": "Flare",
+      "drainConnectionIn": 0.98,
+      "dimensionsIn": "33.07 x 33.07 x 9.45 (W x D x H)",
+      "netWeightLb": 64,
+      "condensatePump": "Internal drain pump included",
+      "decorativeGrille": "Sold separately",
+      "voltage": "208-230",
+      "phase": 1,
+      "frequencyHz": 60,
+      "fla": 1.05,
+      "widthIn": 33.07,
+      "depthIn": 33.07,
+      "heightIn": 9.45,
+      "weightLbs": 64,
+      "soundDb": 44,
+      "cfm": 647,
+      "liquidLineIn": "1/4",
+      "suctionLineIn": "5/8",
+      "installOrientation": "Ceiling recessed"
     },
     "compatibility": [],
-    "researchStatus": "conflict",
+    "researchStatus": "verified",
     "publicationStatus": "quote_only",
     "quoteEligible": true,
     "purchaseEligible": false,
     "notes": null,
     "issues": [
-      "brand_inferred_from_identifier",
       "product_type_inferred",
       "category_inferred",
       "btu_inferred_from_product_name",
       "retail_price_unverified",
       "inventory_unverified",
-      "exact_image_unverified",
-      "manufacturer_research_pending"
+      "exact_image_unverified"
     ],
     "evidence": [
       {
@@ -15617,15 +16530,6 @@
         "status": "source_record"
       },
       {
-        "fieldName": "modelNumber",
-        "value": "TM24R32BKDI",
-        "sourceUrl": "https://tosot.com/resources/",
-        "sourceType": "manufacturer",
-        "retrievedAt": "2026-08-09",
-        "status": "conflict",
-        "notes": "TM24R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH24D32AI (R-32) or TM24HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
-      },
-      {
         "fieldName": "specifications",
         "value": "withheld",
         "sourceUrl": "https://tosot.com/resources/",
@@ -15633,7 +16537,50 @@
         "retrievedAt": "2026-08-09",
         "status": "conflict",
         "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+      },
+      {
+        "fieldName": "modelNumber",
+        "value": "TM24R32BKDI",
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "Tosot publishes this exact model number on its own domain with a three-page submittal. Clears the previous MODEL_NOT_FOUND flag: the model was never missing, it had simply not been looked up at the manufacturer."
+      },
+      {
+        "fieldName": "coolingCapacityBtu",
+        "value": 22000,
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "verified",
+        "notes": "Rated cooling capacity from the manufacturer spec table."
+      },
+      {
+        "fieldName": "image",
+        "value": "/products/tosot/8-way-cassette-indoor-unit.webp",
+        "sourceUrl": "https://tosotclima.com/product/r32-ceiling-cassette-indoor-units/",
+        "sourceType": "manufacturer_site",
+        "retrievedAt": "2026-08-25",
+        "status": "conflict",
+        "notes": "Manufacturer photography for the 8-way cassette line, covering all four capacities rather than this one. Held as a reference image only: this catalog publishes exact-model imagery and does not fall back to a family shot, which tests/backend.test.ts enforces. An exact-model photo is still outstanding."
+      },
+      {
+        "fieldName": "coolingCapacityBtu",
+        "value": {
+          "catalogName": 24000,
+          "ratedCooling": 22000,
+          "ratedHeating": 24000
+        },
+        "sourceUrl": "https://assets.tosotclima.com/portal/submittal/TM24R32BKDI.pdf",
+        "sourceType": "manufacturer_submittal",
+        "retrievedAt": "2026-08-25",
+        "status": "conflict",
+        "notes": "The catalog record is named 24000 BTU and the record's top-level btu field carries that number, but the manufacturer rates this model at 22000 BTU cooling and 24000 BTU heating. The product page prints the name figure as 'Capacity', so it currently overstates cooling. The btu field is not overridable from this file -- it comes from the inventory sheet -- so it needs correcting at source."
       }
+    ],
+    "referenceImages": [
+      "/products/tosot/8-way-cassette-indoor-unit.webp"
     ]
   },
   {

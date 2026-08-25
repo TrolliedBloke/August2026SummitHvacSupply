@@ -69,7 +69,22 @@ All four cassettes exist and are published by Tosot with submittal sheets and pr
 | TOSCAS18K | TM18R32BKDI | same page, `…/TM18R32BKDI.pdf` |
 | TOSCAS24K | TM24R32BKDI | same page, `…/TM24R32BKDI.pdf` |
 
-Manufacturer imagery is available at `assets.tosotclima.com/portal/img/product/IDU-8-way-Cassette.webp`. Confirm licensing before use.
+**Retrieved 2026-08-25.** Imagery and all four submittals are now in the repo. Three things came out of doing it:
+
+- **The photo is family imagery, and this catalog will not publish that as a product image.** Tosot ships one product shot for the whole 8-way cassette line, not one per capacity. First attempt set it as the product image; `tests/backend.test.ts` failed with *"publishes only exact-model mapped imagery and never falls back to a broad family assignment"*. That guard is correct and was left alone. The photo is held as a **reference image** with the existing "appearance may vary" caption, and `exactModelImageCoverage` stays at 56 — an exact-model photo for these four is still outstanding.
+- **`MODEL_NOT_FOUND` was wrong on all four** and is now cleared, with the submittal as evidence. Specs, warranty (5-year parts), and documentation attached.
+- **Two capacity conflicts surfaced.** `TM18R32BKDI` is rated **14,400 BTU cooling / 16,000 heating** — the record is named 18,000, which is neither. `TM24R32BKDI` is **22,000 cooling / 24,000 heating**, so its name is the heating figure. `btu` is not overridable from `research-overrides.json`, so both are queued for correction in the inventory sheet.
+
+| SKU | Model | Cooling | Heating | Dimensions (W×D×H in) | Net | Suction |
+|---|---|---|---|---|---|---|
+| TOSCAS09K | TM09R32BKDI | 9,000 | 11,000 | 22.44 × 22.44 × 10.43 | 37.5 lb | 3/8″ |
+| TOSCAS12K | TM12R32BKDI | 12,000 | 12,000 | 22.44 × 22.44 × 10.43 | 37.5 lb | 3/8″ |
+| TOSCAS18K | TM18R32BKDI | **14,400** | 16,000 | 22.44 × 22.44 × 10.43 | 37.5 lb | 3/8″ |
+| TOSCAS24K | TM24R32BKDI | **22,000** | 24,000 | 33.07 × 33.07 × 9.45 | 64 lb | 5/8″ |
+
+All four: 208–230 V / 1 Ph / 60 Hz, R32, flare connections, 1/4″ liquid, internal condensate pump, decorative grille sold separately.
+
+That last point also answers an open question elsewhere in this document: **`TOSPAN01` and `TOSPAN02` are the decorative grilles** these cassettes require, which the submittals list as a separate purchase.
 
 ### Model numbers that do not exist as written — 6 SKUs
 

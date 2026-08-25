@@ -79,7 +79,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
       .map((row) => ({
         label: FIELD_LABELS[row.field].label,
         value: `${typeof row.value === "number" ? row.value.toLocaleString("en-US") : row.value}${FIELD_LABELS[row.field].unit ? ` ${FIELD_LABELS[row.field].unit}` : ""}`,
-        source: sku.fieldSources[row.field]?.sourceUrl ?? null,
+        source: sku.fieldSources[row.field]?.sourceUrl ?? sku.fieldSources.specifications?.sourceUrl ?? null,
       })),
   })).filter((group) => group.rows.length > 0);
 

@@ -393,6 +393,7 @@ function applyResearchOverride<T extends ReturnType<typeof normalizeRow>>(produc
     fieldSources: { ...product.fieldSources, ...override.fieldSources },
     issues: product.issues.filter((issue) => {
       if (override.brand && ["brand_inferred_from_identifier", "manufacturer_research_pending"].includes(issue)) return false;
+      if (override.productType && issue === "product_type_inferred") return false;
       if (override.imageVerification === "verified" && issue === "exact_image_unverified") return false;
       if (override.researchStatus === "verified" && issue === "not_sellable_identity_conflict") return false;
       return true;
