@@ -2,6 +2,30 @@
 
 Status as of 2026-08-21, project `cswrezdcwdqnhwplmddr` (named "crm").
 
+## 2026-08-25 — 022 written, NOT YET APPLIED
+
+`022_quickbooks_inventory_sync.sql` adds `private.quickbooks_token`,
+`quickbooks_sync_runs`, three service-role-only functions, and a 15-minute
+pg_cron job for the QuickBooks inventory sync.
+
+**Not applied to any environment yet.** It was exercised against a throwaway
+local Postgres with the 001–021 dependencies stubbed out, which proves the DDL,
+the PL/pgSQL bodies and the write guarantees parse and behave — not that it
+composes with the real schema. Apply to a branch first.
+
+The file is re-runnable on purpose: `create table if not exists`, a
+`drop policy if exists` before the policy, and a guarded `cron.unschedule`
+before the `cron.schedule`. Verified by running it three times against the same
+database with `ON_ERROR_STOP=1`, with stored data and the refresh token intact
+after each.
+
+After applying, the check that matters:
+
+```sql
+select count(*) from catalog_products
+where inventory_status <> 'unknown' and purchase_eligible;  -- must be 0
+```
+
 ## 2026-08-21 — ledger repaired, 020 and 021 applied
 
 `supabase migration list` showed 005–012, 014, 018 and 019 as local-only, plus

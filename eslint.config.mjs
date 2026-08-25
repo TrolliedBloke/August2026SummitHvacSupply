@@ -9,8 +9,13 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",
+    // Build outputs from the NEXT_DIST_DIR overrides used by the release and
+    // verification scripts. tsconfig.json and .gitignore already list all
+    // three; .next-verify was missing here, so linting after a verification
+    // build reported hundreds of errors in generated code.
     ".next-e2e/**",
     ".next-release/**",
+    ".next-verify/**",
     "out/**",
     "build/**",
     "playwright-report/**",

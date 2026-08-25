@@ -18,6 +18,11 @@ import { TradePricingCard } from "@/components/home/trade-pricing-card";
 import { A2lStrip, HelpStrip } from "@/components/home/a2l-strip";
 import { SITE } from "@/lib/site";
 
+// The counter strip shows live QuickBooks counts, so the prerendered homepage
+// needs a short revalidation window to pick them up. Everything else on the
+// page is static copy.
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Bay area HVAC supply, parts, heat pumps, and pickup | Summit HVAC Supply",
   description:

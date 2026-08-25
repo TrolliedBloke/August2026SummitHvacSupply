@@ -6,6 +6,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Lock, Search, ChevronDown, Phone, ShoppingCart, MapPin } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
+import { StockChip } from "./stock-badge";
+import type { CatalogAvailability } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
 
 /* Primary nav mirrors how the counter is organized: equipment first, then the
@@ -60,7 +62,7 @@ type SearchResult = {
   btu: number;
   voltage: string;
   available: number;
-  availabilityStatus: string;
+  availabilityStatus: CatalogAvailability;
   purchaseEligible: boolean;
   href: string;
 };
@@ -215,8 +217,14 @@ function SearchField({
                 </span>
                 <span className="mt-0.5 block text-sm font-medium text-ink-1">{result.title}</span>
                 <span className="mt-0.5 block text-xs text-ink-3">
-                  {result.modelNumber}{result.btu ? ` · ${result.btu.toLocaleString()} BTU` : ""}{result.voltage ? ` · ${result.voltage}` : ""} · {result.purchaseEligible ? "available to order" : "contact for price"}
+                  {result.modelNumber}{result.btu ? ` · ${result.btu.toLocaleString()} BTU` : ""}{result.voltage ? ` · ${result.voltage}` : ""}
                 </span>
+                <StockChip
+                  status={result.availabilityStatus}
+                  available={result.available}
+                  verified={result.availabilityStatus !== "unknown"}
+                  className="mt-1"
+                />
               </Link>
             </li>
           ))}

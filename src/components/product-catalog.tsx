@@ -3,9 +3,10 @@ import { Container, Eyebrow } from "@/components/ui";
 import { SkuCatalogClient } from "@/components/sku-catalog-client";
 import { ZipGate } from "@/components/zip-gate";
 import { getCatalogFacets, getStorefrontSkus } from "@/lib/storefront/catalog";
+import { applyLiveInventoryAll, getLiveInventory } from "@/lib/storefront/live-inventory";
 
-export function ProductCatalog() {
-  const skus = getStorefrontSkus();
+export async function ProductCatalog() {
+  const skus = applyLiveInventoryAll(getStorefrontSkus(), await getLiveInventory());
   const facets = getCatalogFacets();
   return (
     <>
