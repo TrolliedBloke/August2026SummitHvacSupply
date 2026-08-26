@@ -127,7 +127,7 @@ export function ReviewForm({
       </Field>
 
       <Field label="You are a" required>
-        <Select value={audience} onChange={setAudience} options={AUDIENCES} />
+        <Select ariaLabel="You are a" value={audience} onChange={setAudience} options={AUDIENCES} />
       </Field>
 
       <Field label="Headline" hint="optional">

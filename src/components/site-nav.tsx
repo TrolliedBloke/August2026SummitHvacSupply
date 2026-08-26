@@ -25,14 +25,13 @@ const PRIMARY = [
 ];
 
 const RESOURCES = [
-  { href: "/resources", label: "Resources" },
   { href: "/tools/model-number-decoder", label: "Model number decoder" },
   { href: "/guides/bay-area-hvac-permits", label: "Permit and code guides" },
-  { href: "/bay-area-heat-pump-rebates", label: "Bay area heat pump rebates" },
+  { href: "/bay-area-heat-pump-rebates", label: "Bay Area Heat Pump Rebates" },
   { href: "/locations/newark", label: "Newark delivery and will-call" },
 ];
 
-const RESOURCE_HREFS = RESOURCES.map((r) => r.href);
+const RESOURCE_HREFS = ["/resources", ...RESOURCES.map((resource) => resource.href)];
 
 /* Shared by every row-3 entry so the run reads as an even rhythm: the spacing
    is padding carried by each item, not a fixed gap between labels of very
@@ -191,9 +190,9 @@ function SearchField({
             aria-controls={resultsId}
             aria-autocomplete="list"
             aria-activedescendant={active >= 0 ? `${resultsId}-${active}` : undefined}
-            placeholder="Part #, model #, or product"
+            placeholder="Search products, models, or SKUs"
             className="min-w-0 flex-1 bg-transparent text-sm text-ink-1 outline-none placeholder:text-ink-4"
-            aria-label="Search by SKU or model number"
+            aria-label="Search products, models, or SKUs"
           />
           {query.length > 0 && (
             <button
@@ -407,19 +406,26 @@ function ResourcesMenu({ pathname }: { pathname: string }) {
         <div
           ref={menuRef}
           role="menu"
-          className="absolute left-0 top-[calc(100%+0.5rem)] z-50 w-64 overflow-hidden rounded-(--r-md) border border-line bg-surface-1 p-1.5 shadow-[0_8px_24px_rgba(28,28,26,0.10)]"
+          aria-label="Resources"
+          className="absolute left-5 top-[calc(100%+0.5rem)] z-50 w-64 overflow-hidden rounded-(--r-md) border border-line bg-surface-1 p-1.5 shadow-[0_8px_24px_rgba(28,28,26,0.10)]"
         >
-          {RESOURCES.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              role="menuitem"
-              onClick={close}
-              className="block rounded-(--r-sm) px-3 py-2.5 text-sm font-medium text-ink-1 hover:bg-surface-2"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {RESOURCES.map((item) => {
+            const itemActive = pathname === item.href || pathname.startsWith(item.href + "/");
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                role="menuitem"
+                aria-current={itemActive ? "page" : undefined}
+                onClick={close}
+                className={`block rounded-(--r-sm) px-3 py-2.5 text-sm font-medium transition-colors hover:bg-surface-2 focus-visible:bg-surface-2 ${
+                  itemActive ? "bg-surface-2 text-brand" : "text-ink-1"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
       )}
     </div>

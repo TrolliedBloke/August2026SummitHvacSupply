@@ -339,7 +339,6 @@ function withinOneEdit(a: string, b: string): boolean {
  * "gas furnace" -- returned nothing while the products sat in the catalog.
  */
 const SEARCH_SYNONYMS: Record<string, string[]> = {
-  "heat pump": ["outdoor unit", "condenser", "hpu", "central heat pumps"],
   condenser: ["outdoor unit", "odu", "hpu"],
   furnace: ["furnaces", "fur"],
   thermostat: ["control", "controls", "controller"],
@@ -356,6 +355,195 @@ const SEARCH_SYNONYMS: Record<string, string[]> = {
   "outdoor unit": ["odu"],
 };
 
+/**
+ * Plain-language shopping intent belongs to categories, not arbitrary words.
+ * For example, expanding "heat pump" to "condenser" also matched cooling-only
+ * air conditioners. These terms make broad queries useful without making that
+ * false product claim.
+ */
+const CATEGORY_SEARCH_TERMS: Partial<Record<CatalogCategory, string[]>> = {
+  "furnaces": [
+    "heater", "heaters", "heating", "heating unit", "gas heater", "gas furnace",
+    "forced air heater", "forced air furnace", "80 percent furnace", "hvac equipment",
+  ],
+  "central-heat-pumps": [
+    "heater", "heaters", "heating", "heating unit", "heat pump", "heat pumps",
+    "central heating", "central heater", "central heat pump", "inverter heat pump",
+    "outdoor heat pump", "hvac equipment",
+  ],
+  "mini-splits": [
+    "mini split", "mini splits", "ductless", "ductless ac", "ductless air conditioner",
+    "ductless heat pump", "split ac", "split system", "wall mounted ac", "room heating",
+    "room cooling", "zone system", "zoned system", "heater", "heating", "cooling",
+    "heat pump", "air conditioner", "hvac equipment",
+  ],
+  "central-air-conditioners": [
+    "air conditioner", "air conditioners", "air conditioning", "ac unit", "cooling",
+    "central ac", "central air", "central air conditioner", "condensing unit",
+    "outdoor ac", "hvac equipment",
+  ],
+  "central-systems": [
+    "hvac", "hvac equipment", "hvac system", "heating and cooling", "central heating",
+    "central air", "complete system", "matched system",
+  ],
+  "air-handlers": [
+    "air handler", "air handlers", "ahu", "blower", "blower unit", "fan coil",
+    "indoor blower", "air handling unit", "central indoor unit", "hvac equipment",
+  ],
+  "evaporator-coils": [
+    "evaporator coil", "evaporator coils", "indoor coil", "ac coil", "cooling coil",
+    "cased coil", "a coil", "coil cabinet", "hvac equipment",
+  ],
+  "line-sets": [
+    "line set", "line sets", "refrigerant line", "refrigerant lines", "copper tubing",
+    "copper line", "ac tubing", "mini split tubing", "insulated tubing", "flare line set",
+    "hvac supplies",
+  ],
+  "cassettes": [
+    "cassette", "cassettes", "ceiling cassette", "ceiling ac", "ceiling unit",
+    "recessed ceiling unit", "cassette air conditioner", "hvac equipment",
+  ],
+  "controls": [
+    "thermostat", "thermostats", "temperature control", "wall control", "wired control",
+    "wired remote", "remote control", "controller", "hvac controls", "hvac accessories",
+  ],
+  "installation-supplies": [
+    "hvac supplies", "installation supplies", "install supplies", "hvac parts",
+    "mini split accessories", "ac accessories",
+  ],
+};
+
+type ProductSearchRule = {
+  matches: (sku: StorefrontSku) => boolean;
+  terms: string[];
+};
+
+/** Product-specific trade names that would be too broad at category level. */
+const PRODUCT_SEARCH_RULES: ProductSearchRule[] = [
+  {
+    matches: (sku) => sku.category === "mini-splits" && sku.productType === "Indoor unit",
+    terms: ["indoor head", "mini split head", "wall unit", "wall mounted unit", "indoor evaporator", "idu"],
+  },
+  {
+    matches: (sku) => sku.category === "mini-splits" && sku.productType === "Outdoor unit",
+    terms: ["mini split condenser", "ductless condenser", "outdoor condenser", "outdoor unit", "odu"],
+  },
+  {
+    matches: (sku) => sku.category === "mini-splits" && /multi-zone|\bmz\b/i.test(sku.title),
+    terms: ["multi zone", "multi room", "multiple zones", "multi head", "mz system"],
+  },
+  {
+    matches: (sku) => sku.productType === "Ceiling cassette",
+    terms: ["cassette indoor unit", "ceiling cassette unit", "cassette head"],
+  },
+  {
+    matches: (sku) => sku.productType === "Cassette panel",
+    terms: ["cassette panel", "cassette grille", "ceiling grille", "decorative panel", "cassette cover"],
+  },
+  {
+    matches: (sku) => /^BSP/.test(sku.sku),
+    terms: ["condenser pad", "equipment pad", "ac pad", "heat pump pad", "outdoor unit pad", "base pad", "mounting pad"],
+  },
+  {
+    matches: (sku) => sku.sku === "DCT414",
+    terms: ["temp gun", "temperature gun", "infrared gun", "ir gun", "laser thermometer", "non contact thermometer", "dewalt thermometer", "diagnostic tool"],
+  },
+  {
+    matches: (sku) => ["DCT415", "DCT4102"].includes(sku.sku),
+    terms: ["hvac duct", "ac duct", "duct section", "air conditioner duct"],
+  },
+  {
+    matches: (sku) => sku.sku === "NATAK78350",
+    terms: ["insulated copper", "copper coil", "copper tubing", "refrigerant tubing", "suction line", "natural air copper"],
+  },
+  {
+    matches: (sku) => /line hide|cover|channel|elbow|coupling|t-joint|straight duct/i.test(sku.title),
+    terms: ["line hide", "line cover", "line set cover", "mini split cover", "pipe cover", "slim duct", "cover system", "cover fitting"],
+  },
+  {
+    matches: (sku) => sku.sku === "LHCKITWHT",
+    terms: ["line hide kit", "line cover kit", "pipe cover kit", "slim duct kit"],
+  },
+  {
+    matches: (sku) => sku.sku === "FLEXHOSE",
+    terms: ["flexible hose", "drain hose", "condensate hose", "mini split drain"],
+  },
+  {
+    matches: (sku) => sku.sku === "DISC-30A-FUSE",
+    terms: ["disconnect", "fused disconnect", "service disconnect", "ac disconnect", "30 amp disconnect", "electrical disconnect"],
+  },
+  {
+    matches: (sku) => sku.sku === "WIRE-15FT",
+    terms: ["electrical wire", "hvac wire", "15 foot wire", "equipment wire"],
+  },
+  {
+    matches: (sku) => sku.sku === "COND-LT-1/2-100FT",
+    terms: ["liquid tight", "liquidtight", "flex conduit", "electrical conduit", "non metallic conduit", "weatherproof conduit"],
+  },
+];
+
+const UNSUPPORTED_SEARCH_INTENTS = [
+  "boiler",
+  "water heater",
+  "tankless heater",
+  "space heater",
+  "portable heater",
+  "baseboard heater",
+  "radiator",
+  "window air conditioner",
+  "portable air conditioner",
+  "humidifier",
+  "air purifier",
+];
+
+const STRICT_PRODUCT_INTENTS = [
+  "condenser pad",
+  "equipment pad",
+  "ac pad",
+  "heat pump pad",
+  "outdoor unit pad",
+  "temp gun",
+  "temperature gun",
+  "infrared gun",
+  "ir gun",
+  "laser thermometer",
+  "cassette panel",
+  "cassette grille",
+  "ceiling grille",
+  "decorative panel",
+  "indoor head",
+  "mini split head",
+  "drain hose",
+  "condensate hose",
+  "condensate pump",
+  "fused disconnect",
+  "liquid tight conduit",
+  "wired remote",
+];
+
+const INTENT_CATEGORY_PRIORITY: Array<{ terms: string[]; categories: CatalogCategory[] }> = [
+  { terms: ["heater", "heating", "heating unit", "gas heater"], categories: ["furnaces", "central-heat-pumps", "mini-splits", "central-systems"] },
+  { terms: ["heat pump"], categories: ["central-heat-pumps", "mini-splits", "central-systems"] },
+  { terms: ["air conditioner", "ac unit", "cooling"], categories: ["central-air-conditioners", "mini-splits", "central-systems"] },
+  { terms: ["thermostat", "temperature control"], categories: ["controls"] },
+  { terms: ["blower", "fan coil"], categories: ["air-handlers"] },
+  { terms: ["mini split", "mini splits", "ductless", "ductless ac"], categories: ["mini-splits", "cassettes", "installation-supplies", "line-sets"] },
+  { terms: ["copper tubing", "refrigerant line", "line set"], categories: ["line-sets", "installation-supplies"] },
+  { terms: ["ceiling cassette", "ceiling ac"], categories: ["cassettes", "mini-splits"] },
+  { terms: ["hvac supplies", "installation supplies", "hvac parts"], categories: ["installation-supplies", "line-sets", "controls"] },
+];
+
+function normalizeSearchQuery(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/\ba\/c\b/g, "air conditioner")
+    .replace(/\bmini[- ]?split(s?)\b/g, "mini split$1")
+    .replace(/\bline[- ]?set(s?)\b/g, "line set$1")
+    .replace(/\bmulti[- ]?zone\b/g, "multi zone")
+    .replace(/\s+/g, " ");
+}
+
 /** "3 ton" / "36k" / "36000 btu" all need to reach the same records. */
 function capacityTerms(sku: StorefrontSku): string[] {
   const terms: string[] = [];
@@ -365,6 +553,44 @@ function capacityTerms(sku: StorefrontSku): string[] {
   if (sku.tonnage) {
     terms.push(`${sku.tonnage} ton`, `${sku.tonnage}ton`, `${sku.tonnage} tons`);
   }
+  return terms;
+}
+
+function specificationTerms(sku: StorefrontSku): string[] {
+  const specs = sku.specifications;
+  const terms: string[] = [];
+  const addLabeled = (key: string, labels: string[]) => {
+    const value = specs[key];
+    if (value === undefined || value === "") return;
+    for (const label of labels) terms.push(`${value} ${label}`);
+  };
+
+  addLabeled("seer2", ["seer", "seer2"]);
+  addLabeled("eer2", ["eer", "eer2"]);
+  addLabeled("hspf2", ["hspf", "hspf2"]);
+  addLabeled("afue", ["afue"]);
+  addLabeled("cfm", ["cfm", "airflow"]);
+  addLabeled("airflowCfm", ["cfm", "airflow"]);
+  addLabeled("soundDb", ["db", "decibel"]);
+  addLabeled("soundPressureDbA", ["db", "decibel"]);
+  addLabeled("lineSetLengthFt", ["foot line set", "ft line set"]);
+  addLabeled("lengthFt", ["foot", "ft"]);
+
+  for (const key of [
+    "productFamily",
+    "modelVariant",
+    "fuelType",
+    "installOrientation",
+    "connectionMethod",
+    "material",
+    "dischargePattern",
+    "powerSource",
+    "temperatureRange",
+  ]) {
+    const value = specs[key];
+    if (value !== undefined && value !== "") terms.push(String(value).toLowerCase());
+  }
+  if (specs.condensatePump) terms.push("condensate pump built in drain pump");
   return terms;
 }
 
@@ -382,7 +608,21 @@ function searchHaystack(sku: StorefrontSku): string {
     if (values.some((value) => base.includes(value))) return [key, ...values];
     return [];
   });
-  return `${base} ${synonyms.join(" ")}`.trim();
+  const categoryTerms = CATEGORY_SEARCH_TERMS[sku.category] ?? [];
+  const productTerms = PRODUCT_SEARCH_RULES
+    .filter((rule) => rule.matches(sku))
+    .flatMap((rule) => rule.terms);
+  const compactTerms = [sku.refrigerant, sku.voltage]
+    .filter(Boolean)
+    .map(normalizeCode);
+  return `${base} ${compactTerms.join(" ")} ${specificationTerms(sku).join(" ")} ${synonyms.join(" ")} ${categoryTerms.join(" ")} ${productTerms.join(" ")}`.trim();
+}
+
+function intentPriority(sku: StorefrontSku, query: string): number {
+  const intent = INTENT_CATEGORY_PRIORITY.find(({ terms }) => terms.some((term) => query === term || query.includes(`${term} `) || query.endsWith(` ${term}`)));
+  if (!intent) return 0;
+  const index = intent.categories.indexOf(sku.category);
+  return index === -1 ? 0 : intent.categories.length - index;
 }
 
 /**
@@ -397,6 +637,12 @@ function hasToken(haystack: string, token: string): boolean {
   const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const pattern = /\d/.test(token) ? `(?<![\\w])${escaped}(?![\\w])` : `(?<![\\w])${escaped}`;
   return new RegExp(pattern).test(haystack);
+}
+
+function hasFuzzyToken(haystack: string, token: string): boolean {
+  if (hasToken(haystack, token)) return true;
+  if (token.length < 5) return false;
+  return (haystack.match(/[a-z0-9]+/g) ?? []).some((word) => word.length >= 4 && withinOneEdit(word, token));
 }
 
 /**
@@ -414,33 +660,37 @@ function scoreSku(sku: StorefrontSku, q: string, qCode: string): number {
   // Keep single-digit tokens: dropping the "3" from "3 ton heat pump" made
   // every tonnage match equally, so 4- and 5-ton units ranked alongside 3-ton.
   const tokens = q.split(/\s+/).filter((token) => token.length > 1 || /\d/.test(token));
-  if (tokens.length > 1 && tokens.every((token) => hasToken(haystack, token))) return 3;
+  if (tokens.length > 1 && tokens.every((token) => hasFuzzyToken(haystack, token))) return 3;
   // Partial recall, ranked below a full match. The sheet has no fuel-type
   // column, so "gas furnace" cannot match every token -- but returning nothing
   // for it is worse than returning the furnaces and letting the buyer judge.
   // This widens what search finds; it never asserts a spec the sheet lacks.
   if (tokens.length > 1) {
-    const matched = tokens.filter((token) => token.length >= 4 && hasToken(haystack, token));
+    const matched = tokens.filter((token) => token.length >= 4 && hasFuzzyToken(haystack, token));
     if (matched.length && matched.length * 2 >= tokens.length) return 2;
   }
+  if (tokens.length === 1 && hasFuzzyToken(haystack, tokens[0])) return 2;
   if (qCode.length >= 6 && codes.some((code) => withinOneEdit(code, qCode))) return 1;
   return 0;
 }
 
 export function searchStorefrontSkus(query: string, limit = 12): StorefrontSku[] {
-  const q = query.trim().toLowerCase();
+  const q = normalizeSearchQuery(query);
   if (q.length < 2) return [];
+  if (UNSUPPORTED_SEARCH_INTENTS.some((intent) => q.includes(intent))) return [];
   const qCode = normalizeCode(q);
+  const strictProductIntent = STRICT_PRODUCT_INTENTS.some((intent) => q === intent);
   return getStorefrontSkus()
-    .map((sku) => ({ sku, score: scoreSku(sku, q, qCode) }))
+    .map((sku) => ({ sku, score: scoreSku(sku, q, qCode), intent: intentPriority(sku, q) }))
     .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score || a.sku.title.localeCompare(b.sku.title))
+    .filter((item) => !strictProductIntent || item.score >= 4)
+    .sort((a, b) => b.score - a.score || b.intent - a.intent || a.sku.title.localeCompare(b.sku.title))
     .slice(0, limit)
     .map((item) => item.sku);
 }
 
 export function filterStorefrontSkus(filters: CatalogFilters): StorefrontSku[] {
-  const q = filters.q?.trim().toLowerCase() ?? "";
+  const q = filters.q ? normalizeSearchQuery(filters.q) : "";
   const qCode = q ? normalizeCode(q) : "";
   return getStorefrontSkus().filter((sku) => {
     // Same matcher as the search endpoint, so the catalog's own search box and

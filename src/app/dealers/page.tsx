@@ -196,6 +196,7 @@ export default function DealersPage() {
                     </Field>
                     <Field label="Primary service area" required>
                       <Select
+                        ariaLabel="Primary service area"
                         name="serviceArea"
                         value={serviceArea}
                         onChange={setServiceArea}
@@ -212,6 +213,7 @@ export default function DealersPage() {
                     </Field>
                     <Field label="Business type" required>
                       <Select
+                        ariaLabel="Business type"
                         name="bizType"
                         value={bizType}
                         onChange={setBizType}
@@ -231,6 +233,7 @@ export default function DealersPage() {
                   <div className="flex flex-col gap-5">
                     <Field label="Estimated monthly volume" required>
                       <Select
+                        ariaLabel="Estimated monthly volume"
                         name="volume"
                         value={volume}
                         onChange={setVolume}

@@ -208,7 +208,34 @@ describe("catalog import reconciliation", () => {
     assert.ok(hits("3 ton heat pump").length > 0, "3 ton heat pump returned nothing");
     assert.ok(hits("5 ton condenser").length > 0, "5 ton condenser returned nothing");
     assert.ok(hits("gas furnace").length > 0, "gas furnace returned nothing");
+    assert.ok(hits("heater").length > 0, "heater returned nothing");
+    assert.ok(hits("heating unit").length > 0, "heating unit returned nothing");
+    assert.ok(hits("heatr").length > 0, "one-character product typo returned nothing");
+    assert.ok(
+      searchStorefrontSkus("heater").slice(0, 4).every((sku) => ["furnaces", "central-heat-pumps"].includes(sku.category)),
+      "heater should rank dedicated heating equipment ahead of broad HVAC matches"
+    );
+    assert.ok(
+      searchStorefrontSkus("heat pump").every((sku) => sku.category !== "central-air-conditioners"),
+      "heat pump should not return cooling-only central air conditioners"
+    );
     assert.ok(hits("thermostat").includes("TCLWIREDCONT"));
+    assert.ok(hits("wired remote").includes("TCLWIREDCONT"));
+    assert.ok(hits("temp gun").includes("DCT414"));
+    assert.ok(hits("condenser pad").every((sku) => sku.startsWith("BSP")));
+    assert.ok(hits("fused disconnect").includes("DISC-30A-FUSE"));
+    assert.ok(hits("liquid tight conduit").includes("COND-LT-1/2-100FT"));
+    assert.ok(hits("line hide kit").includes("LHCKITWHT"));
+    assert.ok(hits("cassette grille").every((sku) => sku.includes("PAN")));
+    assert.ok(hits("indoor head").every((sku) => sku.includes("IDU")));
+    assert.ok(hits("mini-split").length > 0);
+    assert.ok(hits("a/c").every((sku) => searchStorefrontSkus("air conditioner").some((item) => item.sku === sku)));
+    assert.ok(hits("r410a").length > 0);
+    assert.ok(hits("115v").length > 0);
+    assert.ok(hits("19 seer").includes("TOS36KHPU"));
+    assert.ok(hits("80 afue").every((sku) => sku.endsWith("FUR")));
+    assert.equal(hits("water heater").length, 0);
+    assert.equal(hits("boiler").length, 0);
     // Exact identifiers must still win outright.
     assert.equal(hits("TSC-09HA1/I3TI22")[0], "TCL09KIDU");
     assert.equal(hits("zzzznotarealquery").length, 0);

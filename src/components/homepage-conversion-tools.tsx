@@ -185,16 +185,16 @@ export function HomepageHomeownerMiniForm() {
           <Input name="zip" required inputMode="numeric" placeholder="94560" />
         </Field>
         <Field label="Home type" required>
-          <Select value={homeType} onChange={setHomeType} placeholder="Select" options={homeTypeOptions} />
+          <Select ariaLabel="Home type" value={homeType} onChange={setHomeType} placeholder="Select" options={homeTypeOptions} />
         </Field>
         <Field label="Rooms / zones" required>
           <Input name="zones" required placeholder="1 room, whole home..." />
         </Field>
         <Field label="Existing ducts" required>
-          <Select value={ducts} onChange={setDucts} placeholder="Select" options={ductsOptions} />
+          <Select ariaLabel="Existing ducts" value={ducts} onChange={setDucts} placeholder="Select" options={ductsOptions} />
         </Field>
         <Field label="Timeline" required>
-          <Select value={timeline} onChange={setTimeline} placeholder="Select" options={timelineOptions} />
+          <Select ariaLabel="Timeline" value={timeline} onChange={setTimeline} placeholder="Select" options={timelineOptions} />
         </Field>
         <Field label="Name" required>
           <Input name="name" required autoComplete="name" placeholder="Your name" />
