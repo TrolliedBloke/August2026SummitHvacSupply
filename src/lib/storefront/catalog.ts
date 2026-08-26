@@ -754,5 +754,32 @@ export function getSeriesPriceRange(seriesSlug: string): SeriesPriceRange | null
   return prices.length ? { low: Math.min(...prices), high: Math.max(...prices), count: prices.length } : null;
 }
 
+/**
+ * A representative product photo for a category, or null when the category has
+ * no exact-model imagery yet (line sets and controls, today).
+ *
+ * Category tiles shipped with generic line-art sketches, which read as clip art
+ * next to a real equipment photo. Every image returned here is one the catalog
+ * has verified against a specific model, so a tile never shows a unit Summit
+ * does not carry. Callers fall back to the sketch when this returns null --
+ * that is a real state, not a failure.
+ *
+ * Two verified photos are required before a category gets one. A single
+ * verified image among nineteen products is not representative of the
+ * category, and the one such case here (installation supplies) resolved to a
+ * DeWalt distance-to-spot spec diagram on a record already flagged as
+ * mis-corrected -- a technical drawing standing in for pads, fittings and
+ * conduit. The sketch is the more honest picture until coverage improves.
+ */
+const MIN_VERIFIED_IMAGES_FOR_HERO = 2;
+
+export function getCategoryHeroImage(category: CatalogCategory): string | null {
+  const verified = getStorefrontSkus().filter(
+    (sku) => sku.category === category && sku.imageExactModel && sku.image
+  );
+  if (verified.length < MIN_VERIFIED_IMAGES_FOR_HERO) return null;
+  return verified[0].image;
+}
+
 export function documentHref(doc: SkuDocument): string { return `/api/documents/${doc.id}`; }
 export function productHref(sku: Pick<StorefrontSku, "sku">): string { return `/products/sku/${skuSlug(sku.sku)}`; }
