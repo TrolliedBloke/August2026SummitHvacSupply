@@ -11,6 +11,7 @@ import {
 } from "../src/lib/backend/math";
 import { createDemoOperationsData } from "../src/lib/backend/mock-data";
 import { checkoutSchema } from "../src/lib/backend/schemas";
+import { resolveUnitPrice } from "../src/lib/backend/pricing";
 import { fulfillmentWindows, isFulfillmentWindowAvailable } from "../src/lib/backend/fulfillment";
 import { createQuoteRequest, roleCanAccessAccount } from "../src/lib/backend/services";
 import { categorySitemapEntries, productSitemapEntries, renderSitemapIndex } from "../src/lib/seo/sitemaps";
@@ -407,5 +408,38 @@ describe("seeded quote-to-order-to-invoice flow", () => {
     assert.equal(order.total, quote.total);
     assert.equal(invoice.total, quote.total);
     assert.equal(invoiceBalance(invoice), invoice.balance);
+  });
+});
+
+describe("trade pricing fallback", () => {
+  // catalog_product_trade_pricing is empty by design until the counter loads
+  // real contractor pricing, so "no trade price on file" is the normal path,
+  // and it must land on retail. Falling to 0 would hand a dealer free
+  // equipment; the storefront projection hardcodes dealerPrice to null, which
+  // is exactly why this branch went unexercised for so long.
+  it("charges retail when no trade price is on file", () => {
+    assert.equal(resolveUnitPrice(true, undefined, 2500), 2500);
+  });
+
+  it("never treats a zero or negative trade price as free", () => {
+    assert.equal(resolveUnitPrice(true, 0, 2500), 2500);
+    assert.equal(resolveUnitPrice(true, -10, 2500), 2500);
+  });
+
+  it("ignores a non-finite trade price", () => {
+    assert.equal(resolveUnitPrice(true, Number.NaN, 2500), 2500);
+    assert.equal(resolveUnitPrice(true, Number.POSITIVE_INFINITY, 2500), 2500);
+  });
+
+  it("applies a real trade price for a trade buyer", () => {
+    assert.equal(resolveUnitPrice(true, 1875, 2500), 1875);
+  });
+
+  it("charges a retail buyer list even when a trade price exists", () => {
+    assert.equal(resolveUnitPrice(false, 1875, 2500), 2500);
+  });
+
+  it("never charges a trade buyer above list on a bad trade row", () => {
+    assert.equal(resolveUnitPrice(true, 9999, 2500), 2500);
   });
 });
