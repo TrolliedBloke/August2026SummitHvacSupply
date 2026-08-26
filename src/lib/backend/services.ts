@@ -77,12 +77,26 @@ export type SeriesBackendSummary = {
   documents: OperationsData["skuDocuments"];
 };
 
+/**
+ * Whether Supabase credentials are configured. This says nothing about where
+ * any particular figure came from -- see getOperationsOverview.
+ */
 export function getOperationsMode(): "supabase" | "seeded" {
   return hasSupabaseEnv() ? "supabase" : "seeded";
 }
 
 export async function getOperationsOverview(): Promise<OperationsOverview> {
-  return buildOperationsOverview(data);
+  // `data` is createDemoOperationsData(). Every KPI below is computed from that
+  // fixture, so the mode reported to the admin dashboard is "seeded" whatever
+  // the environment says.
+  //
+  // It previously reported getOperationsMode(), which is true only of the env
+  // vars: with Supabase configured the dashboard rendered a green "Supabase
+  // connected" badge above numbers that were entirely fabricated. Staff reading
+  // available units, reserved orders or open invoice balance would have been
+  // reading the fixture. Real account-backed operations queries are not
+  // implemented yet; until they are, this must say seeded.
+  return buildOperationsOverview(data, "seeded");
 }
 
 /**
@@ -474,7 +488,10 @@ export function resetSeededDemo() {
   return createDemoOperationsData();
 }
 
-function buildOperationsOverview(source: OperationsData): OperationsOverview {
+function buildOperationsOverview(
+  source: OperationsData,
+  mode: OperationsOverview["mode"]
+): OperationsOverview {
   const inventorySummaries = summarizeInventory(source.inventoryLots);
   const inventory = inventorySummaries.map((summary) => {
     const sku = source.skus.find((candidate) => candidate.id === summary.skuId)!;
@@ -491,7 +508,7 @@ function buildOperationsOverview(source: OperationsData): OperationsOverview {
     .filter((invoice) => invoice.status === "open" || invoice.status === "overdue" || invoice.status === "partial")
     .reduce((sum, invoice) => sum + invoiceBalance(invoice), 0);
   return {
-    mode: getOperationsMode(),
+    mode,
     kpis: {
       availableUnits: inventory.reduce((sum, item) => sum + item.available, 0),
       reservedUnits: inventory.reduce((sum, item) => sum + item.reserved, 0),

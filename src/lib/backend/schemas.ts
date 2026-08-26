@@ -16,17 +16,25 @@ export const quoteRequestSchema = z.object({
   lines: z.array(quoteRequestLineSchema).max(100).default([]),
 });
 
+/**
+ * Every string is bounded. These fields land in Postgres text columns through a
+ * service-role write on an unauthenticated endpoint, so without an upper bound
+ * a single request could store an arbitrarily large row. quoteRequestSchema
+ * above already caps its fields; these did not.
+ *
+ * Limits are sized to the field: a licence number is short, notes are prose.
+ */
 export const dealerApplicationSchema = z.object({
-  company: z.string().min(2),
-  contactName: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().min(7),
-  licenseNumber: z.string().optional(),
-  serviceArea: z.string().optional(),
-  businessType: z.string().optional(),
-  monthlyVolume: z.string().optional(),
-  brands: z.string().optional(),
-  notes: z.string().optional(),
+  company: z.string().min(2).max(200),
+  contactName: z.string().min(2).max(120),
+  email: z.string().email().max(254),
+  phone: z.string().min(7).max(40),
+  licenseNumber: z.string().max(80).optional(),
+  serviceArea: z.string().max(500).optional(),
+  businessType: z.string().max(120).optional(),
+  monthlyVolume: z.string().max(120).optional(),
+  brands: z.string().max(500).optional(),
+  notes: z.string().max(5000).optional(),
 });
 
 export const checkoutSchema = z.object({
@@ -99,9 +107,10 @@ export const cartSnapshotSchema = z.object({
     .max(50),
 });
 
+/** Bounded for the same reason as dealerApplicationSchema above. */
 export const contactRequestSchema = z.object({
-  topic: z.string().min(1),
-  name: z.string().min(2),
-  email: z.string().email(),
-  message: z.string().min(4),
+  topic: z.string().min(1).max(120),
+  name: z.string().min(2).max(120),
+  email: z.string().email().max(254),
+  message: z.string().min(4).max(5000),
 });
