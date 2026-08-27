@@ -1,0 +1,21 @@
+# Reference study: REI
+
+Sources studied: https://www.rei.com/ and https://www.rei.com/c/hiking-boots on August 26, 2026.
+
+Boundary: this study extracts layout principles only. No REI image, icon, logo, or copy is reused.
+
+| Observation | What it implies for Summit |
+| --- | --- |
+| Product and category imagery is treated as a system, not as one-off art. Grid images sit on light neutral fields, objects are centered, crops are generous, and object scale stays in a narrow band. Items generally read around two-thirds to four-fifths of the image frame with even margins. | Category fallback art should be normalized before use: centered object, consistent margin, same stroke weight, and no one drawing feeling closer, darker, or heavier than the next. Product images must remain exact-model verified photos only. |
+| Category tiles separate image and label clearly. The image area does the recognition work; the label sits close by with enough padding to avoid feeling cramped. Tiles are simple and regular rather than decorative. | Summit can keep its compact horizontal trade-counter tile: small image well, label/spec copy to the right, clear card border, no decorative background. The image should support scan speed, not carry the page. |
+| The benefit/trust row uses a short set of repeated units with similarly sized icons, restrained line weight, and compact text. Icons are subordinate to the trust claim, not illustrations in their own right. | Summit’s proof row should stay four equal cards. Icon size should remain roughly button/icon scale, with consistent stroke weight. Since the current direction is green icons, use the Summit green only as a small affordance/accent, with text staying ink. |
+| Product cards lead with the product identity, keep supporting metadata close, then expose price and review confidence in a predictable order. On the hiking-boots category page, product identity, price, deal state, rating/review count, and compare affordance repeat consistently across results. | HVAC cards should be even more structured: brand/OEM model/SKU first, then capacity/voltage/refrigerant/type as a scannable spec line, then verified availability and price/quote state. Contractors compare specs before emotion. |
+| Rhythm is regular: a filter rail plus product results, repeated card widths, and moderate gaps. Homepage category bands use repeated image tiles with enough section spacing that each band reads as a separate decision. | Summit should keep the 8-category desktop grid at four columns with tight but clear gaps. Section spacing can be quieter than REI because search, stock, and branch fulfillment matter more than seasonal merchandising. |
+| REI benefits from lifestyle and promo energy because it sells consumer outdoor aspiration. Some homepage bands use campaign photography, seasonal offers, and member storytelling. | Summit should deliberately diverge. Lifestyle photography, promo banners, and aspirational copy do not transfer. The brand is the counter extended: stock, exact model identity, pickup, delivery, and compliance are the value. |
+| REI’s consistency makes mixed content feel intentional when assets share crop, background, and hierarchy. Mixed realism and illustration is risky when those rules drift. | Summit’s current mix, six real category photos and two fallback drawings, will always feel less unified than an all-photo or all-line-art system. Do not solve that with generated product photos; use verified photos or category-level icons only. |
+
+## Direction For Summit
+
+Use consistent category-level technical icons where verified category photography is missing. Keep each icon generic, green-line, centered, and transparent over the card surface. Do not depict SKU-specific equipment, do not add labels or logos, and never use generated art where the UI promises manufacturer media verified against an exact model.
+
+The better long-term system is all verified photos for product-heavy categories and owner-shot real photos for line sets and installation supplies. Until those camera assets exist, the most coherent short-term option is all line art for category tiles because it is consistent, honest, and on-brand for a trade counter.

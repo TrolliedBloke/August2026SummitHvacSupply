@@ -35,7 +35,7 @@ quantity** changes hourly, so it is read at request time from
 (`src/lib/storefront/live-inventory.ts`), cached for 60 seconds.
 
 The overlay writes availability fields only. It cannot set `purchase_eligible`,
-and neither can the sync: `quickbooks_apply_inventory()` (migration 022) accepts
+and neither can the sync: `quickbooks_apply_inventory()` (migration 024) accepts
 a payload but will only ever move `inventory_quantity` and `inventory_status`.
 Knowing a quantity is a fact about the shelf; selling it self-service is a
 separate decision that stays with a person. If the database is unreachable the

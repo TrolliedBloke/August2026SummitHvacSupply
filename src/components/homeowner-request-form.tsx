@@ -97,6 +97,7 @@ export function HomeownerRequestForm() {
         </Field>
         <Field label="Home type" required>
           <Select
+            ariaLabel="Home type"
             value={homeType}
             onChange={setHomeType}
             placeholder="Select home type"
@@ -113,6 +114,7 @@ export function HomeownerRequestForm() {
         </Field>
         <Field label="Existing ducts" required>
           <Select
+            ariaLabel="Existing ducts"
             value={ducts}
             onChange={setDucts}
             placeholder="Select one"
@@ -125,6 +127,7 @@ export function HomeownerRequestForm() {
         </Field>
         <Field label="Interested in rebates" required>
           <Select
+            ariaLabel="Interested in rebates"
             value={rebates}
             onChange={setRebates}
             placeholder="Select one"
@@ -137,6 +140,7 @@ export function HomeownerRequestForm() {
         </Field>
         <Field label="Timeline" required>
           <Select
+            ariaLabel="Timeline"
             value={timeline}
             onChange={setTimeline}
             placeholder="Select timeline"

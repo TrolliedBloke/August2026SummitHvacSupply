@@ -71,7 +71,7 @@ sync writes `inventory_quantity` and `inventory_status` and nothing else, and
    supabase secrets set SITE_REVALIDATE_URL=https://www.summithvacsupply.com/api/inventory/revalidate CRON_SECRET=...
    supabase functions deploy quickbooks-inventory-sync
    ```
-4. Seed the refresh token once (migration `022` creates the table):
+4. Seed the refresh token once (migration `024` creates the table):
    ```sql
    insert into private.quickbooks_token (refresh_token) values ('<refresh-token>');
    ```

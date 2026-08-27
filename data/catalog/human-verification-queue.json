@@ -1,17 +1,18 @@
 {
   "generatedAt": "2026-08-09",
-  "totalOpen": 53,
+  "totalOpen": 45,
   "byType": {
+    "CAPACITY_NAMING_CONFLICT": 0,
     "INVENTORY_CONFLICT": 2,
-    "MODEL_NOT_FOUND": 20,
-    "WAREHOUSE_MODEL_VERIFICATION": 5,
+    "MANUFACTURER_IDENTITY_UNCERTAIN": 22,
+    "MODEL_NOT_FOUND": 13,
     "PURCHASING_RECORD_VERIFICATION": 3,
-    "MANUFACTURER_IDENTITY_UNCERTAIN": 23
+    "WAREHOUSE_MODEL_VERIFICATION": 5
   },
   "byPriority": {
-    "HIGH": 27,
-    "MEDIUM": 3,
-    "LOW": 23
+    "HIGH": 20,
+    "LOW": 22,
+    "MEDIUM": 3
   },
   "items": [
     {
@@ -155,34 +156,6 @@
       "status": "OPEN"
     },
     {
-      "sku": "TOS36KAHU",
-      "manufacturer": "Tosot",
-      "model": "TU36-32AH2GDU",
-      "name": "Tosot 3 Ton Air Handler",
-      "productType": "Air handler",
-      "conflictType": "MODEL_NOT_FOUND",
-      "priority": "HIGH",
-      "whereToCheck": "Rating plate on the unit, plus the purchase order / supplier invoice",
-      "actionRequired": "Read the model number on the rating plate; if it matches our sheet, ask the supplier which product line it belongs to",
-      "possibleValue": "",
-      "whyConflicted": "TU36-32AH2GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 36K air handler is TUD36AH2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-c",
-      "status": "OPEN"
-    },
-    {
-      "sku": "TOS36KHPU",
-      "manufacturer": "Tosot",
-      "model": "TU36-32GDU",
-      "name": "Tosot 3 Ton Outdoor Condenser",
-      "productType": "Outdoor unit",
-      "conflictType": "MODEL_NOT_FOUND",
-      "priority": "HIGH",
-      "whereToCheck": "Rating plate on the unit, plus the purchase order / supplier invoice",
-      "actionRequired": "Read the model number on the rating plate; if it matches our sheet, ask the supplier which product line it belongs to",
-      "possibleValue": "",
-      "whyConflicted": "TU36-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 36K central outdoor unit is TUD36-36W2/NhG-D(U). Note TOSOT also publishes an R-410A Unix 18 outdoor unit called TU36-24WADU, which is a different unit from the sheet's TU36-32GDU. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a fam",
-      "status": "OPEN"
-    },
-    {
       "sku": "TOS48KAHU",
       "manufacturer": "Tosot",
       "model": "TUD48-R32GDU",
@@ -222,76 +195,6 @@
       "actionRequired": "Read the model number on the rating plate; if it matches our sheet, ask the supplier which product line it belongs to",
       "possibleValue": "",
       "whyConflicted": "TUD60-R32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 60K air handler is TUD60AH2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-ch",
-      "status": "OPEN"
-    },
-    {
-      "sku": "TOS60KHPU",
-      "manufacturer": "Tosot",
-      "model": "TU60-32GDU",
-      "name": "Tosot 5 Ton Outdoor Condenser",
-      "productType": "Outdoor unit",
-      "conflictType": "MODEL_NOT_FOUND",
-      "priority": "HIGH",
-      "whereToCheck": "Rating plate on the unit, plus the purchase order / supplier invoice",
-      "actionRequired": "Read the model number on the rating plate; if it matches our sheet, ask the supplier which product line it belongs to",
-      "possibleValue": "",
-      "whyConflicted": "TU60-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 60K central outdoor unit is TUD60-48W2/NhG-D(U). TOSOT also publishes an R-410A TU60-48WADU, a different unit. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate o",
-      "status": "OPEN"
-    },
-    {
-      "sku": "TOSCAS09K",
-      "manufacturer": "Tosot",
-      "model": "TM09R32BKDI",
-      "name": "Cassette 9000 BTU",
-      "productType": "Ceiling cassette",
-      "conflictType": "MODEL_NOT_FOUND",
-      "priority": "HIGH",
-      "whereToCheck": "Rating plate on the unit, plus the purchase order / supplier invoice",
-      "actionRequired": "Read the model number on the rating plate; if it matches our sheet, ask the supplier which product line it belongs to",
-      "possibleValue": "",
-      "whyConflicted": "TM09R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 cassettes are TKH09D32AI/TKH12D32AI/TKH18D32AI/TKH24D32AI; its R-410A cassettes are TM12HBKDI/TM18HBKDI/TM24HBKDI. The sheet's TM..R32BKDI mixes both patterns and matches neither. TOSOT publishes no 9K cassette in the R-410A line at all. No specifications, warranty or documents are attached to this record, beca",
-      "status": "OPEN"
-    },
-    {
-      "sku": "TOSCAS12K",
-      "manufacturer": "Tosot",
-      "model": "TM12R32BKDI",
-      "name": "Cassette 12000 BTU",
-      "productType": "Ceiling cassette",
-      "conflictType": "MODEL_NOT_FOUND",
-      "priority": "HIGH",
-      "whereToCheck": "Rating plate on the unit, plus the purchase order / supplier invoice",
-      "actionRequired": "Read the model number on the rating plate; if it matches our sheet, ask the supplier which product line it belongs to",
-      "possibleValue": "",
-      "whyConflicted": "TM12R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH12D32AI (R-32) or TM12HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Ne",
-      "status": "OPEN"
-    },
-    {
-      "sku": "TOSCAS18K",
-      "manufacturer": "Tosot",
-      "model": "TM18R32BKDI",
-      "name": "Cassette 18000 BTU",
-      "productType": "Ceiling cassette",
-      "conflictType": "MODEL_NOT_FOUND",
-      "priority": "HIGH",
-      "whereToCheck": "Rating plate on the unit, plus the purchase order / supplier invoice",
-      "actionRequired": "Read the model number on the rating plate; if it matches our sheet, ask the supplier which product line it belongs to",
-      "possibleValue": "",
-      "whyConflicted": "TM18R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH18D32AI (R-32) or TM18HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Ne",
-      "status": "OPEN"
-    },
-    {
-      "sku": "TOSCAS24K",
-      "manufacturer": "Tosot",
-      "model": "TM24R32BKDI",
-      "name": "Cassette 24000 BTU",
-      "productType": "Ceiling cassette",
-      "conflictType": "MODEL_NOT_FOUND",
-      "priority": "HIGH",
-      "whereToCheck": "Rating plate on the unit, plus the purchase order / supplier invoice",
-      "actionRequired": "Read the model number on the rating plate; if it matches our sheet, ask the supplier which product line it belongs to",
-      "possibleValue": "",
-      "whyConflicted": "TM24R32BKDI does not appear anywhere in TOSOT's Technical Resource Center. Published equivalents are TKH24D32AI (R-32) or TM24HBKDI (R-410A). The sheet's identifier matches neither. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Ne",
       "status": "OPEN"
     },
     {
@@ -534,17 +437,17 @@
     },
     {
       "sku": "DCT414",
-      "manufacturer": "Unbranded",
-      "model": null,
-      "name": "Air Conditioner Duct Model 414",
-      "productType": "Accessory",
-      "conflictType": "MANUFACTURER_IDENTITY_UNCERTAIN",
+      "manufacturer": "DEWALT",
+      "model": "DCT414",
+      "name": "DEWALT 12V MAX Cordless IR Thermometer",
+      "productType": "Infrared thermometer",
+      "conflictType": null,
       "priority": "LOW",
-      "whereToCheck": "Supplier invoice or packaging for the brand and part number",
-      "actionRequired": "Supply the manufacturer and part number from the supplier invoice",
-      "possibleValue": "",
-      "whyConflicted": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and a",
-      "status": "OPEN"
+      "whereToCheck": "Official DEWALT DCT414 instruction manual",
+      "actionRequired": "None — identity verified from manufacturer documentation",
+      "possibleValue": "DEWALT DCT414",
+      "whyConflicted": "Resolved: the official DEWALT instruction manual identifies DCT414 as a 12V MAX cordless infrared thermometer, superseding the inventory-generated duct name.",
+      "status": "RESOLVED"
     },
     {
       "sku": "DCT415",

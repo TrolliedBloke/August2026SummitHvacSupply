@@ -14,7 +14,7 @@ export default function ReturnsPage() {
       eyebrow="Policies"
       title="Returns & refunds"
       intro={PURCHASE.returnsDetail}
-      updated="August 2, 2026"
+      updated="August 24, 2026"
     >
       <PolicySection heading="The short version">
         <PolicyList
@@ -24,8 +24,16 @@ export default function ReturnsPage() {
               return unopened equipment for a full refund.
             </>,
             <>
-              Opened or special-order items may carry a{" "}
-              <strong className="font-medium text-ink-1">15% restocking fee</strong>.
+              Opened but uninstalled equipment is refunded less a{" "}
+              <strong className="font-medium text-ink-1">
+                {PURCHASE.restockingFeePercent}% restocking fee
+              </strong>
+              .
+            </>,
+            <>
+              Special-order items are{" "}
+              <strong className="font-medium text-ink-1">not returnable</strong>{" "}
+              unless they arrive defective or damaged.
             </>,
             <>
               Damaged in transit? We replace it free, but you must note the
@@ -60,7 +68,7 @@ export default function ReturnsPage() {
             </>,
             <>
               <strong className="font-medium text-ink-1">Concealed damage:</strong>{" "}
-              report within 5 business days of delivery with photos and the
+              report within {PURCHASE.concealedDamageDays} business days of delivery with photos and the
               serial number. Carriers routinely deny concealed-damage claims
               filed later than this, and that denial passes through to you.
             </>,
@@ -85,7 +93,7 @@ export default function ReturnsPage() {
             </>,
             <>
               <strong className="font-medium text-ink-1">Opened but uninstalled equipment:</strong>{" "}
-              refund less a 15% restocking fee, provided the unit is complete,
+              refund less a {PURCHASE.restockingFeePercent}% restocking fee, provided the unit is complete,
               undamaged, and never charged, wired, or mounted.
             </>,
             <>
@@ -121,6 +129,69 @@ export default function ReturnsPage() {
               energized. A failed board is a warranty claim.
             </>,
             <>Items returned after 30 days without prior authorization.</>,
+          ]}
+        />
+      </PolicySection>
+
+      <PolicySection heading="What a refund covers">
+        <p>
+          A refund returns the price of the goods and the sales tax charged on
+          them. What happens to the delivery charge depends on whose mistake it
+          was, and it is worth stating plainly rather than discovering at the
+          end.
+        </p>
+        <PolicyList
+          items={[
+            <>
+              <strong className="font-medium text-ink-1">Our error</strong>{" "}
+              (wrong item, damaged, dead on arrival, or not as listed): full
+              refund including the original delivery or freight charge, no
+              restocking fee, and we cover the return freight.
+            </>,
+            <>
+              <strong className="font-medium text-ink-1">Change of mind</strong>{" "}
+              or an ordering mistake: the goods and tax are refunded. The
+              original delivery or freight charge is not, because that service
+              was already performed. Will-call pickups have no such charge.
+            </>,
+            <>
+              <strong className="font-medium text-ink-1">Trade accounts on net terms</strong>{" "}
+              are settled by credit memo against the account rather than a card
+              refund, since there is no card to refund to.
+            </>,
+          ]}
+        />
+      </PolicySection>
+
+      <PolicySection heading="Cancelling before it ships">
+        <p>
+          Cancelling is always cheaper than returning, for both of us. Call as
+          soon as you know.
+        </p>
+        <PolicyList
+          items={[
+            <>
+              <strong className="font-medium text-ink-1">Before it leaves the warehouse:</strong>{" "}
+              cancelled in full, refunded in full, no fee.
+            </>,
+            <>
+              <strong className="font-medium text-ink-1">After it is loaded or in transit:</strong>{" "}
+              it becomes a return under the terms above, including the return
+              freight, because the shipment is already moving.
+            </>,
+            <>
+              <strong className="font-medium text-ink-1">Special orders:</strong>{" "}
+              once we place the order with the manufacturer it usually cannot be
+              cancelled. We will tell you at the point of no return, before it
+              passes, rather than after.
+            </>,
+            <>
+              <strong className="font-medium text-ink-1">Refused or undeliverable freight:</strong>{" "}
+              a shipment refused at the door without a damage notation, or
+              returned because no one could receive it, is treated as a
+              change-of-mind return: outbound and return freight are yours, plus
+              the restocking fee if the unit came back opened.
+            </>,
           ]}
         />
       </PolicySection>
@@ -166,7 +237,25 @@ export default function ReturnsPage() {
             </>,
             <>
               We issue an RMA number and tell you whether to ship it back or
-              bring it to will-call at {SITE.address.full}.
+              bring it to will-call at {SITE.address.full}. Write the RMA
+              number on the outside of the packaging, not on the equipment
+              carton itself.
+            </>,
+            <>
+              An RMA is valid for{" "}
+              <strong className="font-medium text-ink-1">
+                {PURCHASE.rmaValidDays} days
+              </strong>
+              . The unit needs to be back with us, or dropped at will-call,
+              inside that window. Ask for an extension if the job schedule makes
+              that tight; we would rather re-date it than refuse it at the dock.
+            </>,
+            <>
+              Returns are inspected on arrival. A unit that comes back
+              incomplete, used, or damaged in return transit is refunded at what
+              it is actually worth to us, or refused and returned to you at your
+              cost. Pack it the way it arrived — the original crate and pallet
+              exist for a reason.
             </>,
             <>
               Refunds are issued to the original payment method within 5–10

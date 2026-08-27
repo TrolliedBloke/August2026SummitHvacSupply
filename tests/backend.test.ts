@@ -11,6 +11,7 @@ import {
 } from "../src/lib/backend/math";
 import { createDemoOperationsData } from "../src/lib/backend/mock-data";
 import { checkoutSchema } from "../src/lib/backend/schemas";
+import { resolveUnitPrice } from "../src/lib/backend/pricing";
 import { fulfillmentWindows, isFulfillmentWindowAvailable } from "../src/lib/backend/fulfillment";
 import { createQuoteRequest, roleCanAccessAccount } from "../src/lib/backend/services";
 import { categorySitemapEntries, productSitemapEntries, renderSitemapIndex } from "../src/lib/seo/sitemaps";
@@ -143,13 +144,13 @@ describe("catalog import reconciliation", () => {
     const skus = getStorefrontSkus();
     const branded = skus.filter((sku) => sku.brand !== "Unbranded");
     const verified = branded.filter((sku) => sku.imageVerified);
-    assert.equal(branded.length, 77);
-    assert.equal(verified.length, 55);
+    assert.equal(branded.length, 78);
+    assert.equal(verified.length, 56);
     assert.ok(verified.every((sku) => sku.imageExactModel && sku.images.length > 0));
     assert.ok(branded.filter((sku) => !sku.imageVerified).every((sku) => sku.images.length === 0));
     assert.ok(skus.filter((sku) => sku.brand === "Unbranded").every((sku) => !sku.imageVerified && sku.images.length === 0));
-    assert.equal(catalogReconciliation.manufacturerImageCoverage, 55);
-    assert.equal(catalogReconciliation.exactModelImageCoverage, 55);
+    assert.equal(catalogReconciliation.manufacturerImageCoverage, 56);
+    assert.equal(catalogReconciliation.exactModelImageCoverage, 56);
     for (const image of new Set(verified.flatMap((sku) => sku.images))) {
       const bytes = await readFile(new URL(`../public${image}`, import.meta.url));
       assert.ok(bytes.length > 1000, `${image} is missing or unexpectedly small`);
@@ -208,7 +209,34 @@ describe("catalog import reconciliation", () => {
     assert.ok(hits("3 ton heat pump").length > 0, "3 ton heat pump returned nothing");
     assert.ok(hits("5 ton condenser").length > 0, "5 ton condenser returned nothing");
     assert.ok(hits("gas furnace").length > 0, "gas furnace returned nothing");
+    assert.ok(hits("heater").length > 0, "heater returned nothing");
+    assert.ok(hits("heating unit").length > 0, "heating unit returned nothing");
+    assert.ok(hits("heatr").length > 0, "one-character product typo returned nothing");
+    assert.ok(
+      searchStorefrontSkus("heater").slice(0, 4).every((sku) => ["furnaces", "central-heat-pumps"].includes(sku.category)),
+      "heater should rank dedicated heating equipment ahead of broad HVAC matches"
+    );
+    assert.ok(
+      searchStorefrontSkus("heat pump").every((sku) => sku.category !== "central-air-conditioners"),
+      "heat pump should not return cooling-only central air conditioners"
+    );
     assert.ok(hits("thermostat").includes("TCLWIREDCONT"));
+    assert.ok(hits("wired remote").includes("TCLWIREDCONT"));
+    assert.ok(hits("temp gun").includes("DCT414"));
+    assert.ok(hits("condenser pad").every((sku) => sku.startsWith("BSP")));
+    assert.ok(hits("fused disconnect").includes("DISC-30A-FUSE"));
+    assert.ok(hits("liquid tight conduit").includes("COND-LT-1/2-100FT"));
+    assert.ok(hits("line hide kit").includes("LHCKITWHT"));
+    assert.ok(hits("cassette grille").every((sku) => sku.includes("PAN")));
+    assert.ok(hits("indoor head").every((sku) => sku.includes("IDU")));
+    assert.ok(hits("mini-split").length > 0);
+    assert.ok(hits("a/c").every((sku) => searchStorefrontSkus("air conditioner").some((item) => item.sku === sku)));
+    assert.ok(hits("r410a").length > 0);
+    assert.ok(hits("115v").length > 0);
+    assert.ok(hits("19 seer").includes("TOS36KHPU"));
+    assert.ok(hits("80 afue").every((sku) => sku.endsWith("FUR")));
+    assert.equal(hits("water heater").length, 0);
+    assert.equal(hits("boiler").length, 0);
     // Exact identifiers must still win outright.
     assert.equal(hits("TSC-09HA1/I3TI22")[0], "TCL09KIDU");
     assert.equal(hits("zzzznotarealquery").length, 0);
@@ -380,5 +408,38 @@ describe("seeded quote-to-order-to-invoice flow", () => {
     assert.equal(order.total, quote.total);
     assert.equal(invoice.total, quote.total);
     assert.equal(invoiceBalance(invoice), invoice.balance);
+  });
+});
+
+describe("trade pricing fallback", () => {
+  // catalog_product_trade_pricing is empty by design until the counter loads
+  // real contractor pricing, so "no trade price on file" is the normal path,
+  // and it must land on retail. Falling to 0 would hand a dealer free
+  // equipment; the storefront projection hardcodes dealerPrice to null, which
+  // is exactly why this branch went unexercised for so long.
+  it("charges retail when no trade price is on file", () => {
+    assert.equal(resolveUnitPrice(true, undefined, 2500), 2500);
+  });
+
+  it("never treats a zero or negative trade price as free", () => {
+    assert.equal(resolveUnitPrice(true, 0, 2500), 2500);
+    assert.equal(resolveUnitPrice(true, -10, 2500), 2500);
+  });
+
+  it("ignores a non-finite trade price", () => {
+    assert.equal(resolveUnitPrice(true, Number.NaN, 2500), 2500);
+    assert.equal(resolveUnitPrice(true, Number.POSITIVE_INFINITY, 2500), 2500);
+  });
+
+  it("applies a real trade price for a trade buyer", () => {
+    assert.equal(resolveUnitPrice(true, 1875, 2500), 1875);
+  });
+
+  it("charges a retail buyer list even when a trade price exists", () => {
+    assert.equal(resolveUnitPrice(false, 1875, 2500), 2500);
+  });
+
+  it("never charges a trade buyer above list on a bad trade row", () => {
+    assert.equal(resolveUnitPrice(true, 9999, 2500), 2500);
   });
 });

@@ -102,6 +102,7 @@ export default function ContactPage() {
             >
               <Field label="I'm reaching out about" required>
                 <Select
+                  ariaLabel="I'm reaching out about"
                   name="topic"
                   value={topic}
                   onChange={setTopic}

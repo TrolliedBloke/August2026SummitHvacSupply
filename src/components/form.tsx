@@ -1,4 +1,5 @@
 import * as React from "react";
+export { CustomSelect as Select } from "./custom-select";
 
 /* Form primitives -- inset control surface (darker than card), brand focus ring.
    Inputs are "wells" that receive content, per the depth system. */
@@ -37,36 +38,4 @@ export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
 
 export function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return <textarea {...props} className={`${controlClass} resize-y py-2.5 ${props.className ?? ""}`} />;
-}
-
-export function Select({
-  value,
-  onChange,
-  options,
-  placeholder = "Select…",
-  name,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  options: { value: string; label: string }[];
-  placeholder?: string;
-  name?: string;
-}) {
-  return (
-    <select
-      name={name}
-      value={value}
-      onChange={(event) => onChange(event.target.value)}
-      className={`${controlClass} h-11`}
-    >
-      <option value="" disabled>
-        {placeholder}
-      </option>
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
-  );
 }

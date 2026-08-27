@@ -83,6 +83,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
   const live = await getLiveInventory();
   const sku = applyLiveInventory(record, live);
   const related = applyLiveInventoryAll(getRelatedSkus(sku, 4), live);
+  const galleryImages = sku.imageVerified ? sku.images : sku.referenceImages;
   // Manifest-driven: only fields that apply to this equipment type are shown,
   // so a furnace never renders a SEER2 row and a base pad never renders MCA.
   const researched = FIELD_GROUPS.map((group) => ({
@@ -94,7 +95,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
       .map((row) => ({
         label: FIELD_LABELS[row.field].label,
         value: `${typeof row.value === "number" ? row.value.toLocaleString("en-US") : row.value}${FIELD_LABELS[row.field].unit ? ` ${FIELD_LABELS[row.field].unit}` : ""}`,
-        source: sku.fieldSources[row.field]?.sourceUrl ?? null,
+        source: sku.fieldSources[row.field]?.sourceUrl ?? sku.fieldSources.specifications?.sourceUrl ?? null,
       })),
   })).filter((group) => group.rows.length > 0);
 
@@ -131,10 +132,18 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
       <Container className="py-8 lg:py-12">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.05fr]">
           <div>
-            {sku.imageVerified && sku.images.length > 0 ? (
+            {galleryImages.length > 0 ? (
               <>
-                <ProductGallery images={sku.images} title={sku.title} />
-                <p className="mt-3 text-xs leading-5 text-ink-3">Manufacturer media verified against model {sku.modelNumber}.</p>
+                <ProductGallery
+                  images={galleryImages}
+                  title={sku.title}
+                  mediaLabel={sku.imageExactModel ? "Manufacturer product view" : "Reference product view"}
+                />
+                <p className="mt-3 text-xs leading-5 text-ink-3">
+                  {sku.imageExactModel
+                    ? `Manufacturer media verified against model ${sku.modelNumber}.`
+                    : "Reference product media. Appearance and fittings may vary; confirm the listed dimensions before ordering."}
+                </p>
               </>
             ) : (
               <div className="grid min-h-80 place-items-center rounded-(--r-md) border border-line bg-surface-2 p-8 text-center">

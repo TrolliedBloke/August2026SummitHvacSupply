@@ -4,8 +4,9 @@ import { getSessionProfile } from "./auth";
 import { createServiceRoleSupabaseClient } from "./supabase";
 import { getStripe } from "./stripe";
 import { isFulfillmentWindowAvailable, localDeliveryFee, resolveZone, WAREHOUSE, type FulfillmentMethod } from "./fulfillment";
-import { estimateTax } from "./pricing";
+import { estimateTax, resolveUnitPrice } from "./pricing";
 import { clearCartSnapshot } from "./lifecycle";
+import { loadTradePricing } from "./portal";
 import { createOrderToken } from "./order-token";
 import { type CheckoutState, type CheckoutStatus } from "./checkout-state";
 
@@ -50,7 +51,8 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   }
 
   // 1. Price every line server-side, by tier.
-  const lines = parsed.items.map((item) => {
+  //    First resolve and validate each line against the catalog.
+  const resolved = parsed.items.map((item) => {
     const sku = getStorefrontSku(item.skuId);
     // A SKU the catalog does not contain is a bad request, not a server fault.
     // Throwing a plain Error surfaced it as a 500, which both misreports the
@@ -59,8 +61,21 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
     if (!sku.purchaseEligible || sku.retailPrice === null) {
       throw new CheckoutConflictError(`${sku.sku} requires a verified quote before purchase.`);
     }
-    // No trade price on file means the trade buyer pays retail, not zero.
-    const unit = trade && sku.dealerPrice !== null && sku.dealerPrice > 0 ? sku.dealerPrice : sku.retailPrice;
+    return { item, sku, retailPrice: sku.retailPrice };
+  });
+
+  //    Then price. Trade pricing is read from the database rather than from
+  //    the published catalog: the storefront projection sets dealerPrice to
+  //    null on every SKU precisely so contractor pricing cannot ship to the
+  //    browser, which meant the trade branch here could never fire and an
+  //    approved dealer was silently charged list. loadTradePricing runs as
+  //    service_role, so it is called ONLY after isTrade() has passed.
+  const tradePrices = trade
+    ? await loadTradePricing(resolved.map((line) => line.sku.id))
+    : new Map<string, number>();
+
+  const lines = resolved.map(({ item, sku, retailPrice }) => {
+    const unit = resolveUnitPrice(trade, tradePrices.get(sku.id), retailPrice);
     return { ...item, skuRecord: sku, unitPrice: unit, lineTotal: unit * item.qty };
   });
   const subtotal = round(lines.reduce((sum, l) => sum + l.lineTotal, 0));

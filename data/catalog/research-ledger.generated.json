@@ -2805,11 +2805,9 @@
       "catalogSku": "TOS36KAHU",
       "sourceSku": "TOS36KAHU",
       "modelNumber": "TU36-32AH2GDU",
-      "researchStatus": "conflict",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -2822,20 +2820,20 @@
         {
           "fieldName": "modelNumber",
           "value": "TU36-32AH2GDU",
-          "sourceUrl": "https://tosot.com/resources/",
-          "sourceType": "manufacturer",
-          "retrievedAt": "2026-08-09",
-          "status": "conflict",
-          "notes": "TU36-32AH2GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 36K air handler is TUD36AH2/NhG-D(U). The sheet's identifier is not published. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+          "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-air-handler-2-to-3-ton",
+          "sourceType": "manufacturer_product_page",
+          "retrievedAt": "2026-08-25",
+          "status": "verified",
+          "notes": "TOSOT's live NOVA 2-3 ton air-handler page lists exact model TU36-32AH2GDU and links the combined submittal."
         },
         {
           "fieldName": "specifications",
-          "value": "withheld",
-          "sourceUrl": "https://tosot.com/resources/",
-          "sourceType": "manufacturer",
-          "retrievedAt": "2026-08-09",
-          "status": "conflict",
-          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+          "value": "official_submittal",
+          "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc46eec016b1a2778c18f6_TU36-32GDU.pdf",
+          "sourceType": "manufacturer_submittal",
+          "retrievedAt": "2026-08-25",
+          "status": "verified",
+          "notes": "The manufacturer submittal explicitly covers TU36-32AH2GDU and provides the indoor-unit electrical, airflow, dimensional and connection data."
         }
       ]
     },
@@ -2844,11 +2842,9 @@
       "catalogSku": "TOS36KHPU",
       "sourceSku": "TOS36KHPU",
       "modelNumber": "TU36-32GDU",
-      "researchStatus": "conflict",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -2861,20 +2857,20 @@
         {
           "fieldName": "modelNumber",
           "value": "TU36-32GDU",
-          "sourceUrl": "https://tosot.com/resources/",
-          "sourceType": "manufacturer",
-          "retrievedAt": "2026-08-09",
-          "status": "conflict",
-          "notes": "TU36-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 36K central outdoor unit is TUD36-36W2/NhG-D(U). Note TOSOT also publishes an R-410A Unix 18 outdoor unit called TU36-24WADU, which is a different unit from the sheet's TU36-32GDU. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+          "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-condenser-2-to-3-ton",
+          "sourceType": "manufacturer_product_page",
+          "retrievedAt": "2026-08-25",
+          "status": "verified",
+          "notes": "TOSOT's live NOVA 2-3 ton condenser page lists exact model TU36-32GDU and links the combined submittal."
         },
         {
           "fieldName": "specifications",
-          "value": "withheld",
-          "sourceUrl": "https://tosot.com/resources/",
-          "sourceType": "manufacturer",
-          "retrievedAt": "2026-08-09",
-          "status": "conflict",
-          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+          "value": "official_submittal",
+          "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc46eec016b1a2778c18f6_TU36-32GDU.pdf",
+          "sourceType": "manufacturer_submittal",
+          "retrievedAt": "2026-08-25",
+          "status": "verified",
+          "notes": "The manufacturer submittal explicitly covers TU36-32GDU and provides matched performance, outdoor electrical, dimensional, piping and operating-range data."
         }
       ]
     },
@@ -3077,11 +3073,9 @@
       "catalogSku": "TOS60KHPU",
       "sourceSku": "TOS60KHPU",
       "modelNumber": "TU60-32GDU",
-      "researchStatus": "conflict",
+      "researchStatus": "verified",
       "missing": [
         "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -3094,20 +3088,20 @@
         {
           "fieldName": "modelNumber",
           "value": "TU60-32GDU",
-          "sourceUrl": "https://tosot.com/resources/",
-          "sourceType": "manufacturer",
-          "retrievedAt": "2026-08-09",
-          "status": "conflict",
-          "notes": "TU60-32GDU does not appear anywhere in TOSOT's Technical Resource Center. TOSOT's R-32 60K central outdoor unit is TUD60-48W2/NhG-D(U). TOSOT also publishes an R-410A TU60-48WADU, a different unit. No specifications, warranty or documents are attached to this record, because attaching a near-neighbour series' data would be a family substitution. HUMAN VERIFICATION REQUIRED: read the rating plate on the unit in Newark. Cross-checked against TOSOT's own Technical Resource Center (tosot.com/resources), which lists every submittal, exploded view and service manual TOSOT publishes for the US market, organised by series."
+          "sourceUrl": "https://tosotcomfort.com/models/nova-ducted-condenser-4-to-5-ton",
+          "sourceType": "manufacturer_product_page",
+          "retrievedAt": "2026-08-25",
+          "status": "verified",
+          "notes": "TOSOT's live NOVA 4-5 ton condenser page lists exact model TU60-32GDU and links the combined submittal."
         },
         {
           "fieldName": "specifications",
-          "value": "withheld",
-          "sourceUrl": "https://tosot.com/resources/",
-          "sourceType": "manufacturer",
-          "retrievedAt": "2026-08-09",
-          "status": "conflict",
-          "notes": "Withheld pending model confirmation. Only the capacity and refrigerant asserted by the inventory sheet are carried, and those are unverified."
+          "value": "official_submittal",
+          "sourceUrl": "https://cdn.prod.website-files.com/69b5027b5ea007adabfb305d/69bc474220caee4038bfdb4d_TU60-32GDU.pdf",
+          "sourceType": "manufacturer_submittal",
+          "retrievedAt": "2026-08-25",
+          "status": "verified",
+          "notes": "The manufacturer submittal explicitly covers TU60-32GDU and provides matched performance, outdoor electrical, dimensional, piping and operating-range data."
         }
       ]
     },
@@ -4137,13 +4131,9 @@
       "sourceRow": 72,
       "catalogSku": "DCT414",
       "sourceSku": "DCT414",
-      "modelNumber": null,
-      "researchStatus": "conflict",
+      "modelNumber": "DCT414",
+      "researchStatus": "verified",
       "missing": [
-        "exact_identity",
-        "exact_image",
-        "official_documents",
-        "manufacturer_warranty",
         "compatibility_evidence"
       ],
       "evidence": [
@@ -4154,22 +4144,41 @@
           "status": "source_record"
         },
         {
-          "fieldName": "manufacturer",
-          "value": null,
-          "sourceUrl": "data/catalog/inventory-source.csv",
-          "sourceType": "other",
-          "retrievedAt": "2026-08-09",
-          "status": "conflict",
-          "notes": "The inventory sheet records no manufacturer and no part number for this item -- the brand column reads '--'. Searching a generic description cannot establish a manufacturer, and guessing one would put a false brand on a product page. Identity is therefore UNVERIFIED. The dimensional and material facts below are read from the product description in the sheet, not from any manufacturer source, and are labelled as such. HUMAN INPUT REQUIRED: purchasing can supply the supplier and part number, after which this becomes researchable."
+          "fieldName": "identity",
+          "value": {
+            "brand": "DEWALT",
+            "modelNumber": "DCT414",
+            "product": "12V Max Cordless IR Thermometer"
+          },
+          "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-24",
+          "status": "verified",
+          "notes": "The official DEWALT instruction manual identifies DCT414 as a cordless infrared thermometer. This supersedes the inventory-generated 'Air Conditioner Duct Model 414' name."
         },
         {
           "fieldName": "specifications",
-          "value": "from_description",
-          "sourceUrl": "data/catalog/inventory-source.csv",
-          "sourceType": "other",
-          "retrievedAt": "2026-08-09",
+          "value": "official_manual",
+          "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-24",
           "status": "verified",
-          "notes": "Dimensions, connection sizes and lengths are parsed from the product description in the inventory sheet. They describe what was ordered; they are not manufacturer-verified specifications."
+          "notes": "Temperature range, distance-to-spot ratio, accuracy, emissivity, laser and battery specifications are taken from the official DCT414 manual."
+        },
+        {
+          "fieldName": "image",
+          "value": {
+            "localPaths": [
+              "/products/dewalt/dct414-distance-to-spot.png",
+              "/products/dewalt/dct414-manual-cover.png"
+            ],
+            "exactModelVerified": true
+          },
+          "sourceUrl": "https://support.dewalt.com/hc/es/article_attachments/115004343893",
+          "sourceType": "official_document",
+          "retrievedAt": "2026-08-24",
+          "status": "verified",
+          "notes": "Rendered pages from the official DCT414 instruction manual show the exact model and its distance-to-spot diagram."
         }
       ]
     },

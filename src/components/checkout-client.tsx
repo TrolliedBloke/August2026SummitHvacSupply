@@ -7,6 +7,7 @@ import { Check, Truck, Store, PackageCheck, ArrowRight, Lock, RotateCcw, ShieldC
 import { MAX_CART_QUANTITY, useQuote } from "./quote-context";
 import { useFulfillment } from "./fulfillment-context";
 import { ZipGate } from "./zip-gate";
+import { CustomSelect } from "./custom-select";
 import {
   fulfillmentOptions,
   fulfillmentWindows,
@@ -381,16 +382,17 @@ export function CheckoutClient({
               />
             </Field>
             <Field label="Buyer type">
-              <select
+              <CustomSelect
+                ariaLabel="Buyer type"
                 value={role}
-                onChange={(e) => setRole(e.target.value)}
-                className={inputCls}
-              >
-                <option value="contractor">Contractor / installer</option>
-                <option value="procurement">Procurement team</option>
-                <option value="property_manager">Property manager</option>
-                <option value="homeowner">Homeowner</option>
-              </select>
+                onChange={setRole}
+                options={[
+                  { value: "contractor", label: "Contractor / installer" },
+                  { value: "procurement", label: "Procurement team" },
+                  { value: "property_manager", label: "Property manager" },
+                  { value: "homeowner", label: "Homeowner" },
+                ]}
+              />
             </Field>
             <Field label="PO / job number">
               <input

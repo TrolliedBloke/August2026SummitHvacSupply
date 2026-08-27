@@ -9,6 +9,7 @@ import { AnalyticsListener } from "@/components/analytics-listener";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/next";
 
 // Body: Inter -- neutral, legible at small sizes for spec-dense pages.
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -74,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${grotesk.variable} ${condensed.variable} ${mono.variable}`}>
-      <body className="min-h-dvh antialiased">
+      <body className="min-h-dvh antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c") }}
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AnalyticsListener />
           </QuoteProvider>
         </FulfillmentProvider>
+        <Analytics />
       </body>
     </html>
   );

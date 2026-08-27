@@ -4,10 +4,9 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import {
   ArrowRight,
-  CheckCircle2,
+  BadgeCheck,
   ClipboardCheck,
-  Home,
-  Package,
+  Store,
   Truck,
 } from "lucide-react";
 import { LinkButton } from "@/components/ui";
@@ -16,6 +15,7 @@ import { CounterStock } from "@/components/home/counter-stock";
 import { FulfillmentCard } from "@/components/home/fulfillment-card";
 import { TradePricingCard } from "@/components/home/trade-pricing-card";
 import { A2lStrip, HelpStrip } from "@/components/home/a2l-strip";
+import { getCategoryHeroImage, type CatalogCategory } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
 
 // The counter strip shows live QuickBooks counts, so the prerendered homepage
@@ -37,7 +37,7 @@ const doors = [
     body: "Equipment, parts, tools, and common job materials.",
     href: "/products",
     cta: "Shop categories",
-    image: "/site/sketches/warehouse-rack.png",
+    image: "/site/sketches/browse-categories.png",
     mediaSide: "left" as const,
   },
   {
@@ -46,21 +46,24 @@ const doors = [
     body: "Answer a few basics. Get matched with equipment and installer help.",
     href: "/homeowners#homeowner-request",
     cta: "Start system selector",
-    image: "/site/sketches/home-system.png",
+    image: "/site/sketches/home-system-green.png",
     mediaSide: "right" as const,
   },
 ];
 
+/* `image` is the fallback only. Each tile prefers a verified product photo from
+   its own category (see getCategoryHeroImage) and drops to the sketch when the
+   category has no exact-model imagery yet -- currently line sets and controls. */
 const categories = [
-  { title: "Mini splits", body: "Indoor, outdoor, and multi-zone units", href: "/products?category=mini-splits", image: "/site/sketches/ductless.png" },
-  { title: "Central heat pumps", body: "TCL, Tosot, and Carrier equipment", href: "/products?category=central-heat-pumps", image: "/site/sketches/heat-pump.png" },
-  { title: "Air handlers", body: "2- through 5-ton air handlers", href: "/products?category=air-handlers", image: "/site/sketches/air-conditioner.png" },
-  { title: "Evaporator coils", body: "Carrier central-system coils", href: "/products?category=evaporator-coils", image: "/site/sketches/indoor-air-quality.png" },
-  { title: "Furnaces", body: "Carrier furnace equipment", href: "/products?category=furnaces", image: "/site/sketches/furnace.png" },
-  { title: "Cassettes", body: "Cassette units, panels, and controls", href: "/products?category=cassettes", image: "/site/sketches/thermostat-controls.png" },
-  { title: "Line sets", body: "Copper line sets by connection size", href: "/products?category=line-sets", image: "/site/sketches/refrigerant.png" },
-  { title: "Installation supplies", body: "Pads, covers, fittings, wire, and conduit", href: "/products?category=installation-supplies", image: "/site/sketches/parts-supplies.png" },
-];
+  { title: "Mini splits", body: "Indoor, outdoor, and multi-zone units", category: "mini-splits", image: "/site/sketches/ductless.png" },
+  { title: "Central heat pumps", body: "TCL, Tosot, and Carrier equipment", category: "central-heat-pumps", image: "/site/sketches/heat-pump.png" },
+  { title: "Air handlers", body: "2- through 5-ton air handlers", category: "air-handlers", image: "/site/sketches/air-conditioner.png" },
+  { title: "Evaporator coils", body: "Carrier central-system coils", category: "evaporator-coils", image: "/site/sketches/indoor-air-quality.png" },
+  { title: "Furnaces", body: "Carrier furnace equipment", category: "furnaces", image: "/site/sketches/furnace.png" },
+  { title: "Cassettes", body: "Cassette units, panels, and controls", category: "cassettes", image: "/site/sketches/thermostat-controls.png" },
+  { title: "Line sets", body: "Copper line sets by connection size", category: "line-sets", image: "/site/sketches/line-set.png" },
+  { title: "Installation supplies", body: "Pads, covers, fittings, wire, and conduit", category: "installation-supplies", image: "/site/sketches/installation-supplies.png" },
+] as const;
 
 const branches = [
   {
@@ -89,11 +92,15 @@ const branches = [
   },
 ];
 
+/* The reason-to-buy row. Each icon is green, which is a deliberate departure
+   from THEME.md ("nothing else is green") -- the flat ink row read as fine
+   print rather than as a reason to trust the counter. Green stays off
+   everything else here: the headings and body remain ink. */
 const proof = [
-  { title: "Exact models.", body: "Search the current SKU catalog.", icon: <Package /> },
-  { title: "Real people.", body: "Local help, not a call center.", icon: <Home /> },
-  { title: "Retail + wholesale.", body: "Shop retail or sign in for trade tools.", icon: <CheckCircle2 /> },
-  { title: "Trade account quotes.", body: "Account pricing is verified by staff.", icon: <ClipboardCheck /> },
+  { title: "Newark pickup", body: "Will-call on confirmed stock", icon: <Store /> },
+  { title: "Bay Area delivery", body: "Local routes from the branch", icon: <Truck /> },
+  { title: "Exact models", body: "Specs sourced, never guessed", icon: <ClipboardCheck /> },
+  { title: "Trade accounts", body: "Net pricing after staff review", icon: <BadgeCheck /> },
 ];
 
 const compliance = [
@@ -184,8 +191,8 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((category) => (
-              <CategoryCard key={category.title} {...category} />
+            {categories.map((item) => (
+              <CategoryCard key={item.title} {...item} />
             ))}
           </div>
         </CounterContainer>
@@ -193,19 +200,28 @@ export default function HomePage() {
 
       <BranchSection />
 
-      <section className="border-y border-line bg-canvas py-7">
-        <CounterContainer className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {proof.map((item) => (
-            <div key={item.title} className="flex items-center gap-4">
-              <span className="grid size-10 place-items-center text-ink-1 [&_svg]:size-7 [&_svg]:stroke-[1.4]">
-                {item.icon}
-              </span>
-              <span>
-                <span className="block text-sm font-medium text-ink-1">{item.title}</span>
-                <span className="block text-sm text-ink-2">{item.body}</span>
-              </span>
-            </div>
-          ))}
+      <section className="bg-canvas py-9">
+        <CounterContainer>
+          <h2 className="counter-heading text-[1.25rem] leading-none text-ink-1">
+            Why buy from Summit
+          </h2>
+          {/* Cards, not a bare row. The border is what turns four sentences into
+              four reasons -- it gives each one a boundary the eye can land on,
+              which a flat grid of text does not. */}
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {proof.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-(--r-md) border border-line bg-surface-1 p-5"
+              >
+                <span className="grid size-8 place-items-center text-brand [&_svg]:size-7 [&_svg]:stroke-[1.5]">
+                  {item.icon}
+                </span>
+                <p className="mt-3.5 text-[0.95rem] font-medium text-ink-1">{item.title}</p>
+                <p className="mt-1 text-sm leading-6 text-ink-2">{item.body}</p>
+              </div>
+            ))}
+          </div>
         </CounterContainer>
       </section>
 
@@ -285,22 +301,32 @@ function DoorCard({
 function CategoryCard({
   title,
   body,
-  href,
+  category,
   image,
 }: {
   title: string;
   body: string;
-  href: string;
+  category: CatalogCategory;
   image: string;
 }) {
+  // A real unit beats line art. The sketch stays as the fallback for categories
+  // with no exact-model photo rather than showing a stand-in from elsewhere.
+  const photo = getCategoryHeroImage(category);
   return (
     <Link
-      href={href}
+      href={`/products?category=${category}`}
       className="group grid min-h-[124px] grid-cols-[58px_minmax(0,1fr)_18px] items-center gap-3 rounded-(--r-sm) border border-line bg-surface-1 p-4 transition-colors duration-150 hover:border-line-strong sm:grid-cols-[68px_minmax(0,1fr)_18px]"
       data-conversion-hook="category-tile-click"
     >
       <span className="relative block aspect-square w-full" aria-hidden="true">
-        <Image src={image} alt="" fill loading="lazy" sizes="(min-width: 640px) 68px, 58px" className="object-contain" />
+        <Image
+          src={photo ?? image}
+          alt=""
+          fill
+          loading="lazy"
+          sizes="(min-width: 640px) 68px, 58px"
+          className="object-contain"
+        />
       </span>
       <span className="min-w-0">
         <span className="block text-base font-medium leading-tight text-ink-1">{title}</span>

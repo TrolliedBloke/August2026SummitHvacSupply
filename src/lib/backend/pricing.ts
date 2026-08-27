@@ -4,10 +4,15 @@
  * so the price a buyer sees always equals the price actually charged.
  *
  * Catalog prices themselves live on each SKU:
- *   - retail  = sku.msrp        (homeowners / guests, paid by card)
- *   - trade   = sku.dealerPrice (signed-in dealers / installers, net terms)
+ *   - retail = sku.retailPrice (homeowners / guests, paid by card)
+ *   - trade  = catalog_product_trade_pricing.contractor_price, read from the
+ *              database at checkout for signed-in dealers / installers
+ *
+ * Trade pricing is deliberately NOT on the published SKU: the storefront
+ * projection pins dealerPrice to null so contractor pricing can never reach
+ * the browser. It is resolved server-side and applied by resolveUnitPrice.
  * There is intentionally no derived markup here -- the numbers come straight
- * from the catalog record.
+ * from the catalog record or the trade-pricing table.
  */
 
 // Combined CA sales-tax rate for the Newark (Alameda County) hub.
@@ -54,4 +59,28 @@ export function round2(n: number): number {
 export function estimateTax(taxableSubtotal: number, zip?: string | null): number | null {
   if (!isWithinTaxJurisdiction(zip)) return null;
   return round2(taxableSubtotal * SALES_TAX_RATE);
+}
+
+/**
+ * The unit price a buyer actually pays.
+ *
+ * Exported so the fallback contract can be tested without a database, because
+ * getting it wrong is expensive in one direction: a missing trade price must
+ * become retail, NEVER zero. `catalog_product_trade_pricing` is deliberately
+ * empty until the counter loads real numbers, so "no row" is the normal case,
+ * not an error.
+ *
+ * A non-trade buyer always pays retail even if a trade price exists.
+ */
+export function resolveUnitPrice(
+  trade: boolean,
+  tradePrice: number | undefined,
+  retailPrice: number
+): number {
+  if (!trade) return retailPrice;
+  if (tradePrice === undefined || !Number.isFinite(tradePrice) || tradePrice <= 0) {
+    return retailPrice;
+  }
+  // A "discount" above list is a data error, not a deal. Charge the lower.
+  return Math.min(tradePrice, retailPrice);
 }

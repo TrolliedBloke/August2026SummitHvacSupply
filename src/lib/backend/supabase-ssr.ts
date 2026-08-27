@@ -6,9 +6,20 @@ import type { SupabaseClient } from "@supabase/supabase-js";
  * Auth-aware Supabase clients (cookie-backed sessions via @supabase/ssr).
  *
  * Use these for anything that must run AS THE LOGGED-IN USER so that Row Level
- * Security applies with their identity. Contrast with `./supabase.ts`
- * `createServerSupabaseClient`, which uses the service-role key and bypasses RLS
- * (only for trusted server jobs like webhooks).
+ * Security applies with their identity.
+ *
+ * Contrast with the two clients in `./supabase.ts`:
+ *   - `createServerSupabaseClient` uses the PUBLIC (anon/publishable) key with
+ *     no session attached. RLS still applies, but as an anonymous caller.
+ *   - `createServiceRoleSupabaseClient` uses the service-role key and BYPASSES
+ *     RLS entirely. That is the one reserved for trusted server jobs such as
+ *     the Stripe webhook and the lifecycle dispatchers.
+ *
+ * This comment previously attributed the service-role behaviour to
+ * createServerSupabaseClient. It documents an auth boundary, so a reader
+ * trusting it could have reached for the wrong client in either direction --
+ * assuming RLS was bypassed when it was not, or avoiding a safe client because
+ * it looked privileged.
  */
 
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL;

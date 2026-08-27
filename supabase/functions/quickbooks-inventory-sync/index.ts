@@ -2,7 +2,7 @@
 //   supabase functions deploy quickbooks-inventory-sync
 //   supabase secrets set QBO_CLIENT_ID=... QBO_CLIENT_SECRET=... QBO_REALM_ID=...
 //
-// Scheduled every 15 minutes by pg_cron (migration 022), through the same
+// Scheduled every 15 minutes by pg_cron (migration 024), through the same
 // private.invoke_function indirection the email jobs use.
 //
 // What this does: copies QtyOnHand from QuickBooks Online onto catalog_products

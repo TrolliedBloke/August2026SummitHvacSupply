@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import * as React from "react";
 import { SkuCard } from "./sku-card";
 import { Button } from "./ui";
+import { CustomSelect } from "./custom-select";
 import {
   filterStorefrontSkus,
   getCatalogFacets,
@@ -86,14 +87,14 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
 
   const searchForm = (
     <form onSubmit={submitSearch} className="rounded-(--r-md) border border-line bg-surface-1 p-3 shadow-[var(--shadow-sm)]">
-      <label className="sr-only" htmlFor="catalog-search">Search by SKU, model, BTU, or unit type</label>
+      <label className="sr-only" htmlFor="catalog-search">Search products, models, SKUs, capacity, or unit type</label>
       <div className="flex items-center gap-2">
         <Search size={17} className="text-ink-3" />
         <input
           id="catalog-search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search SKU or model"
+          placeholder="Try “heater,” “3 ton,” or a model number"
           className="h-10 min-w-0 flex-1 bg-transparent text-sm text-ink-1 outline-none placeholder:text-ink-4"
         />
         <Button type="submit" size="md">Search</Button>
@@ -104,64 +105,86 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
   const filterGroups = (
     <>
       <FilterGroup label="Category">
-        <Select value={filters.category ?? "all"} onChange={(value) => setParam("category", value)}>
-          <option value="all">All categories</option>
-          {facets.categories.map((category) => (
-            <option key={category.value} value={category.value}>{category.label}</option>
-          ))}
-        </Select>
+        <CustomSelect
+          ariaLabel="Category filter"
+          value={filters.category ?? "all"}
+          onChange={(value) => setParam("category", value)}
+          options={[
+            { value: "all", label: "All categories" },
+            ...facets.categories.map((category) => ({ value: category.value, label: category.label })),
+          ]}
+        />
       </FilterGroup>
       <FilterGroup label="Brand">
-        <Select value={filters.brand ?? "all"} onChange={(value) => setParam("brand", value)}>
-          <option value="all">All brands</option>
-          {facets.brands.map((brand) => <option key={brand} value={brand}>{brand}</option>)}
-        </Select>
+        <CustomSelect
+          ariaLabel="Brand filter"
+          value={filters.brand ?? "all"}
+          onChange={(value) => setParam("brand", value)}
+          options={[{ value: "all", label: "All brands" }, ...facets.brands.map((brand) => ({ value: brand, label: brand }))]}
+        />
       </FilterGroup>
       <FilterGroup label="Capacity">
-        <Select value={filters.btu ?? "all"} onChange={(value) => setParam("btu", value)}>
-          <option value="all">Any BTU</option>
-          <option value="small">Up to 12k BTU</option>
-          <option value="mid">18k-36k BTU</option>
-          <option value="large">36k+ BTU</option>
-        </Select>
+        <CustomSelect
+          ariaLabel="Capacity filter"
+          value={filters.btu ?? "all"}
+          onChange={(value) => setParam("btu", value)}
+          options={[
+            { value: "all", label: "Any BTU" },
+            { value: "small", label: "Up to 12k BTU" },
+            { value: "mid", label: "18k-36k BTU" },
+            { value: "large", label: "36k+ BTU" },
+          ]}
+        />
       </FilterGroup>
       <FilterGroup label="Voltage">
-        <Select value={filters.voltage ?? "all"} onChange={(value) => setParam("voltage", value)}>
-          <option value="all">Any voltage</option>
-          {facets.voltages.map((voltage) => (
-            <option key={voltage} value={voltage}>{voltage}</option>
-          ))}
-        </Select>
+        <CustomSelect
+          ariaLabel="Voltage filter"
+          value={filters.voltage ?? "all"}
+          onChange={(value) => setParam("voltage", value)}
+          options={[{ value: "all", label: "Any voltage" }, ...facets.voltages.map((voltage) => ({ value: voltage, label: voltage }))]}
+        />
       </FilterGroup>
       <FilterGroup label="Unit type">
-        <Select value={filters.unitType ?? "all"} onChange={(value) => setParam("unitType", value)}>
-          <option value="all">Any unit type</option>
-          {facets.unitTypes.map((unitType) => (
-            <option key={unitType} value={unitType}>{unitType}</option>
-          ))}
-        </Select>
+        <CustomSelect
+          ariaLabel="Unit type filter"
+          value={filters.unitType ?? "all"}
+          onChange={(value) => setParam("unitType", value)}
+          options={[{ value: "all", label: "Any unit type" }, ...facets.unitTypes.map((unitType) => ({ value: unitType, label: unitType }))]}
+        />
       </FilterGroup>
       <FilterGroup label="Refrigerant">
-        <Select value={filters.refrigerant ?? "all"} onChange={(value) => setParam("refrigerant", value)}>
-          <option value="all">Any refrigerant</option>
-          {facets.refrigerants.map((refrigerant) => <option key={refrigerant} value={refrigerant}>{refrigerant}</option>)}
-        </Select>
+        <CustomSelect
+          ariaLabel="Refrigerant filter"
+          value={filters.refrigerant ?? "all"}
+          onChange={(value) => setParam("refrigerant", value)}
+          options={[{ value: "all", label: "Any refrigerant" }, ...facets.refrigerants.map((refrigerant) => ({ value: refrigerant, label: refrigerant }))]}
+        />
       </FilterGroup>
       <FilterGroup label="Pricing">
-        <Select value={filters.pricing ?? "all"} onChange={(value) => setParam("pricing", value)}>
-          <option value="all">All pricing states</option>
-          <option value="priced">Published price</option>
-          <option value="quote">Request price</option>
-        </Select>
+        <CustomSelect
+          ariaLabel="Pricing filter"
+          value={filters.pricing ?? "all"}
+          onChange={(value) => setParam("pricing", value)}
+          options={[
+            { value: "all", label: "All pricing states" },
+            { value: "priced", label: "Published price" },
+            { value: "quote", label: "Request price" },
+          ]}
+        />
       </FilterGroup>
       <FilterGroup label="Stock">
-        <Select value={filters.stock ?? "all"} onChange={(value) => setParam("stock", value)}>
-          <option value="all">Any stock status</option>
-          <option value="unknown">Confirmation required</option>
-          <option value="in_stock">In stock</option>
-          <option value="low_stock">Low stock</option>
-          <option value="out_of_stock">Out of stock</option>
-        </Select>
+        <CustomSelect
+          ariaLabel="Stock filter"
+          value={filters.stock ?? "all"}
+          onChange={(value) => setParam("stock", value)}
+          options={[
+            { value: "all", label: "Any stock status" },
+            { value: "unknown", label: "Confirmation required" },
+            { value: "in_stock", label: "In stock" },
+            { value: "low_stock", label: "Low stock" },
+            { value: "out_of_stock", label: "Out of stock" },
+          ]}
+        />
       </FilterGroup>
     </>
   );
@@ -187,7 +210,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
       {/* Mobile: search + a sticky Filters button; products render immediately. */}
       <div className="flex flex-col gap-3 lg:hidden">
         {searchForm}
-        <div className="sticky top-[68px] z-20 -mx-1 px-1">
+        <div className="sticky top-[calc(var(--nav-height)+0.5rem)] z-20 -mx-1 px-1">
           <button
             type="button"
             onClick={() => setDrawerOpen(true)}
@@ -257,21 +280,17 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
           <p className="font-mono text-xs uppercase tracking-wider text-ink-3">
             {filtered.length} of {skus.length} SKUs
           </p>
-          <label className="flex items-center gap-2 text-sm text-ink-2">
+          <div className="flex items-center gap-2 text-sm text-ink-2">
             <span className="hidden sm:inline">Sort</span>
-            <select
+            <CustomSelect
+              ariaLabel="Sort SKUs"
               value={sort}
-              onChange={(event) => setParam("sort", event.target.value === "relevance" ? undefined : event.target.value)}
-              aria-label="Sort SKUs"
-              className="h-9 rounded-(--r-sm) border border-control-border bg-control-bg px-2.5 text-sm text-ink-1 outline-none focus:border-brand focus:ring-2 focus:ring-brand/25"
-            >
-              {SORT_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </label>
+              onChange={(value) => setParam("sort", value === "relevance" ? undefined : value)}
+              options={SORT_OPTIONS}
+              size="sm"
+              className="w-52"
+            />
+          </div>
         </div>
         {filtered.length === 0 ? (
           <div className="rounded-(--r-md) border border-dashed border-line-strong bg-surface-2/50 p-10 text-center">
@@ -325,17 +344,5 @@ function FilterGroup({ label, children }: { label: string; children: React.React
       <h3 className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-3">{label}</h3>
       {children}
     </div>
-  );
-}
-
-function Select({ value, onChange, children }: { value: string; onChange: (value: string) => void; children: React.ReactNode }) {
-  return (
-    <select
-      value={value}
-      onChange={(event) => onChange(event.target.value)}
-      className="h-11 w-full rounded-(--r-sm) border border-control-border bg-control-bg px-3 text-sm text-ink-1 outline-none focus:border-brand focus:ring-2 focus:ring-brand/25"
-    >
-      {children}
-    </select>
   );
 }

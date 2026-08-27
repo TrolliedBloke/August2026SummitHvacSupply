@@ -4,8 +4,8 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import * as React from "react";
 
-export function ProductGallery({ images, title }: { images: string[]; title: string }) {
-  const slides = images.map((src, index) => ({ src, label: `Manufacturer product view ${index + 1}` }));
+export function ProductGallery({ images, title, mediaLabel = "Manufacturer product view" }: { images: string[]; title: string; mediaLabel?: string }) {
+  const slides = images.map((src, index) => ({ src, label: `${mediaLabel} ${index + 1}` }));
   const [active, setActive] = React.useState(0);
   const [zoomed, setZoomed] = React.useState(false);
   const dialogRef = React.useRef<HTMLDivElement>(null);
@@ -54,7 +54,7 @@ export function ProductGallery({ images, title }: { images: string[]; title: str
   return (
     <div>
       <div id={`${galleryId}-panel`} role="tabpanel" aria-labelledby={`${galleryId}-tab-${active}`} className="relative aspect-[1.7/1] overflow-hidden rounded-(--r-md) border border-line bg-surface-2 sm:aspect-[1.22/1]">
-        <Image src={current.src} alt={`${title}, manufacturer product view ${active + 1}`} fill loading={active === 0 ? "eager" : "lazy"} sizes="(min-width: 1024px) 48vw, 100vw" className="object-contain p-5 sm:p-12" />
+        <Image src={current.src} alt={`${title}, ${mediaLabel.toLowerCase()} ${active + 1}`} fill loading={active === 0 ? "eager" : "lazy"} sizes="(min-width: 1024px) 48vw, 100vw" className="object-contain p-5 sm:p-12" />
         {slides.length > 1 && <GalleryButton label="Previous view" className="left-3" onClick={() => move(-1)}><ChevronLeft size={20} /></GalleryButton>}
         {slides.length > 1 && <GalleryButton label="Next view" className="right-3" onClick={() => move(1)}><ChevronRight size={20} /></GalleryButton>}
         <button ref={openerRef} type="button" onClick={() => setZoomed(true)} aria-label="Open large product image" className="absolute bottom-3 right-3 grid size-11 place-items-center rounded-(--r-sm) border border-line bg-surface-1 text-ink-1">
@@ -98,7 +98,7 @@ export function ProductGallery({ images, title }: { images: string[]; title: str
           <h2 id="product-zoom-title" className="sr-only">Large image of {title}</h2>
           <button ref={closeRef} type="button" aria-label="Close large image" className="absolute right-5 top-5 grid size-11 place-items-center rounded-(--r-sm) bg-surface-1 text-ink-1" onClick={() => setZoomed(false)}><X size={20} /></button>
           <div className="relative h-[82vh] w-[min(92vw,1100px)] bg-surface-1" onClick={(event) => event.stopPropagation()}>
-            <Image src={current.src} alt={title} fill sizes="92vw" className="object-contain p-8" />
+            <Image src={current.src} alt={`${title}, ${mediaLabel.toLowerCase()} ${active + 1}`} fill sizes="92vw" className="object-contain p-8" />
           </div>
         </div>
       )}

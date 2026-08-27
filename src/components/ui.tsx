@@ -5,7 +5,7 @@ import * as React from "react";
    so the surface treatment stays consistent (skill: same border weight, radius,
    shadow depth across cards/controls). */
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "quiet";
+type ButtonVariant = "primary" | "secondary" | "brand-outline" | "ghost" | "quiet";
 type ButtonSize = "md" | "lg";
 
 const buttonBase =
@@ -18,6 +18,8 @@ const buttonVariants: Record<ButtonVariant, string> = {
     "bg-brand text-brand-ink hover:bg-brand-hover",
   secondary:
     "bg-surface-1 text-ink-1 border border-line-strong hover:bg-surface-2 hover:border-ink-4",
+  "brand-outline":
+    "bg-transparent text-brand border border-brand hover:bg-surface-2",
   ghost:
     "bg-transparent text-ink-1 border border-line hover:bg-surface-2",
   quiet: "bg-transparent text-ink-2 hover:text-ink-1 hover:bg-surface-2",

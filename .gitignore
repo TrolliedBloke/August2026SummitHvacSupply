@@ -57,3 +57,7 @@ next-env.d.ts
 .claude/skills/
 .junie/
 skills-lock.json
+
+# Transient agent dev-server logs
+.codex-dev-out.log
+.codex-dev-err.log
