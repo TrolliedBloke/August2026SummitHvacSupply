@@ -454,28 +454,36 @@ function CartButton() {
   );
 }
 
-/* Row 1. Chrome, not navigation: a step down in size and into the muted ink so
-   it never competes with the category run two rows below. */
+/* Row 1. Chrome, not navigation -- but on the ink panel rather than a light
+   tint. Three white bands stacked (utility, search, category) separated only by
+   hairlines gave the page no top edge at all: the strip receded instead of
+   capping. Dark ink caps it, and by contrast pushes the white search row below
+   it forward.
+   
+   This is not a new colour. --ink-panel is already the full-width footer, so
+   the same token now bookends the page top and bottom. It also raises the
+   strip's contrast from 5.11:1 (muted ink on white -- AA, but quiet enough to
+   disappear) to 11.3:1. */
 function UtilityStrip() {
   return (
-    <div className="hidden border-b border-line bg-surface-2 md:block">
-      <div className="mx-auto flex h-9 w-full max-w-[var(--nav-max)] items-center gap-4 px-5 text-xs text-ink-3 sm:px-6 lg:px-[var(--counter-pad)]">
+    <div className="hidden bg-[var(--ink-panel)] md:block">
+      <div className="mx-auto flex h-9 w-full max-w-[var(--nav-max)] items-center gap-4 px-5 text-xs text-white/80 sm:px-6 lg:px-[var(--counter-pad)]">
         <MapPin size={14} strokeWidth={ICON_STROKE} className="shrink-0" aria-hidden="true" />
         <span className="-ml-2.5 whitespace-nowrap">Newark — Open until 5:00 PM</span>
         <Link
           href="/locations/newark"
-          className="whitespace-nowrap underline underline-offset-2 transition-colors hover:text-ink-1"
+          className="whitespace-nowrap underline underline-offset-2 transition-colors hover:text-white"
         >
           Change
         </Link>
         <div className="ml-auto flex items-center gap-6">
-          <a href={SITE.phoneHref} className="tnum whitespace-nowrap transition-colors hover:text-ink-1">
+          <a href={SITE.phoneHref} className="tnum whitespace-nowrap transition-colors hover:text-white">
             {SITE.phone}
           </a>
-          <Link href="/dealers" className="whitespace-nowrap transition-colors hover:text-ink-1">
+          <Link href="/dealers" className="whitespace-nowrap transition-colors hover:text-white">
             Apply for trade account
           </Link>
-          <Link href="/account" className="whitespace-nowrap transition-colors hover:text-ink-1">
+          <Link href="/account" className="whitespace-nowrap transition-colors hover:text-white">
             Sign in
           </Link>
         </div>
