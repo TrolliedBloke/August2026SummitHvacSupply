@@ -32,7 +32,7 @@ const doors = [
     body: "Equipment, parts, tools, and common job materials.",
     href: "/products",
     cta: "Shop categories",
-    image: "/site/sketches/warehouse-rack.png",
+    image: "/site/sketches/browse-categories.png",
     mediaSide: "left" as const,
   },
   {
@@ -41,7 +41,7 @@ const doors = [
     body: "Answer a few basics. Get matched with equipment and installer help.",
     href: "/homeowners#homeowner-request",
     cta: "Start system selector",
-    image: "/site/sketches/home-system.png",
+    image: "/site/sketches/home-system-green.png",
     mediaSide: "right" as const,
   },
 ];
@@ -56,8 +56,8 @@ const categories = [
   { title: "Evaporator coils", body: "Carrier central-system coils", category: "evaporator-coils", image: "/site/sketches/indoor-air-quality.png" },
   { title: "Furnaces", body: "Carrier furnace equipment", category: "furnaces", image: "/site/sketches/furnace.png" },
   { title: "Cassettes", body: "Cassette units, panels, and controls", category: "cassettes", image: "/site/sketches/thermostat-controls.png" },
-  { title: "Line sets", body: "Copper line sets by connection size", category: "line-sets", image: "/site/sketches/refrigerant.png" },
-  { title: "Installation supplies", body: "Pads, covers, fittings, wire, and conduit", category: "installation-supplies", image: "/site/sketches/parts-supplies.png" },
+  { title: "Line sets", body: "Copper line sets by connection size", category: "line-sets", image: "/site/sketches/line-set.png" },
+  { title: "Installation supplies", body: "Pads, covers, fittings, wire, and conduit", category: "installation-supplies", image: "/site/sketches/installation-supplies.png" },
 ] as const;
 
 const branches = [

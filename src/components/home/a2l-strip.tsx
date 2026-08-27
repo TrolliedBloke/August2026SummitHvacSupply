@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Headphones, House, ShieldCheck } from "lucide-react";
+import { ArrowRight, Headphones, House } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 /* A2L is the live question in Bay Area HVAC right now: the refrigerant
@@ -17,7 +18,9 @@ export function A2lStrip() {
       <CounterWidth>
         <div className="rounded-(--r-md) bg-band p-5 lg:flex lg:items-center lg:justify-between lg:gap-8">
           <div className="flex items-start gap-4">
-            <ShieldCheck size={32} strokeWidth={1.4} className="mt-0.5 shrink-0 text-ink-1" aria-hidden="true" />
+            <span className="relative mt-0.5 block size-10 shrink-0" aria-hidden="true">
+              <Image src="/site/sketches/a2l-ready.png" alt="" fill sizes="40px" className="object-contain" />
+            </span>
             <div className="min-w-0">
               <h2 className="counter-heading text-[1.35rem] leading-none text-ink-1">
                 A2L-ready parts &amp; equipment
