@@ -337,7 +337,7 @@ function ResourcesMenu({ pathname }: { pathname: string }) {
         }}
         aria-expanded={open}
         aria-haspopup="menu"
-        className={`inline-flex items-center gap-1 rounded-(--r-sm) px-3 py-2 text-sm font-medium transition-colors ${
+        className={`inline-flex items-center gap-1 rounded-(--r-sm) px-2 py-2 text-sm font-medium transition-colors ${
           active || open ? "text-ink-1 underline underline-offset-4" : "text-ink-1 hover:bg-surface-2"
         }`}
       >
@@ -414,12 +414,12 @@ export function SiteNav() {
 
         {/* Inline nav appears at xl, exactly where the hamburger hides -- the two
             switch at the same breakpoint so navigation is never unreachable. */}
-        <ul className="hidden min-w-0 flex-1 items-center gap-0.5 xl:flex">
+        <ul className="hidden shrink-0 items-center nav:flex">
           {PRIMARY.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`whitespace-nowrap border-b-2 px-2.5 py-2 text-sm font-medium transition-colors ${
+                className={`whitespace-nowrap border-b-2 px-2 py-2 text-sm font-medium transition-colors ${
                   isActive(item.href)
                     ? "border-brand text-brand"
                     : "border-transparent text-ink-1 hover:text-brand"
@@ -435,22 +435,22 @@ export function SiteNav() {
         </ul>
 
         {/* Right cluster */}
-        <div className="ml-auto flex items-center gap-1.5 xl:ml-0">
+        <div className="ml-auto flex shrink-0 items-center gap-1 nav:ml-auto">
           {/* At xl the search is a persistent field: on a parts site the search
               box is the primary control, and hiding it behind an icon costs a
               click on the most-used path. Below xl it collapses to the popover
               so the bar still fits. */}
-          <div className="hidden w-[190px] xl:block 2xl:w-[260px]">
+          <div className="hidden w-[164px] nav:block">
             <SearchField inline />
           </div>
-          <div className="xl:hidden">
+          <div className="nav:hidden">
             <SearchPopover />
           </div>
           {/* Branch selector. It says "Newark" and nothing more -- the site does
               not geolocate, so it must not claim to have detected anything. */}
           <Link
             href="/locations/newark"
-            className="hidden items-center gap-1.5 whitespace-nowrap rounded-(--r-sm) px-2.5 py-2 text-sm font-medium text-ink-1 transition-colors hover:text-brand xl:inline-flex"
+            className="hidden items-center gap-1.5 whitespace-nowrap rounded-(--r-sm) px-2.5 py-2 text-sm font-medium text-ink-1 transition-colors hover:text-brand nav:inline-flex"
           >
             <MapPin size={15} strokeWidth={2.2} />
             Newark
@@ -459,13 +459,13 @@ export function SiteNav() {
           <Link
             href="/account"
             aria-label="Account portal"
-            className="hidden size-11 place-items-center rounded-(--r-sm) text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink-1 sm:grid xl:hidden"
+            className="hidden size-11 place-items-center rounded-(--r-sm) text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink-1 sm:max-nav:grid"
           >
             <Lock size={16} strokeWidth={2.2} />
           </Link>
           <Link
             href="/account"
-            className="hidden items-center gap-1.5 rounded-(--r-sm) px-2.5 py-2 text-sm font-medium text-ink-2 transition-colors hover:text-ink-1 xl:inline-flex"
+            className="hidden items-center gap-1.5 rounded-(--r-sm) px-2.5 py-2 text-sm font-medium text-ink-2 transition-colors hover:text-ink-1 nav:inline-flex"
           >
             <Lock size={14} strokeWidth={2.2} />
             Account
@@ -483,7 +483,7 @@ export function SiteNav() {
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            className="grid size-11 place-items-center rounded-(--r-sm) text-ink-1 transition-colors hover:bg-surface-2 xl:hidden"
+            className="grid size-11 place-items-center rounded-(--r-sm) text-ink-1 transition-colors hover:bg-surface-2 nav:hidden"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -492,7 +492,7 @@ export function SiteNav() {
 
       {/* Mobile / tablet sheet -- available at every width below xl. */}
       {mobileOpen && (
-        <div className="border-t border-line bg-canvas xl:hidden">
+        <div className="border-t border-line bg-canvas nav:hidden">
           <div className="mx-auto flex w-full max-w-[var(--counter-max)] flex-col px-5 py-4 sm:px-6">
             <SearchField onNavigate={closeMobile} />
             <ul className="mt-4 flex flex-col">

@@ -2,6 +2,15 @@
 @import "../styles/tokens.css";
 
 @theme inline {
+  /* The width at which the inline navigation replaces the hamburger.
+     Measured, not guessed: below this the five nav labels, the wordmark, the
+     search field, the branch link, account, cart and the phone number need more
+     room than --nav-max allows, and the links overlap the search box.
+     Declared as a named breakpoint rather than an inline min-[1400px] variant
+     because Tailwind sorts arbitrary variants inconsistently against named ones
+     -- sm:grid was beating min-[1400px]:hidden, rendering two account links. */
+  --breakpoint-nav: 1400px;
+
   --color-canvas: var(--canvas);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
