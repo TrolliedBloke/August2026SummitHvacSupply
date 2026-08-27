@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Lock, Search, ShoppingCart, MapPin } from "lucide-react";
+import { Menu, X, Lock, Search, ShoppingCart, MapPin, UserRound } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
 import { SITE } from "@/lib/site";
@@ -442,14 +442,20 @@ function CartButton() {
     <button
       onClick={toggle}
       aria-label={showCount ? `Open your cart (${count} ${count === 1 ? "item" : "items"})` : "Open your cart"}
-      className="relative grid size-11 shrink-0 place-items-center rounded-(--r-sm) text-ink-1 transition-colors hover:bg-surface-2"
+      className="relative flex h-11 shrink-0 items-center gap-2 rounded-(--r-sm) px-2.5 text-sm font-medium text-ink-1 transition-colors hover:bg-surface-2 lg:px-3"
     >
-      <ShoppingCart size={24} strokeWidth={ICON_STROKE} />
-      {showCount && (
-        <span className="tnum absolute right-0 top-0 grid min-w-[18px] place-items-center rounded-full bg-brand px-1 font-mono text-[10px] font-medium leading-[18px] text-brand-ink">
-          {count}
-        </span>
-      )}
+      <span className="relative grid size-6 place-items-center">
+        <ShoppingCart size={24} strokeWidth={ICON_STROKE} />
+        {showCount && (
+          <span className="tnum absolute -right-2 -top-1.5 grid min-w-[18px] place-items-center rounded-full bg-brand px-1 font-mono text-[10px] font-medium leading-[18px] text-brand-ink">
+            {count}
+          </span>
+        )}
+      </span>
+      {/* Labelled from lg, matching Sign in beside it. Two labelled controls
+          give the right side enough weight to sit opposite the wordmark; a lone
+          glyph did not. Below lg the label drops and the icon stands alone. */}
+      <span className="hidden lg:inline">Cart</span>
     </button>
   );
 }
@@ -476,15 +482,15 @@ function UtilityStrip() {
         >
           Change
         </Link>
+        {/* Sign in lives in the row below, beside the cart, where an account
+            control is looked for. Carrying it here as well put the same link on
+            screen twice. */}
         <div className="ml-auto flex items-center gap-6">
           <a href={SITE.phoneHref} className="tnum whitespace-nowrap transition-colors hover:text-white">
             {SITE.phone}
           </a>
           <Link href="/dealers" className="whitespace-nowrap transition-colors hover:text-white">
             Apply for trade account
-          </Link>
-          <Link href="/account" className="whitespace-nowrap transition-colors hover:text-white">
-            Sign in
           </Link>
         </div>
       </div>
@@ -518,10 +524,28 @@ export function SiteNav() {
           the field owns the row, nothing pads around it. */}
       <div className="mx-auto flex w-full max-w-[var(--nav-max)] items-center gap-6 px-5 py-2.5 sm:px-6 lg:px-[var(--counter-pad)]">
         <Wordmark />
-        <div className="hidden min-w-0 flex-1 md:block">
-          <SearchField inline withButton />
+        {/* The field is capped rather than greedy. Left to flex-1 it ran 1092px
+            of a 1400px row -- 78% of the header against a right cluster of one
+            bare icon -- so the row read as a search bar with a logo stuck to it.
+            Capped and centred, the three groups (mark / search / account) each
+            hold their own space, which is what makes a retail header feel
+            balanced rather than empty on the right. */}
+        <div className="hidden min-w-0 flex-1 justify-center md:flex">
+          <div className="w-full max-w-[560px]">
+            <SearchField inline withButton />
+          </div>
         </div>
         <div className="ml-auto flex items-center gap-1 md:ml-0">
+          {/* Labelled, not icon-only. An unlabelled glyph gives the right side
+              no weight to balance against, and "Sign in" is the one control a
+              returning trade buyer looks for first. */}
+          <Link
+            href="/account"
+            className="hidden h-11 items-center gap-2 whitespace-nowrap rounded-(--r-sm) px-3 text-sm font-medium text-ink-1 transition-colors hover:bg-surface-2 lg:inline-flex"
+          >
+            <UserRound size={18} strokeWidth={ICON_STROKE} aria-hidden="true" />
+            Sign in
+          </Link>
           <CartButton />
           <button
             onClick={() => setMobileOpen((o) => !o)}
