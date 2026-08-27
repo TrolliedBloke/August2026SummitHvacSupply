@@ -27,7 +27,12 @@ export type CatalogRow = {
   id: string;
   catalog_sku: string;
   source_sku: string | null;
+  /** Carried only so the reconciliation lists are readable by a human. */
+  name?: string | null;
 };
+
+/** A SKU plus enough context to find the thing it refers to. */
+export type NamedSku = { sku: string; name: string };
 
 /** Only the two fields the sync is permitted to move. */
 export type InventoryUpdate = {
@@ -40,15 +45,19 @@ export type MatchReport = {
   updates: InventoryUpdate[];
   matched: number;
   /** Matched, but QuickBooks does not track a quantity. Left unknown. */
-  untracked: string[];
+  untracked: NamedSku[];
   /** Catalog rows QuickBooks said nothing about. Left at their current value. */
-  unmatchedCatalog: string[];
+  unmatchedCatalog: NamedSku[];
   /** QuickBooks items with no catalog row. */
-  unmatchedQbo: string[];
-  /** One QuickBooks SKU resolving to several catalog rows. None are updated. */
-  ambiguous: Array<{ sku: string; catalogIds: string[] }>;
+  unmatchedQbo: NamedSku[];
+  /**
+   * One QuickBooks SKU resolving to several catalog rows. None are updated.
+   * `catalogSkus` accompanies the ids because an id like "inventory-row-33"
+   * tells the person who has to fix it nothing at all.
+   */
+  ambiguous: Array<{ sku: string; catalogIds: string[]; catalogSkus: string[] }>;
   /** QuickBooks items with no SKU set, which can never be matched. */
-  skuless: number;
+  skuless: NamedSku[];
 };
 
 /** Case- and punctuation-insensitive, matching the manual script's `key()`. */
@@ -83,28 +92,35 @@ export function matchInventory(items: QboItem[], rows: CatalogRow[]): MatchRepor
   const byCatalogSku = index(rows, (row) => row.catalog_sku);
   const bySourceSku = index(rows, (row) => row.source_sku);
 
+  const byId = new Map(rows.map((row) => [row.id, row]));
+  const label = (item: QboItem) => (item.Name ?? "").trim().slice(0, 120);
+
   const updates: InventoryUpdate[] = [];
-  const untracked: string[] = [];
-  const unmatchedQbo: string[] = [];
+  const untracked: NamedSku[] = [];
+  const unmatchedQbo: NamedSku[] = [];
+  const skuless: NamedSku[] = [];
   const ambiguous: MatchReport["ambiguous"] = [];
   const seen = new Set<string>();
-  let skuless = 0;
   let matched = 0;
 
   for (const item of items) {
     const key = normalizeSku(item.Sku);
     if (!key) {
-      skuless += 1;
+      skuless.push({ sku: "", name: label(item) });
       continue;
     }
 
     const candidates = byCatalogSku.get(key) ?? bySourceSku.get(key) ?? [];
     if (candidates.length === 0) {
-      unmatchedQbo.push(key);
+      unmatchedQbo.push({ sku: key, name: label(item) });
       continue;
     }
     if (candidates.length > 1) {
-      ambiguous.push({ sku: key, catalogIds: [...candidates] });
+      ambiguous.push({
+        sku: key,
+        catalogIds: [...candidates],
+        catalogSkus: candidates.map((id) => byId.get(id)?.catalog_sku ?? id),
+      });
       continue;
     }
 
@@ -115,7 +131,7 @@ export function matchInventory(items: QboItem[], rows: CatalogRow[]): MatchRepor
     // An item QuickBooks does not track is not a zero -- it is an unknown.
     // Writing 0 here would publish it as out of stock.
     if (item.TrackQtyOnHand === false || typeof item.QtyOnHand !== "number" || !Number.isFinite(item.QtyOnHand)) {
-      untracked.push(key);
+      untracked.push({ sku: key, name: label(item) });
       continue;
     }
 
@@ -130,7 +146,9 @@ export function matchInventory(items: QboItem[], rows: CatalogRow[]): MatchRepor
     updates,
     matched,
     untracked,
-    unmatchedCatalog: rows.filter((row) => !seen.has(row.id)).map((row) => row.catalog_sku),
+    unmatchedCatalog: rows
+      .filter((row) => !seen.has(row.id))
+      .map((row) => ({ sku: row.catalog_sku, name: (row.name ?? "").trim().slice(0, 120) })),
     unmatchedQbo,
     ambiguous,
     skuless,

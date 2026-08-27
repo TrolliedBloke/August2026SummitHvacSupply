@@ -17,11 +17,11 @@ import { availabilityCopy } from "../src/lib/catalog/availability";
  */
 
 const rows: CatalogRow[] = [
-  { id: "p-single", catalog_sku: "TCL24KAHU", source_sku: "TCL24KAHU" },
+  { id: "p-single", catalog_sku: "TCL24KAHU", source_sku: "TCL24KAHU", name: "TCL 24K Air Handler" },
   // The importer split one sheet row into two refrigerant variants. Both keep
   // the shared source identifier; only their catalog SKUs are unique.
-  { id: "p-410a", catalog_sku: "TCL36KMZODU-R-410A", source_sku: "TCL36KMZODU" },
-  { id: "p-454b", catalog_sku: "TCL36KMZODU-R-454B", source_sku: "TCL36KMZODU" },
+  { id: "p-410a", catalog_sku: "TCL36KMZODU-R-410A", source_sku: "TCL36KMZODU", name: "MZ Outdoor R-410A" },
+  { id: "p-454b", catalog_sku: "TCL36KMZODU-R-454B", source_sku: "TCL36KMZODU", name: "MZ Outdoor R-454B" },
 ];
 
 function item(over: Partial<QboItem> & { Sku?: string }): QboItem {
@@ -48,16 +48,16 @@ describe("QuickBooks matching", () => {
   it("leaves an untracked item unknown rather than writing zero", () => {
     // The distinction the whole catalog rests on: "we do not count this" is not
     // "we have none of these".
-    const report = matchInventory([item({ Sku: "TCL24KAHU", TrackQtyOnHand: false })], rows);
+    const report = matchInventory([item({ Sku: "TCL24KAHU", Name: "Air Handler", TrackQtyOnHand: false })], rows);
     assert.deepEqual(report.updates, []);
-    assert.deepEqual(report.untracked, ["TCL24KAHU"]);
+    assert.deepEqual(report.untracked, [{ sku: "TCL24KAHU", name: "Air Handler" }]);
     assert.equal(report.matched, 1);
   });
 
   it("leaves an item with no quantity field unknown", () => {
-    const report = matchInventory([{ Id: "1", Sku: "TCL24KAHU", TrackQtyOnHand: true }], rows);
+    const report = matchInventory([{ Id: "1", Sku: "TCL24KAHU", Name: "Air Handler", TrackQtyOnHand: true }], rows);
     assert.deepEqual(report.updates, []);
-    assert.deepEqual(report.untracked, ["TCL24KAHU"]);
+    assert.deepEqual(report.untracked, [{ sku: "TCL24KAHU", name: "Air Handler" }]);
   });
 
   it("updates nothing when one QuickBooks SKU resolves to several products", () => {
@@ -65,7 +65,15 @@ describe("QuickBooks matching", () => {
     const report = matchInventory([item({ Sku: "TCL36KMZODU", QtyOnHand: 5 })], rows);
     assert.deepEqual(report.updates, []);
     assert.equal(report.matched, 0);
-    assert.deepEqual(report.ambiguous, [{ sku: "TCL36KMZODU", catalogIds: ["p-410a", "p-454b"] }]);
+    assert.deepEqual(report.ambiguous, [
+      {
+        sku: "TCL36KMZODU",
+        catalogIds: ["p-410a", "p-454b"],
+        // The readable half: an id like "p-410a" tells the person who has to
+        // split the QuickBooks item nothing at all.
+        catalogSkus: ["TCL36KMZODU-R-410A", "TCL36KMZODU-R-454B"],
+      },
+    ]);
   });
 
   it("still matches each split variant by its own catalog SKU", () => {
@@ -86,12 +94,43 @@ describe("QuickBooks matching", () => {
   });
 
   it("reports both directions of non-match without updating anything", () => {
-    const report = matchInventory([item({ Sku: "NOT-IN-CATALOG", QtyOnHand: 9 }), item({ Sku: "" })], rows);
+    const report = matchInventory(
+      [item({ Sku: "NOT-IN-CATALOG", Name: "Mystery part", QtyOnHand: 9 }), item({ Sku: "", Name: "No SKU set" })],
+      rows
+    );
     assert.deepEqual(report.updates, []);
-    assert.deepEqual(report.unmatchedQbo, ["NOT-IN-CATALOG"]);
-    assert.equal(report.skuless, 1);
-    // Nothing was matched, so every catalog row is reported as unmentioned.
+    assert.deepEqual(report.unmatchedQbo, [{ sku: "NOT-IN-CATALOG", name: "Mystery part" }]);
+    assert.deepEqual(report.skuless, [{ sku: "", name: "No SKU set" }]);
+    // Nothing was matched, so every catalog row is reported as unmentioned --
+    // and each carries its product name so the list is actionable.
     assert.equal(report.unmatchedCatalog.length, rows.length);
+    assert.deepEqual(report.unmatchedCatalog[0], { sku: "TCL24KAHU", name: "TCL 24K Air Handler" });
+  });
+});
+
+describe("reconciliation lists", () => {
+  it("names every unreconciled item so the list can be acted on", () => {
+    const report = matchInventory(
+      [
+        item({ Sku: "TCL24KAHU", Name: "TCL 24K Air Handler", QtyOnHand: 3 }),
+        item({ Sku: "GHOST-1", Name: "In QuickBooks only" }),
+        item({ Sku: "TCL36KMZODU", Name: "Shared identifier", QtyOnHand: 5 }),
+      ],
+      rows
+    );
+    // One matched, one unknown to the catalog, one ambiguous -- and the two
+    // variants behind the ambiguous item are still reported as uncounted.
+    assert.deepEqual(report.unmatchedQbo, [{ sku: "GHOST-1", name: "In QuickBooks only" }]);
+    assert.deepEqual(report.ambiguous[0].catalogSkus, ["TCL36KMZODU-R-410A", "TCL36KMZODU-R-454B"]);
+    assert.deepEqual(
+      report.unmatchedCatalog.map((entry) => entry.sku).sort(),
+      ["TCL36KMZODU-R-410A", "TCL36KMZODU-R-454B"]
+    );
+  });
+
+  it("tolerates a catalog row with no name", () => {
+    const report = matchInventory([], [{ id: "x", catalog_sku: "NAMELESS", source_sku: "NAMELESS" }]);
+    assert.deepEqual(report.unmatchedCatalog, [{ sku: "NAMELESS", name: "" }]);
   });
 });
 

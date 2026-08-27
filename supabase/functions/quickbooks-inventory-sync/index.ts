@@ -267,7 +267,7 @@ Deno.serve(async (request: Request) => {
 
     const { data: rows, error: rowsError } = await supabase
       .from("catalog_products")
-      .select("id, catalog_sku, source_sku");
+      .select("id, catalog_sku, source_sku, name");
     if (rowsError) throw new Error(`Could not read catalog_products: ${rowsError.message}`);
 
     const report = matchInventory(items, (rows ?? []) as CatalogRow[]);
@@ -276,6 +276,13 @@ Deno.serve(async (request: Request) => {
       p_rows: report.updates,
     });
     if (applyError) throw new Error(`Inventory apply failed: ${applyError.message}`);
+
+    // Bounded: the run log is a worksheet, not an archive. A catalog that has
+    // drifted this far past the cap has a bigger problem than a truncated list,
+    // and an unbounded jsonb column on a job that runs every 15 minutes is how
+    // a table quietly becomes the largest thing in the database.
+    const CAP = 250;
+    const cap = <T>(list: T[]) => list.slice(0, CAP);
 
     const summary = {
       started_at: startedAt,
@@ -288,6 +295,10 @@ Deno.serve(async (request: Request) => {
       unmatched_catalog: report.unmatchedCatalog.length,
       unmatched_qbo: report.unmatchedQbo.length,
       ambiguous: report.ambiguous,
+      untracked_skus: cap(report.untracked),
+      unmatched_catalog_skus: cap(report.unmatchedCatalog),
+      unmatched_qbo_skus: cap(report.unmatchedQbo),
+      skuless_items: cap(report.skuless),
     };
     await supabase.from("quickbooks_sync_runs").insert(summary);
 
