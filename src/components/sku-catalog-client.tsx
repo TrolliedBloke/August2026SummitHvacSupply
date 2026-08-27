@@ -61,7 +61,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
   };
 
   const sort = (params.get("sort") as SortKey | null) ?? "relevance";
-  const filtered = sortStorefrontSkus(filterStorefrontSkus(filters), sort);
+  const filtered = sortStorefrontSkus(filterStorefrontSkus(filters, skus), sort);
   const filterKey = params.toString();
   const visibleCount = visibility.key === filterKey ? visibility.count : PAGE_SIZE;
 

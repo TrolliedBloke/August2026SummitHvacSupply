@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --test tests/backend.test.ts tests/remediation.test.ts tests/request-body.test.ts",
+    "test": "tsx --test tests/backend.test.ts tests/remediation.test.ts tests/request-body.test.ts tests/inventory.test.ts",
     "test:e2e": "playwright test",
     "catalog:import": "tsx scripts/import-inventory-catalog.ts",
     "catalog:sync": "tsx scripts/sync-production-catalog.ts",

@@ -174,6 +174,20 @@ function categoryLabel(category: CatalogCategory): string {
 }
 
 /**
+ * Physical inventory signal to the storefront's coarser display bucket.
+ *
+ * Exported because the live-inventory overlay (which replaces these fields with
+ * counts pulled from QuickBooks) has to bucket them the same way. Two copies of
+ * this ternary would eventually disagree about what "low_stock" looks like.
+ */
+export function stockStatusFor(status: CatalogAvailability): StorefrontSku["stockStatus"] {
+  if (status === "in_stock") return "ready";
+  if (status === "low_stock") return "low";
+  if (status === "unknown") return "unknown";
+  return "backorder";
+}
+
+/**
  * Dimensions as researched, or "" when nothing was found.
  *
  * Research records these two different ways depending on the source: a single
@@ -247,7 +261,7 @@ function toStorefrontSku(record: CatalogRecord): StorefrontSku {
     available: record.inventoryQuantity ?? 0,
     availabilityStatus: record.inventoryStatus,
     availabilityVerified: record.inventoryQuantity !== null && record.inventoryStatus !== "unknown",
-    stockStatus: record.inventoryStatus === "in_stock" ? "ready" : record.inventoryStatus === "low_stock" ? "low" : record.inventoryStatus === "unknown" ? "unknown" : "backorder",
+    stockStatus: stockStatusFor(record.inventoryStatus),
     quoteEligible: record.quoteEligible,
     purchaseEligible: record.purchaseEligible,
     bundleName: record.bundleName,
@@ -689,10 +703,19 @@ export function searchStorefrontSkus(query: string, limit = 12): StorefrontSku[]
     .map((item) => item.sku);
 }
 
-export function filterStorefrontSkus(filters: CatalogFilters): StorefrontSku[] {
+/**
+ * `pool` defaults to the build-time catalog. The catalog page passes its own
+ * array instead, because the server has already overlaid live QuickBooks counts
+ * onto those records -- filtering the generated JSON again here would silently
+ * discard the live stock and re-render the uncounted originals.
+ */
+export function filterStorefrontSkus(
+  filters: CatalogFilters,
+  pool: StorefrontSku[] = getStorefrontSkus()
+): StorefrontSku[] {
   const q = filters.q ? normalizeSearchQuery(filters.q) : "";
   const qCode = q ? normalizeCode(q) : "";
-  return getStorefrontSkus().filter((sku) => {
+  return pool.filter((sku) => {
     // Same matcher as the search endpoint, so the catalog's own search box and
     // the header search agree on what "3 ton heat pump" means.
     if (q && scoreSku(sku, q, qCode) === 0) return false;

@@ -3,6 +3,7 @@
 import { Check } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
+import { StockChip } from "./stock-badge";
 import type { StorefrontSku } from "@/lib/storefront/catalog";
 
 /* Mobile-only sticky purchase bar -- keeps price + CTA in reach on long PDPs.
@@ -37,7 +38,16 @@ export function StickyBuyBar({
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-canvas/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden">
         <div className="mx-auto flex w-full max-w-[1180px] items-center gap-3 px-5 py-3">
           <div className="min-w-0 flex-1">
-            <p className="truncate text-xs text-ink-3">{sku.seriesName}</p>
+            <div className="flex items-center gap-2">
+              <p className="truncate text-xs text-ink-3">{sku.seriesName}</p>
+              <StockChip
+                status={sku.availabilityStatus}
+                available={sku.available}
+                verified={sku.availabilityVerified}
+                compact
+                className="shrink-0"
+              />
+            </div>
             <p className="tnum font-display text-lg font-medium leading-tight text-ink-1">
               {priceLabel}
             </p>

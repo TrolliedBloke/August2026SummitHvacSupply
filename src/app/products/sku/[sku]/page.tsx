@@ -5,8 +5,10 @@ import { AlertTriangle, BadgeCheck, Box, Download, FileText, ImageOff, PackageCh
 import { AddToQuote } from "@/components/add-to-quote";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductGallery } from "@/components/product-gallery";
+import { StockBadge, StockLine } from "@/components/stock-badge";
 import { Container, LinkButton } from "@/components/ui";
 import { getRelatedSkus, getStorefrontSku, getStorefrontSkus, productHref, skuSlug } from "@/lib/storefront/catalog";
+import { applyLiveInventory, applyLiveInventoryAll, getLiveInventory } from "@/lib/storefront/live-inventory";
 import { buildProductSchema, getSkuSeoState } from "@/lib/seo/catalog";
 import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
 import { SITE } from "@/lib/site";
@@ -45,6 +47,14 @@ const CONFLICT_COPY: Record<string, { heading: string; body: string }> = {
 
 export const dynamicParams = false;
 
+/**
+ * The page is otherwise static -- identity, specifications and documents change
+ * only when the catalog is regenerated and redeployed. Stock is the one field
+ * that moves between deploys, so the shell is prerendered and revalidated on a
+ * short interval to pick up the QuickBooks counts.
+ */
+export const revalidate = 60;
+
 export function generateStaticParams() {
   return getStorefrontSkus().map((sku) => ({ sku: skuSlug(sku.sku) }));
 }
@@ -64,9 +74,15 @@ export async function generateMetadata({ params }: PageProps<"/products/sku/[sku
 
 export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]">) {
   const { sku: skuParam } = await params;
-  const sku = getStorefrontSku(decodeURIComponent(skuParam));
-  if (!sku) notFound();
-  const related = getRelatedSkus(sku, 4);
+  const record = getStorefrontSku(decodeURIComponent(skuParam));
+  if (!record) notFound();
+  // Live counts from QuickBooks, where the warehouse has counted this product.
+  // Overlays availability only; the product stays quote-only regardless.
+  // Fetched once and shared with the related items below, so a visitor never
+  // sees one count on the page and a different one in the strip beneath it.
+  const live = await getLiveInventory();
+  const sku = applyLiveInventory(record, live);
+  const related = applyLiveInventoryAll(getRelatedSkus(sku, 4), live);
   const galleryImages = sku.imageVerified ? sku.images : sku.referenceImages;
   // Manifest-driven: only fields that apply to this equipment type are shown,
   // so a furnace never renders a SEER2 row and a base pad never renders MCA.
@@ -165,6 +181,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
               <p className="text-sm text-ink-3">Price</p>
               <p className="mt-1 text-3xl font-semibold text-ink-1">{sku.retailPrice !== null ? currency(sku.retailPrice) : "Request price"}</p>
               {sku.bundleName && <p className="mt-2 text-sm text-ink-2">This component may be priced as part of {sku.bundleName}. We confirm the complete configuration before quoting.</p>}
+              <StockLine sku={sku} className="mt-4" />
             </div>
 
             <div className="mt-5 rounded-(--r-md) border border-line bg-surface-2 p-4">
@@ -275,7 +292,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
           </section>
         )}
 
-        {related.length > 0 && <section className="mt-10"><h2 className="font-display text-xl font-semibold text-ink-1">Related catalog items</h2><p className="mt-1 text-sm text-ink-2">Nearby products in the same category. Similar capacity does not prove compatibility.</p><div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{related.map((item) => <Link key={item.id} href={productHref(item)} className="rounded-(--r-sm) border border-line bg-surface-1 p-4 hover:border-line-strong"><span className="part-number text-xs text-ink-3">{item.sku}</span><span className="mt-2 block font-medium text-ink-1">{item.title}</span><span className="mt-2 block text-xs text-ink-2">{item.retailPrice !== null ? currency(item.retailPrice) : "Contact for price"} · {item.purchaseEligible ? "available to order" : "sales assistance"}</span></Link>)}</div></section>}
+        {related.length > 0 && <section className="mt-10"><h2 className="font-display text-xl font-semibold text-ink-1">Related catalog items</h2><p className="mt-1 text-sm text-ink-2">Nearby products in the same category. Similar capacity does not prove compatibility.</p><div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{related.map((item) => <Link key={item.id} href={productHref(item)} className="rounded-(--r-sm) border border-line bg-surface-1 p-4 hover:border-line-strong"><span className="part-number text-xs text-ink-3">{item.sku}</span><span className="mt-2 block font-medium text-ink-1">{item.title}</span><span className="mt-2 block text-xs text-ink-2">{item.retailPrice !== null ? currency(item.retailPrice) : "Contact for price"} · {item.purchaseEligible ? "available to order" : "sales assistance"}</span><StockBadge sku={item} className="mt-2" /></Link>)}</div></section>}
       </Container>
     </>
   );

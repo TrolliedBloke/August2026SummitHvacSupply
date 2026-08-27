@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ImageOff } from "lucide-react";
 import { AddToQuote } from "./add-to-quote";
+import { StockBadge } from "./stock-badge";
 import { Chip } from "./ui";
 import { productHref, type StorefrontSku } from "@/lib/storefront/catalog";
 
@@ -26,6 +27,7 @@ export function SkuCard({ sku, priority = false }: { sku: StorefrontSku; priorit
           <Chip tone="neutral">{sku.brand}</Chip>
           <Chip tone="neutral">{sku.categoryLabel}</Chip>
           <Chip tone={sku.purchaseEligible ? "eco" : "lead"}>{sku.purchaseEligible ? "Available to order" : "Contact for price"}</Chip>
+          <StockBadge sku={sku} />
         </div>
         <div>
           <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-3">SKU {sku.sku}</p>

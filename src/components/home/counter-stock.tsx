@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AddToQuote } from "@/components/add-to-quote";
 import { getStorefrontSku, productHref, type StorefrontSku } from "@/lib/storefront/catalog";
+import { applyLiveInventory, getLiveInventory } from "@/lib/storefront/live-inventory";
 import { FULFILLMENT } from "@/lib/site";
 
 /* The five models the counter leads with. Real catalog SKUs, resolved at build
@@ -38,10 +39,11 @@ function specLine(sku: StorefrontSku): string {
   return [capacity, qualifier].filter(Boolean).join("  ·  ");
 }
 
-export function CounterStock() {
-  const skus = FEATURED.map((code) => getStorefrontSku(code)).filter(
-    (sku): sku is StorefrontSku => Boolean(sku)
-  );
+export async function CounterStock() {
+  const live = await getLiveInventory();
+  const skus = FEATURED.map((code) => getStorefrontSku(code))
+    .filter((sku): sku is StorefrontSku => Boolean(sku))
+    .map((sku) => applyLiveInventory(sku, live));
   if (skus.length === 0) return null;
 
   return (
@@ -49,11 +51,12 @@ export function CounterStock() {
       <CounterWidth>
         <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
           <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1.5">
-            {/* Not "in stock today": no SKU in the catalog carries a verified
-                branch quantity yet, and the audit calls a stock claim the site
-                cannot back the single most damaging thing on this page. The
-                heading states what is true -- these ship and pick up from
-                Newark -- and each card states its own stock position. */}
+            {/* Not "in stock today". Counts now arrive from QuickBooks, but
+                they arrive per SKU and only for products the warehouse actually
+                tracks -- a blanket heading would still be claiming something
+                the data cannot support for the whole catalog. The heading
+                states what is always true (these ship and pick up from Newark)
+                and each card states its own position, counted or not. */}
             <h2 className="counter-heading border-b-2 border-brand pb-1 text-[1.25rem] leading-none text-ink-1">
               Available from Newark
             </h2>

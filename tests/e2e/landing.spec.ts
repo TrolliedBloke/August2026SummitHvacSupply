@@ -14,9 +14,15 @@ test("landing page never claims a stock count the catalog cannot verify", async 
   const stockRow = page.getByText("Stock at order").first();
   await expect(stockRow).toBeVisible();
 
-  // Every SKU in the source sheet is quote-only with unknown inventory, so a
-  // literal "N in stock" anywhere on this page is a fabricated claim. The audit
-  // calls an unbacked stock metric the single most damaging thing on the page.
+  // This suite runs without Supabase credentials, so the live-inventory overlay
+  // returns nothing and every SKU is uncounted -- which is exactly the state
+  // being guarded. With no verified quantity behind it, a literal "N in stock"
+  // is a fabricated claim, and the audit calls an unbacked stock metric the
+  // single most damaging thing on this page.
+  //
+  // A real count from QuickBooks is a different matter and IS allowed to render
+  // "N in stock"; what must never happen is this page inventing one when the
+  // warehouse has said nothing. Keep the assertion, keep the env absent.
   await expect(page.getByText(/\b\d+\s+in stock\b/)).toHaveCount(0);
 
   // ...and the action must match: nothing is sellable, so nothing offers a cart.

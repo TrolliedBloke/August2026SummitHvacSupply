@@ -2,6 +2,39 @@
 
 Status as of 2026-08-21, project `cswrezdcwdqnhwplmddr` (named "crm").
 
+## 2026-08-25 — QuickBooks sync: 024 applied, 025 pending
+
+`024_quickbooks_inventory_sync.sql` adds `private.quickbooks_token`,
+`quickbooks_sync_runs`, three service-role-only functions, and a 15-minute
+pg_cron job for the QuickBooks inventory sync.
+
+**024 has been applied to the crm project and the sync is running against it.**
+025 has NOT been applied anywhere yet.
+
+Both were renumbered from 022/023 during the merge with main: that branch
+had independently taken 022 (review_requests) and 023 (customer_order_
+visibility), and two files sharing a number is an outright conflict for
+`supabase db push`. 024 is idempotent, so re-applying it under the new name
+is safe and is the intended way to reconcile the ledger.
+
+Originally exercised against a throwaway
+local Postgres with the 001–021 dependencies stubbed out, which proves the DDL,
+the PL/pgSQL bodies and the write guarantees parse and behave — not that it
+composes with the real schema. Apply to a branch first.
+
+The file is re-runnable on purpose: `create table if not exists`, a
+`drop policy if exists` before the policy, and a guarded `cron.unschedule`
+before the `cron.schedule`. Verified by running it three times against the same
+database with `ON_ERROR_STOP=1`, with stored data and the refresh token intact
+after each.
+
+After applying, the check that matters:
+
+```sql
+select count(*) from catalog_products
+where inventory_status <> 'unknown' and purchase_eligible;  -- must be 0
+```
+
 ## 2026-08-21 — ledger repaired, 020 and 021 applied
 
 `supabase migration list` showed 005–012, 014, 018 and 019 as local-only, plus

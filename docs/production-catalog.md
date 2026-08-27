@@ -21,7 +21,26 @@ inventory CSV -> validated importer -> generated catalog -> search/category/prod
                                       |                    |                +-> priced items -> retail checkout
                                       |                    +-> unpriced items -> sales request
                                       +-> reconciliation + research ledger -> staff catalog dashboard
+
+QuickBooks Online -> pg_cron (15 min) -> quickbooks-inventory-sync -> catalog_products
+                                                                     |
+                                                                     +-> live-inventory overlay -> same product pages
 ```
+
+Two paths with different cadences, deliberately. Product **identity** — model
+numbers, specifications, research provenance, price — changes only when the CSV
+is re-imported and the site redeployed, and is baked into the build. **On-hand
+quantity** changes hourly, so it is read at request time from
+`catalog_products` and overlaid onto those build-time records
+(`src/lib/storefront/live-inventory.ts`), cached for 60 seconds.
+
+The overlay writes availability fields only. It cannot set `purchase_eligible`,
+and neither can the sync: `quickbooks_apply_inventory()` (migration 024) accepts
+a payload but will only ever move `inventory_quantity` and `inventory_status`.
+Knowing a quantity is a fact about the shelf; selling it self-service is a
+separate decision that stays with a person. If the database is unreachable the
+overlay yields nothing and every product renders exactly as it did before live
+inventory existed — uncounted, quote-only.
 
 The storefront supports retail orders and sales requests. Products with a positive source sell price are directly purchasable; products without a published price can be sent to sales from the same cart. Inventory quantity remains `unknown` because the supplied source did not include dependable on-hand counts, but that internal data state is not exposed as customer-facing warning copy. Wholesale pricing and tools require an approved wholesale account.
 
@@ -56,10 +75,11 @@ Server checkout canonicalizes every cart line and enforces price and publication
 - 100 source rows map to 100 unique generated records.
 - 91 normalized source identifiers and nine collision groups are preserved as distinct variants pending human confirmation.
 - 23 rows contain a positive source sell price; no `$0` price is published.
-- Inventory quantity is unknown for all 100 records; the 23 positively priced records are purchase eligible and all 100 can be sent to sales.
+- Inventory quantity is unknown for all 100 records **in the generated catalog**, which is the state the site ships with. Live counts arrive separately from QuickBooks and are overlaid at request time; they change what a page displays, never what it sells.
+- **No record is purchase eligible.** All 100 are quote-only and can be sent to sales. The importer requires a confirmed price, a known quantity *and* a non-conflicted identity before a product becomes directly purchasable, and no record currently satisfies all three. (An earlier version of this document claimed the 23 positively priced records were purchasable; that was never true of the generated catalog. Verify with `select count(*) from catalog_products where purchase_eligible;`.)
 - Exact manufacturer-backed imagery covers 55 records. The importer publishes no family-image fallback: the remaining 22 branded records and 23 unbranded accessories intentionally show a neutral photo-coming-soon state until exact evidence or warehouse photography is available.
-- Retail customers may create an account and purchase priced items. Wholesale users must apply and receive staff approval before wholesale access is granted.
-- No database sync or deployment is performed automatically by the importer.
+- Retail customers may create an account. Wholesale users must apply and receive staff approval before wholesale access is granted.
+- No database sync or deployment is performed automatically by the importer. The QuickBooks inventory sync is the one scheduled writer, and it touches only the two inventory columns.
 
 ## Operational ownership
 

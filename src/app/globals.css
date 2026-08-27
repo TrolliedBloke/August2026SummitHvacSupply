@@ -2,6 +2,7 @@
 @import "../styles/tokens.css";
 
 @theme inline {
+
   --color-canvas: var(--canvas);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);

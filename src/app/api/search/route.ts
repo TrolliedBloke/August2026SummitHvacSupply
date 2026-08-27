@@ -1,11 +1,16 @@
 import { NextResponse } from "next/server";
 import { productHref, searchStorefrontSkus } from "@/lib/storefront/catalog";
+import { applyLiveInventory, getLiveInventory } from "@/lib/storefront/live-inventory";
 import { recordEvent } from "@/lib/backend/events";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const q = searchParams.get("q") ?? "";
-  const results = searchStorefrontSkus(q).map((sku) => ({
+  // Search results carry availability, so they get the same live counts the
+  // catalog page shows. A result that says "in stock" in one place and nothing
+  // in the other reads as a bug.
+  const live = await getLiveInventory();
+  const results = searchStorefrontSkus(q).map((match) => applyLiveInventory(match, live)).map((sku) => ({
     id: sku.id,
     sku: sku.sku,
     modelNumber: sku.modelNumber,
