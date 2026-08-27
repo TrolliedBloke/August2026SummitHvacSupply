@@ -9,13 +9,11 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",
-    // Build outputs from the NEXT_DIST_DIR overrides used by the release and
-    // verification scripts. tsconfig.json and .gitignore already list all
-    // three; .next-verify was missing here, so linting after a verification
-    // build reported hundreds of errors in generated code.
-    ".next-e2e/**",
-    ".next-release/**",
-    ".next-verify/**",
+    // Every NEXT_DIST_DIR override, matching .gitignore's own `/.next-*/`.
+    // These were listed one directory at a time and the list kept going stale:
+    // linting after a build into a dir nobody had thought to add reported
+    // hundreds of errors in generated code. A glob cannot fall behind.
+    ".next-*/**",
     "out/**",
     "build/**",
     "playwright-report/**",
