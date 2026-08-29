@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus, Check } from "lucide-react";
+import { Minus, Plus, Check } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
 import type { StorefrontSku } from "@/lib/storefront/catalog";
@@ -11,24 +11,31 @@ export function AddToQuote({
   sku,
   size = "md",
   full = false,
+  withQuantity = false,
+  variant = "solid",
 }: {
   sku: StorefrontSku;
   size?: "sm" | "md";
   full?: boolean;
+  withQuantity?: boolean;
+  variant?: "solid" | "outline";
 }) {
   const { add } = useQuote();
   const [added, setAdded] = React.useState(false);
+  const [quantity, setQuantity] = React.useState(1);
 
   function handle() {
-    add({
-      skuId: sku.id,
-      sku: sku.sku,
-      modelNumber: sku.modelNumber,
-      title: sku.title,
-      image: sku.image,
-      unitPrice: sku.retailPrice ?? 0,
-      available: sku.available,
-    });
+    for (let index = 0; index < quantity; index += 1) {
+      add({
+        skuId: sku.id,
+        sku: sku.sku,
+        modelNumber: sku.modelNumber,
+        title: sku.title,
+        image: sku.image,
+        unitPrice: sku.retailPrice ?? 0,
+        available: sku.available,
+      });
+    }
     setAdded(true);
     window.setTimeout(() => setAdded(false), 1400);
   }
@@ -47,21 +54,53 @@ export function AddToQuote({
       ? `Check availability for ${sku.title}`
       : `Request price for ${sku.title}`;
 
-  return (
+  const action = (
     <button
       onClick={handle}
       aria-label={ariaLabel}
-      className={`inline-flex items-center justify-center gap-2 rounded-(--r-sm) font-medium
-        transition-[background-color,box-shadow] duration-150 ease-out active:translate-y-px
-        ${full ? "w-full" : ""} ${sizing}
+      className={`inline-flex items-center justify-center gap-2 rounded-(--r-sm) border font-medium
+        transition-[background-color,color,border-color] duration-150 ease-out active:translate-y-px
+        ${full || withQuantity ? "w-full" : ""} ${sizing}
         ${
           added
-            ? "bg-eco-tint text-eco-ink"
-            : "bg-brand text-brand-ink hover:bg-brand-hover shadow-[var(--shadow-sm)]"
+            ? "border-brand bg-brand-tint text-brand"
+            : variant === "outline"
+              ? "border-brand bg-brand-tint text-brand hover:bg-brand hover:text-brand-ink"
+              : "border-brand bg-brand text-brand-ink hover:bg-brand-hover"
         }`}
     >
       {added ? <Check size={16} strokeWidth={2.5} /> : <Plus size={16} strokeWidth={2.5} />}
       {added ? addedLabel : label}
     </button>
+  );
+
+  if (!withQuantity) return action;
+
+  return (
+    <div className="flex flex-col items-stretch gap-2 sm:flex-row">
+      <div className="grid h-9 shrink-0 grid-cols-[32px_30px_32px] overflow-hidden rounded-(--r-sm) border border-line bg-surface-1">
+        <button
+          type="button"
+          aria-label={`Decrease quantity for ${sku.title}`}
+          onClick={() => setQuantity((value) => Math.max(1, value - 1))}
+          disabled={quantity === 1}
+          className="grid place-items-center text-ink-1 transition-colors hover:bg-surface-2 disabled:text-ink-4"
+        >
+          <Minus size={13} aria-hidden="true" />
+        </button>
+        <output aria-label={`Quantity for ${sku.title}`} className="part-number grid place-items-center border-x border-line text-xs text-ink-1">
+          {quantity}
+        </output>
+        <button
+          type="button"
+          aria-label={`Increase quantity for ${sku.title}`}
+          onClick={() => setQuantity((value) => Math.min(99, value + 1))}
+          className="grid place-items-center text-ink-1 transition-colors hover:bg-surface-2"
+        >
+          <Plus size={13} aria-hidden="true" />
+        </button>
+      </div>
+      <div className="min-w-0 flex-1">{action}</div>
+    </div>
   );
 }

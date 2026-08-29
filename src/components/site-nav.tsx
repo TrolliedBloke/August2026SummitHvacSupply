@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Lock, Search, ShoppingCart, MapPin, UserRound } from "lucide-react";
+import { Check, Menu, X, Lock, Search, ShoppingCart, MapPin, Phone, UserRound } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
 import { SITE } from "@/lib/site";
@@ -33,6 +33,17 @@ const RESOURCES = [
 
 const RESOURCE_HREFS = ["/resources", ...RESOURCES.map((resource) => resource.href)];
 
+const CATEGORY_RAIL = [
+  { href: "/products?category=mini-splits", label: "Mini Splits" },
+  { href: "/products?q=condenser", label: "Condensers" },
+  { href: "/products?category=furnaces", label: "Furnaces" },
+  { href: "/products?category=air-handlers", label: "Air Handlers" },
+  { href: "/products?category=evaporator-coils", label: "Coils" },
+  { href: "/products?category=line-sets", label: "Line Sets" },
+  { href: "/products?refrigerant=R-454B", label: "Refrigerant" },
+  { href: "/products?category=controls", label: "Thermostats" },
+] as const;
+
 /* Shared by every row-3 entry so the run reads as an even rhythm: the spacing
    is padding carried by each item, not a fixed gap between labels of very
    different widths. */
@@ -55,8 +66,8 @@ function Wordmark() {
         width={1010}
         height={280}
         preload
-        sizes="160px"
-        className="h-9 w-auto object-contain lg:h-10"
+        sizes="(min-width: 1024px) 270px, 160px"
+        className="h-9 w-auto object-contain md:h-12 lg:h-20"
       />
     </Link>
   );
@@ -432,6 +443,96 @@ function ResourcesMenu({ pathname }: { pathname: string }) {
   );
 }
 
+/* Desktop account entry follows the same useful pattern as a mature retail
+   header: the trigger answers "where do I sign in?" immediately, while the
+   anchored panel explains why an account helps before sending the customer to
+   the full account or authentication route. The panel contains links, not a
+   miniature login form, so credentials still enter the dedicated auth page. */
+function AccountMenu() {
+  const [open, setOpen] = React.useState(false);
+  const wrapRef = React.useRef<HTMLDivElement>(null);
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
+  const close = React.useCallback(() => setOpen(false), []);
+  useDismissable(open, close, wrapRef, triggerRef);
+
+  return (
+    <div ref={wrapRef} className="relative hidden lg:block">
+      <button
+        ref={triggerRef}
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+        aria-expanded={open}
+        aria-haspopup="dialog"
+        aria-controls="account-menu-panel"
+        className={`inline-flex h-11 items-center gap-2 whitespace-nowrap rounded-(--r-sm) px-3 text-sm font-medium text-ink-1 transition-colors ${
+          open ? "bg-surface-1" : "hover:bg-surface-1"
+        }`}
+      >
+        <UserRound size={20} strokeWidth={ICON_STROKE} aria-hidden="true" />
+        Sign in
+      </button>
+
+      {open && (
+        <div
+          id="account-menu-panel"
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby="account-menu-title"
+          className="absolute right-[-60px] top-[calc(100%+1rem)] z-50 w-[360px] rounded-(--r-sm) border border-line-strong bg-surface-1 p-6 shadow-[0_12px_32px_rgba(28,28,26,0.14)]"
+        >
+          <span
+            aria-hidden="true"
+            className="absolute -top-[9px] right-[99px] size-4 rotate-45 border-l border-t border-line-strong bg-surface-1"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              close();
+              triggerRef.current?.focus();
+            }}
+            aria-label="Close account menu"
+            className="absolute right-3 top-3 grid size-9 place-items-center rounded-(--r-sm) text-ink-3 transition-colors hover:bg-surface-2 hover:text-ink-1"
+          >
+            <X size={20} strokeWidth={ICON_STROKE} />
+          </button>
+
+          <p id="account-menu-title" className="pr-8 text-[15px] leading-6 text-ink-2">
+            <strong className="font-semibold text-ink-1">SIGN IN</strong> for a better buying experience:
+          </p>
+          <ul className="mt-3 space-y-2.5 text-sm leading-5 text-ink-2">
+            {[
+              "Faster checkout",
+              "Order tracking and saved equipment",
+              "Account pricing for approved trade customers",
+            ].map((benefit) => (
+              <li key={benefit} className="flex items-start gap-2.5">
+                <Check size={17} strokeWidth={2.25} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-5 flex flex-col gap-2.5">
+            <Link
+              href="/account"
+              onClick={close}
+              className="flex h-12 items-center justify-center rounded-(--r-sm) bg-brand px-4 text-[15px] font-semibold text-white transition-colors hover:bg-brand-hover"
+            >
+              Create account
+            </Link>
+            <Link
+              href="/portal/login"
+              onClick={close}
+              className="flex h-12 items-center justify-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-[15px] font-semibold text-ink-1 transition-colors hover:bg-surface-2"
+            >
+              Sign in
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function CartButton() {
   const { count, toggle } = useQuote();
   // The count comes from localStorage (client-only), so defer showing it until
@@ -447,7 +548,7 @@ function CartButton() {
       <span className="relative grid size-6 place-items-center">
         <ShoppingCart size={24} strokeWidth={ICON_STROKE} />
         {showCount && (
-          <span className="tnum absolute -right-2 -top-1.5 grid min-w-[18px] place-items-center rounded-full bg-brand px-1 font-mono text-[10px] font-medium leading-[18px] text-brand-ink">
+          <span className="tnum absolute -right-2 -top-1.5 grid min-w-[18px] place-items-center rounded-full bg-ink-1 px-1 font-mono text-[10px] font-medium leading-[18px] text-white">
             {count}
           </span>
         )}
@@ -473,9 +574,11 @@ function CartButton() {
 function UtilityStrip() {
   return (
     <div className="hidden bg-[var(--ink-panel)] md:block">
-      <div className="mx-auto flex h-9 w-full max-w-[var(--nav-max)] items-center gap-4 px-5 text-xs text-white/80 sm:px-6 lg:px-[var(--counter-pad)]">
+      <div className="mx-auto flex h-10 w-full max-w-[var(--nav-max)] items-center gap-4 px-5 text-xs font-medium text-white sm:px-6 lg:px-[var(--counter-pad)]">
         <MapPin size={14} strokeWidth={ICON_STROKE} className="shrink-0" aria-hidden="true" />
-        <span className="-ml-2.5 whitespace-nowrap">Newark — Open until 5:00 PM</span>
+        <span className="-ml-2.5 whitespace-nowrap">Newark, CA</span>
+        <span aria-hidden="true">·</span>
+        <span className="-ml-2 whitespace-nowrap">Open until 5:00 PM</span>
         <Link
           href="/locations/newark"
           className="whitespace-nowrap underline underline-offset-2 transition-colors hover:text-white"
@@ -485,10 +588,12 @@ function UtilityStrip() {
         {/* Sign in lives in the row below, beside the cart, where an account
             control is looked for. Carrying it here as well put the same link on
             screen twice. */}
-        <div className="ml-auto flex items-center gap-6">
-          <a href={SITE.phoneHref} className="tnum whitespace-nowrap transition-colors hover:text-white">
+        <div className="ml-auto flex items-center gap-5">
+          <a href={SITE.phoneHref} className="tnum inline-flex items-center gap-2 whitespace-nowrap transition-colors hover:text-white">
+            <Phone size={14} strokeWidth={ICON_STROKE} aria-hidden="true" />
             {SITE.phone}
           </a>
+          <span className="h-5 w-px bg-white/35" aria-hidden="true" />
           <Link href="/dealers" className="whitespace-nowrap transition-colors hover:text-white">
             Apply for trade account
           </Link>
@@ -517,12 +622,14 @@ export function SiteNav() {
   const isActive = (href: string) => href === activeHref;
 
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-surface-1">
+    <header className="sticky top-0 z-30 bg-surface-2">
       <UtilityStrip />
 
-      {/* Row 2. Height is the search field plus an even 10px above and below --
-          the field owns the row, nothing pads around it. */}
-      <div className="mx-auto flex w-full max-w-[var(--nav-max)] items-center gap-6 px-5 py-2.5 sm:px-6 lg:px-[var(--counter-pad)]">
+      {/* Row 2 follows the approved retail-header proportion: compact on
+          phones, then an 80px light band on larger screens. The larger Summit
+          lockup lets the mountain do the same visual work as the reference
+          mark without redrawing or altering the brand asset. */}
+      <div className="mx-auto flex w-full max-w-[var(--nav-max)] items-center gap-6 bg-surface-2 px-5 py-2.5 sm:px-6 md:py-[18px] lg:px-[var(--counter-pad)] lg:py-2.5">
         <Wordmark />
         {/* The field is capped rather than greedy. Left to flex-1 it ran 1092px
             of a 1400px row -- 78% of the header against a right cluster of one
@@ -531,21 +638,12 @@ export function SiteNav() {
             hold their own space, which is what makes a retail header feel
             balanced rather than empty on the right. */}
         <div className="hidden min-w-0 flex-1 justify-center md:flex">
-          <div className="w-full max-w-[560px]">
+          <div className="w-full max-w-[640px]">
             <SearchField inline withButton />
           </div>
         </div>
         <div className="ml-auto flex items-center gap-1 md:ml-0">
-          {/* Labelled, not icon-only. An unlabelled glyph gives the right side
-              no weight to balance against, and "Sign in" is the one control a
-              returning trade buyer looks for first. */}
-          <Link
-            href="/account"
-            className="hidden h-11 items-center gap-2 whitespace-nowrap rounded-(--r-sm) px-3 text-sm font-medium text-ink-1 transition-colors hover:bg-surface-2 lg:inline-flex"
-          >
-            <UserRound size={18} strokeWidth={ICON_STROKE} aria-hidden="true" />
-            Sign in
-          </Link>
+          <AccountMenu />
           <CartButton />
           <button
             onClick={() => setMobileOpen((o) => !o)}
@@ -558,11 +656,11 @@ export function SiteNav() {
         </div>
       </div>
 
-      {/* Row 3. Inline nav appears at xl, exactly where the hamburger above
-          hides -- the two switch at the same breakpoint so navigation is never
-          unreachable. */}
-      <nav aria-label="Product categories" className="hidden border-t border-line xl:block">
-        <div className="mx-auto flex w-full max-w-[var(--nav-max)] items-center px-5 py-1.5 sm:px-6 lg:px-[var(--counter-pad)]">
+      {/* Primary destinations and the product rail are one navigation zone.
+          Only the content-width rule after row one separates their hierarchy;
+          there is no full-width bar between them or rule beneath the rail. */}
+      <nav aria-label="Store navigation" className="bg-surface-2">
+        <div className="mx-auto hidden w-full max-w-[var(--nav-max)] items-center border-b border-line px-5 py-1.5 sm:px-6 lg:px-[var(--counter-pad)] xl:flex">
           {/* The trigger sits left of the divider; every destination link sits
               right of it, so the distinction is legible at a glance. */}
           <div className="-ml-5">
@@ -584,6 +682,17 @@ export function SiteNav() {
             <li>
               <ResourcesMenu pathname={pathname} />
             </li>
+          </ul>
+        </div>
+        <div className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <ul className="mx-auto flex w-max min-w-full max-w-[var(--nav-max)] items-center gap-12 px-5 py-2 text-xs text-ink-2 sm:px-6 lg:px-[var(--counter-pad)]">
+            {CATEGORY_RAIL.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="whitespace-nowrap transition-colors hover:text-ink-1">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </nav>

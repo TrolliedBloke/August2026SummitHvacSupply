@@ -1,137 +1,72 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, Upload } from "lucide-react";
+import { ChevronDown, ClipboardList, List, Upload } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "@/components/quote-context";
 
-/* The landing panel: one surface, three ways in. Search is the default because
-   most visitors arrive with a part number. Quick order and CSV upload exist
-   because a contractor arrives with a job list, not a single SKU. */
+/* Search lives in the shared header. This panel is deliberately limited to the
+   two bulk-order workflows that are distinct from search: a contractor arrives
+   with either a pasted job list or a CSV, and neither should compete with the
+   category-led shopping choices above it. */
 
-const TABS = ["Search", "Quick order", "Upload CSV"] as const;
-type Tab = (typeof TABS)[number];
-
-const EXAMPLES = ["TCL09KIDU", "TOS12KODU", "Carrier 3 ton", "line set"];
-
-function tabId(name: string) {
-  return name.replace(/\s/g, "-");
-}
+const TOOLS = ["Quick order", "Upload CSV"] as const;
+type Tool = (typeof TOOLS)[number];
 
 export function CounterPanel() {
-  const [tab, setTab] = React.useState<Tab>("Search");
+  const [activeTool, setActiveTool] = React.useState<Tool | null>(null);
 
   return (
-    <div className="overflow-hidden rounded-(--r-md) border border-line bg-surface-1">
-      <div role="tablist" aria-label="How to order" className="flex gap-1 border-b border-line px-2 pt-2">
-        {TABS.map((name) => (
-          <button
-            key={name}
-            role="tab"
-            type="button"
-            id={`counter-tab-${tabId(name)}`}
-            aria-selected={tab === name}
-            aria-controls={`counter-panel-${tabId(name)}`}
-            onClick={() => setTab(name)}
-            className={`-mb-px border-b-2 px-3.5 py-2.5 text-sm transition-colors duration-150 ${
-              tab === name
-                ? "border-brand font-medium text-ink-1"
-                : "border-transparent text-ink-2 hover:text-ink-1"
-            }`}
-          >
-            {name}
-          </button>
-        ))}
-      </div>
-
-      <div
-        role="tabpanel"
-        id={`counter-panel-${tabId(tab)}`}
-        aria-labelledby={`counter-tab-${tabId(tab)}`}
-        className="p-5"
-      >
-        {tab === "Search" && <SearchTab />}
-        {tab === "Quick order" && <QuickOrderTab />}
-        {tab === "Upload CSV" && <UploadTab />}
-      </div>
-    </div>
-  );
-}
-
-/* Search + compatibility --------------------------------------------------- */
-
-function SearchTab() {
-  return (
-    <div className="grid gap-7 md:grid-cols-2 md:gap-8">
-      <section className="min-w-0">
-        <h2 className="text-[0.95rem] font-medium text-ink-1">Find a product</h2>
-        <form action="/products" className="mt-3 flex gap-2.5" data-conversion-hook="homepage-search-start">
-          <label htmlFor="counter-search" className="sr-only">
-            Search by part number, model number, or product
-          </label>
-          <div className="flex min-w-0 flex-1 items-center gap-1.5 rounded-(--r-sm) border border-line-strong bg-surface-1 px-2.5">
-            <Search size={17} strokeWidth={1.8} className="shrink-0 text-ink-3" aria-hidden="true" />
-            <input
-              id="counter-search"
-              name="q"
-              type="search"
-              placeholder="Part #, model #, or product"
-              className="min-w-0 flex-1 bg-transparent py-2.5 font-mono text-[12px] text-ink-1 outline-none placeholder:text-ink-4"
-            />
+    <div className="overflow-hidden rounded-(--r-sm) border border-line bg-surface-1">
+      <div className="flex flex-col gap-4 px-5 py-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex items-center gap-4">
+          <ClipboardList size={32} strokeWidth={1.4} className="shrink-0 text-ink-1" aria-hidden="true" />
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-7">
+            <p className="counter-heading whitespace-nowrap text-[1.05rem] leading-none text-ink-1">Contractor ordering</p>
+            <p className="text-sm text-ink-2">Order by SKU or upload your material list.</p>
           </div>
-          <button
-            type="submit"
-            className="h-11 shrink-0 rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink transition-colors duration-150 hover:bg-brand-hover"
-          >
-            Search
-          </button>
-        </form>
-
-        <div className="mt-3.5 flex flex-wrap items-center gap-1.5 text-sm text-ink-2">
-          <span className="w-full">Popular parts:</span>
-          {EXAMPLES.map((example) => (
-            <Link
-              key={example}
-              href={`/products?q=${encodeURIComponent(example)}`}
-              className="part-number rounded-(--r-sm) border border-line px-1.5 py-1 text-[11px] text-ink-1 transition-colors duration-150 hover:border-line-strong"
-            >
-              {example}
-            </Link>
-          ))}
         </div>
-      </section>
+        <div className="grid gap-2 sm:grid-cols-2 lg:w-[430px]" aria-label="Contractor ordering tools">
+          {TOOLS.map((name) => {
+            const expanded = activeTool === name;
+            return (
+              <button
+                key={name}
+                type="button"
+                id={`contractor-tool-${name === "Quick order" ? "quick" : "csv"}`}
+                aria-expanded={expanded}
+                aria-controls="contractor-order-panel"
+                onClick={() => setActiveTool(expanded ? null : name)}
+                className={`inline-flex h-11 items-center justify-center gap-2.5 rounded-(--r-sm) border px-4 text-sm font-medium outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 ${
+                  expanded
+                    ? "border-ink-1 bg-surface-2 text-ink-1"
+                    : "border-line-strong bg-surface-1 text-ink-1 hover:bg-surface-2"
+                }`}
+              >
+                {name === "Quick order" ? <List size={17} aria-hidden="true" /> : <Upload size={17} aria-hidden="true" />}
+                {name}
+                <ChevronDown
+                  size={15}
+                  strokeWidth={1.8}
+                  className={`transition-transform duration-150 ${expanded ? "rotate-180" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
-      <section className="min-w-0 md:border-l md:border-line md:pl-4">
-        <h2 className="text-[0.95rem] font-medium text-ink-1">Verify compatibility</h2>
-        <p className="mt-1.5 text-sm leading-6 text-ink-2">
-          Enter the model number from the equipment nameplate.
-        </p>
-        <form action="/products" className="mt-3 flex flex-col gap-2.5 sm:flex-row" data-conversion-hook="homepage-compat-start">
-          <label htmlFor="counter-compat" className="sr-only">
-            Equipment model number
-          </label>
-          <input
-            id="counter-compat"
-            name="q"
-            type="search"
-            placeholder="Equipment model number"
-            className="min-w-0 flex-1 rounded-(--r-sm) border border-line-strong bg-surface-1 px-2 py-2.5 font-mono text-[12px] text-ink-1 outline-none placeholder:text-ink-4"
-          />
-          <button
-            type="submit"
-            className="h-11 shrink-0 rounded-(--r-sm) border border-line-strong bg-surface-1 px-2 text-[12px] font-medium text-ink-1 transition-colors duration-150 hover:bg-surface-2"
-          >
-            Find matching parts
-          </button>
-        </form>
-        <Link
-          href="/tools/model-number-decoder"
-          className="mt-3 inline-block text-sm text-ink-1 underline underline-offset-4"
+      {activeTool && (
+        <div
+          role="region"
+          id="contractor-order-panel"
+          aria-labelledby={`contractor-tool-${activeTool === "Quick order" ? "quick" : "csv"}`}
+          className="border-t border-line p-5"
         >
-          Where do I find the model number?
-        </Link>
-      </section>
+          {activeTool === "Quick order" ? <QuickOrderTab /> : <UploadTab />}
+        </div>
+      )}
     </div>
   );
 }
@@ -220,7 +155,7 @@ function UploadTab() {
             {fileName ? <span className="part-number text-ink-1">{fileName}</span> : "Choose a CSV file"}
           </label>
           <input id="csv-upload" type="file" accept=".csv,text/csv" onChange={onFile} className="sr-only" />
-          {error && <p className="mt-2 text-sm text-ink-1">{error}</p>}
+          {error && <p role="alert" className="mt-2 text-sm text-ink-1">{error}</p>}
         </>
       }
     />
@@ -301,7 +236,7 @@ function BulkForm({
         </span>
       </div>
       {misses.length > 0 && (
-        <p className="mt-3 text-sm leading-6 text-ink-1">
+        <p role="status" aria-live="polite" className="mt-3 text-sm leading-6 text-ink-1">
           Not matched: <span className="part-number">{misses.join(", ")}</span>. Search these by
           hand or send the list to the counter.
         </p>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Store } from "lucide-react";
 import { AddToQuote } from "@/components/add-to-quote";
 import { getStorefrontSku, productHref, type StorefrontSku } from "@/lib/storefront/catalog";
 import { applyLiveInventory, getLiveInventory } from "@/lib/storefront/live-inventory";
@@ -25,18 +25,13 @@ function currency(value: number) {
   }).format(value);
 }
 
-/** The spec slot: exactly two facts on one monospace line, the way the counter
-    labels a box ("50 FT · A2L RATED"). Capacity leads; the second slot goes to
-    the refrigerant class when there is one, because on this catalog A2L is the
-    fact that decides whether a contractor may install the unit at all, and
-    otherwise to voltage. A third fact overflows 190px and gets ellipsized,
-    which loses the A2L flag -- the one thing that must not be hidden. */
 function specLine(sku: StorefrontSku): string {
-  const capacity = sku.btu
-    ? `${sku.btu.toLocaleString("en-US")} BTU`
-    : sku.dimensions || "";
-  const qualifier = sku.refrigerantClass === "A2L" ? "A2L rated" : sku.voltage;
-  return [capacity, qualifier].filter(Boolean).join("  ·  ");
+  const capacity = sku.tonnage
+    ? `${Number.isInteger(sku.tonnage) ? sku.tonnage : sku.tonnage.toFixed(1)} TON`
+    : sku.btu
+      ? `${sku.btu.toLocaleString("en-US")} BTU`
+      : "";
+  return [capacity, sku.refrigerant, sku.voltage].filter(Boolean).join(" / ");
 }
 
 export async function CounterStock() {
@@ -47,35 +42,23 @@ export async function CounterStock() {
   if (skus.length === 0) return null;
 
   return (
-    <section className="bg-canvas pb-2 pt-6">
+    <section className="bg-canvas pb-1 pt-5">
       <CounterWidth>
-        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
-          <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1.5">
-            {/* Not "in stock today". Counts now arrive from QuickBooks, but
-                they arrive per SKU and only for products the warehouse actually
-                tracks -- a blanket heading would still be claiming something
-                the data cannot support for the whole catalog. The heading
-                states what is always true (these ship and pick up from Newark)
-                and each card states its own position, counted or not. */}
-            <h2 className="counter-heading border-b-2 border-brand pb-1 text-[1.25rem] leading-none text-ink-1">
-              Available from Newark
-            </h2>
-            <p className="max-w-[46ch] text-sm leading-6 text-ink-2">
-              Prices shown are list. Trade accounts see net pricing.
-              <br className="hidden sm:block" /> Pick up in 30 minutes or get next-day delivery.
-            </p>
-          </div>
+        <div className="flex items-baseline justify-between gap-5">
+          <h2 className="counter-heading text-[1.25rem] leading-none text-ink-1">
+            Available from Newark
+          </h2>
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 text-sm font-medium text-ink-1 underline underline-offset-4"
+            className="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-brand hover:underline hover:underline-offset-4"
           >
             View all products
             <ArrowRight size={15} />
           </Link>
         </div>
 
-        <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-          {skus.map((sku) => (
+        <div className="grid grid-cols-2 gap-x-3 gap-y-5 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-9">
+          {skus.slice(0, 4).map((sku) => (
             <StockCard key={sku.id} sku={sku} />
           ))}
         </div>
@@ -90,65 +73,62 @@ function StockCard({ sku }: { sku: StorefrontSku }) {
   // count. Everything else says so plainly rather than implying a shelf.
   const verified = sku.availabilityVerified && sku.available > 0;
 
+  const low = verified && sku.available <= 2;
+  const productName = sku.title.replace(new RegExp(`^${sku.brand}\\s*`, "i"), "") || sku.title;
+
   return (
-    <article className="flex flex-col rounded-(--r-md) border border-line bg-surface-1 p-3">
+    <article className="flex min-w-0 flex-col rounded-(--r-sm) border border-transparent px-3 pb-3 pt-2 transition-[background-color,border-color] duration-150 ease-out hover:border-line hover:bg-surface-1 sm:px-4 sm:pb-4 sm:pt-3">
       <Link
         href={productHref(sku)}
-        className="relative mb-2.5 block aspect-[2/1] w-full overflow-hidden"
+        className="relative mb-0.5 block h-[140px] w-full overflow-hidden sm:h-[172px]"
       >
         <Image
           src={sku.image}
           alt={sku.title}
           fill
           loading="lazy"
-          sizes="(min-width: 1024px) 220px, (min-width: 640px) 50vw, 100vw"
-          className="object-contain"
+          sizes="(min-width: 1280px) 320px, (min-width: 1024px) 33vw, 50vw"
+          className="object-contain p-1"
         />
       </Link>
 
-      <Link href={productHref(sku)} className="part-number text-sm font-medium text-ink-1">
-        {sku.sku}
+      <p className="text-xs font-medium uppercase tracking-[0.04em] text-ink-1">{sku.brand}</p>
+      <Link href={productHref(sku)} className="mt-0.5 min-h-9 text-sm font-medium leading-[18px] text-ink-1 hover:underline">
+        {productName}
       </Link>
-      <p className="mt-0.5 text-sm leading-5 text-ink-2">{sku.title}</p>
       {spec && (
-        <p className="part-number mt-1.5 truncate text-[0.7rem] uppercase leading-5 text-ink-3" title={spec}>
+        <p className="part-number mt-1 truncate text-[0.65rem] uppercase leading-5 text-ink-2 sm:text-[0.7rem]" title={spec}>
           {spec}
         </p>
       )}
-
-      <p className="mt-1.5 text-[1.05rem] font-medium text-ink-1">
-        {sku.retailPrice === null ? "Price on request" : currency(sku.retailPrice)}
+      <p className="part-number mt-0.5 truncate text-[0.65rem] uppercase leading-5 text-ink-2 sm:text-[0.7rem]">
+        {sku.sku}
       </p>
 
-      {/* Stock state and the action share one row, as in the reference. The
-          button label is set by AddToQuote from the SKU's real purchase state,
-          so it reads "Check availability" while the catalog is quote-only and
-          becomes "Add to cart" the moment a SKU is sellable. */}
-      {/* The reference puts stock and the action on one row, which works when
-          the button says "Add" (54px). This catalog is quote-only, so the
-          button says "Check availability" (119px) and leaves 59px for the
-          stock text -- not enough. Stock and fulfillment share the row
-          instead, and the button spans beneath. Revisit once real inventory
-          makes these SKUs sellable and the label shortens to "Add to cart". */}
+      <p className="part-number mt-1 text-[1.05rem] font-medium text-ink-1">
+        {sku.retailPrice === null ? "Price on request" : currency(sku.retailPrice)}
+        {sku.retailPrice !== null && <span className="ml-2 font-sans text-[0.62rem] font-normal uppercase text-ink-2">List</span>}
+      </p>
+      <Link href="/portal/login" className="mt-0.5 text-xs text-ink-2 hover:underline hover:decoration-brand hover:underline-offset-4">
+        Sign in for net pricing
+      </Link>
+
       <div className="mt-auto pt-2">
-        <div className="flex items-center justify-between gap-2">
-          <p className="flex min-w-0 items-center gap-1.5 text-xs text-ink-2">
-            <span
-              className={`size-2 shrink-0 rounded-full ${verified ? "bg-brand" : "bg-ink-4"}`}
-              aria-hidden="true"
-            />
-            <span className="part-number truncate">
-              {verified ? `${sku.available} in stock` : "Stock at order"}
-            </span>
-          </p>
-          {/* Both fulfillment methods, on every card. The page named will-call
-              three times and delivery zero times before this line existed. */}
-          <p className="part-number shrink-0 text-[0.62rem] uppercase text-ink-3">
-            {FULFILLMENT.bothMethods}
-          </p>
-        </div>
-        <div className="mt-2">
-          <AddToQuote sku={sku} size="sm" full />
+        <p className="flex min-w-0 items-center gap-2 text-xs text-ink-1">
+          <span
+            className={`size-2 shrink-0 rounded-full ${low ? "bg-[var(--amber)]" : verified ? "bg-brand" : "bg-ink-4"}`}
+            aria-hidden="true"
+          />
+          <span className="truncate">
+            {verified ? (low ? `${sku.available} left` : `${sku.available} in Newark`) : "Stock at order"}
+          </span>
+        </p>
+        <p className="mt-1.5 flex items-center gap-2 text-xs text-ink-2">
+          <Store size={13} strokeWidth={1.7} aria-hidden="true" />
+          {verified ? "Pickup today" : FULFILLMENT.bothMethods}
+        </p>
+        <div className="mt-2.5">
+          <AddToQuote sku={sku} size="sm" withQuantity variant="outline" />
         </div>
       </div>
     </article>
@@ -157,7 +137,7 @@ function StockCard({ sku }: { sku: StorefrontSku }) {
 
 function CounterWidth({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-4 w-auto max-w-[var(--counter-max)] px-0 sm:mx-auto sm:w-full sm:px-6 lg:px-[var(--counter-pad)]">
+    <div className="mx-auto w-full max-w-[var(--nav-max)] px-4 sm:px-6 lg:px-[var(--counter-pad)]">
       {children}
     </div>
   );

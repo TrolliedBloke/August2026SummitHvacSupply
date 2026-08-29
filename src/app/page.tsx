@@ -6,14 +6,15 @@ import {
   ArrowRight,
   BadgeCheck,
   ClipboardCheck,
+  HardHat,
   Store,
   Truck,
+  UserRound,
 } from "lucide-react";
 import { LinkButton } from "@/components/ui";
 import { CounterPanel } from "@/components/home/counter-panel";
 import { CounterStock } from "@/components/home/counter-stock";
 import { FulfillmentCard } from "@/components/home/fulfillment-card";
-import { TradePricingCard } from "@/components/home/trade-pricing-card";
 import { A2lStrip, HelpStrip } from "@/components/home/a2l-strip";
 import { getCategoryHeroImage, type CatalogCategory } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
@@ -29,27 +30,6 @@ export const metadata: Metadata = {
     "Search TCL, Tosot, Carrier, mini-split, central HVAC, furnace, cassette, and installation supply SKUs from Summit HVAC Supply.",
   alternates: { canonical: "/" },
 };
-
-const doors = [
-  {
-    eyebrow: "I know what I need",
-    title: "Browse products by category",
-    body: "Equipment, parts, tools, and common job materials.",
-    href: "/products",
-    cta: "Shop categories",
-    image: "/site/sketches/browse-categories.png",
-    mediaSide: "left" as const,
-  },
-  {
-    eyebrow: "I am replacing a system",
-    title: "Find the right system for your home",
-    body: "Answer a few basics. Get matched with equipment and installer help.",
-    href: "/homeowners#homeowner-request",
-    cta: "Start system selector",
-    image: "/site/sketches/home-system-green.png",
-    mediaSide: "right" as const,
-  },
-];
 
 /* `image` is the fallback only. Each tile prefers a verified product photo from
    its own category (see getCategoryHeroImage) and drops to the sketch when the
@@ -141,47 +121,35 @@ export default function HomePage() {
       />
 
       <section className="bg-canvas">
-        <CounterContainer className="pb-2 pt-8 md:pt-10">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10">
+        <FoldContainer className="pb-0 pt-5">
+          <div className="grid items-stretch gap-5 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,0.85fr)] lg:gap-8">
             <div className="min-w-0">
-              <h1 className="counter-heading text-[2.1rem] leading-[1.02] text-ink-1 sm:text-[2.6rem]">
-                Find it. Verify it.
-                <br />
-                Get it today.
+              <h1 className="counter-heading max-w-[760px] text-[2.1rem] leading-[1.02] text-ink-1 sm:text-[2.6rem]">
+                HVAC equipment and parts,
+                <br /> ready from Newark.
               </h1>
-              <p className="mt-3 text-[0.98rem] leading-7 text-ink-2">
-                Search by part number, equipment model, or product.
+              <p className="mt-2 text-[0.98rem] leading-6 text-ink-1">
+                Trade pricing for approved contractors. List pricing for homeowners.
               </p>
-              <div className="mt-5">
-                <CounterPanel />
-              </div>
+              <AudienceDoors />
             </div>
 
-            <div className="flex flex-col gap-3">
+            <div className="min-w-0">
               <FulfillmentCard />
-              <TradePricingCard />
             </div>
           </div>
-        </CounterContainer>
+        </FoldContainer>
       </section>
 
       <CounterStock />
 
-      <A2lStrip />
-
-      <HelpStrip />
-
-      <MobileBranchStrip />
-
-      <section className="bg-canvas pb-4 pt-5 md:pb-5">
-        <CounterContainer className="grid gap-2 lg:grid-cols-2">
-          {doors.map((door) => (
-            <DoorCard key={door.title} {...door} />
-          ))}
-        </CounterContainer>
+      <section className="bg-canvas pb-5 pt-0">
+        <FoldContainer>
+          <CounterPanel />
+        </FoldContainer>
       </section>
 
-      <section className="bg-canvas pb-4 pt-3">
+      <section className="bg-canvas py-7">
         <CounterContainer>
           <div className="mb-4 flex items-center justify-between gap-4">
             <h2 className="text-2xl font-medium leading-tight text-ink-1">Shop by category</h2>
@@ -197,6 +165,12 @@ export default function HomePage() {
           </div>
         </CounterContainer>
       </section>
+
+      <A2lStrip />
+
+      <HelpStrip />
+
+      <MobileBranchStrip />
 
       <BranchSection />
 
@@ -259,42 +233,32 @@ export default function HomePage() {
   );
 }
 
-function DoorCard({
-  eyebrow,
-  title,
-  body,
-  href,
-  cta,
-  image,
-  mediaSide,
-}: {
-  eyebrow: string;
-  title: string;
-  body: string;
-  href: string;
-  cta: string;
-  image: string;
-  mediaSide: "left" | "right";
-}) {
+function AudienceDoors() {
   return (
-    <article className={`grid min-h-[190px] items-center gap-4 rounded-(--r-md) border border-line bg-surface-1 p-5 md:p-6 ${
-      mediaSide === "right"
-        ? "grid-cols-[minmax(0,1fr)_120px] md:grid-cols-[minmax(0,1fr)_190px]"
-        : "grid-cols-[96px_minmax(0,1fr)] md:grid-cols-[118px_minmax(0,1fr)]"
-    }`}>
-      <div className={`relative aspect-square w-full ${mediaSide === "right" ? "order-2" : ""}`} aria-hidden="true">
-        <Image src={image} alt="" fill loading="lazy" sizes="(min-width: 768px) 190px, 120px" className="object-contain" />
-      </div>
-      <div className={`min-w-0 ${mediaSide === "right" ? "order-1" : ""}`}>
-        <p className="text-sm font-medium text-ink-1">{eyebrow}</p>
-        <h2 className="mt-2 max-w-[360px] text-[1.42rem] font-medium leading-tight text-ink-1 sm:text-[1.55rem]">{title}</h2>
-        <p className="mt-2 text-sm leading-6 text-ink-2">{body}</p>
-        <LinkButton href={href} variant="secondary" className="mt-4" data-conversion-hook="buyer-door-click">
-          {cta}
-          <ArrowRight size={15} />
-        </LinkButton>
-      </div>
-    </article>
+    <div className="mt-3 grid max-w-[680px] overflow-hidden rounded-(--r-sm) border border-brand md:grid-cols-2">
+      <Link
+        href="/portal/login"
+        data-conversion-hook="homepage-shop-contractor"
+        className="flex min-h-14 items-center justify-center gap-4 border-b border-brand px-5 py-2.5 transition-colors duration-150 hover:bg-brand-tint md:border-b-0 md:border-r"
+      >
+        <HardHat size={31} strokeWidth={1.4} className="shrink-0 text-brand" aria-hidden="true" />
+        <span>
+          <span className="block text-sm font-medium text-ink-1">Shop as contractor</span>
+          <span className="part-number mt-0.5 block text-[0.65rem] uppercase tracking-[0.06em] text-ink-2">Net pricing</span>
+        </span>
+      </Link>
+      <Link
+        href="/products"
+        data-conversion-hook="homepage-shop-homeowner"
+        className="flex min-h-14 items-center justify-center gap-4 px-5 py-2.5 transition-colors duration-150 hover:bg-brand-tint"
+      >
+        <UserRound size={31} strokeWidth={1.4} className="shrink-0 text-brand" aria-hidden="true" />
+        <span>
+          <span className="block text-sm font-medium text-ink-1">Shop as homeowner</span>
+          <span className="part-number mt-0.5 block text-[0.65rem] uppercase tracking-[0.06em] text-ink-2">List pricing</span>
+        </span>
+      </Link>
+    </div>
   );
 }
 
@@ -398,6 +362,20 @@ function CounterContainer({
 }) {
   return (
     <div className={`mx-4 w-auto max-w-[var(--counter-max)] px-0 sm:mx-auto sm:w-full sm:px-6 lg:px-[var(--counter-pad)] ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+function FoldContainer({
+  className = "",
+  children,
+}: {
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className={`mx-auto w-full max-w-[var(--nav-max)] px-4 sm:px-6 lg:px-[var(--counter-pad)] ${className}`}>
       {children}
     </div>
   );

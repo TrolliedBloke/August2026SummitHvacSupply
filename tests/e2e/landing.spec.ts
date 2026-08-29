@@ -34,25 +34,67 @@ test("landing page surfaces delivery alongside pickup, not pickup alone", async 
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
   const branch = page.getByRole("article").filter({ hasText: "NEWARK BRANCH" }).first();
-  await expect(branch.getByText("Pickup", { exact: true })).toBeVisible();
-  await expect(branch.getByText("Delivery", { exact: true })).toBeVisible();
-
-  // The address was absent entirely while the card was pickup-only; once a
-  // visitor is choosing between two methods, "where is it" is part of the choice.
-  await expect(branch.getByText(/5437 Central Ave/)).toBeVisible();
-  await expect(branch.getByRole("link", { name: "Directions" })).toBeVisible();
+  await expect(branch.getByRole("link", { name: "Next-day delivery" })).toBeVisible();
+  await expect(branch.getByText(/Order (in|tomorrow|before)/)).toBeVisible();
+  await expect(branch.getByText(/Will-call ready in 30 min/)).toBeVisible();
 
   // Product cards state both methods too.
-  await expect(page.getByText("PICKUP OR DELIVERY").first()).toBeVisible();
+  await expect(page.getByText(/Pickup or delivery/i).first()).toBeVisible();
 
-  await branch.getByRole("link", { name: "Delivery details" }).click();
+  await branch.getByRole("link", { name: "Next-day delivery" }).click();
   await expect(page).toHaveURL(/\/delivery$/);
   await expect(page.getByRole("heading", { name: /Delivery and pickup/i })).toBeVisible();
 });
 
+test("landing uses the header search once and routes product-led hero actions", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  await expect(page.locator("main input[type=search]")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /Shop as contractor/ })).toHaveAttribute("href", "/portal/login");
+  await expect(page.getByRole("link", { name: /Shop as homeowner/ })).toHaveAttribute("href", "/products");
+});
+
+test("featured product quantity controls keep a floor of one", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  const decrease = page.getByRole("button", { name: "Decrease quantity for TCL 2 Ton Air Handler" });
+  const increase = page.getByRole("button", { name: "Increase quantity for TCL 2 Ton Air Handler" });
+  const quantity = page.getByRole("status", { name: "Quantity for TCL 2 Ton Air Handler" });
+  await expect(decrease).toBeDisabled();
+  await expect(quantity).toHaveText("1");
+  await increase.click();
+  await expect(quantity).toHaveText("2");
+  await decrease.click();
+  await expect(quantity).toHaveText("1");
+  await expect(decrease).toBeDisabled();
+});
+
+test("contractor ordering opens, switches, and collapses without a duplicate search", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  const quick = page.getByRole("button", { name: "Quick order" });
+  const upload = page.getByRole("button", { name: "Upload CSV" });
+  await expect(quick).toHaveAttribute("aria-expanded", "false");
+  await expect(page.getByLabel("Part numbers and quantities")).toHaveCount(0);
+
+  await quick.click();
+  await expect(quick).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByLabel("Part numbers and quantities")).toBeVisible();
+
+  await upload.click();
+  await expect(upload).toHaveAttribute("aria-expanded", "true");
+  await expect(quick).toHaveAttribute("aria-expanded", "false");
+  await expect(page.getByLabel("Part numbers and quantities")).toHaveCount(0);
+  await expect(page.locator("#csv-upload")).toHaveCount(1);
+
+  await upload.click();
+  await expect(upload).toHaveAttribute("aria-expanded", "false");
+  await expect(page.locator("#csv-upload")).toHaveCount(0);
+});
+
 test("quick order resolves real SKUs and reports the ones it cannot match", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  await page.getByRole("tab", { name: "Quick order" }).click();
+  await page.getByRole("button", { name: "Quick order" }).click();
 
   await page
     .getByLabel("Part numbers and quantities")
@@ -64,6 +106,23 @@ test("quick order resolves real SKUs and reports the ones it cannot match", asyn
   await expect(page.getByText(/Not matched:/)).toBeVisible();
   await expect(page.getByText("NOTAREALSKU", { exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "TCL 2 Ton Air Handler" }).first()).toBeVisible();
+});
+
+test("CSV upload parses a headed job list before adding it to the order", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: "Upload CSV" }).click();
+
+  await page.locator("#csv-upload").setInputFiles({
+    name: "newark-job.csv",
+    mimeType: "text/csv",
+    buffer: Buffer.from("sku,qty\nTCL24KAHU,2\nNOTAREALSKU,1"),
+  });
+
+  await expect(page.getByText("newark-job.csv", { exact: true })).toBeVisible();
+  await expect(page.getByText("2 lines", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Add to order" }).click();
+  await expect(page.getByText(/Not matched:/)).toBeVisible();
+  await expect(page.getByText("NOTAREALSKU", { exact: true })).toBeVisible();
 });
 
 test("delivery page marks unconfirmed terms rather than presenting them as final", async ({ page }) => {
