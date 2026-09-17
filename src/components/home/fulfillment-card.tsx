@@ -20,7 +20,7 @@ export function FulfillmentCard({ open = true }: { open?: boolean }) {
       >
         Next-day delivery
       </Link>
-      <DeliveryCountdown cutoffHour={14} />
+      <DeliveryCountdown cutoffHour={FULFILLMENT.deliveryCutoffHour} />
 
       <hr className="my-4 border-0 border-t border-line" />
 

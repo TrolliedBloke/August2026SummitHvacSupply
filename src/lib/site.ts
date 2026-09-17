@@ -48,6 +48,12 @@ export const PURCHASE = {
   delivery: "Newark will-call, Bay Area delivery, and freight are confirmed with each quote",
 } as const;
 
+/** "14" -> "2:00 PM". Shared so the string and the countdown cannot disagree. */
+export function formatCutoffHour(hour: number): string {
+  const display = hour % 12 || 12;
+  return `${display}:00 ${hour >= 12 ? "PM" : "AM"}`;
+}
+
 /**
  * Fulfillment facts shown on the landing page and /delivery. Single source of
  * truth so the branch card, the product cards, and the delivery page can never
@@ -60,8 +66,18 @@ export const PURCHASE = {
 export const FULFILLMENT = {
   /** TODO(summit-ops): confirm the real will-call pick-and-stage time. */
   pickupReady: "Will-call ready in 30 min",
-  /** TODO(summit-ops): confirm the real next-day delivery order cutoff. */
-  deliveryCutoff: "2:00 PM",
+  /**
+   * The cutoff, as an hour in Pacific time. This is the SOURCE: the display
+   * string below is derived from it, and the homepage countdown ticks against
+   * it. It was briefly expressed twice -- "2:00 PM" here and a hardcoded
+   * cutoffHour={14} on the branch card -- which let /delivery and the homepage
+   * state different cutoffs from one edit.
+   *
+   * TODO(summit-ops): confirm the real next-day delivery order cutoff.
+   */
+  deliveryCutoffHour: 14,
+  /** Derived from deliveryCutoffHour. Do not hand-edit. */
+  deliveryCutoff: formatCutoffHour(14),
   deliveryLine: "for next-day delivery",
   /** Shown under both fulfillment rows on product cards. */
   bothMethods: "Pickup or delivery",

@@ -2,6 +2,8 @@
 
 import * as React from "react";
 
+import { formatCutoffHour } from "@/lib/site";
+
 const TIME_ZONE = "America/Los_Angeles";
 
 function pacificClock(now: Date) {
@@ -26,10 +28,9 @@ function deliveryLabel(cutoffHour: number) {
   return `Order in ${hours}h ${minutes}m`;
 }
 
-function formatCutoff(cutoffHour: number) {
-  const hour = cutoffHour % 12 || 12;
-  return `${hour}:00 ${cutoffHour >= 12 ? "PM" : "AM"}`;
-}
+// Re-exported from site.ts so this component and /delivery render the cutoff
+// identically; a second local copy is how the two drifted apart before.
+const formatCutoff = formatCutoffHour;
 
 export function DeliveryCountdown({ cutoffHour = 14 }: { cutoffHour?: number }) {
   // The stable server/client fallback prevents a clock-dependent hydration

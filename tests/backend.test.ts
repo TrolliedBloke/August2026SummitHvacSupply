@@ -12,6 +12,7 @@ import {
 import { createDemoOperationsData } from "../src/lib/backend/mock-data";
 import { checkoutSchema } from "../src/lib/backend/schemas";
 import { resolveUnitPrice } from "../src/lib/backend/pricing";
+import { FULFILLMENT, formatCutoffHour } from "../src/lib/site";
 import { fulfillmentWindows, isFulfillmentWindowAvailable } from "../src/lib/backend/fulfillment";
 import { createQuoteRequest, roleCanAccessAccount } from "../src/lib/backend/services";
 import { categorySitemapEntries, productSitemapEntries, renderSitemapIndex } from "../src/lib/seo/sitemaps";
@@ -441,5 +442,28 @@ describe("trade pricing fallback", () => {
 
   it("never charges a trade buyer above list on a bad trade row", () => {
     assert.equal(resolveUnitPrice(true, 9999, 2500), 2500);
+  });
+});
+
+describe("fulfillment cutoff is stated once", () => {
+  // The homepage countdown and /delivery render the same cutoff from different
+  // code paths. They were briefly two literals -- "2:00 PM" in site.ts and a
+  // hardcoded cutoffHour={14} on the branch card -- so one edit could leave the
+  // two pages promising different times to the same customer.
+  it("derives the display string from the hour", () => {
+    assert.equal(FULFILLMENT.deliveryCutoff, formatCutoffHour(FULFILLMENT.deliveryCutoffHour));
+  });
+
+  it("formats hours the way the counter says them", () => {
+    assert.equal(formatCutoffHour(14), "2:00 PM");
+    assert.equal(formatCutoffHour(9), "9:00 AM");
+    assert.equal(formatCutoffHour(12), "12:00 PM");
+    assert.equal(formatCutoffHour(0), "12:00 AM");
+  });
+
+  it("keeps the cutoff inside business hours", () => {
+    // A cutoff outside opening hours would be unmeetable, and the countdown
+    // would tick toward a time nobody is at the counter.
+    assert.ok(FULFILLMENT.deliveryCutoffHour > 7 && FULFILLMENT.deliveryCutoffHour < 17);
   });
 });
