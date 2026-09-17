@@ -54,7 +54,20 @@ const nextConfig: NextConfig = {
               // across environments) and the dev overlay fails loudly without
               // it -- verified in the browser console. React never uses eval()
               // in a production build, so the production policy stays strict.
-              `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://js.stripe.com`,
+              //
+              // va.vercel-scripts.com is likewise development ONLY.
+              // @vercel/analytics loads two different scripts: in production it
+              // injects /_vercel/insights/script.js, same-origin and already
+              // covered by 'self'; in development it loads script.debug.js from
+              // that host, which this policy refused, so the dev console
+              // reported analytics as blocked while production was fine.
+              // Allowing the host in production would widen the policy to fix a
+              // problem production does not have.
+              `script-src 'self' 'unsafe-inline'${
+                process.env.NODE_ENV === "development"
+                  ? " 'unsafe-eval' https://va.vercel-scripts.com"
+                  : ""
+              } https://js.stripe.com`,
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob:",
               "font-src 'self' data:",

@@ -38,6 +38,13 @@ test("landing page surfaces delivery alongside pickup, not pickup alone", async 
   await expect(branch.getByText(/Order (in|tomorrow|before)/)).toBeVisible();
   await expect(branch.getByText(/Will-call ready in 30 min/)).toBeVisible();
 
+  // The address and Directions were required by the original brief and were
+  // dropped when the fold was rebuilt delivery-first. Someone weighing pickup
+  // against delivery is deciding whether the drive is worth it, so the branch
+  // location belongs in the fold, not only in the strip further down.
+  await expect(branch.getByText(/5437 Central Ave/)).toBeVisible();
+  await expect(branch.getByRole("link", { name: "Directions" })).toBeVisible();
+
   // Product cards state both methods too.
   await expect(page.getByText(/Pickup or delivery/i).first()).toBeVisible();
 

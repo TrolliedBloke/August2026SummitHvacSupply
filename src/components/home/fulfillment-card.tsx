@@ -1,13 +1,18 @@
 import Link from "next/link";
 import { Clock } from "lucide-react";
 import { DeliveryCountdown } from "@/components/home/delivery-countdown";
-import { FULFILLMENT } from "@/lib/site";
+import { FULFILLMENT, SITE } from "@/lib/site";
 
 /**
  * The Newark branch card in the landing page rail.
  *
  * The fold-level branch promise. Delivery leads because its cutoff is the
  * time-sensitive choice; pickup follows as the stable same-day alternative.
+ *
+ * The address closes the card. Someone weighing pickup against delivery is
+ * deciding whether the drive is worth it, and that question cannot be answered
+ * without knowing where the counter is -- which is why it belongs in the fold
+ * rather than only in the branch strip further down the page.
  */
 export function FulfillmentCard({ open = true }: { open?: boolean }) {
   return (
@@ -35,6 +40,21 @@ export function FulfillmentCard({ open = true }: { open?: boolean }) {
         <Clock size={17} strokeWidth={1.6} aria-hidden="true" />
         <span className="part-number">{FULFILLMENT.pickupReady}</span>
       </p>
+
+      <address className="mt-3 border-t border-line pt-3 text-xs not-italic leading-5 text-ink-2">
+        {SITE.address.street}
+        <br />
+        {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
+        {" · "}
+        <a
+          href={FULFILLMENT.mapsHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-ink-1 underline underline-offset-4"
+        >
+          Directions
+        </a>
+      </address>
     </article>
   );
 }
