@@ -16,6 +16,28 @@ export function QuoteDrawer() {
   const previousFocus = React.useRef<HTMLElement | null>(null);
   const readyForCheckout = items.length > 0 && items.every((item) => item.unitPrice > 0);
 
+  /**
+   * Paint one frame closed before opening.
+   *
+   * This drawer is dynamic(ssr:false) and only loads once the cart is non-empty,
+   * so the very first add mounts it ALREADY open: React's first paint puts it at
+   * translate-x-0, there is no from-state, and the CSS transition has nothing to
+   * animate. It appeared instantly on first use and slid on every use after --
+   * which reads as broken rather than fast.
+   *
+   * Flipping this on the next animation frame gives the browser a closed frame
+   * to transition from. prefers-reduced-motion is honoured globally in
+   * globals.css, which collapses the transition to 0.01ms, so this costs a
+   * frame and nothing else for users who have asked for less motion.
+   */
+  const [entered, setEntered] = React.useState(false);
+  React.useEffect(() => {
+    const frame = requestAnimationFrame(() => setEntered(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  const shown = isOpen && entered;
+
   // Lock scroll + close on Escape while open.
   React.useEffect(() => {
     if (!isOpen) return;
@@ -66,9 +88,9 @@ export function QuoteDrawer() {
         aria-modal={isOpen ? "true" : undefined}
         aria-hidden={!isOpen}
         inert={!isOpen}
-        className={`fixed right-0 top-0 z-50 flex h-dvh w-full max-w-[400px] flex-col border-l border-line bg-surface-1 shadow-[var(--shadow-lg)]
+        className={`fixed right-0 top-0 z-50 flex h-dvh w-full max-w-[400px] flex-col border-l border-line bg-surface-1 shadow-[-16px_0_40px_-12px_rgba(28,28,26,0.18)]
           transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
-          ${isOpen ? "translate-x-0" : "pointer-events-none translate-x-full"}`}
+          ${shown ? "translate-x-0" : "pointer-events-none translate-x-full"}`}
       >
         <header className="flex items-center justify-between border-b border-line px-5 py-4">
           <div className="flex flex-col">
