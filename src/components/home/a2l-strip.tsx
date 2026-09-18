@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Headphones, House } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { ArrowRight, House } from "lucide-react";
 import { Container } from "@/components/ui";
 
 /* A2L is the live question in Bay Area HVAC right now: the refrigerant
@@ -69,7 +68,7 @@ export function HelpStrip() {
   return (
     <section className="bg-canvas pb-8">
       <Container>
-        <div className="grid gap-4 border-t border-line pt-6 sm:grid-cols-2">
+        <div className="border-t border-line pt-6">
           <p className="flex items-center gap-3 text-base text-ink-1">
             <House size={26} strokeWidth={1.4} className="shrink-0" aria-hidden="true" />
             Replacing a home system?
@@ -77,13 +76,6 @@ export function HelpStrip() {
               Start system selector
               <ArrowRight size={14} />
             </Link>
-          </p>
-          <p className="flex items-center gap-3 text-base text-ink-1 sm:justify-end">
-            <Headphones size={26} strokeWidth={1.4} className="shrink-0" aria-hidden="true" />
-            Need help verifying a match?
-            <a href={SITE.phoneHref} className="part-number font-medium underline underline-offset-4">
-              {SITE.phone}
-            </a>
           </p>
         </div>
       </Container>

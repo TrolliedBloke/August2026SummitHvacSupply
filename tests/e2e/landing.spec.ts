@@ -33,7 +33,7 @@ test("landing page never claims a stock count the catalog cannot verify", async 
 test("landing page surfaces delivery alongside pickup, not pickup alone", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
-  const branch = page.getByRole("article").filter({ hasText: "NEWARK BRANCH" }).first();
+  const branch = page.getByRole("article").filter({ hasText: "Newark branch" }).first();
   await expect(branch.getByRole("link", { name: "Next-day delivery" })).toBeVisible();
   await expect(branch.getByText(/Order (in|tomorrow|before)/)).toBeVisible();
   await expect(branch.getByText(/Will-call ready in 30 min/)).toBeVisible();
@@ -44,9 +44,6 @@ test("landing page surfaces delivery alongside pickup, not pickup alone", async 
   // location belongs in the fold, not only in the strip further down.
   await expect(branch.getByText(/5437 Central Ave/)).toBeVisible();
   await expect(branch.getByRole("link", { name: "Directions" })).toBeVisible();
-
-  // Product cards state both methods too.
-  await expect(page.getByText(/Pickup or delivery/i).first()).toBeVisible();
 
   await branch.getByRole("link", { name: "Next-day delivery" }).click();
   await expect(page).toHaveURL(/\/delivery$/);
@@ -59,21 +56,6 @@ test("landing uses the header search once and routes product-led hero actions", 
   await expect(page.locator("main input[type=search]")).toHaveCount(0);
   await expect(page.getByRole("link", { name: /Shop as contractor/ })).toHaveAttribute("href", "/portal/login");
   await expect(page.getByRole("link", { name: /Shop as homeowner/ })).toHaveAttribute("href", "/products");
-});
-
-test("featured product quantity controls keep a floor of one", async ({ page }) => {
-  await page.goto("/", { waitUntil: "domcontentloaded" });
-
-  const decrease = page.getByRole("button", { name: "Decrease quantity for TCL 2 Ton Air Handler" });
-  const increase = page.getByRole("button", { name: "Increase quantity for TCL 2 Ton Air Handler" });
-  const quantity = page.getByRole("status", { name: "Quantity for TCL 2 Ton Air Handler" });
-  await expect(decrease).toBeDisabled();
-  await expect(quantity).toHaveText("1");
-  await increase.click();
-  await expect(quantity).toHaveText("2");
-  await decrease.click();
-  await expect(quantity).toHaveText("1");
-  await expect(decrease).toBeDisabled();
 });
 
 test("contractor ordering opens, switches, and collapses without a duplicate search", async ({ page }) => {

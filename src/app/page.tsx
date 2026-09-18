@@ -44,33 +44,6 @@ const categories = [
   { title: "Installation supplies", body: "Pads, covers, fittings, wire, and conduit", category: "installation-supplies", image: "/site/sketches/installation-supplies.png" },
 ] as const;
 
-const branches = [
-  {
-    name: "Newark",
-    stock: "Retail pickup and trade orders",
-    address: SITE.address.full,
-    note: "Will-call until 5:00pm",
-  },
-  {
-    name: "Bay Area delivery",
-    stock: "Local routes available",
-    address: "San Jose, Oakland, Fremont, peninsula",
-    note: "Ask before ordering",
-  },
-  {
-    name: "Contractor pickup",
-    stock: "Counter workflow ready",
-    address: "Orders, documents, and job quotes",
-    note: "Sign in for pro pricing",
-  },
-  {
-    name: "Homeowner help",
-    stock: "One-system buyers welcome",
-    address: "Equipment guidance and installer referral",
-    note: "No model number needed",
-  },
-];
-
 /* The reason-to-buy row. Each icon is green, which is a deliberate departure
    from THEME.md ("nothing else is green") -- the flat ink row read as fine
    print rather than as a reason to trust the counter. Green stays off
@@ -124,8 +97,8 @@ export default function HomePage() {
           <div className="grid items-stretch gap-5 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,0.85fr)] lg:gap-8">
             <div className="min-w-0">
               <h1 className="counter-heading max-w-[760px] text-[2rem] leading-[1.1] text-ink-1 sm:text-[2.5rem]">
-                HVAC equipment and parts,
-                <br /> ready from Newark.
+                HVAC equipment and parts,{" "}
+                <br className="hidden sm:block" />ready from Newark.
               </h1>
               <p className="mt-2 text-base leading-6 text-ink-1">
                 Trade pricing for approved contractors. List pricing for homeowners.
@@ -142,7 +115,7 @@ export default function HomePage() {
 
       <CounterStock />
 
-      <section className="bg-canvas pb-5 pt-0">
+      <section className="bg-canvas pb-5 pt-10">
         <Container>
           <CounterPanel />
         </Container>
@@ -168,10 +141,6 @@ export default function HomePage() {
       <A2lStrip />
 
       <HelpStrip />
-
-      <MobileBranchStrip />
-
-      <BranchSection />
 
       <section className="bg-canvas py-9">
         <Container>
@@ -296,57 +265,4 @@ function CategoryCard({
     </Link>
   );
 }
-
-function BranchSection() {
-  return (
-    <section className="hidden bg-canvas py-7 md:block">
-      <Container>
-        <div className="mb-5 flex items-center justify-between gap-4">
-          <h2 className="counter-heading text-2xl leading-tight text-ink-1">Pick up at a branch near you</h2>
-          <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-medium text-ink-1">
-            View locations
-            <ArrowRight size={15} />
-          </Link>
-        </div>
-        <div className="grid gap-2 lg:grid-cols-4">
-          {branches.map((branch) => (
-            <BranchCard key={branch.name} {...branch} />
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-function MobileBranchStrip() {
-  return (
-    <section className="border-b border-line bg-surface-1 py-4 md:hidden">
-      <Container>
-        <BranchCard {...branches[0]} />
-      </Container>
-    </section>
-  );
-}
-
-function BranchCard({
-  name,
-  stock,
-  address,
-  note,
-}: {
-  name: string;
-  stock: string;
-  address: string;
-  note: string;
-}) {
-  return (
-    <article className="rounded-(--r-sm) border border-line bg-surface-1 p-4">
-      <h3 className="text-sm font-medium text-ink-1">{name}</h3>
-      <p className="mt-1 text-sm font-medium text-brand">{stock}</p>
-      <p className="mt-3 min-h-10 text-sm leading-5 text-ink-1">{address}</p>
-      <p className="mt-3 text-sm text-ink-2">{note}</p>
-    </article>
-  );
-}
-
 
