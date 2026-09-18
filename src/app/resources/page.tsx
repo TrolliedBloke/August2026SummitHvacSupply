@@ -82,18 +82,15 @@ export default function ResourcesPage() {
 
       {/* Rebates */}
       <Container className="py-12 lg:py-14">
-        <div className="flex items-center gap-2">
-          <Leaf size={18} className="text-eco" />
-          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">
-            Rebate &amp; incentive guides
-          </h2>
-        </div>
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">
+          Rebate &amp; incentive guides
+        </h2>
         <p className="mt-2 max-w-2xl text-sm text-ink-2">
           Help your customers buy on total cost with current program guidance and support for project-specific eligibility.
         </p>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           {REBATES.map((r) => (
-            <div key={r.name} className="rounded-(--r-md) border border-line bg-surface-1 p-6 shadow-[var(--shadow-sm)]">
+            <div key={r.name} className="border-t border-line pt-6">
               <div className="flex items-start justify-between gap-3">
                 <span className="grid size-11 place-items-center rounded-(--r-md) bg-eco-tint text-eco-ink">
                   <Leaf size={20} strokeWidth={2.2} />
@@ -169,7 +166,7 @@ export default function ResourcesPage() {
         </div>
 
         {/* SEO/help cross-links */}
-        <div className="mt-10 rounded-(--r-md) border border-line bg-surface-2/50 p-6">
+        <div className="mt-10 border-t border-line pt-8">
           <h3 className="font-display text-lg font-semibold text-ink-1">Need help choosing?</h3>
           <p className="mt-1.5 max-w-xl text-sm text-ink-2">
             Not sure which series fits a job? Filter the lineup by capacity and

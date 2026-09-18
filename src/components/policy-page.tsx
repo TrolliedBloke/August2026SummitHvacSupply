@@ -54,7 +54,7 @@ export function PolicyPage({
 
           <div className="flex flex-col gap-8">{children}</div>
 
-          <div className="mt-10 rounded-(--r-md) border border-line bg-surface-2/60 px-5 py-4 text-sm leading-relaxed text-ink-2">
+          <div className="mt-10 border-t border-line pt-6 text-sm leading-relaxed text-ink-2">
             <p className="font-medium text-ink-1">Questions about this policy?</p>
             <p className="mt-1">
               Call{" "}
@@ -67,7 +67,6 @@ export function PolicyPage({
               </a>
               . {SITE.hours.split("·")[0].trim()}.
             </p>
-            <p className="mt-2 text-ink-2">{SITE.address.full}</p>
           </div>
         </div>
       </Container>

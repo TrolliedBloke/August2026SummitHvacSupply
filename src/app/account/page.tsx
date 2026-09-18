@@ -7,7 +7,7 @@ export default function AccountPage() {
       <section aria-labelledby="account-heading" className="mx-auto max-w-4xl text-center">
         <h1
           id="account-heading"
-          className="font-display text-4xl font-semibold leading-tight tracking-tight text-ink-1 sm:text-[42px]"
+          className="font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl"
         >
           One store, the right account for you
         </h1>

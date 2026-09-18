@@ -59,7 +59,7 @@ export default function BrandsPage() {
     <section className="bg-surface-1">
       <div className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 sm:px-6 sm:py-14 lg:px-8 lg:pb-8 lg:pt-20">
         <header>
-          <h1 className="counter-heading text-[2.7rem] leading-[0.94] text-ink-1 sm:text-[3.25rem]">
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
             Brands we stock
           </h1>
           <p className="mt-4 max-w-[790px] text-base leading-8 text-ink-2 sm:text-lg">

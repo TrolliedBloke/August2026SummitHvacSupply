@@ -21,7 +21,7 @@ export function FulfillmentCard({ open = true }: { open?: boolean }) {
 
       <Link
         href="/delivery"
-        className="counter-heading mt-2 inline-block text-sm tracking-[0.04em] text-brand hover:underline hover:underline-offset-4"
+        className="mt-2 inline-block text-sm font-semibold text-brand hover:underline hover:underline-offset-4"
       >
         Next-day delivery
       </Link>

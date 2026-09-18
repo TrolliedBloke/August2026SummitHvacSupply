@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AlertTriangle, BadgeCheck, Box, Download, FileText, ImageOff, PackageCheck, ShieldCheck, UserRoundCheck } from "lucide-react";
+import { AlertTriangle, Download, ImageOff, PackageCheck, ShieldCheck, UserRoundCheck } from "lucide-react";
+import { ProductCard } from "@/components/product-card";
 import { AddToQuote } from "@/components/add-to-quote";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductGallery } from "@/components/product-gallery";
-import { StockBadge, StockLine } from "@/components/stock-badge";
+import { StockLine } from "@/components/stock-badge";
 import { Container, LinkButton } from "@/components/ui";
 import { getRelatedSkus, getStorefrontSku, getStorefrontSkus, productHref, skuSlug } from "@/lib/storefront/catalog";
 import { applyLiveInventory, applyLiveInventoryAll, getLiveInventory } from "@/lib/storefront/live-inventory";
@@ -153,7 +153,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
           </div>
 
           <section aria-labelledby="product-title">
-            <div className="flex flex-wrap gap-2 text-xs"><span className="rounded-full border border-line bg-surface-1 px-3 py-1 text-ink-2">{sku.brand}</span><span className="rounded-full border border-line bg-surface-1 px-3 py-1 text-ink-2">{sku.categoryLabel}</span><span className="rounded-full border border-line bg-surface-1 px-3 py-1 text-ink-2">{sku.productType}</span></div>
+            <div className="flex flex-wrap gap-2 text-xs"><span className="rounded-full bg-surface-1 px-3 py-1 text-ink-2">{sku.brand}</span><span className="rounded-full bg-surface-1 px-3 py-1 text-ink-2">{sku.categoryLabel}</span><span className="rounded-full bg-surface-1 px-3 py-1 text-ink-2">{sku.productType}</span></div>
             <p className="part-number mt-5 text-sm text-ink-3">SKU {sku.sku}</p>
             <h1 id="product-title" className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">{sku.title}</h1>
             <p className="part-number mt-3 text-sm text-ink-2">{sku.modelNumber ? `Manufacturer model ${sku.modelNumber}` : "Manufacturer model not supplied"}</p>
@@ -184,8 +184,8 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
               <StockLine sku={sku} className="mt-4" />
             </div>
 
-            <div className="mt-5 rounded-(--r-md) border border-line bg-surface-2 p-4">
-              <div className="flex gap-3"><PackageCheck className="mt-0.5 shrink-0 text-brand" size={20} /><div><h2 className="font-medium text-ink-1">Pickup and delivery</h2><p className="mt-1 text-sm text-ink-2">Choose Newark pickup or an eligible delivery option during checkout. Large and unpriced orders can be submitted to our sales team.</p></div></div>
+            <div className="mt-5 border-t border-line pt-5">
+              <div className="flex gap-3"><PackageCheck className="mt-0.5 shrink-0 text-brand" size={20} /><div><h2 className="font-semibold text-ink-1">Pickup and delivery</h2><p className="mt-1 text-sm text-ink-2">Choose Newark pickup or an eligible delivery option during checkout. Large and unpriced orders can be submitted to our sales team.</p></div></div>
             </div>
 
             <div className="mt-5 flex flex-wrap gap-3"><AddToQuote sku={sku} /><LinkButton href={`/contact?sku=${encodeURIComponent(sku.sku)}`} variant="secondary">Ask about compatibility</LinkButton></div>
@@ -193,15 +193,15 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
           </section>
         </div>
 
-        <section className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_.8fr]">
-          <div className="rounded-(--r-md) border border-line bg-surface-1 p-6">
-            <div className="flex items-center gap-2"><Box size={19} /><h2 className="font-display text-xl font-semibold text-ink-1">Product information</h2></div>
+        <section className="mt-12 grid gap-10 border-t border-line pt-10 lg:grid-cols-[1.2fr_.8fr]">
+          <div>
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">Product information</h2>
             <dl className="mt-5 divide-y divide-line">{specs.map(([label, value]) => <div key={label} className="grid gap-1 py-3 sm:grid-cols-[180px_1fr]"><dt className="text-sm text-ink-3">{label}</dt><dd className="text-sm font-medium text-ink-1">{value}</dd></div>)}</dl>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-8">
             {sku.warranty ? (
-              <article className="rounded-(--r-md) border border-line bg-surface-1 p-5">
-                <div className="flex items-center gap-2 text-ink-1"><ShieldCheck size={20} /><h2 className="font-medium">Manufacturer warranty</h2></div>
+              <article>
+                <div className="flex items-center gap-2 text-ink-1"><ShieldCheck size={20} /><h2 className="text-lg font-semibold text-ink-1">Manufacturer warranty</h2></div>
                 <dl className="mt-3 space-y-2 text-sm">
                   {sku.warranty.parts && <div className="flex justify-between gap-4"><dt className="text-ink-3">Parts</dt><dd className="font-medium text-ink-1">{sku.warranty.parts}</dd></div>}
                   {sku.warranty.partsWithRegistration && <div className="flex justify-between gap-4"><dt className="text-ink-3">Parts, registered</dt><dd className="font-medium text-ink-1">{sku.warranty.partsWithRegistration}</dd></div>}
@@ -229,8 +229,8 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
         </section>
 
         {researched.length > 0 && (
-          <section className="mt-10 rounded-(--r-md) border border-line bg-surface-1 p-6">
-            <div className="flex items-center gap-2"><Box size={19} /><h2 className="font-display text-xl font-semibold text-ink-1">Manufacturer specifications</h2></div>
+          <section className="mt-12 border-t border-line pt-10">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">Manufacturer specifications</h2>
             <p className="mt-1 text-sm text-ink-2">Read from manufacturer documentation for model {sku.modelNumber}. Every value links to its source.</p>
             <div className="mt-5 grid gap-6 sm:grid-cols-2">
               {researched.map((group) => (
@@ -254,8 +254,8 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
         )}
 
         {sku.documents.length > 0 && (
-          <section className="mt-10 rounded-(--r-md) border border-line bg-surface-1 p-6">
-            <div className="flex items-center gap-2"><FileText size={19} /><h2 className="font-display text-xl font-semibold text-ink-1">Documents</h2></div>
+          <section className="mt-12 border-t border-line pt-10">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">Documents</h2>
             <p className="mt-1 text-sm text-ink-2">Manufacturer documentation confirmed to cover model {sku.modelNumber}.</p>
             <ul className="mt-4 divide-y divide-line">
               {sku.documents.map((document) => (
@@ -274,8 +274,8 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
         )}
 
         {sku.ahri && (
-          <section className="mt-10 rounded-(--r-md) border border-line bg-surface-1 p-6">
-            <div className="flex items-center gap-2"><BadgeCheck size={19} /><h2 className="font-display text-xl font-semibold text-ink-1">AHRI certification</h2></div>
+          <section className="mt-12 border-t border-line pt-10">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">AHRI certification</h2>
             {sku.ahri.referenceNumber ? (
               <p className="mt-2 text-sm text-ink-1">Certified reference <span className="part-number font-medium">{sku.ahri.referenceNumber}</span>{sku.ahri.certifiedModel ? ` for ${sku.ahri.certifiedModel}` : ""}.</p>
             ) : (
@@ -292,14 +292,22 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
           </section>
         )}
 
-        {related.length > 0 && <section className="mt-10"><h2 className="font-display text-xl font-semibold text-ink-1">Related catalog items</h2><p className="mt-1 text-sm text-ink-2">Nearby products in the same category. Similar capacity does not prove compatibility.</p><div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{related.map((item) => <Link key={item.id} href={productHref(item)} className="rounded-(--r-sm) border border-line bg-surface-1 p-4 hover:border-line-strong"><span className="part-number text-xs text-ink-3">{item.sku}</span><span className="mt-2 block font-medium text-ink-1">{item.title}</span><span className="mt-2 block text-xs text-ink-2">{item.retailPrice !== null ? currency(item.retailPrice) : "Contact for price"} · {item.purchaseEligible ? "available to order" : "sales assistance"}</span><StockBadge sku={item} className="mt-2" /></Link>)}</div></section>}
+        {related.length > 0 && (
+          <section className="mt-12 border-t border-line pt-10">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">Related catalog items</h2>
+            <p className="mt-1 text-sm text-ink-2">Nearby products in the same category. Similar capacity does not prove compatibility.</p>
+            <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-4">
+              {related.map((item) => <ProductCard key={item.id} sku={item} />)}
+            </div>
+          </section>
+        )}
       </Container>
     </>
   );
 }
 
 function StatusCard({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
-  return <article className="rounded-(--r-md) border border-line bg-surface-1 p-5"><div className="flex items-center gap-2 text-ink-1">{icon}<h2 className="font-medium">{title}</h2></div><p className="mt-2 text-sm leading-6 text-ink-2">{body}</p></article>;
+  return <article><div className="flex items-center gap-2 text-ink-1">{icon}<h2 className="text-lg font-semibold text-ink-1">{title}</h2></div><p className="mt-2 text-sm leading-6 text-ink-2">{body}</p></article>;
 }
 
 function currency(value: number) {

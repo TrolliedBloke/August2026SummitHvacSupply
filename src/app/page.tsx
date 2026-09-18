@@ -96,7 +96,7 @@ export default function HomePage() {
         <Container className="pb-0 pt-5">
           <div className="grid items-stretch gap-5 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,0.85fr)] lg:gap-8">
             <div className="min-w-0">
-              <h1 className="counter-heading max-w-[760px] text-[2rem] leading-[1.1] text-ink-1 sm:text-[2.5rem]">
+              <h1 className="max-w-[760px] font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
                 HVAC equipment and parts,{" "}
                 <br className="hidden sm:block" />ready from Newark.
               </h1>

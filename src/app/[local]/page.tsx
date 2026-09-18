@@ -70,13 +70,13 @@ export default async function LocalPage({ params }: PageProps<"/[local]">) {
       <Container className="py-14">
         <div className="grid gap-4 md:grid-cols-3">
           {page.points.map((point) => (
-            <div key={point} className="rounded-(--r-md) border border-line bg-surface-1 p-5 shadow-[var(--shadow-sm)]">
+            <div key={point}>
               <CheckCircle2 className="text-eco" size={22} />
               <p className="mt-3 text-sm leading-relaxed text-ink-2">{point}</p>
             </div>
           ))}
         </div>
-        <div className="mt-10 rounded-(--r-md) border border-line bg-surface-2/60 p-6">
+        <div className="mt-10 border-t border-line pt-8">
           <h2 className="font-display text-xl font-semibold text-ink-1">
             Not sure which path fits?
           </h2>

@@ -26,7 +26,7 @@ export default function DeliveryPage() {
     <>
       <section className="border-b border-line bg-surface-1">
         <Container className="py-12 lg:py-16">
-          <h1 className="counter-heading max-w-[16ch] text-[2.4rem] leading-[0.95] text-ink-1 sm:text-[3rem]">
+          <h1 className="max-w-[20ch] font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
             Delivery and pickup
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-ink-2">
@@ -224,7 +224,7 @@ function SummaryCard({
   detail: string;
 }) {
   return (
-    <div className="rounded-(--r-md) border border-line bg-canvas p-4">
+    <div>
       <p className="flex items-center gap-2.5 text-sm font-medium text-ink-1">
         <span className="text-ink-1">{icon}</span>
         {title}
@@ -236,7 +236,7 @@ function SummaryCard({
 
 function ZoneCard({ name, cities, note }: { name: string; cities: string; note: string }) {
   return (
-    <div className="rounded-(--r-md) border border-line bg-surface-1 p-4">
+    <div>
       <dt className="flex items-center gap-2 text-sm font-medium text-ink-1">
         <PackageCheck size={16} strokeWidth={1.6} aria-hidden="true" />
         {name}

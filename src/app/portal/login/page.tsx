@@ -73,7 +73,7 @@ export default async function PortalLoginPage({
         </div>
 
         {/* What's inside */}
-        <div className="rounded-(--r-lg) border border-line bg-surface-2/50 p-8">
+        <div className="rounded-(--r-lg) bg-surface-1 p-8">
           <h2 className="text-xs font-semibold text-ink-3">
             What dealers will get inside
           </h2>
@@ -83,7 +83,7 @@ export default async function PortalLoginPage({
               return (
                 <div
                   key={f.label}
-                  className="flex items-center gap-3 rounded-(--r-md) border border-line bg-surface-1 px-4 py-3.5"
+                  className="flex items-center gap-3"
                 >
                   <span className="grid size-9 shrink-0 place-items-center rounded-(--r-sm) bg-brand-tint text-brand">
                     <Icon size={17} />

@@ -38,7 +38,7 @@ export default function ContactPage() {
           </p>
 
           {/* Homeowner secondary path -- capture & hand off, never dominate */}
-          <div className="mt-6 flex items-start gap-3 rounded-(--r-md) border border-line bg-surface-2/60 p-4">
+          <div className="mt-6 flex items-start gap-3 border-t border-line pt-6">
             <span className="grid size-9 shrink-0 place-items-center rounded-(--r-sm) bg-surface-3 text-ink-3">
               <Home size={17} />
             </span>

@@ -64,7 +64,7 @@ export default function AboutPage() {
 
       {/* Values */}
       <Container className="py-16">
-        <div className="grid gap-px overflow-hidden rounded-(--r-md) border border-line bg-line md:grid-cols-3">
+        <div className="grid gap-10 md:grid-cols-3">
           <Pillar
             icon={<Truck size={20} />}
             title="Local fulfillment review"
@@ -126,10 +126,7 @@ export default function AboutPage() {
                 <p className="font-display text-lg font-semibold text-ink-1">
                   {SITE.address.city}, {SITE.address.state}
                 </p>
-                <p className="mt-1 max-w-[260px] text-sm leading-relaxed text-ink-2">
-                  {SITE.address.full}
-                </p>
-                <p className="mt-3 text-xs text-ink-3">
+                <p className="mt-1 text-xs text-ink-3">
                   Newark will-call · Bay Area delivery · freight
                 </p>
               </div>
@@ -165,7 +162,7 @@ function Pillar({
   body: string;
 }) {
   return (
-    <div className="bg-surface-1 p-7">
+    <div>
       <span className="grid size-11 place-items-center rounded-(--r-md) bg-copper-tint text-copper">
         {icon}
       </span>

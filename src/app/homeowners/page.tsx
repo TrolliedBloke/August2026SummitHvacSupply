@@ -119,9 +119,9 @@ export default function HomeownersPage() {
               you ask the right questions before money is spent.
             </p>
           </div>
-          <div className="grid gap-3">
+          <div className="grid gap-5">
             {faq.map((item) => (
-              <div key={item.q} className="rounded-(--r-md) border border-line bg-canvas p-5">
+              <div key={item.q} className="border-t border-line pt-5">
                 <h3 className="font-display text-base font-semibold text-ink-1">{item.q}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-2">{item.a}</p>
               </div>
@@ -136,7 +136,7 @@ export default function HomeownersPage() {
       <TestimonialSlot
         items={HOMEOWNER_TESTIMONIALS}
         heading="What other Bay Area homeowners found"
-        className="border-t border-line bg-surface-1 px-5 py-14 sm:px-6 lg:px-8 [&>*]:mx-auto [&>*]:max-w-[var(--page-max)]"
+        className="border-t border-line bg-surface-1 py-14 [&>*]:mx-auto [&>*]:max-w-[var(--page-max)] [&>*]:px-5 sm:[&>*]:px-6 lg:[&>*]:px-8"
       />
 
       <section id="homeowner-request">
@@ -150,7 +150,7 @@ export default function HomeownersPage() {
 
 function Proof({ title, body }: { title: string; body: string }) {
   return (
-    <div className="flex gap-3 rounded-(--r-sm) border border-line bg-surface-1 p-3">
+    <div className="flex gap-3">
       <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-eco" />
       <div>
         <h3 className="text-sm font-semibold text-ink-1">{title}</h3>
@@ -162,7 +162,7 @@ function Proof({ title, body }: { title: string; body: string }) {
 
 function Step({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
   return (
-    <div className="rounded-(--r-md) border border-line bg-surface-1 p-5 shadow-[var(--shadow-sm)]">
+    <div>
       <span className="grid size-11 place-items-center rounded-(--r-sm) bg-brand-tint text-brand">{icon}</span>
       <h2 className="mt-4 font-display text-lg font-semibold tracking-tight text-ink-1">{title}</h2>
       <p className="mt-2 text-sm leading-relaxed text-ink-2">{body}</p>
