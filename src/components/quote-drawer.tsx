@@ -150,7 +150,7 @@ export function QuoteDrawer() {
                     >
                       {item.title}
                     </Link>
-                    <p className="mt-0.5 truncate font-mono text-[11px] uppercase tracking-[0.12em] text-ink-3">
+                    <p className="mt-0.5 truncate text-xs text-ink-3">
                       {item.sku} · {item.modelNumber}
                     </p>
                     <button
@@ -168,7 +168,7 @@ export function QuoteDrawer() {
                     >
                       <Minus size={14} />
                     </button>
-                    <span className="tnum w-6 text-center font-mono text-sm font-semibold text-ink-1">
+                    <span className="tnum w-6 text-center text-sm font-semibold text-ink-1">
                       {item.qty}
                     </span>
                     <button
@@ -192,7 +192,7 @@ export function QuoteDrawer() {
               <Link
                 href={readyForCheckout ? "/checkout" : "/quote"}
                 onClick={close}
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-(--r-sm) bg-brand text-[15px] font-medium text-brand-ink shadow-[var(--shadow-sm)] transition-colors hover:bg-brand-hover"
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-(--r-sm) bg-brand text-base font-medium text-brand-ink shadow-[var(--shadow-sm)] transition-colors hover:bg-brand-hover"
               >
                 {readyForCheckout ? "Go to checkout" : "Request pricing"}
               </Link>

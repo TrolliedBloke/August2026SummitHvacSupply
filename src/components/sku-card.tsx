@@ -24,7 +24,7 @@ export function SkuCard({ sku, priority = false }: { sku: StorefrontSku; priorit
           <StockBadge sku={sku} />
         </div>
         <div>
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-3">SKU {sku.sku}</p>
+          <p className="text-xs font-semibold text-ink-3">SKU {sku.sku}</p>
           <h3 className="mt-1 [overflow-wrap:anywhere] font-display text-xl font-semibold tracking-tight text-ink-1"><Link href={productHref(sku)} className="hover:text-brand">{sku.title}</Link></h3>
           <p className="mt-1 break-words text-sm text-ink-2">{sku.modelNumber ? `Model ${sku.modelNumber} · ` : ""}{sku.productType}</p>
         </div>
@@ -43,5 +43,5 @@ export function SkuCard({ sku, priority = false }: { sku: StorefrontSku; priorit
 }
 
 function Spec({ label, value }: { label: string; value: string }) {
-  return <div className="flex min-w-0 flex-col justify-center bg-surface-1 px-2 py-2"><dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-4">{label}</dt><dd className="mt-1 break-words font-mono text-xs font-semibold text-ink-1">{value}</dd></div>;
+  return <div className="flex min-w-0 flex-col justify-center bg-surface-1 px-2 py-2"><dt className="text-xs text-ink-4">{label}</dt><dd className="mt-1 break-words text-xs font-semibold text-ink-1">{value}</dd></div>;
 }

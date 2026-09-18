@@ -11,7 +11,7 @@ export default function AccountPage() {
         >
           One store, the right account for you
         </h1>
-        <p className="mx-auto mt-3 max-w-3xl text-[15px] leading-6 text-ink-2 sm:text-base">
+        <p className="mx-auto mt-3 max-w-3xl text-base leading-6 text-ink-2 sm:text-base">
           Retail customers can shop at listed prices. Approved contractors and trade customers sign in for wholesale
           pricing and purchasing tools.
         </p>
@@ -78,8 +78,8 @@ function AccountChoice({
   return (
     <article className="flex h-full flex-col rounded-(--r-md) border border-line bg-surface-1 p-6 sm:p-8 md:min-h-[360px]">
       <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">{title}</h2>
-      <p className="mt-3 text-[15px] leading-6 text-ink-2 sm:text-base">{body}</p>
-      <div className="mt-4 space-y-3 text-[15px] leading-6 text-ink-2 sm:text-base">
+      <p className="mt-3 text-base leading-6 text-ink-2 sm:text-base">{body}</p>
+      <div className="mt-4 space-y-3 text-base leading-6 text-ink-2 sm:text-base">
         {details.map((detail) => (
           <p key={detail}>{detail}</p>
         ))}

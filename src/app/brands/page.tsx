@@ -62,7 +62,7 @@ export default function BrandsPage() {
           <h1 className="counter-heading text-[2.7rem] leading-[0.94] text-ink-1 sm:text-[3.25rem]">
             Brands we stock
           </h1>
-          <p className="mt-4 max-w-[790px] text-[1.05rem] leading-8 text-ink-2 sm:text-lg">
+          <p className="mt-4 max-w-[790px] text-base leading-8 text-ink-2 sm:text-lg">
             Equipment lines carried at the Newark branch. Counts below are the SKUs in the
             current catalog, not a manufacturer&rsquo;s full range.
           </p>
@@ -110,15 +110,15 @@ export default function BrandsPage() {
               </div>
 
               <div className="flex flex-1 flex-col p-6">
-                <h2 className="counter-heading text-[1.45rem] leading-none text-ink-1">{brand.name}</h2>
-                <p className="part-number mt-2 text-xs uppercase tracking-[0.02em] text-ink-3">
+                <h2 className="counter-heading text-2xl leading-none text-ink-1">{brand.name}</h2>
+                <p className="part-number mt-2 text-xs text-ink-3">
                   {brand.count} SKUs
                   {brand.from !== null ? ` · from ${currency(brand.from)}` : ""}
                 </p>
-                <p className="mt-4 flex-1 text-[0.95rem] leading-7 text-ink-2">
+                <p className="mt-4 flex-1 text-base leading-7 text-ink-2">
                   {BRAND_NOTES[brand.name] ?? brand.categories.join(", ")}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-[0.95rem] font-semibold text-brand">
+                <span className="mt-5 inline-flex items-center gap-2 text-base font-semibold text-brand">
                   Shop {brand.name}
                   <ArrowRight size={17} className="transition-transform duration-150 group-hover:translate-x-1" />
                 </span>
@@ -127,7 +127,7 @@ export default function BrandsPage() {
           ))}
         </div>
 
-        <p className="mt-8 max-w-[820px] text-[0.95rem] leading-7 text-ink-2">
+        <p className="mt-8 max-w-[820px] text-base leading-7 text-ink-2">
           Line sets, covers, pads, disconnects, and other installation supplies are stocked
           unbranded.{" "}
           <Link

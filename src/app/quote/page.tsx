@@ -74,7 +74,7 @@ export default function QuotePage() {
                 .
               </p>
               {requestId && (
-                <p className="mt-3 font-mono text-xs uppercase tracking-[0.12em] text-ink-3">
+                <p className="mt-3 text-xs text-ink-3">
                   Request ID {requestId}
                 </p>
               )}
@@ -153,7 +153,7 @@ export default function QuotePage() {
                     <Link href={`/products/sku/${encodeURIComponent(i.sku)}`} className="text-ink-1 hover:text-brand">
                       {i.title}
                     </Link>
-                    <span className="tnum font-mono text-ink-3">×{i.qty}</span>
+                    <span className="tnum text-ink-3">×{i.qty}</span>
                   </li>
                 ))}
               </ul>

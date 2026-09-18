@@ -235,7 +235,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
             <div className="mt-5 grid gap-6 sm:grid-cols-2">
               {researched.map((group) => (
                 <div key={group.heading}>
-                  <h3 className="text-xs font-medium uppercase tracking-[0.12em] text-ink-3">{group.heading}</h3>
+                  <h3 className="text-xs font-medium text-ink-3">{group.heading}</h3>
                   <dl className="mt-2 divide-y divide-line">
                     {group.rows.map((row) => (
                       <div key={row.label} className="grid gap-1 py-2.5 sm:grid-cols-[160px_1fr]">

@@ -74,7 +74,7 @@ export default async function PortalLoginPage({
 
         {/* What's inside */}
         <div className="rounded-(--r-lg) border border-line bg-surface-2/50 p-8">
-          <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-ink-3">
+          <h2 className="text-xs font-semibold text-ink-3">
             What dealers will get inside
           </h2>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">

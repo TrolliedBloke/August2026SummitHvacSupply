@@ -193,7 +193,7 @@ export function CustomSelect({
         disabled={disabled}
         onClick={() => open ? setOpen(false) : openMenu()}
         onKeyDown={onKeyDown}
-        className={`${size === "sm" ? "h-9 px-2.5 text-sm" : "h-11 px-3.5 text-[15px]"} flex w-full items-center justify-between gap-3 rounded-(--r-sm) border border-control-border bg-control-bg text-left text-ink-1 transition-colors hover:border-ink-4 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25 disabled:cursor-not-allowed disabled:opacity-50`}
+        className={`${size === "sm" ? "h-9 px-2.5 text-sm" : "h-11 px-3.5 text-base"} flex w-full items-center justify-between gap-3 rounded-(--r-sm) border border-control-border bg-control-bg text-left text-ink-1 transition-colors hover:border-ink-4 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25 disabled:cursor-not-allowed disabled:opacity-50`}
       >
         <span className={`min-w-0 truncate ${selected ? "" : "text-ink-3"}`}>
           {selected?.label ?? placeholder}

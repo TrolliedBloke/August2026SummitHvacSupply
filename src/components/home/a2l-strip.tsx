@@ -22,7 +22,7 @@ export function A2lStrip() {
               <Image src="/site/sketches/a2l-ready.png" alt="" fill sizes="40px" className="object-contain" />
             </span>
             <div className="min-w-0">
-              <h2 className="counter-heading text-[1.35rem] leading-none text-ink-1">
+              <h2 className="text-lg font-semibold leading-snug text-ink-1">
                 A2L-ready parts &amp; equipment
               </h2>
               <p className="mt-2 max-w-[52ch] text-sm leading-6 text-ink-2">
@@ -69,7 +69,7 @@ export function HelpStrip() {
     <section className="bg-canvas pb-8">
       <CounterWidth>
         <div className="grid gap-4 border-t border-line pt-6 sm:grid-cols-2">
-          <p className="flex items-center gap-3 text-[0.95rem] text-ink-1">
+          <p className="flex items-center gap-3 text-base text-ink-1">
             <House size={26} strokeWidth={1.4} className="shrink-0" aria-hidden="true" />
             Replacing a home system?
             <Link href="/homeowners#homeowner-request" className="inline-flex items-center gap-1.5 font-medium underline underline-offset-4">
@@ -77,7 +77,7 @@ export function HelpStrip() {
               <ArrowRight size={14} />
             </Link>
           </p>
-          <p className="flex items-center gap-3 text-[0.95rem] text-ink-1 sm:justify-end">
+          <p className="flex items-center gap-3 text-base text-ink-1 sm:justify-end">
             <Headphones size={26} strokeWidth={1.4} className="shrink-0" aria-hidden="true" />
             Need help verifying a match?
             <a href={SITE.phoneHref} className="part-number font-medium underline underline-offset-4">

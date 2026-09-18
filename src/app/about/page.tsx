@@ -90,7 +90,7 @@ export default function AboutPage() {
             <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">
               Visit or reach us
             </h2>
-            <dl className="mt-5 space-y-4 text-[15px]">
+            <dl className="mt-5 space-y-4 text-base">
               <NapRow icon={<MapPin size={18} />} label="Warehouse & will-call">
                 {SITE.address.full}
               </NapRow>
@@ -129,7 +129,7 @@ export default function AboutPage() {
                 <p className="mt-1 max-w-[260px] text-sm leading-relaxed text-ink-2">
                   {SITE.address.full}
                 </p>
-                <p className="mt-3 font-mono text-xs uppercase tracking-[0.14em] text-ink-3">
+                <p className="mt-3 text-xs text-ink-3">
                   Newark will-call · Bay Area delivery · freight
                 </p>
               </div>
@@ -192,7 +192,7 @@ function NapRow({
         {icon}
       </span>
       <div>
-        <dt className="font-mono text-xs uppercase tracking-wider text-ink-3">
+        <dt className="text-xs text-ink-3">
           {label}
         </dt>
         <dd className="mt-0.5 text-ink-1">{children}</dd>

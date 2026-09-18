@@ -151,7 +151,7 @@ export function SaveCartAsList({ items }: { items: SavedListItem[] }) {
       >
         Save
       </button>
-      {error && <p className="text-[11px] text-danger">{error}</p>}
+      {error && <p className="text-xs text-danger">{error}</p>}
     </form>
   );
 }

@@ -77,7 +77,7 @@ function ConfirmationInner() {
           </h1>
         </div>
         <p className="mt-2 text-ink-2">
-          Order <span className="font-mono font-semibold text-ink-1">{order.orderNumber}</span>. {complete ? "Your order is confirmed." : failed ? "Your cart is still available so you can try again." : "Inventory is reserved while payment is completed."}
+          Order <span className="font-semibold text-ink-1">{order.orderNumber}</span>. {complete ? "Your order is confirmed." : failed ? "Your cart is still available so you can try again." : "Inventory is reserved while payment is completed."}
         </p>
 
         {order.checkoutState === "payment_pending" && order.payment === "card" && order.clientSecret && (

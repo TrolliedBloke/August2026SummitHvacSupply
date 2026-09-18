@@ -45,7 +45,7 @@ export async function CounterStock() {
     <section className="bg-canvas pb-1 pt-5">
       <CounterWidth>
         <div className="flex items-baseline justify-between gap-5">
-          <h2 className="counter-heading text-[1.25rem] leading-none text-ink-1">
+          <h2 className="counter-heading text-2xl leading-tight text-ink-1">
             Available from Newark
           </h2>
           <Link
@@ -82,22 +82,22 @@ function StockCard({ sku }: { sku: StorefrontSku }) {
         <ProductImage src={sku.image} alt={sku.title} sizes="(min-width: 1280px) 300px, (min-width: 1024px) 33vw, 50vw" />
       </Link>
 
-      <p className="text-xs font-medium uppercase tracking-[0.04em] text-ink-1">{sku.brand}</p>
+      <p className="text-xs font-medium text-ink-1">{sku.brand}</p>
       <Link href={productHref(sku)} className="mt-0.5 min-h-9 text-sm font-medium leading-[18px] text-ink-1 hover:underline">
         {productName}
       </Link>
       {spec && (
-        <p className="part-number mt-1 truncate text-[0.65rem] uppercase leading-5 text-ink-2 sm:text-[0.7rem]" title={spec}>
+        <p className="part-number mt-1 truncate text-xs leading-5 text-ink-2 sm:text-xs" title={spec}>
           {spec}
         </p>
       )}
-      <p className="part-number mt-0.5 truncate text-[0.65rem] uppercase leading-5 text-ink-2 sm:text-[0.7rem]">
+      <p className="part-number mt-0.5 truncate text-xs leading-5 text-ink-2 sm:text-xs">
         {sku.sku}
       </p>
 
-      <p className="part-number mt-1 text-[1.05rem] font-medium text-ink-1">
+      <p className="part-number mt-1 text-base font-medium text-ink-1">
         {sku.retailPrice === null ? "Price on request" : currency(sku.retailPrice)}
-        {sku.retailPrice !== null && <span className="ml-2 font-sans text-[0.62rem] font-normal uppercase text-ink-2">List</span>}
+        {sku.retailPrice !== null && <span className="ml-2 font-sans text-xs font-normal text-ink-2">List</span>}
       </p>
       <Link href="/portal/login" className="mt-0.5 text-xs text-ink-2 hover:underline hover:decoration-brand hover:underline-offset-4">
         Sign in for net pricing

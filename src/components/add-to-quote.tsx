@@ -52,7 +52,7 @@ export function AddToQuote({
   // says. The padding and the hidden icon are what actually buy the label its
   // one line back on the narrowest cards. Grid items stretch, so cards stay
   // equal height even if one button does run to two lines.
-  const sizing = size === "sm" ? "min-h-9 px-2 py-1.5 text-sm sm:px-3" : "min-h-11 px-5 py-2 text-[15px]";
+  const sizing = size === "sm" ? "min-h-9 px-2 py-1.5 text-sm sm:px-3" : "min-h-11 px-5 py-2 text-base";
   const purchasable = sku.purchaseEligible && sku.retailPrice !== null;
   // Three states, not two. "Request price" was shown on items whose price is
   // printed directly above the button, which reads as a broken page. When the

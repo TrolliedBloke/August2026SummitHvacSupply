@@ -17,7 +17,7 @@ import { FULFILLMENT, SITE } from "@/lib/site";
 export function FulfillmentCard({ open = true }: { open?: boolean }) {
   return (
     <article className="h-full min-w-0 rounded-(--r-sm) border border-line bg-surface-1 p-5">
-      <h2 className="counter-heading text-[1.15rem] leading-none text-ink-1">Newark branch</h2>
+      <h2 className="text-lg font-semibold leading-snug text-ink-1">Newark branch</h2>
 
       <Link
         href="/delivery"

@@ -28,7 +28,7 @@ export function Field({
 }
 
 const controlClass =
-  "w-full rounded-(--r-sm) border border-control-border bg-control-bg px-3.5 text-[15px] text-ink-1 " +
+  "w-full rounded-(--r-sm) border border-control-border bg-control-bg px-3.5 text-base text-ink-1 " +
   "placeholder:text-ink-4 transition-colors hover:border-ink-4 focus:border-brand focus:bg-surface-1 " +
   "focus:outline-none focus:ring-2 focus:ring-brand/25";
 

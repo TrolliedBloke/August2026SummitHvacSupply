@@ -105,7 +105,7 @@ export function SystemSizer({ skus }: { skus: SizerSku[] }) {
               type="button"
               onClick={() => setScope(option.value)}
               aria-pressed={scope === option.value}
-              className={`h-9 rounded-(--r-sm) text-[13px] font-medium transition-colors ${
+              className={`h-9 rounded-(--r-sm) text-sm font-medium transition-colors ${
                 scope === option.value
                   ? "bg-surface-1 text-brand shadow-[var(--shadow-sm)]"
                   : "text-ink-2 hover:text-ink-1"
@@ -133,8 +133,8 @@ export function SystemSizer({ skus }: { skus: SizerSku[] }) {
                     : "border-line bg-surface-1 hover:border-line-strong"
                 }`}
               >
-                <span className="block text-[13px] font-medium text-ink-1">{option.label}</span>
-                <span className="block text-[11px] text-ink-3">{option.hint}</span>
+                <span className="block text-sm font-medium text-ink-1">{option.label}</span>
+                <span className="block text-xs text-ink-3">{option.hint}</span>
               </button>
             ))}
           </div>
@@ -154,7 +154,7 @@ export function SystemSizer({ skus }: { skus: SizerSku[] }) {
                 type="button"
                 onClick={() => setDucts(value as boolean)}
                 aria-pressed={ducts === value}
-                className={`h-9 rounded-(--r-sm) text-[13px] font-medium transition-colors ${
+                className={`h-9 rounded-(--r-sm) text-sm font-medium transition-colors ${
                   ducts === value
                     ? "bg-surface-1 text-brand shadow-[var(--shadow-sm)]"
                     : "text-ink-2 hover:text-ink-1"
@@ -195,7 +195,7 @@ export function SystemSizer({ skus }: { skus: SizerSku[] }) {
         ))}
       </div>
 
-      <p className="mt-3 text-[11px] leading-relaxed text-ink-4">
+      <p className="mt-3 text-xs leading-relaxed text-ink-4">
         Rule-of-thumb estimate. Your installer confirms the final size with a
         Manual J load calculation before anything is ordered.
       </p>

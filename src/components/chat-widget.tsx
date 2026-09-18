@@ -184,7 +184,7 @@ export function ChatWidget() {
               </span>
               <div>
                 <p className="text-sm font-semibold text-ink-1">Summit assistant</p>
-                <p className="text-[11px] text-ink-3">AI assistant for instant answers, 24/7</p>
+                <p className="text-xs text-ink-3">AI assistant for instant answers, 24/7</p>
               </div>
             </div>
             <button
@@ -274,7 +274,7 @@ export function ChatWidget() {
             <a
               href={SITE.phoneHref}
               data-conversion-hook="chat-escalate-phone"
-              className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-medium text-ink-3 hover:text-brand"
+              className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-ink-3 hover:text-brand"
             >
               <Phone size={11} />
               Prefer a human? Call or text {SITE.phone}

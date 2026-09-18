@@ -149,7 +149,7 @@ export default function ResourcesPage() {
                 <Link href={productHref(sku)} className="font-display text-base font-semibold text-ink-1 hover:text-brand">
                   {sku.title}
                 </Link>
-                <span className="ml-2 font-mono text-xs text-ink-3">{sku.sku}</span>
+                <span className="ml-2 text-xs text-ink-3">{sku.sku}</span>
                 <p className="mt-1 text-xs text-ink-3">{sku.modelNumber} · {sku.btu.toLocaleString()} BTU · {sku.voltage}</p>
               </div>
               <div className="flex flex-wrap gap-2">

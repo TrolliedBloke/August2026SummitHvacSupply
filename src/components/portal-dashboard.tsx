@@ -44,12 +44,12 @@ export function PortalDashboard({ overview }: { overview: PortalOverview }) {
               <div key={sku.id} className="flex items-center justify-between gap-4 rounded-(--r-sm) border border-line bg-surface-2/60 p-3">
                 <div>
                   <p className="text-sm font-semibold text-ink-1">{sku.title}</p>
-                  <p className="mt-0.5 font-mono text-xs text-ink-3">
+                  <p className="mt-0.5 text-xs text-ink-3">
                     {sku.sku} · {sku.btu.toLocaleString()} BTU · {sku.seriesName}
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="tnum font-mono text-sm font-semibold text-ink-1">{currency(sku.dealerPrice)}</p>
+                  <p className="tnum text-sm font-semibold text-ink-1">{currency(sku.dealerPrice)}</p>
                   <p className="text-xs text-ink-3">{sku.available} available</p>
                 </div>
               </div>
@@ -155,7 +155,7 @@ function MiniList({ rows, empty }: { rows: string[][]; empty: string }) {
             <p className="text-sm font-semibold text-ink-1">{title}</p>
             <p className="mt-0.5 text-xs text-ink-3">{detail}</p>
           </div>
-          <span className="shrink-0 rounded-full bg-surface-2 px-2 py-1 text-[11px] font-medium text-ink-3">
+          <span className="shrink-0 rounded-full bg-surface-2 px-2 py-1 text-xs font-medium text-ink-3">
             {status.replaceAll("_", " ")}
           </span>
         </div>

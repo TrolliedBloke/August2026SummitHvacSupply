@@ -81,7 +81,7 @@ export function ProductReviews({
               <div className="flex items-center justify-between gap-3">
                 <Stars value={review.rating} />
                 {review.verified && (
-                  <span className="rounded-full bg-eco-tint px-2 py-0.5 text-[11px] font-semibold text-eco-ink">
+                  <span className="rounded-full bg-eco-tint px-2 py-0.5 text-xs font-semibold text-eco-ink">
                     Verified buyer
                   </span>
                 )}

@@ -71,7 +71,7 @@ export function HomeownerRequestForm() {
           .
         </p>
         {requestId && (
-          <p className="mt-3 font-mono text-xs uppercase tracking-[0.12em] text-ink-3">
+          <p className="mt-3 text-xs text-ink-3">
             Request ID {requestId}
           </p>
         )}

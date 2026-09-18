@@ -124,11 +124,11 @@ export default function HomePage() {
         <Container className="pb-0 pt-5">
           <div className="grid items-stretch gap-5 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,0.85fr)] lg:gap-8">
             <div className="min-w-0">
-              <h1 className="counter-heading max-w-[760px] text-[2.1rem] leading-[1.02] text-ink-1 sm:text-[2.6rem]">
+              <h1 className="counter-heading max-w-[760px] text-[2rem] leading-[1.1] text-ink-1 sm:text-[2.5rem]">
                 HVAC equipment and parts,
                 <br /> ready from Newark.
               </h1>
-              <p className="mt-2 text-[0.98rem] leading-6 text-ink-1">
+              <p className="mt-2 text-base leading-6 text-ink-1">
                 Trade pricing for approved contractors. List pricing for homeowners.
               </p>
               <AudienceDoors />
@@ -152,7 +152,7 @@ export default function HomePage() {
       <section className="bg-canvas py-7">
         <Container>
           <div className="mb-4 flex items-center justify-between gap-4">
-            <h2 className="text-2xl font-medium leading-tight text-ink-1">Shop by category</h2>
+            <h2 className="counter-heading text-2xl leading-tight text-ink-1">Shop by category</h2>
             <Link href="/products" className="hidden items-center gap-2 text-sm font-medium text-ink-1 md:inline-flex">
               View all categories
               <ArrowRight size={15} />
@@ -176,7 +176,7 @@ export default function HomePage() {
 
       <section className="bg-canvas py-9">
         <Container>
-          <h2 className="counter-heading text-[1.25rem] leading-none text-ink-1">
+          <h2 className="counter-heading text-2xl leading-tight text-ink-1">
             Why buy from Summit
           </h2>
           {/* Cards, not a bare row. The border is what turns four sentences into
@@ -191,7 +191,7 @@ export default function HomePage() {
                 <span className="grid size-8 place-items-center text-brand [&_svg]:size-7 [&_svg]:stroke-[1.5]">
                   {item.icon}
                 </span>
-                <p className="mt-3.5 text-[0.95rem] font-medium text-ink-1">{item.title}</p>
+                <p className="mt-3.5 text-base font-medium text-ink-1">{item.title}</p>
                 <p className="mt-1 text-sm leading-6 text-ink-2">{item.body}</p>
               </div>
             ))}
@@ -205,7 +205,7 @@ export default function HomePage() {
             <div className="flex items-start gap-4">
               <Truck size={38} strokeWidth={1.4} className="mt-1 shrink-0 text-ink-1" aria-hidden="true" />
               <div>
-                <h2 className="text-lg font-medium text-ink-1">Need help finding something?</h2>
+                <h2 className="text-lg font-semibold leading-snug text-ink-1">Need help finding something?</h2>
                 <p className="mt-1 text-sm leading-6 text-ink-2">
                   Call {SITE.phone} or submit your local branch request.
                 </p>
@@ -244,7 +244,7 @@ function AudienceDoors() {
         <HardHat size={31} strokeWidth={1.4} className="shrink-0 text-brand" aria-hidden="true" />
         <span>
           <span className="block text-sm font-medium text-ink-1">Shop as contractor</span>
-          <span className="part-number mt-0.5 block text-[0.65rem] uppercase tracking-[0.06em] text-ink-2">Net pricing</span>
+          <span className="part-number mt-0.5 block text-xs text-ink-2">Net pricing</span>
         </span>
       </Link>
       <Link
@@ -255,7 +255,7 @@ function AudienceDoors() {
         <UserRound size={31} strokeWidth={1.4} className="shrink-0 text-brand" aria-hidden="true" />
         <span>
           <span className="block text-sm font-medium text-ink-1">Shop as homeowner</span>
-          <span className="part-number mt-0.5 block text-[0.65rem] uppercase tracking-[0.06em] text-ink-2">List pricing</span>
+          <span className="part-number mt-0.5 block text-xs text-ink-2">List pricing</span>
         </span>
       </Link>
     </div>
@@ -306,7 +306,7 @@ function BranchSection() {
     <section className="hidden bg-canvas py-7 md:block">
       <Container>
         <div className="mb-5 flex items-center justify-between gap-4">
-          <h2 className="text-2xl font-medium leading-tight text-ink-1">Pick up at a branch near you</h2>
+          <h2 className="counter-heading text-2xl leading-tight text-ink-1">Pick up at a branch near you</h2>
           <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-medium text-ink-1">
             View locations
             <ArrowRight size={15} />

@@ -66,7 +66,7 @@ export function DeliveryCountdown({ cutoffHour = 14 }: { cutoffHour?: number }) 
   return (
     <p className="mt-1.5 min-w-0" aria-live="polite">
       <span className="block text-xs leading-5 text-ink-2">{label.caption}</span>
-      <span className="part-number block text-[1.5rem] leading-none text-ink-1 sm:text-[1.65rem]">
+      <span className="part-number block text-2xl leading-none text-ink-1 sm:text-2xl">
         {label.value}
       </span>
     </p>

@@ -76,7 +76,7 @@ export function BuyAgainButton({ orderId }: { orderId: string }) {
         Buy again
       </button>
       {notice && (
-        <p className={`mt-1 max-w-[220px] text-[11px] leading-snug ${state === "error" ? "text-danger" : "text-ink-3"}`}>
+        <p className={`mt-1 max-w-[220px] text-xs leading-snug ${state === "error" ? "text-danger" : "text-ink-3"}`}>
           {notice}
         </p>
       )}

@@ -83,7 +83,7 @@ export function StockChip({
     : "Availability on request";
   if (compact) {
     return (
-      <span className={`tnum inline-flex items-center gap-1 font-mono text-xs ${showCount ? "text-stock-ready" : "text-ink-3"} ${className}`}>
+      <span className={`tnum inline-flex items-center gap-1 text-xs ${showCount ? "text-stock-ready" : "text-ink-3"} ${className}`}>
         {icon}
         {label}
       </span>
@@ -96,7 +96,7 @@ export function StockChip({
     >
       {icon}
       {label}
-      {showCount && <span className="tnum font-mono">· {available}</span>}
+      {showCount && <span className="tnum ">· {available}</span>}
     </span>
   );
 }
@@ -141,7 +141,7 @@ export function StockLine({
     <div className={className}>
       <div className="flex items-baseline gap-3">
         {onHand && (
-          <span className="tnum font-mono text-3xl font-medium leading-none text-stock-ready">
+          <span className="tnum text-3xl font-medium leading-none text-stock-ready">
             {sku.available}
           </span>
         )}

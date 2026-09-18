@@ -20,7 +20,7 @@ export default function Error({
   return (
     <div className="mx-auto w-full max-w-[var(--page-max)] px-5 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-xl text-center">
-        <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-copper">
+        <p className="text-xs font-semibold text-copper">
           Something went wrong
         </p>
         <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-1">
@@ -34,18 +34,18 @@ export default function Error({
           and we&apos;ll take the order by phone.
         </p>
         {error.digest && (
-          <p className="mt-2 font-mono text-xs text-ink-4">Reference: {error.digest}</p>
+          <p className="mt-2 text-xs text-ink-4">Reference: {error.digest}</p>
         )}
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
           <button
             onClick={() => unstable_retry()}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-(--r-sm) bg-brand px-6 text-[15px] font-medium text-brand-ink shadow-[var(--shadow-sm)] transition-colors hover:bg-brand-hover"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-(--r-sm) bg-brand px-6 text-base font-medium text-brand-ink shadow-[var(--shadow-sm)] transition-colors hover:bg-brand-hover"
           >
             <RotateCcw size={16} /> Try again
           </button>
           <Link
             href="/"
-            className="inline-flex h-12 items-center justify-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-6 text-[15px] font-medium text-ink-1 transition-colors hover:bg-surface-2"
+            className="inline-flex h-12 items-center justify-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-6 text-base font-medium text-ink-1 transition-colors hover:bg-surface-2"
           >
             Back to home
           </Link>

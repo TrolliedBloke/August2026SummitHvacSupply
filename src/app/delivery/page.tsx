@@ -208,8 +208,8 @@ export default function DeliveryPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="counter-heading text-[1.4rem] leading-none text-ink-1">{title}</h2>
-      <div className="mt-3 text-[0.98rem] leading-7 text-ink-2">{children}</div>
+      <h2 className="counter-heading text-2xl leading-none text-ink-1">{title}</h2>
+      <div className="mt-3 text-base leading-7 text-ink-2">{children}</div>
     </section>
   );
 }
@@ -243,7 +243,7 @@ function ZoneCard({ name, cities, note }: { name: string; cities: string; note: 
       </dt>
       <dd className="mt-2 text-sm leading-6 text-ink-2">
         {cities}
-        <span className="part-number mt-1.5 block text-xs uppercase text-ink-3">{note}</span>
+        <span className="part-number mt-1.5 block text-xs text-ink-3">{note}</span>
       </dd>
     </div>
   );

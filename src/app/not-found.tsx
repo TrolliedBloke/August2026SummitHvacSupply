@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <Container className="py-20 lg:py-28">
       <div className="mx-auto max-w-xl text-center">
-        <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-copper">
+        <p className="text-xs font-semibold text-copper">
           404: page not found
         </p>
         <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
@@ -33,7 +33,7 @@ export default function NotFound() {
       </div>
 
       <div className="mx-auto mt-14 max-w-2xl">
-        <h2 className="text-center font-mono text-xs font-semibold uppercase tracking-[0.14em] text-ink-3">
+        <h2 className="text-center text-xs font-semibold text-ink-3">
           Browse categories
         </h2>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">

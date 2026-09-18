@@ -22,7 +22,7 @@ export function CounterPanel() {
         <div className="flex items-center gap-4">
           <ClipboardList size={32} strokeWidth={1.4} className="shrink-0 text-ink-1" aria-hidden="true" />
           <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-7">
-            <p className="counter-heading whitespace-nowrap text-[1.05rem] leading-none text-ink-1">Contractor ordering</p>
+            <p className="counter-heading whitespace-nowrap text-base leading-none text-ink-1">Contractor ordering</p>
             <p className="text-sm text-ink-2">Order by SKU or upload your material list.</p>
           </div>
         </div>
@@ -107,7 +107,7 @@ function QuickOrderTab() {
             value={value}
             onChange={(event) => setValue(event.target.value)}
             placeholder={"TCL24KAHU, 2\nTOS12KODU, 1"}
-            className="w-full resize-y rounded-(--r-sm) border border-line-strong bg-surface-1 p-3 font-mono text-sm text-ink-1 outline-none placeholder:text-ink-4"
+            className="w-full resize-y rounded-(--r-sm) border border-line-strong bg-surface-1 p-3 text-sm text-ink-1 outline-none placeholder:text-ink-4"
           />
         </>
       }

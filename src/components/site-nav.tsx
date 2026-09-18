@@ -47,7 +47,7 @@ const CATEGORY_RAIL = [
 /* Shared by every row-3 entry so the run reads as an even rhythm: the spacing
    is padding carried by each item, not a fixed gap between labels of very
    different widths. */
-const NAV_ITEM = "whitespace-nowrap rounded-(--r-sm) px-5 py-2 text-[15px] font-medium transition-colors";
+const NAV_ITEM = "whitespace-nowrap rounded-(--r-sm) px-5 py-2 text-base font-medium transition-colors";
 
 function useClientMounted() {
   return React.useSyncExternalStore(
@@ -263,7 +263,7 @@ function SearchField({
                   index === active ? "bg-surface-2" : "hover:bg-surface-2"
                 }`}
               >
-                <span className="block font-mono text-[11px] font-medium text-ink-3">
+                <span className="block text-xs font-medium text-ink-3">
                   {result.sku}
                 </span>
                 <span className="mt-0.5 block text-sm font-medium text-ink-1">{result.title}</span>
@@ -496,8 +496,8 @@ function AccountMenu() {
             <X size={20} strokeWidth={ICON_STROKE} />
           </button>
 
-          <p id="account-menu-title" className="pr-8 text-[15px] leading-6 text-ink-2">
-            <strong className="font-semibold text-ink-1">SIGN IN</strong> for a better buying experience:
+          <p id="account-menu-title" className="pr-8 text-base leading-6 text-ink-2">
+            <strong className="font-semibold text-ink-1">Sign in</strong> for a better buying experience:
           </p>
           <ul className="mt-3 space-y-2.5 text-sm leading-5 text-ink-2">
             {[
@@ -515,14 +515,14 @@ function AccountMenu() {
             <Link
               href="/account"
               onClick={close}
-              className="flex h-12 items-center justify-center rounded-(--r-sm) bg-brand px-4 text-[15px] font-semibold text-white transition-colors hover:bg-brand-hover"
+              className="flex h-12 items-center justify-center rounded-(--r-sm) bg-brand px-4 text-base font-semibold text-white transition-colors hover:bg-brand-hover"
             >
               Create account
             </Link>
             <Link
               href="/portal/login"
               onClick={close}
-              className="flex h-12 items-center justify-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-[15px] font-semibold text-ink-1 transition-colors hover:bg-surface-2"
+              className="flex h-12 items-center justify-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-base font-semibold text-ink-1 transition-colors hover:bg-surface-2"
             >
               Sign in
             </Link>
@@ -548,7 +548,7 @@ function CartButton() {
       <span className="relative grid size-6 place-items-center">
         <ShoppingCart size={24} strokeWidth={ICON_STROKE} />
         {showCount && (
-          <span className="tnum absolute -right-2 -top-1.5 grid min-w-[18px] place-items-center rounded-full bg-ink-1 px-1 font-mono text-[10px] font-medium leading-[18px] text-white">
+          <span className="tnum absolute -right-2 -top-1.5 grid min-w-[18px] place-items-center rounded-full bg-ink-1 px-1 text-xs font-medium leading-[18px] text-white">
             {count}
           </span>
         )}
@@ -707,7 +707,7 @@ export function SiteNav() {
                 <Link
                   href="/products"
                   onClick={closeMobile}
-                  className="block rounded-(--r-sm) px-3 py-3 text-[15px] font-medium text-ink-1 hover:bg-surface-2"
+                  className="block rounded-(--r-sm) px-3 py-3 text-base font-medium text-ink-1 hover:bg-surface-2"
                 >
                   All products
                 </Link>
@@ -717,7 +717,7 @@ export function SiteNav() {
                   <Link
                     href={item.href}
                     onClick={closeMobile}
-                    className={`block rounded-(--r-sm) px-3 py-3 text-[15px] font-medium hover:bg-surface-2 ${
+                    className={`block rounded-(--r-sm) px-3 py-3 text-base font-medium hover:bg-surface-2 ${
                       isActive(item.href) ? "text-ink-1 underline underline-offset-4" : "text-ink-1"
                     }`}
                   >
@@ -734,7 +734,7 @@ export function SiteNav() {
                     key={item.href}
                     href={item.href}
                     onClick={closeMobile}
-                    className="block rounded-(--r-sm) px-3 py-2.5 text-[15px] font-medium text-ink-1 hover:bg-surface-2"
+                    className="block rounded-(--r-sm) px-3 py-2.5 text-base font-medium text-ink-1 hover:bg-surface-2"
                   >
                     {item.label}
                   </Link>
@@ -744,7 +744,7 @@ export function SiteNav() {
                 <Link
                   href="/contact"
                   onClick={closeMobile}
-                  className={`block rounded-(--r-sm) px-3 py-3 text-[15px] font-medium hover:bg-surface-2 ${
+                  className={`block rounded-(--r-sm) px-3 py-3 text-base font-medium hover:bg-surface-2 ${
                     isActive("/contact") ? "text-ink-1 underline underline-offset-4" : "text-ink-1"
                   }`}
                 >

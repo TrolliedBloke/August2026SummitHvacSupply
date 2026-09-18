@@ -65,7 +65,7 @@ export default function ContactPage() {
                 .
               </p>
               {requestId && (
-                <p className="mt-3 font-mono text-xs uppercase tracking-[0.12em] text-ink-3">
+                <p className="mt-3 text-xs text-ink-3">
                   Request ID {requestId}
                 </p>
               )}
@@ -154,7 +154,7 @@ export default function ContactPage() {
         {/* NAP aside */}
         <aside className="lg:sticky lg:top-6 lg:self-start">
           <div className="rounded-(--r-md) border border-line bg-surface-1 p-6 shadow-[var(--shadow-sm)]">
-            <dl className="space-y-4 text-[15px]">
+            <dl className="space-y-4 text-base">
               <Row icon={<MapPin size={18} />} label="Address">
                 {SITE.address.full}
               </Row>
@@ -209,7 +209,7 @@ function Row({
         {icon}
       </span>
       <div>
-        <dt className="font-mono text-xs uppercase tracking-wider text-ink-3">
+        <dt className="text-xs text-ink-3">
           {label}
         </dt>
         <dd className="mt-0.5 text-ink-1">{children}</dd>

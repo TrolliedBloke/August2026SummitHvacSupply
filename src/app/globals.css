@@ -49,10 +49,12 @@
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
 
+  /* One typeface. Headings, body, part numbers and data are all Inter; numbers
+     line up through tabular figures on body, not through a monospace font. */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-grotesk), var(--font-inter), sans-serif;
-  --font-condensed: var(--font-condensed-archivo), var(--font-grotesk), sans-serif;
-  --font-mono: var(--font-mono-jb), ui-monospace, monospace;
+  --font-display: var(--font-sans);
+  --font-condensed: var(--font-sans);
+  --font-mono: var(--font-sans);
 }
 
 *,
@@ -106,17 +108,12 @@ body {
 }
 
 .part-number {
-  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums lining-nums;
 }
 
-/* Counter heading -- bold condensed uppercase. Used for the landing page
-   section titles ("NEWARK BRANCH", "AVAILABLE FROM NEWARK"). Tracking is
-   tightened because condensed caps otherwise read as loose at display size. */
+/* Section heading -- the one heading style, in sentence case. Used for the
+   landing page section titles ("Available from Newark", "Shop by category"). */
 .counter-heading {
-  font-family: var(--font-condensed-archivo), var(--font-grotesk), sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.005em;
-  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }

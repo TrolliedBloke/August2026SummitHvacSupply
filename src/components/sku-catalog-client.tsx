@@ -277,7 +277,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
 
       <section>
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <p className="font-mono text-xs uppercase tracking-wider text-ink-3">
+          <p className="text-xs text-ink-3">
             {filtered.length} of {skus.length} SKUs
           </p>
           <div className="flex items-center gap-2 text-sm text-ink-2">
@@ -341,7 +341,7 @@ function ZeroResultsLogger({ query }: { query?: string }) {
 function FilterGroup({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="mt-6 border-t border-line pt-5 first:mt-5">
-      <h3 className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-3">{label}</h3>
+      <h3 className="mb-3 text-xs font-semibold text-ink-3">{label}</h3>
       {children}
     </div>
   );

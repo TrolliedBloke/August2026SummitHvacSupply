@@ -127,7 +127,7 @@ export default function DealersPage() {
                 <a href={SITE.emailHref} className="font-medium text-brand">{SITE.email}</a>.
               </p>
               {requestId && (
-                <p className="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-ink-3">
+                <p className="mt-4 text-xs text-ink-3">
                   Application ID {requestId}
                 </p>
               )}
