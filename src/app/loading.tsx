@@ -2,7 +2,7 @@
    (header band + card grid), so navigation feels instant instead of blank. */
 export default function Loading() {
   return (
-    <div className="mx-auto w-full max-w-[1180px] px-5 py-12 sm:px-6 lg:px-8" aria-busy="true" aria-label="Loading page">
+    <div className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 sm:px-6 lg:px-8" aria-busy="true" aria-label="Loading page">
       <div className="h-4 w-40 animate-pulse rounded-full bg-surface-3" />
       <div className="mt-4 h-9 w-2/3 max-w-lg animate-pulse rounded-(--r-sm) bg-surface-3" />
       <div className="mt-3 h-4 w-1/2 max-w-md animate-pulse rounded-full bg-surface-2" />

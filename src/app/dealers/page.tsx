@@ -106,7 +106,7 @@ export default function DealersPage() {
           labeled in development and production remains consent-gated. */}
       <TestimonialSlot
         items={CONTRACTOR_TESTIMONIALS}
-        className="mx-auto w-full max-w-[1180px] px-5 pt-12 sm:px-6 lg:px-8"
+        className="mx-auto w-full max-w-[var(--page-max)] px-5 pt-12 sm:px-6 lg:px-8"
       />
 
       <Container className="py-12 lg:py-16">

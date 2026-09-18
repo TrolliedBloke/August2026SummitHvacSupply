@@ -574,7 +574,7 @@ function CartButton() {
 function UtilityStrip() {
   return (
     <div className="hidden bg-[var(--ink-panel)] md:block">
-      <div className="mx-auto flex h-10 w-full max-w-[var(--nav-max)] items-center gap-4 px-5 text-xs font-medium text-white sm:px-6 lg:px-[var(--counter-pad)]">
+      <div className="mx-auto flex h-10 w-full max-w-[var(--page-max)] items-center gap-4 px-5 text-xs font-medium text-white sm:px-6 lg:px-8">
         <MapPin size={14} strokeWidth={ICON_STROKE} className="shrink-0" aria-hidden="true" />
         <span className="-ml-2.5 whitespace-nowrap">Newark, CA</span>
         <span aria-hidden="true">·</span>
@@ -629,7 +629,7 @@ export function SiteNav() {
           phones, then an 80px light band on larger screens. The larger Summit
           lockup lets the mountain do the same visual work as the reference
           mark without redrawing or altering the brand asset. */}
-      <div className="mx-auto flex w-full max-w-[var(--nav-max)] items-center gap-6 bg-surface-2 px-5 py-2.5 sm:px-6 md:py-[18px] lg:px-[var(--counter-pad)] lg:py-2.5">
+      <div className="mx-auto flex w-full max-w-[var(--page-max)] items-center gap-6 bg-surface-2 px-5 py-2.5 sm:px-6 md:py-[18px] lg:px-8 lg:py-2.5">
         <Wordmark />
         {/* The field is capped rather than greedy. Left to flex-1 it ran 1092px
             of a 1400px row -- 78% of the header against a right cluster of one
@@ -660,7 +660,7 @@ export function SiteNav() {
           Only the content-width rule after row one separates their hierarchy;
           there is no full-width bar between them or rule beneath the rail. */}
       <nav aria-label="Store navigation" className="bg-surface-2">
-        <div className="mx-auto hidden w-full max-w-[var(--nav-max)] items-center border-b border-line px-5 py-1.5 sm:px-6 lg:px-[var(--counter-pad)] xl:flex">
+        <div className="mx-auto hidden w-full max-w-[var(--page-max)] items-center border-b border-line px-5 py-1.5 sm:px-6 lg:px-8 xl:flex">
           {/* The trigger sits left of the divider; every destination link sits
               right of it, so the distinction is legible at a glance. */}
           <div className="-ml-5">
@@ -685,7 +685,7 @@ export function SiteNav() {
           </ul>
         </div>
         <div className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <ul className="mx-auto flex w-max min-w-full max-w-[var(--nav-max)] items-center gap-12 px-5 py-2 text-xs text-ink-2 sm:px-6 lg:px-[var(--counter-pad)]">
+          <ul className="mx-auto flex w-full max-w-[var(--page-max)] items-center gap-12 px-5 py-2 text-xs text-ink-2 sm:px-6 lg:px-8">
             {CATEGORY_RAIL.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="whitespace-nowrap transition-colors hover:text-ink-1">
@@ -700,7 +700,7 @@ export function SiteNav() {
       {/* Mobile / tablet sheet -- available at every width below xl. */}
       {mobileOpen && (
         <div className="border-t border-line bg-canvas xl:hidden">
-          <div className="mx-auto flex w-full max-w-[var(--counter-max)] flex-col px-5 py-4 sm:px-6">
+          <div className="mx-auto flex w-full max-w-[var(--page-max)] flex-col px-5 py-4 sm:px-6">
             <SearchField onNavigate={closeMobile} />
             <ul className="mt-4 flex flex-col">
               <li>

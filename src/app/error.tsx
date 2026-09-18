@@ -18,7 +18,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="mx-auto w-full max-w-[1180px] px-5 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <div className="mx-auto w-full max-w-[var(--page-max)] px-5 py-20 sm:px-6 lg:px-8 lg:py-28">
       <div className="mx-auto max-w-xl text-center">
         <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-copper">
           Something went wrong

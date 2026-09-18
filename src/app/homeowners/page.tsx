@@ -136,7 +136,7 @@ export default function HomeownersPage() {
       <TestimonialSlot
         items={HOMEOWNER_TESTIMONIALS}
         heading="What other Bay Area homeowners found"
-        className="border-t border-line bg-surface-1 px-5 py-14 sm:px-6 lg:px-8 [&>*]:mx-auto [&>*]:max-w-[1180px]"
+        className="border-t border-line bg-surface-1 px-5 py-14 sm:px-6 lg:px-8 [&>*]:mx-auto [&>*]:max-w-[var(--page-max)]"
       />
 
       <section id="homeowner-request">

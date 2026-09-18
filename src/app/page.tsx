@@ -11,7 +11,7 @@ import {
   Truck,
   UserRound,
 } from "lucide-react";
-import { LinkButton } from "@/components/ui";
+import { Container, LinkButton } from "@/components/ui";
 import { CounterPanel } from "@/components/home/counter-panel";
 import { CounterStock } from "@/components/home/counter-stock";
 import { FulfillmentCard } from "@/components/home/fulfillment-card";
@@ -121,7 +121,7 @@ export default function HomePage() {
       />
 
       <section className="bg-canvas">
-        <FoldContainer className="pb-0 pt-5">
+        <Container className="pb-0 pt-5">
           <div className="grid items-stretch gap-5 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,0.85fr)] lg:gap-8">
             <div className="min-w-0">
               <h1 className="counter-heading max-w-[760px] text-[2.1rem] leading-[1.02] text-ink-1 sm:text-[2.6rem]">
@@ -138,19 +138,19 @@ export default function HomePage() {
               <FulfillmentCard />
             </div>
           </div>
-        </FoldContainer>
+        </Container>
       </section>
 
       <CounterStock />
 
       <section className="bg-canvas pb-5 pt-0">
-        <FoldContainer>
+        <Container>
           <CounterPanel />
-        </FoldContainer>
+        </Container>
       </section>
 
       <section className="bg-canvas py-7">
-        <CounterContainer>
+        <Container>
           <div className="mb-4 flex items-center justify-between gap-4">
             <h2 className="text-2xl font-medium leading-tight text-ink-1">Shop by category</h2>
             <Link href="/products" className="hidden items-center gap-2 text-sm font-medium text-ink-1 md:inline-flex">
@@ -163,7 +163,7 @@ export default function HomePage() {
               <CategoryCard key={item.title} {...item} />
             ))}
           </div>
-        </CounterContainer>
+        </Container>
       </section>
 
       <A2lStrip />
@@ -175,7 +175,7 @@ export default function HomePage() {
       <BranchSection />
 
       <section className="bg-canvas py-9">
-        <CounterContainer>
+        <Container>
           <h2 className="counter-heading text-[1.25rem] leading-none text-ink-1">
             Why buy from Summit
           </h2>
@@ -196,11 +196,11 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-        </CounterContainer>
+        </Container>
       </section>
 
       <section className="bg-canvas py-8">
-        <CounterContainer>
+        <Container>
           <div className="rounded-(--r-md) border border-line bg-surface-1 p-5 md:flex md:items-center md:justify-between md:gap-8">
             <div className="flex items-start gap-4">
               <Truck size={38} strokeWidth={1.4} className="mt-1 shrink-0 text-ink-1" aria-hidden="true" />
@@ -215,11 +215,11 @@ export default function HomePage() {
               Contact us
             </LinkButton>
           </div>
-        </CounterContainer>
+        </Container>
       </section>
 
       <section className="bg-canvas pb-10">
-        <CounterContainer>
+        <Container>
           <div className="grid gap-2 md:grid-cols-3">
             {compliance.map((item) => (
               <p key={item} className="rounded-(--r-md) border border-line bg-surface-1 p-4 text-sm leading-6 text-ink-2">
@@ -227,7 +227,7 @@ export default function HomePage() {
               </p>
             ))}
           </div>
-        </CounterContainer>
+        </Container>
       </section>
     </>
   );
@@ -304,7 +304,7 @@ function CategoryCard({
 function BranchSection() {
   return (
     <section className="hidden bg-canvas py-7 md:block">
-      <CounterContainer>
+      <Container>
         <div className="mb-5 flex items-center justify-between gap-4">
           <h2 className="text-2xl font-medium leading-tight text-ink-1">Pick up at a branch near you</h2>
           <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-medium text-ink-1">
@@ -317,7 +317,7 @@ function BranchSection() {
             <BranchCard key={branch.name} {...branch} />
           ))}
         </div>
-      </CounterContainer>
+      </Container>
     </section>
   );
 }
@@ -325,9 +325,9 @@ function BranchSection() {
 function MobileBranchStrip() {
   return (
     <section className="border-b border-line bg-surface-1 py-4 md:hidden">
-      <CounterContainer>
+      <Container>
         <BranchCard {...branches[0]} />
-      </CounterContainer>
+      </Container>
     </section>
   );
 }
@@ -353,30 +353,4 @@ function BranchCard({
   );
 }
 
-function CounterContainer({
-  className = "",
-  children,
-}: {
-  className?: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className={`mx-4 w-auto max-w-[var(--counter-max)] px-0 sm:mx-auto sm:w-full sm:px-6 lg:px-[var(--counter-pad)] ${className}`}>
-      {children}
-    </div>
-  );
-}
 
-function FoldContainer({
-  className = "",
-  children,
-}: {
-  className?: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className={`mx-auto w-full max-w-[var(--nav-max)] px-4 sm:px-6 lg:px-[var(--counter-pad)] ${className}`}>
-      {children}
-    </div>
-  );
-}

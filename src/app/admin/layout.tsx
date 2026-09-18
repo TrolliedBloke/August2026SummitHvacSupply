@@ -23,7 +23,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     <>
       {staffName && (
         <div className="border-b border-line bg-surface-1">
-          <div className="mx-auto flex w-full max-w-[1180px] items-center justify-between px-5 py-2 text-sm sm:px-6 lg:px-8">
+          <div className="mx-auto flex w-full max-w-[var(--page-max)] items-center justify-between px-5 py-2 text-sm sm:px-6 lg:px-8">
             <span className="text-ink-3">
               Signed in as <span className="font-medium text-ink-1">{staffName}</span>
             </span>

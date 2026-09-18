@@ -31,7 +31,7 @@ const COMPANY_LINKS = [
 export function SiteFooter() {
   return (
     <footer className="bg-[var(--ink-panel)] text-white">
-      <div className="mx-auto w-full max-w-[var(--nav-max)] px-5 py-12 sm:px-6 sm:py-14 lg:px-[var(--counter-pad)]">
+      <div className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
         <div className="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[minmax(280px,1.45fr)_repeat(3,minmax(0,.8fr))_minmax(190px,1fr)]">
           <section aria-labelledby="footer-company-heading" className="max-w-md">
             <div className="flex items-center gap-3">

@@ -27,7 +27,7 @@ export function FeaturedSystems() {
 
   return (
     <section className="border-b border-line bg-canvas py-12 lg:py-14">
-      <div className="mx-auto w-full max-w-[1180px] px-5 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-[var(--page-max)] px-5 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1 sm:text-3xl">

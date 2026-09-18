@@ -92,7 +92,7 @@ export function HelpStrip() {
 
 function CounterWidth({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-4 w-auto max-w-[var(--counter-max)] px-0 sm:mx-auto sm:w-full sm:px-6 lg:px-[var(--counter-pad)]">
+    <div className="mx-auto w-full max-w-[var(--page-max)] px-5 sm:px-6 lg:px-8">
       {children}
     </div>
   );

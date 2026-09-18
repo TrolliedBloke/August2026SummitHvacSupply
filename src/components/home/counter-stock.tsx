@@ -137,7 +137,7 @@ function StockCard({ sku }: { sku: StorefrontSku }) {
 
 function CounterWidth({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto w-full max-w-[var(--nav-max)] px-4 sm:px-6 lg:px-[var(--counter-pad)]">
+    <div className="mx-auto w-full max-w-[var(--page-max)] px-5 sm:px-6 lg:px-8">
       {children}
     </div>
   );
