@@ -19,7 +19,7 @@
   --radius-control: 6px;
   --radius-card: 12px;
   --border-hairline: 0.5px solid var(--border);
-  /* Sticky header height. Three tiers at xl; the utility strip drops below md
+  /* Header height (the header scrolls with the page). Three tiers at xl; the utility strip drops below md
      and the category row below xl, so the value steps down with them. Anything
      that parks itself under the header offsets by this token. */
   --nav-height: 96px;

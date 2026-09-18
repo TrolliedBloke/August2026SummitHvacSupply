@@ -622,7 +622,7 @@ export function SiteNav() {
   const isActive = (href: string) => href === activeHref;
 
   return (
-    <header className="sticky top-0 z-30 bg-surface-2">
+    <header className="relative z-30 bg-surface-2">
       <UtilityStrip />
 
       {/* Row 2 follows the approved retail-header proportion: compact on

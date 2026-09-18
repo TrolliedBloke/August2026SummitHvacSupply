@@ -192,7 +192,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
   return (
     <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
       {/* Desktop sidebar -- hidden below lg so mobile reaches products first. */}
-      <aside className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
+      <aside className="hidden lg:sticky lg:top-6 lg:block lg:self-start">
         {searchForm}
         <div className="mt-6 flex items-center justify-between">
           <span className="inline-flex items-center gap-2 font-display text-sm font-semibold text-ink-1">
@@ -210,7 +210,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
       {/* Mobile: search + a sticky Filters button; products render immediately. */}
       <div className="flex flex-col gap-3 lg:hidden">
         {searchForm}
-        <div className="sticky top-[calc(var(--nav-height)+0.5rem)] z-20 -mx-1 px-1">
+        <div className="sticky top-2 z-20 -mx-1 px-1">
           <button
             type="button"
             onClick={() => setDrawerOpen(true)}

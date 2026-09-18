@@ -152,7 +152,7 @@ export default function ContactPage() {
         </div>
 
         {/* NAP aside */}
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        <aside className="lg:sticky lg:top-6 lg:self-start">
           <div className="rounded-(--r-md) border border-line bg-surface-1 p-6 shadow-[var(--shadow-sm)]">
             <dl className="space-y-4 text-[15px]">
               <Row icon={<MapPin size={18} />} label="Address">

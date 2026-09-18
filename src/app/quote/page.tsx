@@ -114,7 +114,7 @@ export default function QuotePage() {
         </div>
 
         {/* Aside: quote summary + reassurance */}
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        <aside className="lg:sticky lg:top-6 lg:self-start">
           <div className="mb-4 overflow-hidden rounded-(--r-md) border border-line bg-surface-2 shadow-[var(--shadow-sm)]">
             <div className="relative aspect-[16/10]">
               <Image
