@@ -109,7 +109,7 @@ export function AddToQuote({
           aria-label={`Decrease quantity for ${sku.title}`}
           onClick={() => setQuantity((value) => Math.max(1, value - 1))}
           disabled={quantity === 1}
-          className="grid place-items-center text-ink-1 transition-colors hover:bg-surface-2 disabled:text-ink-4"
+          className="grid place-items-center text-ink-1 transition-colors duration-100 hover:bg-surface-2 active:bg-line disabled:text-ink-4 disabled:active:bg-transparent"
         >
           <Minus size={13} aria-hidden="true" />
         </button>
@@ -120,7 +120,7 @@ export function AddToQuote({
           type="button"
           aria-label={`Increase quantity for ${sku.title}`}
           onClick={() => setQuantity((value) => Math.min(99, value + 1))}
-          className="grid place-items-center text-ink-1 transition-colors hover:bg-surface-2"
+          className="grid place-items-center text-ink-1 transition-colors duration-100 hover:bg-surface-2 active:bg-line"
         >
           <Plus size={13} aria-hidden="true" />
         </button>
