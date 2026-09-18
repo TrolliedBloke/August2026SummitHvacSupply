@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ImageOff } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { AddToQuote } from "./add-to-quote";
+import { ProductImage } from "./product-image";
 import { StockBadge } from "./stock-badge";
 import { Chip } from "./ui";
 import { productHref, type StorefrontSku } from "@/lib/storefront/catalog";
@@ -13,14 +13,8 @@ function currency(value: number) {
 export function SkuCard({ sku, priority = false }: { sku: StorefrontSku; priority?: boolean }) {
   return (
     <article className="group min-w-0 flex flex-col overflow-hidden rounded-(--r-md) border border-line bg-surface-1 shadow-[var(--shadow-sm)] transition-shadow hover:shadow-[var(--shadow-md)]">
-      <Link href={productHref(sku)} className="relative flex aspect-[16/10] items-center justify-center bg-surface-2">
-        {sku.imageVerified ? (
-          <>
-            <Image src={sku.image} alt={`${sku.title}, model ${sku.modelNumber}`} fill loading={priority ? "eager" : "lazy"} sizes="(min-width: 1024px) 360px, 100vw" className="object-contain p-4" />
-          </>
-        ) : (
-          <span className="flex flex-col items-center gap-2 text-ink-3"><ImageOff size={28} aria-hidden="true" /><span className="text-xs">Exact image being verified</span></span>
-        )}
+      <Link href={productHref(sku)} className="block p-3 pb-0">
+        <ProductImage src={sku.imageVerified ? sku.image : null} alt={`${sku.title}, model ${sku.modelNumber}`} sizes="(min-width: 1024px) 360px, 100vw" priority={priority} />
       </Link>
       <div className="flex min-w-0 flex-1 flex-col gap-4 p-5">
         <div className="flex flex-wrap items-center gap-2">

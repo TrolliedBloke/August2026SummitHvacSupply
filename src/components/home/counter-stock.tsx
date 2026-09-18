@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Store } from "lucide-react";
 import { AddToQuote } from "@/components/add-to-quote";
+import { ProductImage } from "@/components/product-image";
 import { getStorefrontSku, productHref, type StorefrontSku } from "@/lib/storefront/catalog";
 import { applyLiveInventory, getLiveInventory } from "@/lib/storefront/live-inventory";
 import { FULFILLMENT } from "@/lib/site";
@@ -78,18 +78,8 @@ function StockCard({ sku }: { sku: StorefrontSku }) {
 
   return (
     <article className="flex min-w-0 flex-col rounded-(--r-sm) border border-transparent px-3 pb-3 pt-2 transition-[background-color,border-color] duration-150 ease-out hover:border-line hover:bg-surface-1 sm:px-4 sm:pb-4 sm:pt-3">
-      <Link
-        href={productHref(sku)}
-        className="relative mb-0.5 block h-[140px] w-full overflow-hidden sm:h-[172px]"
-      >
-        <Image
-          src={sku.image}
-          alt={sku.title}
-          fill
-          loading="lazy"
-          sizes="(min-width: 1280px) 320px, (min-width: 1024px) 33vw, 50vw"
-          className="object-contain p-1"
-        />
+      <Link href={productHref(sku)} className="mb-3 block">
+        <ProductImage src={sku.image} alt={sku.title} sizes="(min-width: 1280px) 300px, (min-width: 1024px) 33vw, 50vw" />
       </Link>
 
       <p className="text-xs font-medium uppercase tracking-[0.04em] text-ink-1">{sku.brand}</p>
