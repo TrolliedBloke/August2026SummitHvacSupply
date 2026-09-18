@@ -179,15 +179,12 @@ export default function HomePage() {
           <h2 className="counter-heading text-2xl leading-tight text-ink-1">
             Why buy from Summit
           </h2>
-          {/* Cards, not a bare row. The border is what turns four sentences into
-              four reasons -- it gives each one a boundary the eye can land on,
-              which a flat grid of text does not. */}
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {/* No card borders: the icon and the spacing already separate the four
+              reasons, and outlining every block on the page left nothing to
+              stand out. Borders are kept for things you click. */}
+          <div className="mt-5 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {proof.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-(--r-md) border border-line bg-surface-1 p-5"
-              >
+              <div key={item.title}>
                 <span className="grid size-8 place-items-center text-brand [&_svg]:size-7 [&_svg]:stroke-[1.5]">
                   {item.icon}
                 </span>
@@ -201,7 +198,7 @@ export default function HomePage() {
 
       <section className="bg-canvas py-8">
         <Container>
-          <div className="rounded-(--r-md) border border-line bg-surface-1 p-5 md:flex md:items-center md:justify-between md:gap-8">
+          <div className="border-t border-line pt-8 md:flex md:items-center md:justify-between md:gap-8">
             <div className="flex items-start gap-4">
               <Truck size={38} strokeWidth={1.4} className="mt-1 shrink-0 text-ink-1" aria-hidden="true" />
               <div>
@@ -220,9 +217,9 @@ export default function HomePage() {
 
       <section className="bg-canvas pb-10">
         <Container>
-          <div className="grid gap-2 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {compliance.map((item) => (
-              <p key={item} className="rounded-(--r-md) border border-line bg-surface-1 p-4 text-sm leading-6 text-ink-2">
+              <p key={item} className="text-xs leading-5 text-ink-3">
                 {item}
               </p>
             ))}
