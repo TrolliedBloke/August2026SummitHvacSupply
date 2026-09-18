@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { createPortal } from "react-dom";
 import * as React from "react";
-import { SkuCard } from "./sku-card";
+import { ProductCard } from "./product-card";
 import { Button } from "./ui";
 import { CustomSelect } from "./custom-select";
 import {
@@ -309,9 +309,9 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
           </div>
         ) : (
           <>
-            <div className="grid gap-6 lg:grid-cols-2">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-3">
               {filtered.slice(0, visibleCount).map((sku, index) => (
-                <SkuCard key={sku.id} sku={sku} priority={index < 4} />
+                <ProductCard key={sku.id} sku={sku} priority={index < 4} />
               ))}
             </div>
             {visibleCount < filtered.length && (

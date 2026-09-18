@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { SkuCard } from "./sku-card";
+import { ProductCard } from "./product-card";
 import { getStorefrontSkus, type StorefrontSku } from "@/lib/storefront/catalog";
 
 /* One representative unit per series lane, cheapest in-stock first -- the
@@ -47,7 +47,7 @@ export function FeaturedSystems() {
         </div>
         <div className="mt-7 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {featured.map((sku, index) => (
-            <SkuCard key={sku.id} sku={sku} priority={index < 2} />
+            <ProductCard key={sku.id} sku={sku} priority={index < 2} />
           ))}
         </div>
       </div>

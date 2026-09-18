@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Headphones, House } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { Container } from "@/components/ui";
 
 /* A2L is the live question in Bay Area HVAC right now: the refrigerant
    transition decides which condensers a contractor is allowed to install. The
@@ -15,7 +16,7 @@ const FILTERS = [
 export function A2lStrip() {
   return (
     <section className="bg-canvas py-6">
-      <CounterWidth>
+      <Container>
         <div className="rounded-(--r-md) bg-band p-5 lg:flex lg:items-center lg:justify-between lg:gap-8">
           <div className="flex items-start gap-4">
             <span className="relative mt-0.5 block size-10 shrink-0" aria-hidden="true">
@@ -57,7 +58,7 @@ export function A2lStrip() {
             </Link>
           </div>
         </div>
-      </CounterWidth>
+      </Container>
     </section>
   );
 }
@@ -67,7 +68,7 @@ export function A2lStrip() {
 export function HelpStrip() {
   return (
     <section className="bg-canvas pb-8">
-      <CounterWidth>
+      <Container>
         <div className="grid gap-4 border-t border-line pt-6 sm:grid-cols-2">
           <p className="flex items-center gap-3 text-base text-ink-1">
             <House size={26} strokeWidth={1.4} className="shrink-0" aria-hidden="true" />
@@ -85,15 +86,8 @@ export function HelpStrip() {
             </a>
           </p>
         </div>
-      </CounterWidth>
+      </Container>
     </section>
   );
 }
 
-function CounterWidth({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="mx-auto w-full max-w-[var(--page-max)] px-5 sm:px-6 lg:px-8">
-      {children}
-    </div>
-  );
-}
