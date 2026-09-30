@@ -43,7 +43,7 @@ export function PriceAudience() {
               value={optionValue}
               checked={value === optionValue}
               onChange={() => setValue(optionValue)}
-              className="peer absolute size-0 opacity-0"
+              className="peer sr-only"
             />
             <Icon
               size={24}

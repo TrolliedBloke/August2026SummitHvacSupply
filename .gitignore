@@ -61,3 +61,7 @@ skills-lock.json
 # Transient agent dev-server logs
 .codex-dev-out.log
 .codex-dev-err.log
+
+# Design review screenshots: 23MB of generated PNGs, regenerated on demand by
+# scripts/design-screens.ts. The reference and the round-by-round shots stay.
+design/screens/

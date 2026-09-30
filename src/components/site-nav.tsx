@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { Check, Menu, X, Lock, Search, ShoppingCart, MapPin, Phone, UserRound } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
@@ -537,9 +538,41 @@ function UtilityStrip() {
   );
 }
 
+
+/* The category run. `query` is null until the client provides it, so the server
+   can prerender the links and only the current-page marking waits. */
+function CategoryLinks({ pathname, query }: { pathname: string; query: string | null }) {
+  const isCurrent = (href: string) => {
+    if (query === null) return false;
+    const [path, itemQuery = ""] = href.split("?");
+    if (pathname !== path) return false;
+    return itemQuery ? query === itemQuery : query === "";
+  };
+
+  return (
+    <ul className="flex shrink-0 items-center">
+      {CATEGORY_RAIL.map((item) => (
+        <li key={item.href}>
+          <Link
+            href={item.href}
+            aria-current={isCurrent(item.href) ? "page" : undefined}
+            className={`${NAV_ITEM} ${NAV_UNDERLINE} block ${isCurrent(item.href) ? NAV_UNDERLINE_ON : ""}`}
+          >
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function CategoryRail({ pathname }: { pathname: string }) {
+  const searchParams = useSearchParams();
+  return <CategoryLinks pathname={pathname} query={searchParams.toString()} />;
+}
+
 export function SiteNav() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const closeMobile = () => setMobileOpen(false);
 
@@ -555,15 +588,6 @@ export function SiteNav() {
   });
 
   const isActive = (href: string) => href === activeHref;
-
-  // A category link is current only when both its path and its query match, so
-  // /products?category=furnaces does not mark every other /products entry.
-  const isCategoryCurrent = (href: string) => {
-    const [path, query = ""] = href.split("?");
-    if (pathname !== path) return false;
-    const current = searchParams.toString();
-    return query ? current === query : current === "";
-  };
 
   return (
     <header className="relative z-30 bg-surface-2">
@@ -615,21 +639,9 @@ export function SiteNav() {
             <div className="-ml-4 shrink-0">
               <AllProductsMenu />
             </div>
-            <ul className="flex shrink-0 items-center">
-              {CATEGORY_RAIL.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={isCategoryCurrent(item.href) ? "page" : undefined}
-                    className={`${NAV_ITEM} ${NAV_UNDERLINE} block ${
-                      isCategoryCurrent(item.href) ? NAV_UNDERLINE_ON : ""
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <Suspense fallback={<CategoryLinks pathname={pathname} query={null} />}>
+              <CategoryRail pathname={pathname} />
+            </Suspense>
             <Link
               href="/brands"
               aria-current={pathname === "/brands" ? "page" : undefined}
