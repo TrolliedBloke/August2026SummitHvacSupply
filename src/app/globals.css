@@ -49,12 +49,23 @@
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
 
-  /* One typeface. Headings, body, part numbers and data are all Inter; numbers
-     line up through tabular figures on body, not through a monospace font. */
+  /* Inter for everything a person reads. JetBrains Mono is scoped to SKUs and
+     spec values only (.part-number) -- the reference sets part numbers in mono,
+     and a fixed-width digit is easier to read back over a phone at the counter.
+     It is never used for prose, labels or headings. */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sans);
   --font-condensed: var(--font-sans);
-  --font-mono: var(--font-sans);
+  --font-mono: var(--font-mono-jb), ui-monospace, monospace;
+
+  /* One type scale, read off the reference. Anything in between snaps to the
+     nearest step; no component invents a size. */
+  --text-display: 2.75rem;  /* 44 -- hero h1 */
+  --text-h2: 1.5rem;        /* 24 -- section headings */
+  --text-lead: 1.125rem;    /* 18 -- card titles, the order-by line */
+  --text-item: 0.9375rem;   /* 15 -- product titles, control options */
+  --text-meta: 0.8125rem;   /* 13 -- muted supporting text */
+  --text-micro: 0.75rem;    /* 12 -- utility bar, SKUs */
 }
 
 *,
@@ -108,6 +119,7 @@ body {
 }
 
 .part-number {
+  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums lining-nums;
 }
 

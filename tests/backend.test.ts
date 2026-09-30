@@ -455,10 +455,12 @@ describe("fulfillment cutoff is stated once", () => {
   });
 
   it("formats hours the way the counter says them", () => {
-    assert.equal(formatCutoffHour(14), "2:00 PM");
-    assert.equal(formatCutoffHour(9), "9:00 AM");
-    assert.equal(formatCutoffHour(12), "12:00 PM");
-    assert.equal(formatCutoffHour(0), "12:00 AM");
+    // On-the-hour times read without ":00" -- the counter says "2 PM", and the
+    // site states it that way everywhere it appears.
+    assert.equal(formatCutoffHour(14), "2 PM");
+    assert.equal(formatCutoffHour(9), "9 AM");
+    assert.equal(formatCutoffHour(12), "12 PM");
+    assert.equal(formatCutoffHour(0), "12 AM");
   });
 
   it("keeps the cutoff inside business hours", () => {

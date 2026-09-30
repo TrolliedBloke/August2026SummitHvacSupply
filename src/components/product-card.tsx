@@ -17,7 +17,6 @@ export function ProductCard({ sku, priority = false }: { sku: StorefrontSku; pri
   // Everything else says so plainly rather than implying a shelf.
   const verified = sku.availabilityVerified && sku.available > 0;
   const low = verified && sku.available <= 2;
-  const name = sku.title.replace(new RegExp(`^${sku.brand}\\s*`, "i"), "") || sku.title;
 
   return (
     <article className="group flex min-w-0 flex-col">
@@ -30,14 +29,16 @@ export function ProductCard({ sku, priority = false }: { sku: StorefrontSku; pri
         />
       </Link>
 
-      <p className="mt-3 text-xs text-ink-2">{sku.brand}</p>
-      <Link href={productHref(sku)} className="mt-0.5 line-clamp-2 min-h-10 text-sm font-medium leading-5 text-ink-1 group-hover:underline">
-        {name}
+      {/* Title carries the brand, as the reference has it, so the title and the
+          SKU below it start at the same baseline on every card. */}
+      <Link href={productHref(sku)} className="mt-3 line-clamp-2 min-h-12 text-item font-medium leading-6 text-ink-1 group-hover:underline">
+        {sku.title}
       </Link>
-      <p className="part-number mt-2 text-base font-semibold text-ink-1">
+      <p className="part-number mt-0.5 text-micro text-ink-3">{sku.sku}</p>
+      <p className="part-number mt-2 text-item font-semibold text-ink-1">
         {sku.retailPrice === null ? "Price on request" : currency(sku.retailPrice)}
       </p>
-      <p className="mt-1 flex items-center gap-2 text-xs text-ink-2">
+      <p className="mt-1.5 flex items-center gap-2 text-meta text-ink-2">
         <span
           className={`size-2 shrink-0 rounded-full ${low ? "bg-[var(--amber)]" : verified ? "bg-brand" : "bg-ink-4"}`}
           aria-hidden="true"

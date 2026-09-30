@@ -5,13 +5,12 @@ import {
   ArrowRight,
   BadgeCheck,
   ClipboardCheck,
-  HardHat,
   Store,
   Truck,
-  UserRound,
 } from "lucide-react";
 import { Container, LinkButton } from "@/components/ui";
 import { CounterPanel } from "@/components/home/counter-panel";
+import { PriceAudience } from "@/components/home/price-audience";
 import { CounterStock } from "@/components/home/counter-stock";
 import { FulfillmentCard } from "@/components/home/fulfillment-card";
 import { A2lStrip, HelpStrip } from "@/components/home/a2l-strip";
@@ -93,20 +92,22 @@ export default function HomePage() {
       />
 
       <section className="bg-canvas">
-        <Container className="pb-0 pt-5">
-          <div className="grid items-stretch gap-5 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,0.85fr)] lg:gap-8">
+        <Container className="pb-0 pt-14">
+          <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,0.85fr)] lg:gap-8">
             <div className="min-w-0">
-              <h1 className="max-w-[760px] font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
+              <h1 className="max-w-[760px] font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink-1 sm:text-display">
                 HVAC equipment and parts,{" "}
                 <br className="hidden sm:block" />ready from Newark.
               </h1>
-              <p className="mt-2 text-base leading-6 text-ink-1">
+              <p className="mt-8 text-base leading-6 text-ink-2">
                 Trade pricing for approved contractors. List pricing for homeowners.
               </p>
-              <AudienceDoors />
+              <PriceAudience />
             </div>
 
-            <div className="min-w-0">
+            {/* The rail's top aligns with the h1's cap height rather than its
+                line box, which is what the reference shows. */}
+            <div className="min-w-0 lg:-mt-2">
               <FulfillmentCard />
             </div>
           </div>
@@ -195,35 +196,6 @@ export default function HomePage() {
         </Container>
       </section>
     </>
-  );
-}
-
-function AudienceDoors() {
-  return (
-    <div className="mt-3 grid max-w-[680px] overflow-hidden rounded-(--r-sm) border border-brand md:grid-cols-2">
-      <Link
-        href="/portal/login"
-        data-conversion-hook="homepage-shop-contractor"
-        className="flex min-h-14 items-center justify-center gap-4 border-b border-brand px-5 py-2.5 transition-colors duration-150 hover:bg-brand-tint md:border-b-0 md:border-r"
-      >
-        <HardHat size={31} strokeWidth={1.4} className="shrink-0 text-brand" aria-hidden="true" />
-        <span>
-          <span className="block text-sm font-medium text-ink-1">Shop as contractor</span>
-          <span className="part-number mt-0.5 block text-xs text-ink-2">Net pricing</span>
-        </span>
-      </Link>
-      <Link
-        href="/products"
-        data-conversion-hook="homepage-shop-homeowner"
-        className="flex min-h-14 items-center justify-center gap-4 px-5 py-2.5 transition-colors duration-150 hover:bg-brand-tint"
-      >
-        <UserRound size={31} strokeWidth={1.4} className="shrink-0 text-brand" aria-hidden="true" />
-        <span>
-          <span className="block text-sm font-medium text-ink-1">Shop as homeowner</span>
-          <span className="part-number mt-0.5 block text-xs text-ink-2">List pricing</span>
-        </span>
-      </Link>
-    </div>
   );
 }
 

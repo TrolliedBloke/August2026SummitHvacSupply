@@ -33,12 +33,12 @@ const RESOURCES = [
 ];
 
 const CATEGORY_RAIL = [
-  { href: "/products?category=mini-splits", label: "Mini Splits" },
+  { href: "/products?category=mini-splits", label: "Mini splits" },
   { href: "/products?q=condenser", label: "Condensers" },
   { href: "/products?category=furnaces", label: "Furnaces" },
-  { href: "/products?category=air-handlers", label: "Air Handlers" },
+  { href: "/products?category=air-handlers", label: "Air handlers" },
   { href: "/products?category=evaporator-coils", label: "Coils" },
-  { href: "/products?category=line-sets", label: "Line Sets" },
+  { href: "/products?category=line-sets", label: "Line sets" },
   { href: "/products?refrigerant=R-454B", label: "Refrigerant" },
   { href: "/products?category=controls", label: "Thermostats" },
 ] as const;
@@ -47,7 +47,7 @@ const CATEGORY_RAIL = [
    is padding carried by each item, not a fixed gap between labels of very
    different widths. */
 const NAV_ITEM =
-  "inline-flex h-11 items-center whitespace-nowrap px-4 text-base font-medium text-ink-1 transition-colors duration-120";
+  "inline-flex h-16 items-center whitespace-nowrap px-4 text-base font-medium text-ink-1 transition-colors duration-120";
 /* The 2px green underline is a state, not decoration: it shows on hover, while
    the menu is open, and on the current category page (aria-current). The
    homepage therefore carries none, because "All products" is a menu trigger and
@@ -74,7 +74,7 @@ function Wordmark() {
         height={280}
         preload
         sizes="(min-width: 1024px) 270px, 160px"
-        className="h-9 w-auto object-contain md:h-12 lg:h-20"
+        className="h-9 w-auto object-contain md:h-12 lg:h-16"
       />
     </Link>
   );
@@ -194,7 +194,7 @@ function SearchField({
       <form
         onSubmit={onSubmit}
         role="search"
-        className="flex h-11 items-stretch overflow-hidden rounded-(--r-sm) border border-line-strong bg-surface-1 focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/25"
+        className="flex h-13 items-stretch overflow-hidden rounded-(--r-sm) border border-line-strong bg-surface-1 focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/25"
       >
         <div className="flex min-w-0 flex-1 items-center gap-2.5 px-3.5">
           <Search size={18} strokeWidth={ICON_STROKE} className="shrink-0 text-ink-3" aria-hidden="true" />
@@ -232,7 +232,7 @@ function SearchField({
         {withButton && (
           <button
             type="submit"
-            className="inline-flex shrink-0 items-center px-7 text-sm font-medium text-brand-ink transition-opacity hover:opacity-90"
+            className="inline-flex w-30 shrink-0 items-center justify-center text-base font-medium text-brand-ink transition-colors duration-120 hover:bg-[var(--green-deep)]"
             style={{ backgroundColor: "var(--brand)" }}
           >
             Search
@@ -502,7 +502,7 @@ function UtilityStrip() {
 
   return (
     <div className="hidden bg-[var(--green-deep)] md:block">
-      <div className="mx-auto flex h-12 w-full max-w-[var(--page-max)] items-center gap-3 px-5 text-xs font-medium text-white">
+      <div className="mx-auto flex h-12 w-full max-w-[var(--page-max)] items-center gap-3 px-5 text-meta font-medium text-white">
         <MapPin size={14} strokeWidth={ICON_STROKE} className="shrink-0" aria-hidden="true" />
         <span className="whitespace-nowrap">Newark, CA</span>
         <span aria-hidden="true" className="text-white/50">·</span>
@@ -573,7 +573,7 @@ export function SiteNav() {
           phones, then an 80px light band on larger screens. The larger Summit
           lockup lets the mountain do the same visual work as the reference
           mark without redrawing or altering the brand asset. */}
-      <div className="mx-auto flex w-full max-w-[var(--page-max)] items-center gap-6 bg-surface-2 px-5 py-2.5 md:py-[18px] lg:py-2.5">
+      <div className="mx-auto flex w-full max-w-[var(--page-max)] items-center gap-6 bg-surface-2 px-5 py-2.5 md:py-[18px] lg:py-[15px]">
         <Wordmark />
         {/* The field is capped rather than greedy. Left to flex-1 it ran 1092px
             of a 1400px row -- 78% of the header against a right cluster of one
@@ -582,7 +582,7 @@ export function SiteNav() {
             hold their own space, which is what makes a retail header feel
             balanced rather than empty on the right. */}
         <div className="hidden min-w-0 flex-1 justify-center md:flex">
-          <div className="w-full max-w-[640px]">
+          <div className="w-full max-w-[827px]">
             <SearchField inline withButton />
           </div>
         </div>

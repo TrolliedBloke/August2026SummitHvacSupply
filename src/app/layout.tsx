@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { QuoteProvider } from "@/components/quote-context";
 import { FulfillmentProvider } from "@/components/fulfillment-context";
@@ -14,6 +14,8 @@ import { Analytics } from "@vercel/analytics/next";
 // Inter is the only typeface: headings, body and data. Numbers line up via
 // tabular figures (see globals.css), not a monospace font.
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+// SKUs and spec values only (.part-number), never prose.
+const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono-jb", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.origin),
@@ -65,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     areaServed: SITE.serviceArea,
   };
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={inter.variable}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${mono.variable}`}>
       <body className="min-h-dvh antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"

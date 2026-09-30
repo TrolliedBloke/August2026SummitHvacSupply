@@ -309,7 +309,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-3">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-9 lg:grid-cols-3">
               {filtered.slice(0, visibleCount).map((sku, index) => (
                 <ProductCard key={sku.id} sku={sku} priority={index < 4} />
               ))}

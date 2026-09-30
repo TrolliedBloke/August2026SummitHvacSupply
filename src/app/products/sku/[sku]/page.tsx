@@ -296,7 +296,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
           <section className="mt-12 border-t border-line pt-10">
             <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">Related catalog items</h2>
             <p className="mt-1 text-sm text-ink-2">Nearby products in the same category. Similar capacity does not prove compatibility.</p>
-            <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-4">
+            <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-9 lg:grid-cols-4">
               {related.map((item) => <ProductCard key={item.id} sku={item} />)}
             </div>
           </section>

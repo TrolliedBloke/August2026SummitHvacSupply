@@ -39,7 +39,7 @@ export async function CounterStock() {
           </Link>
         </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-4">
+        <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-9 lg:grid-cols-4">
           {skus.slice(0, 4).map((sku) => (
             <ProductCard key={sku.id} sku={sku} />
           ))}
