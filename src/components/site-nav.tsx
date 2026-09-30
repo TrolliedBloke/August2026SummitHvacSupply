@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { Check, Menu, X, Lock, Search, ShoppingCart, MapPin, Phone, UserRound } from "lucide-react";
+import { Check, ChevronRight, Menu, MessageSquare, X, Search, ShoppingCart, MapPin, Phone, UserRound } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
 import { branchStatus, formatHour } from "@/lib/branch-hours";
@@ -19,20 +19,6 @@ const ICON_STROKE = 1.75;
 /* Primary nav mirrors how the counter is organized: equipment first, then the
    parts that go with it, then brand. Every target is a real catalog view --
    nothing here lands on an empty result set. */
-const PRIMARY = [
-  { href: "/products", label: "Equipment" },
-  { href: "/products?category=installation-supplies", label: "Parts" },
-  { href: "/products?category=line-sets", label: "Tools" },
-  { href: "/brands", label: "Brands" },
-];
-
-const RESOURCES = [
-  { href: "/tools/model-number-decoder", label: "Model number decoder" },
-  { href: "/guides/bay-area-hvac-permits", label: "Permit and code guides" },
-  { href: "/bay-area-heat-pump-rebates", label: "Bay Area Heat Pump Rebates" },
-  { href: "/locations/newark", label: "Newark delivery and will-call" },
-];
-
 const CATEGORY_RAIL = [
   { href: "/products?category=mini-splits", label: "Mini splits" },
   { href: "/products?q=condenser", label: "Condensers" },
@@ -65,7 +51,7 @@ function useClientMounted() {
   );
 }
 
-function Wordmark() {
+function Wordmark({ mobileMenu = false }: { mobileMenu?: boolean }) {
   return (
     <Link href="/" className="flex shrink-0 items-center" aria-label="Summit HVAC Supply home">
       <Image
@@ -75,7 +61,7 @@ function Wordmark() {
         height={280}
         preload
         sizes="(min-width: 1024px) 270px, 160px"
-        className="h-9 w-auto object-contain md:h-12 lg:h-16"
+        className={`${mobileMenu ? "h-[39px]" : "h-9 md:h-12 lg:h-16"} w-auto object-contain`}
       />
     </Link>
   );
@@ -101,6 +87,7 @@ function SearchField({
   autoFocus = false,
   inline = false,
   withButton = false,
+  mobileMenu = false,
 }: {
   onNavigate?: () => void;
   autoFocus?: boolean;
@@ -110,6 +97,8 @@ function SearchField({
   /** Attaches the green submit button, which runs the query against the
       catalog rather than picking a single typeahead hit. */
   withButton?: boolean;
+  /** Larger touch target and type used by the full-screen mobile menu. */
+  mobileMenu?: boolean;
 }) {
   const router = useRouter();
   const [query, setQuery] = React.useState("");
@@ -195,10 +184,10 @@ function SearchField({
       <form
         onSubmit={onSubmit}
         role="search"
-        className="flex h-13 items-stretch overflow-hidden rounded-(--r-sm) border border-line-strong bg-surface-1 focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/25"
+        className={`flex items-stretch overflow-hidden rounded-(--r-sm) border border-line-strong bg-surface-1 focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/25 ${mobileMenu ? "h-12" : "h-13"}`}
       >
-        <div className="flex min-w-0 flex-1 items-center gap-2.5 px-3.5">
-          <Search size={18} strokeWidth={ICON_STROKE} className="shrink-0 text-ink-3" aria-hidden="true" />
+        <div className={`flex min-w-0 flex-1 items-center ${mobileMenu ? "gap-4 px-4" : "gap-2.5 px-3.5"}`}>
+          <Search size={mobileMenu ? 24 : 18} strokeWidth={ICON_STROKE} className={mobileMenu ? "shrink-0 text-ink-1" : "shrink-0 text-ink-3"} aria-hidden="true" />
           <input
             ref={inputRef}
             value={query}
@@ -210,7 +199,7 @@ function SearchField({
             aria-autocomplete="list"
             aria-activedescendant={active >= 0 ? `${resultsId}-${active}` : undefined}
             placeholder="Search products, models, or SKUs"
-            className="min-w-0 flex-1 bg-transparent text-sm text-ink-1 outline-none placeholder:text-ink-4"
+            className={`min-w-0 flex-1 bg-transparent text-ink-1 outline-none placeholder:text-ink-3 ${mobileMenu ? "text-[17px]" : "text-sm"}`}
             aria-label="Search products, models, or SKUs"
           />
           {query.length > 0 && (
@@ -578,18 +567,14 @@ export function SiteNav() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const closeMobile = () => setMobileOpen(false);
 
-  // Highlight the section, not the filter. Three primary entries share the
-  // /products path and differ only by query string, which the server cannot
-  // see -- resolving them client-side meant a post-hydration state flip that
-  // raced anything reading the nav. Matching on pathname alone is decided at
-  // render time, identical on server and client, and only ever marks one
-  // entry: the first whose path matches wins.
-  const activeHref = PRIMARY.map((item) => item.href).find((href) => {
-    const path = href.split("?")[0];
-    return pathname === path || pathname.startsWith(path + "/");
-  });
-
-  const isActive = (href: string) => href === activeHref;
+  React.useEffect(() => {
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileOpen]);
 
   return (
     <header className="relative z-30 bg-surface-2">
@@ -657,92 +642,115 @@ export function SiteNav() {
         </div>
       </nav>
 
-      {/* Mobile / tablet sheet -- available at every width below xl. */}
+      {/* Full-screen mobile menu. It owns the viewport so the product list and
+          branch actions stay predictable instead of pushing the page down. */}
       {mobileOpen && (
-        <div className="border-t border-line bg-canvas xl:hidden">
-          <div className="mx-auto flex w-full max-w-[var(--page-max)] flex-col px-5 py-4">
-            <SearchField onNavigate={closeMobile} />
-            <ul className="mt-4 flex flex-col">
-              <li>
-                <Link
-                  href="/products"
-                  onClick={closeMobile}
-                  className="block rounded-(--r-sm) px-3 py-3 text-base font-medium text-ink-1 hover:bg-surface-2"
-                >
-                  All products
-                </Link>
-              </li>
-              {PRIMARY.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={closeMobile}
-                    className={`block rounded-(--r-sm) px-3 py-3 text-base font-medium hover:bg-surface-2 ${
-                      isActive(item.href) ? "text-ink-1 underline underline-offset-4" : "text-ink-1"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+          className="fixed inset-0 z-[70] flex flex-col bg-[#f7f6f1] xl:hidden"
+        >
+          <div className="flex h-16 shrink-0 items-center gap-3 px-3.5">
+            <button
+              type="button"
+              onClick={closeMobile}
+              aria-label="Close menu"
+              className="grid size-11 shrink-0 place-items-center text-ink-1"
+            >
+              <X size={29} strokeWidth={1.75} />
+            </button>
+            <Wordmark mobileMenu />
+            <div className="ml-auto flex items-center gap-1.5">
+              <Link
+                href="/portal/login"
+                onClick={closeMobile}
+                aria-label="Sign in"
+                className="grid size-11 place-items-center text-ink-1"
+              >
+                <UserRound size={28} strokeWidth={ICON_STROKE} />
+              </Link>
+              <div onClick={closeMobile}>
+                <CartButton />
+              </div>
+            </div>
+          </div>
+
+          <div className="shrink-0 border-b border-line px-5 pb-3 pt-1">
+            <SearchField onNavigate={closeMobile} mobileMenu />
+          </div>
+
+          <nav aria-label="Mobile store navigation" className="min-h-0 flex-1 overflow-y-auto px-5">
+            <ul className="flex flex-col">
+              {CATEGORY_RAIL.map((item) => (
+                <MobileMenuLink key={item.href} href={item.href} onClick={closeMobile}>
+                  {item.label}
+                </MobileMenuLink>
               ))}
-              <li className="mt-2 border-t border-line pt-2">
-                <p className="px-3 pb-1 pt-2 text-sm font-medium text-ink-2">
-                  Resources
-                </p>
-                {RESOURCES.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={closeMobile}
-                    className="block rounded-(--r-sm) px-3 py-2.5 text-base font-medium text-ink-1 hover:bg-surface-2"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  onClick={closeMobile}
-                  className={`block rounded-(--r-sm) px-3 py-3 text-base font-medium hover:bg-surface-2 ${
-                    isActive("/contact") ? "text-ink-1 underline underline-offset-4" : "text-ink-1"
-                  }`}
-                >
-                  Contact
-                </Link>
-              </li>
-              <li className="mt-3 grid grid-cols-2 gap-2 border-t border-line pt-3">
-                <Link
-                  href="/quote"
-                  onClick={closeMobile}
-                  className="flex h-11 items-center justify-center gap-1.5 rounded-(--r-sm) bg-brand text-sm font-medium text-brand-ink"
-                >
-                  Get help
-                </Link>
-                <Link
-                  href="/account"
-                  onClick={closeMobile}
-                  className="flex h-11 items-center justify-center gap-1.5 rounded-(--r-sm) border border-line-strong bg-surface-1 text-sm font-medium text-ink-1"
-                >
-                  <Lock size={14} strokeWidth={ICON_STROKE} /> Sign in
-                </Link>
-                <a
-                  href={SITE.phoneHref}
-                  className="flex h-11 items-center justify-center rounded-(--r-sm) bg-surface-2 text-sm font-medium text-ink-1"
-                >
-                  Call {SITE.phone}
-                </a>
-                <a
-                  href={SITE.smsHref}
-                  className="flex h-11 items-center justify-center rounded-(--r-sm) bg-surface-2 text-sm font-medium text-ink-1"
-                >
-                  Text us
-                </a>
-              </li>
+              <MobileMenuLink href="/products" onClick={closeMobile} trailing>
+                All products
+              </MobileMenuLink>
+              <MobileMenuLink href="/brands" onClick={closeMobile} trailing>
+                Brands
+              </MobileMenuLink>
+              <MobileMenuLink href="/resources" onClick={closeMobile} trailing>
+                Resources
+              </MobileMenuLink>
+              <MobileMenuLink href="/dealers" onClick={closeMobile}>
+                Apply for a trade account
+              </MobileMenuLink>
             </ul>
+          </nav>
+
+          <div className="shrink-0 border-t border-line bg-[#f7f6f1] px-5 pb-4 pt-3">
+            <div className="flex items-center gap-1.5 px-1 text-base font-medium text-ink-1">
+              <MapPin size={18} strokeWidth={2} className="fill-brand text-brand" aria-hidden="true" />
+              <span>Newark, open until 5 PM</span>
+            </div>
+            <div className="grid grid-cols-[3.1fr_2fr] gap-2.5">
+              <a
+                href={SITE.phoneHref}
+                className="flex h-[46px] items-center justify-center gap-3 rounded-(--r-sm) bg-brand px-3 text-base font-medium whitespace-nowrap text-white"
+              >
+                <Phone size={22} strokeWidth={2.2} />
+                Call {SITE.phone}
+              </a>
+              <a
+                href={SITE.smsHref}
+                className="flex h-[46px] items-center justify-center gap-3 rounded-(--r-sm) border border-line-strong bg-surface-1 px-3 text-[18px] font-medium text-brand"
+              >
+                <MessageSquare size={22} strokeWidth={2} />
+                Text us
+              </a>
+            </div>
           </div>
         </div>
       )}
     </header>
+  );
+}
+
+function MobileMenuLink({
+  href,
+  onClick,
+  trailing = false,
+  children,
+}: {
+  href: string;
+  onClick: () => void;
+  trailing?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <li>
+      <Link
+        href={href}
+        onClick={onClick}
+        className="flex min-h-[51px] items-center justify-between border-b border-line px-0.5 text-[18px] font-medium leading-6 text-ink-1"
+      >
+        <span>{children}</span>
+        {trailing && <ChevronRight size={21} strokeWidth={1.9} aria-hidden="true" />}
+      </Link>
+    </li>
   );
 }

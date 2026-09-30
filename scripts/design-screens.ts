@@ -149,7 +149,7 @@ const FEATURES: Feature[] = [
     name: "f12-contact-form-errors",
     path: "/contact",
     run: async (page) => {
-      await page.getByRole("button", { name: /Prepare request/i }).first().click();
+      await page.getByRole("button", { name: /Open email draft/i }).first().click();
       await page.waitForTimeout(500);
     },
   },

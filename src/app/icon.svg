@@ -1,25 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
-  <title id="title">Summit HVAC Supply logo mark</title>
-  <desc id="desc">A mountain ridge over airflow lines inside a rounded square.</desc>
-  <defs>
-    <linearGradient id="mark-bg" x1="16" y1="8" x2="112" y2="120" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#15394b"/>
-      <stop offset="0.58" stop-color="#0f5a5d"/>
-      <stop offset="1" stop-color="#18766b"/>
-    </linearGradient>
-    <linearGradient id="snow" x1="30" y1="35" x2="98" y2="85" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#f8fbfc"/>
-      <stop offset="1" stop-color="#cfe4ea"/>
-    </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#062532" flood-opacity="0.22"/>
-    </filter>
-  </defs>
-  <rect x="8" y="8" width="112" height="112" rx="24" fill="url(#mark-bg)" filter="url(#shadow)"/>
-  <path d="M25 78 52 39l14 20 10-12 27 31H25Z" fill="url(#snow)"/>
-  <path d="m52 39 14 20-8-3-8 8-6-7-19 21 27-39Z" fill="#ffffff"/>
-  <path d="M76 47 55 78h48L76 47Z" fill="#d8eef3"/>
-  <path d="m76 47 7 31H55l15-21 6 4 6-7-6-7Z" fill="#f8fbfc"/>
-  <path d="M28 88h39c8.6 0 12.7-9 22.1-9H100" fill="none" stroke="#f4b24d" stroke-width="7" stroke-linecap="round"/>
-  <path d="M32 101h28c9.5 0 15.5-8 26-8h10" fill="none" stroke="#b9d9e2" stroke-width="6" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Summit HVAC Supply mountain mark</title>
+  <desc id="desc">The dark green Summit mountain ridge with silver and green airflow bands.</desc>
+  <path
+    fill="#133830"
+    d="M18 181 87 31l50 92 34-58 67 101-36 3-25-39-24 36-34 21-32-79-34 73H18Z"
+  />
+  <path
+    fill="#8c968f"
+    d="M58 188c56-8 109-39 174-43-54 16-103 48-174 53v-10Z"
+  />
+  <path
+    fill="#133830"
+    d="M47 203c73 12 139-8 190-42l13 19c-61 41-132 50-203 31v-8Z"
+  />
 </svg>

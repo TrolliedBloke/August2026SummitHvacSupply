@@ -25,8 +25,8 @@ export default function ContactPage() {
   const emailRef = React.useRef<HTMLInputElement>(null);
 
   return (
-    <div className="bg-[#f7f6f3] py-12 lg:pt-16 lg:pb-14">
-      <div className="mx-auto grid w-full max-w-[1428px] gap-12 px-5 lg:grid-cols-[minmax(0,826px)_minmax(0,510px)] lg:gap-[52px]">
+    <div className="bg-[#f6f5f1] py-12 lg:pt-16 lg:pb-14">
+      <div className="contact-layout mx-auto grid w-full max-w-[1428px] gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_360px] min-[1430px]:gap-[52px]">
         {/* Form */}
         <div>
           <Eyebrow>Contact</Eyebrow>
@@ -126,9 +126,9 @@ export default function ContactPage() {
                 }
               }}
               noValidate
-              className="mt-8 flex flex-col gap-7"
+              className="mt-[41px] flex flex-col gap-7"
             >
-              <Field label="I'm reaching out about" required className="gap-2.5">
+              <Field label="I'm reaching out about" required className="gap-2.5 [&>span:first-child]:text-base [&>span:first-child]:leading-5">
                 <Select
                   ariaLabel="I'm reaching out about"
                   name="topic"
@@ -149,7 +149,7 @@ export default function ContactPage() {
                 />
               </Field>
               <div className="grid gap-5 sm:grid-cols-2">
-                <Field label="Name" required className="gap-2.5">
+                <Field label="Name" required className="gap-2.5 [&>span:first-child]:text-base [&>span:first-child]:leading-5">
                   <Input
                     name="name"
                     autoComplete="name"
@@ -158,10 +158,10 @@ export default function ContactPage() {
                     style={fieldError === "name" ? { borderColor: "#d92d20", boxShadow: "0 0 0 1px #d92d20" } : undefined}
                   />
                   {fieldError === "name" && (
-                    <span className="text-base leading-5 text-[#c91d12]">Enter your name.</span>
+                    <span className="-mt-[5px] text-base leading-5 text-[#c91d12]">Enter your name.</span>
                   )}
                 </Field>
-                <Field label="Email" required className="gap-2.5">
+                <Field label="Email" required className="gap-2.5 [&>span:first-child]:text-base [&>span:first-child]:leading-5">
                   <Input
                     ref={emailRef}
                     name="email"
@@ -172,7 +172,7 @@ export default function ContactPage() {
                   />
                 </Field>
               </div>
-              <Field label="Message" required className="-mt-[3px] gap-[13px]">
+              <Field label="Message" required className="-mt-px gap-[13px] [&>span:first-child]:text-base [&>span:first-child]:leading-5">
                 <Textarea
                   name="message"
                   rows={5}
@@ -180,7 +180,7 @@ export default function ContactPage() {
                   className="h-[136px] min-h-0"
                 />
               </Field>
-              <Button type="submit" size="lg" className="-mt-1 h-14 min-w-[262px] self-start text-[18px] font-semibold" disabled={isSubmitting}>
+              <Button type="submit" size="lg" className="-mt-[5px] h-14 min-w-[262px] self-start bg-[#115c3b] text-[18px] font-semibold hover:bg-[#115c3b]" disabled={isSubmitting}>
                 {isSubmitting ? "Preparing..." : "Open email draft"}
               </Button>
               {error && <p role="alert" className="text-sm text-danger">{error}</p>}
@@ -235,7 +235,7 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-start gap-7">
+    <div className="flex items-start gap-6">
       <span className="mt-0.5 grid size-9 shrink-0 place-items-center text-[#30302e]">
         {icon}
       </span>
