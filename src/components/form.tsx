@@ -9,14 +9,16 @@ export function Field({
   hint,
   required,
   children,
+  className = "",
 }: {
   label: string;
   hint?: string;
   required?: boolean;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <label className="flex flex-col gap-1.5">
+    <label className={`flex flex-col gap-1.5 ${className}`}>
       <span className="text-sm font-medium text-ink-1">
         {label}
         {required && <span className="ml-0.5 text-copper">*</span>}
@@ -32,9 +34,11 @@ const controlClass =
   "placeholder:text-ink-4 transition-colors hover:border-ink-4 focus:border-brand focus:bg-surface-1 " +
   "focus:outline-none focus:ring-2 focus:ring-brand/25";
 
-export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
-  return <input {...props} className={`${controlClass} h-11 ${props.className ?? ""}`} />;
-}
+export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
+  function Input(props, ref) {
+    return <input ref={ref} {...props} className={`${controlClass} h-11 ${props.className ?? ""}`} />;
+  }
+);
 
 export function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return <textarea {...props} className={`${controlClass} resize-y py-2.5 ${props.className ?? ""}`} />;

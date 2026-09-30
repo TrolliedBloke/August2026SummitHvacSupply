@@ -720,7 +720,13 @@ export function filterStorefrontSkus(
     // the header search agree on what "3 ton heat pump" means.
     if (q && scoreSku(sku, q, qCode) === 0) return false;
     if (filters.category && filters.category !== "all" && sku.category !== filters.category) return false;
-    if (filters.brand && filters.brand !== "all" && sku.brand !== filters.brand) return false;
+    // Brand is multi-select (a comma-separated list) so the catalog's brand
+    // checkboxes can add up rather than replace each other. One value behaves
+    // exactly as it did before.
+    if (filters.brand && filters.brand !== "all") {
+      const brands = filters.brand.split(",").filter(Boolean);
+      if (brands.length > 0 && !brands.includes(sku.brand)) return false;
+    }
     if (filters.voltage && filters.voltage !== "all" && sku.voltage !== filters.voltage) return false;
     if (filters.unitType && filters.unitType !== "all" && sku.unitType !== filters.unitType) return false;
     if (filters.refrigerant && filters.refrigerant !== "all" && sku.refrigerant !== filters.refrigerant) return false;

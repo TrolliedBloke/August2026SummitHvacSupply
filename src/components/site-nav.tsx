@@ -335,7 +335,9 @@ function AllProductsMenu() {
         aria-haspopup="menu"
         className={`${NAV_ITEM} inline-flex items-center gap-4 text-ink-1 hover:bg-surface-2`}
       >
-        <Menu size={22} strokeWidth={2} aria-hidden="true" />
+        {/* The header already carries a menu button on mobile; two hamburgers
+            side by side read as two different menus. */}
+        <Menu size={22} strokeWidth={2} aria-hidden="true" className="hidden md:block" />
         All products
       </button>
       {open && (

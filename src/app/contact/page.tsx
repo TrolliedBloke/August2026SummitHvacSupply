@@ -6,12 +6,11 @@ import {
   Mail,
   Clock,
   CheckCircle2,
-  ArrowRight,
   Home,
+  Truck,
 } from "lucide-react";
 import * as React from "react";
-import Link from "next/link";
-import { Container, Eyebrow, Button } from "@/components/ui";
+import { Eyebrow, Button } from "@/components/ui";
 import { Field, Input, Textarea, Select } from "@/components/form";
 import { SITE } from "@/lib/site";
 import { postJson } from "@/lib/client/post-json";
@@ -22,12 +21,14 @@ export default function ContactPage() {
   const [requestId, setRequestId] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const [fieldError, setFieldError] = React.useState<"name" | "email" | "message" | "topic" | null>(null);
+  const emailRef = React.useRef<HTMLInputElement>(null);
 
   return (
-    <Container className="py-12 lg:py-16">
-      <div className="grid gap-12 lg:grid-cols-[1fr_360px]">
+    <div className="bg-[#f7f6f3] py-12 lg:pt-16 lg:pb-14">
+      <div className="mx-auto grid w-full max-w-[1428px] gap-12 px-5 lg:grid-cols-[minmax(0,826px)_minmax(0,510px)] lg:gap-[52px]">
         {/* Form */}
-        <div className="max-w-xl">
+        <div>
           <Eyebrow>Contact</Eyebrow>
           <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
             Talk to a real person who knows HVAC.
@@ -38,11 +39,11 @@ export default function ContactPage() {
           </p>
 
           {/* Homeowner secondary path -- capture & hand off, never dominate */}
-          <div className="mt-6 flex items-start gap-3 border-t border-line pt-6">
-            <span className="grid size-9 shrink-0 place-items-center rounded-(--r-sm) bg-surface-3 text-ink-3">
-              <Home size={17} />
+          <div className="mt-6 flex items-start gap-6 pt-6">
+            <span className="grid size-9 shrink-0 place-items-center text-ink-3">
+              <Home size={22} strokeWidth={1.75} />
             </span>
-            <p className="text-sm text-ink-2">
+            <p className="max-w-[670px] text-[18px] leading-6 text-ink-2">
               <span className="font-semibold text-ink-1">Homeowner? </span>{" "}
               We supply equipment and can help route you toward a qualified Bay
               Area installer. We do not perform installation ourselves.
@@ -76,12 +77,38 @@ export default function ContactPage() {
                 e.preventDefault();
                 setIsSubmitting(true);
                 setError(null);
-                if (!topic) {
+                setFieldError(null);
+                const form = new FormData(e.currentTarget);
+                const name = String(form.get("name") ?? "").trim();
+                const email = String(form.get("email") ?? "").trim();
+                const message = String(form.get("message") ?? "").trim();
+
+                // Validate one field at a time so the form remains calm and
+                // useful rather than turning every control red at once.
+                if (!name) {
                   setIsSubmitting(false);
-                  setError("Please choose what you are reaching out about.");
+                  setFieldError("name");
+                  requestAnimationFrame(() => {
+                    emailRef.current?.focus();
+                    window.scrollTo({ top: document.documentElement.scrollHeight });
+                  });
                   return;
                 }
-                const form = new FormData(e.currentTarget);
+                if (!email) {
+                  setIsSubmitting(false);
+                  setFieldError("email");
+                  return;
+                }
+                if (!topic) {
+                  setIsSubmitting(false);
+                  setFieldError("topic");
+                  return;
+                }
+                if (!message) {
+                  setIsSubmitting(false);
+                  setFieldError("message");
+                  return;
+                }
                 try {
                   const payload = await postJson<{ ok: boolean; id?: string; error?: string }>("/api/contact-requests", {
                     topic,
@@ -98,14 +125,19 @@ export default function ContactPage() {
                   setIsSubmitting(false);
                 }
               }}
-              className="mt-8 flex flex-col gap-5"
+              noValidate
+              className="mt-8 flex flex-col gap-7"
             >
-              <Field label="I'm reaching out about" required>
+              <Field label="I'm reaching out about" required className="gap-2.5">
                 <Select
                   ariaLabel="I'm reaching out about"
                   name="topic"
                   value={topic}
-                  onChange={setTopic}
+                  onChange={(value) => {
+                    setTopic(value);
+                    if (fieldError === "topic") setFieldError(null);
+                  }}
+                  size="lg"
                   placeholder="Choose a topic"
                   options={[
                     { value: "one_system", label: "I want one system for my home" },
@@ -117,34 +149,39 @@ export default function ContactPage() {
                 />
               </Field>
               <div className="grid gap-5 sm:grid-cols-2">
-                <Field label="Name" required>
+                <Field label="Name" required className="gap-2.5">
                   <Input
                     name="name"
-                    required
                     autoComplete="name"
-                    placeholder="Your name"
+                    aria-invalid={fieldError === "name"}
+                    className={`h-13 ${fieldError === "name" ? "border-[#d92d20] hover:border-[#d92d20] focus:border-[#d92d20] focus:ring-[#d92d20]/20" : ""}`}
+                    style={fieldError === "name" ? { borderColor: "#d92d20", boxShadow: "0 0 0 1px #d92d20" } : undefined}
                   />
+                  {fieldError === "name" && (
+                    <span className="text-base leading-5 text-[#c91d12]">Enter your name.</span>
+                  )}
                 </Field>
-                <Field label="Email" required>
+                <Field label="Email" required className="gap-2.5">
                   <Input
+                    ref={emailRef}
                     name="email"
                     type="email"
-                    required
                     placeholder="you@email.com"
+                    aria-invalid={fieldError === "email"}
+                    className="h-13"
                   />
                 </Field>
               </div>
-              <Field label="Message" required>
+              <Field label="Message" required className="-mt-[3px] gap-[13px]">
                 <Textarea
                   name="message"
-                  required
-                  rows={4}
-                  placeholder="How can we help?"
+                  rows={5}
+                  aria-invalid={fieldError === "message"}
+                  className="h-[136px] min-h-0"
                 />
               </Field>
-              <Button type="submit" size="lg" className="self-start" disabled={isSubmitting}>
-                {isSubmitting ? "Preparing..." : "Prepare request"}{" "}
-                <ArrowRight size={18} />
+              <Button type="submit" size="lg" className="-mt-1 h-14 min-w-[262px] self-start text-[18px] font-semibold" disabled={isSubmitting}>
+                {isSubmitting ? "Preparing..." : "Open email draft"}
               </Button>
               {error && <p role="alert" className="text-sm text-danger">{error}</p>}
             </form>
@@ -152,13 +189,13 @@ export default function ContactPage() {
         </div>
 
         {/* NAP aside */}
-        <aside className="lg:sticky lg:top-6 lg:self-start">
-          <div className="rounded-(--r-md) border border-line bg-surface-1 p-6 shadow-[var(--shadow-sm)]">
-            <dl className="space-y-4 text-base">
-              <Row icon={<MapPin size={18} />} label="Address">
-                {SITE.address.full}
+        <aside className="lg:sticky lg:top-[102px] lg:mt-[52px] lg:self-start">
+          <div className="rounded-[12px] border border-[#d7d4cd] bg-white p-8 shadow-[var(--shadow-sm)]">
+            <dl className="space-y-[27px] text-[18px] leading-6">
+              <Row icon={<MapPin size={27} strokeWidth={1.65} />} label="Address">
+                5437 Central Ave., Suite 10,<br />Newark, CA 94560
               </Row>
-              <Row icon={<Phone size={18} />} label="Phone">
+              <Row icon={<Phone size={27} strokeWidth={1.65} />} label="Phone">
                 <a
                   href={SITE.phoneHref}
                   className="text-brand hover:text-brand-hover"
@@ -166,7 +203,7 @@ export default function ContactPage() {
                   {SITE.phone}
                 </a>
               </Row>
-              <Row icon={<Mail size={18} />} label="Email">
+              <Row icon={<Mail size={27} strokeWidth={1.65} />} label="Email">
                 <a
                   href={SITE.emailHref}
                   className="text-brand hover:text-brand-hover"
@@ -174,23 +211,17 @@ export default function ContactPage() {
                   {SITE.email}
                 </a>
               </Row>
-              <Row icon={<Clock size={18} />} label="Hours">
-                {SITE.hours}
+              <Row icon={<Clock size={27} strokeWidth={1.65} />} label="Hours">
+                Mon–Fri 7 AM–5 PM PT
+              </Row>
+              <Row icon={<Truck size={27} strokeWidth={1.65} />} label="Service">
+                Newark will-call, Bay Area delivery &amp; freight
               </Row>
             </dl>
           </div>
-          <Link
-            href="/dealers"
-            className="mt-4 flex items-center justify-between gap-3 rounded-(--r-md) border border-line bg-brand-tint p-4 text-brand transition-colors hover:bg-brand/15"
-          >
-            <span className="text-sm font-semibold">
-              Contractor? Open a pro account
-            </span>
-            <ArrowRight size={16} />
-          </Link>
         </aside>
       </div>
-    </Container>
+    </div>
   );
 }
 
@@ -204,15 +235,15 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-start gap-3">
-      <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-(--r-sm) bg-surface-2 text-ink-3">
+    <div className="flex items-start gap-7">
+      <span className="mt-0.5 grid size-9 shrink-0 place-items-center text-[#30302e]">
         {icon}
       </span>
       <div>
-        <dt className="text-xs text-ink-3">
+        <dt className="text-[15px] leading-5 text-[#696863]">
           {label}
         </dt>
-        <dd className="mt-0.5 text-ink-1">{children}</dd>
+        <dd className="mt-0.5 max-w-[330px] text-ink-1">{children}</dd>
       </div>
     </div>
   );

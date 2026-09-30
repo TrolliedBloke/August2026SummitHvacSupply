@@ -8,6 +8,7 @@ import * as React from "react";
 import { ProductCard } from "./product-card";
 import { Button } from "./ui";
 import { CustomSelect } from "./custom-select";
+import { ActiveFilterChips, buildGroups, FilterPanel, splitMulti, type FilterKey } from "./catalog-filters";
 import {
   filterStorefrontSkus,
   getCatalogFacets,
@@ -23,6 +24,8 @@ import { track } from "@/lib/track";
 
 type Facets = ReturnType<typeof getCatalogFacets>;
 const PAGE_SIZE = 24;
+/** Ceiling on the result count the catalog will state exactly. */
+const RESULT_CAP = 1000;
 
 export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; facets: Facets }) {
   const router = useRouter();
@@ -32,19 +35,44 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [visibility, setVisibility] = React.useState({ key: "", count: PAGE_SIZE });
   const drawerCloseRef = React.useRef<HTMLButtonElement>(null);
+  const filtersButtonRef = React.useRef<HTMLButtonElement>(null);
+  const sheetRef = React.useRef<HTMLDivElement>(null);
 
-  // Mobile filter drawer: scroll lock + Escape to close.
+  // The sheet is a dialog, with the same mechanics as the menu: scroll lock,
+  // Escape to close, Tab held inside, and focus returned to the control that
+  // opened it.
   React.useEffect(() => {
     if (!drawerOpen) return;
+    const opener = filtersButtonRef.current;
     drawerCloseRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setDrawerOpen(false);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setDrawerOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !sheetRef.current) return;
+      const focusable = Array.from(
+        sheetRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      opener?.focus();
     };
   }, [drawerOpen]);
 
@@ -82,8 +110,56 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
     router.push(pathname, { scroll: false });
   }
 
-  // Count only real filters -- sorting alone shouldn't offer "Clear".
-  const activeCount = Array.from(params.keys()).filter((k) => k !== "sort").length;
+  // Count only real filters -- sorting alone shouldn't offer "Clear". Brand
+  // counts once per selected brand, because each one is its own chip.
+  const activeCount = Array.from(params.keys())
+    .filter((key) => key !== "sort")
+    .reduce((total, key) => total + (key === "brand" ? splitMulti(params.get("brand") ?? undefined).length : 1), 0);
+
+  // The category page sets ?category=, so the Category group is redundant
+  // there; on All products and on search results it is the main way in.
+  const showCategory = !params.get("category");
+
+  const groups = buildGroups({ facets, filters, skus, showCategory });
+  // Some categories cannot be narrowed at all -- line sets carry one brand, no
+  // BTU rating and no voltage -- so every group collapses. Offering a Filters
+  // button that opens an empty sheet is worse than not offering one.
+  const hasFilters = groups.length > 0;
+
+  function toggleFilter(key: FilterKey, value: string) {
+    if (key === "brand") {
+      const current = splitMulti(params.get("brand") ?? undefined);
+      const next = current.includes(value) ? current.filter((b) => b !== value) : [...current, value];
+      setParam("brand", next.join(","));
+      return;
+    }
+    setParam(key, params.get(key) === value ? undefined : value);
+  }
+
+  function removeFilter(key: FilterKey, value: string) {
+    if (key === "brand") {
+      const next = splitMulti(params.get("brand") ?? undefined).filter((brand) => brand !== value);
+      setParam("brand", next.join(","));
+      return;
+    }
+    setParam(key, undefined);
+  }
+
+  // "SKUs" is trade jargon on a page homeowners also read. RESULT_CAP is the
+  // most the catalog will ever hand this component; if a future page limit
+  // truncates the set, the count says "100+" rather than claiming an exact
+  // number it cannot see past. Today nothing truncates it.
+  const capped = filtered.length >= RESULT_CAP;
+  const resultLabel = `${capped ? `${RESULT_CAP}+` : filtered.length} ${filtered.length === 1 ? "result" : "results"}`;
+
+  const labelFor = (key: FilterKey, value: string) => {
+    const group = groups.find((candidate) => candidate.key === key);
+    const option = group?.options.find((candidate) => candidate.value === value);
+    if (option) return option.label;
+    // A category chip has to keep working after its group is hidden.
+    if (key === "category") return facets.categories.find((c) => c.value === value)?.label ?? value;
+    return value;
+  };
 
   const searchForm = (
     <form onSubmit={submitSearch} className="rounded-(--r-md) border border-line bg-surface-1 p-3 shadow-[var(--shadow-sm)]">
@@ -102,92 +178,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
     </form>
   );
 
-  const filterGroups = (
-    <>
-      <FilterGroup label="Category">
-        <CustomSelect
-          ariaLabel="Category filter"
-          value={filters.category ?? "all"}
-          onChange={(value) => setParam("category", value)}
-          options={[
-            { value: "all", label: "All categories" },
-            ...facets.categories.map((category) => ({ value: category.value, label: category.label })),
-          ]}
-        />
-      </FilterGroup>
-      <FilterGroup label="Brand">
-        <CustomSelect
-          ariaLabel="Brand filter"
-          value={filters.brand ?? "all"}
-          onChange={(value) => setParam("brand", value)}
-          options={[{ value: "all", label: "All brands" }, ...facets.brands.map((brand) => ({ value: brand, label: brand }))]}
-        />
-      </FilterGroup>
-      <FilterGroup label="Capacity">
-        <CustomSelect
-          ariaLabel="Capacity filter"
-          value={filters.btu ?? "all"}
-          onChange={(value) => setParam("btu", value)}
-          options={[
-            { value: "all", label: "Any BTU" },
-            { value: "small", label: "Up to 12k BTU" },
-            { value: "mid", label: "18k-36k BTU" },
-            { value: "large", label: "36k+ BTU" },
-          ]}
-        />
-      </FilterGroup>
-      <FilterGroup label="Voltage">
-        <CustomSelect
-          ariaLabel="Voltage filter"
-          value={filters.voltage ?? "all"}
-          onChange={(value) => setParam("voltage", value)}
-          options={[{ value: "all", label: "Any voltage" }, ...facets.voltages.map((voltage) => ({ value: voltage, label: voltage }))]}
-        />
-      </FilterGroup>
-      <FilterGroup label="Unit type">
-        <CustomSelect
-          ariaLabel="Unit type filter"
-          value={filters.unitType ?? "all"}
-          onChange={(value) => setParam("unitType", value)}
-          options={[{ value: "all", label: "Any unit type" }, ...facets.unitTypes.map((unitType) => ({ value: unitType, label: unitType }))]}
-        />
-      </FilterGroup>
-      <FilterGroup label="Refrigerant">
-        <CustomSelect
-          ariaLabel="Refrigerant filter"
-          value={filters.refrigerant ?? "all"}
-          onChange={(value) => setParam("refrigerant", value)}
-          options={[{ value: "all", label: "Any refrigerant" }, ...facets.refrigerants.map((refrigerant) => ({ value: refrigerant, label: refrigerant }))]}
-        />
-      </FilterGroup>
-      <FilterGroup label="Pricing">
-        <CustomSelect
-          ariaLabel="Pricing filter"
-          value={filters.pricing ?? "all"}
-          onChange={(value) => setParam("pricing", value)}
-          options={[
-            { value: "all", label: "All pricing states" },
-            { value: "priced", label: "Published price" },
-            { value: "quote", label: "Request price" },
-          ]}
-        />
-      </FilterGroup>
-      <FilterGroup label="Stock">
-        <CustomSelect
-          ariaLabel="Stock filter"
-          value={filters.stock ?? "all"}
-          onChange={(value) => setParam("stock", value)}
-          options={[
-            { value: "all", label: "Any stock status" },
-            { value: "unknown", label: "Confirmation required" },
-            { value: "in_stock", label: "In stock" },
-            { value: "low_stock", label: "Low stock" },
-            { value: "out_of_stock", label: "Out of stock" },
-          ]}
-        />
-      </FilterGroup>
-    </>
-  );
+  const filterGroups = <FilterPanel groups={groups} filters={filters} onToggle={toggleFilter} />;
 
   return (
     <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
@@ -204,14 +195,22 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
             </button>
           )}
         </div>
-        {filterGroups}
+        {hasFilters ? (
+          <div className="mt-5">{filterGroups}</div>
+        ) : (
+          <p className="mt-5 text-meta text-ink-3">
+            Nothing here narrows further. Clear the category to filter the whole catalog.
+          </p>
+        )}
       </aside>
 
       {/* Mobile: search + a sticky Filters button; products render immediately. */}
       <div className="flex flex-col gap-3 lg:hidden">
         {searchForm}
+        {hasFilters && (
         <div className="sticky top-2 z-20 -mx-1 px-1">
           <button
+            ref={filtersButtonRef}
             type="button"
             onClick={() => setDrawerOpen(true)}
             aria-haspopup="dialog"
@@ -222,6 +221,7 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
             Filters{activeCount > 0 ? ` (${activeCount})` : ""}
           </button>
         </div>
+        )}
       </div>
 
       {/* Mobile filter bottom sheet */}
@@ -231,28 +231,21 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
             <div
               aria-hidden
               onClick={() => setDrawerOpen(false)}
-              className="absolute inset-0 bg-[var(--ink-panel)]/40 backdrop-blur-[2px]"
+              className="absolute inset-0 bg-[var(--ink-panel)]/50"
             />
             <div
+              ref={sheetRef}
               role="dialog"
               aria-modal="true"
-              aria-label="Filter SKUs"
+              aria-label={activeCount > 0 ? `Filters (${activeCount})` : "Filters"}
               className="absolute inset-x-0 bottom-0 flex max-h-[85dvh] flex-col rounded-t-(--r-lg) border-t border-line bg-canvas shadow-[var(--shadow-lg)]"
             >
               <header className="flex items-center justify-between border-b border-line px-5 py-4">
-                <span className="inline-flex items-center gap-2 font-display text-base font-semibold text-ink-1">
-                  <SlidersHorizontal size={16} /> Filters
+                <span className="inline-flex items-center gap-2 text-lead font-semibold text-ink-1">
+                  <SlidersHorizontal size={16} aria-hidden="true" />
+                  Filters{activeCount > 0 ? ` (${activeCount})` : ""}
                 </span>
                 <div className="flex items-center gap-3">
-                  {activeCount > 0 && (
-                    <button
-                      type="button"
-                      onClick={() => { clear(); setDrawerOpen(false); }}
-                      className="text-xs font-medium text-ink-3 hover:text-danger"
-                    >
-                      Clear all
-                    </button>
-                  )}
                   <button
                     ref={drawerCloseRef}
                     type="button"
@@ -264,10 +257,23 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
                   </button>
                 </div>
               </header>
-              <div className="flex-1 overflow-y-auto px-5 pb-4">{filterGroups}</div>
-              <footer className="border-t border-line bg-surface-1 px-5 py-4">
+              <div className="flex-1 overflow-y-auto px-5 pb-6 pt-6">{filterGroups}</div>
+              {/* The button sits near the home indicator, so the safe area is
+                  padding, not a guess at a magic number. */}
+              <footer
+                className="flex items-center gap-4 border-t border-line bg-surface-1 px-5 pt-4"
+                style={{ paddingBottom: "calc(1rem + env(safe-area-inset-bottom))" }}
+              >
+                <button
+                  type="button"
+                  onClick={clear}
+                  disabled={activeCount === 0}
+                  className="min-h-11 shrink-0 px-1 text-item font-medium text-ink-2 underline underline-offset-4 transition-colors duration-120 hover:text-ink-1 disabled:text-ink-4 disabled:no-underline"
+                >
+                  Clear all
+                </button>
                 <Button type="button" full onClick={() => setDrawerOpen(false)}>
-                  Show {filtered.length} {filtered.length === 1 ? "SKU" : "SKUs"}
+                  Show {resultLabel}
                 </Button>
               </footer>
             </div>
@@ -276,9 +282,10 @@ export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; face
         )}
 
       <section>
+        <ActiveFilterChips filters={filters} labelFor={labelFor} onRemove={removeFilter} onClear={clear} />
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <p className="text-xs text-ink-3">
-            {filtered.length} of {skus.length} SKUs
+            {filtered.length} of {skus.length} products
           </p>
           <div className="flex items-center gap-2 text-sm text-ink-2">
             <span className="hidden sm:inline">Sort</span>
@@ -336,13 +343,4 @@ function ZeroResultsLogger({ query }: { query?: string }) {
     }
   }, [query]);
   return null;
-}
-
-function FilterGroup({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="mt-6 border-t border-line pt-5 first:mt-5">
-      <h3 className="mb-3 text-xs font-semibold text-ink-3">{label}</h3>
-      {children}
-    </div>
-  );
 }
