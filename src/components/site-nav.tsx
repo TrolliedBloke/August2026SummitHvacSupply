@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Check, Menu, X, Lock, Search, ShoppingCart, MapPin, Phone, UserRound } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
+import { branchStatus, formatHour } from "@/lib/branch-hours";
 import { SITE } from "@/lib/site";
 import { CATALOG_CATEGORIES } from "@/lib/storefront/catalog";
 
@@ -31,8 +32,6 @@ const RESOURCES = [
   { href: "/locations/newark", label: "Newark delivery and will-call" },
 ];
 
-const RESOURCE_HREFS = ["/resources", ...RESOURCES.map((resource) => resource.href)];
-
 const CATEGORY_RAIL = [
   { href: "/products?category=mini-splits", label: "Mini Splits" },
   { href: "/products?q=condenser", label: "Condensers" },
@@ -47,7 +46,15 @@ const CATEGORY_RAIL = [
 /* Shared by every row-3 entry so the run reads as an even rhythm: the spacing
    is padding carried by each item, not a fixed gap between labels of very
    different widths. */
-const NAV_ITEM = "whitespace-nowrap rounded-(--r-sm) px-5 py-2 text-base font-medium transition-colors";
+const NAV_ITEM =
+  "inline-flex h-11 items-center whitespace-nowrap px-4 text-base font-medium text-ink-1 transition-colors duration-120";
+/* The 2px green underline is a state, not decoration: it shows on hover, while
+   the menu is open, and on the current category page (aria-current). The
+   homepage therefore carries none, because "All products" is a menu trigger and
+   no category is current. */
+const NAV_UNDERLINE =
+  "relative after:absolute after:inset-x-4 after:bottom-0 after:h-0.5 after:bg-brand after:opacity-0 after:transition-opacity after:duration-120 hover:after:opacity-100";
+const NAV_UNDERLINE_ON = "after:opacity-100";
 
 function useClientMounted() {
   return React.useSyncExternalStore(
@@ -363,91 +370,6 @@ function AllProductsMenu() {
   );
 }
 
-function ResourcesMenu({ pathname }: { pathname: string }) {
-  const [open, setOpen] = React.useState(false);
-  const wrapRef = React.useRef<HTMLDivElement>(null);
-  const triggerRef = React.useRef<HTMLButtonElement>(null);
-  const menuRef = React.useRef<HTMLDivElement>(null);
-  const close = React.useCallback(() => setOpen(false), []);
-  const active =
-    pathname.startsWith("/guides/") ||
-    pathname.startsWith("/tools/") ||
-    RESOURCE_HREFS.some((href) => pathname === href || pathname.startsWith(href + "/"));
-
-  useDismissable(open, close, wrapRef, triggerRef);
-
-  function onMenuKeyDown(event: React.KeyboardEvent) {
-    if (!open || !menuRef.current) return;
-    const items = Array.from(menuRef.current.querySelectorAll<HTMLElement>('[role="menuitem"]'));
-    if (items.length === 0) return;
-    const current = Math.max(0, items.indexOf(document.activeElement as HTMLElement));
-    let next: number | null = null;
-    if (event.key === "ArrowDown") next = (current + 1) % items.length;
-    if (event.key === "ArrowUp") next = (current - 1 + items.length) % items.length;
-    if (event.key === "Home") next = 0;
-    if (event.key === "End") next = items.length - 1;
-    if (next !== null) {
-      event.preventDefault();
-      items[next].focus();
-    }
-  }
-
-  return (
-    <div ref={wrapRef} className="relative" onKeyDown={onMenuKeyDown}>
-      <button
-        ref={triggerRef}
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        onKeyDown={(event) => {
-          if (event.key === "ArrowDown") {
-            event.preventDefault();
-            setOpen(true);
-            window.setTimeout(() => menuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus());
-          }
-        }}
-        aria-expanded={open}
-        aria-haspopup="menu"
-        className={`${NAV_ITEM} inline-flex items-center ${
-          active || open ? "text-ink-1 underline underline-offset-4" : "text-ink-1 hover:bg-surface-2"
-        }`}
-      >
-        Resources
-      </button>
-      {open && (
-        <div
-          ref={menuRef}
-          role="menu"
-          aria-label="Resources"
-          className="absolute left-5 top-[calc(100%+0.5rem)] z-50 w-64 overflow-hidden rounded-(--r-md) border border-line bg-surface-1 p-1.5 shadow-[0_8px_24px_rgba(28,28,26,0.10)]"
-        >
-          {RESOURCES.map((item) => {
-            const itemActive = pathname === item.href || pathname.startsWith(item.href + "/");
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                role="menuitem"
-                aria-current={itemActive ? "page" : undefined}
-                onClick={close}
-                className={`block rounded-(--r-sm) px-3 py-2.5 text-sm font-medium transition-colors hover:bg-surface-2 focus-visible:bg-surface-2 ${
-                  itemActive ? "bg-surface-2 text-brand" : "text-ink-1"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
-
-/* Desktop account entry follows the same useful pattern as a mature retail
-   header: the trigger answers "where do I sign in?" immediately, while the
-   anchored panel explains why an account helps before sending the customer to
-   the full account or authentication route. The panel contains links, not a
-   miniature login form, so credentials still enter the dedicated auth page. */
 function AccountMenu() {
   const [open, setOpen] = React.useState(false);
   const wrapRef = React.useRef<HTMLDivElement>(null);
@@ -572,16 +494,22 @@ function CartButton() {
    strip's contrast from 5.11:1 (muted ink on white -- AA, but quiet enough to
    disappear) to 11.3:1. */
 function UtilityStrip() {
+  // The status line is time-dependent, so it renders the stable closing-hour
+  // label on the server and swaps to live open/closed state after mount. Both
+  // strings come from BRANCH_HOURS; neither is written by hand.
+  const mounted = useClientMounted();
+  const status = mounted ? branchStatus().label : `Open until ${formatHour(17)}`;
+
   return (
-    <div className="hidden bg-[var(--ink-panel)] md:block">
-      <div className="mx-auto flex h-10 w-full max-w-[var(--page-max)] items-center gap-4 px-5 text-xs font-medium text-white sm:px-6 lg:px-8">
+    <div className="hidden bg-[var(--green-deep)] md:block">
+      <div className="mx-auto flex h-12 w-full max-w-[var(--page-max)] items-center gap-3 px-5 text-xs font-medium text-white">
         <MapPin size={14} strokeWidth={ICON_STROKE} className="shrink-0" aria-hidden="true" />
-        <span className="-ml-2.5 whitespace-nowrap">Newark, CA</span>
-        <span aria-hidden="true">·</span>
-        <span className="-ml-2 whitespace-nowrap">Open until 5:00 PM</span>
+        <span className="whitespace-nowrap">Newark, CA</span>
+        <span aria-hidden="true" className="text-white/50">·</span>
+        <span className="whitespace-nowrap">{status}</span>
         <Link
           href="/locations/newark"
-          className="whitespace-nowrap underline underline-offset-2 transition-colors hover:text-white"
+          className="ml-1 inline-flex items-center whitespace-nowrap py-3 underline underline-offset-2 transition-colors hover:text-white/80"
         >
           Change
         </Link>
@@ -589,12 +517,18 @@ function UtilityStrip() {
             control is looked for. Carrying it here as well put the same link on
             screen twice. */}
         <div className="ml-auto flex items-center gap-5">
-          <a href={SITE.phoneHref} className="tnum inline-flex items-center gap-2 whitespace-nowrap transition-colors hover:text-white">
+          <a
+            href={SITE.phoneHref}
+            className="tnum inline-flex items-center gap-2 whitespace-nowrap py-3 transition-colors hover:text-white/80"
+          >
             <Phone size={14} strokeWidth={ICON_STROKE} aria-hidden="true" />
             {SITE.phone}
           </a>
+          <Link href="/resources" className="inline-flex items-center whitespace-nowrap py-3 transition-colors hover:text-white/80">
+            Resources
+          </Link>
           <span className="h-5 w-px bg-white/35" aria-hidden="true" />
-          <Link href="/dealers" className="whitespace-nowrap transition-colors hover:text-white">
+          <Link href="/dealers" className="inline-flex items-center whitespace-nowrap py-3 transition-colors hover:text-white/80">
             Apply for trade account
           </Link>
         </div>
@@ -605,6 +539,7 @@ function UtilityStrip() {
 
 export function SiteNav() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const closeMobile = () => setMobileOpen(false);
 
@@ -621,6 +556,15 @@ export function SiteNav() {
 
   const isActive = (href: string) => href === activeHref;
 
+  // A category link is current only when both its path and its query match, so
+  // /products?category=furnaces does not mark every other /products entry.
+  const isCategoryCurrent = (href: string) => {
+    const [path, query = ""] = href.split("?");
+    if (pathname !== path) return false;
+    const current = searchParams.toString();
+    return query ? current === query : current === "";
+  };
+
   return (
     <header className="relative z-30 bg-surface-2">
       <UtilityStrip />
@@ -629,7 +573,7 @@ export function SiteNav() {
           phones, then an 80px light band on larger screens. The larger Summit
           lockup lets the mountain do the same visual work as the reference
           mark without redrawing or altering the brand asset. */}
-      <div className="mx-auto flex w-full max-w-[var(--page-max)] items-center gap-6 bg-surface-2 px-5 py-2.5 sm:px-6 md:py-[18px] lg:px-8 lg:py-2.5">
+      <div className="mx-auto flex w-full max-w-[var(--page-max)] items-center gap-6 bg-surface-2 px-5 py-2.5 md:py-[18px] lg:py-2.5">
         <Wordmark />
         {/* The field is capped rather than greedy. Left to flex-1 it ran 1092px
             of a 1400px row -- 78% of the header against a right cluster of one
@@ -659,48 +603,50 @@ export function SiteNav() {
       {/* Primary destinations and the product rail are one navigation zone.
           Only the content-width rule after row one separates their hierarchy;
           there is no full-width bar between them or rule beneath the rail. */}
-      <nav aria-label="Store navigation" className="bg-surface-2">
-        <div className="mx-auto hidden w-full max-w-[var(--page-max)] items-center border-b border-line px-5 py-1.5 sm:px-6 lg:px-8 xl:flex">
-          {/* The trigger sits left of the divider; every destination link sits
-              right of it, so the distinction is legible at a glance. */}
-          <div className="-ml-5">
-            <AllProductsMenu />
+      {/* One navigation row, as the reference has it: the All-products trigger,
+          then the category run, with Brands pinned right. Equipment/Parts/Tools
+          were query filters on /products and live in the trigger's menu, which
+          lists every category -- a second row of them was the same links twice.
+          Every gap is identical because the spacing is fixed padding carried by
+          each item (NAV_ITEM), never space-between. */}
+      <nav aria-label="Store navigation" className="border-b border-line bg-surface-2">
+        <div className="mx-auto w-full max-w-[var(--page-max)] px-5">
+          <div className="flex items-center overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="-ml-4 shrink-0">
+              <AllProductsMenu />
+            </div>
+            <ul className="flex shrink-0 items-center">
+              {CATEGORY_RAIL.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={isCategoryCurrent(item.href) ? "page" : undefined}
+                    className={`${NAV_ITEM} ${NAV_UNDERLINE} block ${
+                      isCategoryCurrent(item.href) ? NAV_UNDERLINE_ON : ""
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/brands"
+              aria-current={pathname === "/brands" ? "page" : undefined}
+              className={`${NAV_ITEM} ${NAV_UNDERLINE} ml-auto -mr-4 shrink-0 ${
+                pathname === "/brands" ? NAV_UNDERLINE_ON : ""
+              }`}
+            >
+              Brands
+            </Link>
           </div>
-          <ul className="ml-6 flex min-w-0 items-center">
-            {PRIMARY.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`${NAV_ITEM} block ${
-                    isActive(item.href) ? "text-brand" : "text-ink-1 hover:bg-surface-2"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <ResourcesMenu pathname={pathname} />
-            </li>
-          </ul>
-        </div>
-        <div className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <ul className="mx-auto flex w-full max-w-[var(--page-max)] items-center gap-12 px-5 py-2 text-xs text-ink-2 sm:px-6 lg:px-8">
-            {CATEGORY_RAIL.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="whitespace-nowrap transition-colors hover:text-ink-1">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </nav>
 
       {/* Mobile / tablet sheet -- available at every width below xl. */}
       {mobileOpen && (
         <div className="border-t border-line bg-canvas xl:hidden">
-          <div className="mx-auto flex w-full max-w-[var(--page-max)] flex-col px-5 py-4 sm:px-6">
+          <div className="mx-auto flex w-full max-w-[var(--page-max)] flex-col px-5 py-4">
             <SearchField onNavigate={closeMobile} />
             <ul className="mt-4 flex flex-col">
               <li>

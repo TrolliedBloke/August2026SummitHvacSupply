@@ -17,8 +17,8 @@ export const SITE = {
   smsHref: "sms:+14159884445",
   email: "info@summithvacsupply.com",
   emailHref: "mailto:info@summithvacsupply.com",
-  counterHours: "Mon–Fri 7:00 AM–5:00 PM PT",
-  hours: "Mon-Fri 7:00a-5:00p PT · Newark will-call, Bay Area delivery & freight",
+  counterHours: "Mon–Fri 7 AM–5 PM PT",
+  hours: "Mon-Fri 7 AM-5 PM PT · Newark will-call, Bay Area delivery & freight",
   serviceArea: "San Jose, Oakland, Fremont, San Francisco, the Peninsula, East Bay, South Bay, North Bay & nearby Bay Area cities",
   broaderServiceArea: "California, Oregon, Washington, Nevada & Arizona",
   ahriDirectory: "https://www.ahridirectory.org/",
@@ -48,10 +48,11 @@ export const PURCHASE = {
   delivery: "Newark will-call, Bay Area delivery, and freight are confirmed with each quote",
 } as const;
 
-/** "14" -> "2:00 PM". Shared so the string and the countdown cannot disagree. */
+/** "14" -> "2 PM". Shared so the string and the countdown cannot disagree. */
+import { formatHour } from "./branch-hours";
+
 export function formatCutoffHour(hour: number): string {
-  const display = hour % 12 || 12;
-  return `${display}:00 ${hour >= 12 ? "PM" : "AM"}`;
+  return formatHour(hour);
 }
 
 /**

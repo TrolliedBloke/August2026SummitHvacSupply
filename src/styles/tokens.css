@@ -6,7 +6,12 @@
   --page: #FAF9F6;
   --surface: #FFFFFF;
   --border: #E2E0DA;
+  /* Two greens, ranked. --green is the strongest on the page and belongs to
+     the primary action (the Search button). --green-deep is one step darker and
+     is chrome only (the utility bar), so Search still wins the eye. Green means
+     interactive, selected, or status -- never a plain label. */
   --green: #1F4A32;
+  --green-deep: #14331F;
   --green-bg: #F0F5F1;
   --amber: #C77D2E;
   --dark: #1A1A1A;
@@ -25,7 +30,7 @@
   --nav-height: 96px;
   /* The one page width. Header, content and footer all share it, so every
      section starts at the same left edge. Side padding lives in Container. */
-  --page-max: 1280px;
+  --page-max: 1440px;
   --transition-fast: 150ms;
 
   /* Compatibility aliases for existing pages while the new system rolls out. */

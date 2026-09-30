@@ -57,7 +57,7 @@ export default function BrandsPage() {
 
   return (
     <section className="bg-surface-1">
-      <div className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 sm:px-6 sm:py-14 lg:px-8 lg:pb-8 lg:pt-20">
+      <div className="mx-auto w-full max-w-[var(--page-max)] px-5 py-12 sm:py-14 lg:pb-8 lg:pt-20">
         <header>
           <h1 className="font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
             Brands we stock

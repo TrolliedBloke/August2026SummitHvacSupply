@@ -175,7 +175,7 @@ export default function DeliveryPage() {
               <br />
               {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
               <br />
-              <span className="text-ink-2">Monday-Friday 7:00am-5:00pm PT</span>
+              <span className="text-ink-2">{SITE.counterHours}</span>
               <br />
               <a
                 href={FULFILLMENT.mapsHref}

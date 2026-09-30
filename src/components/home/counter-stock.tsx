@@ -24,7 +24,7 @@ export async function CounterStock() {
   if (skus.length === 0) return null;
 
   return (
-    <section className="bg-canvas pb-1 pt-5">
+    <section className="bg-canvas pb-1 pt-19">
       <Container>
         <div className="flex items-baseline justify-between gap-5">
           <h2 className="counter-heading text-2xl leading-tight text-ink-1">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Clock } from "lucide-react";
 import { DeliveryCountdown } from "@/components/home/delivery-countdown";
+import { branchStatus } from "@/lib/branch-hours";
 import { FULFILLMENT, SITE } from "@/lib/site";
 
 /**
@@ -14,7 +15,11 @@ import { FULFILLMENT, SITE } from "@/lib/site";
  * without knowing where the counter is -- which is why it belongs in the fold
  * rather than only in the branch strip further down the page.
  */
-export function FulfillmentCard({ open = true }: { open?: boolean }) {
+export function FulfillmentCard() {
+  // Open state and the closing hour come from BRANCH_HOURS, never from a
+  // hardcoded string: the card and the utility bar have to agree, and they
+  // cannot if either one writes "5 PM" by hand.
+  const status = branchStatus();
   return (
     <article className="h-full min-w-0 rounded-(--r-sm) border border-line bg-surface-1 p-5">
       <h2 className="text-lg font-semibold leading-snug text-ink-1">Newark branch</h2>
@@ -31,10 +36,10 @@ export function FulfillmentCard({ open = true }: { open?: boolean }) {
 
       <p className="flex items-center gap-3 text-sm text-ink-1">
         <span
-          className={`size-2.5 shrink-0 rounded-full ${open ? "bg-brand" : "bg-ink-4"}`}
+          className={`size-2.5 shrink-0 rounded-full ${status.open ? "bg-brand" : "bg-ink-4"}`}
           aria-hidden="true"
         />
-        {open ? "Open until 5:00 PM" : "Closed · opens 7:00 AM"}
+        {status.label}
       </p>
       <p className="mt-3 flex items-center gap-3 text-sm text-ink-1">
         <Clock size={17} strokeWidth={1.6} aria-hidden="true" />
