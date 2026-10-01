@@ -2,17 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { CATEGORY_RAIL } from "@/lib/nav-links";
 
-const PRODUCT_CATEGORIES = [
-  { href: "/products?category=mini-splits", label: "Mini splits" },
-  { href: "/products?q=condenser", label: "Condensers" },
-  { href: "/products?category=furnaces", label: "Furnaces" },
-  { href: "/products?category=air-handlers", label: "Air handlers" },
-  { href: "/products?category=evaporator-coils", label: "Coils" },
-  { href: "/products?category=line-sets", label: "Line sets" },
-  { href: "/products?refrigerant=R-454B", label: "Refrigerant" },
-  { href: "/products?category=controls", label: "Thermostats" },
-] as const;
+/* The same list as the header's category rail. */
+const PRODUCT_CATEGORIES = CATEGORY_RAIL;
 
 const RESOURCE_LINKS = [
   { href: "/resources", label: "Resource center" },
@@ -38,7 +31,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-[#093324] bg-[linear-gradient(180deg,#0a3425_0%,#082e20_100%)] text-white">
       <div className="mx-auto w-full max-w-[1538px] px-6 pt-8 pb-7 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
-        <div className="footer-layout grid gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[minmax(320px,1.35fr)_minmax(140px,.7fr)_minmax(160px,.75fr)_minmax(190px,.85fr)_minmax(260px,1fr)] xl:gap-x-10 2xl:gap-x-12">
+        <div className="footer-layout grid gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,.7fr)_minmax(0,.75fr)_minmax(0,.85fr)_minmax(13rem,1fr)] xl:gap-x-10 2xl:gap-x-12">
           <section aria-labelledby="footer-company-heading" className="max-w-md -translate-y-1">
             <div className="flex items-center gap-3">
               <Image
@@ -72,7 +65,7 @@ export function SiteFooter() {
             </address>
           </section>
 
-          <div>
+          <div className="hidden md:block">
             <FooterNav title="Products">
               {PRODUCT_CATEGORIES.map((category) => (
                 <FooterLink key={category.href} href={category.href}>
@@ -82,21 +75,27 @@ export function SiteFooter() {
             </FooterNav>
           </div>
 
-          <FooterNav title="Resources">
+          <div className="hidden md:block"><FooterNav title="Resources">
             {RESOURCE_LINKS.map((item) => (
               <FooterLink key={item.href} href={item.href}>
                 {item.label}
               </FooterLink>
             ))}
-          </FooterNav>
+          </FooterNav></div>
 
-          <FooterNav title="Company & policies">
+          <div className="hidden md:block"><FooterNav title="Company & policies">
             {COMPANY_LINKS.map((item) => (
               <FooterLink key={`${item.href}-${item.label}`} href={item.href}>
                 {item.label}
               </FooterLink>
             ))}
-          </FooterNav>
+          </FooterNav></div>
+
+          <div className="divide-y divide-white/20 border-y border-white/20 md:hidden">
+            <FooterDisclosure title="Products">{PRODUCT_CATEGORIES.map((item) => <FooterLink key={item.href} href={item.href}>{item.label}</FooterLink>)}</FooterDisclosure>
+            <FooterDisclosure title="Resources">{RESOURCE_LINKS.map((item) => <FooterLink key={item.href} href={item.href}>{item.label}</FooterLink>)}</FooterDisclosure>
+            <FooterDisclosure title="Company & policies">{COMPANY_LINKS.map((item) => <FooterLink key={`${item.href}-${item.label}`} href={item.href}>{item.label}</FooterLink>)}</FooterDisclosure>
+          </div>
 
           <section aria-label="Shopping paths" className="pt-4">
             <div className="flex flex-col gap-3.5">
@@ -110,7 +109,7 @@ export function SiteFooter() {
                 href="/homeowners"
                 className="flex h-12 w-full items-center justify-center rounded-[6px] border-2 border-white/90 bg-transparent px-4 text-center text-[17px] font-semibold text-white transition-colors hover:bg-white/5"
               >
-                Shop as homeowner
+                Buying for your home
               </Link>
             </div>
           </section>
@@ -119,6 +118,10 @@ export function SiteFooter() {
       </div>
     </footer>
   );
+}
+
+function FooterDisclosure({ title, children }: { title: string; children: React.ReactNode }) {
+  return <details className="group"><summary className="flex min-h-12 cursor-pointer list-none items-center justify-between font-semibold marker:content-none">{title}<span aria-hidden="true" className="text-xl font-normal transition-transform group-open:rotate-45">+</span></summary><ul className="flex flex-col pb-4">{children}</ul></details>;
 }
 
 function FooterNav({ title, children }: { title: string; children: React.ReactNode }) {

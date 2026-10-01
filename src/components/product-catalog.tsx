@@ -3,10 +3,12 @@ import { Container, Eyebrow } from "@/components/ui";
 import { SkuCatalogClient } from "@/components/sku-catalog-client";
 import { ZipGate } from "@/components/zip-gate";
 import { getCatalogFacets, getStorefrontSkus } from "@/lib/storefront/catalog";
-import { applyLiveInventoryAll, getLiveInventory } from "@/lib/storefront/live-inventory";
+import { applyLiveInventoryAll, getLiveInventoryResult } from "@/lib/storefront/live-inventory";
+import { CatalogResultsSkeleton } from "@/components/catalog-skeleton";
 
 export async function ProductCatalog() {
-  const skus = applyLiveInventoryAll(getStorefrontSkus(), await getLiveInventory());
+  const live = await getLiveInventoryResult();
+  const skus = applyLiveInventoryAll(getStorefrontSkus(), live.inventory);
   const facets = getCatalogFacets();
   return (
     <>
@@ -27,8 +29,8 @@ export async function ProductCatalog() {
       </section>
 
       <Container className="py-10 lg:py-12">
-        <React.Suspense fallback={<p className="text-sm text-ink-3">Loading SKU filters...</p>}>
-          <SkuCatalogClient skus={skus} facets={facets} />
+        <React.Suspense fallback={<CatalogResultsSkeleton />}>
+          <SkuCatalogClient skus={skus} facets={facets} inventoryStatus={live.status} />
         </React.Suspense>
       </Container>
     </>

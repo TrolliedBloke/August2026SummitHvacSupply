@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container, LinkButton } from "@/components/ui";
+import { DEALER_REVIEW_SLA } from "@/lib/forms/dealer";
 
 export default function AccountPage() {
   return (
@@ -21,7 +22,7 @@ export default function AccountPage() {
             title="Retail customer"
             body="Shop at listed prices with faster checkout, order history, and saved equipment."
             details={[
-              "No license or business required. Pick up in Newark or ship anywhere in California.",
+              "No license or business required. Pick up in Newark, or check delivery to your ZIP.",
             ]}
             href="/account/create"
             action="Create retail account"
@@ -31,8 +32,8 @@ export default function AccountPage() {
             title="Wholesale customer"
             body="Account pricing, net terms eligibility, saved lists, and repeat ordering."
             details={[
-              "You’ll need: contractor license #, resale certificate, and a business EIN.",
-              "Most applications approved within one business day. Will-call pickup in Newark same day once approved.",
+              "Have ready: your license number if your work needs one, a seller's permit if you resell, and the last 4 of the business EIN.",
+              `Staff review every application and reply ${DEALER_REVIEW_SLA}. Already a retail customer? Apply with the same email.`,
             ]}
             href="/dealers"
             action="Apply for wholesale"

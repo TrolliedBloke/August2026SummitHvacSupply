@@ -9,6 +9,7 @@ import { AnalyticsListener } from "@/components/analytics-listener";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE } from "@/lib/site";
+import { catalogCategoryDestinations } from "@/lib/storefront/catalog";
 import { Analytics } from "@vercel/analytics/next";
 
 // Inter is the only typeface: headings, body and data. Numbers line up via
@@ -49,6 +50,11 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // The production analytics endpoint exists on Vercel only. Rendering the
+  // component in a self-hosted production build requests a missing
+  // /_vercel/insights/script.js and creates a 404/MIME console error on every
+  // page. Custom first-party event logging remains available everywhere.
+  const vercelAnalyticsAvailable = process.env.VERCEL === "1";
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "HVACBusiness",
@@ -81,7 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <FulfillmentProvider>
           <QuoteProvider>
-            <SiteNav />
+            <SiteNav categories={catalogCategoryDestinations()} />
             <main id="main">{children}</main>
             <SiteFooter />
             <QuoteDrawerMount />
@@ -89,7 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AnalyticsListener />
           </QuoteProvider>
         </FulfillmentProvider>
-        <Analytics />
+        {vercelAnalyticsAvailable && <Analytics />}
       </body>
     </html>
   );

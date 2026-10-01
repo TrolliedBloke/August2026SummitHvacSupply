@@ -667,6 +667,11 @@ function scoreSku(sku: StorefrontSku, q: string, qCode: string): number {
   const codes = [sku.sku, sku.sourceSku, sku.modelNumber].map(normalizeCode);
   if (codes.includes(qCode)) return 6;
   if (codes.some((code) => code.startsWith(qCode))) return 5;
+  // A category prefix is deliberate navigation intent, not an incidental text
+  // hit. This keeps "mini" focused on mini splits instead of products whose
+  // accessory prose happens to contain that substring.
+  const categoryLabel = normalizeSearchQuery(sku.categoryLabel);
+  if (categoryLabel === q || categoryLabel.startsWith(`${q} `)) return 5;
   const haystack = searchHaystack(sku);
   if (haystack.includes(q)) return 4;
   // Every word must land somewhere, so "3 ton heat pump" cannot match a random
@@ -775,6 +780,35 @@ export function getCatalogFacets() {
     unitTypes: Array.from(new Set(skus.map((sku) => sku.unitType))).sort(),
     refrigerants: Array.from(new Set(skus.map((sku) => sku.refrigerant).filter(Boolean))).sort(),
   };
+}
+
+export type CategoryDestination = {
+  value: CatalogCategory;
+  label: string;
+  href: string;
+  productCount: number;
+  /** `empty` categories have no landing state today and are not linked. */
+  status: "available" | "empty";
+};
+
+/**
+ * The navigation contract for categories: every entry carries its real
+ * destination and whether that destination has anything on it. Menus render
+ * only `available` entries, so a nav link can never land on an accidental
+ * empty catalog.
+ */
+export function catalogCategoryDestinations(): CategoryDestination[] {
+  const skus = getStorefrontSkus();
+  return CATALOG_CATEGORIES.map((category) => {
+    const productCount = skus.filter((sku) => sku.category === category.value).length;
+    return {
+      value: category.value,
+      label: category.label,
+      href: `/products?category=${category.value}`,
+      productCount,
+      status: productCount > 0 ? "available" : "empty",
+    };
+  });
 }
 
 export type SeriesPriceRange = { low: number; high: number; count: number };

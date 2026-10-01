@@ -39,9 +39,14 @@ export async function CounterStock() {
           </Link>
         </div>
 
-        <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-9 lg:grid-cols-4">
-          {skus.slice(0, 4).map((sku) => (
-            <ProductCard key={sku.id} sku={sku} />
+        {/* Auto-fit, not auto-fill: four cards stretch across the row instead of
+            leaving an empty fifth track. Below sm only two show -- the full
+            list is one tap away, and four full-width cards bury the fold. */}
+        <div className="product-grid mt-2 [grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr))]">
+          {skus.slice(0, 4).map((sku, index) => (
+            <div key={sku.id} className={`row-span-6 grid grid-rows-subgrid ${index >= 2 ? "max-sm:hidden" : ""}`}>
+              <ProductCard sku={sku} />
+            </div>
           ))}
         </div>
       </Container>

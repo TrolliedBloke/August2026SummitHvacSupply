@@ -1,14 +1,14 @@
 import { checkoutSchema } from "./schemas";
-import { getStorefrontSku } from "@/lib/storefront/catalog";
 import { getSessionProfile } from "./auth";
 import { createServiceRoleSupabaseClient } from "./supabase";
 import { getStripe } from "./stripe";
-import { isFulfillmentWindowAvailable, localDeliveryFee, resolveZone, WAREHOUSE, type FulfillmentMethod } from "./fulfillment";
-import { estimateTax, resolveUnitPrice } from "./pricing";
+import { isFulfillmentWindowAvailable, WAREHOUSE, type FulfillmentMethod } from "./fulfillment";
 import { clearCartSnapshot } from "./lifecycle";
-import { loadTradePricing } from "./portal";
 import { createOrderToken } from "./order-token";
 import { type CheckoutState, type CheckoutStatus } from "./checkout-state";
+import { issueCheckoutSnapshot, verifySnapshotToken } from "./checkout-snapshot";
+import type { CheckoutSnapshot } from "@/lib/checkout-snapshot-types";
+import { toConfirmation, type OrderConfirmation, type StoredOrder } from "@/lib/order-confirmation";
 
 /**
  * Places an order from the cart with a chosen fulfillment method.
@@ -30,6 +30,22 @@ type CheckoutResult = CheckoutStatus & {
 export class CheckoutConflictError extends Error {}
 
 /**
+ * The order cannot be placed as reviewed: a line is no longer purchasable, the
+ * chosen fulfillment method is gone, or a price, stock, fee or tax changed
+ * since the buyer's snapshot. Carries the CURRENT snapshot so the client can
+ * show exactly what changed and ask for acknowledgment. Surfaces as HTTP 409.
+ */
+export class CheckoutReviewRequiredError extends Error {
+  constructor(
+    readonly code: "line_errors" | "method_unavailable" | "stale",
+    readonly snapshot: CheckoutSnapshot,
+    message: string
+  ) {
+    super(message);
+  }
+}
+
+/**
  * The order could not be attempted because a dependency (the database) is not
  * configured or not reachable. Distinct from a conflict: nothing was written,
  * the cart is intact, and retrying later is the correct response. Surfaces as
@@ -37,79 +53,44 @@ export class CheckoutConflictError extends Error {}
  */
 export class CheckoutUnavailableError extends Error {}
 
-function isTrade(role: string | undefined): boolean {
-  return role === "dealer" || role === "installer" || role === "staff";
-}
 
 export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   const parsed = checkoutSchema.parse(input);
   const profile = await getSessionProfile();
-  const trade = isTrade(profile?.role);
 
+  // 1. Re-issue the snapshot from current data -- prices by the session's
+  //    authorization, live stock, fulfillment, fee and tax. The client never
+  //    sends prices, and what it reviewed must still be what is true now.
+  const snapshot = await issueCheckoutSnapshot({
+    items: parsed.items.map((item) => ({ skuId: item.skuId, qty: item.qty })),
+    method: parsed.method,
+    zip: parsed.zip ?? null,
+  });
+  if (snapshot.lines.some((line) => line.error)) {
+    throw new CheckoutReviewRequiredError("line_errors", snapshot, "Some items can no longer be bought as listed. Review them to continue.");
+  }
+  if (!snapshot.methodAvailable) {
+    throw new CheckoutReviewRequiredError("method_unavailable", snapshot, "That fulfillment option is no longer available for this order. Choose another.");
+  }
+  if (verifySnapshotToken(parsed.snapshotToken) !== snapshot.digest) {
+    throw new CheckoutReviewRequiredError("stale", snapshot, "Your order changed since you reviewed it. Check the differences and confirm.");
+  }
+  if (snapshot.payment === "card" && snapshot.tax.status === "unavailable") {
+    throw new CheckoutConflictError(
+      "We cannot calculate sales tax for that delivery address online. Request a quote and we will confirm tax and freight."
+    );
+  }
   if (parsed.method !== "freight" && !isFulfillmentWindowAvailable(parsed.method, parsed.zip ?? null, parsed.window!)) {
     throw new CheckoutConflictError("That fulfillment window is no longer available. Choose another time.");
   }
 
-  // 1. Price every line server-side, by tier.
-  //    First resolve and validate each line against the catalog.
-  const resolved = parsed.items.map((item) => {
-    const sku = getStorefrontSku(item.skuId);
-    // A SKU the catalog does not contain is a bad request, not a server fault.
-    // Throwing a plain Error surfaced it as a 500, which both misreports the
-    // cause and makes a tampered cart look like an outage in monitoring.
-    if (!sku) throw new CheckoutConflictError("One of the items in your cart is no longer available.");
-    if (!sku.purchaseEligible || sku.retailPrice === null) {
-      throw new CheckoutConflictError(`${sku.sku} requires a verified quote before purchase.`);
-    }
-    return { item, sku, retailPrice: sku.retailPrice };
+  const lines = parsed.items.map((item) => {
+    const line = snapshot.lines.find((entry) => entry.skuId === item.skuId)!;
+    return { ...item, catalogId: item.skuId, unitPrice: line.unitPrice ?? 0, lineTotal: line.lineTotal ?? 0 };
   });
-
-  //    Then price. Trade pricing is read from the database rather than from
-  //    the published catalog: the storefront projection sets dealerPrice to
-  //    null on every SKU precisely so contractor pricing cannot ship to the
-  //    browser, which meant the trade branch here could never fire and an
-  //    approved dealer was silently charged list. loadTradePricing runs as
-  //    service_role, so it is called ONLY after isTrade() has passed.
-  const tradePrices = trade
-    ? await loadTradePricing(resolved.map((line) => line.sku.id))
-    : new Map<string, number>();
-
-  const lines = resolved.map(({ item, sku, retailPrice }) => {
-    const unit = resolveUnitPrice(trade, tradePrices.get(sku.id), retailPrice);
-    return { ...item, skuRecord: sku, unitPrice: unit, lineTotal: unit * item.qty };
-  });
-  const subtotal = round(lines.reduce((sum, l) => sum + l.lineTotal, 0));
-
-  // 2. Resolve the delivery fee authoritatively.
-  const fee =
-    parsed.method === "local_delivery"
-      ? await resolveDeliveryFee(parsed.zip, subtotal)
-      : 0;
-
-  // 3. Decide the payment path.
-  const payment: CheckoutResult["payment"] =
-    parsed.method === "freight" ? "freight_quote" : trade ? "net_terms" : "card";
-
-  // 4. Estimated sales tax applies only to card checkout (homeowners/guests).
-  //    Trade net-terms orders are taxed on the invoice; freight is quoted.
-  //
-  //    The destination decides the rate: will-call is taxed at the Newark hub,
-  //    local delivery at the delivery ZIP. estimateTax returns null outside the
-  //    one jurisdiction this rate is valid for, and an uncomputable tax must
-  //    stop the sale rather than be charged as 0 -- undercharging tax is a
-  //    liability Summit absorbs, not the customer.
-  let tax = 0;
-  if (payment === "card") {
-    const destinationZip = parsed.method === "pickup" ? WAREHOUSE.zip : parsed.zip;
-    const computed = estimateTax(subtotal, destinationZip);
-    if (computed === null) {
-      throw new CheckoutConflictError(
-        "We cannot calculate sales tax for that delivery address online. Request a quote and we will confirm tax and freight."
-      );
-    }
-    tax = computed;
-  }
-  const total = round(subtotal + fee + tax);
+  const { subtotal, fee, total, payment } = snapshot;
+  const tax = snapshot.tax.amount;
+  const availabilityVerified = snapshot.lines.every((line) => line.state === "purchasable");
 
   // Public checkout must use the trusted server client. The anonymous client
   // cannot insert orders under RLS or call reserve_public_order.
@@ -170,7 +151,7 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   const { error: lineError } = await supabase.from("order_lines").insert(
     lines.map((l) => ({
       order_id: order.id,
-      catalog_product_id: l.skuRecord.id,
+      catalog_product_id: l.catalogId,
       sku_id: null,
       description: `${l.title} (${l.sku})`,
       quantity: l.qty,
@@ -186,7 +167,7 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   // also sells orderable products that are not quantity-tracked in the source
   // catalog; those become normal pending sales orders instead of failing a
   // public checkout merely because no inventory lot exists.
-  if (lines.some((line) => line.skuRecord.availabilityVerified)) {
+  if (availabilityVerified) {
     const { error: reserveError } = await supabase.rpc("reserve_public_order", { p_order_id: order.id });
     if (reserveError) {
       await supabase.from("sales_orders").delete().eq("id", order.id);
@@ -251,6 +232,26 @@ type ExistingOrder = {
   payment_intent_id: string | null;
 };
 
+/**
+ * The safe confirmation DTO: payment, order and fulfillment states, masked
+ * contact and address, lines, totals, and the confirmation-email status --
+ * never internal ids. Columns from migration 028 are read when present.
+ */
+export async function getOrderConfirmation(orderId: string): Promise<OrderConfirmation | null> {
+  const supabase = createServiceRoleSupabaseClient();
+  if (!supabase) return null;
+  const base =
+    "order_number, created_at, checkout_state, payment_mode, fulfillment_method, fulfillment_window, fulfillment_status, delivery_address, delivery_zip, buyer_name, buyer_email, subtotal, total, fulfillment_fee";
+  let { data, error } = await supabase.from("sales_orders").select(`${base}, confirmation_email_status`).eq("id", orderId).maybeSingle();
+  if (error) ({ data, error } = await supabase.from("sales_orders").select(base).eq("id", orderId).maybeSingle());
+  if (error || !data) return null;
+  const withStatus = await supabase.from("order_lines").select("description, quantity, unit_price, fulfillment_status").eq("order_id", orderId);
+  const lines: unknown[] | null = withStatus.error
+    ? (await supabase.from("order_lines").select("description, quantity, unit_price").eq("order_id", orderId)).data
+    : withStatus.data;
+  return toConfirmation({ ...(data as unknown as StoredOrder), lines: (lines ?? []) as StoredOrder["lines"] });
+}
+
 async function existingCheckoutResult(order: ExistingOrder): Promise<CheckoutResult> {
   let clientSecret: string | undefined;
   if (order.payment_intent_id && order.checkout_state === "payment_pending") {
@@ -310,26 +311,6 @@ export async function getCheckoutStatus(orderId: string): Promise<CheckoutStatus
     checkoutState: result.checkoutState,
     clientSecret: result.clientSecret,
   };
-}
-
-async function resolveDeliveryFee(zip: string | undefined, subtotal: number): Promise<number> {
-  const supabase = createServiceRoleSupabaseClient();
-  if (supabase && zip) {
-    const { data } = await supabase
-      .from("delivery_zones")
-      .select("local_delivery_eligible, delivery_fee, free_delivery_over")
-      .eq("zip", zip.slice(0, 5))
-      .single();
-    if (data) {
-      if (!data.local_delivery_eligible) return 0;
-      if (data.free_delivery_over > 0 && subtotal >= Number(data.free_delivery_over)) return 0;
-      return Number(data.delivery_fee);
-    }
-    return 0;
-  }
-  // Seeded path mirrors the DB table.
-  const zone = resolveZone(zip);
-  return zone ? localDeliveryFee(zone, subtotal) : 0;
 }
 
 function round(n: number): number {

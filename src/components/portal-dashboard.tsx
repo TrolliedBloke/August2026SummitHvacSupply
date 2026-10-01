@@ -91,6 +91,9 @@ export function PortalDashboard({ overview }: { overview: PortalOverview }) {
                   <BuyAgainButton orderId={order.id} />
                 </div>
               ))}
+              <Link href="/portal/returns/new" className="block pt-3 text-sm font-medium text-ink-1 underline underline-offset-4">
+                Start a return
+              </Link>
             </div>
           )}
         </Panel>

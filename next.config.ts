@@ -72,7 +72,9 @@ const nextConfig: NextConfig = {
               "img-src 'self' data: blob:",
               "font-src 'self' data:",
               "connect-src 'self' https://api.stripe.com https://*.supabase.co",
-              "frame-src https://js.stripe.com https://hooks.stripe.com",
+              // The Newark location page embeds one Google Maps frame and
+              // provides a plain directions link as its fallback.
+              "frame-src https://js.stripe.com https://hooks.stripe.com https://www.google.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",

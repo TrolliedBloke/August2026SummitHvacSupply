@@ -2,16 +2,17 @@ import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
 import { Container, LinkButton } from "@/components/ui";
 import { getCatalogFacets } from "@/lib/storefront/catalog";
+import { NotFoundRecovery } from "@/components/not-found-recovery";
 import { SITE } from "@/lib/site";
 
 export default function NotFound() {
   return (
     <Container className="py-20 lg:py-28">
       <div className="mx-auto max-w-xl text-center">
-        <p className="text-xs font-semibold text-copper">
+        <p className="text-sm font-medium text-ink-2">
           404: page not found
         </p>
-        <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
           That page moved, or the model number changed.
         </h1>
         <p className="mt-3 text-ink-2">
@@ -30,10 +31,15 @@ export default function NotFound() {
             Back to home
           </LinkButton>
         </div>
+        <p className="mt-4 text-sm text-ink-3">Your cart, saved ZIP and sign-in are unchanged.</p>
       </div>
 
+      {/* Server-rendered recovery above works without JavaScript; this adds
+          suggestions for the specific missing path. */}
+      <NotFoundRecovery />
+
       <div className="mx-auto mt-14 max-w-2xl">
-        <h2 className="text-center text-xs font-semibold text-ink-3">
+        <h2 className="text-center text-sm font-medium text-ink-2">
           Browse categories
         </h2>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">

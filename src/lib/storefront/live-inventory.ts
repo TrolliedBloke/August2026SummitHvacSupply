@@ -54,20 +54,36 @@ const VALID_STATUSES: ReadonlySet<string> = new Set<CatalogAvailability>([
   "lead_time",
 ]);
 
-async function fetchLiveInventory(): Promise<LiveInventory> {
+export type LiveInventoryResult = {
+  inventory: LiveInventory;
+  /**
+   * `unconfigured` is the normal state without Supabase (local dev, e2e) and is
+   * not shown to customers. `error` and `timeout` mean counts exist but could
+   * not be read, which the catalog reports as a partial result.
+   */
+  status: "ok" | "unconfigured" | "error" | "timeout";
+};
+
+const LIVE_INVENTORY_TIMEOUT_MS = 2500;
+
+async function fetchLiveInventoryResult(): Promise<LiveInventoryResult> {
   try {
     // The anon client, deliberately. catalog_products already carries a public
     // read policy for quote_only and published rows, so the render path needs
     // no service-role key -- and a leaked build artifact cannot contain one.
     const supabase = createServerSupabaseClient();
-    if (!supabase) return {};
+    if (!supabase) return { inventory: {}, status: "unconfigured" };
 
-    const { data, error } = await supabase
+    const query = supabase
       .from("catalog_products")
       .select("id, inventory_quantity, inventory_status")
       .neq("inventory_status", "unknown");
+    const timeout = new Promise<"timeout">((resolve) => setTimeout(() => resolve("timeout"), LIVE_INVENTORY_TIMEOUT_MS));
+    const response = await Promise.race([query, timeout]);
+    if (response === "timeout") return { inventory: {}, status: "timeout" };
 
-    if (error || !data) return {};
+    const { data, error } = response;
+    if (error || !data) return { inventory: {}, status: "error" };
 
     const live: LiveInventory = {};
     for (const row of data) {
@@ -78,10 +94,14 @@ async function fetchLiveInventory(): Promise<LiveInventory> {
       if (typeof quantity !== "number" || !VALID_STATUSES.has(status)) continue;
       live[row.id] = { quantity, status: status as CatalogAvailability };
     }
-    return live;
+    return { inventory: live, status: "ok" };
   } catch {
-    return {};
+    return { inventory: {}, status: "error" };
   }
+}
+
+async function fetchLiveInventory(): Promise<LiveInventory> {
+  return (await fetchLiveInventoryResult()).inventory;
 }
 
 /**
@@ -91,6 +111,12 @@ async function fetchLiveInventory(): Promise<LiveInventory> {
  * in the database; the revalidate route drops it sooner.
  */
 export const getLiveInventory = unstable_cache(fetchLiveInventory, ["live-inventory"], {
+  tags: [INVENTORY_TAG],
+  revalidate: 60,
+});
+
+/** The same read, with its outcome, for surfaces that report partial data. */
+export const getLiveInventoryResult = unstable_cache(fetchLiveInventoryResult, ["live-inventory-result"], {
   tags: [INVENTORY_TAG],
   revalidate: 60,
 });

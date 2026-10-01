@@ -8,6 +8,9 @@ import { Container } from "@/components/ui";
 import { StripePayment } from "@/components/stripe-payment";
 import { useQuote } from "@/components/quote-context";
 import type { CheckoutStatus } from "@/lib/backend/checkout-state";
+import { confirmationMessage, type OrderConfirmation } from "@/lib/order-confirmation";
+import { OrderSummary } from "@/components/checkout/order-summary";
+import { Notice } from "@/components/state";
 
 function currency(n: number) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
@@ -20,7 +23,7 @@ export default function ConfirmationPage() {
 function ConfirmationInner() {
   const token = useSearchParams().get("token") ?? "";
   const { clear } = useQuote();
-  const [order, setOrder] = React.useState<CheckoutStatus | null>(null);
+  const [order, setOrder] = React.useState<(CheckoutStatus & { confirmation?: OrderConfirmation | null }) | null>(null);
   const [error, setError] = React.useState<string | null>(null);
   const [loading, setLoading] = React.useState(true);
   const clearedRef = React.useRef(false);
@@ -64,37 +67,66 @@ function ConfirmationInner() {
   if (loading) return <LoadingState />;
   if (error || !order) return <UnavailableState message={error ?? "Order status unavailable"} onRetry={() => { setLoading(true); void load(); }} />;
 
+  const confirmation = order.confirmation ?? null;
   const complete = order.checkoutState === "paid" || order.checkoutState === "confirmed";
   const failed = order.checkoutState === "payment_failed" || order.checkoutState === "expired";
+  // Combination-specific copy: paid-but-backordered never reads as "complete".
+  const message = confirmation
+    ? confirmationMessage(confirmation)
+    : {
+        tone: complete ? "success" : failed ? "danger" : "pending",
+        title: order.checkoutState === "paid" ? "Payment received" : order.checkoutState === "confirmed" ? "Order confirmed" : failed ? "Payment not completed" : "Payment pending",
+        body: complete ? "Your order is confirmed." : failed ? "Your cart is still available so you can try again." : "Inventory is reserved while payment is completed.",
+        next: "",
+      };
 
   return (
     <Container className="py-12 lg:py-16">
-      <div className="mx-auto max-w-xl">
+      <div className="mx-auto max-w-2xl">
         <div className="flex items-center gap-3">
-          {complete ? <CheckCircle2 size={28} className="text-eco" /> : failed ? <AlertCircle size={28} className="text-danger" /> : <Clock3 size={28} className="text-brand" />}
-          <h1 className="font-display text-3xl font-semibold tracking-tight text-ink-1">
-            {order.checkoutState === "paid" ? "Payment received" : order.checkoutState === "confirmed" ? "Order confirmed" : failed ? "Payment not completed" : "Payment pending"}
-          </h1>
+          {message.tone === "success" ? <CheckCircle2 size={28} className="text-state-success-ink" aria-hidden="true" /> : message.tone === "danger" ? <AlertCircle size={28} className="text-state-danger-ink" aria-hidden="true" /> : <Clock3 size={28} className="text-ink-2" aria-hidden="true" />}
+          <h1 className="text-3xl font-semibold tracking-tight text-ink-1">{message.title}</h1>
         </div>
         <p className="mt-2 text-ink-2">
-          Order <span className="font-semibold text-ink-1">{order.orderNumber}</span>. {complete ? "Your order is confirmed." : failed ? "Your cart is still available so you can try again." : "Inventory is reserved while payment is completed."}
+          Order <span className="part-number font-semibold text-ink-1">{order.orderNumber}</span>. {message.body}
         </p>
+        {message.next && <p className="mt-1 text-sm text-ink-2">Next: {message.next}</p>}
+
+        {confirmation?.email === "failed" && (
+          <Notice tone="info" className="mt-6" title="We could not email your confirmation">
+            Your order is placed -- only the email failed, and staff have been notified to resend it. Save or print the receipt below.
+          </Notice>
+        )}
 
         {order.checkoutState === "payment_pending" && order.payment === "card" && order.clientSecret && (
-          <div className="mt-8 rounded-(--r-md) border border-line bg-surface-1 p-6 shadow-[var(--shadow-sm)]">
-            <h2 className="font-display text-lg font-semibold text-ink-1">Pay {currency(order.total)}</h2>
+          <div className="mt-8 rounded-(--r-md) border border-line bg-surface-1 p-6">
+            <h2 className="text-lg font-semibold text-ink-1">Pay {currency(order.total)}</h2>
             <StripePayment clientSecret={order.clientSecret} confirmationToken={token} />
           </div>
         )}
 
-        {order.checkoutState === "confirmed" && order.payment === "net_terms" && <NextStep icon={<Store size={18} />} title="Invoiced to your account" body={`${currency(order.total)} on net terms. Your confirmed order is ready for staging.`} />}
-        {order.checkoutState === "confirmed" && order.payment === "freight_quote" && <NextStep icon={<PackageCheck size={18} />} title="Freight quote on the way" body={`We'll email a freight quote for your ${currency(order.subtotal)} order before any charge.`} />}
-        {order.checkoutState === "paid" && <NextStep icon={<Truck size={18} />} title="Your order is being processed" body="You'll get an email with your pickup or delivery details." />}
+        {!confirmation && order.checkoutState === "confirmed" && order.payment === "net_terms" && <NextStep icon={<Store size={18} />} title="Invoiced to your account" body={`${currency(order.total)} on net terms. Your confirmed order is ready for staging.`} />}
+        {!confirmation && order.checkoutState === "confirmed" && order.payment === "freight_quote" && <NextStep icon={<PackageCheck size={18} />} title="Freight quote on the way" body={`We'll email a freight quote for your ${currency(order.subtotal)} order before any charge.`} />}
+        {!confirmation && order.checkoutState === "paid" && <NextStep icon={<Truck size={18} />} title="Your order is being processed" body="You'll get an email with your pickup or delivery details." />}
+
+        {confirmation && !failed && (
+          <section aria-labelledby="order-details" className="mt-8 rounded-(--r-md) border border-line bg-surface-1 p-6">
+            <h2 id="order-details" className="text-lg font-semibold text-ink-1">Order details</h2>
+            <div className="mt-4">
+              <OrderSummary confirmation={confirmation} />
+            </div>
+          </section>
+        )}
 
         <div className="mt-8 flex flex-wrap gap-3">
           {failed && <Link href="/checkout" className="inline-flex h-11 items-center rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink">Return to checkout</Link>}
+          {complete && confirmation && (
+            <Link href={`/checkout/receipt?token=${encodeURIComponent(token)}`} className="inline-flex h-11 items-center rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink">
+              View receipt
+            </Link>
+          )}
           <Link href="/products" className="inline-flex h-11 items-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-sm font-medium text-ink-1">Keep shopping</Link>
-          {complete && <Link href="/portal" className="inline-flex h-11 items-center rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink">View in portal</Link>}
+          {complete && <Link href="/portal" className="inline-flex h-11 items-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-sm font-medium text-ink-1">View in portal</Link>}
         </div>
       </div>
     </Container>

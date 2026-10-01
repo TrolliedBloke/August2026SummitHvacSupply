@@ -42,10 +42,15 @@ export default async function AdminPage() {
             Track stock, dealer activity, quotes, orders, invoices, purchase orders, receiving, and open support cases from one operations console.
           </p>
         </div>
-        <LinkButton href="/products" variant="secondary">
-          Public catalog
-          <ArrowRight size={16} />
-        </LinkButton>
+        <div className="flex flex-wrap gap-3">
+          <LinkButton href="/admin/dealers" variant="primary">
+            Dealer applications
+            <ArrowRight size={16} />
+          </LinkButton>
+          <LinkButton href="/products" variant="secondary">
+            Public catalog
+          </LinkButton>
+        </div>
       </div>
 
       <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

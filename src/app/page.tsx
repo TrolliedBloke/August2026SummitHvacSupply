@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Container, LinkButton } from "@/components/ui";
 import { CounterPanel } from "@/components/home/counter-panel";
-import { PriceAudience } from "@/components/home/price-audience";
+import { AudiencePaths } from "@/components/home/audience-paths";
 import { CounterStock } from "@/components/home/counter-stock";
 import { FulfillmentCard } from "@/components/home/fulfillment-card";
 import { A2lStrip, HelpStrip } from "@/components/home/a2l-strip";
@@ -102,7 +102,7 @@ export default function HomePage() {
               <p className="mt-8 text-base leading-6 text-ink-2">
                 Trade pricing for approved contractors. List pricing for homeowners.
               </p>
-              <PriceAudience />
+              <AudiencePaths />
             </div>
 
             {/* The rail's top aligns with the h1's cap height rather than its
@@ -131,7 +131,7 @@ export default function HomePage() {
               <ArrowRight size={15} />
             </Link>
           </div>
-          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
             {categories.map((item) => (
               <CategoryCard key={item.title} {...item} />
             ))}
@@ -216,10 +216,10 @@ function CategoryCard({
   return (
     <Link
       href={`/products?category=${category}`}
-      className="group grid min-h-[124px] grid-cols-[58px_minmax(0,1fr)_18px] items-center gap-3 rounded-(--r-sm) border border-line bg-surface-1 p-4 transition-colors duration-150 hover:border-line-strong sm:grid-cols-[68px_minmax(0,1fr)_18px]"
+      className="group relative flex min-h-[108px] flex-col items-start gap-2 rounded-(--r-sm) border border-line bg-surface-1 p-3 pr-8 transition-colors duration-150 hover:border-line-strong sm:grid sm:min-h-[124px] sm:grid-cols-[68px_minmax(0,1fr)_18px] sm:items-center sm:gap-3 sm:p-4"
       data-conversion-hook="category-tile-click"
     >
-      <span className="relative block aspect-square w-full" aria-hidden="true">
+      <span className="relative block size-11 shrink-0 sm:aspect-square sm:size-auto sm:w-full" aria-hidden="true">
         <Image
           src={photo ?? image}
           alt=""
@@ -231,10 +231,9 @@ function CategoryCard({
       </span>
       <span className="min-w-0">
         <span className="block text-base font-medium leading-tight text-ink-1">{title}</span>
-        <span className="mt-1 block text-sm leading-5 text-ink-2">{body}</span>
+        <span className="mt-1 hidden text-sm leading-5 text-ink-2 sm:block">{body}</span>
       </span>
-      <ArrowRight size={16} strokeWidth={1.8} className="text-ink-1" aria-hidden="true" />
+      <ArrowRight size={16} strokeWidth={1.8} className="absolute right-3 top-3 text-ink-1 sm:static" aria-hidden="true" />
     </Link>
   );
 }
-

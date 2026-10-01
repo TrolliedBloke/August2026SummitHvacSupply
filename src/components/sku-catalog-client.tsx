@@ -2,336 +2,430 @@
 
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Search, SlidersHorizontal, X } from "lucide-react";
-import { createPortal } from "react-dom";
+import { RotateCcw, Search, SlidersHorizontal, X } from "lucide-react";
 import * as React from "react";
 import { ProductCard } from "./product-card";
 import { Button } from "./ui";
 import { CustomSelect } from "./custom-select";
-import { ActiveFilterChips, buildGroups, FilterPanel, splitMulti, type FilterKey } from "./catalog-filters";
+import { Modal } from "./dialog";
+import { Notice, StatePanel } from "./state";
+import { ActiveFilterChips, buildGroups, FilterPanel } from "./catalog-filters";
+import { filterStorefrontSkus, SORT_OPTIONS, type SortKey, type StorefrontSku } from "@/lib/storefront/catalog";
 import {
-  filterStorefrontSkus,
-  getCatalogFacets,
-  sortStorefrontSkus,
-  SORT_OPTIONS,
-  type CatalogFilters,
-  type SortKey,
-  type StorefrontSku,
-  type CatalogCategory,
-} from "@/lib/storefront/catalog";
+  activeFacets,
+  clearFacets,
+  normalizeCatalogFilters,
+  parseCatalogFilters,
+  removeFacet,
+  sameFilters,
+  serializeCatalogFilters,
+  toCatalogFilters,
+  toggleFacet,
+  type AppliedFilters,
+  type CatalogFacets,
+  type FacetKey,
+} from "@/lib/storefront/filter-codec";
+import { queryCatalog } from "@/lib/storefront/catalog-query";
+import type { LiveInventoryResult } from "@/lib/storefront/live-inventory";
 import { SITE } from "@/lib/site";
 import { track } from "@/lib/track";
 
-type Facets = ReturnType<typeof getCatalogFacets>;
-const PAGE_SIZE = 24;
-/** Ceiling on the result count the catalog will state exactly. */
-const RESULT_CAP = 1000;
+const CATALOG_INITIAL_PAGE_SIZE = 12;
 
-export function SkuCatalogClient({ skus, facets }: { skus: StorefrontSku[]; facets: Facets }) {
+/**
+ * The catalog. The URL is the only applied filter state: every control reads
+ * it through the codec and writes it back through the codec, so the sidebar,
+ * the chips, the mobile sheet and Back/Forward always agree.
+ *
+ * The mobile sheet edits a DRAFT copy. Its controls change only the draft and
+ * a locally computed preview count; Apply commits the draft in one history
+ * entry; Cancel, Escape, the close button and the backdrop all discard it.
+ */
+export function SkuCatalogClient({
+  skus,
+  facets,
+  inventoryStatus = "ok",
+}: {
+  skus: StorefrontSku[];
+  facets: CatalogFacets;
+  inventoryStatus?: LiveInventoryResult["status"];
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
-  const [query, setQuery] = React.useState(params.get("q") ?? "");
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const [visibility, setVisibility] = React.useState({ key: "", count: PAGE_SIZE });
-  const drawerCloseRef = React.useRef<HTMLButtonElement>(null);
-  const filtersButtonRef = React.useRef<HTMLButtonElement>(null);
-  const sheetRef = React.useRef<HTMLDivElement>(null);
+  const paramString = params.toString();
+  const applied = React.useMemo(
+    () => normalizeCatalogFilters(parseCatalogFilters(new URLSearchParams(paramString)), facets),
+    [paramString, facets]
+  );
+  const appliedKey = serializeCatalogFilters(applied);
 
-  // The sheet is a dialog, with the same mechanics as the menu: scroll lock,
-  // Escape to close, Tab held inside, and focus returned to the control that
-  // opened it.
-  React.useEffect(() => {
-    if (!drawerOpen) return;
-    const opener = filtersButtonRef.current;
-    drawerCloseRef.current?.focus();
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setDrawerOpen(false);
-        return;
-      }
-      if (event.key !== "Tab" || !sheetRef.current) return;
-      const focusable = Array.from(
-        sheetRef.current.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        )
-      );
-      if (focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-      opener?.focus();
-    };
-  }, [drawerOpen]);
-
-  const filters: CatalogFilters = {
-    q: params.get("q") ?? undefined,
-    category: (params.get("category") as CatalogCategory | null) ?? "all",
-    brand: params.get("brand") ?? undefined,
-    btu: params.get("btu") ?? undefined,
-    voltage: params.get("voltage") ?? undefined,
-    unitType: params.get("unitType") ?? undefined,
-    refrigerant: params.get("refrigerant") ?? undefined,
-    pricing: (params.get("pricing") as CatalogFilters["pricing"]) ?? "all",
-    stock: (params.get("stock") as CatalogFilters["stock"]) ?? "all",
-  };
-
-  const sort = (params.get("sort") as SortKey | null) ?? "relevance";
-  const filtered = sortStorefrontSkus(filterStorefrontSkus(filters, skus), sort);
-  const filterKey = params.toString();
-  const visibleCount = visibility.key === filterKey ? visibility.count : PAGE_SIZE;
-
-  function setParam(key: string, value?: string) {
-    const next = new URLSearchParams(params.toString());
-    if (!value || value === "all") next.delete(key);
-    else next.set(key, value);
-    router.push(`${pathname}?${next.toString()}`, { scroll: false });
+  // The search box follows the URL, including Back and Forward.
+  const [query, setQuery] = React.useState(applied.q);
+  const [syncedQ, setSyncedQ] = React.useState(applied.q);
+  if (applied.q !== syncedQ) {
+    setSyncedQ(applied.q);
+    setQuery(applied.q);
   }
 
+  function commit(next: AppliedFilters) {
+    // Normalized before serializing, so the same filters always produce the
+    // same URL (brand order follows the facet list, not click order).
+    const qs = serializeCatalogFilters(normalizeCatalogFilters(next, facets));
+    router.push(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }
+
+  /* Paging through the query boundary -------------------------------------- */
+  const [loaded, setLoaded] = React.useState({ key: appliedKey, pages: 1 });
+  const pageCount = loaded.key === appliedKey ? loaded.pages : 1;
+  const page = React.useMemo(() => {
+    const first = queryCatalog(skus, applied, { limit: CATALOG_INITIAL_PAGE_SIZE });
+    const items = [...first.items];
+    let cursor = first.nextCursor;
+    for (let index = 1; index < pageCount && cursor; index += 1) {
+      const next = queryCatalog(skus, applied, { cursor, limit: CATALOG_INITIAL_PAGE_SIZE });
+      items.push(...next.items);
+      cursor = next.nextCursor;
+    }
+    return { items, total: first.total, nextCursor: cursor, rejected: first.rejected };
+  }, [skus, applied, pageCount]);
+  const firstNewRef = React.useRef<number | null>(null);
+  const gridRef = React.useRef<HTMLDivElement>(null);
+
+  function showMore() {
+    firstNewRef.current = page.items.length;
+    setLoaded({ key: appliedKey, pages: pageCount + 1 });
+  }
+
+  // After "Show more", move focus to the first newly shown product so keyboard
+  // users continue where the list grew instead of back at the button.
+  React.useEffect(() => {
+    if (firstNewRef.current === null) return;
+    const index = firstNewRef.current;
+    firstNewRef.current = null;
+    const links = gridRef.current?.querySelectorAll<HTMLAnchorElement>("article h3 a");
+    links?.[index]?.focus({ preventScroll: false });
+  }, [page.items.length]);
+
+  /* Groups ----------------------------------------------------------------- */
+  const showCategory = !applied.category;
+  const groups = buildGroups({ facets, filters: applied, skus, showCategory });
+  const hasFilters = groups.length > 0;
+  const activeCount = activeFacets(applied).length;
+
+  /* Mobile draft sheet ------------------------------------------------------ */
+  const [sheetOpen, setSheetOpen] = React.useState(false);
+  const [draft, setDraft] = React.useState<AppliedFilters>(applied);
+  const sheetCloseRef = React.useRef<HTMLButtonElement>(null);
+  const draftGroups = sheetOpen ? buildGroups({ facets, filters: draft, skus, showCategory }) : [];
+  const draftCount = sheetOpen ? filterStorefrontSkus(toCatalogFilters(draft), skus).length : 0;
+  const draftDirty = sheetOpen && !sameFilters(draft, applied);
+  const draftChanges = sheetOpen ? countChanges(applied, draft) : 0;
+
+  // The sheet is a phone and tablet surface. Growing past lg while it is open
+  // would leave an inert page behind an invisible dialog, so it closes (and,
+  // like every other dismissal, discards the draft).
+  React.useEffect(() => {
+    if (!sheetOpen) return;
+    const query = window.matchMedia("(min-width: 1024px)");
+    const onChange = () => query.matches && setSheetOpen(false);
+    query.addEventListener("change", onChange);
+    return () => query.removeEventListener("change", onChange);
+  }, [sheetOpen]);
+
+  function openSheet() {
+    setDraft(applied);
+    setSheetOpen(true);
+  }
+  function applyDraft() {
+    if (draftDirty) commit(draft);
+    setSheetOpen(false);
+  }
+
+  /* Search ----------------------------------------------------------------- */
   function submitSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setParam("q", query.trim());
+    commit({ ...applied, q: query.trim() });
   }
 
-  function clear() {
-    setQuery("");
-    router.push(pathname, { scroll: false });
-  }
-
-  // Count only real filters -- sorting alone shouldn't offer "Clear". Brand
-  // counts once per selected brand, because each one is its own chip.
-  const activeCount = Array.from(params.keys())
-    .filter((key) => key !== "sort")
-    .reduce((total, key) => total + (key === "brand" ? splitMulti(params.get("brand") ?? undefined).length : 1), 0);
-
-  // The category page sets ?category=, so the Category group is redundant
-  // there; on All products and on search results it is the main way in.
-  const showCategory = !params.get("category");
-
-  const groups = buildGroups({ facets, filters, skus, showCategory });
-  // Some categories cannot be narrowed at all -- line sets carry one brand, no
-  // BTU rating and no voltage -- so every group collapses. Offering a Filters
-  // button that opens an empty sheet is worse than not offering one.
-  const hasFilters = groups.length > 0;
-
-  function toggleFilter(key: FilterKey, value: string) {
-    if (key === "brand") {
-      const current = splitMulti(params.get("brand") ?? undefined);
-      const next = current.includes(value) ? current.filter((b) => b !== value) : [...current, value];
-      setParam("brand", next.join(","));
-      return;
-    }
-    setParam(key, params.get(key) === value ? undefined : value);
-  }
-
-  function removeFilter(key: FilterKey, value: string) {
-    if (key === "brand") {
-      const next = splitMulti(params.get("brand") ?? undefined).filter((brand) => brand !== value);
-      setParam("brand", next.join(","));
-      return;
-    }
-    setParam(key, undefined);
-  }
-
-  // "SKUs" is trade jargon on a page homeowners also read. RESULT_CAP is the
-  // most the catalog will ever hand this component; if a future page limit
-  // truncates the set, the count says "100+" rather than claiming an exact
-  // number it cannot see past. Today nothing truncates it.
-  const capped = filtered.length >= RESULT_CAP;
-  const resultLabel = `${capped ? `${RESULT_CAP}+` : filtered.length} ${filtered.length === 1 ? "result" : "results"}`;
-
-  const labelFor = (key: FilterKey, value: string) => {
-    const group = groups.find((candidate) => candidate.key === key);
-    const option = group?.options.find((candidate) => candidate.value === value);
-    if (option) return option.label;
-    // A category chip has to keep working after its group is hidden.
-    if (key === "category") return facets.categories.find((c) => c.value === value)?.label ?? value;
-    return value;
-  };
-
-  const searchForm = (
-    <form onSubmit={submitSearch} className="rounded-(--r-md) border border-line bg-surface-1 p-3 shadow-[var(--shadow-sm)]">
-      <label className="sr-only" htmlFor="catalog-search">Search products, models, SKUs, capacity, or unit type</label>
-      <div className="flex items-center gap-2">
-        <Search size={17} className="text-ink-3" />
-        <input
-          id="catalog-search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Try “heater,” “3 ton,” or a model number"
-          className="h-10 min-w-0 flex-1 bg-transparent text-sm text-ink-1 outline-none placeholder:text-ink-4"
-        />
-        <Button type="submit" size="md">Search</Button>
-      </div>
-    </form>
-  );
-
-  const filterGroups = <FilterPanel groups={groups} filters={filters} onToggle={toggleFilter} />;
+  const resultLabel = `${page.total} ${page.total === 1 ? "result" : "results"}`;
+  const partial = inventoryStatus === "error" || inventoryStatus === "timeout";
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
+    <div className="grid gap-8 lg:grid-cols-[minmax(15rem,17.5rem)_minmax(0,1fr)]">
       {/* Desktop sidebar -- hidden below lg so mobile reaches products first. */}
-      <aside className="hidden lg:sticky lg:top-6 lg:block lg:self-start">
-        {searchForm}
+      <aside className="hidden min-w-0 lg:sticky lg:top-6 lg:block lg:self-start" aria-label="Search and filters">
+        <CatalogSearchForm id="catalog-search-desktop" compact query={query} onQuery={setQuery} onSubmit={submitSearch} />
         <div className="mt-6 flex items-center justify-between">
-          <span className="inline-flex items-center gap-2 font-display text-sm font-semibold text-ink-1">
-            <SlidersHorizontal size={16} /> Filters
-          </span>
+          <h2 className="inline-flex items-center gap-2 text-sm font-semibold text-ink-1">
+            <SlidersHorizontal size={16} aria-hidden="true" /> Filters
+          </h2>
           {activeCount > 0 && (
-            <button type="button" onClick={clear} className="inline-flex items-center gap-1 text-xs font-medium text-ink-3 hover:text-danger">
-              <X size={12} /> Clear
+            <button
+              type="button"
+              onClick={() => commit(clearFacets(applied))}
+              className="inline-flex min-h-11 items-center gap-1 text-xs font-medium text-ink-3 hover:text-ink-1"
+            >
+              <X size={12} aria-hidden="true" /> Clear filters
             </button>
           )}
         </div>
         {hasFilters ? (
-          <div className="mt-5">{filterGroups}</div>
+          <div className="mt-5">
+            <FilterPanel
+              idPrefix="sidebar"
+              groups={groups}
+              filters={applied}
+              onToggle={(key, value) => commit(toggleFacet(applied, key, value))}
+            />
+          </div>
         ) : (
-          <p className="mt-5 text-meta text-ink-3">
-            Nothing here narrows further. Clear the category to filter the whole catalog.
-          </p>
+          <p className="mt-5 text-meta text-ink-3">Nothing here narrows further. Clear the category to filter the whole catalog.</p>
         )}
       </aside>
 
-      {/* Mobile: search + a sticky Filters button; products render immediately. */}
-      <div className="flex flex-col gap-3 lg:hidden">
-        {searchForm}
-        {hasFilters && (
-        <div className="sticky top-2 z-20 -mx-1 px-1">
-          <button
-            ref={filtersButtonRef}
-            type="button"
-            onClick={() => setDrawerOpen(true)}
-            aria-haspopup="dialog"
-            aria-expanded={drawerOpen}
-            className="flex h-11 w-full items-center justify-center gap-2 rounded-(--r-sm) border border-line-strong bg-surface-1/95 text-sm font-semibold text-ink-1 shadow-[var(--shadow-sm)] backdrop-blur transition-colors hover:bg-surface-2"
-          >
-            <SlidersHorizontal size={16} />
-            Filters{activeCount > 0 ? ` (${activeCount})` : ""}
-          </button>
-        </div>
-        )}
+      {/* Mobile search. Result controls stay sticky beside the products below. */}
+      <div className="flex min-w-0 flex-col gap-3 lg:hidden">
+        <CatalogSearchForm id="catalog-search-mobile" query={query} onQuery={setQuery} onSubmit={submitSearch} />
       </div>
 
-      {/* Mobile filter bottom sheet */}
-      {drawerOpen && typeof document !== "undefined" &&
-        createPortal(
-          <div className="fixed inset-0 z-50 lg:hidden">
-            <div
-              aria-hidden
-              onClick={() => setDrawerOpen(false)}
-              className="absolute inset-0 bg-[var(--ink-panel)]/50"
+      <Modal
+        open={sheetOpen}
+        onClose={() => setSheetOpen(false)}
+        labelledBy="filter-sheet-title"
+        placement="bottom"
+        initialFocusRef={sheetCloseRef}
+        className="animate-slide-in-up"
+        backdropClassName="animate-fade-in"
+      >
+        <header className="flex shrink-0 items-center justify-between border-b border-line px-5 py-3">
+          <h2 id="filter-sheet-title" className="inline-flex items-center gap-2 text-lead font-semibold text-ink-1">
+            <SlidersHorizontal size={16} aria-hidden="true" />
+            Filters
+          </h2>
+          <button
+            ref={sheetCloseRef}
+            type="button"
+            onClick={() => setSheetOpen(false)}
+            aria-label="Close filters without applying"
+            className="grid size-11 place-items-center rounded-(--r-sm) text-ink-2 hover:bg-surface-2 hover:text-ink-1"
+          >
+            <X size={18} aria-hidden="true" />
+          </button>
+        </header>
+        <div className="min-h-0 flex-1 scroll-pb-8 overflow-y-auto overscroll-contain px-5 pb-8 pt-5">
+          {draftGroups.length > 0 ? (
+            <FilterPanel
+              idPrefix="sheet"
+              groups={draftGroups}
+              filters={draft}
+              onToggle={(key, value) => setDraft((current) => toggleFacet(current, key, value))}
             />
-            <div
-              ref={sheetRef}
-              role="dialog"
-              aria-modal="true"
-              aria-label={activeCount > 0 ? `Filters (${activeCount})` : "Filters"}
-              className="absolute inset-x-0 bottom-0 flex max-h-[85dvh] flex-col rounded-t-(--r-lg) border-t border-line bg-canvas shadow-[var(--shadow-lg)]"
+          ) : (
+            <p className="text-meta text-ink-3">Nothing narrows these results further.</p>
+          )}
+        </div>
+        <footer
+          className="shrink-0 border-t border-line bg-surface-1 px-5 pt-3 shadow-[0_-8px_20px_rgba(0,0,0,0.06)]"
+          style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
+        >
+          <p className="mb-2 text-meta text-ink-3" aria-live="polite">
+            {draftDirty
+              ? `${draftChanges} ${draftChanges === 1 ? "change" : "changes"} not applied yet · ${draftCount} ${draftCount === 1 ? "result" : "results"}`
+              : "No changes yet"}
+          </p>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setDraft((current) => clearFacets(current))}
+              disabled={activeFacets(draft).length === 0}
+              className="min-h-11 shrink-0 px-1 text-item font-medium text-ink-2 underline underline-offset-4 transition-colors duration-120 hover:text-ink-1 disabled:text-ink-4 disabled:no-underline"
             >
-              <header className="flex items-center justify-between border-b border-line px-5 py-4">
-                <span className="inline-flex items-center gap-2 text-lead font-semibold text-ink-1">
-                  <SlidersHorizontal size={16} aria-hidden="true" />
-                  Filters{activeCount > 0 ? ` (${activeCount})` : ""}
-                </span>
-                <div className="flex items-center gap-3">
-                  <button
-                    ref={drawerCloseRef}
-                    type="button"
-                    onClick={() => setDrawerOpen(false)}
-                    aria-label="Close filters"
-                    className="grid size-9 place-items-center rounded-(--r-sm) text-ink-2 hover:bg-surface-2 hover:text-ink-1"
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-              </header>
-              <div className="flex-1 overflow-y-auto px-5 pb-6 pt-6">{filterGroups}</div>
-              {/* The button sits near the home indicator, so the safe area is
-                  padding, not a guess at a magic number. */}
-              <footer
-                className="flex items-center gap-4 border-t border-line bg-surface-1 px-5 pt-4"
-                style={{ paddingBottom: "calc(1rem + env(safe-area-inset-bottom))" }}
-              >
-                <button
-                  type="button"
-                  onClick={clear}
-                  disabled={activeCount === 0}
-                  className="min-h-11 shrink-0 px-1 text-item font-medium text-ink-2 underline underline-offset-4 transition-colors duration-120 hover:text-ink-1 disabled:text-ink-4 disabled:no-underline"
-                >
-                  Clear all
-                </button>
-                <Button type="button" full onClick={() => setDrawerOpen(false)}>
-                  Show {resultLabel}
-                </Button>
-              </footer>
-            </div>
-          </div>,
-          document.body
+              Clear all
+            </button>
+            <button
+              type="button"
+              onClick={() => setSheetOpen(false)}
+              className="min-h-11 shrink-0 rounded-(--r-sm) border border-line-strong px-4 text-sm font-medium text-ink-1 hover:bg-surface-2"
+            >
+              Cancel
+            </button>
+            <Button type="button" full onClick={applyDraft} disabled={!draftDirty}>
+              Show {draftCount} {draftCount === 1 ? "result" : "results"}
+            </Button>
+          </div>
+        </footer>
+      </Modal>
+
+      <section aria-labelledby="catalog-results-heading" className="min-w-0">
+        <h2 id="catalog-results-heading" className="sr-only">Catalog results</h2>
+        <div className="sticky top-2 z-20 mb-4 grid grid-cols-[1fr_auto] gap-2 rounded-(--r-md) border border-line bg-canvas/95 p-2 shadow-sm backdrop-blur lg:hidden">
+          <p className="col-span-full px-1 text-xs font-medium text-ink-2">{resultLabel}{activeCount > 0 ? ` · ${activeCount} active ${activeCount === 1 ? "filter" : "filters"}` : ""}</p>
+          {hasFilters ? (
+            <button type="button" onClick={openSheet} aria-haspopup="dialog" aria-expanded={sheetOpen} className="inline-flex h-11 items-center justify-center gap-2 rounded-(--r-sm) border border-line-strong bg-surface-1 px-3 text-sm font-semibold text-ink-1">
+              <SlidersHorizontal size={16} aria-hidden="true" /> Filters{activeCount > 0 ? ` (${activeCount})` : ""}
+            </button>
+          ) : <span />}
+          <CustomSelect ariaLabel="Sort products" value={applied.sort} onChange={(value) => commit({ ...applied, sort: value as SortKey })} options={SORT_OPTIONS} size="sm" className="min-w-[9.5rem]" />
+        </div>
+        <ActiveFilterChips
+          filters={applied}
+          onRemove={(key: FacetKey, value) => commit(removeFacet(applied, key, value))}
+          onClear={() => commit(clearFacets(applied))}
+        />
+
+        {partial && (
+          <Notice
+            tone="warning"
+            className="mb-5"
+            title="Live stock counts did not load"
+            action={
+              <button type="button" onClick={() => router.refresh()} className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-ink-1 underline underline-offset-4">
+                <RotateCcw size={14} aria-hidden="true" /> Retry
+              </button>
+            }
+          >
+            Products and prices are shown, but no stock counts. Availability is confirmed before any order is accepted.
+          </Notice>
+        )}
+        {page.rejected.length > 0 && (
+          <Notice tone="info" className="mb-5" title={`${page.rejected.length} ${page.rejected.length === 1 ? "product is" : "products are"} not shown`}>
+            {page.rejected.length === 1 ? "Its" : "Their"} catalog record is incomplete. Call {SITE.phone} and the counter will look it up.
+          </Notice>
         )}
 
-      <section>
-        <ActiveFilterChips filters={filters} labelFor={labelFor} onRemove={removeFilter} onClear={clear} />
-        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-xs text-ink-3">
-            {filtered.length} of {skus.length} products
+        <div className="mb-5 hidden flex-wrap items-center justify-between gap-3 lg:flex">
+          <div className="text-sm font-medium text-ink-2">
+            {applied.q ? (
+              <>
+                {resultLabel} for <span className="text-ink-1">“{applied.q}”</span>
+              </>
+            ) : activeCount > 0 ? (
+              <>
+                {page.total} of {skus.length - page.rejected.length} products
+              </>
+            ) : (
+              <>{page.total} products</>
+            )}
+          </div>
+          <p role="status" className="sr-only">
+            {resultLabel}
           </p>
-          <div className="flex items-center gap-2 text-sm text-ink-2">
-            <span className="hidden sm:inline">Sort</span>
+          <div className="flex w-full items-center gap-2 text-sm text-ink-2 sm:w-auto">
+            <span aria-hidden="true" className="shrink-0">Sort</span>
             <CustomSelect
-              ariaLabel="Sort SKUs"
-              value={sort}
-              onChange={(value) => setParam("sort", value === "relevance" ? undefined : value)}
+              ariaLabel="Sort products"
+              value={applied.sort}
+              onChange={(value) => commit({ ...applied, sort: value as SortKey })}
               options={SORT_OPTIONS}
               size="sm"
-              className="w-52"
+              className="min-w-0 flex-1 sm:w-auto sm:min-w-[13rem] sm:flex-none"
             />
           </div>
         </div>
-        {filtered.length === 0 ? (
-          <div className="rounded-(--r-md) border border-dashed border-line-strong bg-surface-2/50 p-10 text-center">
-            <ZeroResultsLogger query={filters.q} />
-            <h2 className="font-display text-xl font-semibold text-ink-1">No SKUs match those filters.</h2>
-            <p className="mt-2 text-sm text-ink-2">
-              Clear filters or search by model number. Or text a photo of the old
-              unit&apos;s model plate to {SITE.phone} and we&apos;ll match it for you.
-            </p>
-            <div className="mt-5 flex flex-wrap justify-center gap-3">
-              <Button type="button" onClick={clear}>Clear filters</Button>
-              <Link href="/contact" className="inline-flex h-10 items-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-sm font-medium text-ink-1 hover:bg-surface-2">
-                Contact support
-              </Link>
-            </div>
-          </div>
+
+        {page.total === 0 ? (
+          <>
+            <ZeroResultsLogger query={applied.q} />
+            <StatePanel
+              title={applied.q ? `No products match “${applied.q}”` : "No products match those filters"}
+              actions={
+                <>
+                  {activeCount > 0 && (
+                    <Button type="button" onClick={() => commit(clearFacets(applied))}>
+                      Clear filters
+                    </Button>
+                  )}
+                  {applied.q && (
+                    <Button type="button" variant="secondary" onClick={() => commit({ ...applied, q: "" })}>
+                      Search all products
+                    </Button>
+                  )}
+                  <Link
+                    href="/contact?topic=product"
+                    className="inline-flex h-11 items-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-sm font-medium text-ink-1 hover:bg-surface-2"
+                  >
+                    Ask the counter
+                  </Link>
+                </>
+              }
+            >
+              Remove a filter or search by model number. Or text a photo of the old unit&apos;s model plate to {SITE.phone} and we&apos;ll match it.
+            </StatePanel>
+          </>
         ) : (
           <>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-9 lg:grid-cols-3">
-              {filtered.slice(0, visibleCount).map((sku, index) => (
-                <ProductCard key={sku.id} sku={sku} priority={index < 4} />
+            <div ref={gridRef} className="product-grid">
+              {page.items.map((sku, index) => (
+                <ProductCard key={sku.id} sku={sku} priority={index < 4} compactOnMobile />
               ))}
             </div>
-            {visibleCount < filtered.length && (
-              <div className="mt-8 flex justify-center">
-                <Button type="button" onClick={() => setVisibility({ key: filterKey, count: visibleCount + PAGE_SIZE })}>
-                  Show more ({filtered.length - visibleCount} remaining)
+            <div className="mt-8 flex flex-col items-center gap-3">
+              <p className="text-meta text-ink-3">
+                Showing {page.items.length} of {page.total}
+              </p>
+              {page.nextCursor && (
+                <Button type="button" variant="secondary" onClick={showMore}>
+                  Show {Math.min(CATALOG_INITIAL_PAGE_SIZE, page.total - page.items.length)} more
                 </Button>
-              </div>
-            )}
+              )}
+            </div>
           </>
         )}
       </section>
     </div>
+  );
+}
+
+function countChanges(applied: AppliedFilters, draft: AppliedFilters): number {
+  const a = new Set(activeFacets(applied).map(({ key, value }) => `${key}:${value}`));
+  const b = new Set(activeFacets(draft).map(({ key, value }) => `${key}:${value}`));
+  let changes = 0;
+  for (const entry of a) if (!b.has(entry)) changes += 1;
+  for (const entry of b) if (!a.has(entry)) changes += 1;
+  return changes;
+}
+
+function CatalogSearchForm({
+  id,
+  compact = false,
+  query,
+  onQuery,
+  onSubmit,
+}: {
+  id: string;
+  /** The sidebar is narrow: an icon submit leaves the field room for its placeholder. */
+  compact?: boolean;
+  query: string;
+  onQuery: (value: string) => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}) {
+  return (
+    <form role="search" onSubmit={onSubmit} className="rounded-(--r-md) border border-line bg-surface-1 p-3">
+      <label className="sr-only" htmlFor={id}>
+        Search products, models, SKUs, capacity, or unit type
+      </label>
+      <div className="flex items-center gap-2">
+        {!compact && <Search size={17} className="shrink-0 text-ink-3" aria-hidden="true" />}
+        <input
+          id={id}
+          type="search"
+          value={query}
+          onChange={(event) => onQuery(event.target.value)}
+          placeholder={compact ? "Model, SKU, or “3 ton”" : "Try “heater,” “3 ton,” or a model number"}
+          className="h-11 min-w-0 flex-1 bg-transparent text-sm text-ink-1 outline-none placeholder:text-ink-4"
+        />
+        {compact ? (
+          <Button type="submit" size="md" aria-label="Search" className="w-11 shrink-0 px-0">
+            <Search size={17} aria-hidden="true" />
+          </Button>
+        ) : (
+          <Button type="submit" size="md">
+            Search
+          </Button>
+        )}
+      </div>
+    </form>
   );
 }
 

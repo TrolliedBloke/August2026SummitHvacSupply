@@ -1,172 +1,144 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Clock, MapPin, PackageCheck, Truck } from "lucide-react";
+import { Clock, MapPin, Truck } from "lucide-react";
 import { Container } from "@/components/ui";
+import { BranchStatusText } from "@/components/branch-status";
+import { DeliveryPromiseText } from "@/components/delivery-promise";
+import { FulfillmentAnswer } from "@/components/fulfillment-answer";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { FULFILLMENT, SITE } from "@/lib/site";
+import { deliveryPolicyIsConfirmed, FULFILLMENT_POLICY, pendingPolicyRules } from "@/lib/fulfillment-policy";
+import { branchExceptions, formatMinutes, NEWARK, weeklyHoursRows } from "@/lib/branch";
 
 /**
- * Delivery and pickup terms.
+ * Delivery and pickup, answer first.
  *
- * TODO(summit-ops): every figure on this page is shaped to the right length so
- * the layout is real, but NONE of it is confirmed by the counter. Each unset
- * term is marked inline. Replace them all before launch, or delete the section.
- * Do not let a placeholder radius, fee, or cutoff ship as a commitment.
+ * The ZIP answer at the top and every date, cutoff and zone below are
+ * projections of the fulfillment policy and the calculator checkout enforces
+ * (lib/fulfillment-policy.ts, lib/backend/fulfillment.ts). Prose that no
+ * calculator enforced -- route "bands", fee schedules, who may order delivery
+ * -- was removed rather than published as a commitment. /shipping owns the
+ * long-form terms; this page owns the answer.
  */
 
 export const metadata: Metadata = pageMetadata({
   title: "Bay Area Delivery & Newark Will-Call",
-  description:
-    "Delivery zones, order cutoffs, fees, and will-call pickup terms for Summit HVAC Supply in Newark, California.",
+  description: "Check delivery to your ZIP, the order cutoff, and will-call pickup at Summit HVAC Supply in Newark, California.",
   path: "/delivery",
 });
 
 export default function DeliveryPage() {
+  const deliveryConfirmed = deliveryPolicyIsConfirmed();
+  const hoursConfirmed = NEWARK.hoursReview.status === "confirmed";
+  const sameDay = deliveryConfirmed
+    ? FULFILLMENT_POLICY.zones.list.filter((zone) => zone.leadTimeHours <= FULFILLMENT_POLICY.zones.sameDayLeadHours)
+    : [];
+  const nextDay = deliveryConfirmed
+    ? FULFILLMENT_POLICY.zones.list.filter((zone) => zone.leadTimeHours > FULFILLMENT_POLICY.zones.sameDayLeadHours)
+    : [];
+  const cutoff = deliveryConfirmed ? formatMinutes(FULFILLMENT_POLICY.cutoff.minutes) : null;
+  const year = new Date().getFullYear();
+  const holidays = hoursConfirmed ? branchExceptions(NEWARK, year).filter((exception) => exception.kind === "holiday") : [];
+  const pending = pendingPolicyRules();
+
   return (
     <>
       <section className="border-b border-line bg-surface-1">
-        <Container className="py-12 lg:py-16">
-          <h1 className="max-w-[20ch] font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
-            Delivery and pickup
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-8 text-ink-2">
-            Two ways to take the order: pick it up at the Newark counter, or have it
-            delivered on a Bay Area route. This page covers the terms for both.
+        <Container className="py-10 lg:py-14">
+          <h1 className="max-w-[20ch] text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">Delivery and pickup</h1>
+          <p className="mt-3 max-w-2xl text-lg leading-8 text-ink-2">
+            Enter the job-site ZIP to see what is available, the earliest date, and the order-by time.
           </p>
-
-          <div className="mt-7 grid gap-2 sm:grid-cols-3">
-            <SummaryCard
-              icon={<Clock size={20} strokeWidth={1.5} />}
-              title="Pickup"
-              detail={FULFILLMENT.pickupReady}
-            />
-            <SummaryCard
-              icon={<Truck size={20} strokeWidth={1.5} />}
-              title="Delivery"
-              detail={`Order by ${FULFILLMENT.deliveryCutoff} ${FULFILLMENT.deliveryLine}`}
-            />
-            <SummaryCard
-              icon={<MapPin size={20} strokeWidth={1.5} />}
-              title="Branch"
-              detail={`${SITE.address.city}, ${SITE.address.state}`}
-            />
+          <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+            <FulfillmentAnswer />
+            <dl className="grid content-start gap-5 sm:grid-cols-3 lg:grid-cols-1">
+              <SummaryItem icon={<Truck size={20} strokeWidth={1.5} />} title="Delivery timing">
+                <DeliveryPromiseText />
+              </SummaryItem>
+              <SummaryItem icon={<Clock size={20} strokeWidth={1.5} />} title="Will-call pickup">
+                {FULFILLMENT.pickupReady}
+              </SummaryItem>
+              <SummaryItem icon={<MapPin size={20} strokeWidth={1.5} />} title="Newark branch">
+                <BranchStatusText />
+              </SummaryItem>
+            </dl>
           </div>
         </Container>
       </section>
 
       <Container className="py-10 lg:py-14">
         <div className="flex max-w-3xl flex-col gap-9">
-          {/* Dev-only banner mirrors the convention in PolicyPage: review status
-              is tracked in the repo and in front of the team, never in front of
-              a customer deciding on a $2,500 air handler. */}
-          {process.env.NODE_ENV !== "production" && (
+          {process.env.NODE_ENV !== "production" && pending.length > 0 && (
             <div className="rounded-(--r-md) border border-line-strong bg-surface-2 px-4 py-3 text-sm leading-relaxed text-ink-2">
-              <strong className="font-medium text-ink-1">Dev-only notice.</strong> The zones,
-              cutoffs, fees, and thresholds below are placeholders marked with TODO comments in{" "}
-              <span className="part-number">src/app/delivery/page.tsx</span>. Confirm each one with
-              the counter before launch.
+              <strong className="font-medium text-ink-1">Dev-only notice.</strong> Fulfillment policy{" "}
+              <span className="part-number">{FULFILLMENT_POLICY.version}</span> has rules awaiting operations sign-off:{" "}
+              {pending.join(", ")}. Confirm them in <span className="part-number">src/lib/fulfillment-policy.ts</span>.
             </div>
           )}
 
           <Section title="Delivery zones">
-            <p>
-              Summit runs its own Bay Area routes out of the Newark branch. Coverage is
-              organized in two bands: core cities served on the standard route, and outer
-              cities served on a confirmed basis.
-            </p>
-            {/* TODO(summit-ops): confirm the real route bands and the exact city
-                list for each. The split below follows SITE.serviceArea, which is
-                a marketing radius, not a routing plan. */}
-            <dl className="mt-4 grid gap-3 sm:grid-cols-2">
-              <ZoneCard
-                name="Core route"
-                cities="Newark, Fremont, Union City, Hayward, San Jose, Oakland"
-                note="Standard next-day route"
-              />
-              <ZoneCard
-                name="Extended route"
-                cities="San Francisco, the Peninsula, North Bay, outer East Bay"
-                note="Confirmed per order before scheduling"
-              />
-            </dl>
-            <p className="mt-4">
-              Outside these bands, equipment ships by freight carrier. Ask the counter before
-              ordering so the lead time is set correctly on the quote.
-            </p>
+            {deliveryConfirmed ? (
+              <>
+                <p>Delivery runs on Summit&apos;s own routes from the Newark branch, to these areas:</p>
+                <dl className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <ZoneGroup name="Same-day route" note={`Orders confirmed by ${cutoff} can arrive the same trading day.`} zones={sameDay.map((zone) => zone.label)} />
+                  <ZoneGroup name="Next route day" note={`Orders confirmed by ${cutoff} arrive the next trading day.`} zones={nextDay.map((zone) => zone.label)} />
+                </dl>
+                <p className="mt-4">
+                  Anywhere else, equipment goes by freight carrier, quoted before you pay. The ZIP check above uses the same list.
+                </p>
+              </>
+            ) : (
+              <p>
+                Delivery coverage is confirmed by the Newark counter for each job-site ZIP. Enter the ZIP above, then call or send
+                a request for the current route and freight options; the site will not guess from an unapproved route table.
+              </p>
+            )}
           </Section>
 
           <Section title="Order cutoff">
-            <p>
-              Orders placed and confirmed by{" "}
-              <span className="part-number">{FULFILLMENT.deliveryCutoff}</span> on a business day
-              are scheduled for next-day delivery. Orders confirmed after the cutoff move to the
-              following route day.
-            </p>
-            {/* TODO(summit-ops): confirm the cutoff, whether it differs for
-                equipment vs parts, and what happens on Fridays and holidays. */}
-            <p className="mt-3">
-              An order is confirmed when stock and payment or account terms are settled, not when
-              the cart is submitted. Weekend and holiday routes are not currently scheduled.
-            </p>
+            {deliveryConfirmed && hoursConfirmed ? (
+              <>
+                <p>
+                  Orders confirmed by <span className="part-number">{cutoff}</span> Pacific on a trading day make that day&apos;s
+                  pickup or the next route. An order is confirmed when stock and payment or account terms are settled, not when the
+                  cart is submitted.
+                </p>
+                <p className="mt-3">
+                  The branch does not run routes or will-call on weekends or these {year} holidays:{" "}
+                  {holidays.map((holiday) => holiday.reason).join(", ")}. Dates shown on this site already skip them.
+                </p>
+              </>
+            ) : (
+              <p>
+                The counter confirms the current order cutoff and operating calendar before accepting an order. No unapproved
+                cutoff or holiday schedule is used as a customer promise.
+              </p>
+            )}
           </Section>
 
           <Section title="Fees and thresholds">
-            {/* TODO(summit-ops): no delivery fee schedule or free-delivery
-                threshold has been set. Do not publish a number here until it is
-                real -- a wrong fee on this page is a chargeback conversation. */}
             <p>
-              Delivery pricing is quoted per order and depends on the route band, the size of the
-              equipment, and whether a liftgate or a second person is needed at the drop.
-            </p>
-            <p className="mt-3">
-              The fee appears on the quote before payment. Will-call pickup at the Newark counter
-              carries no delivery charge.
+              Any delivery fee is shown on your order before you pay. Will-call pickup at the Newark counter has no delivery
+              charge. Freight is quoted at the carrier&apos;s rate before any charge.
             </p>
           </Section>
 
-          <Section title="Who can order delivery">
-            {/* TODO(summit-ops): confirm whether delivery is open to retail
-                buyers or trade accounts only, and whether that differs by
-                equipment class. */}
+          <Section title="Receiving equipment">
             <p>
-              Delivery is available to trade accounts and to retail buyers on confirmed equipment
-              orders. Trade accounts can schedule recurring job-site drops; retail deliveries are
-              scheduled one order at a time.
+              Condensers, air handlers and furnaces are palletized and may need a liftgate or a dock. Inspect cartons before
+              signing the delivery receipt and write any damage on it -- see{" "}
+              <Link href="/returns#freight-damage-inspect-before-you-sign" className="text-ink-1 underline underline-offset-4">
+                freight damage
+              </Link>
+              .
             </p>
-            <p className="mt-3">
-              A person over 18 must be present to receive and sign for equipment. Summit does not
-              leave equipment unattended at a job site or a residence.
-            </p>
-          </Section>
-
-          <Section title="Equipment and freight vs parts">
-            <p>
-              Parts and installation supplies move on the standard route and follow the cutoff
-              above. Equipment behaves differently in three ways:
-            </p>
-            <ul className="mt-3 flex list-disc flex-col gap-2 pl-5">
-              <li>
-                Condensers, air handlers, and furnaces are palletized and need a liftgate or a
-                dock at the delivery address.
-              </li>
-              <li>
-                Special-order and drop-ship equipment runs on manufacturer lead time, which is
-                quoted per model and is not covered by the next-day cutoff.
-              </li>
-              <li>
-                Cartons must be inspected for shipping damage at the drop. Damage noted on the
-                delivery receipt is replaced under the ships-right guarantee; damage reported
-                later is handled case by case.
-              </li>
-            </ul>
-            {/* TODO(summit-ops): confirm typical lead time bands for
-                special-order equipment so a buyer can plan a job around them. */}
           </Section>
 
           <Section title="Will-call pickup">
             <p>
-              The Newark counter stages confirmed orders for pickup. Bring the order reference and
-              the pickup contact name. Do not travel for stock that has not been confirmed.
+              The Newark counter stages confirmed orders for pickup. Bring the order reference and the pickup contact name, and
+              wait for the confirmation before you travel.
             </p>
             <address className="mt-4 rounded-(--r-md) border border-line bg-surface-1 p-4 text-sm not-italic leading-6 text-ink-1">
               <span className="font-medium">{SITE.name} · Newark</span>
@@ -175,22 +147,28 @@ export default function DeliveryPage() {
               <br />
               {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
               <br />
-              <span className="text-ink-2">{SITE.counterHours}</span>
+              {hoursConfirmed ? (
+                weeklyHoursRows(NEWARK)
+                  .filter((row) => row.hours)
+                  .map((row) => (
+                    <span key={row.days} className="block text-ink-2">
+                      {row.days} {row.hours} PT
+                    </span>
+                  ))
+              ) : (
+                <span className="block text-ink-2">Call to confirm counter hours before traveling.</span>
+              )}
+              <BranchStatusText withDot className="mt-1 text-ink-2" />
               <br />
-              <a
-                href={FULFILLMENT.mapsHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-1 inline-block underline underline-offset-4"
-              >
-                Directions
+              <a href={FULFILLMENT.mapsHref} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block underline underline-offset-4">
+                Directions<span className="sr-only"> (opens in a new tab)</span>
               </a>
             </address>
           </Section>
 
           <div className="flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-6 text-sm">
             <Link href="/shipping" className="text-ink-1 underline underline-offset-4">
-              Shipping &amp; returns policy
+              Full shipping and freight terms
             </Link>
             <Link href="/locations/newark" className="text-ink-1 underline underline-offset-4">
               Newark branch details
@@ -208,42 +186,31 @@ export default function DeliveryPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="counter-heading text-2xl leading-none text-ink-1">{title}</h2>
+      <h2 className="counter-heading text-2xl leading-tight text-ink-1">{title}</h2>
       <div className="mt-3 text-base leading-7 text-ink-2">{children}</div>
     </section>
   );
 }
 
-function SummaryCard({
-  icon,
-  title,
-  detail,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  detail: string;
-}) {
+function SummaryItem({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="flex items-center gap-2.5 text-sm font-medium text-ink-1">
-        <span className="text-ink-1">{icon}</span>
+      <dt className="flex items-center gap-2.5 text-sm font-medium text-ink-1">
+        <span aria-hidden="true">{icon}</span>
         {title}
-      </p>
-      <p className="part-number mt-2 text-sm leading-6 text-ink-2">{detail}</p>
+      </dt>
+      <dd className="mt-1.5 text-sm leading-6 text-ink-2">{children}</dd>
     </div>
   );
 }
 
-function ZoneCard({ name, cities, note }: { name: string; cities: string; note: string }) {
+function ZoneGroup({ name, note, zones }: { name: string; note: string; zones: string[] }) {
   return (
     <div>
-      <dt className="flex items-center gap-2 text-sm font-medium text-ink-1">
-        <PackageCheck size={16} strokeWidth={1.6} aria-hidden="true" />
-        {name}
-      </dt>
-      <dd className="mt-2 text-sm leading-6 text-ink-2">
-        {cities}
-        <span className="part-number mt-1.5 block text-xs text-ink-3">{note}</span>
+      <dt className="text-sm font-medium text-ink-1">{name}</dt>
+      <dd className="mt-1.5 text-sm leading-6 text-ink-2">
+        {zones.join(", ")}
+        <span className="mt-1 block text-xs text-ink-3">{note}</span>
       </dd>
     </div>
   );

@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { FileText, BookOpen, Leaf, ArrowRight, ExternalLink } from "lucide-react";
-import { Container, Eyebrow, Chip } from "@/components/ui";
+import { existsSync, statSync } from "node:fs";
+import path from "node:path";
+import * as React from "react";
+import { ArrowRight } from "lucide-react";
+import { Container, Eyebrow } from "@/components/ui";
+import { ResourceLibrary } from "@/components/resources/resource-library";
 import { REBATES, SITE } from "@/lib/site";
-import { getStorefrontSkus, productHref } from "@/lib/storefront/catalog";
+import { getStorefrontSkus } from "@/lib/storefront/catalog";
 import { SEO_GUIDES } from "@/lib/seo/guides";
 import { SEO_TOOLS } from "@/lib/seo/tools";
 import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
+import { fromDocuments, fromGuide, fromRebate, fromTool, validateResource, type ResourceItem } from "@/lib/resources";
 
 export const metadata: Metadata = pageMetadata({ title: "HVAC Resources - Tools & Bay Area Guides", description: "Search model records and review Bay Area permit, refrigerant, rebate, and energy-code guidance. Exact-model documents publish only after verification.", path: "/resources" });
 
@@ -38,8 +43,48 @@ const FAQS: { q: string; a: string }[] = [
   },
 ];
 
+/** Size and presence of a file hosted in /public, read at build time. */
+function fileInfo(url: string) {
+  const file = path.join(process.cwd(), "public", decodeURIComponent(url.split("?")[0]));
+  return existsSync(file) ? { sizeBytes: statSync(file).size, exists: true } : { sizeBytes: null, exists: false };
+}
+
+/* Every rendered resource comes through the typed model in lib/resources.ts. */
+function buildLibrary(): ResourceItem[] {
+  return [
+    ...SEO_TOOLS.map(fromTool),
+    ...SEO_GUIDES.map(fromGuide),
+    ...REBATES.map(fromRebate),
+    ...fromDocuments(getStorefrontSkus(), fileInfo),
+    validateResource({
+      type: "external",
+      id: "external:ahri",
+      title: "AHRI Directory of Certified Product Performance",
+      summary: "Verify a complete indoor/outdoor combination and its certified ratings.",
+      topics: ["Model lookup", "Rebates"],
+      audience: ["contractor", "homeowner"],
+      updated: null,
+      destination: SITE.ahriDirectory,
+      source: "ahridirectory.org",
+      opensInNewTab: true,
+    }),
+    validateResource({
+      type: "external",
+      id: "external:energy-star",
+      title: "ENERGY STAR product finder",
+      summary: "Check whether an exact model carries an ENERGY STAR certification.",
+      topics: ["Rebates"],
+      audience: ["homeowner", "contractor"],
+      updated: null,
+      destination: SITE.energyStar,
+      source: "energystar.gov",
+      opensInNewTab: true,
+    }),
+  ];
+}
+
 export default function ResourcesPage() {
-  const documentedSkus = getStorefrontSkus().filter((sku) => sku.documents.length > 0);
+  const library = buildLibrary();
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -80,106 +125,18 @@ export default function ResourcesPage() {
         </Container>
       </section>
 
-      {/* Rebates */}
       <Container className="py-12 lg:py-14">
-        <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">
-          Rebate &amp; incentive guides
-        </h2>
-        <p className="mt-2 max-w-2xl text-sm text-ink-2">
-          Help your customers buy on total cost with current program guidance and support for project-specific eligibility.
-        </p>
-        <div className="mt-6 grid gap-5 md:grid-cols-2">
-          {REBATES.map((r) => (
-            <div key={r.name} className="border-t border-line pt-6">
-              <div className="flex items-start justify-between gap-3">
-                <span className="grid size-11 place-items-center rounded-(--r-md) bg-eco-tint text-eco-ink">
-                  <Leaf size={20} strokeWidth={2.2} />
-                </span>
-                {r.confirm && <Chip tone="copper">Project guidance</Chip>}
-              </div>
-              <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-ink-1">
-                {r.name}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-2">{r.detail}</p>
-              <Link
-                href="/contact"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand hover:text-brand-hover"
-              >
-                Request guidance <ArrowRight size={15} />
-              </Link>
-            </div>
-          ))}
-        </div>
-      </Container>
-
-      <Container className="pb-14">
-        <div className="grid gap-8 lg:grid-cols-2">
-          <section><h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">Equipment tools</h2><p className="mt-2 text-sm leading-6 text-ink-2">Use exact identifiers and project inputs to narrow the next step.</p><div className="mt-5 grid gap-2">{SEO_TOOLS.map((tool) => <Link key={tool.slug} href={`/tools/${tool.slug}`} className="rounded-(--r-sm) border border-line bg-surface-1 p-4"><span className="font-medium text-ink-1">{tool.title}</span><span className="mt-1 block text-sm leading-6 text-ink-2">{tool.description}</span></Link>)}</div></section>
-          <section><h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">Bay Area compliance guides</h2><p className="mt-2 text-sm leading-6 text-ink-2">Reviewed summaries with jurisdiction, effective date, pending changes, and primary sources.</p><div className="mt-5 grid gap-2">{SEO_GUIDES.map((guide) => <Link key={guide.slug} href={`/guides/${guide.slug}`} className="rounded-(--r-sm) border border-line bg-surface-1 p-4"><span className="font-medium text-ink-1">{guide.eyebrow}</span><span className="mt-1 block text-sm leading-6 text-ink-2">{guide.description}</span></Link>)}</div></section>
-        </div>
-      </Container>
-
-      {/* Document library */}
-      <Container className="pb-16">
-        <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">
-          Spec sheets &amp; install manuals
-        </h2>
-        <p className="mt-2 text-sm text-ink-3">
-          Exact-model documents appear here only after their model match and source are verified.
-        </p>
-        <div className="mt-6 overflow-hidden rounded-(--r-md) border border-line">
-          {documentedSkus.length === 0 && (
-            <div className="bg-surface-1 p-6">
-              <p className="font-medium text-ink-1">No exact-model documents are published yet.</p>
-              <p className="mt-2 text-sm leading-6 text-ink-2">The imported catalog remains quote-ready while manufacturer documents are verified. Send the SKU or OEM model and we will locate the correct file without substituting a similar product.</p>
-              <Link href="/contact" className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand">Request a document <ArrowRight size={15} /></Link>
-            </div>
-          )}
-          {documentedSkus.map((sku, i) => (
-            <div
-              key={sku.id}
-              className={`flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between ${
-                i % 2 === 0 ? "bg-surface-1" : "bg-surface-2/50"
-              } ${i > 0 ? "border-t border-line" : ""}`}
-            >
-              <div>
-                <Link href={productHref(sku)} className="font-display text-base font-semibold text-ink-1 hover:text-brand">
-                  {sku.title}
-                </Link>
-                <span className="ml-2 text-xs text-ink-3">{sku.sku}</span>
-                <p className="mt-1 text-xs text-ink-3">{sku.modelNumber} · {sku.btu.toLocaleString()} BTU · {sku.voltage}</p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {/* Documents now link to the manufacturer's own hosted file,
-                    verified to cover this model, rather than a generated stub. */}
-                {sku.documents.map((doc) => (
-                  <DocChip
-                    key={doc.url}
-                    href={doc.url}
-                    icon={doc.kind === "installation_manual" ? <BookOpen size={14} /> : <FileText size={14} />}
-                    label={doc.title}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* SEO/help cross-links */}
+        <React.Suspense fallback={<p className="text-sm text-ink-3">Loading resources…</p>}>
+          <ResourceLibrary items={library} />
+        </React.Suspense>
         <div className="mt-10 border-t border-line pt-8">
-          <h3 className="font-display text-lg font-semibold text-ink-1">Need help choosing?</h3>
+          <h3 className="text-lg font-semibold text-ink-1">Need help choosing?</h3>
           <p className="mt-1.5 max-w-xl text-sm text-ink-2">
-            Not sure which series fits a job? Filter the lineup by capacity and
-            efficiency, or send us the details and we&apos;ll spec it for you.
+            Filter the lineup by capacity and efficiency, or send us the details and we&apos;ll spec it for you.
           </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link href="/products" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand hover:text-brand-hover">
-              Browse products <ArrowRight size={15} />
-            </Link>
-            <a href={SITE.ahriDirectory} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-2 hover:text-brand">
-              AHRI Directory <ExternalLink size={14} />
-            </a>
-          </div>
+          <Link href="/products" className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-brand hover:text-brand-hover">
+            Browse products <ArrowRight size={15} aria-hidden="true" />
+          </Link>
         </div>
       </Container>
 
@@ -207,19 +164,5 @@ export default function ResourcesPage() {
         </div>
       </Container>
     </>
-  );
-}
-
-function DocChip({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
-  return (
-    <a
-      href={href}
-      data-conversion-hook="resource-document-download"
-      className="inline-flex items-center gap-1.5 rounded-(--r-sm) border border-line bg-surface-1 px-3 py-1.5 text-sm font-medium text-ink-2 transition-colors hover:border-ink-4 hover:text-ink-1"
-    >
-      {icon}
-      {label}
-      <ArrowRight size={13} className="text-ink-4" />
-    </a>
   );
 }

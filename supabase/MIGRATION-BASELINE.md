@@ -2,6 +2,73 @@
 
 Status as of 2026-08-21, project `cswrezdcwdqnhwplmddr` (named "crm").
 
+## 2026-09-30 — design-remediation migrations are local-only
+
+The repository now contains four migrations that are **not recorded as applied
+to the crm project**:
+
+| Migration | Remote state | Purpose |
+|---|---|---|
+| 025_quickbooks_reconciliation_lists | pending (unchanged) | QuickBooks reconciliation queues |
+| 026_identity_and_trade_access | local-only | Linked dealer identity/application/account state and staff-only approval RPCs |
+| 027_structured_requests | local-only | Typed homeowner/contact/quote requests and lifecycle data |
+| 028_orders_and_returns | local-only | Confirmation-email state, line fulfillment, and order-line RMAs |
+
+Do not point the remediated application at production and assume these objects
+exist. First apply 025–028, in order, to an isolated Supabase branch. Then run:
+
+```sh
+npm run test:security
+npm test
+npm run test:e2e
+```
+
+The live security suite must prove that anonymous callers cannot read the new
+request/application/RMA tables or execute the dealer transition/approval RPCs.
+Exercise dealer submission → staff review → approval twice and verify one
+account, one effective authorization transition, and an intact audit history.
+Exercise homeowner/contact/quote retries with the same client request ID and
+verify one stored request/reference. Only a green branch run authorizes a
+production migration window.
+
+The older “Current state — all applied” heading below is historical for the
+001–019 repair described in that section; it does not include 020–028. This
+section is the authoritative status for the new remediation migrations.
+
+## 2026-10-01 — 026, 027, 028 and 029 applied
+
+Applied to the crm project by hand in the SQL Editor (each wrapped in
+`begin; … commit;`), then recorded in `supabase_migrations.schema_migrations`
+as `026`, `027`, `028` so `supabase db push` will not replay them.
+
+- 026 identity_and_trade_access: access_status, one identity per normalized
+  email, dealer application lifecycle + events, `approve_dealer_application`
+  and `transition_dealer_application` (service_role only), signup trigger now
+  links an earlier application by email.
+- 027 structured_requests: `homeowner_requests` (+ events), structured contact
+  and quote request columns, client request ids for idempotent retries.
+- 028 orders_and_returns: confirmation-email status, per-line fulfillment
+  status, order-line RMAs with one open RMA per line.
+
+Pre-checks (read-only, before applying): every referenced table, column and
+function existed; nothing from 026-028 was partially present; no duplicate
+profile emails; the one legacy application (`pending_review`) is now
+`submitted`.
+
+Post-checks: all objects present, history rows recorded, anon and
+authenticated cannot execute the two approval functions, RLS on for all three
+new tables. **Found:** the new tables kept default grants (anon SELECT/
+REFERENCES/TRIGGER, authenticated TRUNCATE) and the advisor flagged a mutable
+search_path on `dealer_application_transition_allowed`. 029 fixes both; applied
+and recorded the same day. Verified after: anon holds no grants on the three new
+tables, authenticated holds SELECT only (staff read through RLS), the function's
+search_path is pinned, and the advisor no longer flags it.
+
+Still open, pre-existing (not from 026-028): Supabase's advisor reports
+leaked-password protection disabled (dashboard → Auth), and authenticated can
+execute several older SECURITY DEFINER RPCs (`adjust_inventory`,
+`ship_order`, …) -- confirm each still has its in-function staff guard.
+
 ## 2026-08-25 — QuickBooks sync: 024 applied, 025 pending
 
 `024_quickbooks_inventory_sync.sql` adds `private.quickbooks_token`,

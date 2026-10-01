@@ -10,7 +10,11 @@ export type SeoGuide = {
   pending: string;
   reviewedAt: string;
   nextReviewAt: string;
-  sections: { heading: string; body: string; bullets?: string[] }[];
+  /**
+   * `id` is the section's permanent anchor (/guides/<slug>#<id>): author-
+   * controlled, unique within the guide, and never renamed once published.
+   */
+  sections: { id: string; heading: string; body: string; bullets?: string[]; references?: { label: string; href: string }[] }[];
   sources: { label: string; href: string }[];
 };
 
@@ -28,8 +32,8 @@ export const SEO_GUIDES: SeoGuide[] = [
     reviewedAt: "August 5, 2026",
     nextReviewAt: "September 5, 2026",
     sections: [
-      { heading: "The current schedule", body: "Air District materials list phased implementation by appliance type and capacity.", bullets: ["Small natural-gas water heaters: January 1, 2027 schedule.", "Applicable natural-gas furnaces: January 1, 2029 schedule.", "Larger water heaters and boilers: later phases may apply."] },
-      { heading: "What buyers should do", body: "Treat this as a project-planning input, not a product-page badge. A contractor should confirm appliance type, manufacture date, project jurisdiction, electrical capacity, and any adopted exception or extension before purchase." },
+      { id: "the-current-schedule", heading: "The current schedule", body: "Air District materials list phased implementation by appliance type and capacity.", bullets: ["Small natural-gas water heaters: January 1, 2027 schedule.", "Applicable natural-gas furnaces: January 1, 2029 schedule.", "Larger water heaters and boilers: later phases may apply."] },
+      { id: "what-buyers-should-do", heading: "What buyers should do", body: "Treat this as a project-planning input, not a product-page badge. A contractor should confirm appliance type, manufacture date, project jurisdiction, electrical capacity, and any adopted exception or extension before purchase." },
     ],
     sources: [
       { label: "Bay Area Air District building-appliance rule development", href: "https://www.baaqmd.gov/en/rules-and-compliance/rule-development/building-appliances" },
@@ -49,8 +53,8 @@ export const SEO_GUIDES: SeoGuide[] = [
     reviewedAt: "August 5, 2026",
     nextReviewAt: "November 5, 2026",
     sections: [
-      { heading: "Questions to answer", body: "Give the installer the exact job address and existing-system details before equipment is finalized.", bullets: ["Which building department has jurisdiction?", "Is this an alteration, replacement, addition, or new system?", "Are electrical service, disconnect, condensate, duct, or structural changes included?", "Which compliance documents and inspections are required?"] },
-      { heading: "Equipment supply is not permit approval", body: "Summit can provide model information and manufacturer documents. The installer and local authority confirm the permitted design, code path, and final scope." },
+      { id: "questions-to-answer", heading: "Questions to answer", body: "Give the installer the exact job address and existing-system details before equipment is finalized.", bullets: ["Which building department has jurisdiction?", "Is this an alteration, replacement, addition, or new system?", "Are electrical service, disconnect, condensate, duct, or structural changes included?", "Which compliance documents and inspections are required?"] },
+      { id: "equipment-supply-is-not-permit-approval", heading: "Equipment supply is not permit approval", body: "Summit can provide model information and manufacturer documents. The installer and local authority confirm the permitted design, code path, and final scope." },
     ],
     sources: [
       { label: "California Energy Commission 2025 Energy Code", href: "https://www.energy.ca.gov/programs-and-topics/programs/building-energy-efficiency-standards/2025-building-energy-efficiency" },
@@ -70,8 +74,8 @@ export const SEO_GUIDES: SeoGuide[] = [
     reviewedAt: "August 5, 2026",
     nextReviewAt: "September 5, 2026",
     sections: [
-      { heading: "Federal status", body: "The IRS states that the Energy Efficient Home Improvement Credit under section 25C is not allowed for property placed in service after December 31, 2025." },
-      { heading: "What to collect", body: "Before asking for an incentive estimate, collect the project ZIP, electric and gas utilities, building type, existing fuel, proposed AHRI match, installer information, and expected installation date." },
+      { id: "federal-status", heading: "Federal status", body: "The IRS states that the Energy Efficient Home Improvement Credit under section 25C is not allowed for property placed in service after December 31, 2025." },
+      { id: "what-to-collect", heading: "What to collect", body: "Before asking for an incentive estimate, collect the project ZIP, electric and gas utilities, building type, existing fuel, proposed AHRI match, installer information, and expected installation date." },
     ],
     sources: [
       { label: "IRS clean-energy credit modification FAQ", href: "https://www.irs.gov/newsroom/faqs-for-modification-of-sections-25c-25d-25e-30c-30d-45l-45w-and-179d-under-public-law-119-21-139-stat-72-july-4-2025-commonly-known-as-the-one-big-beautiful-bill-obbb" },
@@ -92,8 +96,8 @@ export const SEO_GUIDES: SeoGuide[] = [
     reviewedAt: "August 5, 2026",
     nextReviewAt: "October 5, 2026",
     sections: [
-      { heading: "Compatibility is non-negotiable", body: "Do not mix indoor units, outdoor units, controls, or service procedures across refrigerants unless the manufacturer explicitly lists the combination. EPA notes that A2L refrigerants may not be used in systems that were not designed for them." },
-      { heading: "What the contractor confirms", body: "The installer should confirm the listed system match, charge and line requirements, tools and recovery equipment, leak-detection or mitigation requirements, transport/storage practices, labeling, and local code adoption." },
+      { id: "compatibility-is-non-negotiable", heading: "Compatibility is non-negotiable", body: "Do not mix indoor units, outdoor units, controls, or service procedures across refrigerants unless the manufacturer explicitly lists the combination. EPA notes that A2L refrigerants may not be used in systems that were not designed for them." },
+      { id: "what-the-contractor-confirms", heading: "What the contractor confirms", body: "The installer should confirm the listed system match, charge and line requirements, tools and recovery equipment, leak-detection or mitigation requirements, transport/storage practices, labeling, and local code adoption." },
     ],
     sources: [
       { label: "EPA HFC phasedown frequently asked questions", href: "https://www.epa.gov/hfcs/frequent-questions-phasedown-hydrofluorocarbons" },
@@ -114,8 +118,8 @@ export const SEO_GUIDES: SeoGuide[] = [
     reviewedAt: "August 5, 2026",
     nextReviewAt: "November 5, 2026",
     sections: [
-      { heading: "Before selecting equipment", body: "Confirm the permit application date, building type, climate zone, existing ducts, equipment match, controls, ventilation, electrical scope, and required acceptance or verification steps." },
-      { heading: "Keep the documentation chain intact", body: "Product submittals and AHRI references support the equipment decision, but they do not replace the permit, compliance forms, installation verification, or inspection." },
+      { id: "before-selecting-equipment", heading: "Before selecting equipment", body: "Confirm the permit application date, building type, climate zone, existing ducts, equipment match, controls, ventilation, electrical scope, and required acceptance or verification steps." },
+      { id: "keep-the-documentation-chain-intact", heading: "Keep the documentation chain intact", body: "Product submittals and AHRI references support the equipment decision, but they do not replace the permit, compliance forms, installation verification, or inspection." },
     ],
     sources: [
       { label: "California Energy Commission 2025 standards", href: "https://www.energy.ca.gov/programs-and-topics/programs/building-energy-efficiency-standards/2025-building-energy-efficiency" },

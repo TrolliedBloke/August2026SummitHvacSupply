@@ -39,9 +39,9 @@ const PAGES: Array<{ name: string; path: string }> = [
   { name: "21-portal-login", path: "/portal/login" },
   { name: "22-portal-forgot", path: "/portal/forgot-password" },
   { name: "23-portal-reset", path: "/portal/reset-password" },
-  { name: "24-checkout", path: "/checkout" },
-  { name: "25-confirmation", path: "/checkout/confirmation" },
-  { name: "26-review", path: "/review" },
+  { name: "24-checkout", path: "/checkout?design=1" },
+  { name: "25-confirmation", path: "/checkout/confirmation?token=design-paid" },
+  { name: "26-write-product-review", path: "/review" },
   { name: "27-returns", path: "/returns" },
   { name: "28-shipping", path: "/shipping" },
   { name: "29-privacy", path: "/privacy" },
@@ -93,14 +93,11 @@ const FEATURES: Feature[] = [
     },
   },
   {
-    name: "f06-price-audience-contractor",
+    name: "f06-contractor-sign-in-path",
     path: "/",
     run: async (page) => {
-      // .first(): the dev server leaves a hidden streaming copy of the page in
-      // the DOM, so every control appears twice. Production serves one (checked
-      // against a real build), which is why this is a selector note, not a bug.
-      await page.getByRole("radio", { name: /Shop as contractor/i }).first().check({ force: true });
-      await page.waitForTimeout(200);
+      await page.getByRole("link", { name: "Contractor sign in" }).click();
+      await page.waitForURL(/\/portal\/login/);
     },
   },
   {
@@ -123,8 +120,9 @@ const FEATURES: Feature[] = [
     name: "f09-gallery-zoom",
     path: "/products/sku/tos-18k-idu",
     run: async (page) => {
-      await page.getByRole("button", { name: /Open large product image/i }).click();
-      await page.waitForTimeout(400);
+      await page.getByRole("button", { name: "View larger" }).click();
+      await page.getByRole("dialog").waitFor({ state: "visible" });
+      await page.locator('[role="dialog"] img').waitFor({ state: "visible" });
     },
   },
   {
@@ -149,9 +147,19 @@ const FEATURES: Feature[] = [
     name: "f12-contact-form-errors",
     path: "/contact",
     run: async (page) => {
-      await page.getByRole("button", { name: /Open email draft/i }).first().click();
+      await page.getByRole("button", { name: "Send message" }).click();
       await page.waitForTimeout(500);
     },
+  },
+  {
+    name: "f13-confirmation-pending",
+    path: "/checkout/confirmation?token=design-pending",
+    run: async (page) => { await page.getByText("Payment pending").waitFor(); },
+  },
+  {
+    name: "f14-confirmation-failed",
+    path: "/checkout/confirmation?token=design-failed",
+    run: async (page) => { await page.getByText("Payment not completed").waitFor(); },
   },
 ];
 
@@ -159,6 +167,58 @@ const VIEWPORTS = [
   { key: "desktop", width: 1440, height: 900 },
   { key: "mobile", width: 390, height: 844 },
 ];
+
+const checkoutLine = {
+  skuId: "inventory-row-2", sku: "TCL09KIDU", title: "TCL 9K Indoor Unit", qty: 2,
+  state: "purchasable", unitPrice: 489, lineTotal: 978, provenance: "List price", error: null,
+};
+const confirmationLine = { title: checkoutLine.title, sku: checkoutLine.sku, qty: 2, unitPrice: 489, lineTotal: 978, status: "pending" };
+
+async function prepareDeterministicState(page: Page, path: string) {
+  if (path.startsWith("/checkout?")) {
+    await page.addInitScript((line) => localStorage.setItem("summit-quote-v2", JSON.stringify([{
+      skuId: line.skuId, sku: line.sku, modelNumber: "TSC-09HA1/I3TI22", title: line.title,
+      image: "/products/catalog-official/tcl-tpro-indoor-front.webp", unitPrice: line.unitPrice,
+      available: 8, qty: line.qty, intent: "cart",
+    }])), checkoutLine);
+    await page.route("**/api/checkout/preflight", async (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({
+      ok: true,
+      snapshot: {
+        version: 1, issuedAt: "2026-10-01T16:00:00.000Z", expiresAt: "2026-10-01T16:30:00.000Z",
+        account: { kind: "guest", label: null }, zip: null, method: "pickup", methodAvailable: true,
+        methods: [
+          { method: "pickup", label: "Will-call pickup", available: true, fee: 0, detail: "Pick up at our Newark counter after confirmation.", windows: [] },
+          { method: "local_delivery", label: "Local delivery", available: true, fee: 79, detail: "Bay Area jobsite delivery.", windows: [] },
+          { method: "freight", label: "Freight", available: true, fee: null, detail: "Quoted before shipment.", windows: [] },
+        ],
+        lines: [checkoutLine], subtotal: 978, fee: 0, tax: { status: "estimated", amount: 89.87 }, total: 1067.87,
+        payment: "card", digest: "design-review", token: "design-snapshot",
+      },
+    }) }));
+  }
+  if (path.startsWith("/checkout/confirmation")) {
+    const token = new URL(path, "http://design.local").searchParams.get("token") ?? "";
+    const checkoutState = token.includes("failed") ? "payment_failed" : token.includes("pending") ? "payment_pending" : "paid";
+    await page.route("**/api/checkout/status?*", async (route) => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({
+      ok: true, orderId: "design-order", orderNumber: "SH-10482", subtotal: 978, fee: 0, tax: 89.87, total: 1067.87,
+      payment: "card", checkoutState,
+      confirmation: checkoutState === "paid" ? {
+        orderNumber: "SH-10482", placedAt: "2026-10-01T16:00:00.000Z", payment: "paid", order: "confirmed",
+        fulfillment: "pending", email: "sent", method: "pickup", windowLabel: "Fri, Oct 2, 9:00 AM PT", address: null,
+        contact: { name: "Alex Rivera", email: "a•••@example.com" }, lines: [confirmationLine],
+        totals: { subtotal: 978, fee: 0, tax: 89.87, total: 1067.87 },
+      } : null,
+    }) }));
+  }
+}
+
+async function prepareCapture(page: Page) {
+  // The Next.js development badge is not part of the product and can cover
+  // controls in full-page captures. Runtime errors are still collected by the
+  // runner; this removes only the floating development chrome.
+  await page.addStyleTag({ content: "nextjs-portal { display: none !important; }" });
+  await page.waitForTimeout(300);
+}
 
 async function main() {
   await mkdir(OUT, { recursive: true });
@@ -170,8 +230,9 @@ async function main() {
     for (const vp of VIEWPORTS) {
       const page = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
       try {
+        await prepareDeterministicState(page, entry.path);
         await page.goto(BASE + entry.path, { waitUntil: "networkidle", timeout: 30_000 });
-        await page.waitForTimeout(500);
+        await prepareCapture(page);
         const file = `${entry.name}-${vp.key}.png`;
         await page.screenshot({ path: `${OUT}/${file}`, fullPage: true });
         row[vp.key as "desktop" | "mobile"] = file;
@@ -194,9 +255,11 @@ async function main() {
       name: `${feature.name} (${vp.key})`,
     };
     try {
+      await prepareDeterministicState(page, feature.path);
       await page.goto(BASE + feature.path, { waitUntil: "networkidle", timeout: 30_000 });
       await page.waitForTimeout(400);
       await feature.run(page);
+      await prepareCapture(page);
       const file = `${feature.name}.png`;
       await page.screenshot({ path: `${OUT}/${file}`, fullPage: false });
       row[vp.key as "desktop" | "mobile"] = file;

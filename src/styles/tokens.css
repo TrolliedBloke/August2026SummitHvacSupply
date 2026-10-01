@@ -21,6 +21,35 @@
      TODO(summit-design): confirm this hex against the source design file. */
   --band: #F5F0E8;
 
+  /* State contract. One set of surfaces for every loading, empty, error,
+     validation and commerce state, so a failed catalog load, a rejected form
+     field and an unavailable product read as the same family. Color is never
+     the only signal: every state also carries an icon or a word. Amber and red
+     stay off actions -- green still means "yes". */
+  --state-info-bg: #F4F3EF;
+  --state-info-border: var(--border);
+  --state-info-ink: var(--ink);
+  --state-success-bg: var(--green-bg);
+  --state-success-border: #C9DCCF;
+  --state-success-ink: var(--green);
+  --state-warning-bg: #FBF4EA;
+  --state-warning-border: #E8CFA8;
+  /* Darkened from --amber so warning text passes AA on its own tint. */
+  --state-warning-ink: #8A5112;
+  --state-danger-bg: #FBEFED;
+  --state-danger-border: #E9BDB6;
+  --state-danger-ink: #A3261A;
+  --state-skeleton: #EFEDE7;
+
+  /* Control and target sizes. 44px is the minimum touch target everywhere a
+     person taps; the compact size is for dense desktop toolbars only. */
+  --control-h: 44px;
+  --control-h-compact: 36px;
+  --target-min: 44px;
+
+  /* Long-form reading measure, shared by guides and legal documents. */
+  --measure: 68ch;
+
   --radius-control: 6px;
   --radius-card: 12px;
   --border-hairline: 0.5px solid var(--border);
@@ -58,8 +87,10 @@
   --eco: var(--ink);
   --eco-tint: var(--surface);
   --eco-ink: var(--ink);
-  --danger: var(--ink);
-  --danger-tint: var(--surface);
+  /* Errors were aliased to ink, so a rejected field looked identical to a
+     valid one. They now resolve to the danger state. */
+  --danger: var(--state-danger-ink);
+  --danger-tint: var(--state-danger-bg);
   --control-bg: var(--surface);
   --control-border: var(--border);
   --r-sm: var(--radius-control);

@@ -1,24 +1,21 @@
 import { getSessionProfile } from "@/lib/backend/auth";
 import { Container } from "@/components/ui";
-import { CheckoutClient, type PriceMap } from "@/components/checkout-client";
+import { CheckoutClient } from "@/components/checkout-client";
 import { getStorefrontSkus } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
 import { redirect } from "next/navigation";
 
 export const metadata = { title: "Checkout", robots: { index: false, follow: false } };
 
-export default async function CheckoutPage() {
-  if (!getStorefrontSkus().some((sku) => sku.purchaseEligible)) redirect("/quote");
+export default async function CheckoutPage({ searchParams }: { searchParams: Promise<{ design?: string }> }) {
+  const designPreview = (await searchParams).design === "1" && process.env.NODE_ENV !== "production";
+  if (!designPreview && !getStorefrontSkus().some((sku) => sku.purchaseEligible)) redirect("/quote");
   const profile = await getSessionProfile();
   const trade = profile?.role === "dealer" || profile?.role === "installer" || profile?.role === "staff";
 
-  const prices: PriceMap = Object.fromEntries(
-    getStorefrontSkus().map((sku) => [
-      sku.id,
-      // Falls back to retail when no trade price is on file.
-      { dealer: sku.dealerPrice !== null && sku.dealerPrice > 0 ? sku.dealerPrice : sku.msrp, retail: sku.msrp },
-    ])
-  );
+  // No price map is built here any more: the client renders only the
+  // server-issued snapshot (/api/checkout/preflight), which prices every line
+  // by this session's authorization.
 
   return (
     <Container className="py-10 lg:py-14">
@@ -43,12 +40,12 @@ export default async function CheckoutPage() {
               {SITE.phone}
             </a>{" "}
             and we&apos;ll take the order over the phone, or pick up at{" "}
-            {SITE.address.full}. {SITE.hours.split("·")[0].trim()}.
+            {SITE.address.full}, {SITE.counterHours}.
           </p>
         </div>
       </noscript>
 
-      <CheckoutClient prices={prices} trade={trade} accountName={profile?.name ?? null} />
+      <CheckoutClient />
     </Container>
   );
 }

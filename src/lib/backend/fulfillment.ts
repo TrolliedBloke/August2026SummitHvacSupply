@@ -1,20 +1,38 @@
 /**
- * Local-fulfillment domain logic. Pure functions + the Bay Area zone table,
- * usable on the server (checkout) and client (ZIP gate, badges) and in seeded
- * mode with no database. The DB `delivery_zones` table mirrors ZONES and is the
- * authoritative fee source when Supabase is configured.
+ * The fulfillment calculator. Pure functions over the versioned policy in
+ * `lib/fulfillment-policy.ts` and the branch calendar in `lib/branch.ts`, usable
+ * on the server (checkout validation) and the client (ZIP gate, checkout
+ * summary), and with no database. The DB `delivery_zones` table mirrors the
+ * policy zones and is the authoritative fee source when Supabase is configured.
+ *
+ * Checkout enforces these results, so every marketing surface renders a
+ * projection of them (`resolveFulfillmentAnswer`, `deliveryPromise`) instead of
+ * typing its own cutoff, date or zone list.
  */
 
-export type FulfillmentMethod = "pickup" | "local_delivery" | "freight";
+import {
+  addDays,
+  effectiveHours,
+  formatMinutes,
+  getBranch,
+  isoDate,
+  localMoment,
+  weekdayShort,
+  type Branch,
+  type LocalDate,
+  type Weekday,
+} from "@/lib/branch";
+import {
+  FULFILLMENT_POLICY,
+  deliveryPolicyIsConfirmed,
+  isConfirmed,
+  pickupPolicyIsConfirmed,
+  type DeliveryZone,
+  type FulfillmentPolicy,
+} from "@/lib/fulfillment-policy";
 
-export type DeliveryZone = {
-  zip: string;
-  label: string;
-  localDeliveryEligible: boolean;
-  deliveryFee: number;
-  freeDeliveryOver: number;
-  leadTimeHours: number;
-};
+export type FulfillmentMethod = "pickup" | "local_delivery" | "freight";
+export type { DeliveryZone };
 
 export const WAREHOUSE = {
   id: "50000000-0000-0000-0000-000000000001",
@@ -25,21 +43,22 @@ export const WAREHOUSE = {
 };
 
 /** Bay Area zones served from Newark. Mirrors supabase/seed.sql delivery_zones. */
-export const ZONES: DeliveryZone[] = [
-  { zip: "94560", label: "Newark", localDeliveryEligible: true, deliveryFee: 0, freeDeliveryOver: 0, leadTimeHours: 4 },
-  { zip: "94538", label: "Fremont", localDeliveryEligible: true, deliveryFee: 35, freeDeliveryOver: 2000, leadTimeHours: 8 },
-  { zip: "94587", label: "Union City", localDeliveryEligible: true, deliveryFee: 35, freeDeliveryOver: 2000, leadTimeHours: 8 },
-  { zip: "94544", label: "Hayward", localDeliveryEligible: true, deliveryFee: 45, freeDeliveryOver: 2000, leadTimeHours: 24 },
-  { zip: "94601", label: "Oakland", localDeliveryEligible: true, deliveryFee: 55, freeDeliveryOver: 2500, leadTimeHours: 24 },
-  { zip: "95131", label: "San Jose", localDeliveryEligible: true, deliveryFee: 55, freeDeliveryOver: 2500, leadTimeHours: 24 },
-  { zip: "94103", label: "San Francisco", localDeliveryEligible: true, deliveryFee: 75, freeDeliveryOver: 3000, leadTimeHours: 24 },
-  { zip: "94303", label: "Palo Alto", localDeliveryEligible: true, deliveryFee: 65, freeDeliveryOver: 3000, leadTimeHours: 24 },
-];
+export const ZONES: DeliveryZone[] = FULFILLMENT_POLICY.zones.list;
 
-export function resolveZone(zip: string | null | undefined): DeliveryZone | null {
+function policyBranch(policy: FulfillmentPolicy): Branch {
+  const branch = getBranch(policy.branchId);
+  if (!branch) throw new Error(`Fulfillment policy ${policy.id} references unknown branch ${policy.branchId}`);
+  return branch;
+}
+
+export function resolveZone(zip: string | null | undefined, policy: FulfillmentPolicy = FULFILLMENT_POLICY): DeliveryZone | null {
   if (!zip) return null;
   const z = zip.trim().slice(0, 5);
-  return ZONES.find((zone) => zone.zip === z) ?? null;
+  return policy.zones.list.find((zone) => zone.zip === z) ?? null;
+}
+
+function isSameDayZone(zone: DeliveryZone | null, policy: FulfillmentPolicy): boolean {
+  return Boolean(zone && zone.leadTimeHours <= policy.zones.sameDayLeadHours);
 }
 
 export type FulfillmentOption = {
@@ -64,23 +83,31 @@ export function localDeliveryFee(zone: DeliveryZone, subtotal: number): number {
  * always available (drive to Newark); local delivery only inside a served zone;
  * freight is the fallback for everyone (cost quoted separately).
  */
-export function fulfillmentOptions(zip: string | null, subtotal: number): FulfillmentOption[] {
+export function fulfillmentOptions(zip: string | null, subtotal: number, now = new Date()): FulfillmentOption[] {
+  const branchConfirmed = getBranch(FULFILLMENT_POLICY.branchId)?.hoursReview.status === "confirmed";
+  const pickupConfirmed = pickupPolicyIsConfirmed() && branchConfirmed;
+  const deliveryConfirmed = deliveryPolicyIsConfirmed() && branchConfirmed;
   const zone = resolveZone(zip);
+  const pickupDay = pickupConfirmed ? earliestDay("pickup", zone, now) : null;
   const pickup: FulfillmentOption = {
     method: "pickup",
     label: "Will-call pickup",
-    detail: `Free. Ready same day at ${WAREHOUSE.city}.`,
+    detail: pickupConfirmed
+      ? `Free. ${pickupDay ? `Ready ${dayPhrase(pickupDay, now)}` : "Ready when confirmed"} at ${WAREHOUSE.city}.`
+      : `Free at ${WAREHOUSE.city}. Pickup timing is confirmed with the order.`,
     fee: 0,
-    available: true,
+    available: pickupConfirmed,
+    ...(!pickupConfirmed ? { note: "Pickup hours and preparation time are being confirmed by the counter" } : {}),
   };
-  const delivery: FulfillmentOption = zone?.localDeliveryEligible
+  const deliveryDay = deliveryConfirmed && zone?.localDeliveryEligible ? earliestDay("local_delivery", zone, now) : null;
+  const delivery: FulfillmentOption = deliveryConfirmed && zone?.localDeliveryEligible
     ? {
         method: "local_delivery",
         label: "Local jobsite delivery",
         detail:
           localDeliveryFee(zone, subtotal) === 0
-            ? `Free to ${zone.label}. Within ${zone.leadTimeHours}h.`
-            : `$${localDeliveryFee(zone, subtotal)} to ${zone.label}. Within ${zone.leadTimeHours}h${
+            ? `Free to ${zone.label}. Earliest ${deliveryDay ? dayPhrase(deliveryDay, now) : "on confirmation"}.`
+            : `$${localDeliveryFee(zone, subtotal)} to ${zone.label}. Earliest ${deliveryDay ? dayPhrase(deliveryDay, now) : "on confirmation"}${
                 zone.freeDeliveryOver > 0 ? `, free over $${zone.freeDeliveryOver.toLocaleString()}` : ""
               }.`,
         fee: localDeliveryFee(zone, subtotal),
@@ -92,7 +119,7 @@ export function fulfillmentOptions(zip: string | null, subtotal: number): Fulfil
         detail: "Not available for this ZIP.",
         fee: 0,
         available: false,
-        note: zip ? "Outside our Bay Area delivery radius" : "Enter a ZIP to check",
+        note: !deliveryConfirmed ? "Delivery routes are being confirmed by the counter" : zip ? "Outside our Bay Area delivery radius" : "Enter a ZIP to check",
       };
   const freight: FulfillmentOption = {
     method: "freight",
@@ -106,16 +133,15 @@ export function fulfillmentOptions(zip: string | null, subtotal: number): Fulfil
 }
 
 /** A short stock/fulfillment promise for a product, given the visitor's ZIP. */
-export function fulfillmentPromise(zip: string | null, inStock: boolean): string {
+export function fulfillmentPromise(zip: string | null, inStock: boolean, now = new Date()): string {
   if (!inStock) return "Backorder";
   const zone = resolveZone(zip);
-  if (!zip) return "In stock, pickup today";
-  if (zone?.localDeliveryEligible) {
-    return zone.leadTimeHours <= 8
-      ? `In stock, delivery to ${zone.label} today`
-      : `In stock, delivery to ${zone.label} tomorrow`;
+  if (!zip || !zone?.localDeliveryEligible) {
+    const day = earliestDay("pickup", zone, now);
+    return day ? `In stock, pickup ${dayPhrase(day, now)}` : "In stock, pickup on confirmation";
   }
-  return "In stock, pickup today or freight";
+  const day = earliestDay("local_delivery", zone, now);
+  return day ? `In stock, delivery to ${zone.label} ${dayPhrase(day, now)}` : `In stock, delivery to ${zone.label} on confirmation`;
 }
 
 export type FulfillmentWindow = {
@@ -126,44 +152,88 @@ export type FulfillmentWindow = {
   endAt: string;
 };
 
-const WAREHOUSE_TIME_ZONE = "America/Los_Angeles";
-const SAME_DAY_CUTOFF_HOUR = 14;
-const PREP_MINUTES = 60;
-const SLOT_HOURS: Array<[number, number]> = [[7, 9], [9, 11], [12, 14], [14, 16]];
+type Day = LocalDate & { weekday: Weekday };
+
+/** A day the branch trades on, honoring holidays and dated exceptions. */
+function openHours(branch: Branch, date: Day) {
+  return effectiveHours(branch, date).hours;
+}
+
+function nextOpenDay(branch: Branch, from: Day): Day | null {
+  for (let offset = 1; offset <= 21; offset += 1) {
+    const day = addDays(from, offset);
+    if (openHours(branch, day)) return day;
+  }
+  return null;
+}
 
 /**
- * Available warehouse windows, calculated in Pacific time. Past slots,
- * weekends, warehouse holidays, and same-day slots after cutoff are omitted.
- * `now` is injectable so both server validation and tests are deterministic.
+ * The order day: today when the branch trades today and the cutoff has not
+ * passed, otherwise the next trading day. Every promise starts here.
+ */
+function orderDay(policy: FulfillmentPolicy, now: Date, branch: Branch = policyBranch(policy)): { day: Day; today: boolean } | null {
+  const moment = localMoment(now, branch.timezone);
+  const today: Day = { year: moment.year, month: moment.month, day: moment.day, weekday: moment.weekday };
+  if (openHours(branch, today) && moment.minutes < policy.cutoff.minutes) return { day: today, today: true };
+  const next = nextOpenDay(branch, today);
+  return next ? { day: next, today: false } : null;
+}
+
+/** First day a method can be fulfilled: same day for pickup and same-day zones, next route day otherwise. */
+function earliestDay(
+  method: FulfillmentMethod,
+  zone: DeliveryZone | null,
+  now: Date,
+  policy = FULFILLMENT_POLICY,
+  branch: Branch = policyBranch(policy)
+): Day | null {
+  if (method === "freight") return null;
+  const order = orderDay(policy, now, branch);
+  if (!order) return null;
+  if (method === "pickup" || isSameDayZone(zone, policy)) return order.day;
+  return nextOpenDay(branch, order.day);
+}
+
+/**
+ * Available windows, calculated in the branch timezone. Past slots, closed
+ * days, holidays and dated exceptions, and days before the method's earliest
+ * day are omitted. `now` is injectable so server validation and tests are
+ * deterministic.
  */
 export function fulfillmentWindows(
   method: FulfillmentMethod,
   zip: string | null,
-  now = new Date()
+  now = new Date(),
+  policy: FulfillmentPolicy = FULFILLMENT_POLICY
 ): FulfillmentWindow[] {
   if (method === "freight") return [];
-  const zone = resolveZone(zip);
-  const sameDayEligible = method === "pickup" || Boolean(zone && zone.leadTimeHours <= 8);
-  const today = pacificParts(now);
-  const earliest = new Date(now.getTime() + PREP_MINUTES * 60_000);
+  const branch = policyBranch(policy);
+  const zone = resolveZone(zip, policy);
+  if (method === "local_delivery" && !zone?.localDeliveryEligible) return [];
+  const first = earliestDay(method, zone, now, policy);
+  if (!first) return [];
+  const moment = localMoment(now, branch.timezone);
+  const todayKey = isoDate(moment);
+  const earliestInstant = new Date(now.getTime() + policy.pickupPrep.minutes * 60_000);
   const out: FulfillmentWindow[] = [];
 
-  for (let offset = 0; offset < 14 && out.length < 8; offset += 1) {
-    const date = addUtcDays(today.year, today.month, today.day, offset);
-    if (isWeekend(date) || isWarehouseHoliday(date)) continue;
-    if (offset === 0 && (!sameDayEligible || today.hour >= SAME_DAY_CUTOFF_HOUR)) continue;
-
-    for (const [startHour, endHour] of SLOT_HOURS) {
-      const start = pacificDateToUtc(date.year, date.month, date.day, startHour);
-      if (start < earliest) continue;
-      const end = pacificDateToUtc(date.year, date.month, date.day, endHour);
+  for (let offset = 0; offset < policy.windows.horizonDays && out.length < policy.windows.maxOffered; offset += 1) {
+    const date = addDays(first, offset);
+    const hours = openHours(branch, date);
+    if (!hours) continue;
+    for (const [startHour, endHour] of policy.windows.slots) {
+      // A shortened exception day only offers slots inside its hours.
+      if (startHour * 60 < hours.opens || endHour * 60 > hours.closes) continue;
+      const start = zonedDateToUtc(date, startHour, branch.timezone);
+      if (start < earliestInstant) continue;
+      const end = zonedDateToUtc(date, endHour, branch.timezone);
       out.push({
         id: start.toISOString(),
-        label: formatWindowLabel(start, end, offset),
+        label: formatWindowLabel(start, end, isoDate(date) === todayKey, branch.timezone),
         startAt: start.toISOString(),
         endAt: end.toISOString(),
       });
-      if (out.length === 8) break;
+      if (out.length === policy.windows.maxOffered) break;
     }
   }
   return out;
@@ -173,74 +243,184 @@ export function isFulfillmentWindowAvailable(
   method: FulfillmentMethod,
   zip: string | null,
   windowId: string,
-  now = new Date()
+  now = new Date(),
+  policy: FulfillmentPolicy = FULFILLMENT_POLICY,
+  branch: Branch = policyBranch(policy)
 ): boolean {
-  return fulfillmentWindows(method, zip, now).some((window) => window.id === windowId);
+  if (branch.hoursReview.status !== "confirmed") return false;
+  if (method === "pickup" && !pickupPolicyIsConfirmed(policy)) return false;
+  if (method === "local_delivery" && !deliveryPolicyIsConfirmed(policy)) return false;
+  return fulfillmentWindows(method, zip, now, policy).some((window) => window.id === windowId);
 }
 
-type DateParts = { year: number; month: number; day: number; hour: number };
-
-function pacificParts(date: Date): DateParts {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: WAREHOUSE_TIME_ZONE,
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    hour: "numeric",
-    hourCycle: "h23",
-  }).formatToParts(date);
-  const get = (type: string) => Number(parts.find((part) => part.type === type)?.value);
-  return { year: get("year"), month: get("month"), day: get("day"), hour: get("hour") };
-}
-
-function addUtcDays(year: number, month: number, day: number, offset: number) {
-  const date = new Date(Date.UTC(year, month - 1, day + offset));
-  return { year: date.getUTCFullYear(), month: date.getUTCMonth() + 1, day: date.getUTCDate() };
-}
-
-/** Convert a Pacific wall-clock time to its UTC instant, including DST. */
-function pacificDateToUtc(year: number, month: number, day: number, hour: number): Date {
-  const desired = Date.UTC(year, month - 1, day, hour);
+/** Convert a wall-clock hour in `timezone` to its UTC instant, including DST. */
+function zonedDateToUtc(date: LocalDate, hour: number, timezone: string): Date {
+  const desired = Date.UTC(date.year, date.month - 1, date.day, hour);
   let guess = desired;
   for (let i = 0; i < 2; i += 1) {
-    const actual = pacificParts(new Date(guess));
-    const actualWallTime = Date.UTC(actual.year, actual.month - 1, actual.day, actual.hour);
+    const actual = localMoment(new Date(guess), timezone);
+    const actualWallTime = Date.UTC(actual.year, actual.month - 1, actual.day, Math.floor(actual.minutes / 60), actual.minutes % 60);
     guess += desired - actualWallTime;
   }
   return new Date(guess);
 }
 
-function isWeekend(date: { year: number; month: number; day: number }) {
-  const weekday = new Date(Date.UTC(date.year, date.month - 1, date.day)).getUTCDay();
-  return weekday === 0 || weekday === 6;
-}
-
-function isWarehouseHoliday(date: { year: number; month: number; day: number }) {
-  const key = `${date.month}-${date.day}`;
-  if (["1-1", "7-4", "12-25"].includes(key)) return true;
-  // Thanksgiving: fourth Thursday in November.
-  if (date.month === 11) {
-    const weekday = new Date(Date.UTC(date.year, 10, date.day)).getUTCDay();
-    if (weekday === 4 && date.day >= 22 && date.day <= 28) return true;
-  }
-  return false;
-}
-
-function formatWindowLabel(start: Date, end: Date, dayOffset: number) {
-  const day = dayOffset === 0
+function formatWindowLabel(start: Date, end: Date, today: boolean, timezone: string) {
+  const day = today
     ? "Today"
-    : new Intl.DateTimeFormat("en-US", {
-        timeZone: WAREHOUSE_TIME_ZONE,
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-      }).format(start);
-  const time = (date: Date) => new Intl.DateTimeFormat("en-US", {
-    timeZone: WAREHOUSE_TIME_ZONE,
-    hour: "numeric",
-    minute: "2-digit",
-  }).format(date);
+    : new Intl.DateTimeFormat("en-US", { timeZone: timezone, weekday: "short", month: "short", day: "numeric" }).format(start);
+  const time = (date: Date) => new Intl.DateTimeFormat("en-US", { timeZone: timezone, hour: "numeric", minute: "2-digit" }).format(date);
   return `${day}, ${time(start)}–${time(end)} PT`;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Projections                                                                */
+/* -------------------------------------------------------------------------- */
+
+function dayOffset(from: LocalDate, to: LocalDate): number {
+  return Math.round((Date.UTC(to.year, to.month - 1, to.day) - Date.UTC(from.year, from.month - 1, from.day)) / 86_400_000);
+}
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** "today", "tomorrow", "Mon", or "Mon, Oct 5" when more than a week out. */
+export function dayPhrase(day: Day, now: Date, policy = FULFILLMENT_POLICY, branch: Branch = policyBranch(policy)): string {
+  const moment = localMoment(now, branch.timezone);
+  const offset = dayOffset(moment, day);
+  if (offset === 0) return "today";
+  if (offset === 1) return "tomorrow";
+  if (offset < 7) return weekdayShort(day.weekday);
+  return `${weekdayShort(day.weekday)}, ${MONTHS[day.month - 1]} ${day.day}`;
+}
+
+/**
+ * The standard next-route-day promise: order by the cutoff on the order day,
+ * arrives the next trading day. This is exactly what checkout offers a
+ * non-same-day zone, so the homepage line and the checkout windows agree.
+ */
+export function deliveryPromise(
+  now = new Date(),
+  policy: FulfillmentPolicy = FULFILLMENT_POLICY,
+  branch: Branch = policyBranch(policy)
+) {
+  if (!deliveryPolicyIsConfirmed(policy) || branch.hoursReview.status !== "confirmed") return null;
+  const order = orderDay(policy, now, branch);
+  if (!order) return null;
+  const arrives = nextOpenDay(branch, order.day);
+  if (!arrives) return null;
+  const orderLabel = order.today ? "today" : weekdayShort(order.day.weekday);
+  return {
+    cutoff: formatMinutes(policy.cutoff.minutes),
+    orderDay: isoDate(order.day),
+    arrivesDay: isoDate(arrives),
+    /** "Order by 2 PM Thu, arrives Fri" -- weekday names, never "today", so it reads the same all day. */
+    line: `Order by ${formatMinutes(policy.cutoff.minutes)} ${weekdayShort(order.day.weekday)}, arrives ${weekdayShort(arrives.weekday)}`,
+    orderLabel,
+    confirmed: isConfirmed(policy.cutoff.review),
+  };
+}
+
+/** "Will-call ready in 1 hour" -- from the same prep time checkout enforces. */
+export function pickupReadyLine(policy: FulfillmentPolicy = FULFILLMENT_POLICY): string {
+  if (!pickupPolicyIsConfirmed(policy)) return "Will-call timing confirmed with your order";
+  const minutes = policy.pickupPrep.minutes;
+  if (minutes < 60) return `Will-call ready in ${minutes} min`;
+  const hours = minutes / 60;
+  return `Will-call ready in ${Number.isInteger(hours) ? hours : hours.toFixed(1)} ${hours === 1 ? "hour" : "hours"}`;
+}
+
+export type MethodAnswer = {
+  method: FulfillmentMethod;
+  label: string;
+  available: boolean;
+  /** "today", "tomorrow", "Fri" -- null for freight (quoted) or unavailable methods. */
+  earliest: string | null;
+  detail: string;
+};
+
+export type FulfillmentAnswer =
+  | { kind: "malformed"; zip: string }
+  | { kind: "unavailable" }
+  | { kind: "unknown"; zip: string }
+  | {
+      kind: "eligible" | "ineligible";
+      zip: string;
+      area: string | null;
+      methods: MethodAnswer[];
+      orderBy: { cutoff: string; dayLabel: string } | null;
+      fee: { status: "free" | "amount" | "quoted"; amount?: number; freeOver?: number };
+      policyVersion: string;
+      confirmed: boolean;
+    };
+
+const ZIP_PATTERN = /^\d{5}$/;
+const SERVICE_STATE_ZIP = { min: 90001, max: 96162 };
+
+/**
+ * The answer-first projection for a ZIP. `policy` null models the policy store
+ * being unavailable: the result is an explicit "cannot confirm", never a
+ * guessed date.
+ */
+export function resolveFulfillmentAnswer(
+  rawZip: string,
+  now = new Date(),
+  policy: FulfillmentPolicy | null = FULFILLMENT_POLICY,
+  branch: Branch | null = policy ? getBranch(policy.branchId) : null
+): FulfillmentAnswer {
+  const zip = rawZip.trim();
+  if (!policy) return { kind: "unavailable" };
+  if (!ZIP_PATTERN.test(zip)) return { kind: "malformed", zip };
+  if (!deliveryPolicyIsConfirmed(policy) || !branch || branch.hoursReview.status !== "confirmed") return { kind: "unavailable" };
+  const numeric = Number(zip);
+  if (numeric < SERVICE_STATE_ZIP.min || numeric > SERVICE_STATE_ZIP.max) return { kind: "unknown", zip };
+
+  const zone = resolveZone(zip, policy);
+  const eligible = Boolean(zone?.localDeliveryEligible);
+  const pickupDay = earliestDay("pickup", zone, now, policy, branch);
+  const deliveryDay = eligible ? earliestDay("local_delivery", zone, now, policy, branch) : null;
+  const order = orderDay(policy, now, branch);
+  const feesPublic = isConfirmed(policy.fees.review);
+
+  const methods: MethodAnswer[] = [
+    {
+      method: "local_delivery",
+      label: "Local delivery",
+      available: eligible,
+      earliest: deliveryDay ? dayPhrase(deliveryDay, now, policy, branch) : null,
+      detail: eligible ? `Route delivery to ${zone!.label}` : "Not on a Newark route for this ZIP",
+    },
+    {
+      method: "pickup",
+      label: "Will-call pickup",
+      available: true,
+      earliest: pickupDay ? dayPhrase(pickupDay, now, policy, branch) : null,
+      detail: `Newark counter, ${pickupReadyLine(policy).replace("Will-call ready", "ready").toLowerCase()} after confirmation`,
+    },
+    {
+      method: "freight",
+      label: "Freight",
+      available: true,
+      earliest: null,
+      detail: "Carrier rate and date quoted before you pay",
+    },
+  ];
+
+  return {
+    kind: eligible ? "eligible" : "ineligible",
+    zip,
+    area: zone?.label ?? null,
+    methods,
+    orderBy: order ? { cutoff: formatMinutes(policy.cutoff.minutes), dayLabel: order.today ? "today" : weekdayShort(order.day.weekday) } : null,
+    fee: !eligible
+      ? { status: "quoted" }
+      : !feesPublic
+        ? { status: "quoted" }
+        : zone!.deliveryFee === 0
+          ? { status: "free" }
+          : { status: "amount", amount: zone!.deliveryFee, freeOver: zone!.freeDeliveryOver || undefined },
+    policyVersion: policy.version,
+    confirmed: isConfirmed(policy.cutoff.review) && isConfirmed(policy.zones.review),
+  };
 }
 
 export const FULFILLMENT_LABEL: Record<FulfillmentMethod, string> = {

@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { AlertTriangle, Download, ImageOff, PackageCheck, ShieldCheck, UserRoundCheck } from "lucide-react";
+import { AlertTriangle, Download, PackageCheck, ShieldCheck, UserRoundCheck } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
 import { AddToQuote } from "@/components/add-to-quote";
+import { AccountPrice } from "@/components/account-price";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CommerceStatusLine } from "@/components/commerce-status";
+import { NotifyMe } from "@/components/notify-me";
 import { ProductGallery } from "@/components/product-gallery";
-import { StockLine } from "@/components/stock-badge";
 import { Container, LinkButton } from "@/components/ui";
+import { presentCommerceState, publicCommerceState } from "@/lib/commerce/state";
+import { productMedia } from "@/lib/media";
 import { getRelatedSkus, getStorefrontSku, getStorefrontSkus, productHref, skuSlug } from "@/lib/storefront/catalog";
 import { applyLiveInventory, applyLiveInventoryAll, getLiveInventory } from "@/lib/storefront/live-inventory";
 import { buildProductSchema, getSkuSeoState } from "@/lib/seo/catalog";
@@ -84,8 +88,17 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
   const sku = applyLiveInventory(record, live);
   const related = applyLiveInventoryAll(getRelatedSkus(sku, 4), live);
   const galleryImages = sku.imageVerified ? sku.images : sku.referenceImages;
+  const media = productMedia(galleryImages, {
+    title: sku.title,
+    label: sku.imageExactModel ? "Manufacturer product view" : "Reference product view",
+  });
+  // The public CommerceState. Price, status and action below all come from it;
+  // an approved trade session's own price arrives through <AccountPrice />.
+  const commerce = publicCommerceState(sku);
+  const commerceView = presentCommerceState(commerce);
   // Manifest-driven: only fields that apply to this equipment type are shown,
   // so a furnace never renders a SEER2 row and a base pad never renders MCA.
+  const summaryLabels = new Set(["Brand", "Internal SKU", "Manufacturer model", "Equipment type", "Capacity", "Voltage", "Refrigerant", "Zones", "Bundle / kit"]);
   const researched = FIELD_GROUPS.map((group) => ({
     heading: group.heading,
     rows: group.fields
@@ -96,7 +109,8 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
         label: FIELD_LABELS[row.field].label,
         value: `${typeof row.value === "number" ? row.value.toLocaleString("en-US") : row.value}${FIELD_LABELS[row.field].unit ? ` ${FIELD_LABELS[row.field].unit}` : ""}`,
         source: sku.fieldSources[row.field]?.sourceUrl ?? sku.fieldSources.specifications?.sourceUrl ?? null,
-      })),
+      }))
+      .filter((row) => !summaryLabels.has(row.label)),
   })).filter((group) => group.rows.length > 0);
 
   const specs = [
@@ -130,25 +144,15 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
         <Container className="py-3"><Breadcrumbs items={[{ label: "Products", href: "/products" }, { label: sku.categoryLabel, href: `/products?category=${sku.category}` }, { label: sku.sku, href: productHref(sku) }]} /></Container>
       </div>
       <Container className="py-8 lg:py-12">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.05fr]">
-          <div>
-            {galleryImages.length > 0 ? (
-              <>
-                <ProductGallery
-                  images={galleryImages}
-                  title={sku.title}
-                  mediaLabel={sku.imageExactModel ? "Manufacturer product view" : "Reference product view"}
-                />
-                <p className="mt-3 text-xs leading-5 text-ink-3">
-                  {sku.imageExactModel
-                    ? `Manufacturer media verified against model ${sku.modelNumber}.`
-                    : "Reference product media. Appearance and fittings may vary; confirm the listed dimensions before ordering."}
-                </p>
-              </>
-            ) : (
-              <div className="grid min-h-80 place-items-center rounded-(--r-md) border border-line bg-surface-2 p-8 text-center">
-                <div><ImageOff className="mx-auto text-ink-3" size={36} aria-hidden="true" /><p className="mt-3 font-medium text-ink-1">Product photo coming soon</p><p className="mt-1 max-w-sm text-sm text-ink-2">Use the manufacturer model and specifications on this page when matching equipment.</p></div>
-              </div>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+          <div className="min-w-0">
+            <ProductGallery media={media} title={sku.title} />
+            {media.length > 0 && (
+              <p className="mt-3 text-xs leading-5 text-ink-3">
+                {sku.imageExactModel
+                  ? `Manufacturer media verified against model ${sku.modelNumber}.`
+                  : "Reference product media. Appearance and fittings may vary; confirm the listed dimensions before ordering."}
+              </p>
             )}
           </div>
 
@@ -178,18 +182,35 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
             )}
 
             <div className="mt-6 border-y border-line py-5">
-              <p className="text-sm text-ink-3">Price</p>
-              <p className="mt-1 text-3xl font-semibold text-ink-1">{sku.retailPrice !== null ? currency(sku.retailPrice) : "Request price"}</p>
+              <p className="text-sm text-ink-3">{commerceView.priceText ? commerceView.priceQualifier ?? "Price" : "Price"}</p>
+              <p className={`mt-1 text-3xl font-semibold text-ink-1 ${commerceView.priceText ? "part-number" : ""}`}>{commerceView.priceText ?? commerceView.priceFallback}</p>
+              {commerceView.priceText && (
+                <p className="mt-1 text-xs text-ink-3">Plus tax. Approved trade accounts see their own price after sign-in.</p>
+              )}
               {sku.bundleName && <p className="mt-2 text-sm text-ink-2">This component may be priced as part of {sku.bundleName}. We confirm the complete configuration before quoting.</p>}
-              <StockLine sku={sku} className="mt-4" />
+              <AccountPrice skuId={sku.id} />
+              <CommerceStatusLine state={commerce} className="mt-4" />
             </div>
 
             <div className="mt-5 border-t border-line pt-5">
               <div className="flex gap-3"><PackageCheck className="mt-0.5 shrink-0 text-brand" size={20} /><div><h2 className="font-semibold text-ink-1">Pickup and delivery</h2><p className="mt-1 text-sm text-ink-2">Choose Newark pickup or an eligible delivery option during checkout. Large and unpriced orders can be submitted to our sales team.</p></div></div>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-3"><AddToQuote sku={sku} /><LinkButton href={`/contact?sku=${encodeURIComponent(sku.sku)}`} variant="secondary">Ask about compatibility</LinkButton></div>
-            <p className="mt-4 text-xs leading-5 text-ink-3">Retail customers can check out at the listed price. Wholesale pricing is available only to approved signed-in accounts.</p>
+            {commerceView.action.intent === "notify" ? (
+              <div id="restock" className="mt-5 scroll-mt-6">
+                <NotifyMe skuId={sku.id} />
+              </div>
+            ) : (
+              <div className="mt-5 flex flex-wrap gap-3">
+                <AddToQuote sku={sku} state={commerce} />
+                <LinkButton href={`/contact?topic=product&sku=${encodeURIComponent(sku.sku)}`} variant="secondary">Ask about compatibility</LinkButton>
+              </div>
+            )}
+            <p className="mt-4 text-xs leading-5 text-ink-3">
+              {commerceView.action.intent === "cart"
+                ? "Checkout confirms the price, stock and fulfillment window again before payment."
+                : "Requests go to the Newark counter, which confirms price, stock and timing in writing. Nothing is charged."}
+            </p>
           </section>
         </div>
 
@@ -296,7 +317,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
           <section className="mt-12 border-t border-line pt-10">
             <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">Related catalog items</h2>
             <p className="mt-1 text-sm text-ink-2">Nearby products in the same category. Similar capacity does not prove compatibility.</p>
-            <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-9 lg:grid-cols-4">
+            <div className="product-grid mt-6">
               {related.map((item) => <ProductCard key={item.id} sku={item} />)}
             </div>
           </section>
@@ -308,8 +329,4 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
 
 function StatusCard({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
   return <article><div className="flex items-center gap-2 text-ink-1">{icon}<h2 className="text-lg font-semibold text-ink-1">{title}</h2></div><p className="mt-2 text-sm leading-6 text-ink-2">{body}</p></article>;
-}
-
-function currency(value: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(value);
 }

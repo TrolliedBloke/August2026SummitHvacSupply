@@ -1,5 +1,28 @@
+import { deliveryPolicyIsConfirmed, FULFILLMENT_POLICY } from "./fulfillment-policy";
+import { BRANCHES, type Branch } from "./branch";
+
+/**
+ * Local landing pages as structured, reviewable data. Each page names the
+ * locality it speaks to, the coverage that backs its claims (a resolver key
+ * into the fulfillment policy, not prose), the branches that serve it, and
+ * when its claims were last reviewed. JSON-LD `areaServed` is generated from
+ * that coverage -- never from the global marketing service area -- and every
+ * href is validated against the catalog taxonomy in tests.
+ *
+ * TODO(summit-ops): re-review each page's claims and update `claimsReviewedAt`.
+ */
+export type LocalCoverage = {
+  /** `route_zips`: claims rest on the Newark delivery routes plus will-call. */
+  type: "route_zips" | "pickup_and_freight";
+  resolverKey: "newark-fulfillment";
+};
+
 export type LocalPage = {
   slug: string;
+  locality: { name: string; kind: "region" | "city" };
+  coverage: LocalCoverage;
+  servingBranchIds: string[];
+  claimsReviewedAt: string;
   title: string;
   description: string;
   eyebrow: string;
@@ -15,6 +38,10 @@ export type LocalPage = {
 export const LOCAL_PAGES: LocalPage[] = [
   {
     slug: "bay-area-hvac-supply",
+    locality: { name: "San Francisco Bay Area", kind: "region" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "Bay Area HVAC Supply - Newark TCL Heat Pumps & Mini Splits",
     description:
       "Bay Area TCL HVAC supply from Newark, CA with homeowner equipment guidance, contractor will-call, local delivery coordination, and spec support.",
@@ -34,6 +61,10 @@ export const LOCAL_PAGES: LocalPage[] = [
   },
   {
     slug: "bay-area-mini-split-supply",
+    locality: { name: "San Francisco Bay Area", kind: "region" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "Bay Area Mini Split Supply - TCL Ductless Systems",
     description:
       "Shop TCL mini splits for Bay Area homes, ADUs, additions, and contractor jobs with local supply from Newark, CA.",
@@ -49,10 +80,14 @@ export const LOCAL_PAGES: LocalPage[] = [
     primaryCta: "Find the right system",
     primaryHref: "/homeowners#homeowner-request",
     secondaryCta: "Shop systems",
-    secondaryHref: "/products?category=ductless",
+    secondaryHref: "/products?category=mini-splits",
   },
   {
     slug: "bay-area-heat-pump-installer-help",
+    locality: { name: "San Francisco Bay Area", kind: "region" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "Bay Area Heat Pump Installer Help - TCL Equipment Guidance",
     description:
       "Need a Bay Area installer for a TCL heat pump or mini split? Summit supplies equipment and helps homeowners prepare for qualified contractor follow-up.",
@@ -72,6 +107,10 @@ export const LOCAL_PAGES: LocalPage[] = [
   },
   {
     slug: "buy-one-mini-split-bay-area",
+    locality: { name: "San Francisco Bay Area", kind: "region" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "Buy One Mini Split in the Bay Area - TCL Equipment Help",
     description:
       "Buying one TCL mini split in the Bay Area? Summit helps retail buyers understand equipment, installation, rebates, and local availability.",
@@ -87,10 +126,14 @@ export const LOCAL_PAGES: LocalPage[] = [
     primaryCta: "Ask about one unit",
     primaryHref: "/homeowners#homeowner-request",
     secondaryCta: "View mini splits",
-    secondaryHref: "/products?category=ductless",
+    secondaryHref: "/products?category=mini-splits",
   },
   {
     slug: "bay-area-heat-pump-rebates",
+    locality: { name: "San Francisco Bay Area", kind: "region" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "Bay Area Heat Pump Rebates - Current Program Guidance",
     description:
       "Learn what Bay Area heat pump buyers should verify about active California programs, AHRI matchups, utility rules, and installer eligibility.",
@@ -110,6 +153,10 @@ export const LOCAL_PAGES: LocalPage[] = [
   },
   {
     slug: "newark-hvac-will-call-contractors",
+    locality: { name: "Newark", kind: "city" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "Newark HVAC Will-Call for Contractors - TCL Stock & Docs",
     description:
       "Contractors can use Summit HVAC Supply in Newark for TCL HVAC will-call, stock checks, spec sheets, quote support, and account pricing.",
@@ -129,6 +176,10 @@ export const LOCAL_PAGES: LocalPage[] = [
   },
   {
     slug: "tcl-mini-split-systems",
+    locality: { name: "San Francisco Bay Area", kind: "region" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "TCL Mini Split Systems - Bay Area Stock & Guidance",
     description: "Compare TCL single-zone and multi-zone mini split systems with Newark availability, documents, and Bay Area installer help.",
     eyebrow: "TCL mini split systems",
@@ -140,12 +191,16 @@ export const LOCAL_PAGES: LocalPage[] = [
       "Part-number search, documents, and Newark stock for contractor buyers.",
     ],
     primaryCta: "Shop ductless systems",
-    primaryHref: "/products?category=ductless",
+    primaryHref: "/products?category=mini-splits",
     secondaryCta: "Get installer help",
     secondaryHref: "/homeowners#homeowner-request",
   },
   {
     slug: "tcl-ducted-heat-pumps",
+    locality: { name: "San Francisco Bay Area", kind: "region" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "TCL Ducted Heat Pumps - Bay Area Equipment Supply",
     description: "Explore TCL ducted heat pumps for Bay Area replacements and new projects with AHRI, permit, and installer guidance.",
     eyebrow: "TCL ducted heat pumps",
@@ -157,12 +212,16 @@ export const LOCAL_PAGES: LocalPage[] = [
       "Newark supply support for qualified Bay Area installers.",
     ],
     primaryCta: "Shop ducted systems",
-    primaryHref: "/products?category=ducted",
+    primaryHref: "/products?category=central-heat-pumps",
     secondaryCta: "Check permit guidance",
     secondaryHref: "/guides/bay-area-hvac-permits",
   },
   {
     slug: "r-32-mini-split-systems",
+    locality: { name: "San Francisco Bay Area", kind: "region" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "R-32 Mini Split Systems - Bay Area Supply Guidance",
     description: "Shop and compare R-32 mini split systems with A2L handling guidance, product documents, and Newark availability.",
     eyebrow: "R-32 mini split systems",
@@ -180,6 +239,10 @@ export const LOCAL_PAGES: LocalPage[] = [
   },
   {
     slug: "contractor-hvac-supply-newark",
+    locality: { name: "Newark", kind: "city" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "Contractor HVAC Supply in Newark - Stock, Will-Call & Docs",
     description: "Newark HVAC supply for Bay Area contractors with SKU search, local stock, will-call, documents, quotes, and trade account access.",
     eyebrow: "Contractor HVAC supply",
@@ -197,6 +260,10 @@ export const LOCAL_PAGES: LocalPage[] = [
   },
   {
     slug: "heat-pump-equipment-property-managers",
+    locality: { name: "San Francisco Bay Area", kind: "region" },
+    coverage: { type: "route_zips", resolverKey: "newark-fulfillment" },
+    servingBranchIds: ["newark"],
+    claimsReviewedAt: "2026-09-30",
     title: "Heat Pump Equipment for Bay Area Property Managers",
     description: "Equipment planning and quote support for Bay Area property managers replacing heat pumps across apartments and commercial properties.",
     eyebrow: "Property and portfolio buyers",
@@ -210,9 +277,20 @@ export const LOCAL_PAGES: LocalPage[] = [
     primaryCta: "Request project quote",
     primaryHref: "/quote",
     secondaryCta: "Contact the counter",
-    secondaryHref: "/contact?topic=property",
+    secondaryHref: "/contact?topic=quote",
   },
 ];
+
+/** The coverage a page may claim, from the same policy the ZIP check uses. */
+export function localAreaServed(page: LocalPage): string[] {
+  if (page.coverage.type === "pickup_and_freight") return [page.locality.name];
+  if (!deliveryPolicyIsConfirmed()) return [];
+  return FULFILLMENT_POLICY.zones.list.filter((zone) => zone.localDeliveryEligible).map((zone) => `${zone.label}, CA`);
+}
+
+export function servingBranches(page: LocalPage): Branch[] {
+  return page.servingBranchIds.flatMap((id) => BRANCHES.filter((branch) => branch.id === id));
+}
 
 export function getLocalPage(slug: string) {
   return LOCAL_PAGES.find((page) => page.slug === slug);

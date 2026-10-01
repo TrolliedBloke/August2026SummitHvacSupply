@@ -14,11 +14,22 @@ import { checkoutSchema } from "../src/lib/backend/schemas";
 import { resolveUnitPrice } from "../src/lib/backend/pricing";
 import { FULFILLMENT, formatCutoffHour } from "../src/lib/site";
 import { fulfillmentWindows, isFulfillmentWindowAvailable } from "../src/lib/backend/fulfillment";
+import { FULFILLMENT_POLICY, type FulfillmentPolicy } from "../src/lib/fulfillment-policy";
+import { NEWARK, type Branch } from "../src/lib/branch";
 import { createQuoteRequest, roleCanAccessAccount } from "../src/lib/backend/services";
 import { categorySitemapEntries, productSitemapEntries, renderSitemapIndex } from "../src/lib/seo/sitemaps";
 import { filterStorefrontSkus, getStorefrontSku, getStorefrontSkus, searchStorefrontSkus } from "../src/lib/storefront/catalog";
 import { catalogHealth, catalogReconciliation } from "../src/lib/catalog/reconciliation";
 import type { InventoryLot, OrderLine } from "../src/lib/backend/types";
+
+const CONFIRMED_REVIEW = { status: "confirmed" as const, reviewedAt: "2026-09-30" };
+const CONFIRMED_BRANCH: Branch = { ...NEWARK, hoursReview: CONFIRMED_REVIEW };
+const CONFIRMED_POLICY: FulfillmentPolicy = {
+  ...FULFILLMENT_POLICY,
+  cutoff: { ...FULFILLMENT_POLICY.cutoff, review: CONFIRMED_REVIEW },
+  pickupPrep: { ...FULFILLMENT_POLICY.pickupPrep, review: CONFIRMED_REVIEW },
+  zones: { ...FULFILLMENT_POLICY.zones, review: CONFIRMED_REVIEW },
+};
 
 describe("backend inventory math", () => {
   const lots: InventoryLot[] = [
@@ -319,7 +330,8 @@ describe("fulfillment windows", () => {
     const windows = fulfillmentWindows("pickup", "94560", now);
     assert.ok(windows.length > 0);
     assert.ok(windows.every((window) => new Date(window.startAt) > now));
-    assert.equal(isFulfillmentWindowAvailable("pickup", "94560", windows[0].id, now), true);
+    assert.equal(isFulfillmentWindowAvailable("pickup", "94560", windows[0].id, now), false, "draft operations data cannot authorize checkout");
+    assert.equal(isFulfillmentWindowAvailable("pickup", "94560", windows[0].id, now, CONFIRMED_POLICY, CONFIRMED_BRANCH), true);
   });
 
   it("does not offer same-day pickup after the Pacific cutoff", () => {

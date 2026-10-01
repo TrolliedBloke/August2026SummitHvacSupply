@@ -61,6 +61,8 @@ export const checkoutSchema = z.object({
   window: z.string().optional(),
   buyerName: z.string().optional(),
   buyerEmail: z.string().email().optional(),
+  /** The signed snapshot the buyer reviewed. Orders are accepted only against a current one. */
+  snapshotToken: z.string().max(2000).optional(),
 }).superRefine((value, ctx) => {
   if (value.method === "local_delivery" && (!value.address || value.address.trim().length < 5)) {
     ctx.addIssue({ code: "custom", path: ["address"], message: "Jobsite address is required for local delivery." });

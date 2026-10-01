@@ -41,6 +41,20 @@
   --color-control-bg: var(--control-bg);
   --color-control-border: var(--control-border);
 
+  --color-state-info: var(--state-info-bg);
+  --color-state-info-line: var(--state-info-border);
+  --color-state-info-ink: var(--state-info-ink);
+  --color-state-success: var(--state-success-bg);
+  --color-state-success-line: var(--state-success-border);
+  --color-state-success-ink: var(--state-success-ink);
+  --color-state-warning: var(--state-warning-bg);
+  --color-state-warning-line: var(--state-warning-border);
+  --color-state-warning-ink: var(--state-warning-ink);
+  --color-state-danger: var(--state-danger-bg);
+  --color-state-danger-line: var(--state-danger-border);
+  --color-state-danger-ink: var(--state-danger-ink);
+  --color-skeleton: var(--state-skeleton);
+
   --radius-sm: var(--r-sm);
   --radius-md: var(--r-md);
   --radius-lg: var(--r-lg);
@@ -117,6 +131,72 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Product grid. Intrinsic tracks: one column until two cards each keep at
+   least 14rem (where a wrapped title, price and a full action still fit), then
+   as many as the container allows. ProductCard spans six rows and adopts them
+   as a subgrid, so titles, prices and actions align across each row. */
+@layer components {
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+    column-gap: 1rem;
+    row-gap: 2.25rem;
+  }
+}
+
+/* Long-form reading. Guides and legal documents own their measure and rhythm
+   here, so a marketing type change cannot widen a policy past readability. */
+.prose-doc {
+  max-width: var(--measure);
+  color: var(--ink-2);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.prose-doc h2 {
+  color: var(--ink-1);
+  font-size: var(--text-h2);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.prose-doc h3 {
+  color: var(--ink-1);
+  font-size: var(--text-lead);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.prose-doc a {
+  color: var(--ink-1);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.prose-doc a:hover {
+  color: var(--brand);
+}
+.prose-doc :where(h2, h3)[id] {
+  scroll-margin-top: 1.5rem;
+}
+@media (forced-colors: active) {
+  .prose-doc a {
+    text-decoration-thickness: 2px;
+  }
+}
+
+/* Sheet and drawer entrances. Collapsed to nothing by the reduced-motion rule
+   above. */
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+}
+@keyframes slide-in-up {
+  from { transform: translateY(100%); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+.animate-slide-in-right { animation: slide-in-right 280ms cubic-bezier(0.16, 1, 0.3, 1); }
+.animate-slide-in-up { animation: slide-in-up 260ms cubic-bezier(0.16, 1, 0.3, 1); }
+.animate-fade-in { animation: fade-in 150ms ease-out; }
 
 .part-number {
   font-family: var(--font-mono);

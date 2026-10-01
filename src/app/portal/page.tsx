@@ -1,13 +1,15 @@
 import { redirect } from "next/navigation";
-import { getSessionProfile } from "@/lib/backend/auth";
+import { portalDestination, resolvePortalAccess } from "@/lib/backend/session-access";
 
 export const metadata = { title: "Account Portal - Summit HVAC Supply" };
 
+/**
+ * Routes by ACCESS state, not just role: a signed-in person whose profile is
+ * missing, whose application is pending, or whose account is paused lands on
+ * /portal/status with an explanation -- never back on the login form.
+ */
 export default async function PortalPage() {
-  const profile = await getSessionProfile();
-  if (!profile) redirect("/portal/login?next=/portal");
-  if (profile.role === "staff") redirect("/admin");
-  if (profile.role === "dealer") redirect("/portal/dealer");
-  if (profile.role === "installer") redirect("/portal/installer");
-  redirect("/portal/homeowner");
+  const access = await resolvePortalAccess();
+  if (access.kind === "signedOut") redirect("/portal/login?next=/portal");
+  redirect(portalDestination(access));
 }

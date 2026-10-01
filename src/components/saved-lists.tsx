@@ -2,12 +2,12 @@
 
 import { ListChecks, Plus, Trash2 } from "lucide-react";
 import * as React from "react";
-import { useQuote } from "./quote-context";
+import { pendingIntent, useQuote } from "./quote-context";
 import type { SavedListItem, SavedList } from "@/lib/backend/lists";
 
 /* Truck-stock lists in the portal: one click restocks the cart. */
 export function SavedListsPanel() {
-  const { add, setQty } = useQuote();
+  const { addMany } = useQuote();
   const [lists, setLists] = React.useState<SavedList[] | null>(null);
   const [notice, setNotice] = React.useState<string | null>(null);
 
@@ -19,8 +19,11 @@ export function SavedListsPanel() {
   }, []);
 
   function addAll(list: SavedList) {
-    for (const item of list.items) {
-      add({
+    // A saved list cannot prove a line is still purchasable, so every line
+    // enters as a request; the drawer's server revalidation promotes the ones
+    // that are. One mutation for the whole list.
+    addMany(
+      list.items.map((item) => ({
         skuId: item.skuId,
         sku: item.sku,
         modelNumber: item.modelNumber,
@@ -28,9 +31,10 @@ export function SavedListsPanel() {
         image: item.image,
         available: item.available,
         unitPrice: item.unitPrice,
-      });
-      if (item.qty > 1) setQty(item.skuId, item.qty);
-    }
+        qty: item.qty,
+        intent: pendingIntent(item.unitPrice),
+      }))
+    );
     setNotice(`"${list.name}" added to cart (${list.items.length} items).`);
   }
 

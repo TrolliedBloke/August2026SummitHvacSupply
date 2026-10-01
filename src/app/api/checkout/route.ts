@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-import { CheckoutConflictError, CheckoutUnavailableError, placeOrder } from "@/lib/backend/checkout";
+import { CheckoutConflictError, CheckoutReviewRequiredError, CheckoutUnavailableError, placeOrder } from "@/lib/backend/checkout";
 
 export async function POST(request: Request) {
   try {
@@ -12,6 +12,14 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { ok: false, error: "Invalid checkout", issues: error.issues },
         { status: 400 }
+      );
+    }
+    // The current snapshot travels with the 409 so the page can show exactly
+    // which lines, fees or totals changed and ask the buyer to confirm.
+    if (error instanceof CheckoutReviewRequiredError) {
+      return NextResponse.json(
+        { ok: false, code: error.code, error: error.message, snapshot: error.snapshot },
+        { status: 409, headers: { "Cache-Control": "private, no-store" } }
       );
     }
     if (error instanceof CheckoutConflictError) {

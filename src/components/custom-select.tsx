@@ -32,11 +32,20 @@ export function CustomSelect({
   disabled = false,
   size = "md",
   className = "",
+  id,
+  invalid,
+  describedBy,
+  required,
 }: {
   value: string;
   onChange: (value: string) => void;
   options: readonly SelectOption[];
-  ariaLabel: string;
+  /** Used when no visible <label htmlFor={id}> names the control. */
+  ariaLabel?: string;
+  id?: string;
+  invalid?: boolean;
+  describedBy?: string;
+  required?: boolean;
   placeholder?: string;
   name?: string;
   disabled?: boolean;
@@ -184,8 +193,12 @@ export function CustomSelect({
       <button
         ref={triggerRef}
         type="button"
+        id={id}
         role="combobox"
-        aria-label={ariaLabel}
+        aria-label={id ? undefined : ariaLabel}
+        aria-invalid={invalid || undefined}
+        aria-describedby={describedBy}
+        aria-required={required || undefined}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listboxId}
@@ -193,9 +206,9 @@ export function CustomSelect({
         disabled={disabled}
         onClick={() => open ? setOpen(false) : openMenu()}
         onKeyDown={onKeyDown}
-        className={`${size === "sm" ? "h-9 px-2.5 text-sm" : size === "lg" ? "h-13 px-4 text-[18px]" : "h-11 px-3.5 text-base"} flex w-full items-center justify-between gap-3 rounded-(--r-sm) border border-control-border bg-control-bg text-left text-ink-1 transition-colors hover:border-ink-4 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25 disabled:cursor-not-allowed disabled:opacity-50`}
+        className={`${size === "sm" ? "min-h-9 px-2.5 text-sm" : size === "lg" ? "min-h-13 px-4 text-[18px]" : "min-h-11 px-3.5 text-base"} flex w-full items-center justify-between gap-3 rounded-(--r-sm) border border-control-border bg-control-bg py-1 text-left text-ink-1 transition-colors hover:border-ink-4 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25 disabled:cursor-not-allowed disabled:opacity-50 aria-[invalid=true]:border-state-danger-ink aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-state-danger-ink/40`}
       >
-        <span className={`min-w-0 truncate ${selected ? "" : "text-ink-3"}`}>
+        <span className={`min-w-0 break-words leading-snug ${selected ? "" : "text-ink-3"}`}>
           {selected?.label ?? placeholder}
         </span>
         <ChevronDown
@@ -212,6 +225,7 @@ export function CustomSelect({
           id={listboxId}
           role="listbox"
           aria-label={ariaLabel}
+          aria-labelledby={id && !ariaLabel ? id : undefined}
           style={{
             position: "fixed",
             top: position.top,
@@ -239,7 +253,7 @@ export function CustomSelect({
                   isActive ? "bg-surface-2 text-ink-1" : "text-ink-2 hover:bg-surface-2 hover:text-ink-1"
                 } ${isSelected ? "font-medium text-brand" : ""}`}
               >
-                <span>{option.label}</span>
+                <span className="min-w-0 break-words">{option.label}</span>
                 {isSelected && <Check size={15} strokeWidth={2} className="shrink-0 text-brand" aria-hidden="true" />}
               </button>
             );

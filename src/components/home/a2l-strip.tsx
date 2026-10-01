@@ -7,7 +7,6 @@ import { Container } from "@/components/ui";
    transition decides which condensers a contractor is allowed to install. The
    chips are real catalog filters, not decoration. */
 const FILTERS = [
-  { label: "A2L rated", href: "/products?refrigerant=R-454B" },
   { label: "R-454B", href: "/products?refrigerant=R-454B" },
   { label: "R-32", href: "/products?refrigerant=R-32" },
 ];
@@ -82,4 +81,3 @@ export function HelpStrip() {
     </section>
   );
 }
-

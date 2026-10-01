@@ -11,7 +11,7 @@ import { expect, test } from "@playwright/test";
 test("landing page never claims a stock count the catalog cannot verify", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
-  const stockRow = page.getByText("Stock at order").first();
+  const stockRow = page.getByText("Stock confirmed at order", { exact: true }).first();
   await expect(stockRow).toBeVisible();
 
   // This suite runs without Supabase credentials, so the live-inventory overlay
@@ -34,9 +34,10 @@ test("landing page surfaces delivery alongside pickup, not pickup alone", async 
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
   const branch = page.getByRole("article").filter({ hasText: "Newark branch" }).first();
-  await expect(branch.getByRole("link", { name: "Next-day delivery" })).toBeVisible();
-  await expect(branch.getByText(/Order (in|tomorrow|before)/)).toBeVisible();
-  await expect(branch.getByText(/Will-call ready in 30 min/)).toBeVisible();
+  // Stable link name; the dated order-by line is its description.
+  await expect(branch.getByRole("link", { name: "Delivery and pickup" })).toBeVisible();
+  await expect(branch.getByText(/Delivery timing confirmed after ZIP and stock review/)).toBeVisible();
+  await expect(branch.getByText(/Will-call timing confirmed with your order/)).toBeVisible();
 
   // The address and Directions were required by the original brief and were
   // dropped when the fold was rebuilt delivery-first. Someone weighing pickup
@@ -45,7 +46,7 @@ test("landing page surfaces delivery alongside pickup, not pickup alone", async 
   await expect(branch.getByText(/5437 Central Ave/)).toBeVisible();
   await expect(branch.getByRole("link", { name: "Directions" })).toBeVisible();
 
-  await branch.getByRole("link", { name: "Next-day delivery" }).click();
+  await branch.getByRole("link", { name: "Delivery and pickup" }).click();
   await expect(page).toHaveURL(/\/delivery$/);
   await expect(page.getByRole("heading", { name: /Delivery and pickup/i })).toBeVisible();
 });
@@ -54,8 +55,9 @@ test("landing uses the header search once and routes product-led hero actions", 
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
   await expect(page.locator("main input[type=search]")).toHaveCount(0);
-  await expect(page.getByRole("link", { name: /Shop as contractor/ })).toHaveAttribute("href", "/portal/login");
-  await expect(page.getByRole("link", { name: /Shop as homeowner/ })).toHaveAttribute("href", "/products");
+  await expect(page.getByRole("link", { name: "Shop retail" })).toHaveAttribute("href", "/products");
+  await expect(page.getByRole("link", { name: "Contractor sign in" })).toHaveAttribute("href", "/portal/login?next=/products");
+  await expect(page.getByRole("radio")).toHaveCount(0);
 });
 
 test("contractor ordering opens, switches, and collapses without a duplicate search", async ({ page }) => {
@@ -88,12 +90,12 @@ test("quick order resolves real SKUs and reports the ones it cannot match", asyn
   await page
     .getByLabel("Part numbers and quantities")
     .fill("TCL24KAHU, 2\nNOTAREALSKU, 1");
-  await page.getByRole("button", { name: "Add to order" }).click();
+  await page.getByRole("button", { name: "Review lines" }).click();
 
-  // A part number the catalog does not carry must be named, not silently
-  // dropped -- a contractor pasting a job list has to know what did not land.
-  await expect(page.getByText(/Not matched:/)).toBeVisible();
-  await expect(page.getByText("NOTAREALSKU", { exact: true })).toBeVisible();
+  // A part number the catalog does not carry is named in the review table,
+  // not silently dropped, and nothing is added until the user confirms.
+  await expect(page.getByText(/Not in the catalog:/)).toBeVisible();
+  await page.getByRole("button", { name: /Add 1 line to order/ }).click();
   await expect(page.getByRole("link", { name: "TCL 2 Ton Air Handler" }).first()).toBeVisible();
 });
 
@@ -109,9 +111,7 @@ test("CSV upload parses a headed job list before adding it to the order", async 
 
   await expect(page.getByText("newark-job.csv", { exact: true })).toBeVisible();
   await expect(page.getByText("2 lines", { exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Add to order" }).click();
-  await expect(page.getByText(/Not matched:/)).toBeVisible();
-  await expect(page.getByText("NOTAREALSKU", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Not in the catalog:/)).toBeVisible();
 });
 
 test("delivery page marks unconfirmed terms rather than presenting them as final", async ({ page }) => {

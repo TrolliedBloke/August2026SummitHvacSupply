@@ -5,7 +5,6 @@ import { HomeownerRequestForm } from "@/components/homeowner-request-form";
 import { HeroRoutingPanel } from "@/components/homepage-conversion-tools";
 import { TestimonialSlot } from "@/components/testimonial-slot";
 import { HOMEOWNER_TESTIMONIALS } from "@/lib/testimonials";
-import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "For Homeowners - Buy One TCL Mini Split or Heat Pump in the Bay Area",
@@ -90,7 +89,7 @@ export default function HomeownersPage() {
             <div className="mt-4 grid gap-3">
               <Proof title="Yes, one system is okay" body="You do not need to be buying a truckload or know the exact SKU." />
               <Proof title="Equipment supply only" body="We do not install. We help you prepare for a qualified installer conversation." />
-              <Proof title="Local Bay Area focus" body={`Newark supply hub serving ${SITE.serviceArea}.`} />
+              <Proof title="Local Bay Area focus" body="Newark supply hub with Bay Area delivery routes. The request form checks your ZIP." />
             </div>
             </div>
             </div>

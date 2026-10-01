@@ -14,7 +14,8 @@ import {
 } from "lucide-react";
 import { Container, Chip } from "@/components/ui";
 import { LoginForm } from "@/components/login-form";
-import { getSessionProfile } from "@/lib/backend/auth";
+import { allowedNext, portalDestination, resolvePortalAccess } from "@/lib/backend/session-access";
+import { Notice } from "@/components/state";
 import { SITE } from "@/lib/site";
 
 const PORTAL_FEATURES = [
@@ -29,19 +30,20 @@ const PORTAL_FEATURES = [
 export default async function PortalLoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string }>;
+  searchParams: Promise<{ next?: string; signed_out?: string }>;
 }) {
-  const { next } = await searchParams;
-  const profile = await getSessionProfile();
+  const { next, signed_out: signedOut } = await searchParams;
+  const access = await resolvePortalAccess();
 
-  // Already signed in: send them where they belong.
-  if (profile) {
-    // `next` is attacker-controllable via the query string and this fires on a
-    // bare GET, so it must be constrained to a site-relative path before use.
-    redirect(profile.role === "staff" ? safeNextPath(next, "/admin") : "/portal");
+  // Already signed in: route by access state. `next` is attacker-controllable
+  // and this fires on a bare GET, so it must be site-relative AND allowed for
+  // the resolved role -- otherwise the role's own destination wins. A signed-in
+  // person never sees this form again, which is what removes the old loop.
+  if (access.kind !== "signedOut" && access.kind !== "unavailable") {
+    redirect(allowedNext(access, safeNextPath(next, "") || null) ?? portalDestination(access));
   }
 
-  const target = safeNextPath(next, "/portal");
+  const target = safeNextPath(next, "");
 
   return (
     <Container className="py-14 lg:py-20">
@@ -61,6 +63,11 @@ export default async function PortalLoginPage({
             Access orders, saved equipment, account details, and the tools available for your account type.
           </p>
 
+          {signedOut === "1" && (
+            <Notice tone="success" role="status" className="mt-5">
+              You are signed out.
+            </Notice>
+          )}
           <LoginForm next={target} />
 
           <p className="mt-4 text-center text-xs text-ink-4">
@@ -74,7 +81,7 @@ export default async function PortalLoginPage({
 
         {/* What's inside */}
         <div className="rounded-(--r-lg) bg-surface-1 p-8">
-          <h2 className="text-xs font-semibold text-ink-3">
+          <h2 className="text-sm font-semibold text-ink-1">
             What dealers will get inside
           </h2>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">

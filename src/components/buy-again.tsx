@@ -2,7 +2,7 @@
 
 import { RotateCw } from "lucide-react";
 import * as React from "react";
-import { useQuote } from "./quote-context";
+import { pendingIntent, useQuote } from "./quote-context";
 
 /**
  * One-click reorder from portal order history -- the load-bearing feature of
@@ -11,7 +11,7 @@ import { useQuote } from "./quote-context";
  * price changes and backorders instead of hiding them.
  */
 export function BuyAgainButton({ orderId }: { orderId: string }) {
-  const { add, setQty } = useQuote();
+  const { add } = useQuote();
   const [state, setState] = React.useState<"idle" | "busy" | "error">("idle");
   const [notice, setNotice] = React.useState<string | null>(null);
 
@@ -46,8 +46,8 @@ export function BuyAgainButton({ orderId }: { orderId: string }) {
           image: item.image,
           available: item.available,
           unitPrice: item.unitPrice,
-        });
-        if (item.qty > 1) setQty(item.skuId, item.qty);
+          intent: pendingIntent(item.unitPrice),
+        }, item.qty);
         added++;
         if (item.priceChanged) priceChanged++;
       }

@@ -1,9 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { ChevronDown, ClipboardList, List, Upload } from "lucide-react";
 import * as React from "react";
-import { useQuote } from "@/components/quote-context";
+import { QuickOrderReview, useQuickOrderReview } from "@/components/quick-order-review";
+import { Notice } from "@/components/state";
+import { parseQuickOrderText, QUICK_ORDER_ROW_LIMIT } from "@/lib/quick-order";
+import { CSV_MAX_BYTES, parseQuickOrderCsv } from "@/lib/csv";
 
 /* Search lives in the shared header. This panel is deliberately limited to the
    two bulk-order workflows that are distinct from search: a contractor arrives
@@ -73,174 +75,129 @@ export function CounterPanel() {
 
 /* Quick order + CSV -------------------------------------------------------- */
 
-type Parsed = { sku: string; qty: number };
-
-/** Accepts "SKU, 2" / "SKU 2" / "SKU" per line. Quantity defaults to 1. */
-function parseLines(raw: string): Parsed[] {
-  return raw
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => {
-      const parts = line.split(/[,\t]|\s+/).filter(Boolean);
-      const sku = parts[0] ?? "";
-      const qty = Number.parseInt(parts[1] ?? "1", 10);
-      return { sku, qty: Number.isFinite(qty) && qty > 0 ? qty : 1 };
-    })
-    .filter((entry) => entry.sku.length > 0);
-}
+/* Both tabs feed the same pipeline: parse locally (lib/quick-order.ts or
+   lib/csv.ts) into one row model, resolve every row in one batch request, show
+   the review table, and commit accepted rows in one cart update. Nothing is
+   added before the user confirms. */
 
 function QuickOrderTab() {
   const [value, setValue] = React.useState("");
+  const review = useQuickOrderReview();
+  const parsed = React.useMemo(() => parseQuickOrderText(value), [value]);
+
+  function submit(event: React.FormEvent) {
+    event.preventDefault();
+    if (parsed.rows.length === 0) return;
+    review.load(parsed.rows, parsed.overLimit);
+  }
+
+  // The review table sits outside the form: Enter in a row's input must not
+  // re-parse the textarea and discard corrections.
   return (
-    <BulkForm
-      label="Paste one part number per line. Add a quantity after a comma."
-      parsed={parseLines(value)}
-      control={
-        <>
-          <label htmlFor="quick-order" className="sr-only">
-            Part numbers and quantities
-          </label>
-          <textarea
-            id="quick-order"
-            rows={5}
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-            placeholder={"TCL24KAHU, 2\nTOS12KODU, 1"}
-            className="w-full resize-y rounded-(--r-sm) border border-line-strong bg-surface-1 p-3 text-sm text-ink-1 outline-none placeholder:text-ink-4"
-          />
-        </>
-      }
-    />
+    <>
+    <form onSubmit={submit} data-conversion-hook="homepage-bulk-order">
+      <p id="quick-order-help" className="text-sm leading-6 text-ink-2">
+        One part per line: the part number, a comma, then the quantity. Up to {QUICK_ORDER_ROW_LIMIT} lines.
+      </p>
+      <label htmlFor="quick-order" className="sr-only">
+        Part numbers and quantities
+      </label>
+      <textarea
+        id="quick-order"
+        rows={5}
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        aria-describedby="quick-order-help"
+        placeholder={"TCL24KAHU, 2\nTOS12KODU, 1"}
+        className="mt-3 w-full resize-y rounded-(--r-sm) border border-line-strong bg-surface-1 p-3 text-sm text-ink-1 outline-none placeholder:text-ink-4 focus:border-brand focus:ring-2 focus:ring-brand/25"
+      />
+      <div className="mt-3 flex flex-wrap items-center gap-3">
+        <button
+          type="submit"
+          disabled={parsed.rows.length === 0}
+          className="h-11 rounded-(--r-sm) border border-ink-1 bg-surface-1 px-6 text-sm font-medium text-ink-1 transition-colors duration-150 hover:bg-surface-2 disabled:pointer-events-none disabled:opacity-50"
+        >
+          Review lines
+        </button>
+        <span className="part-number text-sm text-ink-3">
+          {parsed.rows.length} {parsed.rows.length === 1 ? "line" : "lines"}
+          {parsed.overLimit > 0 ? ` · ${parsed.overLimit} over the limit` : ""}
+        </span>
+      </div>
+    </form>
+    <QuickOrderReview review={review} />
+    </>
   );
 }
 
 function UploadTab() {
-  const [value, setValue] = React.useState("");
   const [fileName, setFileName] = React.useState<string | null>(null);
+  const [rowCount, setRowCount] = React.useState<number | null>(null);
   const [error, setError] = React.useState<string | null>(null);
+  const [notes, setNotes] = React.useState<string | null>(null);
+  const review = useQuickOrderReview();
 
   async function onFile(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
+    event.target.value = "";
     if (!file) return;
     setError(null);
-    // 2 MB is far past any plausible job list; past that it is the wrong file.
-    if (file.size > 2_000_000) {
+    setNotes(null);
+    setRowCount(null);
+    review.reset();
+    setFileName(file.name);
+    if (file.size > CSV_MAX_BYTES) {
       setError("That file is larger than 2 MB. Upload a part list, not a catalog export.");
       return;
     }
+    let text: string;
     try {
-      const text = await file.text();
-      setFileName(file.name);
-      // Drop a header row if the first cell is obviously a label.
-      const lines = text.split(/\r?\n/);
-      const body = /sku|part|item/i.test(lines[0] ?? "") ? lines.slice(1) : lines;
-      setValue(body.join("\n"));
+      text = await file.text();
     } catch {
-      setError("That file could not be read. Save it as CSV and try again.");
+      setError("That file could not be read. Save it as CSV UTF-8 and try again.");
+      return;
     }
+    const result = parseQuickOrderCsv(text, file.size);
+    if (!result.ok) {
+      setError(result.error.message);
+      return;
+    }
+    if (result.rows.length === 0) {
+      setError("The file has a header but no part lines.");
+      return;
+    }
+    setRowCount(result.rows.length);
+    if (result.ignoredColumns.length > 0) setNotes(`Ignored columns: ${result.ignoredColumns.join(", ")}.`);
+    review.load(result.rows, result.overLimit);
   }
 
   return (
-    <BulkForm
-      label="Upload a CSV with a part number in the first column and a quantity in the second."
-      parsed={parseLines(value)}
-      control={
-        <>
-          <label
-            htmlFor="csv-upload"
-            className="flex cursor-pointer items-center justify-center gap-2.5 rounded-(--r-sm) border border-dashed border-line-strong bg-surface-2 px-4 py-7 text-sm text-ink-2 transition-colors duration-150 hover:border-ink-4"
-          >
-            <Upload size={17} strokeWidth={1.7} aria-hidden="true" />
-            {fileName ? <span className="part-number text-ink-1">{fileName}</span> : "Choose a CSV file"}
-          </label>
-          <input id="csv-upload" type="file" accept=".csv,text/csv" onChange={onFile} className="sr-only" />
-          {error && <p role="alert" className="mt-2 text-sm text-ink-1">{error}</p>}
-        </>
-      }
-    />
-  );
-}
-
-/* Shared submit path for both bulk tabs. Every pasted line is resolved against
-   the real catalog before anything is added -- an unmatched part number is
-   reported back rather than silently dropped. */
-function BulkForm({
-  label,
-  control,
-  parsed,
-}: {
-  label: string;
-  control: React.ReactNode;
-  parsed: Parsed[];
-}) {
-  const { add, open } = useQuote();
-  const router = useRouter();
-  const [busy, setBusy] = React.useState(false);
-  const [misses, setMisses] = React.useState<string[]>([]);
-
-  async function submit(event: React.FormEvent) {
-    event.preventDefault();
-    if (parsed.length === 0 || busy) return;
-    setBusy(true);
-    setMisses([]);
-    const notFound: string[] = [];
-    let added = 0;
-
-    for (const entry of parsed.slice(0, 50)) {
-      try {
-        const res = await fetch(`/api/search?q=${encodeURIComponent(entry.sku)}`);
-        const payload = await res.json();
-        const hit = payload.results?.[0];
-        if (!hit) {
-          notFound.push(entry.sku);
-          continue;
-        }
-        for (let i = 0; i < entry.qty; i += 1) {
-          add({
-            skuId: hit.id,
-            sku: hit.sku,
-            modelNumber: hit.modelNumber,
-            title: hit.title,
-            image: "/logo-summit.svg",
-            unitPrice: 0,
-            available: hit.available ?? 0,
-          });
-        }
-        added += 1;
-      } catch {
-        notFound.push(entry.sku);
-      }
-    }
-
-    setBusy(false);
-    setMisses(notFound);
-    if (added > 0) open();
-    else if (notFound.length > 0) router.push(`/products?q=${encodeURIComponent(notFound[0])}`);
-  }
-
-  return (
-    <form onSubmit={submit} data-conversion-hook="homepage-bulk-order">
-      <p className="text-sm leading-6 text-ink-2">{label}</p>
-      <div className="mt-3">{control}</div>
-      <div className="mt-3 flex flex-wrap items-center gap-3">
-        <button
-          type="submit"
-          disabled={parsed.length === 0 || busy}
-          className="h-11 rounded-(--r-sm) bg-brand px-6 text-sm font-medium text-brand-ink transition-colors duration-150 hover:bg-brand-hover disabled:pointer-events-none disabled:opacity-50"
-        >
-          {busy ? "Matching..." : "Add to order"}
-        </button>
-        <span className="part-number text-sm text-ink-3">
-          {parsed.length} {parsed.length === 1 ? "line" : "lines"}
-        </span>
-      </div>
-      {misses.length > 0 && (
-        <p role="status" aria-live="polite" className="mt-3 text-sm leading-6 text-ink-1">
-          Not matched: <span className="part-number">{misses.join(", ")}</span>. Search these by
-          hand or send the list to the counter.
-        </p>
+    <div>
+      <p className="text-sm leading-6 text-ink-2">
+        Upload a CSV with a <span className="part-number">sku</span> column and a{" "}
+        <span className="part-number">quantity</span> column, comma or tab separated.{" "}
+        <a href="/templates/quick-order-template.csv" download className="font-medium text-ink-1 underline underline-offset-4">
+          Download the template
+        </a>
+      </p>
+      <label
+        htmlFor="csv-upload"
+        className="mt-3 flex cursor-pointer items-center justify-center gap-2.5 rounded-(--r-sm) border border-dashed border-line-strong bg-surface-2 px-4 py-7 text-sm text-ink-2 transition-colors duration-150 hover:border-ink-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brand"
+      >
+        <Upload size={17} strokeWidth={1.7} aria-hidden="true" />
+        {fileName ? <span className="part-number break-all text-ink-1">{fileName}</span> : "Choose a CSV file"}
+      </label>
+      <input id="csv-upload" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values" onChange={onFile} className="sr-only" />
+      {rowCount !== null && (
+        <p className="part-number mt-3 text-sm text-ink-3">{rowCount} {rowCount === 1 ? "line" : "lines"}</p>
       )}
-    </form>
+      {notes && <p className="mt-1 text-meta text-ink-3">{notes}</p>}
+      {error && (
+        <Notice tone="danger" role="alert" className="mt-3">
+          {error}
+        </Notice>
+      )}
+      <QuickOrderReview review={review} />
+    </div>
   );
 }
