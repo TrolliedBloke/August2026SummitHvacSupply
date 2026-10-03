@@ -66,7 +66,15 @@ export function AudiencePaths() {
         ))}
       </ul>
       <p className="mt-3 text-meta text-ink-3">
-        New trade customer?{" "}
+        Not sure what you need?{" "}
+        <Link
+          href="/finder"
+          className="font-medium text-ink-1 underline underline-offset-4 transition-colors duration-120 hover:text-brand"
+          data-conversion-hook="audience-finder"
+        >
+          Find your system
+        </Link>
+        {" · "}New trade customer?{" "}
         <Link
           href="/dealers"
           className="font-medium text-ink-1 underline underline-offset-4 transition-colors duration-120 hover:text-brand"

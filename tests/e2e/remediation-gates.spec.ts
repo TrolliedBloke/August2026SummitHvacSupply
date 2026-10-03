@@ -18,6 +18,8 @@ const PUBLIC_ROUTES = [
   "/locations/newark",
   "/bay-area-hvac-supply",
   "/homeowners",
+  "/finder",
+  "/privacy/opt-out",
   "/dealers",
   "/about",
   "/contact",

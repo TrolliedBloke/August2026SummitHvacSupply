@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { CheckCircle2, Clock3, History, ShieldCheck, UserRoundCheck } from "lucide-react";
 import { Chip, Container } from "@/components/ui";
-import { listDealerApplicationsForReview, type DealerApplicationReview } from "@/lib/backend/dealer-review";
+import { cslbLookupHref, listDealerApplicationsForReview, type DealerApplicationReview } from "@/lib/backend/dealer-review";
 import { APPLICANT_COPY, canTransition, DEALER_TRANSITIONS, type DealerApplicationStatus } from "@/lib/dealer-application-state";
-import { approveDealerApplicationAction, reviewDealerApplicationAction } from "./actions";
+import { approveDealerApplicationAction, recordEpa608Action, recordLicenseCheckAction, reviewDealerApplicationAction } from "./actions";
 
 export const metadata = { title: "Dealer application review", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -101,6 +101,7 @@ export default async function DealerApplicationsAdminPage({
 function ApplicationCard({ application, readOnly = false }: { application: DealerApplicationReview; readOnly?: boolean }) {
   const transitions = DEALER_TRANSITIONS[application.status].filter((status) => status !== "approved");
   const approvable = canTransition(application.status, "approved") && application.status !== "approved";
+  const needsLicenseCheck = Boolean(application.licenseApplicable && !application.licenseVerifiedAt);
   return (
     <article className="rounded-(--r-md) border border-line bg-surface-1 p-5 shadow-[var(--shadow-sm)] sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -131,6 +132,30 @@ function ApplicationCard({ application, readOnly = false }: { application: Deale
       </dl>
       {application.notes && <p className="mt-4 rounded-(--r-sm) bg-surface-2 p-3 text-sm leading-6 text-ink-2"><strong className="font-medium text-ink-1">Applicant notes:</strong> {application.notes}</p>}
 
+      <section className="mt-5 grid gap-4 border-t border-line pt-5 sm:grid-cols-2" aria-label="Credential verification">
+        <div>
+          <h4 className="font-medium">Contractor license</h4>
+          <p className="mt-2 text-sm">{application.licenseVerifiedAt ? `${application.licenseClassification} · checked ${formatDate(application.licenseVerifiedAt)}` : "No license check recorded."}</p>
+          {application.licenseState?.toLowerCase() === "ca" && application.licenseNumber && <a className="inline-flex min-h-11 items-center text-sm underline underline-offset-4" href={cslbLookupHref(application.licenseNumber)} target="_blank" rel="noopener noreferrer">Check license with CSLB (opens a new tab)</a>}
+          {application.licenseApplicable && (!readOnly || application.status === "approved") && <form action={recordLicenseCheckAction} className="mt-3 grid gap-3">
+            <input type="hidden" name="applicationId" value={application.id} />
+            <label className="text-sm">License classification<input name="classification" required maxLength={4} placeholder="C-20" defaultValue={application.licenseClassification ?? ""} className="mt-1 block h-11 w-full rounded-(--r-sm) border border-line px-3" /></label>
+            <label className="flex items-start gap-2 text-sm"><input type="checkbox" name="confirmed" value="yes" required className="mt-1" />I checked the license and classification with the issuing board.</label>
+            <button className="min-h-11 rounded-(--r-sm) border border-line px-4 text-sm" type="submit">Record license check</button>
+          </form>}
+        </div>
+        <div>
+          <h4 className="font-medium">EPA 608 certificate</h4>
+          <p className="mt-2 break-words text-sm">{application.epa608Type?.replaceAll("_", " ") ?? "Not supplied"}{application.epa608Number ? ` · ${application.epa608Number}` : ""}{application.epa608SightedAt ? ` · card sighted ${formatDate(application.epa608SightedAt)}` : " · card not yet sighted"}</p>
+          {(!readOnly || application.status === "approved") && <form action={recordEpa608Action} className="mt-3 grid gap-3">
+            <input type="hidden" name="applicationId" value={application.id} />
+            <label className="text-sm">Certification type<select name="type" required defaultValue={application.epa608Type ?? ""} className="mt-1 block h-11 w-full rounded-(--r-sm) border border-line px-3"><option value="" disabled>Select a type</option><option value="type_i">Type I</option><option value="type_ii">Type II</option><option value="type_iii">Type III</option><option value="universal">Universal</option></select></label>
+            <label className="text-sm">Certificate number<input name="certificateNumber" required minLength={4} maxLength={40} defaultValue={application.epa608Number ?? ""} className="mt-1 block h-11 w-full rounded-(--r-sm) border border-line px-3" /></label>
+            <button type="submit" className="min-h-11 rounded-(--r-sm) border border-line px-4 text-sm">Record card as sighted</button>
+          </form>}
+        </div>
+      </section>
+
       {!readOnly && (transitions.length > 0 || approvable) && (
         <div className="mt-6 grid gap-4 border-t border-line pt-5 lg:grid-cols-2">
           {transitions.length > 0 && (
@@ -155,7 +180,8 @@ function ApplicationCard({ application, readOnly = false }: { application: Deale
                 <option value="volume">Volume trade</option>
               </select>
               <p className="mt-3 text-sm leading-6 text-ink-2">Approval links the existing sign-in when present and updates account access atomically.</p>
-              <button type="submit" className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink hover:bg-brand-hover">
+              {needsLicenseCheck && <p className="mt-3 text-sm" id={`license-block-${application.id}`}>Record the license check before approving this application.</p>}
+              <button type="submit" disabled={needsLicenseCheck} aria-describedby={needsLicenseCheck ? `license-block-${application.id}` : undefined} className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50">
                 <UserRoundCheck size={17} aria-hidden="true" /> Approve account
               </button>
             </form>

@@ -26,6 +26,11 @@ export type DealerApplicationReview = {
   licenseApplicable: boolean | null;
   licenseNumber: string | null;
   licenseState: string | null;
+  licenseVerifiedAt: string | null;
+  licenseClassification: string | null;
+  epa608Type: string | null;
+  epa608Number: string | null;
+  epa608SightedAt: string | null;
   taxIdLast4: string | null;
   resaleCertificateNumber: string | null;
   serviceArea: string | null;
@@ -51,6 +56,11 @@ type DealerApplicationRow = {
   license_applicable: boolean | null;
   license_number: string | null;
   license_state: string | null;
+  license_verified_at: string | null;
+  license_classification: string | null;
+  epa608_certification_type: string | null;
+  epa608_certificate_number: string | null;
+  epa608_sighted_at: string | null;
   tax_id_last4: string | null;
   resale_certificate_number: string | null;
   service_area: string | null;
@@ -69,7 +79,7 @@ export async function listDealerApplicationsForReview(): Promise<{ connected: bo
   if (!supabase) return { connected: false, applications: [] };
   const { data, error } = await supabase
     .from("dealer_applications")
-    .select("id, reference, status, status_reason, company, entity_type, contact_name, email, phone, business_type, license_applicable, license_number, license_state, tax_id_last4, resale_certificate_number, service_area, monthly_volume, brands, notes, created_at, updated_at")
+    .select("id, reference, status, status_reason, company, entity_type, contact_name, email, phone, business_type, license_applicable, license_number, license_state, license_verified_at, license_classification, epa608_certification_type, epa608_certificate_number, epa608_sighted_at, tax_id_last4, resale_certificate_number, service_area, monthly_volume, brands, notes, created_at, updated_at")
     .order("created_at", { ascending: false })
     .limit(200);
   if (error) throw new Error(`Could not load dealer applications: ${error.message}`);
@@ -113,6 +123,11 @@ export async function listDealerApplicationsForReview(): Promise<{ connected: bo
       licenseApplicable: row.license_applicable,
       licenseNumber: row.license_number,
       licenseState: row.license_state,
+      licenseVerifiedAt: row.license_verified_at,
+      licenseClassification: row.license_classification,
+      epa608Type: row.epa608_certification_type,
+      epa608Number: row.epa608_certificate_number,
+      epa608SightedAt: row.epa608_sighted_at,
       taxIdLast4: row.tax_id_last4,
       resaleCertificateNumber: row.resale_certificate_number,
       serviceArea: row.service_area,
@@ -166,4 +181,40 @@ export async function approveDealerApplication(applicationId: string, priceTier 
   });
   if (error) throw new Error(error.message);
   return String(data);
+}
+
+/**
+ * Staff checked the contractor license with the issuing board (CSLB for
+ * California). Approval of a licensed business is refused until this is
+ * recorded (migration 030).
+ */
+export async function recordLicenseVerification(applicationId: string, classification: string) {
+  const staff = await requireStaff();
+  const supabase = createServiceRoleSupabaseClient();
+  if (!supabase) throw new Error("Database unavailable");
+  const { error } = await supabase.rpc("record_license_verification", {
+    p_application_id: applicationId,
+    p_classification: classification,
+    p_actor: staff.userId,
+  });
+  if (error) throw new Error(error.message);
+}
+
+/** Staff saw the applicant's EPA 608 card. No image is stored. */
+export async function recordEpa608Sighting(applicationId: string, type: string, certificateNumber: string) {
+  const staff = await requireStaff();
+  const supabase = createServiceRoleSupabaseClient();
+  if (!supabase) throw new Error("Database unavailable");
+  const { error } = await supabase.rpc("record_epa608_sighting", {
+    p_application_id: applicationId,
+    p_type: type,
+    p_number: certificateNumber,
+    p_actor: staff.userId,
+  });
+  if (error) throw new Error(error.message);
+}
+
+/** CSLB's public license lookup for a California license number. */
+export function cslbLookupHref(licenseNumber: string): string {
+  return `https://www.cslb.ca.gov/OnlineServices/CheckLicenseII/LicenseDetail.aspx?LicNum=${encodeURIComponent(licenseNumber.replace(/\D/g, ""))}`;
 }

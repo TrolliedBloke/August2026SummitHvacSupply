@@ -4,6 +4,7 @@ import { RETURNS } from "./returns";
 import { SHIPPING } from "./shipping";
 import { TERMS_1_0 } from "./archive/terms-1.0";
 import { SHIPPING_1_0 } from "./archive/shipping-1.0";
+import { PRIVACY_1_0 } from "./archive/privacy-1.0";
 import type { LegalDocument } from "./schema";
 
 /** Current, canonical versions. */
@@ -19,7 +20,7 @@ export const LEGAL_DOCUMENTS: Record<LegalDocument["id"], LegalDocument> = {
  * has a stable archive URL: /legal/<document>/<version>.
  */
 export const LEGAL_ARCHIVE: Record<LegalDocument["id"], Record<string, LegalDocument>> = {
-  privacy: { [PRIVACY.version]: PRIVACY },
+  privacy: { [PRIVACY_1_0.version]: PRIVACY_1_0, [PRIVACY.version]: PRIVACY },
   terms: { [TERMS_1_0.version]: TERMS_1_0, [TERMS.version]: TERMS },
   returns: { [RETURNS.version]: RETURNS },
   shipping: { [SHIPPING_1_0.version]: SHIPPING_1_0, [SHIPPING.version]: SHIPPING },

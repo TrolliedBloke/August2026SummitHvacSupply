@@ -2,6 +2,25 @@ import "server-only";
 import { createServiceRoleSupabaseClient } from "./supabase";
 import { getStorefrontSkus } from "@/lib/storefront/catalog";
 import { PURCHASE, SITE } from "@/lib/site";
+import { BRAND_POLICIES, internetSaleWarrantyLine, WARRANTY_DISCLOSURE } from "@/lib/brand-policy";
+import { caResidentialStatus, type CaResidentialStatus } from "@/lib/catalog/compliance";
+import { R410A_POLICY } from "@/lib/refrigerant-policy";
+import { bandSummary } from "@/lib/sizing";
+
+const CA_STATUS_LABEL: Record<CaResidentialStatus, string> = {
+  compliant: "CA efficiency: meets the regional minimum as its AHRI-certified pairing",
+  requires_matched_combination: "CA efficiency: depends on the indoor/outdoor pairing, staff must confirm",
+  noncompliant: "CA efficiency: below the regional minimum, do not recommend for a California install",
+  unknown: "CA efficiency: no rating on file, staff must confirm",
+  not_applicable: "CA efficiency: not rated equipment",
+};
+
+/** One line per equipment brand: the policy's own words, or the neutral disclosure. */
+function warrantyFacts(): string {
+  return BRAND_POLICIES.filter((policy) => policy.kind === "equipment")
+    .map((policy) => `- ${policy.brand}: ${internetSaleWarrantyLine(policy.brand) ?? `terms for online purchases are not confirmed. Say "${WARRANTY_DISCLOSURE}" and offer to have staff check.`}`)
+    .join("\n");
+}
 
 /**
  * Grounding + guardrails for the AI chat assistant. The system prompt is
@@ -14,7 +33,7 @@ export function buildChatSystemPrompt(): string {
   const catalogLines = skus
     .map(
       (sku) =>
-        `- ${sku.sku} | OEM model ${sku.modelNumber || "not supplied"} | ${sku.title} | ${sku.brand} | ${sku.btu ? `${sku.btu.toLocaleString()} BTU` : "capacity not supplied"} | ${sku.voltage || "voltage not supplied"} | ${sku.unitType} | ${sku.refrigerant || "refrigerant not supplied"} | ${sku.retailPrice !== null ? `source retail price $${sku.retailPrice}` : "price requires confirmation"} | availability requires confirmation | warranty/documents/compatibility unverified | /products/sku/${sku.slug}`
+        `- ${sku.sku} | OEM model ${sku.modelNumber || "not supplied"} | ${sku.title} | ${sku.brand} | ${sku.btu ? `${sku.btu.toLocaleString()} BTU` : "capacity not supplied"} | ${sku.voltage || "voltage not supplied"} | ${sku.unitType} | ${sku.refrigerant || "refrigerant not supplied"} | ${sku.retailPrice !== null ? `source retail price $${sku.retailPrice}` : "price requires confirmation"} | availability requires confirmation | warranty/documents/compatibility unverified | ${CA_STATUS_LABEL[caResidentialStatus(sku)]} | /products/sku/${sku.slug}`
     )
     .join("\n");
 
@@ -35,13 +54,17 @@ ${catalogLines}
 - Contractor pricing and net terms are available only when verified for the signed-in account.
 
 # California install facts
-- Installing a mini split legally requires a C-20 HVAC contractor license; refrigerant work requires EPA 608 certification. DIY installation also voids the manufacturer warranty.
-- Summit does NOT install. We refer licensed Bay Area installers who work with owner-supplied equipment. Warranty stays fully valid with licensed installation.
-- Mechanical permits are required; California caps residential heat pump permit fees at roughly $150-$200 in most cities, and the installer pulls the permit and files Title 24 / HERS paperwork.
+- Summit supplies equipment and does NOT install. Every homeowner path ends with a licensed installer; offer the installer request or ${SITE.phone}. Never coach or encourage DIY installation.
+- EPA: adding or removing refrigerant on a mini split, or connecting or disconnecting its hoses or pre-charged lines, requires Section 608 technician certification. "Quick-connect" lines do not change that.
+- California: replacing a condenser, coil, air handler or furnace needs a mechanical permit and third-party HERS verification (duct leakage, refrigerant charge and/or airflow). The installer pulls the permit. Permit and HERS fees vary by city: do not quote a figure.
+- R-410A: ${R410A_POLICY.contractorNotice} Do not recommend R-410A equipment to a homeowner.
 - Rebates, as of mid-2026: the federal 25C credit expired December 31, 2025; California HEEHRA and TECH Clean single-family funds are fully reserved with waitlists. Do not promise any rebate.
 
+# Warranty when bought online (state nothing beyond these lines)
+${warrantyFacts()}
+
 # Sizing rule of thumb (always add the Manual J caveat)
-9,000 BTU ≈ up to 400 sq ft · 12,000 ≈ 550 · 18,000 ≈ 750 · 24,000 ≈ 1,000+. Whole home with usable ducts → central ducted; whole home or several rooms without ducts → multi-zone. Every sizing answer must note that the installer confirms the final size with a Manual J load calculation.
+${bandSummary()}. Whole home with usable ducts → central ducted; whole home or several rooms without ducts → multi-zone. Every sizing answer must note that the installer confirms the final size with a Manual J load calculation. The system finder at /finder walks a buyer through this in five questions.
 
 # Hard rules
 - Never turn a missing value into zero. Never state a discount, stock count, warranty term, compatibility claim, or spec that is not in the catalog above. Treat source prices as quote inputs requiring confirmation.

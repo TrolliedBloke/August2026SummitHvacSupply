@@ -16,6 +16,7 @@ import {
 } from "@/lib/forms/homeowner";
 import { fieldErrorsFrom, submitForm, type FieldErrors } from "@/lib/forms/result";
 import { SITE } from "@/lib/site";
+import { takeHandoff } from "@/lib/finder/handoff";
 
 type Receipt = { reference: string; responseWindow: string; nextStep: string; serviceArea: string; duplicate: boolean };
 
@@ -56,6 +57,24 @@ export function HomeownerRequestForm() {
     else doneRef.current?.focus();
   }, [focus]);
   const requestFocus = (target: "invalid" | "done") => setFocus((current) => ({ target, tick: (current?.tick ?? 0) + 1 }));
+
+  // Answers carried over from the system finder, if the visitor came from it.
+  // Every prefilled value stays visible and editable.
+  const [fromFinder, setFromFinder] = React.useState(false);
+  React.useEffect(() => {
+    const prefill = takeHandoff();
+    if (!prefill) return;
+    queueMicrotask(() => {
+      setValues((current) => ({
+        ...current,
+        zip: prefill.zip ?? current.zip,
+        zones: prefill.zones ?? current.zones,
+        existingDucts: prefill.existingDucts ?? current.existingDucts,
+        timeline: prefill.timeline ?? current.timeline,
+      }));
+      setFromFinder(true);
+    });
+  }, []);
 
   function set<K extends keyof typeof EMPTY>(key: K, value: (typeof EMPTY)[K]) {
     setValues((current) => ({ ...current, [key]: value }));
@@ -150,6 +169,11 @@ export function HomeownerRequestForm() {
         </div>
       </dl>
       <p className="mt-4 text-sm leading-relaxed text-ink-2">You do not need a model number or a complete project scope to start.</p>
+      {fromFinder && (
+        <p role="status" className="mt-3 text-sm text-ink-2">
+          We filled in what you told the system finder. Check it and add the rest.
+        </p>
+      )}
 
       <div className="mt-5">
         <ErrorSummary errors={errors} labels={HOMEOWNER_FIELD_LABELS} formError={formError} id="homeowner-summary" />

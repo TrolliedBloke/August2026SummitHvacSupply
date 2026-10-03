@@ -17,6 +17,9 @@ import { buildProductSchema, getSkuSeoState } from "@/lib/seo/catalog";
 import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
 import { SITE } from "@/lib/site";
 import { FIELD_GROUPS, FIELD_LABELS, isFieldApplicable } from "@/lib/catalog/field-manifest";
+import { CA_STATUS_PUBLIC_LABEL, caResidentialStatus } from "@/lib/catalog/compliance";
+import { brandPolicy, internetSaleWarrantyLine, WARRANTY_DISCLOSURE } from "@/lib/brand-policy";
+import { isR410a, R410A_POLICY } from "@/lib/refrigerant-policy";
 
 // Every valid slug is known at build time. Without this, an unknown slug is
 // rendered on demand and notFound() is served with HTTP 200 -- a soft 404 that
@@ -126,11 +129,14 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
     ["Refrigerant", sku.refrigerant ? `${sku.refrigerant}${sku.refrigerantClass ? ` (${sku.refrigerantClass})` : ""}` : null],
     ["Zones", sku.zones || null],
     ["Bundle / kit", sku.bundleName],
+    ["California efficiency", CA_STATUS_PUBLIC_LABEL[caResidentialStatus(sku)]],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
   // Only indexable records publish structured data; buildProductSchema returns
   // null for conflicted or incomplete ones.
   const productSchema = buildProductSchema(sku, SITE.origin);
+  const equipmentBrand = brandPolicy(sku.brand).kind === "equipment";
+  const warrantyLine = equipmentBrand ? internetSaleWarrantyLine(sku.brand) ?? WARRANTY_DISCLOSURE : null;
 
   return (
     <>
@@ -196,6 +202,13 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
               <div className="flex gap-3"><PackageCheck className="mt-0.5 shrink-0 text-brand" size={20} /><div><h2 className="font-semibold text-ink-1">Pickup and delivery</h2><p className="mt-1 text-sm text-ink-2">Choose Newark pickup or an eligible delivery option during checkout. Large and unpriced orders can be submitted to our sales team.</p></div></div>
             </div>
 
+            {isR410a(sku.refrigerant) && (
+              <p className="mt-5 flex gap-2 rounded-(--r-sm) border border-state-warning-line bg-state-warning p-3 text-sm leading-6 text-state-warning-ink">
+                <AlertTriangle className="mt-0.5 shrink-0" size={16} aria-hidden="true" />
+                <span>{R410A_POLICY.contractorNotice}</span>
+              </p>
+            )}
+
             {commerceView.action.intent === "notify" ? (
               <div id="restock" className="mt-5 scroll-mt-6">
                 <NotifyMe skuId={sku.id} />
@@ -235,6 +248,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
                   </p>
                 )}
                 {sku.warranty.conditions && <p className="mt-2 text-xs leading-5 text-ink-3">{sku.warranty.conditions}</p>}
+                {warrantyLine && <p className="mt-2 text-xs leading-5 text-ink-3">{warrantyLine}</p>}
                 {sku.warranty.sourceUrl && (
                   <a href={sku.warranty.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-xs font-medium text-brand hover:text-brand-hover">
                     Manufacturer warranty source

@@ -46,6 +46,14 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
   await send(to, subject, html);
 }
 
+/** User-requested and scheduled mail must not report success when delivery was skipped. */
+export async function sendRequiredEmail(to: string, subject: string, html: string, idempotencyKey?: string): Promise<void> {
+  const resend = getResend();
+  if (!resend) throw new Error("Email delivery is not configured.");
+  const { error } = await resend.emails.send({ from: FROM, to, subject, html }, idempotencyKey ? { idempotencyKey } : undefined);
+  if (error) throw new Error(`Email provider rejected delivery: ${error.name}`);
+}
+
 /** First contact email on an account, or null. */
 async function accountEmail(accountId: string | null): Promise<string | null> {
   if (!accountId) return null;

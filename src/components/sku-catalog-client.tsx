@@ -342,6 +342,12 @@ export function SkuCatalogClient({
                     </Button>
                   )}
                   <Link
+                    href="/finder"
+                    className="inline-flex h-11 items-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-sm font-medium text-ink-1 hover:bg-surface-2"
+                  >
+                    Use the system finder
+                  </Link>
+                  <Link
                     href="/contact?topic=product"
                     className="inline-flex h-11 items-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-sm font-medium text-ink-1 hover:bg-surface-2"
                   >

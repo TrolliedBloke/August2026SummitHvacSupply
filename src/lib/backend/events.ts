@@ -1,5 +1,6 @@
 import "server-only";
 import { createServiceRoleSupabaseClient } from "./supabase";
+import { readReportPages } from "./report-pages";
 
 /**
  * Lightweight first-party analytics ("never CVR alone"). Supabase-backed with
@@ -52,18 +53,15 @@ export async function getEventSummary(): Promise<EventSummary> {
   const supabase = createServiceRoleSupabaseClient();
   if (supabase) {
     const since = new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString();
-    const { data, error } = await supabase
-      .from("site_events")
-      .select("name, metadata")
-      .gte("created_at", since)
-      .limit(5000);
-    if (!error && data) {
+    try {
+      const data = await readReportPages((from, to) => supabase
+        .from("site_events").select("name, metadata").gte("created_at", since).order("id").range(from, to));
       return summarize(
         data.map((row) => ({ name: row.name, metadata: row.metadata as Record<string, unknown> | null }))
       );
-    }
+    } catch { /* Analytics must not break the operations dashboard. */ }
   }
-  return summarize(memEvents);
+  return summarize(memEvents.filter((event) => event.at >= Date.now() - 30 * 24 * 3600 * 1000));
 }
 
 function summarize(

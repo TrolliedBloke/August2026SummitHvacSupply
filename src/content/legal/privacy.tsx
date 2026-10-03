@@ -3,23 +3,43 @@ import { SITE } from "@/lib/site";
 import type { LegalDocument } from "./schema";
 
 /**
- * Privacy policy, version 1.0. Section ids are permanent: they are
+ * Privacy policy, version 1.1. Section ids are permanent: they are
  * deep-link targets and must never be renamed once published. To revise this
- * document, copy it to ./archive/privacy-1.0.tsx first, then edit
+ * document, copy it to ./archive/privacy-<version>.tsx first, then edit
  * here and add a history entry.
  */
+
+/**
+ * Whether this notice tells visitors that Summit shares personal information
+ * for cross-context behavioral advertising. It does not, so ad tags and ad
+ * audience exports stay off (lib/ads-config.ts reads this). Flip it only in
+ * the version whose "we do not sell" section has been rewritten to describe
+ * the sharing and approved by counsel -- see docs/PRIVACY-AD-SHARING-DRAFT.md.
+ */
+export const PRIVACY_DISCLOSES_AD_SHARING = false;
 export const PRIVACY: LegalDocument = {
   id: "privacy",
   path: "/privacy",
   eyebrow: "Legal",
   title: "Privacy policy",
   intro: "What we collect, why we collect it, who we share it with, and how to make us stop.",
-  version: "1.0",
-  effectiveDate: "2026-08-02",
-  updatedDate: "2026-08-02",
+  version: "1.1",
+  effectiveDate: "2026-10-01",
+  updatedDate: "2026-10-01",
   owner: "Summit HVAC Supply operations (privacy)",
   review: { status: "pending_counsel", reviewedAt: null },
-  history: [{ version: "1.0", effectiveDate: "2026-08-02", summary: ["First structured, versioned publication. Wording unchanged from the August 2, 2026 page."] }],
+  history: [
+    {
+      version: "1.1",
+      effectiveDate: "2026-10-01",
+      summary: [
+        "Lists the answers the system finder collects and why.",
+        "Marketing email now requires a separate opt-in.",
+        "Adds the opt-out page and states that Global Privacy Control signals are honored.",
+      ],
+    },
+    { version: "1.0", effectiveDate: "2026-08-02", summary: ["First structured, versioned publication. Wording unchanged from the August 2, 2026 page."] },
+  ],
   sections: [
     {
       id: "what-we-collect",
@@ -49,6 +69,14 @@ export const PRIVACY: LegalDocument = {
                 cart contents, saved lists, and back-in-stock notification
                 requests, so those features work across sessions.
               </>,
+              <>
+                <strong className="font-medium text-ink-1">System finder answers:</strong>{" "}
+                the choices you make in the system finder: who the equipment is
+                for, your goal, your current system, a rough size, what matters
+                most to you, and an optional ZIP code used only for climate zone
+                and local permit information. The finder does not ask about income
+                or health.
+              </>,
             ]}
           />
           <p>
@@ -67,6 +95,10 @@ export const PRIVACY: LegalDocument = {
             items={[
               <>To process, fulfill, and support your orders.</>,
               <>To quote freight and confirm delivery.</>,
+              <>
+                To suggest equipment that fits your answers and, when you ask,
+                introduce a licensed installer who works your area.
+              </>,
               <>
                 To notify you about order status, back-in-stock items you asked
                 about, and account activity.
@@ -93,6 +125,13 @@ export const PRIVACY: LegalDocument = {
             to do their job for us: payment processing, freight carriers and
             delivery, email delivery, and site hosting and analytics. Those
             providers are contractually limited to using it for that purpose.
+          </p>
+          <p>
+            If we ever begin sharing personal information for advertising, we
+            will update this notice before we start. Every page links to our{" "}
+            <PolicyLink href="/privacy/opt-out">Do Not Sell or Share My Personal Information</PolicyLink>{" "}
+            page, and we treat a Global Privacy Control signal from your browser
+            as that request.
           </p>
           <p>
             We will also disclose information where legally required (subpoena,
@@ -130,8 +169,10 @@ export const PRIVACY: LegalDocument = {
               <>
                 <strong className="font-medium text-ink-1">Opt out</strong> of sale
                 or sharing. As stated above, we do not sell or share personal
-                information, so there is nothing to opt out of, but the right
-                stands if that ever changes.
+                information. You can still record the request now on our{" "}
+                <PolicyLink href="/privacy/opt-out">opt-out page</PolicyLink>, and
+                we honor Global Privacy Control signals automatically, so it stays
+                in effect if that ever changes.
               </>,
               <>
                 <strong className="font-medium text-ink-1">Non-discrimination</strong>. Exercising these rights will not change your pricing or the
@@ -162,10 +203,12 @@ export const PRIVACY: LegalDocument = {
         <>
           <p>
             Transactional email (order confirmations, shipping notices, back-in-stock
-            alerts you requested) is part of the service. Marketing email is
-            separate and every message includes a one-click unsubscribe link that
-            works without logging in. Unsubscribing from marketing does not stop
-            order-related messages.
+            alerts you requested, a shortlist you asked us to send) is part of the
+            service. Marketing email is separate: we send it only if you check an
+            unchecked opt-in box, and every message includes a one-click
+            unsubscribe link that works without logging in. Unsubscribing from
+            marketing does not stop order-related messages. We do not send
+            marketing text messages.
           </p>
         </>
       ),

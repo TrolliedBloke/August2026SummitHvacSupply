@@ -10,11 +10,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --test tests/backend.test.ts tests/remediation.test.ts tests/request-body.test.ts tests/inventory.test.ts tests/design-remediation.test.ts",
+    "test": "tsx --require ./tests/register-server-only.cjs --test tests/backend.test.ts tests/remediation.test.ts tests/request-body.test.ts tests/inventory.test.ts tests/design-remediation.test.ts tests/finder.test.ts",
     "test:e2e": "playwright test",
     "test:links": "tsx scripts/check-external-links.ts",
     "catalog:import": "tsx scripts/import-inventory-catalog.ts",
     "catalog:sync": "tsx scripts/sync-production-catalog.ts",
+    "catalog:compliance": "tsx scripts/compliance-report.ts",
     "inventory:quickbooks": "tsx scripts/sync-quickbooks-inventory.ts",
     "seed:staff": "tsx scripts/create-staff-user.ts",
     "test:security": "tsx --test tests/security.live.test.ts"

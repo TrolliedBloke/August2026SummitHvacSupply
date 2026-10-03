@@ -85,6 +85,8 @@ export async function submitDealerApplication(input: unknown): Promise<DealerRec
       license_applicable: parsed.licenseApplicable === "yes",
       license_number: parsed.licenseApplicable === "yes" ? parsed.licenseNumber : null,
       license_state: parsed.licenseApplicable === "yes" ? parsed.licenseState : null,
+      epa608_certification_type: parsed.epa608Type ?? null,
+      epa608_certificate_number: parsed.epa608Type ? parsed.epa608Number ?? null : null,
       tax_id_last4: parsed.taxIdLast4,
       resale_certificate_number: parsed.buysForResale === "yes" ? parsed.resaleCertificateNumber : null,
       service_area: parsed.serviceArea,

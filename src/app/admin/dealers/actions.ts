@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { approveDealerApplication, transitionDealerApplication } from "@/lib/backend/dealer-review";
+import { approveDealerApplication, recordEpa608Sighting, recordLicenseVerification, transitionDealerApplication } from "@/lib/backend/dealer-review";
 import type { DealerApplicationStatus } from "@/lib/dealer-application-state";
 
 const STATUS_VALUES = ["draft", "submitted", "needs_information", "under_review", "approved", "rejected", "withdrawn"] as const;
@@ -58,4 +58,46 @@ export async function approveDealerApplicationAction(formData: FormData): Promis
     returnToQueue("Approval could not be completed. Reload the queue and verify the application state.", "error");
   }
   returnToQueue("Application approved; the account, membership, price tier, and audit event were updated together.", "success");
+}
+
+const licenseCheckSchema = z.object({
+  applicationId: z.uuid(),
+  classification: z.string().trim().toUpperCase().regex(/^[A-Z]-?[0-9]{0,2}$/, "Use the board's class code, e.g. C-20, C-38 or B."),
+  confirmed: z.literal("yes"),
+});
+
+export async function recordLicenseCheckAction(formData: FormData): Promise<void> {
+  const parsed = licenseCheckSchema.safeParse({
+    applicationId: String(formData.get("applicationId") ?? ""),
+    classification: String(formData.get("classification") ?? ""),
+    confirmed: String(formData.get("confirmed") ?? ""),
+  });
+  if (!parsed.success) returnToQueue("Enter the license class (for example C-20) and confirm you checked it with the board.", "error");
+  try {
+    await recordLicenseVerification(parsed.data.applicationId, parsed.data.classification);
+  } catch {
+    returnToQueue("The license check could not be recorded. Reload the queue and try again.", "error");
+  }
+  returnToQueue("License check recorded in the audit history.", "success");
+}
+
+const epa608Schema = z.object({
+  applicationId: z.uuid(),
+  type: z.enum(["type_i", "type_ii", "type_iii", "universal"]),
+  certificateNumber: z.string().trim().min(4).max(40),
+});
+
+export async function recordEpa608Action(formData: FormData): Promise<void> {
+  const parsed = epa608Schema.safeParse({
+    applicationId: String(formData.get("applicationId") ?? ""),
+    type: String(formData.get("type") ?? ""),
+    certificateNumber: String(formData.get("certificateNumber") ?? ""),
+  });
+  if (!parsed.success) returnToQueue("Choose the certification type and enter the certificate number from the card.", "error");
+  try {
+    await recordEpa608Sighting(parsed.data.applicationId, parsed.data.type, parsed.data.certificateNumber);
+  } catch {
+    returnToQueue("The EPA 608 sighting could not be recorded. Reload the queue and try again.", "error");
+  }
+  returnToQueue("EPA 608 card recorded as sighted.", "success");
 }

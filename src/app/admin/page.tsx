@@ -16,6 +16,7 @@ import {
 import { Container, Chip, LinkButton } from "@/components/ui";
 import { getOperationsOverview } from "@/lib/backend/services";
 import { getEventSummary } from "@/lib/backend/events";
+import { finderFunnel } from "@/lib/finder/funnel";
 
 export const metadata = {
   title: "Operations Dashboard - Summit HVAC Supply",
@@ -24,6 +25,7 @@ export const metadata = {
 export default async function AdminPage() {
   const ops = await getOperationsOverview();
   const events = await getEventSummary();
+  const funnel = finderFunnel(events.counts);
 
   return (
     <Container className="py-10 lg:py-14">
@@ -43,6 +45,8 @@ export default async function AdminPage() {
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
+          <LinkButton href="/admin/referrals" variant="secondary">Installer referrals</LinkButton>
+          <LinkButton href="/admin/audiences" variant="secondary">Ad audiences</LinkButton>
           <LinkButton href="/admin/dealers" variant="primary">
             Dealer applications
             <ArrowRight size={16} />
@@ -159,6 +163,14 @@ export default async function AdminPage() {
       </section>
 
       {/* First-party conversion signals -- never CVR alone. */}
+      <section className="mt-6 rounded-(--r-md) border border-line bg-surface-1 p-5" aria-labelledby="finder-funnel">
+        <h2 id="finder-funnel" className="text-lg font-medium">System finder · last 30 days</h2>
+        <dl className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          {funnel.stages.map((stage) => <div key={stage.name}><dt className="text-sm text-ink-2">{stage.label}</dt><dd className="mt-1 text-xl font-medium">{stage.count.toLocaleString()}</dd></div>)}
+        </dl>
+        <p className="mt-5 text-sm">Start → completion: {funnel.completionRate} · Completion → opt-in: {funnel.optInRate}</p>
+        <p className="mt-2 text-xs text-ink-3">Event counts, not unique people. Repeat visits and blocked analytics can affect these rates. Installer requests are an independent outcome; email opt-in is optional.</p>
+      </section>
       <section className="mt-6 grid gap-6 lg:grid-cols-2">
         <Panel title="Conversion events" icon={<BarChart3 size={18} />} action="Last 30 days">
           {events.counts.length === 0 ? (

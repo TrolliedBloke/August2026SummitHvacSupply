@@ -32,7 +32,7 @@ export function seriesSitemapEntries(): MetadataRoute.Sitemap {
 }
 
 export function categorySitemapEntries(): MetadataRoute.Sitemap {
-  return ["", "/products", "/homeowners", "/resources", "/about", "/contact", "/dealers", "/quote"].map(
+  return ["", "/products", "/finder", "/homeowners", "/resources", "/about", "/contact", "/dealers", "/quote"].map(
     (path) => ({
       url: `${SITE.origin}${path}`,
       lastModified: changed,

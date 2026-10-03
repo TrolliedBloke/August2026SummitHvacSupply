@@ -123,6 +123,9 @@ export default async function LocalPage({ params }: PageProps<"/[local]">) {
             <Link href="/homeowners" className="text-sm font-medium text-brand hover:text-brand-hover">
               For homeowners
             </Link>
+            <Link href="/finder" className="text-sm font-medium text-brand hover:text-brand-hover">
+              Find your system
+            </Link>
             <Link href="/products" className="text-sm font-medium text-brand hover:text-brand-hover">
               Shop systems
             </Link>

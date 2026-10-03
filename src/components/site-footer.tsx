@@ -9,6 +9,7 @@ const PRODUCT_CATEGORIES = CATEGORY_RAIL;
 
 const RESOURCE_LINKS = [
   { href: "/resources", label: "Resource center" },
+  { href: "/finder", label: "System finder" },
   { href: "/homeowners", label: "For homeowners" },
   { href: "/dealers", label: "For contractors" },
   { href: "/tools/model-number-decoder", label: "Model decoder" },
@@ -115,6 +116,13 @@ export function SiteFooter() {
           </section>
         </div>
 
+        {/* Outside the mobile disclosures on purpose: the opt-out link must be
+            reachable on every page without opening anything (CCPA). */}
+        <p className="mt-8 border-t border-white/20 pt-4 text-sm text-white/90">
+          <Link href="/privacy/opt-out" className="underline underline-offset-4 transition-colors hover:text-white">
+            Do Not Sell or Share My Personal Information
+          </Link>
+        </p>
       </div>
     </footer>
   );

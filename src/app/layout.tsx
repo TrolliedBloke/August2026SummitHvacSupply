@@ -11,6 +11,9 @@ import { SiteFooter } from "@/components/site-footer";
 import { SITE } from "@/lib/site";
 import { catalogCategoryDestinations } from "@/lib/storefront/catalog";
 import { Analytics } from "@vercel/analytics/next";
+import { AdTags } from "@/components/ad-tags";
+import { adsConfig } from "@/lib/ads-config";
+import { BrowserPrivacy } from "@/components/privacy/browser-privacy";
 
 // Inter is the only typeface: headings, body and data. Numbers line up via
 // tabular figures (see globals.css), not a monospace font.
@@ -55,6 +58,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   // /_vercel/insights/script.js and creates a 404/MIME console error on every
   // page. Custom first-party event logging remains available everywhere.
   const vercelAnalyticsAvailable = process.env.VERCEL === "1";
+  // Ad tags render only when every gate in lib/ads-config.ts is open; today
+  // the privacy notice says Summit does not share data, so this is null.
+  const ads = adsConfig();
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "HVACBusiness",
@@ -96,6 +102,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </QuoteProvider>
         </FulfillmentProvider>
         {vercelAnalyticsAvailable && <Analytics />}
+        <BrowserPrivacy />
+        {ads.enabled && <AdTags metaPixelId={ads.metaPixelId} googleTagId={ads.googleTagId} />}
       </body>
     </html>
   );

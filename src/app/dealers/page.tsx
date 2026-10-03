@@ -17,6 +17,7 @@ import {
   DEALER_STEPS,
   dealerFormSchema,
   ENTITY_TYPES,
+  EPA608_TYPES,
   SERVICE_STATES,
   VOLUMES,
   type DealerField,
@@ -41,6 +42,8 @@ const EMPTY: Omit<Draft, "idempotencyKey"> = {
   licenseApplicable: "",
   licenseNumber: "",
   licenseState: "",
+  epa608Type: "",
+  epa608Number: "",
   taxIdLast4: "",
   buysForResale: "",
   resaleCertificateNumber: "",
@@ -168,10 +171,24 @@ export default function DealersPage() {
       {render}
     </FormField>
   );
-  const select = (name: DealerField, options: ReadonlyArray<{ value: string; label: string }>, placeholder = "Select") =>
-    field(name, (control) => (
-      <Select id={control.id} invalid={Boolean(control["aria-invalid"])} describedBy={control["aria-describedby"]} required value={draft[name]} onChange={(value) => set(name, value)} placeholder={placeholder} options={options} />
-    ));
+  const select = (name: DealerField, options: ReadonlyArray<{ value: string; label: string }>, placeholder = "Select", fieldOptions: { required?: boolean } = {}) =>
+    field(
+      name,
+      (control) => (
+        <Select
+          id={control.id}
+          invalid={Boolean(control["aria-invalid"])}
+          describedBy={control["aria-describedby"]}
+          required={fieldOptions.required !== false}
+          value={draft[name]}
+          // An optional select offers "none", which clears the field.
+          onChange={(value) => set(name, value === "none" ? "" : value)}
+          placeholder={placeholder}
+          options={fieldOptions.required === false ? [{ value: "none", label: placeholder }, ...options] : options}
+        />
+      ),
+      fieldOptions
+    );
   const yesNo = (name: "licenseApplicable" | "buysForResale", yes: string, no: string) => (
     // aria-invalid is not valid on a radio; the group's description carries the error.
     <fieldset id={name} tabIndex={-1} className="border-0 p-0 outline-none" data-invalid={errors[name] ? "true" : undefined} aria-describedby={errors[name] ? `${name}-error` : undefined}>
@@ -316,6 +333,11 @@ export default function DealersPage() {
                         {select("licenseState", SERVICE_STATES.filter((state) => state.value !== "multi"))}
                       </div>
                     )}
+                    {select("epa608Type", EPA608_TYPES, "No EPA 608 card, or add later", { required: false })}
+                    {draft.epa608Type !== "" &&
+                      field("epa608Number", (control) => <Input {...control} value={draft.epa608Number} onChange={(event) => set("epa608Number", event.target.value)} />, {
+                        hint: "As printed on the card. Staff may ask to see it.",
+                      })}
                     {licensed === false && draft.licenseApplicable === "" && (
                       <p className="-mt-2 text-meta text-ink-3">Resellers who do not install usually choose “No license applies”.</p>
                     )}

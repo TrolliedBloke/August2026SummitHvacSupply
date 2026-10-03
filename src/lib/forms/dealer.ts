@@ -34,6 +34,13 @@ export const SERVICE_STATES = [
   { value: "az", label: "Arizona" },
   { value: "multi", label: "Multiple states" },
 ] as const;
+/** EPA Section 608 technician certification types. */
+export const EPA608_TYPES = [
+  { value: "type_i", label: "Type I (small appliances)" },
+  { value: "type_ii", label: "Type II (high-pressure, incl. split systems)" },
+  { value: "type_iii", label: "Type III (low-pressure)" },
+  { value: "universal", label: "Universal" },
+] as const;
 export const VOLUMES = [
   { value: "1-5", label: "1-5 units / month" },
   { value: "6-20", label: "6-20 units / month" },
@@ -54,6 +61,10 @@ export const dealerFormSchema = z
     licenseApplicable: z.enum(["yes", "no"], { message: "Tell us whether your work requires a contractor license." }),
     licenseNumber: z.string().trim().max(80).optional(),
     licenseState: z.enum(values(SERVICE_STATES)).optional(),
+    // Optional today; required the day Summit lists refrigerant, which EPA
+    // sells only to certified technicians (docs/FINDER-AND-AUDIENCE-PLAN.md 2.2).
+    epa608Type: z.enum(values(EPA608_TYPES)).optional(),
+    epa608Number: z.string().trim().max(40).optional(),
     taxIdLast4: z.string().trim().regex(/^\d{4}$/, "Enter the last 4 digits of the EIN (or SSN for a sole proprietor)."),
     buysForResale: z.enum(["yes", "no"], { message: "Tell us whether you buy equipment to resell." }),
     resaleCertificateNumber: z.string().trim().max(80).optional(),
@@ -72,6 +83,9 @@ export const dealerFormSchema = z
       if (!value.licenseNumber || value.licenseNumber.length < 4) ctx.addIssue({ code: "custom", path: ["licenseNumber"], message: "Enter the license number." });
       if (!value.licenseState) ctx.addIssue({ code: "custom", path: ["licenseState"], message: "Choose the state that issued the license." });
     }
+    if (value.epa608Type && (!value.epa608Number || value.epa608Number.length < 4)) {
+      ctx.addIssue({ code: "custom", path: ["epa608Number"], message: "Enter the certification number from the EPA 608 card." });
+    }
     if (value.buysForResale === "yes" && (!value.resaleCertificateNumber || value.resaleCertificateNumber.length < 4)) {
       ctx.addIssue({ code: "custom", path: ["resaleCertificateNumber"], message: "Enter the seller's permit or resale certificate number." });
     }
@@ -82,7 +96,7 @@ export type DealerField = Exclude<keyof DealerForm, "idempotencyKey">;
 
 export const DEALER_STEPS: Array<{ id: number; label: string; fields: DealerField[] }> = [
   { id: 1, label: "Company", fields: ["company", "entityType", "contactName", "email", "phone"] },
-  { id: 2, label: "Licensing & tax", fields: ["businessType", "licenseApplicable", "licenseNumber", "licenseState", "taxIdLast4", "buysForResale", "resaleCertificateNumber", "serviceArea"] },
+  { id: 2, label: "Licensing & tax", fields: ["businessType", "licenseApplicable", "licenseNumber", "licenseState", "epa608Type", "epa608Number", "taxIdLast4", "buysForResale", "resaleCertificateNumber", "serviceArea"] },
   { id: 3, label: "Volume", fields: ["monthlyVolume", "brands", "notes"] },
 ];
 
@@ -96,6 +110,8 @@ export const DEALER_FIELD_LABELS: Record<DealerField, string> = {
   licenseApplicable: "Contractor license",
   licenseNumber: "License number",
   licenseState: "Issuing state",
+  epa608Type: "EPA 608 certification",
+  epa608Number: "EPA 608 certificate number",
   taxIdLast4: "Last 4 of EIN or SSN",
   buysForResale: "Buying for resale",
   resaleCertificateNumber: "Seller's permit or resale certificate",
@@ -107,7 +123,8 @@ export const DEALER_FIELD_LABELS: Record<DealerField, string> = {
 
 export const DEALER_CHECKLIST = [
   "The business's legal name and how it is organized (LLC, corporation, sole proprietor…)",
-  "Your contractor license number and issuing state, if your work requires one",
+  "Your contractor license number and issuing state, if your work requires one. Staff check it before approval.",
+  "Your EPA 608 certification, if you have one (optional)",
   "The last 4 digits of the business EIN (or SSN for a sole proprietor)",
   "A seller's permit or resale certificate, if you buy equipment to resell",
 ];

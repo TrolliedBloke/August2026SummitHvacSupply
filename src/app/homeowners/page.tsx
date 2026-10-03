@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, CheckCircle2, Home, Ruler, ShieldCheck, Users } from "lucide-react";
 import { Container, Eyebrow, LinkButton } from "@/components/ui";
@@ -72,10 +73,17 @@ export default function HomeownersPage() {
               <LinkButton href="#homeowner-request" size="lg">
                 Get Bay Area installer help <ArrowRight size={18} />
               </LinkButton>
-              <LinkButton href="/bay-area-heat-pump-rebates" variant="secondary" size="lg">
-                See rebate options
+              <LinkButton href="/finder" variant="secondary" size="lg">
+                Find your system
               </LinkButton>
             </div>
+            <p className="mt-4 text-sm text-ink-3">
+              Five questions to a starting size and what your install will involve.{" "}
+              <Link href="/bay-area-heat-pump-rebates" className="text-ink-1 underline underline-offset-4">
+                See rebate options
+              </Link>
+              .
+            </p>
           </div>
           <div className="flex flex-col gap-5">
             {/* Relocated from the homepage hero -- ZIP + role routing earns its

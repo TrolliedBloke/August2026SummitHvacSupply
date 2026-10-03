@@ -47,6 +47,8 @@ const PAGES: Array<{ name: string; path: string }> = [
   { name: "29-privacy", path: "/privacy" },
   { name: "30-terms", path: "/terms" },
   { name: "31-not-found", path: "/no-such-page" },
+  { name: "32-finder", path: "/finder" },
+  { name: "33-privacy-opt-out", path: "/privacy/opt-out" },
 ];
 
 type Feature = { name: string; path: string; mobile?: boolean; run: (page: Page) => Promise<void> };
