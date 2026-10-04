@@ -18,7 +18,8 @@ export async function deliverOnce(key: string, to: string, subject: string, html
     claimed.add(key);
   }
   try {
-    await sendRequiredEmail(to, subject, html, key);
+    // The key's prefix names the stage: planning-, category-, warranty-, maintenance-.
+    await sendRequiredEmail(to, subject, html, key, { kind: key.split("-")[0], relatedType: "lifecycle", relatedId: key });
     if (db) {
       const { error } = await db.from("lifecycle_deliveries").update({ sent_at: new Date().toISOString() }).eq("delivery_key", key);
       if (error) throw new Error("Provider accepted email but delivery confirmation could not be saved.");

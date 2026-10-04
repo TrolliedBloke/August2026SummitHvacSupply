@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --require ./tests/register-server-only.cjs --test tests/backend.test.ts tests/remediation.test.ts tests/request-body.test.ts tests/inventory.test.ts tests/design-remediation.test.ts tests/finder.test.ts tests/media.test.ts tests/ux-fix.test.ts tests/tokens.test.ts",
+    "test": "tsx --require ./tests/register-server-only.cjs --test tests/backend.test.ts tests/remediation.test.ts tests/request-body.test.ts tests/inventory.test.ts tests/design-remediation.test.ts tests/finder.test.ts tests/media.test.ts tests/ux-fix.test.ts tests/tokens.test.ts tests/customers.test.ts",
     "test:e2e": "playwright test",
     "test:links": "tsx scripts/check-external-links.ts",
     "catalog:import": "tsx scripts/import-inventory-catalog.ts",

@@ -45,9 +45,10 @@ export default async function AdminPage() {
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
+          <LinkButton href="/admin/customers" variant="primary">Customers</LinkButton>
           <LinkButton href="/admin/referrals" variant="secondary">Installer referrals</LinkButton>
           <LinkButton href="/admin/audiences" variant="secondary">Ad audiences</LinkButton>
-          <LinkButton href="/admin/dealers" variant="primary">
+          <LinkButton href="/admin/dealers" variant="secondary">
             Dealer applications
             <ArrowRight size={16} />
           </LinkButton>

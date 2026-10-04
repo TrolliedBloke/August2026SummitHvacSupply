@@ -51,16 +51,28 @@ Deno.serve(async () => {
       )
       .join("");
 
-    await resend.emails.send({
+    const subject = `Your monthly statement - balance ${money(Number(account.balance))}`;
+    const { data: sentEmail, error: sendError } = await resend.emails.send({
       from: FROM,
       to: contact.email,
-      subject: `Your monthly statement - balance ${money(Number(account.balance))}`,
+      subject,
       html: `<h2>Statement for ${account.name}</h2>
         <p>Total balance: <strong>${money(Number(account.balance))}</strong></p>
         <table border="1" cellpadding="6" cellspacing="0">
           <thead><tr><th>Invoice</th><th>Total</th><th>Balance</th><th>Due</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>`,
+    });
+    // One row per send for the staff customer view (migration 036). Best effort.
+    await supabase.from("email_messages").insert({
+      to_email: contact.email,
+      subject,
+      kind: "statement",
+      status: sendError ? "failed" : "sent",
+      provider_id: sentEmail?.id ?? null,
+      error: sendError?.name ?? null,
+      related_type: "account",
+      related_id: account.id,
     });
     sent++;
   }

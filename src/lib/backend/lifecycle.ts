@@ -97,7 +97,9 @@ export async function dispatchBackInStock(): Promise<{ sent: number }> {
          <p style="line-height: 1.6;">Retail ${money(sku.msrp)}. Stock moves; if this one matters for a job, grab it.</p>
          <p style="margin-top: 20px;"><a href="${baseUrl()}${productHref(sku)}" style="background: green; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">View ${sku.sku}</a></p>`,
         unsubscribeUrl
-      )
+      ),
+      undefined,
+      { kind: "back_in_stock", relatedType: "sku", relatedId: skuId }
     );
     return true;
   };
@@ -306,7 +308,9 @@ export async function dispatchAbandonedCarts(advanceMinutes = 0): Promise<{ sent
     await sendEmail(
       cart.email,
       STAGES[stage].subject(cartStockIsVerified(cart.items)),
-      emailShell(stageBody(stage, cart.items, cart.subtotal), unsubscribeUrl)
+      emailShell(stageBody(stage, cart.items, cart.subtotal), unsubscribeUrl),
+      undefined,
+      { kind: "abandoned_cart", relatedType: "cart" }
     );
     return true;
   };
@@ -474,7 +478,9 @@ export async function dispatchReviewRequests(advanceDays = 0): Promise<{ sent: n
       await sendEmail(
         order.buyerEmail,
         order.productTitle ? `How's the ${order.productTitle} running?` : "How did your Summit order work out?",
-        emailShell(reviewRequestBody(order))
+        emailShell(reviewRequestBody(order)),
+        undefined,
+        { kind: "review_request", relatedType: "order" }
       );
       sent++;
     } catch (error) {

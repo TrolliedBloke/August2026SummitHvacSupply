@@ -157,7 +157,7 @@ export async function sendShortlist(
   await sendRequiredEmail(email, shortlistSubject(result), emailShell(`${shortlistBody(result, origin, SITE.phone)}
     <p style="margin-top: 20px; font-size: 12px; color: dimgray;">You received this because you asked for your finder results on ${escapeOrigin(origin)}.${
       marketingOptIn ? " You also asked for occasional planning emails; every one has an unsubscribe link." : " It is a one-time message. You are not subscribed to anything."
-    }</p>`, unsubscribeUrl));
+    }</p>`, unsubscribeUrl), undefined, { kind: "finder_shortlist", relatedType: "finder" });
 
   if (marketingOptIn && !session.homeownerRequestId && (session.segment === "homeowner_active" || session.segment === "homeowner_researching")) {
     await startPlanningSeries(email, session.id, session.segment);
