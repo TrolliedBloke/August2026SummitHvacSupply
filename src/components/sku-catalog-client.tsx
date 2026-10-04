@@ -10,7 +10,9 @@ import { CustomSelect } from "./custom-select";
 import { Modal } from "./dialog";
 import { Notice, StatePanel } from "./state";
 import { ActiveFilterChips, buildGroups, FilterPanel } from "./catalog-filters";
-import { filterStorefrontSkus, SORT_OPTIONS, type SortKey, type StorefrontSku } from "@/lib/storefront/catalog";
+import { filterStorefrontSkus, searchMatchReason, SORT_OPTIONS, type SortKey, type StorefrontSku } from "@/lib/storefront/catalog";
+import { CATALOG_TASKS, catalogTask, type CatalogTask } from "@/lib/storefront/catalog-tasks";
+import { resultCompatibilityNotes } from "@/lib/storefront/compatibility";
 import {
   activeFacets,
   clearFacets,
@@ -18,6 +20,7 @@ import {
   parseCatalogFilters,
   removeFacet,
   sameFilters,
+  selectTask,
   serializeCatalogFilters,
   toCatalogFilters,
   toggleFacet,
@@ -32,6 +35,15 @@ import { track } from "@/lib/track";
 
 const CATALOG_INITIAL_PAGE_SIZE = 12;
 
+/** An AHRI-matched pair, flattened on the server for the "complete system" task. */
+export type MatchedSystemSummary = {
+  ahriReference: string;
+  brand: string;
+  btu: number;
+  refrigerant: string;
+  components: Array<{ sku: string; unitType: string; href: string }>;
+};
+
 /**
  * The catalog. The URL is the only applied filter state: every control reads
  * it through the codec and writes it back through the codec, so the sidebar,
@@ -44,10 +56,12 @@ const CATALOG_INITIAL_PAGE_SIZE = 12;
 export function SkuCatalogClient({
   skus,
   facets,
+  systems = [],
   inventoryStatus = "ok",
 }: {
   skus: StorefrontSku[];
   facets: CatalogFacets;
+  systems?: MatchedSystemSummary[];
   inventoryStatus?: LiveInventoryResult["status"];
 }) {
   const router = useRouter();
@@ -106,6 +120,25 @@ export function SkuCatalogClient({
     const links = gridRef.current?.querySelectorAll<HTMLAnchorElement>("article h3 a");
     links?.[index]?.focus({ preventScroll: false });
   }, [page.items.length]);
+
+  /* Task and compatibility ----------------------------------------------- */
+  const task = catalogTask(applied.task);
+  const allMatches = React.useMemo(() => filterStorefrontSkus(toCatalogFilters(applied), skus), [skus, applied]);
+  // Only once the buyer has narrowed the list: on the unfiltered catalog every
+  // mix is expected and the notice would be noise above the first product.
+  const narrowed = Boolean(applied.q || applied.task || activeFacets(applied).length > 0);
+  const compatibility = narrowed ? resultCompatibilityNotes(allMatches) : [];
+
+  function chooseTask(value: CatalogTask) {
+    const next = applied.task === value ? null : value;
+    commit(selectTask(applied, next));
+    track("catalog_task", { task: next ?? "none" });
+    // "I know the model" is a search job: put the caret where the model goes.
+    if (next === "model") {
+      const desktop = window.matchMedia("(min-width: 1024px)").matches;
+      document.getElementById(desktop ? "catalog-search-desktop" : "catalog-search-mobile")?.focus();
+    }
+  }
 
   /* Groups ----------------------------------------------------------------- */
   const showCategory = !applied.category;
@@ -259,6 +292,38 @@ export function SkuCatalogClient({
 
       <section aria-labelledby="catalog-results-heading" className="min-w-0">
         <h2 id="catalog-results-heading" className="sr-only">Catalog results</h2>
+        <TaskPicker value={applied.task} onChoose={chooseTask} />
+        {task && (
+          <div className="mb-5 rounded-(--r-md) border border-line bg-surface-1 p-4" data-catalog-task={task.value}>
+            <p className="text-sm leading-6 text-ink-2">{task.hint}</p>
+            {task.value === "system" && (
+              <div className="mt-3">
+                {systems.length > 0 && (
+                  <ul className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3" aria-label="Matched systems">
+                    {systems.map((system) => (
+                      <li key={system.ahriReference} className="rounded-(--r-sm) border border-line p-3 text-meta">
+                        <p className="font-medium text-ink-1">
+                          {system.brand} {Math.round(system.btu / 1000)}k BTU · {system.refrigerant}
+                        </p>
+                        <p className="part-number mt-0.5 text-micro text-ink-3">AHRI {system.ahriReference}</p>
+                        <p className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+                          {system.components.map((component) => (
+                            <Link key={component.sku} href={component.href} className="text-brand underline-offset-4 hover:underline">
+                              {component.unitType} {component.sku}
+                            </Link>
+                          ))}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <Link href="/finder" className="mt-3 inline-flex min-h-11 items-center text-sm font-medium text-brand underline underline-offset-4">
+                  Let the system finder pick a matched pair
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
         <div className="sticky top-2 z-20 mb-4 grid grid-cols-[1fr_auto] gap-2 rounded-(--r-md) border border-line bg-canvas/95 p-2 shadow-sm backdrop-blur lg:hidden">
           <p className="col-span-full px-1 text-xs font-medium text-ink-2">{resultLabel}{activeCount > 0 ? ` · ${activeCount} active ${activeCount === 1 ? "filter" : "filters"}` : ""}</p>
           {hasFilters ? (
@@ -286,6 +351,17 @@ export function SkuCatalogClient({
             }
           >
             Products and prices are shown, but no stock counts. Availability is confirmed before any order is accepted.
+          </Notice>
+        )}
+        {compatibility.length > 0 && (
+          <Notice tone="info" className="mb-5" title="Check compatibility before ordering">
+            <ul className="space-y-1" data-compatibility-notes={compatibility.map((note) => note.id).join(" ")}>
+              {compatibility.map((note) => (
+                <li key={note.id}>
+                  <span className="font-medium text-ink-1">{note.title}.</span> {note.body}
+                </li>
+              ))}
+            </ul>
           </Notice>
         )}
         {page.rejected.length > 0 && (
@@ -363,13 +439,25 @@ export function SkuCatalogClient({
           <>
             <div ref={gridRef} className="product-grid">
               {page.items.map((sku, index) => (
-                <ProductCard key={sku.id} sku={sku} priority={index < 4} compactOnMobile />
+                <ProductCard
+                  key={sku.id}
+                  sku={sku}
+                  priority={index < 4}
+                  compactOnMobile
+                  matchReason={applied.q ? searchMatchReason(sku, applied.q) : null}
+                />
               ))}
             </div>
             <div className="mt-8 flex flex-col items-center gap-3">
               <p className="text-meta text-ink-3">
                 Showing {page.items.length} of {page.total}
               </p>
+              {page.total === 1 && (applied.q || activeCount > 0) && (
+                <p className="max-w-md text-center text-meta text-ink-2" data-one-result>
+                  Only one match. Not the unit you need? {activeCount > 0 ? "Remove a filter, or " : ""}search the full model from the data plate, or{" "}
+                  <Link href="/contact?topic=product" className="font-medium text-brand underline underline-offset-4">ask the counter</Link>.
+                </p>
+              )}
               {page.nextCursor && (
                 <Button type="button" variant="secondary" onClick={showMore}>
                   Show {Math.min(CATALOG_INITIAL_PAGE_SIZE, page.total - page.items.length)} more
@@ -379,6 +467,33 @@ export function SkuCatalogClient({
           </>
         )}
       </section>
+    </div>
+  );
+}
+
+/** The job before the facets. A toggle row, not tabs: none selected is valid. */
+function TaskPicker({ value, onChoose }: { value: CatalogTask | null; onChoose: (value: CatalogTask) => void }) {
+  return (
+    <div className="mb-4" role="group" aria-label="What are you looking for?">
+      <p className="mb-2 text-meta font-medium text-ink-2">What are you looking for?</p>
+      <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible">
+        {CATALOG_TASKS.map((task) => {
+          const on = value === task.value;
+          return (
+            <button
+              key={task.value}
+              type="button"
+              aria-pressed={on}
+              onClick={() => onChoose(task.value)}
+              className={`inline-flex min-h-11 shrink-0 items-center rounded-full border px-4 text-item transition-colors duration-120 ${
+                on ? "border-brand bg-brand-tint font-medium text-ink-1" : "border-line bg-surface-1 text-ink-1 hover:border-line-strong"
+              }`}
+            >
+              {task.label}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

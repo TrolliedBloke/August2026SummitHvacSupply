@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, ImageOff, Maximize2, RotateCcw, X } from "lu
 import * as React from "react";
 import { Modal } from "./dialog";
 import { reconcileActiveId, type MediaItem } from "@/lib/media";
+import { mediaNotice, type MediaDisplayState, type MediaVerification } from "@/lib/media-verification";
 
 /**
  * Product media. One component owns the zero, one and many cases.
@@ -19,12 +20,25 @@ import { reconcileActiveId, type MediaItem } from "@/lib/media";
  *    blank region.
  *  - On touch, a deliberate horizontal swipe changes image; vertical movement
  *    is left to the page (touch-action: pan-y).
+ *  - What the media is evidence of (exact model, family, unverified reference
+ *    or none) is stated in words under the frame and, when it is not exact,
+ *    as a label on the image itself. The frame exposes `data-media-state`.
  */
 
 const SWIPE_THRESHOLD_PX = 40;
 const MAX_RETRIES = 2;
 
-export function ProductGallery({ media, title }: { media: MediaItem[]; title: string }) {
+export function ProductGallery({
+  media,
+  title,
+  verification,
+  modelNumber,
+}: {
+  media: MediaItem[];
+  title: string;
+  verification: MediaVerification;
+  modelNumber: string;
+}) {
   const [activeId, setActiveId] = React.useState<string | null>(media[0]?.id ?? null);
   const [previousMedia, setPreviousMedia] = React.useState(media);
   if (previousMedia !== media) {
@@ -39,17 +53,19 @@ export function ProductGallery({ media, title }: { media: MediaItem[]; title: st
   const [largeOpen, setLargeOpen] = React.useState(false);
   const tabRefs = React.useRef<Record<string, HTMLButtonElement | null>>({});
   const swipe = React.useRef<{ x: number; y: number; id: number } | null>(null);
+  const [loaded, setLoaded] = React.useState<Record<string, boolean>>({});
   const galleryId = React.useId();
 
   if (media.length === 0) {
     return (
-      <div className="grid aspect-[1.22/1] place-items-center rounded-(--r-md) border border-line bg-surface-1 p-8 text-center">
+      <div
+        className="grid aspect-[1.22/1] place-items-center rounded-(--r-md) border border-line bg-surface-1 p-8 text-center"
+        data-media-state="missing"
+      >
         <div>
           <ImageOff className="mx-auto text-ink-3" size={36} aria-hidden="true" />
-          <p className="mt-3 font-medium text-ink-1">Product photo coming soon</p>
-          <p className="mt-1 max-w-sm text-sm text-ink-2">
-            Use the manufacturer model and specifications on this page when matching equipment.
-          </p>
+          <p className="mt-3 font-medium text-ink-1">No verified photo of {modelNumber ? `model ${modelNumber}` : "this model"} yet</p>
+          <p className="mt-1 max-w-sm text-sm text-ink-2">{mediaNotice("missing", modelNumber).detail}</p>
         </div>
       </div>
     );
@@ -60,6 +76,8 @@ export function ProductGallery({ media, title }: { media: MediaItem[]; title: st
   const many = media.length > 1;
   const failedCount = failures[current.id] ?? 0;
   const failed = failedCount > 0;
+  const displayState: MediaDisplayState = failed ? "failed" : loaded[current.id] ? verification : "loading";
+  const notice = mediaNotice(verification, modelNumber);
 
   function select(nextIndex: number, { focusTab = false } = {}) {
     const wrapped = (nextIndex + media.length) % media.length;
@@ -94,6 +112,7 @@ export function ProductGallery({ media, title }: { media: MediaItem[]; title: st
         onPointerUp={onPointerUp}
         onPointerCancel={() => (swipe.current = null)}
         className="relative aspect-[1.22/1] touch-pan-y select-none overflow-hidden rounded-(--r-md) border border-line bg-surface-1"
+        data-media-state={displayState}
       >
         {failed && failedCount > MAX_RETRIES ? (
           <MediaFallback title="Image unavailable" body="This image could not be loaded. The specifications below still describe the exact model." />
@@ -122,10 +141,17 @@ export function ProductGallery({ media, title }: { media: MediaItem[]; title: st
             loading={index === 0 ? "eager" : "lazy"}
             sizes="(min-width: 1024px) 48vw, 100vw"
             className="object-contain p-5 sm:p-12"
+            onLoad={() => setLoaded((all) => ({ ...all, [current.id]: true }))}
             onError={() =>
               setFailures((all) => ({ ...all, [current.id]: Math.abs(all[current.id] ?? 0) + 1 }))
             }
           />
+        )}
+
+        {notice.badge && !failed && (
+          <span className="absolute left-3 top-3 rounded-(--r-sm) border border-line bg-surface-1/95 px-2.5 py-1 text-xs font-medium text-ink-2">
+            {notice.badge}
+          </span>
         )}
 
         {many && (
@@ -151,6 +177,9 @@ export function ProductGallery({ media, title }: { media: MediaItem[]; title: st
       </div>
 
       {current.caption && <p className="mt-2 text-sm text-ink-2">{current.caption}</p>}
+      <p className="mt-3 text-xs leading-5 text-ink-3" data-media-notice={verification}>
+        {notice.detail}
+      </p>
 
       {many && (
         <>

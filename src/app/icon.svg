@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
   <title id="title">Summit HVAC Supply mountain mark</title>
-  <desc id="desc">The dark green Summit mountain ridge with silver and green airflow bands.</desc>
+  <desc id="desc">The white Summit mountain ridge with white airflow bands.</desc>
   <path
-    fill="#133830"
+    fill="#ffffff"
     d="M18 181 87 31l50 92 34-58 67 101-36 3-25-39-24 36-34 21-32-79-34 73H18Z"
   />
   <path
-    fill="#8c968f"
+    fill="#ffffff"
     d="M58 188c56-8 109-39 174-43-54 16-103 48-174 53v-10Z"
   />
   <path
-    fill="#133830"
+    fill="#ffffff"
     d="M47 203c73 12 139-8 190-42l13 19c-61 41-132 50-203 31v-8Z"
   />
 </svg>

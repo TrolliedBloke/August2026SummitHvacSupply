@@ -19,6 +19,7 @@ import {
   type CatalogFilters,
   type SortKey,
 } from "./catalog";
+import { CATALOG_TASK_VALUES, catalogTask, type CatalogTask } from "./catalog-tasks";
 
 export const BTU_BUCKETS = [
   { value: "small", label: "Up to 12k" },
@@ -43,6 +44,8 @@ type PricingValue = (typeof PRICING_OPTIONS)[number]["value"];
 
 export type AppliedFilters = {
   q: string;
+  /** The buyer's job (catalog-tasks.ts). A mode, not a facet: never a chip. */
+  task: CatalogTask | null;
   category: CatalogCategory | null;
   brand: string[];
   btu: BtuBucket | null;
@@ -69,11 +72,12 @@ export const FACET_SCHEMA: Record<FacetKey, { label: string; cardinality: "singl
 
 /** Fixed serialization order. `q` first so shared links read naturally. */
 const KEY_ORDER: Array<keyof AppliedFilters> = [
-  "q", "category", "brand", "btu", "voltage", "unitType", "refrigerant", "pricing", "stock", "sort",
+  "q", "task", "category", "brand", "btu", "voltage", "unitType", "refrigerant", "pricing", "stock", "sort",
 ];
 
 export const EMPTY_FILTERS: AppliedFilters = {
   q: "",
+  task: null,
   category: null,
   brand: [],
   btu: null,
@@ -123,6 +127,7 @@ export function parseCatalogFilters(source: ParamSource): AppliedFilters {
     .filter((brand) => brand && brand !== "all" && brand.length <= MAX_FREE_VALUE);
   return {
     q: (get("q") ?? "").trim().replace(/\s+/g, " ").slice(0, MAX_QUERY),
+    task: oneOf(get("task"), CATALOG_TASK_VALUES),
     category: oneOf(get("category"), CATALOG_CATEGORIES.map((category) => category.value)),
     brand: Array.from(new Set(brands)).slice(0, MAX_BRANDS),
     btu: oneOf(get("btu"), BTU_BUCKETS.map((bucket) => bucket.value)),
@@ -182,6 +187,7 @@ export function serializeCatalogFilters(filters: AppliedFilters): string {
 export function toCatalogFilters(filters: AppliedFilters): CatalogFilters {
   return {
     q: filters.q || undefined,
+    categories: catalogTask(filters.task)?.categories ?? undefined,
     category: filters.category ?? "all",
     brand: filters.brand.length ? filters.brand.join(",") : undefined,
     btu: filters.btu ?? undefined,
@@ -209,9 +215,19 @@ export function removeFacet(filters: AppliedFilters, key: FacetKey, value: strin
   return { ...filters, [key]: null } as AppliedFilters;
 }
 
-/** Clear every facet, keeping the search text and sort. */
+/** Clear every facet, keeping the search text, task and sort. */
 export function clearFacets(filters: AppliedFilters): AppliedFilters {
-  return { ...EMPTY_FILTERS, q: filters.q, sort: filters.sort };
+  return { ...EMPTY_FILTERS, q: filters.q, task: filters.task, sort: filters.sort };
+}
+
+/**
+ * Switch task. Facets that the new task cannot reach (a category outside it)
+ * are dropped, so the switch never lands on an unexplained empty page.
+ */
+export function selectTask(filters: AppliedFilters, task: CatalogTask | null): AppliedFilters {
+  const categories = catalogTask(task)?.categories;
+  const category = filters.category && categories && !categories.includes(filters.category) ? null : filters.category;
+  return { ...filters, task, category };
 }
 
 export function selectedValues(filters: AppliedFilters, key: FacetKey): string[] {

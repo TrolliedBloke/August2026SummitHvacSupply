@@ -10,7 +10,7 @@
  * the UI receives.
  */
 
-import { filterStorefrontSkus, getCatalogFacets, sortStorefrontSkus, type StorefrontSku } from "./catalog";
+import { filterStorefrontSkus, getCatalogFacets, rankBySearch, sortStorefrontSkus, type StorefrontSku } from "./catalog";
 import { normalizeCatalogFilters, toCatalogFilters, type AppliedFilters } from "./filter-codec";
 
 export const CATALOG_PAGE_SIZE = 24;
@@ -65,7 +65,9 @@ export function queryCatalog(
 ): CatalogPage {
   const { valid, rejected } = partitionRecords(pool);
   const applied = normalizeCatalogFilters(filters, getCatalogFacets());
-  const matches = sortStorefrontSkus(filterStorefrontSkus(toCatalogFilters(applied), valid), applied.sort);
+  const filtered = filterStorefrontSkus(toCatalogFilters(applied), valid);
+  // "Most relevant" with a query means match strength; any explicit sort wins.
+  const matches = applied.q && applied.sort === "relevance" ? rankBySearch(filtered, applied.q) : sortStorefrontSkus(filtered, applied.sort);
   const size = Math.min(Math.max(1, Math.floor(limit)), CATALOG_MAX_PAGE_SIZE);
   const offset = Math.min(decodeCursor(cursor), matches.length);
   const end = offset + size;

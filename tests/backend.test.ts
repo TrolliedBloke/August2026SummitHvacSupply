@@ -152,16 +152,27 @@ describe("catalog import reconciliation", () => {
     }
   });
 
-  it("publishes only exact-model mapped imagery and never falls back to a broad family assignment", async () => {
+  it("publishes manufacturer imagery only with an honest exact/family split", async () => {
     const skus = getStorefrontSkus();
     const branded = skus.filter((sku) => sku.brand !== "Unbranded");
     const verified = branded.filter((sku) => sku.imageVerified);
     assert.equal(branded.length, 78);
-    assert.equal(verified.length, 56);
-    assert.ok(verified.every((sku) => sku.imageExactModel && sku.images.length > 0));
-    assert.ok(branded.filter((sku) => !sku.imageVerified).every((sku) => sku.images.length === 0));
+    // 56 records carry manufacturer media; 8 of those show something else (6
+    // caught by file name, 2 by visual review in data/catalog/media-review.json)
+    // and are withheld until the catalog owner supplies the right photo.
+    assert.equal(verified.length, 48);
+    assert.equal(verified.filter((sku) => sku.imageExactModel).length, 9);
+    assert.ok(verified.every((sku) => sku.images.length > 0));
+    // Exact means no other model uses the file.
+    const modelsByImage = new Map<string, Set<string>>();
+    for (const sku of verified) for (const image of sku.images) modelsByImage.set(image, (modelsByImage.get(image) ?? new Set()).add(sku.modelNumber));
+    for (const sku of verified.filter((item) => item.imageExactModel)) {
+      assert.ok(sku.images.every((image) => modelsByImage.get(image)!.size === 1), `${sku.sku} shares an image but is labelled exact`);
+    }
+    assert.ok(branded.filter((sku) => sku.mediaVerification === "missing" && sku.images.length > 0).every((sku) => !sku.imageVerified));
     assert.ok(skus.filter((sku) => sku.brand === "Unbranded").every((sku) => !sku.imageVerified && sku.images.length === 0));
     assert.equal(catalogReconciliation.manufacturerImageCoverage, 56);
+    // The import-time flag; the storefront classification above is stricter.
     assert.equal(catalogReconciliation.exactModelImageCoverage, 56);
     for (const image of new Set(verified.flatMap((sku) => sku.images))) {
       const bytes = await readFile(new URL(`../public${image}`, import.meta.url));

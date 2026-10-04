@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AddToQuote } from "@/components/add-to-quote";
 import { ProductImage } from "@/components/product-image";
 import { productHref, type StorefrontSku } from "@/lib/storefront/catalog";
+import { skuMedia } from "@/lib/media";
 import { presentCommerceState, publicCommerceState, type CommerceState } from "@/lib/commerce/state";
 
 /* The one product card, used on the homepage, in the catalog and under related
@@ -21,8 +22,11 @@ export function ProductCard({
   priority = false,
   headingLevel = 3,
   compactOnMobile = false,
+  matchReason = null,
 }: {
   sku: StorefrontSku;
+  /** Why this card matched the search, from searchMatchReason. */
+  matchReason?: string | null;
   state?: CommerceState;
   priority?: boolean;
   headingLevel?: 2 | 3 | 4;
@@ -31,6 +35,7 @@ export function ProductCard({
   const state = stateProp ?? publicCommerceState(sku);
   const view = presentCommerceState(state);
   const Heading = `h${headingLevel}` as "h2" | "h3" | "h4";
+  const media = skuMedia(sku);
   // Provenance is always visible: a signed-in trade buyer must never read the
   // public list price as their account price (account prices appear only on
   // the product page, cart and checkout, from the session projection).
@@ -42,10 +47,11 @@ export function ProductCard({
           pointer users only, so keyboard and screen-reader users meet it once. */}
       <Link href={productHref(sku)} tabIndex={-1} aria-hidden="true" className={`block ${compactOnMobile ? "col-start-1 row-span-4 row-start-1 sm:col-auto sm:row-span-1 sm:row-auto" : ""}`}>
         <ProductImage
-          src={sku.imageVerified ? sku.image : null}
+          src={media.primarySrc}
           alt=""
           sizes="(min-width: 1280px) 300px, (min-width: 640px) 45vw, 100vw"
           priority={priority}
+          verification={media.verification}
         />
       </Link>
 
@@ -54,7 +60,11 @@ export function ProductCard({
           {sku.title}
         </Link>
       </Heading>
-      <p className={`part-number mt-0.5 min-w-0 break-all text-micro text-ink-3 ${compactOnMobile ? "col-start-2 sm:col-auto" : ""}`}>{sku.sku}</p>
+      {/* The match reason shares the SKU's subgrid row so card rows stay aligned. */}
+      <p className={`mt-0.5 min-w-0 text-micro text-ink-3 ${compactOnMobile ? "col-start-2 sm:col-auto" : ""}`}>
+        <span className="part-number block break-all">{sku.sku}</span>
+        {matchReason && <span className="mt-0.5 block text-ink-2" data-match-reason>{matchReason}</span>}
+      </p>
 
       <p className={`mt-2 flex min-w-0 flex-wrap items-baseline gap-x-2 text-item ${compactOnMobile ? "col-start-2 sm:col-auto" : ""}`}>
         {view.priceText ? (
@@ -67,15 +77,25 @@ export function ProductCard({
         )}
       </p>
 
-      <p className={`mt-1.5 flex min-w-0 items-start gap-2 text-meta text-ink-2 ${compactOnMobile ? "col-start-2 sm:col-auto" : ""}`}>
+      <div
+        className={`mt-1.5 flex min-w-0 items-start gap-2 text-meta text-ink-2 ${compactOnMobile ? "col-start-2 sm:col-auto" : ""}`}
+        data-commerce-state={view.kind}
+      >
         <span
           className={`mt-[0.4375rem] size-2 shrink-0 rounded-full ${
             view.tone === "ready" ? (view.statusLabel.includes("left") ? "bg-[var(--amber)]" : "bg-brand") : "bg-ink-4"
           }`}
           aria-hidden="true"
         />
-        <span className="min-w-0">{view.statusLabel}</span>
-      </p>
+        <span className="min-w-0">
+          <span className="block">{view.statusLabel}</span>
+          {view.tone !== "ready" ? (
+            <span className="mt-0.5 block text-micro leading-4 text-ink-3">{view.statusDetail}</span>
+          ) : (
+            <span className="sr-only">. {view.statusDetail}</span>
+          )}
+        </span>
+      </div>
 
       <div className={`self-end pt-3 ${compactOnMobile ? "col-span-2 sm:col-span-1" : ""}`}>
         <AddToQuote sku={sku} state={state} size="sm" variant="outline" full />

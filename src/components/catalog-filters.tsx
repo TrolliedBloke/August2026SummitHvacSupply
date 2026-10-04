@@ -17,6 +17,7 @@ import {
   type CatalogFacets,
   type FacetKey,
 } from "@/lib/storefront/filter-codec";
+import { catalogTask } from "@/lib/storefront/catalog-tasks";
 
 export type FilterOption = { value: string; label: string; count: number; disabled: boolean };
 export type FilterGroup = { key: FacetKey; label: string; control: "chips" | "checkbox"; options: FilterOption[] };
@@ -43,6 +44,10 @@ function countFor(key: FacetKey, value: string, filters: AppliedFilters, skus: S
  * selected value. A selected facet never disappears, even when it narrowed the
  * set to one remaining option, so the user can always see and undo what
  * produced the results.
+ *
+ * With a task chosen, only that task's facets show, in the order that matters
+ * for the job, and category options are limited to the task's categories. A
+ * selected facet outside the task's list still shows, for the same reason.
  */
 export function buildGroups({
   facets,
@@ -63,9 +68,11 @@ export function buildGroups({
     return { key, label: FACET_SCHEMA[key].label, control, options };
   };
 
+  const task = catalogTask(filters.task);
+  const categories = task?.categories ? facets.categories.filter((category) => task.categories!.includes(category.value as never)) : facets.categories;
   const groups: FilterGroup[] = [];
   if (showCategory || filters.category) {
-    groups.push(make("category", "chips", facets.categories));
+    groups.push(make("category", "chips", categories));
   }
   groups.push(make("brand", "checkbox", facets.brands.map((brand) => ({ value: brand, label: brand }))));
   groups.push(make("btu", "chips", BTU_BUCKETS));
@@ -75,7 +82,14 @@ export function buildGroups({
   groups.push(make("pricing", "chips", PRICING_OPTIONS));
   groups.push(make("stock", "chips", STOCK_OPTIONS));
 
-  return groups
+  const ordered = task
+    ? task.facets
+        .map((key) => groups.find((group) => group.key === key))
+        .filter((group): group is FilterGroup => Boolean(group))
+        .concat(groups.filter((group) => !task.facets.includes(group.key) && selectedValues(filters, group.key).length > 0))
+    : groups;
+
+  return ordered
     .filter((group) => {
       if (group.key === "category" && !showCategory) return selectedValues(filters, "category").length > 0;
       const reachable = group.options.filter((option) => !option.disabled).length;

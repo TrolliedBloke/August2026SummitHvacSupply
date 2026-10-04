@@ -1,4 +1,5 @@
 import manifest from "@/data/media-manifest.generated.json";
+import type { MediaVerification } from "@/lib/media-verification";
 
 /**
  * Normalized product media. The gallery used to receive bare URLs and track the
@@ -85,4 +86,32 @@ export function reconcileActiveId(previous: MediaItem[], next: MediaItem[], acti
   if (activeId && next.some((item) => item.id === activeId)) return activeId;
   const oldIndex = Math.max(0, previous.findIndex((item) => item.id === activeId));
   return next[Math.min(oldIndex, next.length - 1)].id;
+}
+
+type SkuMediaInput = {
+  title: string;
+  image: string;
+  images: string[];
+  referenceImages: string[];
+  mediaVerification: MediaVerification;
+};
+
+/**
+ * A SKU's media and what it is evidence of, for every surface that shows it.
+ * The card shows `primarySrc`; the product page shows `items`. Both carry the
+ * same `verification`, so a card cannot look exact while its page says
+ * "reference".
+ */
+export function skuMedia(sku: SkuMediaInput): { verification: MediaVerification; primarySrc: string | null; items: MediaItem[] } {
+  const verification = sku.mediaVerification;
+  const sources =
+    verification === "verifiedExact" || verification === "verifiedFamily"
+      ? sku.images.length > 0 ? sku.images : [sku.image]
+      : verification === "reference"
+        ? sku.referenceImages
+        : [];
+  const label =
+    verification === "verifiedExact" ? "Manufacturer product view" : verification === "verifiedFamily" ? "Manufacturer family view" : "Reference photo";
+  const items = productMedia(sources, { title: sku.title, label });
+  return { verification, primarySrc: items[0]?.src ?? null, items };
 }

@@ -26,7 +26,7 @@ test("an unsigned payment claim cannot produce a paid confirmation", async ({ pa
 test("priced product shows its price and requests availability without exposing internal inventory language", async ({ page }) => {
   await page.goto("/products/sku/tcl09kidu", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: "TCL 9K Indoor Unit", exact: true })).toBeVisible();
-  await expect(page.getByRole("img", { name: /TCL 9K Indoor Unit, manufacturer product view 1/i })).toBeVisible();
+  await expect(page.getByRole("img", { name: /TCL 9K Indoor Unit, manufacturer family view 1/i })).toBeVisible();
   await expect(page.getByText(/availability confirmation required/i)).toHaveCount(0);
   await expect(page.getByText(/inventory source/i)).toHaveCount(0);
   // Stock is unknown for every SKU in the source sheet, so a priced item is not
@@ -39,14 +39,17 @@ test("priced product shows its price and requests availability without exposing 
   await expect(page.getByRole("link", { name: /Check out/ })).toHaveCount(0);
 });
 
-test("exact-model media loads and supports multiple manufacturer views", async ({ page }) => {
+test("family media is labelled and supports multiple manufacturer views", async ({ page }) => {
   await page.goto("/products/sku/tos-18k-idu", { waitUntil: "domcontentloaded" });
-  await expect(page.getByText(/Manufacturer media verified against model TWH18AT19D6D/).first()).toBeVisible();
+  // TOSOT publishes the same photos for the 18K and 24K heads, so they are
+  // family media, labelled as such, not "verified against model".
+  await expect(page.getByText(/not model TWH18AT19D6D specifically/).first()).toBeVisible();
+  await expect(page.getByText("Representative", { exact: true }).first()).toBeVisible();
   const productImage = page.getByRole("tabpanel").locator("img");
   await expect(productImage).toBeVisible();
   await expect.poll(() => productImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   await page.getByRole("button", { name: "Next view" }).click();
-  await expect(page.getByRole("tab", { name: /Manufacturer product view 2/ })).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByRole("tab", { name: /Manufacturer family view 2/ })).toHaveAttribute("aria-selected", "true");
 });
 
 test("account entry separates retail signup from wholesale application", async ({ page }) => {

@@ -13,6 +13,7 @@ import { ICON_STROKE, SearchField } from "./nav/search-field";
 import { AccountMenu, accountActions, triggerLabel, useNavAccount } from "./nav/account-menu";
 import { SITE } from "@/lib/site";
 import { CATEGORY_RAIL } from "@/lib/nav-links";
+import { shellVariantForPathname } from "@/lib/shell-variant";
 import type { CategoryDestination } from "@/lib/storefront/catalog";
 
 /* Shared by every row-3 entry so the run reads as an even rhythm. */
@@ -151,7 +152,7 @@ function CartButton({ onOpen }: { onOpen?: () => void }) {
    "open". */
 function UtilityStrip() {
   return (
-    <div className="hidden bg-[var(--green-deep)] md:block">
+    <div className="hidden bg-[var(--chrome)] md:block">
       <div className="mx-auto flex h-12 w-full max-w-[var(--page-max)] items-center gap-3 px-5 text-meta font-medium text-white">
         <MapPin size={14} strokeWidth={ICON_STROKE} className="shrink-0" aria-hidden="true" />
         <span className="whitespace-nowrap">Newark, CA</span>
@@ -213,6 +214,7 @@ function CategoryRail({ pathname }: { pathname: string }) {
 
 export function SiteNav({ categories }: { categories: CategoryDestination[] }) {
   const pathname = usePathname();
+  const shellVariant = shellVariantForPathname(pathname);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [productsOpen, setProductsOpen] = React.useState(false);
   const productsWrapRef = React.useRef<HTMLDivElement>(null);
@@ -241,18 +243,25 @@ export function SiteNav({ categories }: { categories: CategoryDestination[] }) {
   }, [productsOpen]);
 
   return (
-    <header className="relative z-30 bg-surface-2">
-      <UtilityStrip />
+    <header className="relative z-30 bg-surface-2" data-shell-variant={shellVariant}>
+      {shellVariant === "commerce" && <UtilityStrip />}
 
-      <div className="mx-auto flex w-full max-w-[var(--page-max)] items-center gap-6 bg-surface-2 px-5 py-2.5 md:py-[18px] lg:py-[15px]">
-        <Wordmark />
+      <div
+        className={`mx-auto flex w-full max-w-[var(--page-max)] items-center gap-3 bg-surface-2 px-5 py-2.5 lg:gap-6 ${shellVariant === "commerce" ? "md:py-[18px] lg:py-[15px]" : "md:py-3"}`}
+      >
+        <Wordmark compact={shellVariant !== "commerce"} />
         {/* Capped and centred, so mark / search / account each hold their space. */}
         <div className="hidden min-w-0 flex-1 justify-center md:flex">
           <div className="w-full max-w-[827px]">
             <SearchField inline withButton />
           </div>
         </div>
-        <div className="ml-auto flex items-center gap-1 md:ml-0">
+        <div className="ml-auto flex shrink-0 items-center gap-1 md:ml-0">
+          {shellVariant === "focused" && (
+            <Link href="/products" className="hidden h-11 items-center rounded-(--r-sm) px-3 text-sm font-medium text-brand hover:bg-surface-2 md:inline-flex">
+              Catalog
+            </Link>
+          )}
           <AccountMenu />
           <CartButton />
           <button
@@ -272,42 +281,59 @@ export function SiteNav({ categories }: { categories: CategoryDestination[] }) {
           Brands pinned right. The disclosure's panel is positioned against this
           nav (not inside the horizontally scrolling row), so it is never
           clipped by the row's overflow. */}
-      <nav aria-label="Store navigation" className="relative border-b border-line bg-surface-2">
-        <div ref={productsWrapRef}>
-          <div className="mx-auto w-full max-w-[var(--page-max)] px-5">
-            <div className="flex items-center overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <div className="-ml-4 shrink-0">
-                <button
-                  ref={productsTriggerRef}
-                  type="button"
-                  onClick={() => setProductsOpen((current) => !current)}
-                  aria-expanded={productsOpen}
-                  aria-controls={productsPanelId}
-                  className={`${NAV_ITEM} inline-flex items-center gap-4 text-ink-1 hover:bg-surface-2`}
+      {shellVariant === "commerce" ? (
+        <nav aria-label="Store navigation" className="relative border-b border-line bg-surface-2">
+          <div ref={productsWrapRef}>
+            <div className="mx-auto w-full max-w-[var(--page-max)] px-5">
+              <div className="flex items-center overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <div className="-ml-4 shrink-0">
+                  <button
+                    ref={productsTriggerRef}
+                    type="button"
+                    onClick={() => setProductsOpen((current) => !current)}
+                    aria-expanded={productsOpen}
+                    aria-controls={productsPanelId}
+                    className={`${NAV_ITEM} inline-flex items-center gap-4 text-ink-1 hover:bg-surface-2`}
+                  >
+                    <Menu size={22} strokeWidth={2} aria-hidden="true" className="hidden md:block" />
+                    All products
+                  </button>
+                </div>
+                <Suspense fallback={<CategoryLinks pathname={pathname} query={null} />}>
+                  <CategoryRail pathname={pathname} />
+                </Suspense>
+                <Link
+                  href="/brands"
+                  aria-current={pathname === "/brands" ? "page" : undefined}
+                  className={`${NAV_ITEM} ${NAV_UNDERLINE} ml-auto -mr-4 shrink-0 ${pathname === "/brands" ? NAV_UNDERLINE_ON : ""}`}
                 >
-                  <Menu size={22} strokeWidth={2} aria-hidden="true" className="hidden md:block" />
-                  All products
-                </button>
+                  Brands
+                </Link>
               </div>
-              <Suspense fallback={<CategoryLinks pathname={pathname} query={null} />}>
-                <CategoryRail pathname={pathname} />
-              </Suspense>
-              <Link
-                href="/brands"
-                aria-current={pathname === "/brands" ? "page" : undefined}
-                className={`${NAV_ITEM} ${NAV_UNDERLINE} ml-auto -mr-4 shrink-0 ${pathname === "/brands" ? NAV_UNDERLINE_ON : ""}`}
-              >
-                Brands
-              </Link>
+            </div>
+            <div className="mx-auto w-full max-w-[var(--page-max)]">
+              <div className="relative">
+                {productsOpen && <AllProductsPanel id={productsPanelId} categories={categories} onNavigate={() => setProductsOpen(false)} />}
+              </div>
             </div>
           </div>
-          <div className="mx-auto w-full max-w-[var(--page-max)]">
-            <div className="relative">
-              {productsOpen && <AllProductsPanel id={productsPanelId} categories={categories} onNavigate={() => setProductsOpen(false)} />}
-            </div>
+        </nav>
+      ) : shellVariant === "service" ? (
+        <nav aria-label="Service navigation" className="border-b border-line bg-surface-2">
+          <div className="mx-auto hidden h-12 w-full max-w-[var(--page-max)] items-center gap-7 px-5 text-sm font-medium text-ink-1 md:flex">
+            <Link href="/products" className="hover:text-brand">Catalog</Link>
+            <Link href="/finder" aria-current={pathname.startsWith("/finder") ? "page" : undefined} className="hover:text-brand aria-[current=page]:text-brand">System finder</Link>
+            <Link href="/resources" aria-current={pathname.startsWith("/resources") || pathname.startsWith("/guides") ? "page" : undefined} className="hover:text-brand aria-[current=page]:text-brand">Resources</Link>
+            <Link href="/contact" aria-current={pathname.startsWith("/contact") ? "page" : undefined} className="hover:text-brand aria-[current=page]:text-brand">Contact</Link>
+            <a href={SITE.phoneHref} className="tnum ml-auto inline-flex items-center gap-2 hover:text-brand">
+              <Phone size={14} strokeWidth={ICON_STROKE} aria-hidden="true" />
+              {SITE.phone}
+            </a>
           </div>
-        </div>
-      </nav>
+        </nav>
+      ) : (
+        <div className="border-b border-line" aria-hidden="true" />
+      )}
 
       <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} categories={categories} />
     </header>

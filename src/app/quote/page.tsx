@@ -1,13 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { AlertTriangle, ArrowRight, CheckCircle2, Info, Minus, Phone, Plus, Trash2 } from "lucide-react";
+import { AlertTriangle, ArrowRight, CheckCircle2, ChevronDown, Info, Minus, Plus, Trash2 } from "lucide-react";
 import * as React from "react";
 import { Container, Eyebrow, Button } from "@/components/ui";
 import { ErrorSummary, FormField, Input, Select, Textarea, focusFirstInvalid } from "@/components/form";
 import { MAX_CART_QUANTITY, useQuote, type QuoteItem } from "@/components/quote-context";
 import { Notice } from "@/components/state";
+import { WhatHappensNext } from "@/components/what-happens-next";
 import { SITE } from "@/lib/site";
 import { productHref } from "@/lib/storefront/catalog";
 import { PROJECT_TYPES, QUOTE_FIELD_LABELS, QUOTE_RESPONSE_WINDOW, quoteDraftSchema, type CompatibilityNote, type QuoteField, type QuoteLineCheck } from "@/lib/forms/quote";
@@ -41,6 +41,9 @@ export default function QuotePage() {
   const requestIdRef = React.useRef<string | null>(null);
   const formRef = React.useRef<HTMLFormElement>(null);
   const [focusTick, setFocusTick] = React.useState(0);
+  // Delivery ZIP and needed-by date are optional: disclosed on request, and
+  // forced open when they hold a value or an error so nothing is hidden.
+  const [moreOpen, setMoreOpen] = React.useState(false);
   React.useEffect(() => {
     if (focusTick) focusFirstInvalid(formRef.current);
   }, [focusTick]);
@@ -180,18 +183,30 @@ export default function QuotePage() {
                 <FormField id="phone" label={QUOTE_FIELD_LABELS.phone} error={errors.phone} hint="Fastest if you want a call back.">
                   {(control) => <Input {...control} type="tel" autoComplete="tel" value={values.phone} onChange={(event) => set("phone", event.target.value)} />}
                 </FormField>
-                <FormField id="zip" label={QUOTE_FIELD_LABELS.zip} error={errors.zip} hint="For delivery and tax.">
-                  {(control) => <Input {...control} inputMode="numeric" maxLength={5} value={values.zip} onChange={(event) => set("zip", event.target.value.replace(/\D/g, ""))} />}
-                </FormField>
                 <FormField id="projectType" label={QUOTE_FIELD_LABELS.projectType} required error={errors.projectType}>
                   {(control) => (
                     <Select id={control.id} invalid={Boolean(control["aria-invalid"])} describedBy={control["aria-describedby"]} required value={values.projectType} onChange={(value) => set("projectType", value)} placeholder="Select" options={PROJECT_TYPES} />
                   )}
                 </FormField>
-                <FormField id="requestedDate" label={QUOTE_FIELD_LABELS.requestedDate} error={errors.requestedDate}>
-                  {(control) => <Input {...control} type="date" value={values.requestedDate} onChange={(event) => set("requestedDate", event.target.value)} />}
-                </FormField>
               </div>
+              <details
+                open={moreOpen || Boolean(values.zip || values.requestedDate || errors.zip || errors.requestedDate)}
+                onToggle={(event) => setMoreOpen((event.currentTarget as HTMLDetailsElement).open)}
+                className="group rounded-(--r-sm) border border-line"
+              >
+                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 text-sm font-medium text-ink-1 [&::-webkit-details-marker]:hidden">
+                  Delivery ZIP and needed-by date <span className="font-normal text-ink-3">(optional)</span>
+                  <ChevronDown size={16} aria-hidden="true" className="ml-auto shrink-0 text-ink-3 transition-transform group-open:rotate-180" />
+                </summary>
+                <div className="grid gap-5 border-t border-line p-4 sm:grid-cols-2">
+                  <FormField id="zip" label={QUOTE_FIELD_LABELS.zip} error={errors.zip} hint="For delivery and tax.">
+                    {(control) => <Input {...control} inputMode="numeric" maxLength={5} value={values.zip} onChange={(event) => set("zip", event.target.value.replace(/\D/g, ""))} />}
+                  </FormField>
+                  <FormField id="requestedDate" label={QUOTE_FIELD_LABELS.requestedDate} error={errors.requestedDate}>
+                    {(control) => <Input {...control} type="date" value={values.requestedDate} onChange={(event) => set("requestedDate", event.target.value)} />}
+                  </FormField>
+                </div>
+              </details>
               <FormField
                 id="notes"
                 label={QUOTE_FIELD_LABELS.notes}
@@ -210,21 +225,13 @@ export default function QuotePage() {
         </div>
 
         <aside className="lg:sticky lg:top-6 lg:self-start">
-          <div className="mb-4 overflow-hidden rounded-(--r-md) border border-line bg-surface-2">
-            <div className="relative aspect-[16/10]">
-              <Image src="/site/generated/spec-workbench-documents.jpg" alt="Spec sheets and installation materials on a workbench" fill preload sizes="(min-width: 1024px) 380px, 100vw" className="object-cover" />
-            </div>
-            <p className="p-4 text-sm leading-relaxed text-ink-2">Every quote is checked against exact equipment, stock, documents and fulfillment timing before we reply.</p>
-          </div>
-          <a href={SITE.phoneHref} className="flex items-center gap-3 rounded-(--r-md) border border-line bg-surface-2 p-4 text-ink-1 transition-colors hover:bg-surface-1">
-            <span className="grid size-10 place-items-center rounded-(--r-sm) bg-brand-tint text-brand">
-              <Phone size={18} aria-hidden="true" />
-            </span>
-            <span className="flex flex-col leading-tight">
-              <span className="text-xs text-ink-3">Prefer to talk?</span>
-              <span className="text-sm font-semibold">{SITE.phone}</span>
-            </span>
-          </a>
+          <WhatHappensNext
+            steps={[
+              "The counter checks every product, quantity and date against stock and manufacturer documents.",
+              "You get a written quote by email with your reference number. Matched-system compatibility is confirmed in it.",
+              "Nothing is charged. You decide whether to order.",
+            ]}
+          />
         </aside>
       </div>
     </Container>

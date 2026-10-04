@@ -225,3 +225,33 @@ export function tagsFor(submission: FinderSubmission): string[] {
   ];
   return tags.filter((tag): tag is string => Boolean(tag));
 }
+
+/* ------------------------------------------------------- recap and contract */
+
+/** What each path delivers, stated before the first question (UX fix plan WS-5). */
+export const FINDER_CONTRACT: Record<FinderPath, string> = {
+  homeowner: "You get a starting size (not a load calculation), matched systems that meet California efficiency rules, and an installer handoff.",
+  contractor: "You get matching stock with live Newark counts, then a will-call, quote or trade-account handoff.",
+};
+
+export type RecapItem = { index: number; id: string; prompt: string; answer: string };
+
+/**
+ * The answers so far, in question order, in the words the buyer chose. Only
+ * questions before `upTo` are included, so the recap never shows an answer to
+ * the question on screen.
+ */
+export function finderRecap(path: FinderPath, answers: Record<string, string | undefined>, upTo: number): RecapItem[] {
+  return questionsFor(path, answers)
+    .slice(0, upTo)
+    .map((question, index) => {
+      const value = answers[question.id];
+      const answer =
+        value === undefined
+          ? "Skipped"
+          : question.kind === "zip"
+            ? `ZIP ${value}`
+            : question.options?.find((option) => option.value === value)?.label ?? value;
+      return { index, id: question.id, prompt: question.prompt, answer };
+    });
+}

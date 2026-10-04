@@ -12,7 +12,7 @@ export function CommerceStatusLine({ state, className = "" }: { state: CommerceS
   const stock = "stock" in state && state.stock.kind === "verified" && state.stock.quantity > 0 ? state.stock : null;
   const Icon = view.tone === "ready" ? Check : view.tone === "blocked" ? PackageX : stock ? Check : view.kind === "quoteRequired" ? Clock : HelpCircle;
   return (
-    <div className={className}>
+    <div className={className} data-commerce-state={view.kind}>
       <div className="flex items-baseline gap-3">
         {stock && <span className="tnum text-3xl font-medium leading-none text-stock-ready">{stock.quantity}</span>}
         <span

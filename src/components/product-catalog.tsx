@@ -2,7 +2,8 @@ import * as React from "react";
 import { Container, Eyebrow } from "@/components/ui";
 import { SkuCatalogClient } from "@/components/sku-catalog-client";
 import { ZipGate } from "@/components/zip-gate";
-import { getCatalogFacets, getStorefrontSkus } from "@/lib/storefront/catalog";
+import { getCatalogFacets, getStorefrontSkus, productHref } from "@/lib/storefront/catalog";
+import { matchedSystems } from "@/lib/catalog/compliance";
 import { applyLiveInventoryAll, getLiveInventoryResult } from "@/lib/storefront/live-inventory";
 import { CatalogResultsSkeleton } from "@/components/catalog-skeleton";
 
@@ -10,6 +11,15 @@ export async function ProductCatalog() {
   const live = await getLiveInventoryResult();
   const skus = applyLiveInventoryAll(getStorefrontSkus(), live.inventory);
   const facets = getCatalogFacets();
+  // AHRI-matched pairs, for the "complete system" task. Plain data: the client
+  // never needs the compliance module.
+  const systems = matchedSystems().map((system) => ({
+    ahriReference: system.ahriReference,
+    brand: system.brand,
+    btu: system.btu,
+    refrigerant: system.refrigerant,
+    components: system.components.map((component) => ({ sku: component.sku, unitType: component.unitType, href: productHref(component) })),
+  }));
   return (
     <>
       <section className="border-b border-line bg-surface-1">
@@ -30,7 +40,7 @@ export async function ProductCatalog() {
 
       <Container className="py-10 lg:py-12">
         <React.Suspense fallback={<CatalogResultsSkeleton />}>
-          <SkuCatalogClient skus={skus} facets={facets} inventoryStatus={live.status} />
+          <SkuCatalogClient skus={skus} facets={facets} systems={systems} inventoryStatus={live.status} />
         </React.Suspense>
       </Container>
     </>

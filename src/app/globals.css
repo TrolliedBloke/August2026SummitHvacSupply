@@ -156,14 +156,14 @@ body {
 .prose-doc h2 {
   color: var(--ink-1);
   font-size: var(--text-h2);
-  font-weight: 600;
+  font-weight: var(--weight-strong);
   line-height: 1.25;
   letter-spacing: -0.01em;
 }
 .prose-doc h3 {
   color: var(--ink-1);
   font-size: var(--text-lead);
-  font-weight: 500;
+  font-weight: var(--weight-strong);
   line-height: 1.4;
 }
 .prose-doc a {
@@ -206,7 +206,7 @@ body {
 /* Section heading -- the one heading style, in sentence case. Used for the
    landing page section titles ("Available from Newark", "Shop by category"). */
 .counter-heading {
-  font-weight: 600;
+  font-weight: var(--weight-strong);
   letter-spacing: -0.01em;
 }
 

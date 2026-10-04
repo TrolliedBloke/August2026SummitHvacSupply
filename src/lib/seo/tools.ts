@@ -15,3 +15,16 @@ export const SEO_TOOLS: SeoTool[] = [
 ];
 
 export function getSeoTool(slug: string) { return SEO_TOOLS.find((tool) => tool.slug === slug); }
+
+/**
+ * Where each tool's result leads (UX fix plan WS-6). A tool must not end at its
+ * own output: the primary step carries the result back into the catalog, the
+ * finder or a request, and the counter is always the fallback.
+ */
+export const TOOL_NEXT_STEP: Record<SeoTool["slug"], { label: string; href: string; body: string }> = {
+  "model-number-decoder": { label: "Search the catalog by model", href: "/products?task=model", body: "Take the decoded model to the catalog to see stock, documents and the matched system." },
+  "rebate-lookup": { label: "Find a qualifying matched system", href: "/finder", body: "Rebates pay for rated, matched systems. The finder shortlists the ones that meet California efficiency rules." },
+  "ahri-match-finder": { label: "Browse matched systems", href: "/products?task=system", body: "See every AHRI-matched pair Summit stocks, with each component's stock and price." },
+  "system-sizing-estimator": { label: "See systems in this size", href: "/finder", body: "Turn the starting capacity into a shortlist of matched systems, then an installer confirms the load." },
+  "operating-cost-comparison": { label: "Shortlist a heat pump", href: "/finder", body: "Five questions to a starting size and matched systems that meet California efficiency rules." },
+};

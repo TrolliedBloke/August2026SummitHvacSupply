@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { MessageCircle, Phone, Send, Sparkles, X } from "lucide-react";
 import * as React from "react";
 import { SITE } from "@/lib/site";
+import { floatingChatAllowed } from "@/lib/shell-variant";
 
 /**
  * AI chat widget. Honest labeling ("AI assistant") plus a first-class exit to
@@ -48,7 +50,16 @@ function AssistantText({ text }: { text: string }) {
 }
 
 export function ChatWidget() {
+  const pathname = usePathname();
+  const allowed = floatingChatAllowed(pathname);
   const [open, setOpen] = React.useState(false);
+  // Navigating onto a route where floating chat is suppressed closes it, so
+  // it does not reopen on its own when the buyer navigates back.
+  const [wasAllowed, setWasAllowed] = React.useState(allowed);
+  if (wasAllowed !== allowed) {
+    setWasAllowed(allowed);
+    if (!allowed) setOpen(false);
+  }
   const [messages, setMessages] = React.useState<ChatMessage[]>([]);
   const [input, setInput] = React.useState("");
   const [busy, setBusy] = React.useState(false);
@@ -60,6 +71,7 @@ export function ChatWidget() {
   React.useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
   }, [messages, open]);
+
 
   // Escape to close + focus trap, matching the quote drawer. Without this the
   // panel announces itself as a dialog while leaving keyboard users unable to
@@ -150,6 +162,8 @@ export function ChatWidget() {
       setBusy(false);
     }
   }
+
+  if (!allowed) return null;
 
   return (
     <>

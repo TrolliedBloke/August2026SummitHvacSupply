@@ -12,7 +12,16 @@ import { submitForm } from "@/lib/forms/result";
 import { SITE } from "@/lib/site";
 import { MANUAL_J_CAVEAT } from "@/lib/sizing";
 import { WARRANTY_DISCLOSURE } from "@/lib/brand-policy";
-import { FORK_OPTIONS, questionsFor, type FinderPath, type FinderQuestion, type HomeownerAnswers } from "@/lib/finder/questions";
+import {
+  FINDER_CONTRACT,
+  finderRecap,
+  FORK_OPTIONS,
+  questionsFor,
+  type FinderPath,
+  type FinderQuestion,
+  type HomeownerAnswers,
+  type RecapItem,
+} from "@/lib/finder/questions";
 import type { ContractorResult, FinderResult, HomeownerResult, ResultItem } from "@/lib/finder/recommend";
 import { prefillFromAnswers, storeHandoff } from "@/lib/finder/handoff";
 import type { TradeTier } from "@/lib/trade-tier";
@@ -98,6 +107,12 @@ export function Finder() {
     else setPhase({ kind: "question", path: phase.path, index: phase.index - 1 });
   }
 
+  /** Jump back to an earlier question from the recap; later answers are kept. */
+  function jump(index: number) {
+    if (phase.kind !== "question") return;
+    setPhase({ kind: "question", path: phase.path, index });
+  }
+
   function restart() {
     setAnswers({});
     setPhase({ kind: "fork" });
@@ -105,7 +120,12 @@ export function Finder() {
 
   if (phase.kind === "fork") {
     return (
-      <section aria-labelledby="finder-step-heading" className="rounded-(--r-md) border border-line bg-surface-1 p-5 sm:p-7">
+      <section
+        aria-labelledby="finder-step-heading"
+        className="rounded-(--r-md) border border-line bg-surface-1 p-5 sm:p-7"
+        data-finder-phase="fork"
+        data-screenshot-ready="true"
+      >
         <h2 id="finder-step-heading" ref={headingRef} tabIndex={-1} className="text-lead font-medium text-ink-1 outline-none">
           Who is this for?
         </h2>
@@ -139,6 +159,9 @@ export function Finder() {
         index={phase.index}
         total={questions.length}
         value={answers[question.id]}
+        recap={finderRecap(phase.path, answers, phase.index)}
+        contract={FINDER_CONTRACT[phase.path]}
+        onJump={jump}
         headingRef={headingRef}
         onBack={back}
         onAnswer={advance}
@@ -148,7 +171,7 @@ export function Finder() {
 
   if (phase.kind === "loading") {
     return (
-      <section aria-busy="true" className="rounded-(--r-md) border border-line bg-surface-1 p-5 sm:p-7">
+      <section aria-busy="true" className="rounded-(--r-md) border border-line bg-surface-1 p-5 sm:p-7" data-finder-phase="loading">
         <h2 ref={headingRef} tabIndex={-1} className="text-lead font-medium text-ink-1 outline-none">
           Matching your answers…
         </h2>
@@ -159,7 +182,7 @@ export function Finder() {
 
   if (phase.kind === "error") {
     return (
-      <section role="alert" className="rounded-(--r-md) border border-state-danger-line bg-state-danger p-5 sm:p-7">
+      <section role="alert" className="rounded-(--r-md) border border-state-danger-line bg-state-danger p-5 sm:p-7" data-finder-phase="error" data-screenshot-ready="true">
         <h2 ref={headingRef} tabIndex={-1} className="text-lead font-medium text-state-danger-ink outline-none">
           {phase.message}
         </h2>
@@ -190,11 +213,17 @@ function QuestionStep({
   headingRef,
   onBack,
   onAnswer,
+  recap,
+  contract,
+  onJump,
 }: {
   question: FinderQuestion;
   index: number;
   total: number;
   value: string | undefined;
+  recap: RecapItem[];
+  contract: string;
+  onJump: (index: number) => void;
   headingRef: React.RefObject<HTMLHeadingElement | null>;
   onBack: () => void;
   onAnswer: (value: string | undefined) => void;
@@ -219,7 +248,14 @@ function QuestionStep({
   }
 
   return (
-    <section aria-labelledby={headingId} className="rounded-(--r-md) border border-line bg-surface-1 p-5 sm:p-7">
+    <section
+      aria-labelledby={headingId}
+      className="rounded-(--r-md) border border-line bg-surface-1 p-5 sm:p-7"
+      data-finder-phase="question"
+      data-finder-question={question.id}
+      data-finder-step={index + 1}
+      data-screenshot-ready="true"
+    >
       <div className="flex items-center justify-between gap-4 text-meta text-ink-3">
         <span>
           Question {index + 1} of {total}
@@ -231,11 +267,35 @@ function QuestionStep({
         aria-label="Finder progress"
         aria-valuemin={0}
         aria-valuemax={total}
-        aria-valuenow={index}
+        aria-valuenow={index + 1}
         className="mt-2 h-1 w-full overflow-hidden rounded-full bg-surface-2"
       >
-        <div className="h-full bg-ink-1 transition-[width] duration-150" style={{ width: `${(index / total) * 100}%` }} />
+        <div className="h-full bg-ink-1 transition-[width] duration-150" style={{ width: `${((index + 1) / total) * 100}%` }} />
       </div>
+      {index === 0 && <p className="mt-3 text-meta text-ink-3" data-finder-contract>{contract}</p>}
+
+      {/* What has been answered so far, each one changeable without starting over. */}
+      {recap.length > 0 && (
+        <div className="mt-4 rounded-(--r-sm) bg-surface-2 px-3 py-2" data-finder-recap>
+          <h3 className="sr-only">Your answers so far</h3>
+          <ul className="flex flex-wrap gap-x-4 gap-y-1 text-meta">
+            {recap.map((item) => (
+              <li key={item.id} className="inline-flex items-center gap-1.5">
+                <span className="text-ink-3">{item.prompt.replace(/\?$/, "")}:</span>
+                <span className="text-ink-1">{item.answer}</span>
+                <button
+                  type="button"
+                  onClick={() => onJump(item.index)}
+                  aria-label={`Change answer to “${item.prompt}”`}
+                  className="inline-flex min-h-11 items-center px-1 font-medium text-brand underline underline-offset-4 sm:min-h-0"
+                >
+                  Change
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <h2 id={headingId} ref={headingRef} tabIndex={-1} className="mt-6 text-lead font-medium text-ink-1 outline-none">
         {question.prompt}
@@ -396,6 +456,9 @@ function HomeownerResults({
     <div className="flex flex-col gap-6">
       <section className="rounded-(--r-md) border border-line bg-surface-1 p-5 sm:p-7">
         <ResultsHeader headingRef={headingRef} title="Your shortlist" onRestart={onRestart}>
+          <p className="mt-1 text-meta font-medium text-ink-3" data-finder-result-kind="starting-recommendation">
+            Starting recommendation. A licensed installer confirms the size and any permit before you buy.
+          </p>
           <p className="mt-1 text-ink-2">
             {result.laneLabel}
             {result.capacity ? `, starting around ${result.capacity}` : ""}.

@@ -1,5 +1,7 @@
 import catalogJson from "@/data/catalog.generated.json";
 import type { SkuDocument } from "@/lib/backend/types";
+import mediaReviewJson from "../../../data/catalog/media-review.json";
+import { classifyMedia, imageModelIndex, type MediaReview, type MediaVerification } from "@/lib/media-verification";
 
 export const CATALOG_CATEGORIES = [
   { value: "mini-splits", label: "Mini splits" },
@@ -100,6 +102,14 @@ type CatalogRecord = {
 
 const catalogRecords = catalogJson as unknown as CatalogRecord[];
 
+/* Built once over every record, archived included: an image shared with an
+   archived model is still not specific to the live one. */
+const IMAGE_MODELS = imageModelIndex(catalogRecords);
+/* Reviewed verdicts on what a photo actually shows, keyed by catalog SKU. */
+const MEDIA_REVIEW = new Map<string, MediaReview>(
+  (mediaReviewJson.entries as Array<MediaReview & { sku: string }>).map(({ sku, ...review }) => [sku, review])
+);
+
 export type StorefrontSku = {
   id: string;
   sourceRow: number;
@@ -128,8 +138,12 @@ export type StorefrontSku = {
   image: string;
   images: string[];
   referenceImages: string[];
+  /** Whether there is manufacturer media at all: exact or family. */
   imageVerified: boolean;
+  /** True only for media no other model in the catalog shares. */
   imageExactModel: boolean;
+  /** What the image is evidence of. See src/lib/media-verification.ts. */
+  mediaVerification: MediaVerification;
   available: number;
   availabilityStatus: CatalogAvailability;
   availabilityVerified: boolean;
@@ -159,6 +173,8 @@ export type StorefrontSku = {
 
 export type CatalogFilters = {
   q?: string;
+  /** Restricts the pool to these categories (the catalog task). */
+  categories?: CatalogCategory[];
   category?: CatalogCategory | "all";
   brand?: string;
   btu?: string;
@@ -224,6 +240,7 @@ function deriveAhriReference(ahri: CatalogAhri | null): string {
 
 function toStorefrontSku(record: CatalogRecord): StorefrontSku {
   const price = record.retailPrice ?? 0;
+  const mediaVerification = classifyMedia(record, IMAGE_MODELS, MEDIA_REVIEW.get(record.catalogSku));
   return {
     id: record.id,
     sourceRow: record.sourceRow,
@@ -256,8 +273,9 @@ function toStorefrontSku(record: CatalogRecord): StorefrontSku {
     image: record.image ?? "/logo-summit.svg",
     images: record.images ?? (record.image ? [record.image] : []),
     referenceImages: record.referenceImages ?? [],
-    imageVerified: record.imageVerification !== "unverified" && Boolean(record.image),
-    imageExactModel: record.imageVerification === "verified" && Boolean(record.image),
+    imageVerified: mediaVerification === "verifiedExact" || mediaVerification === "verifiedFamily",
+    imageExactModel: mediaVerification === "verifiedExact",
+    mediaVerification,
     available: record.inventoryQuantity ?? 0,
     availabilityStatus: record.inventoryStatus,
     availabilityVerified: record.inventoryQuantity !== null && record.inventoryStatus !== "unknown",
@@ -693,6 +711,46 @@ function scoreSku(sku: StorefrontSku, q: string, qCode: string): number {
   return 0;
 }
 
+/**
+ * Order search results by match strength: exact model or SKU first, then
+ * prefix, then text. Stable within a tier, so the catalog's own order breaks
+ * ties. The catalog's "Most relevant" sort uses this whenever there is a query
+ * -- without it an exact SKU hit could sit below a description match.
+ */
+export function rankBySearch(skus: StorefrontSku[], query: string): StorefrontSku[] {
+  const q = normalizeSearchQuery(query);
+  if (!q) return skus;
+  const qCode = normalizeCode(q);
+  return skus
+    .map((sku, index) => ({ sku, index, score: scoreSku(sku, q, qCode), intent: intentPriority(sku, q) }))
+    .sort((a, b) => b.score - a.score || b.intent - a.intent || a.index - b.index)
+    .map((item) => item.sku);
+}
+
+/**
+ * Why a record matched a search, in words, for the result card. Derived from
+ * the same tiers as scoreSku, so a result can never claim a stronger match
+ * than the one that ranked it. Null when the query does not match.
+ */
+export function searchMatchReason(sku: StorefrontSku, query: string): string | null {
+  const q = normalizeSearchQuery(query);
+  if (!q) return null;
+  const qCode = normalizeCode(q);
+  const score = scoreSku(sku, q, qCode);
+  if (score === 0) return null;
+  const named: Array<[string, string]> = [["model", sku.modelNumber], ["SKU", sku.sku], ["supplier SKU", sku.sourceSku]];
+  const exact = named.find(([, code]) => code && normalizeCode(code) === qCode);
+  if (score === 6 && exact) return `Exact ${exact[0]} match`;
+  const prefix = named.find(([, code]) => code && normalizeCode(code).startsWith(qCode));
+  if (score === 5 && prefix) return `${prefix[0][0].toUpperCase()}${prefix[0].slice(1)} starts with “${query.trim()}”`;
+  if (score === 5) return `In ${sku.categoryLabel.toLowerCase()}`;
+  if (score === 4) return "Name or description contains your search";
+  if (score === 3) return "Matches every search word";
+  if (score === 2) return "Matches some search words";
+  const near = named.find(([, code]) => code && withinOneEdit(normalizeCode(code), qCode));
+  return near ? `${near[0][0].toUpperCase()}${near[0].slice(1)} is one character different` : "Close match";
+}
+
 export function searchStorefrontSkus(query: string, limit = 12): StorefrontSku[] {
   const q = normalizeSearchQuery(query);
   if (q.length < 2) return [];
@@ -724,6 +782,7 @@ export function filterStorefrontSkus(
     // Same matcher as the search endpoint, so the catalog's own search box and
     // the header search agree on what "3 ton heat pump" means.
     if (q && scoreSku(sku, q, qCode) === 0) return false;
+    if (filters.categories && !filters.categories.includes(sku.category)) return false;
     if (filters.category && filters.category !== "all" && sku.category !== filters.category) return false;
     // Brand is multi-select (a comma-separated list) so the catalog's brand
     // checkboxes can add up rather than replace each other. One value behaves
@@ -819,11 +878,11 @@ export function getSeriesPriceRange(seriesSlug: string): SeriesPriceRange | null
 
 /**
  * A representative product photo for a category, or null when the category has
- * no exact-model imagery yet (line sets and controls, today).
+ * no verified manufacturer imagery yet (line sets and controls, today).
  *
  * Category tiles shipped with generic line-art sketches, which read as clip art
- * next to a real equipment photo. Every image returned here is one the catalog
- * has verified against a specific model, so a tile never shows a unit Summit
+ * next to a real equipment photo. Every image returned here is manufacturer
+ * media for a product line in the catalog, so a tile never shows a unit Summit
  * does not carry. Callers fall back to the sketch when this returns null --
  * that is a real state, not a failure.
  *
@@ -838,7 +897,9 @@ const MIN_VERIFIED_IMAGES_FOR_HERO = 2;
 
 export function getCategoryHeroImage(category: CatalogCategory): string | null {
   const verified = getStorefrontSkus().filter(
-    (sku) => sku.category === category && sku.imageExactModel && sku.image
+    // Family media is enough for a category tile: it claims a product line,
+    // not a model. Unverified reference photos are not.
+    (sku) => sku.category === category && sku.imageVerified && sku.image
   );
   if (verified.length < MIN_VERIFIED_IMAGES_FOR_HERO) return null;
   return verified[0].image;

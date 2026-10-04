@@ -9,6 +9,7 @@ import {
   behaviorLabel,
   filterResources,
   parseResourceFilters,
+  resourceActionLabel,
   RESOURCE_TOPICS,
   RESOURCE_TYPE_LABEL,
   serializeResourceFilters,
@@ -184,15 +185,18 @@ function ResourceCard({ item }: { item: ResourceItem }) {
     return (
       <a href={item.destination} target="_blank" rel="noopener noreferrer" data-conversion-hook="resource-document-download" className={`${shell} transition-colors hover:border-line-strong`}>
         {body}
-        <span className="sr-only">, {label}</span>
+        <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-sm font-medium text-ink-1">
+          {resourceActionLabel(item)} <ExternalLink size={14} aria-hidden="true" />
+          <span className="sr-only">, opens in a new tab</span>
+        </span>
       </a>
     );
   }
   return (
     <Link href={item.destination} className={`${shell} transition-colors hover:border-line-strong`}>
       {body}
-      <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-ink-1">
-        {item.type === "tool" ? "Open tool" : "Read guide"} <ArrowRight size={14} aria-hidden="true" />
+      <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-sm font-medium text-ink-1">
+        {resourceActionLabel(item)} <ArrowRight size={14} aria-hidden="true" />
       </span>
     </Link>
   );

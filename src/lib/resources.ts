@@ -69,6 +69,20 @@ export function behaviorLabel(item: ResourceItem): string {
   }
 }
 
+/** The verb on the card: what activating it does, named before the click. */
+export function resourceActionLabel(item: ResourceItem): string {
+  switch (item.type) {
+    case "guide":
+      return "Read guide";
+    case "tool":
+      return "Open tool";
+    case "document":
+      return item.fileType === "PDF" ? "Download PDF" : "Open document";
+    case "external":
+      return `Open ${item.source}`;
+  }
+}
+
 export class InvalidResourceError extends Error {}
 
 /** Reject items missing the fields their variant requires. */

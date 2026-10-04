@@ -45,6 +45,7 @@ import { CATEGORY_RAIL } from "../src/lib/nav-links";
 import { mergeDuplicateRows, parseQuantity, parseQuickOrderText, QUICK_ORDER_ROW_LIMIT } from "../src/lib/quick-order";
 import { parseQuickOrderCsv } from "../src/lib/csv";
 import { accountPriceUnavailable } from "../src/lib/commerce/price-presentation";
+import { floatingChatAllowed, shellVariantForPathname } from "../src/lib/shell-variant";
 
 const sku = (code: string) => getStorefrontSku(code)!;
 const withStock = (base: StorefrontSku, patch: Partial<StorefrontSku>): StorefrontSku => ({ ...base, ...patch });
@@ -57,6 +58,28 @@ const CONFIRMED_POLICY: FulfillmentPolicy = {
   zones: { ...FULFILLMENT_POLICY.zones, review: CONFIRMED_REVIEW },
   fees: { review: CONFIRMED_REVIEW },
 };
+
+describe("01 shell variants", () => {
+  it("keeps merchandising chrome on commerce routes and reduces it for task routes", () => {
+    assert.equal(shellVariantForPathname("/"), "commerce");
+    assert.equal(shellVariantForPathname("/products/ductless/tcl/tcl09kidu"), "commerce");
+    assert.equal(shellVariantForPathname("/finder"), "service");
+    assert.equal(shellVariantForPathname("/resources/guides/sizing"), "service");
+    assert.equal(shellVariantForPathname("/portal/login"), "focused");
+    assert.equal(shellVariantForPathname("/account/orders"), "focused");
+    assert.equal(shellVariantForPathname("/checkout"), "focused");
+    assert.equal(shellVariantForPathname("/accounting"), "commerce");
+  });
+
+  it("suppresses floating assistance where it competes with a focused task", () => {
+    assert.equal(floatingChatAllowed("/products"), true);
+    assert.equal(floatingChatAllowed("/finder"), true);
+    assert.equal(floatingChatAllowed("/portal/login"), false);
+    assert.equal(floatingChatAllowed("/checkout"), false);
+    assert.equal(floatingChatAllowed("/quote"), false);
+    assert.equal(floatingChatAllowed("/contact"), false);
+  });
+});
 
 /* 01 — the homepage has no audience state; covered end-to-end in tests/e2e. */
 

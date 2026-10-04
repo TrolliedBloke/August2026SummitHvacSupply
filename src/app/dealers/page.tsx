@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Check, ArrowRight, ArrowLeft, CheckCircle2, ClipboardList } from "lucide-react";
 import * as React from "react";
@@ -224,26 +223,27 @@ export default function DealersPage() {
 
   return (
     <>
-      <section className="border-b border-line bg-[var(--ink-panel)] py-14 text-white">
-        <Container className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <p className="text-sm font-medium text-white">Become a dealer</p>
-            <h1 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">Open a contractor account.</h1>
-            <p className="mt-3 max-w-xl text-white/75">
-              Account pricing, Bay Area stock, spec and rebate support, and repeat ordering. About five minutes; staff review
-              every application and reply {DEALER_REVIEW_SLA}.
-            </p>
-          </div>
-          <div className="relative min-h-[250px] overflow-hidden rounded-(--r-md) border border-white/10 bg-white/5">
-            <Image src="/site/generated/contractor-will-call-counter.jpg" alt="HVAC contractor reviewing a will-call pickup order at a supply counter" fill preload sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
-          </div>
+      {/* A short header, then the checklist and form: the application is the
+          reason for the page, so nothing decorative sits before it. */}
+      <section className="border-b border-line bg-[var(--ink-panel)] py-10 text-white">
+        <Container>
+          <p className="text-sm font-medium text-white">Become a dealer</p>
+          <h1 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">Open a contractor account.</h1>
+          <p className="mt-3 max-w-2xl text-white/75">
+            Account pricing, Bay Area stock, spec and rebate support, and repeat ordering. About five minutes; staff review
+            every application and reply {DEALER_REVIEW_SLA}.
+          </p>
+          <p className="mt-3 max-w-2xl text-sm text-white/75" data-no-account-path>
+            Buying one part? No account needed:{" "}
+            <Link href="/products" className="font-medium text-white underline underline-offset-4">shop at list price</Link> or{" "}
+            <Link href="/quote" className="font-medium text-white underline underline-offset-4">request a quote</Link>.
+          </p>
         </Container>
       </section>
 
-      <TestimonialSlot items={CONTRACTOR_TESTIMONIALS} className="mx-auto w-full max-w-[var(--page-max)] px-5 pt-12" />
-
-      <Container className="py-12 lg:py-16">
-        <div className="mx-auto max-w-xl">
+      <Container className="py-10 lg:py-14">
+        <div className="mx-auto grid max-w-xl gap-8 lg:max-w-5xl lg:grid-cols-[minmax(0,36rem)_minmax(0,1fr)] lg:items-start">
+          <div className="min-w-0">
           {receipt ? (
             <div role="status" className="rounded-(--r-md) border border-state-success-line bg-state-success p-8 text-center">
               <CheckCircle2 className="mx-auto text-state-success-ink" size={36} aria-hidden="true" />
@@ -270,19 +270,18 @@ export default function DealersPage() {
             </div>
           ) : (
             <>
-              <section aria-labelledby="dealer-checklist" className="rounded-(--r-md) border border-line bg-surface-1 p-5">
-                <h2 id="dealer-checklist" className="flex items-center gap-2 text-base font-semibold text-ink-1">
-                  <ClipboardList size={18} aria-hidden="true" /> Before you start, have ready
-                </h2>
-                <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-ink-2">
-                  {DEALER_CHECKLIST.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <p className="mt-3 text-sm text-ink-2">Review timing: {DEALER_REVIEW_SLA}. Your answers are saved on this device until you submit.</p>
-              </section>
+              {/* Phones: the checklist is one tap away, so the first field is in reach. */}
+              <details className="group rounded-(--r-md) border border-line bg-surface-1 lg:hidden">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 px-4 py-2 text-sm font-semibold text-ink-1 [&::-webkit-details-marker]:hidden">
+                  <ClipboardList size={18} aria-hidden="true" /> Have ready: {DEALER_CHECKLIST.length} items
+                  <span className="ml-auto text-xs font-normal text-ink-3 group-open:hidden">Show</span>
+                </summary>
+                <div className="border-t border-line px-4 pb-4">
+                  <DealerChecklist />
+                </div>
+              </details>
 
-              <ol className="mt-8 flex items-center gap-2" aria-label="Application steps">
+              <ol className="mt-6 flex lg:mt-0 items-center gap-2" aria-label="Application steps">
                 {DEALER_STEPS.map((entry, index) => {
                   const active = step === entry.id;
                   const complete = step > entry.id;
@@ -382,8 +381,32 @@ export default function DealersPage() {
               </form>
             </>
           )}
+          </div>
+          {!receipt && (
+            <aside aria-labelledby="dealer-checklist" className="hidden rounded-(--r-md) border border-line bg-surface-1 p-5 lg:sticky lg:top-6 lg:block">
+              <h2 id="dealer-checklist" className="flex items-center gap-2 text-base font-semibold text-ink-1">
+                <ClipboardList size={18} aria-hidden="true" /> Before you start, have ready
+              </h2>
+              <DealerChecklist />
+            </aside>
+          )}
         </div>
       </Container>
+
+      <TestimonialSlot items={CONTRACTOR_TESTIMONIALS} className="mx-auto w-full max-w-[var(--page-max)] px-5 pb-12" />
+    </>
+  );
+}
+
+function DealerChecklist() {
+  return (
+    <>
+      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-ink-2">
+        {DEALER_CHECKLIST.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+      <p className="mt-3 text-sm text-ink-2">Review timing: {DEALER_REVIEW_SLA}. Your answers are saved on this device until you submit.</p>
     </>
   );
 }

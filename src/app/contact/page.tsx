@@ -1,9 +1,10 @@
-import { Clock, Home, Mail, MapPin, Phone, Truck } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, Truck } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 import { Eyebrow } from "@/components/ui";
 import { BranchStatusText } from "@/components/branch-status";
 import { ContactForm } from "@/components/contact/contact-form";
+import { WhatHappensNext } from "@/components/what-happens-next";
 import { contactPrefill } from "@/lib/forms/contact";
 import { getStorefrontSku } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
@@ -33,19 +34,14 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
             gets it.
           </p>
 
-          <div className="mt-6 flex items-start gap-6 pt-6">
-            <span className="grid size-9 shrink-0 place-items-center text-ink-3">
-              <Home size={22} strokeWidth={1.75} aria-hidden="true" />
-            </span>
-            <p className="max-w-[670px] text-[18px] leading-6 text-ink-2">
-              <span className="font-semibold text-ink-1">Homeowner? </span> We supply equipment and can route you toward a
-              qualified Bay Area installer. We do not perform installation ourselves.{" "}
-              <Link href="/homeowners#homeowner-request" className="text-ink-1 underline underline-offset-4">
-                Use the homeowner request
-              </Link>
-              .
-            </p>
-          </div>
+          {/* One line, not a second hero: the topic field should be in the first viewport. */}
+          <p className="mt-3 max-w-[670px] text-sm leading-6 text-ink-3">
+            Homeowner looking for an installer? We supply equipment, not installation.{" "}
+            <Link href="/homeowners#homeowner-request" className="font-medium text-ink-1 underline underline-offset-4">
+              Use the homeowner request
+            </Link>
+            .
+          </p>
 
           <ContactForm prefill={prefill} />
         </div>
@@ -79,6 +75,15 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
               </Row>
             </dl>
           </div>
+          <WhatHappensNext
+            className="mt-4"
+            showPhone={false}
+            steps={[
+              "Your topic routes the message to the counter or the orders desk.",
+              "They reply by email, or by phone if you leave a number. The topic field shows what to expect.",
+              "For an order or return, include the order number so nothing waits on a lookup.",
+            ]}
+          />
         </aside>
       </div>
     </div>

@@ -30,7 +30,7 @@ const COMPANY_LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-[#093324] bg-[linear-gradient(180deg,#0a3425_0%,#082e20_100%)] text-white">
+    <footer className="bg-[var(--chrome)] text-[var(--chrome-ink)]">
       <div className="mx-auto w-full max-w-[1538px] px-6 pt-8 pb-7 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         <div className="footer-layout grid gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,.7fr)_minmax(0,.75fr)_minmax(0,.85fr)_minmax(13rem,1fr)] xl:gap-x-10 2xl:gap-x-12">
           <section aria-labelledby="footer-company-heading" className="max-w-md -translate-y-1">
@@ -102,7 +102,7 @@ export function SiteFooter() {
             <div className="flex flex-col gap-3.5">
               <Link
                 href="/dealers"
-                className="flex h-11 w-full items-center justify-center rounded-[6px] bg-[#f6f5f1] px-4 text-center text-[17px] font-semibold text-[#073322] transition-colors hover:bg-white"
+                className="flex h-11 w-full items-center justify-center rounded-[6px] bg-[var(--page)] px-4 text-center text-[17px] font-semibold text-[var(--chrome)] transition-colors hover:bg-[var(--surface)]"
               >
                 Apply for a trade account
               </Link>

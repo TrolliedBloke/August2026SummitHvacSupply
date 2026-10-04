@@ -12,6 +12,11 @@
      interactive, selected, or status -- never a plain label. */
   --green: #1F4A32;
   --green-deep: #14331F;
+  /* Chrome: the one named exception to "green means yes". The commerce shell's
+     utility strip and the footer sit on it; nothing else may. It is a surface,
+     never an action or status color (DESIGN-UX-DECISION-LOG D-08). */
+  --chrome: var(--green-deep);
+  --chrome-ink: var(--surface);
   --green-bg: #F0F5F1;
   --amber: #C77D2E;
   --dark: #1A1A1A;
@@ -41,6 +46,15 @@
   --state-danger-ink: #A3261A;
   --state-skeleton: #EFEDE7;
 
+  /* Type weights. THEME.md allows 400 and 500 only; Tailwind's semibold and
+     bold utilities resolve to --weight-strong (below), so 171
+     existing call sites follow the contract without 171 edits. */
+  --weight-regular: 400;
+  --weight-strong: 500;
+  /* Tailwind defines these in its theme layer; this unlayered :root wins. */
+  --font-weight-semibold: var(--weight-strong);
+  --font-weight-bold: var(--weight-strong);
+
   /* Control and target sizes. 44px is the minimum touch target everywhere a
      person taps; the compact size is for dense desktop toolbars only. */
   --control-h: 44px;
@@ -62,7 +76,8 @@
   --page-max: 1440px;
   --transition-fast: 150ms;
 
-  /* Compatibility aliases for existing pages while the new system rolls out. */
+  /* Semantic names -- the Tailwind-facing API (bg-surface-1, text-ink-2, ...).
+     Use these in components. The palette above is for this file only. */
   --canvas: var(--page);
   --surface-1: var(--surface);
   --surface-2: var(--page);
@@ -71,32 +86,38 @@
   --ink-1: var(--ink);
   --ink-2: var(--text-2);
   --ink-3: var(--text-muted);
-  --ink-4: var(--text-muted);
   --line: var(--border);
-  --line-soft: var(--border);
-  --line-strong: var(--border);
   --brand: var(--green);
-  --brand-hover: var(--green);
   --brand-ink: var(--surface);
   --brand-tint: var(--green-bg);
-  --copper: var(--ink);
-  --copper-tint: var(--surface);
   --stock-ready: var(--green);
-  --stock-ready-tint: var(--surface);
-  --stock-ready-ink: var(--green);
-  --eco: var(--ink);
-  --eco-tint: var(--surface);
-  --eco-ink: var(--ink);
-  /* Errors were aliased to ink, so a rejected field looked identical to a
-     valid one. They now resolve to the danger state. */
-  --danger: var(--state-danger-ink);
-  --danger-tint: var(--state-danger-bg);
   --control-bg: var(--surface);
   --control-border: var(--border);
   --r-sm: var(--radius-control);
   --r-md: var(--radius-card);
-  --r-lg: var(--radius-card);
-  --shadow-sm: none;
+
+  /* DEPRECATED aliases (DESIGN-UX-DECISION-LOG D-09). Each now resolves to
+     the same value as its replacement, so the name promises a distinction
+     the design no longer makes. Do not use in new code; tests/tokens.test.ts
+     fails if their use grows. Replacement in brackets. */
+  --surface-3: var(--page);            /* [surface-2] */
+  --ink-4: var(--text-muted);          /* [ink-3] */
+  --line-soft: var(--border);          /* [line] */
+  --line-strong: var(--border);        /* [line] */
+  --brand-hover: var(--green);         /* [brand] */
+  --copper: var(--ink);                /* [state-warning-ink, or ink-1] */
+  --copper-tint: var(--surface);       /* [state-warning] */
+  --stock-ready-tint: var(--surface);  /* [surface-1] */
+  --stock-ready-ink: var(--green);     /* [stock-ready] */
+  --eco: var(--ink);                   /* [ink-1] */
+  --eco-tint: var(--surface);          /* [surface-1] */
+  --eco-ink: var(--ink);               /* [ink-1] */
+  /* Errors were aliased to ink, so a rejected field looked identical to a
+     valid one. They now resolve to the danger state. */
+  --danger: var(--state-danger-ink);   /* [state-danger-ink] */
+  --danger-tint: var(--state-danger-bg); /* [state-danger] */
+  --r-lg: var(--radius-card);          /* [r-md] */
+  --shadow-sm: none;                   /* [none: THEME.md has no shadows] */
   --shadow-md: none;
   --shadow-lg: none;
 }
