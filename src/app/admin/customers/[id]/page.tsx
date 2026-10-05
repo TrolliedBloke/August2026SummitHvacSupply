@@ -4,7 +4,9 @@ import { AlertTriangle, ArrowLeft, Mail, Phone } from "lucide-react";
 import { Chip, Container } from "@/components/ui";
 import { LiveRefresh } from "@/components/admin/live-refresh";
 import { CustomersUnavailableError, loadCustomers } from "@/lib/backend/customers";
-import { formatDate, formatMoney, PERSONA_LABEL, STAGE_LABEL, type Person } from "@/lib/crm/people";
+import { formatDate, formatMoney, PERSONA_LABEL, requestLabel, STAGE_LABEL, type Person, type PersonRequest } from "@/lib/crm/people";
+import { trackingUrl } from "@/lib/shipstation/custom-store";
+import { updateRequestStatus } from "../actions";
 
 export const metadata = { title: "Customer" };
 export const dynamic = "force-dynamic";
@@ -23,11 +25,32 @@ const EMAIL_KIND: Record<string, string> = {
   finder_shortlist: "Finder shortlist",
   planning: "Planning series",
   transactional: "Transactional",
+  shipped: "Shipped notice",
 };
 
 /** One person: who they are, what is owed to them, and everything that has happened. */
-export default async function CustomerPage({ params }: PageProps<"/admin/customers/[id]">) {
+const NOTICE: Record<string, { text: string; tone: "ok" | "error" }> = {
+  saved: { text: "Saved. The request's task updates automatically.", tone: "ok" },
+  unavailable: { text: "Could not save: the database is not reachable from this server.", tone: "error" },
+  invalid: { text: "That change was not valid. Reload and try again.", tone: "error" },
+};
+
+/** Delivery outcomes from Resend's webhook; bad ones are what staff must see. */
+const DELIVERY: Record<string, { label: string; bad: boolean }> = {
+  delivered: { label: "Delivered", bad: false },
+  opened: { label: "Opened", bad: false },
+  clicked: { label: "Clicked", bad: false },
+  delivery_delayed: { label: "Delayed", bad: true },
+  bounced: { label: "Bounced", bad: true },
+  complained: { label: "Marked as spam", bad: true },
+  failed: { label: "Failed", bad: true },
+  suppressed: { label: "Suppressed", bad: true },
+};
+
+export default async function CustomerPage({ params, searchParams }: PageProps<"/admin/customers/[id]">) {
   const { id } = await params;
+  const query = await searchParams;
+  const notice = typeof query.notice === "string" ? NOTICE[query.notice] : undefined;
   let person: Person | undefined;
   let source: "supabase" | "demo" = "supabase";
   try {
@@ -51,6 +74,12 @@ export default async function CustomerPage({ params }: PageProps<"/admin/custome
       <Link href="/admin/customers" className="inline-flex min-h-11 items-center gap-1.5 text-sm text-ink-2 hover:text-ink-1">
         <ArrowLeft size={15} aria-hidden="true" /> All customers
       </Link>
+
+      {notice && (
+        <p role="status" className={`mt-2 rounded-(--r-sm) border px-4 py-2 text-sm ${notice.tone === "ok" ? "border-state-success-line bg-state-success text-state-success-ink" : "border-state-danger-line bg-state-danger text-state-danger-ink"}`}>
+          {notice.text}
+        </p>
+      )}
 
       <header className="mt-2 flex flex-wrap items-start justify-between gap-4 border-b border-line pb-6">
         <div className="min-w-0">
@@ -91,7 +120,12 @@ export default async function CustomerPage({ params }: PageProps<"/admin/custome
           <ul className="mt-2 space-y-1 text-sm text-ink-1">
             {person.followUps.map((item) => (
               <li key={item.reason}>
-                {item.reason} <span className="text-ink-3">· since {formatDate(item.since)}{item.priority === "high" ? " · waiting over a day" : ""}</span>
+                {item.reason}{" "}
+                <span className="text-ink-3">
+                  · since {formatDate(item.since)}
+                  {item.due ? ` · due ${formatDate(item.due, true)}` : ""}
+                  {item.priority === "high" ? " · urgent" : ""}
+                </span>
               </li>
             ))}
           </ul>
@@ -111,6 +145,20 @@ export default async function CustomerPage({ params }: PageProps<"/admin/custome
                   {formatDate(order.createdAt)} · {order.status.replaceAll("_", " ")}
                   {order.fulfillment ? ` · ${order.fulfillment.replaceAll("_", " ")}` : ""} · {order.paid ? "paid" : "not paid"}
                 </p>
+                {order.shipments.map((shipment, index) => {
+                  const url = trackingUrl(shipment.carrier, shipment.trackingNumber);
+                  return (
+                    <p key={`${shipment.trackingNumber}-${index}`} className="mt-1 text-xs text-ink-2">
+                      Shipped{shipment.shippedAt ? ` ${formatDate(shipment.shippedAt)}` : ""}{shipment.carrier ? ` via ${shipment.carrier}` : ""}
+                      {shipment.trackingNumber &&
+                        (url ? (
+                          <> · <a href={url} target="_blank" rel="noopener noreferrer" className="part-number text-brand underline-offset-4 hover:underline">{shipment.trackingNumber}</a></>
+                        ) : (
+                          <span className="part-number"> · {shipment.trackingNumber}</span>
+                        ))}
+                    </p>
+                  );
+                })}
                 {order.lines.length > 0 && (
                   <ul className="mt-2 divide-y divide-line text-sm">
                     {order.lines.map((line, index) => (
@@ -129,10 +177,17 @@ export default async function CustomerPage({ params }: PageProps<"/admin/custome
             <ul className="divide-y divide-line rounded-(--r-sm) border border-line">
               {person.requests.map((request) => (
                 <li key={`${request.kind}-${request.id}`} className="p-3 text-sm">
-                  <span className="font-medium text-ink-1">{REQUEST_TITLE[request.kind]}{request.reference ? ` ${request.reference}` : ""}</span>
+                  <span className="font-medium text-ink-1">{requestLabel(request.kind, request.channel)}{request.reference ? ` ${request.reference}` : ""}</span>
                   <span className={`ml-2 text-xs ${request.open ? "font-medium text-state-warning-ink" : "text-ink-3"}`}>{request.status.replaceAll("_", " ")}</span>
-                  <span className="block text-ink-2">{request.summary}</span>
-                  <span className="block text-xs text-ink-3">{formatDate(request.createdAt)}</span>
+                  <span className="block whitespace-pre-line text-ink-2">{request.summary}</span>
+                  <span className="block text-xs text-ink-3">
+                    {formatDate(request.createdAt)}
+                    {request.task &&
+                      (request.task.status === "open"
+                        ? ` · task due ${request.task.dueAt ? formatDate(request.task.dueAt, true) : "—"}${request.task.overdue ? " · overdue" : ""}`
+                        : " · task done")}
+                  </span>
+                  {source === "supabase" && <RequestActions request={request} personId={person.id} />}
                   {request.kind === "dealer" && <Link href="/admin/dealers" className="text-xs font-medium text-brand underline-offset-4 hover:underline">Review in dealer applications</Link>}
                   {request.kind === "homeowner" && <Link href="/admin/referrals" className="text-xs font-medium text-brand underline-offset-4 hover:underline">Match an installer</Link>}
                 </li>
@@ -149,6 +204,9 @@ export default async function CustomerPage({ params }: PageProps<"/admin/custome
                     <span className="block text-xs text-ink-3">
                       {EMAIL_KIND[email.kind] ?? email.kind}
                       {email.source === "reconstructed" ? " · from order and alert records" : ""}
+                      {email.delivery && DELIVERY[email.delivery] && (
+                        <span className={`ml-1 ${DELIVERY[email.delivery].bad ? "font-medium text-state-danger-ink" : "text-ink-2"}`}>· {DELIVERY[email.delivery].label}</span>
+                      )}
                     </span>
                   </span>
                   <span className={`shrink-0 text-xs ${email.status === "sent" ? "text-ink-3" : "font-medium text-state-danger-ink"}`}>
@@ -186,7 +244,38 @@ export default async function CustomerPage({ params }: PageProps<"/admin/custome
   );
 }
 
-const REQUEST_TITLE = { quote: "Quote request", contact: "Message", homeowner: "Homeowner request", dealer: "Dealer application" } as const;
+/** Close or reopen a quote or message; homeowner and dealer requests keep their own workflows. */
+function RequestActions({ request, personId }: { request: PersonRequest; personId: string }) {
+  const buttons: Array<[to: string, label: string]> =
+    request.kind === "quote"
+      ? request.open
+        ? [["quoted", "Mark quoted"], ["closed", "Close"]]
+        : [["reopen", "Reopen"]]
+      : request.kind === "contact"
+        ? request.open
+          ? [["resolved", "Mark resolved"]]
+          : [["reopen", "Reopen"]]
+        : [];
+  if (buttons.length === 0) return null;
+  return (
+    <span className="mt-2 flex flex-wrap gap-2">
+      {buttons.map(([to, label]) => (
+        <form key={to} action={updateRequestStatus}>
+          <input type="hidden" name="kind" value={request.kind} />
+          <input type="hidden" name="id" value={request.id} />
+          <input type="hidden" name="to" value={to} />
+          <input type="hidden" name="personId" value={personId} />
+          <button
+            type="submit"
+            className={`min-h-11 rounded-(--r-sm) border px-3 text-xs font-medium ${to === "reopen" ? "border-line text-ink-2 hover:bg-surface-2" : "border-brand bg-brand text-brand-ink"}`}
+          >
+            {label}
+          </button>
+        </form>
+      ))}
+    </span>
+  );
+}
 
 function Section({ title, count, empty, children }: { title: string; count: number; empty: string; children: React.ReactNode }) {
   return (

@@ -1,6 +1,6 @@
 # Summit pipeline architecture plan
 
-Status: proposal for Vincent and Gabriel. The customer view (Phase 1, part 1) is built; everything else is a proposal unless the status table says so.
+Status: phases 1–4 built (2026-10-04) using the recommended answer to each decision in section 3; phase 5 is an app install and phase 6 is per-person setup, both documented in `BACKEND_SETUP.md` (§7–9). The status table in section 6 is current.
 Source: the two "Summit Pipeline with Vercel" sketches (2026-10-04).
 Goal: the owner runs the counter; online orders, payments, shipping, customer email and books run themselves; staff touch only exceptions.
 
@@ -42,7 +42,7 @@ flowchart LR
   RS -->|inbound email| RIN --> DB
   DB --> ADM
   ST -->|sales, fees, payouts| QB[QuickBooks]
-  QB -->|nightly stock counts, if D1 = QuickBooks| DB
+  QB -->|stock counts every 15 min, if D1 = QuickBooks| DB
 ```
 
 ### What each system owns
@@ -60,7 +60,7 @@ flowchart LR
 
 | # | Decision | Options | Recommendation |
 |---|---|---|---|
-| D1 | Which system counts stock? | **QuickBooks**: the owner already keeps it there, and the repo already syncs it nightly. Or **Supabase**: we become the system of record, and QuickBooks gets only accounting entries. | QuickBooks for now; it is what the counter uses. Revisit if online volume outgrows it. |
+| D1 | Which system counts stock? | **QuickBooks**: the owner already keeps it there, and the repo already syncs it every 15 minutes. Or **Supabase**: we become the system of record, and QuickBooks gets only accounting entries. | QuickBooks for now; it is what the counter uses. Revisit if online volume outgrows it. |
 | D2 | How do orders reach ShipStation? | **Custom Store (pull)**: ShipStation polls our endpoint and posts tracking back. Or **API push**: we call ShipStation when an order is paid. | Custom Store. It matches the sketch's "ShipStation pulls from SQL" and needs no retry logic on our side. Confirm your ShipStation plan includes Custom Store. |
 | D3 | How do Stripe sales reach QuickBooks? | **Stripe's own QuickBooks app**: free, limited. Or **a sync app** (Synder, Acodei): paid, handles fees and refunds. Or **custom code**. | An app, not custom code. Start with Stripe's free app; upgrade if the books need fee and refund detail. |
 | D4 | Keep Atlas ERP? | Keep or drop | Drop (sketch 2 already does). |
@@ -101,7 +101,7 @@ Each flow runs without anyone clicking. A person is needed only at the step mark
 
 **F5. Books and stock**
 
-- **Nightly:** QuickBooks stock counts sync into Supabase (D1).
+- **Every 15 minutes:** QuickBooks stock counts sync into Supabase (D1).
 - **Continuously:** Stripe sales sync into QuickBooks (D3).
 - **Monthly:** the existing AR-statements job emails open balances.
 
@@ -129,7 +129,7 @@ Every system except Atlas ERP has an official MCP server, so Claude can work wit
 | Stripe webhook → order paid | Built | `supabase/functions/stripe-webhook` |
 | Receipt and lifecycle emails via Resend | Built | `supabase/functions/send-receipt`, `src/lib/backend/email.ts`, cron 033 |
 | Login, retail vs. trade accounts, contractor verification | Built | migrations 012, 026, 030; `/admin/dealers` |
-| QuickBooks → stock sync (nightly) | Built | `supabase/functions/quickbooks-inventory-sync`, cron 024 |
+| QuickBooks → stock sync (every 15 min) | Built | `supabase/functions/quickbooks-inventory-sync`, cron 024 |
 | AR statements, low-stock alerts | Built | `supabase/functions/ar-statements`, `low-stock-alert` |
 | Quote, contact, homeowner and dealer request tables | Built | migrations 005, 027, 029 |
 | CRM tables (accounts, contacts, tasks, notes, activity) | Tables exist; not used in the UI | migration 001 |
@@ -137,10 +137,11 @@ Every system except Atlas ERP has an official MCP server, so Claude can work wit
 | Email log (every send recorded, including the edge functions) | **Built**; migration 036 applied to the live project | `email_messages`, `src/lib/backend/email.ts` |
 | Live updates (private Realtime "crm" topic, staff only, no customer data in events; focus and 30 s poll fallback) | **Built**; migration 037 applied to the live project | `src/components/admin/live-refresh.tsx` |
 | `/admin` operations dashboard | **Shows seeded demo data only**; live queries not written | `src/app/admin/page.tsx` |
-| ShipStation integration | Not started | — |
-| Resend inbound support email | Not started | — |
-| Stripe → QuickBooks sales sync | Not started (an app, D3) | — |
-| Auto-task triggers on new requests | Not started | — |
+| ShipStation integration (Custom Store: export paid/net-terms orders, ship notices record the shipment, release stock and send one "shipped" email) | **Built**; needs ShipStation store credentials (`BACKEND_SETUP.md` §7) | `src/app/api/shipstation`, `src/lib/shipstation`, `record_external_shipment` (038) |
+| Resend inbound support email, plus delivery outcomes (delivered, opened, bounced) on every logged email | **Built**; needs a receiving domain and webhook secret (§8) | `src/app/api/resend/webhook`, `src/lib/support/inbound.ts` |
+| Stripe → QuickBooks sales sync | Not started: install an app (D3); no code | — |
+| Auto-tasks: new request → task due next business day 5 pm; closing the request completes it; staff close quotes and messages from the customer view | **Built**; migration 038 applied and verified on the live project | `private.crm_task_for_request`, `src/app/admin/customers/actions.ts` |
+| Checkout's `buyer_phone`, `buyer_company` and `po_number` columns | **Fixed**: they were missing from the live database, so every real checkout failed at the order insert | migration 038 |
 
 The live Supabase project behind all this is the one named **crm** in your Supabase account. All of the site's migrations are applied there.
 
@@ -150,7 +151,7 @@ Each phase leaves the business better off on its own.
 
 | Phase | Work | Done when |
 |---|---|---|
-| 0. Decide | Answer D1–D5 | Written below this table |
+| 0. Decide | Answer D1–D5 | Built with the recommended answers: D1 QuickBooks counts stock, D2 Custom Store, D3 an app, D4 drop Atlas, D5 Supabase queue. Changing D1 or D2 later means revisiting the stock sync or the ShipStation endpoint. |
 | 1. CRM on live data | `/admin/crm`: an inbox of every open request, customers with lifetime value and balance, a quote-to-cash pipeline, tasks; account pages with notes and tasks. Replace the seeded admin numbers with live queries. | Staff work every request from one screen; no demo numbers left in `/admin` |
 | 2. Auto-tasks | Migration: new request → task plus activity entry; request closed → task closed. The trigger can never block a customer's submission. | Every submission appears as a task within seconds |
 | 3. ShipStation | `/api/shipstation` Custom Store endpoint (export orders, receive shipnotify); shipped email via Resend | A paid test order appears in ShipStation, and the label posts tracking back to the order |

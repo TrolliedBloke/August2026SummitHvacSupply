@@ -74,6 +74,35 @@ Deno.serve(async (request) => {
     return new Response("Invalid signature", { status: 400 });
   }
 
+  // Card checkout authorizes (capture_method: manual); the counter captures
+  // after confirming stock. Record the authorization, or release it at once if
+  // the order is no longer live, so a customer is never held for nothing.
+  if (event.type === "payment_intent.amount_capturable_updated") {
+    const pi = event.data.object as Stripe.PaymentIntent;
+    const orderId = pi.metadata?.order_id;
+    if (orderId && pi.status === "requires_capture") {
+      const charge = typeof pi.latest_charge === "string"
+        ? await stripe.charges.retrieve(pi.latest_charge).catch(() => null)
+        : null;
+      const captureBefore = charge?.payment_method_details?.card?.capture_before;
+      const { data, error } = await supabase.rpc("mark_order_authorized", {
+        p_order_id: orderId,
+        p_amount: pi.amount_capturable / 100,
+        p_stripe_event_id: event.id,
+        p_expires_at: captureBefore ? new Date(captureBefore * 1000).toISOString() : null,
+      });
+      if (error) {
+        console.error("mark_order_authorized failed:", error.message);
+        return new Response("Order update failed", { status: 500 });
+      }
+      if (data && data.live === false) {
+        await stripe.paymentIntents.cancel(pi.id, { cancellation_reason: "abandoned" }).catch((err: unknown) => {
+          console.error("releasing stale authorization failed:", err);
+        });
+      }
+    }
+  }
+
   if (event.type === "payment_intent.succeeded") {
     const pi = event.data.object as Stripe.PaymentIntent;
     const invoiceId = pi.metadata?.invoice_id;
@@ -199,7 +228,19 @@ Deno.serve(async (request) => {
     }
   }
 
-  if (event.type === "payment_intent.payment_failed" || event.type === "payment_intent.canceled") {
+  // A declined card is not the end of the order: Stripe lets the buyer retry
+  // the same PaymentIntent with another card, and releasing the order here
+  // let a successful retry pay for an order we had already cancelled
+  // (QA-001). The reservation stands until the 30-minute expiry, which checks
+  // the PaymentIntent with Stripe before releasing (src/lib/backend/payments.ts).
+  if (event.type === "payment_intent.payment_failed") {
+    const pi = event.data.object as Stripe.PaymentIntent;
+    console.warn(`payment attempt failed for order ${pi.metadata?.order_id ?? "?"}: ${pi.last_payment_error?.code ?? "unknown"}`);
+  }
+
+  // Cancelled at Stripe (by us, by the expiry, or in the dashboard): nothing
+  // can be charged on it any more, so the order and its stock are released.
+  if (event.type === "payment_intent.canceled") {
     const pi = event.data.object as Stripe.PaymentIntent;
     const orderId = pi.metadata?.order_id;
     if (orderId) {

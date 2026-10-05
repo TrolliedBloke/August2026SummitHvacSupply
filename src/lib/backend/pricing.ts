@@ -24,26 +24,28 @@
 export const SALES_TAX_RATE = 0.1075;
 
 /**
- * ZIP range for the only jurisdiction this rate is valid in.
+ * Destinations whose rate has been checked, by 5-digit ZIP.
  *
- * NOT A TAX ENGINE. US sales tax is destination-based and varies by district
- * within a single county; this covers the current business, which is will-call
- * at the Newark hub plus Bay Area local delivery. Freight orders are quoted and
- * taxed on the invoice, and trade net-terms orders are taxed on the invoice
- * too, so neither passes through here.
+ * NOT A TAX ENGINE. California sales tax is destination-based and varies by
+ * district within a county, so one rate for every California ZIP (what this
+ * used to do) over- or under-charges most deliveries. Until the accountant
+ * picks a source (A-1: Stripe Tax recommended, or a maintained district table),
+ * only destinations listed here get a computed tax. Will-call pickup is taxed
+ * at the Newark counter's rate, so the warehouse ZIP is always listed.
+ * Everything else returns null: card checkout refuses it and the order is
+ * quoted, rather than charging a rate that may be wrong.
  *
- * Selling into another state, or shipping parcels interstate, requires a real
- * tax service (nexus tracking, product taxability, exemption certificates)
- * before this function can be trusted. Until then an out-of-jurisdiction
- * destination returns null rather than silently applying an Alameda rate to it.
+ * Freight orders are quoted and taxed on the invoice, and trade net-terms
+ * orders are taxed on the invoice too, so neither passes through here.
  */
-const CA_ZIP_MIN = 90001;
-const CA_ZIP_MAX = 96162;
+// TODO(accountant A-1): replace with Stripe Tax or a verified district table.
+export const VERIFIED_TAX_RATES: Readonly<Record<string, { rate: number; jurisdiction: string }>> = {
+  "94560": { rate: SALES_TAX_RATE, jurisdiction: "Newark, Alameda County" },
+};
 
 export function isWithinTaxJurisdiction(zip: string | null | undefined): boolean {
   if (!zip) return false;
-  const numeric = Number(zip.slice(0, 5));
-  return Number.isInteger(numeric) && numeric >= CA_ZIP_MIN && numeric <= CA_ZIP_MAX;
+  return Object.hasOwn(VERIFIED_TAX_RATES, zip.trim().slice(0, 5));
 }
 
 export function round2(n: number): number {
@@ -57,8 +59,8 @@ export function round2(n: number): number {
  * tax-free order.
  */
 export function estimateTax(taxableSubtotal: number, zip?: string | null): number | null {
-  if (!isWithinTaxJurisdiction(zip)) return null;
-  return round2(taxableSubtotal * SALES_TAX_RATE);
+  if (!zip || !isWithinTaxJurisdiction(zip)) return null;
+  return round2(taxableSubtotal * VERIFIED_TAX_RATES[zip.trim().slice(0, 5)].rate);
 }
 
 /**

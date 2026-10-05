@@ -3,6 +3,7 @@ import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { getStorefrontSku } from "@/lib/storefront/catalog";
 import { applyLiveInventory, getLiveInventory } from "@/lib/storefront/live-inventory";
 import { buildSnapshot } from "@/lib/checkout-snapshot";
+import { isRefrigerantProduct, type OrderCompliance } from "@/lib/compliance/order-checks";
 import type { CheckoutSnapshot } from "@/lib/checkout-snapshot-types";
 import { createServiceRoleSupabaseClient } from "./supabase";
 import { loadTradePricingResult } from "./portal";
@@ -40,12 +41,30 @@ export async function issueCheckoutSnapshot(input: {
   zip: string | null;
   now?: Date;
 }): Promise<CheckoutSnapshot> {
+  return (await issueCheckoutSnapshotWithCompliance(input)).snapshot;
+}
+
+/** The snapshot plus the staff-only compliance notes placeOrder stores on the order. */
+export async function issueCheckoutSnapshotWithCompliance(input: {
+  items: Array<{ skuId: string; qty: number }>;
+  method: FulfillmentMethod;
+  zip: string | null;
+  now?: Date;
+}): Promise<{ snapshot: CheckoutSnapshot; compliance: OrderCompliance; accountId: string | null }> {
   const access = await resolvePortalAccess();
   const account = toAccountContext(access);
   const live = await getLiveInventory();
   const skuIds = input.items.map((item) => item.skuId);
   const pricing = account.kind === "tradeApproved" ? await loadTradePricingResult(skuIds) : null;
   const zoneFee = await dbDeliveryFee(input.zip);
+  const tradeAccountId = account.kind === "tradeApproved" ? account.accountId : null;
+  const epa608OnFile =
+    tradeAccountId && input.items.some((item) => {
+      const sku = getStorefrontSku(item.skuId);
+      return sku ? isRefrigerantProduct(sku) : false;
+    })
+      ? await accountEpa608(tradeAccountId)
+      : false;
 
   const built = buildSnapshot({
     ...input,
@@ -57,12 +76,20 @@ export async function issueCheckoutSnapshot(input: {
     pricing,
     deliveryFee: (subtotal) =>
       zoneFee ? (!zoneFee.eligible ? 0 : zoneFee.freeOver > 0 && subtotal >= zoneFee.freeOver ? 0 : zoneFee.fee) : null,
+    epa608OnFile,
   });
-  const { digestSource, ...snapshot } = built;
+  const { digestSource, compliance, ...snapshot } = built;
   const digest = createHash("sha256").update(digestSource).digest("base64url");
   const payload = Buffer.from(JSON.stringify({ d: digest, e: snapshot.expiresAt })).toString("base64url");
   const signature = createHmac("sha256", secret()).update(payload).digest("base64url");
-  return { ...snapshot, digest, token: `${payload}.${signature}` };
+  return { snapshot: { ...snapshot, digest, token: `${payload}.${signature}` }, compliance, accountId: tradeAccountId };
+}
+
+async function accountEpa608(accountId: string): Promise<boolean> {
+  const supabase = createServiceRoleSupabaseClient();
+  if (!supabase) return false;
+  const { data } = await supabase.from("accounts").select("epa608_on_file").eq("id", accountId).maybeSingle();
+  return Boolean(data?.epa608_on_file);
 }
 
 /** The digest a token vouches for, or null when it is forged or expired. */

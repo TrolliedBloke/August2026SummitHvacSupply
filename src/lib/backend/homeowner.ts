@@ -3,6 +3,7 @@ import { makeReference } from "@/lib/forms/result";
 import { resolveFulfillmentAnswer } from "./fulfillment";
 import { createServiceRoleSupabaseClient } from "./supabase";
 import { rememberedResult, rememberResult } from "./idempotency";
+import { assertSeededAllowed } from "./seeded";
 
 export type HomeownerReceipt = {
   id: string;
@@ -101,6 +102,7 @@ export async function createHomeownerRequest(input: unknown): Promise<HomeownerR
 
   const prior = recent.get(dedupeKey);
   if (prior && Date.now() - prior.at < DUPLICATE_WINDOW_MS) return { ...prior.receipt, duplicate: true };
+  assertSeededAllowed("homeowner request");
   const receipt: HomeownerReceipt = {
     id: `homeowner-${Date.now()}`,
     reference: makeReference("H"),

@@ -30,8 +30,8 @@ const METHOD_ICON: Record<FulfillmentMethod, React.ReactNode> = {
    storage only, versioned, and never payment data -- card entry happens in
    Stripe's own field on the next step. */
 const DRAFT_KEY = "summit-checkout-draft-v1";
-type Draft = { method: FulfillmentMethod; windowSlot: string; address: string; company: string; phone: string; role: string; poNumber: string; buyerName: string; buyerEmail: string };
-const EMPTY_DRAFT: Draft = { method: "pickup", windowSlot: "", address: "", company: "", phone: "", role: "contractor", poNumber: "", buyerName: "", buyerEmail: "" };
+type Draft = { method: FulfillmentMethod; windowSlot: string; address: string; company: string; phone: string; role: string; poNumber: string; buyerName: string; buyerEmail: string; pickupName: string };
+const EMPTY_DRAFT: Draft = { method: "pickup", windowSlot: "", address: "", company: "", phone: "", role: "contractor", poNumber: "", buyerName: "", buyerEmail: "", pickupName: "" };
 
 function currency(n: number) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
@@ -57,6 +57,8 @@ export function CheckoutClient() {
   const [refresh, setRefresh] = React.useState(0);
   const [diffs, setDiffs] = React.useState<SnapshotDiff[] | null>(null);
   const [acknowledged, setAcknowledged] = React.useState(false);
+  /** Versions of the compliance acknowledgements the buyer ticked. */
+  const [acceptedTerms, setAcceptedTerms] = React.useState<string[]>([]);
   const [submitting, setSubmitting] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [touched, setTouched] = React.useState<Record<string, boolean>>({});
@@ -160,7 +162,9 @@ export function CheckoutClient() {
   };
   const invalidFields = Object.entries(fieldErrors).filter(([, message]) => message !== null);
   const showError = (field: string) => (touched[field] ? fieldErrors[field] : null);
-  const blocked = !snapshot || lineErrors.length > 0 || !snapshot.methodAvailable || (snapshot.payment === "card" && snapshot.tax.status === "unavailable") || (diffs !== null && !acknowledged);
+  const requiredTerms = snapshot?.acknowledgements ?? [];
+  const termsMissing = requiredTerms.some((term) => !acceptedTerms.includes(term.version));
+  const blocked = !snapshot || lineErrors.length > 0 || !snapshot.methodAvailable || (snapshot.payment === "card" && snapshot.tax.status === "unavailable") || (diffs !== null && !acknowledged) || termsMissing;
 
   async function placeOrder(current: CheckoutSnapshot) {
     if (submitLockRef.current) return;
@@ -186,6 +190,8 @@ export function CheckoutClient() {
           window: draft.method !== "freight" ? draft.windowSlot : undefined,
           buyerName: draft.buyerName,
           buyerEmail: draft.buyerEmail,
+          pickupName: draft.method === "pickup" && draft.pickupName.trim() ? draft.pickupName.trim() : undefined,
+          acknowledgements: acceptedTerms.filter((version) => current.acknowledgements.some((term) => term.version === version)),
         }),
       });
       const data = await response.json();
@@ -283,8 +289,8 @@ export function CheckoutClient() {
           <p className="mt-3 flex items-start gap-2 rounded-(--r-sm) bg-surface-2/70 px-3 py-2.5 text-sm leading-snug text-ink-2">
             <ShieldCheck size={16} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
             <span>
-              {draft.method === "pickup" && "We confirm your order before it leaves the counter and stage it under your name at Newark will-call."}
-              {draft.method === "local_delivery" && "We confirm your order before dispatch and send a confirmed delivery window. Someone should be on site to receive and inspect the equipment."}
+              {draft.method === "pickup" && "We confirm your order before it leaves the counter and stage it under your name at Newark will-call. Bring photo ID; we check it before releasing the order."}
+              {draft.method === "local_delivery" && "We confirm your order before dispatch and send a confirmed delivery window. Someone should be on site to inspect the equipment and note any damage before signing."}
               {draft.method === "freight" && "Freight is quoted and confirmed with you before your card is charged anything beyond the item total."}
             </span>
           </p>
@@ -355,8 +361,37 @@ export function CheckoutClient() {
               />
             </div>
             <TextField id="poNumber" label="PO / job number" value={draft.poNumber} onChange={(value) => set("poNumber", value)} />
+            {draft.method === "pickup" && (
+              <TextField id="pickupName" label="Someone else collecting? Their name" autoComplete="off" value={draft.pickupName} onChange={(value) => set("pickupName", value)} />
+            )}
           </div>
         </section>
+
+        {requiredTerms.length > 0 && (
+          <section>
+            <h2 className="text-lg font-semibold tracking-tight text-ink-1">4. Installation and warranty</h2>
+            <div className="mt-3 flex flex-col gap-2">
+              {requiredTerms.map((term) => (
+                <label key={term.version} className="flex min-h-11 items-start gap-2.5 rounded-(--r-sm) border border-line bg-surface-1 px-3 py-2.5 text-sm leading-snug text-ink-1">
+                  <input
+                    type="checkbox"
+                    checked={acceptedTerms.includes(term.version)}
+                    onChange={(event) =>
+                      setAcceptedTerms((current) => (event.target.checked ? [...current, term.version] : current.filter((version) => version !== term.version)))
+                    }
+                    className="mt-0.5 size-4.5 shrink-0 accent-[var(--green)]"
+                  />
+                  <span>{term.text}</span>
+                </label>
+              ))}
+            </div>
+          </section>
+        )}
+        {snapshot?.reviewRequired && (
+          <Notice tone="info" title="Our team reviews this order before it is released">
+            Something in it needs a quick check with you first. You are not charged until it is released, and we contact you if anything changes.
+          </Notice>
+        )}
       </div>
 
       <aside className="h-fit min-w-0 rounded-(--r-md) border border-line bg-surface-1 p-6">
@@ -451,6 +486,13 @@ export function CheckoutClient() {
         )}
 
         <div aria-live="polite">
+          {snapshot?.payment === "card" && snapshot.tax.status === "unavailable" && (
+            <p className="mt-3 rounded-(--r-sm) bg-state-warning px-3 py-2 text-sm text-state-warning-ink">
+              We can&apos;t calculate sales tax for this delivery address online yet. Choose will-call pickup, or{" "}
+              <Link href="/quote" className="font-medium underline underline-offset-4">request a quote</Link> and we&apos;ll confirm the tax with you.
+            </p>
+          )}
+          {termsMissing && !error && <p className="mt-3 text-sm text-ink-2">Tick the installation and warranty terms in step 4 to continue.</p>}
           {error && (
             <p role="alert" className="mt-3 rounded-(--r-sm) bg-state-danger px-3 py-2 text-sm font-medium text-state-danger-ink">
               {error}
@@ -468,7 +510,7 @@ export function CheckoutClient() {
           {!submitting && <ArrowRight size={16} aria-hidden="true" />}
         </button>
         <p className="mt-3 text-center text-xs text-ink-3">
-          {snapshot?.payment === "net_terms" ? "Invoiced to your account on net terms." : draft.method === "freight" ? "We email a freight quote before charging." : "Secure card payment on the next step."}
+          {snapshot?.payment === "net_terms" ? "Invoiced to your account on net terms." : draft.method === "freight" ? "We email a freight quote before charging." : "Your card is authorized on the next step and charged only when the counter confirms your items."}
         </p>
 
         <ul className="mt-4 flex flex-col gap-2 border-t border-line pt-4 text-xs text-ink-2">

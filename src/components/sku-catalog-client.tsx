@@ -308,7 +308,7 @@ export function SkuCatalogClient({
                         <p className="part-number mt-0.5 text-micro text-ink-3">AHRI {system.ahriReference}</p>
                         <p className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
                           {system.components.map((component) => (
-                            <Link key={component.sku} href={component.href} className="text-brand underline-offset-4 hover:underline">
+                            <Link key={component.sku} href={component.href} className="inline-flex min-h-11 items-center text-brand underline-offset-4 hover:underline">
                               {component.unitType} {component.sku}
                             </Link>
                           ))}

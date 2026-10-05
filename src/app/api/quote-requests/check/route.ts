@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { checkQuoteLines, compatibilityNotes } from "@/lib/backend/quote";
+import { checkQuoteLines, compatibilityNotes, quoteRestrictions, sessionIsTrade } from "@/lib/backend/quote";
 import { quoteLineSchema, QUOTE_MAX_LINES } from "@/lib/forms/quote";
 import { clientKey, rateLimit } from "@/lib/backend/rate-limit";
 
@@ -13,5 +13,11 @@ export async function POST(request: Request) {
   const parsed = bodySchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ ok: false, error: "Invalid lines" }, { status: 400 });
   const { lines, merged } = checkQuoteLines(parsed.data.lines);
-  return NextResponse.json({ ok: true, lines, compatibility: compatibilityNotes(merged.map((line) => line.sku)) });
+  const products = merged.map((line) => line.sku);
+  return NextResponse.json({
+    ok: true,
+    lines,
+    compatibility: compatibilityNotes(products),
+    restrictions: quoteRestrictions(products, await sessionIsTrade()),
+  });
 }

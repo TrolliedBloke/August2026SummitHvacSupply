@@ -3,6 +3,9 @@ import { makeReference } from "@/lib/forms/result";
 import { getStorefrontSku, type StorefrontSku } from "@/lib/storefront/catalog";
 import { createServiceRoleSupabaseClient } from "./supabase";
 import { rememberedResult, rememberResult } from "./idempotency";
+import { evaluateOrderCompliance, type LineRestriction } from "@/lib/compliance/order-checks";
+import { resolvePortalAccess, toAccountContext } from "./session-access";
+import { assertSeededAllowed } from "./seeded";
 
 /**
  * Canonicalize and merge quote lines, visibly. Every input line comes back
@@ -60,6 +63,32 @@ export function compatibilityNotes(products: StorefrontSku[]): CompatibilityNote
   return notes;
 }
 
+export type QuoteRestrictionNote = { sku: string; code: LineRestriction["code"]; message: string };
+
+/**
+ * Lines this buyer can't order online (R-410A for non-contractors, refrigerant
+ * without EPA 608). A quote is still accepted: the counter is the "talk to us"
+ * path (docs/LIABILITY-REMEDIATION-PLAN.md, 3.2), and the line is flagged for
+ * staff rather than refused.
+ */
+export function quoteRestrictions(products: StorefrontSku[], trade: boolean): QuoteRestrictionNote[] {
+  const { restricted } = evaluateOrderCompliance(products, { trade, epa608OnFile: false });
+  return products.flatMap((sku) => {
+    const restriction = restricted.get(sku.id);
+    return restriction
+      ? [{ sku: sku.sku, code: restriction.code, message: `${sku.sku}: ${restriction.code === "r410a_contractor_only" ? "R-410A equipment. California install rules for it are being confirmed, so the counter will talk through it with you before quoting." : "refrigerant needs an approved trade account with EPA 608 certification on file."}` }]
+      : [];
+  });
+}
+
+export async function sessionIsTrade(): Promise<boolean> {
+  try {
+    return toAccountContext(await resolvePortalAccess()).kind === "tradeApproved";
+  } catch {
+    return false;
+  }
+}
+
 export type QuoteReceipt = {
   id: string;
   reference: string;
@@ -109,6 +138,7 @@ export async function submitQuoteDraft(input: unknown): Promise<QuoteReceipt & {
     if (error) throw new Error(error.message);
     if (merged.length) {
       const intents = new Map(parsed.lines.map((line) => [line.skuId, line.intent]));
+      const flagged = new Map(quoteRestrictions(merged.map(({ sku }) => sku), await sessionIsTrade()).map((note) => [note.sku, note.code]));
       const { error: lineError } = await supabase.from("quote_request_lines").insert(
         merged.map(({ sku, quantity }) => ({
           quote_request_id: id,
@@ -117,7 +147,7 @@ export async function submitQuoteDraft(input: unknown): Promise<QuoteReceipt & {
           product_name: `${sku.title} (${sku.modelNumber})`,
           quantity,
           intent: intents.get(sku.id) ?? "quote",
-          validation: "canonical",
+          validation: flagged.has(sku.sku) ? `restricted:${flagged.get(sku.sku)}` : "canonical",
         }))
       );
       if (lineError) throw new Error(lineError.message);
@@ -126,6 +156,7 @@ export async function submitQuoteDraft(input: unknown): Promise<QuoteReceipt & {
     rememberResult("quote", parsed.clientRequestId, receipt);
     return receipt;
   }
+  assertSeededAllowed("quote request");
   const receipt = { id: `qr-${Date.now()}`, reference, lifecycle, responseWindow: QUOTE_RESPONSE_WINDOW, lineCount: merged.length, mode: "seeded" as const, lines };
   rememberResult("quote", parsed.clientRequestId, receipt);
   return receipt;

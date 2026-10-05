@@ -5,7 +5,7 @@
  * shared by the confirmation page, the status API and the printable receipt.
  */
 
-export type PaymentStatus = "pending" | "paid" | "failed" | "invoiced" | "quoted";
+export type PaymentStatus = "pending" | "authorized" | "paid" | "failed" | "invoiced" | "quoted";
 export type OrderStatus = "processing" | "confirmed" | "cancelled";
 export type FulfillmentStatus = "pending" | "ready" | "partial" | "backordered" | "completed" | "cancelled";
 export type EmailStatus = "pending" | "sent" | "failed" | "not_applicable";
@@ -71,13 +71,17 @@ export function maskAddress(address: string | null | undefined, zip: string | nu
 export function paymentStatusFor(order: Pick<StoredOrder, "checkout_state" | "payment_mode">): PaymentStatus {
   if (order.payment_mode === "net_terms" && order.checkout_state === "confirmed") return "invoiced";
   if (order.payment_mode === "freight_quote" && order.checkout_state === "confirmed") return "quoted";
-  if (order.checkout_state === "paid") return "paid";
+  if (order.checkout_state === "authorized") return "authorized";
+  // A late payment staff are reviewing is still money received: never "failed".
+  if (order.checkout_state === "paid" || order.checkout_state === "paid_needs_review") return "paid";
   if (order.checkout_state === "payment_failed" || order.checkout_state === "expired") return "failed";
   return "pending";
 }
 
 export function orderStatusFor(order: Pick<StoredOrder, "checkout_state">): OrderStatus {
   if (order.checkout_state === "paid" || order.checkout_state === "confirmed") return "confirmed";
+  // Authorized and under-review orders are being confirmed by the counter.
+  if (order.checkout_state === "authorized" || order.checkout_state === "paid_needs_review") return "processing";
   if (order.checkout_state === "payment_failed" || order.checkout_state === "expired") return "cancelled";
   return "processing";
 }
@@ -141,6 +145,14 @@ export function confirmationMessage(confirmation: Pick<OrderConfirmation, "payme
   if (payment === "pending") {
     return { tone: "pending", title: "Payment pending", body: "Your items are held while payment completes.", next: "Finish payment below." };
   }
+  if (payment === "authorized") {
+    return {
+      tone: "pending",
+      title: "Card authorized -- confirming stock",
+      body: "Your card is held, not charged. The Newark counter is checking the stock; we email you before your card is charged. If we can't fulfil the order, the hold is released and you pay nothing.",
+      next: "Watch your email for confirmation.",
+    };
+  }
   const where = method === "pickup" ? "pickup" : method === "local_delivery" ? "delivery" : "shipment";
   if (fulfillment === "backordered") {
     return { tone: "warning", title: payment === "paid" ? "Payment received -- items on backorder" : "Order confirmed -- items on backorder", body: "Everything on this order is waiting on stock. We email the expected date before anything ships.", next: "Watch your email for the backorder date." };
@@ -149,7 +161,7 @@ export function confirmationMessage(confirmation: Pick<OrderConfirmation, "payme
     return { tone: "warning", title: payment === "paid" ? "Payment received -- part of the order is ready" : "Order confirmed -- part of the order is ready", body: `Some lines are ready for ${where}; the rest are listed below with their status.`, next: `We confirm the ${where} plan for the remaining lines by email.` };
   }
   if (fulfillment === "ready") {
-    return { tone: "success", title: method === "pickup" ? "Ready for pickup" : "Out for delivery", body: "Your order is staged.", next: method === "pickup" ? "Bring the order number to the Newark counter." : "Someone should be on site to receive and inspect it." };
+    return { tone: "success", title: method === "pickup" ? "Ready for pickup" : "Out for delivery", body: "Your order is staged.", next: method === "pickup" ? "Bring the order number and photo ID to the Newark counter; the order is released to the name on it." : "Someone should be on site to receive it and note any damage on the delivery receipt before signing." };
   }
   if (fulfillment === "completed") {
     return { tone: "success", title: "Order complete", body: "Every line has been picked up or delivered.", next: "Keep the receipt for warranty registration." };

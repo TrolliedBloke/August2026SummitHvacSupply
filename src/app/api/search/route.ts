@@ -3,6 +3,7 @@ import { catalogCategoryDestinations, productHref, searchStorefrontSkus } from "
 import { applyLiveInventory, getLiveInventory } from "@/lib/storefront/live-inventory";
 import { matchIdentifier } from "@/lib/model-identifier";
 import { recordEvent } from "@/lib/backend/events";
+import { clientKey, rateLimit } from "@/lib/backend/rate-limit";
 
 /**
  * Header typeahead. Results carry a taxonomy so the listbox can group and
@@ -11,6 +12,11 @@ import { recordEvent } from "@/lib/backend/events";
  * first, so a pasted model number lands on its product.
  */
 export async function GET(request: Request) {
+  // Typeahead fires per keystroke, so the bound is generous; it stops scraping.
+  const limit = rateLimit(clientKey(request, "search"), 300, 300);
+  if (!limit.allowed) {
+    return NextResponse.json({ ok: false, categories: [], results: [] }, { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } });
+  }
   const { searchParams } = new URL(request.url);
   const q = (searchParams.get("q") ?? "").slice(0, 120);
   const normalized = q.trim().toLowerCase();

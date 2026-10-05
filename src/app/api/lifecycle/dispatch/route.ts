@@ -9,6 +9,8 @@ import {
   dispatchWarrantyReminders,
 } from "@/lib/backend/lifecycle";
 import { cleanupExpiredCheckouts } from "@/lib/backend/checkout";
+import { cronAuthorized } from "@/lib/backend/cron-auth";
+import { recordHeartbeat } from "@/lib/backend/alerts";
 
 /**
  * Runs every lifecycle flow. pg_cron calls GET hourly at seven past the hour
@@ -21,14 +23,7 @@ import { cleanupExpiredCheckouts } from "@/lib/backend/checkout";
  * for the day-based flows (review request, planning series, post-purchase).
  */
 function authorized(request: Request): boolean {
-  const secret = process.env.CRON_SECRET;
-  // Fail closed. This route sends real email to real customers -- back-in-stock
-  // alerts and abandoned-cart sequences -- and releases checkout reservations.
-  // Returning true when CRON_SECRET is absent meant that in any deployment where
-  // the variable was forgotten, an anonymous GET could send the entire mailing.
-  // Outside development, no secret means no dispatch.
-  if (!secret) return process.env.NODE_ENV !== "production";
-  return request.headers.get("authorization") === `Bearer ${secret}`;
+  return cronAuthorized(request);
 }
 
 async function run(advanceMinutes = 0, advanceDays = 0) {
@@ -57,7 +52,15 @@ async function run(advanceMinutes = 0, advanceDays = 0) {
 
 export async function GET(request: Request) {
   if (!authorized(request)) return NextResponse.json({ ok: false }, { status: 401 });
-  return NextResponse.json(await run());
+  // The heartbeat is what /api/health/jobs checks: a job that stops running is noticed.
+  try {
+    const result = await run();
+    await recordHeartbeat("lifecycle-dispatch", "ok", result);
+    return NextResponse.json(result);
+  } catch (error) {
+    await recordHeartbeat("lifecycle-dispatch", "error", { error: error instanceof Error ? error.message : String(error) });
+    throw error;
+  }
 }
 
 export async function POST(request: Request) {

@@ -1,15 +1,92 @@
 {
   "policy": "Human review of the photo each product actually shows, applied after the automatic classification in src/lib/media-verification.ts. 'withhold' shows no image (the photo is of something else); 'family' stops a photo of a whole system or kit from being presented as this component alone. Remove an entry once the photo mapping in exact-media.json is corrected.",
-  "reviewedAt": "2026-10-04",
+  "reviewedAt": "2026-10-05",
   "method": "Visual contact-sheet review of every displayed product photo against the record's product type.",
   "entries": [
-    { "sku": "TCL24KODU", "verdict": "withhold", "reason": "Outdoor unit record shows an indoor wall-head photo." },
-    { "sku": "DCT414", "verdict": "withhold", "reason": "Shows a page of the instruction manual (distance-to-spot diagram), not the thermometer." },
-    { "sku": "TCL24KIDU", "verdict": "family", "reason": "Photo shows the indoor and outdoor units together as a system." },
-    { "sku": "TOS09KIDU-R-32", "verdict": "family", "reason": "Photo shows the indoor and outdoor units together as a system." },
-    { "sku": "TOS09KODU-R-410A", "verdict": "family", "reason": "Photo shows the full system with indoor unit and remote." },
-    { "sku": "TOS09KODU-09AT19D6DO", "verdict": "family", "reason": "Photo shows the full system with indoor unit and remote." },
-    { "sku": "TOS12KIDU-R-410A", "verdict": "family", "reason": "Photo shows the full system with outdoor unit and remote." },
-    { "sku": "TOS30KMZODU", "verdict": "family", "reason": "Photo shows a multi-zone kit with two indoor heads and line sets." }
+    {
+      "sku": "TCL24KODU",
+      "verdict": "withhold",
+      "reason": "Outdoor unit record shows an indoor wall-head photo."
+    },
+    {
+      "sku": "DCT414",
+      "verdict": "withhold",
+      "reason": "Shows a page of the instruction manual (distance-to-spot diagram), not the thermometer."
+    },
+    {
+      "sku": "TCL24KIDU",
+      "verdict": "family",
+      "reason": "Photo shows the indoor and outdoor units together as a system."
+    },
+    {
+      "sku": "TOS09KIDU-R-32",
+      "verdict": "family",
+      "reason": "Photo shows the indoor and outdoor units together as a system."
+    },
+    {
+      "sku": "TOS09KODU-R-410A",
+      "verdict": "family",
+      "reason": "Photo shows the full system with indoor unit and remote."
+    },
+    {
+      "sku": "TOS09KODU-09AT19D6DO",
+      "verdict": "family",
+      "reason": "Photo shows the full system with indoor unit and remote."
+    },
+    {
+      "sku": "TOS12KIDU-R-410A",
+      "verdict": "family",
+      "reason": "Photo shows the full system with outdoor unit and remote."
+    },
+    {
+      "sku": "TOS30KMZODU",
+      "verdict": "family",
+      "reason": "Photo shows a multi-zone kit with two indoor heads and line sets."
+    },
+    {
+      "sku": "TOS12KIDU-R-32",
+      "verdict": "family",
+      "reason": "Photo shows the indoor and outdoor units together as a system."
+    },
+    {
+      "sku": "TOS12KODU",
+      "verdict": "family",
+      "reason": "Photo shows the indoor and outdoor units together as a system."
+    },
+    {
+      "sku": "TOS18KODU",
+      "verdict": "family",
+      "reason": "Photo shows the indoor and outdoor units together as a system."
+    },
+    {
+      "sku": "TOS24KODU",
+      "verdict": "family",
+      "reason": "Photo shows the indoor and outdoor units together as a system."
+    },
+    {
+      "sku": "TOS18KMZODU",
+      "verdict": "withhold",
+      "reason": "Multi-zone outdoor unit record shows a single-zone indoor/outdoor pair; the condenser pictured is a different product."
+    },
+    {
+      "sku": "TCLCAS9K",
+      "verdict": "family",
+      "reason": "Light-commercial family photo: a ducted unit, an outdoor unit and a cassette together."
+    },
+    {
+      "sku": "TCLCAS12K",
+      "verdict": "family",
+      "reason": "Light-commercial family photo: a ducted unit, an outdoor unit and a cassette together."
+    },
+    {
+      "sku": "TCLCAS18K",
+      "verdict": "family",
+      "reason": "Light-commercial family photo: a ducted unit, an outdoor unit and a cassette together."
+    },
+    {
+      "sku": "TCLCAS24K",
+      "verdict": "family",
+      "reason": "Light-commercial family photo: a ducted unit, an outdoor unit and a cassette together."
+    }
   ]
 }

@@ -1,4 +1,5 @@
 import "server-only";
+import type Anthropic from "@anthropic-ai/sdk";
 import { createServiceRoleSupabaseClient } from "./supabase";
 import { getStorefrontSkus } from "@/lib/storefront/catalog";
 import { PURCHASE, SITE } from "@/lib/site";
@@ -76,6 +77,26 @@ ${bandSummary()}. Whole home with usable ducts → central ducted; whole home or
 }
 
 /** Best-effort transcript logging -- what buyers ask is free market research. */
+/**
+ * The one request the storefront chat sends, shared by the route and the
+ * claim eval (scripts/chat-eval.ts) so the eval tests exactly what ships.
+ * The model is the owner's choice (docs/LIABILITY-REMEDIATION-PLAN.md, 5.1):
+ * change it here, then run the eval before deploying.
+ */
+export const CHAT_MODEL = "claude-opus-4-8";
+
+export function chatRequestParams(history: Anthropic.MessageParam[]) {
+  return {
+    model: CHAT_MODEL,
+    max_tokens: 1024,
+    // Retail chat: latency matters more than depth; low effort keeps
+    // replies snappy while the grounded prompt carries the facts.
+    output_config: { effort: "low" as const },
+    system: [{ type: "text" as const, text: buildChatSystemPrompt(), cache_control: { type: "ephemeral" as const } }],
+    messages: history,
+  };
+}
+
 export async function logChatMessage(
   sessionId: string,
   role: "user" | "assistant",

@@ -6,7 +6,10 @@
 import type { CommerceKind } from "@/lib/commerce/state";
 import type { FulfillmentMethod, FulfillmentWindow } from "@/lib/backend/fulfillment";
 
-export type SnapshotLineError = { code: "unknown_sku" | "not_purchasable" | "exceeds_stock" | "price_unavailable"; message: string };
+export type SnapshotLineError = { code: "unknown_sku" | "not_purchasable" | "exceeds_stock" | "price_unavailable" | "restricted"; message: string };
+
+/** A box the buyer must tick; the version is submitted and stored with the order. */
+export type SnapshotAcknowledgement = { id: "install" | "r410a"; version: string; text: string };
 
 export type SnapshotLine = {
   skuId: string;
@@ -46,6 +49,10 @@ export type CheckoutSnapshot = {
   tax: { status: "estimated" | "invoice" | "quoted" | "unavailable"; amount: number };
   total: number;
   payment: "card" | "net_terms" | "freight_quote";
+  /** Acknowledgements this order needs (src/lib/compliance/order-checks.ts). */
+  acknowledgements: SnapshotAcknowledgement[];
+  /** Staff will review the order before it is released (notes are staff-only). */
+  reviewRequired: boolean;
   /** Hash of everything that affects the charge. */
   digest: string;
   /** Signed, expiring; submitted with the order. */

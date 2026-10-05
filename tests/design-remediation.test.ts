@@ -466,7 +466,8 @@ describe("19/23 one password policy", () => {
 });
 
 describe("24 checkout snapshot", () => {
-  const sellable = withStock(sku("TCL09KIDU"), { availabilityVerified: true, availabilityStatus: "in_stock", available: 3, purchaseEligible: true });
+  // R-32, so the R-410A contractor-only rule (tests/liability.test.ts) doesn't apply to a guest.
+  const sellable = withStock(sku("TCL09KIDU"), { refrigerant: "R-32", availabilityVerified: true, availabilityStatus: "in_stock", available: 3, purchaseEligible: true });
   const build = (method: "pickup" | "local_delivery" | "freight", zip: string | null, qty = 1) =>
     buildSnapshot({ items: [{ skuId: sellable.id, qty }], method, zip, resolveSku: () => sellable, account: { kind: "anonymous" }, pricing: null, deliveryFee: () => null, now: new Date("2026-10-01T17:00:00Z") });
 

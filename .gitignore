@@ -35,6 +35,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # Acquisition cost. This repository is public, so anything carrying what Summit
 # pays per unit stays out of it. Both files are ops inputs only: the Next build

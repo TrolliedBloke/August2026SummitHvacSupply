@@ -1,4 +1,5 @@
 import "server-only";
+import { SITE } from "@/lib/site";
 import { Resend } from "resend";
 import { createServiceRoleSupabaseClient } from "./supabase";
 
@@ -95,7 +96,16 @@ export async function sendRequiredEmail(to: string, subject: string, html: strin
     await logEmail(to, subject, "skipped", meta, { error: "RESEND_API_KEY not configured" });
     throw new Error("Email delivery is not configured.");
   }
-  const { data, error } = await resend.emails.send({ from: FROM, to, subject, html }, idempotencyKey ? { idempotencyKey } : undefined);
+  let result: Awaited<ReturnType<typeof resend.emails.send>>;
+  try {
+    result = await resend.emails.send({ from: FROM, to, subject, html }, idempotencyKey ? { idempotencyKey } : undefined);
+  } catch (err) {
+    // A network failure throws instead of returning an error; it must still
+    // leave a "failed" row, or the customer view shows nothing was attempted.
+    await logEmail(to, subject, "failed", meta, { error: err instanceof Error ? err.message : "unknown" });
+    throw new Error("Email provider could not be reached.");
+  }
+  const { data, error } = result;
   if (error) {
     await logEmail(to, subject, "failed", meta, { error: error.name });
     throw new Error(`Email provider rejected delivery: ${error.name}`);
@@ -188,5 +198,37 @@ export async function sendOrderConfirmation(orderId: string): Promise<void> {
      <p>Order total: <strong>${money(Number(order.total))}</strong></p>
      <p>We will follow up with shipment and tracking details.</p>`,
     { kind: "order_confirmation", relatedType: "order", relatedId: orderId }
+  );
+}
+
+/**
+ * "Your order shipped", sent once per ShipStation ship notice for delivered
+ * orders (will-call handovers need no tracking email). The tracking link is
+ * shown only for carriers we can link to; otherwise the number alone.
+ */
+export async function sendShippedEmail(input: {
+  to: string;
+  name: string | null;
+  orderId: string;
+  orderNumber: string;
+  carrier: string | null;
+  trackingNumber: string | null;
+  trackingUrl: string | null;
+}): Promise<void> {
+  const escape = (value: string) => value.replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[char]!);
+  const tracking = input.trackingNumber
+    ? input.trackingUrl
+      ? `<p>Tracking: <a href="${escape(input.trackingUrl)}">${escape(input.trackingNumber)}</a>${input.carrier ? ` (${escape(input.carrier)})` : ""}</p>`
+      : `<p>Tracking number: <strong>${escape(input.trackingNumber)}</strong>${input.carrier ? ` (${escape(input.carrier)})` : ""}</p>`
+    : "<p>It is on its way. Reply to this email if you need the delivery details.</p>";
+  await send(
+    input.to,
+    `Order ${input.orderNumber} has shipped`,
+    `<h2>${input.name ? `${escape(input.name.split(" ")[0])}, your` : "Your"} order ${escape(input.orderNumber)} has shipped</h2>
+     ${tracking}
+     <p><strong>Inspect before you sign.</strong> Check every carton when it arrives and write any damage on the delivery receipt before signing, or the carrier can refuse the damage claim. Photograph the damage and reply to this email the same day.</p>
+     <p>Warranty question later on? File it at <a href="${SITE.origin}/warranty">${SITE.origin.replace(/^https?:\/\//, "")}/warranty</a>.</p>
+     <p>Questions about delivery? Reply to this email or call the Newark counter.</p>`,
+    { kind: "shipped", relatedType: "order", relatedId: input.orderId }
   );
 }

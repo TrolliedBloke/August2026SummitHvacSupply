@@ -65,12 +65,13 @@ export default async function CustomersPage({ searchParams }: PageProps<"/admin/
         <p className="mt-4 text-sm text-state-warning-ink">Showing the newest 5,000 rows of {result.truncated.join(", ")}; older people from those tables are not listed.</p>
       )}
 
-      <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
         <Kpi label="People" value={kpis.people} />
         <Kpi label="Customers" value={kpis.customers} />
         <Kpi label="Contractors" value={kpis.contractors} />
         <Kpi label="Need follow-up" value={kpis.needFollowUp} href={href({ follow: "1" })} />
-        <Kpi label="Waiting over a day" value={kpis.urgent} tone={kpis.urgent > 0 ? "warn" : undefined} href={href({ follow: "1" })} />
+        <Kpi label="Urgent" value={kpis.urgent} tone={kpis.urgent > 0 ? "warn" : undefined} href={href({ follow: "1" })} />
+        <Kpi label="Overdue tasks" value={kpis.overdueTasks} tone={kpis.overdueTasks > 0 ? "warn" : undefined} href={href({ follow: "1" })} />
         <Kpi label="Email subscribers" value={kpis.subscribed} />
       </dl>
 

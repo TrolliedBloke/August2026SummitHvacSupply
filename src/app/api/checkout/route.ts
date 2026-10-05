@@ -1,8 +1,18 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { CheckoutConflictError, CheckoutReviewRequiredError, CheckoutUnavailableError, placeOrder } from "@/lib/backend/checkout";
+import { clientKey, rateLimit } from "@/lib/backend/rate-limit";
 
 export async function POST(request: Request) {
+  // Each attempt can reserve stock and create a PaymentIntent. Retries of one
+  // order reuse its idempotency key, so a buyer never needs more than a few.
+  const limit = rateLimit(clientKey(request, "checkout"), 10, 600);
+  if (!limit.allowed) {
+    return NextResponse.json(
+      { ok: false, error: "Too many checkout attempts. Wait a few minutes, or call the counter.", retryable: true },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } }
+    );
+  }
   try {
     const payload = await request.json();
     const result = await placeOrder(payload);

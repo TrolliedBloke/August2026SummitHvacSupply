@@ -90,9 +90,17 @@ describe("live catalog honours the eligibility rule", () => {
 });
 
 describe("tax is refused outside its jurisdiction", () => {
-  it("accepts in-state ZIPs", () => {
+  it("computes tax only for a verified destination (the Newark counter)", () => {
     assert.equal(isWithinTaxJurisdiction("94560"), true);
-    assert.equal(typeof estimateTax(1000, "94560"), "number");
+    assert.equal(estimateTax(1000, "94560"), 107.5);
+  });
+
+  it("does not apply Newark's rate to other California districts", () => {
+    // San Jose, San Francisco and Oakland have different district rates.
+    for (const zip of ["95112", "94103", "94607"]) {
+      assert.equal(isWithinTaxJurisdiction(zip), false);
+      assert.equal(estimateTax(1000, zip), null);
+    }
   });
 
   it("returns null rather than 0 for an out-of-state destination", () => {

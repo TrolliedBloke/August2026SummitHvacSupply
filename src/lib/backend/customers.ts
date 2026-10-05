@@ -28,7 +28,7 @@ const SELECTS: Record<keyof CrmRows, [table: string, columns: string, orderBy: s
   accounts: ["accounts", "id, type, name, status, price_tier, license_verified_at", "created_at"],
   contacts: ["contacts", "account_id, name, email, phone, role, created_at", "created_at"],
   quoteRequests: ["quote_requests", "id, reference, name, email, phone, need, lifecycle, status, project_type, zip, account_id, created_at", "created_at"],
-  contactRequests: ["contact_requests", "id, reference, name, email, topic, message, status, created_at", "created_at"],
+  contactRequests: ["contact_requests", "id, reference, name, email, topic, message, status, channel, created_at", "created_at"],
   homeownerRequests: ["homeowner_requests", "id, reference, name, email, phone, status, zip, city, timeline, created_at", "created_at"],
   dealerApplications: ["dealer_applications", "id, reference, company, contact_name, email, phone, status, account_id, created_at", "created_at"],
   orders: [
@@ -42,7 +42,11 @@ const SELECTS: Record<keyof CrmRows, [table: string, columns: string, orderBy: s
   categoryAlerts: ["category_stock_alerts", "email, category, created_at, last_notified_at, unsubscribed", "created_at"],
   finderSessions: ["finder_sessions", "id, email, path, segment, created_at, completed_at, shortlist_sent_at, homeowner_request_id", "created_at"],
   consents: ["marketing_consents", "email, channel, source, consented_at, withdrawn_at", "created_at"],
-  emails: ["email_messages", "to_email, kind, subject, status, sent_at, related_type, related_id", "sent_at"],
+  emails: ["email_messages", "to_email, kind, subject, status, sent_at, related_type, related_id, delivery_status", "sent_at"],
+  tasks: ["tasks", "id, title, status, due_at, source_type, source_id, completed_at", "created_at"],
+  shipments: ["shipments", "order_id, carrier, tracking_number, shipped_at", "shipped_at"],
+  rmas: ["rmas", "id, rma_number, requester_email, requester_name, status, reason, quantity, account_id, channel, created_at", "created_at"],
+  warrantyClaims: ["warranty_claims", "id, claim_number, claimant_email, claimant_name, claimant_phone, status, model_number, product_description, account_id, created_at", "created_at"],
 };
 
 export async function loadCustomers(now = new Date()): Promise<CustomersResult> {
@@ -60,9 +64,9 @@ export async function loadCustomers(now = new Date()): Promise<CustomersResult> 
     keys.map(async (key) => {
       const [table, columns, orderBy] = SELECTS[key];
       const { data, error } = await db.from(table).select(columns).order(orderBy, { ascending: false }).limit(LIMIT);
-      // email_messages arrives with migration 036; before it runs the view
-      // still works from the reconstructed history.
-      if (error && key === "emails") return [key, [], false] as const;
+      // email_messages (036) and the task links (038) arrive with their
+      // migrations; before those run the view still works without them.
+      if (error && (key === "emails" || key === "tasks" || key === "shipments" || key === "rmas" || key === "warrantyClaims")) return [key, [], false] as const;
       if (error) throw new CustomersUnavailableError(`Could not read ${table}: ${error.message}`);
       return [key, data ?? [], (data?.length ?? 0) >= LIMIT] as const;
     })

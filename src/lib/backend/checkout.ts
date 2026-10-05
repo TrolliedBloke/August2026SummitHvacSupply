@@ -6,7 +6,10 @@ import { isFulfillmentWindowAvailable, WAREHOUSE, type FulfillmentMethod } from 
 import { clearCartSnapshot } from "./lifecycle";
 import { createOrderToken } from "./order-token";
 import { type CheckoutState, type CheckoutStatus } from "./checkout-state";
-import { issueCheckoutSnapshot, verifySnapshotToken } from "./checkout-snapshot";
+import { issueCheckoutSnapshotWithCompliance, verifySnapshotToken } from "./checkout-snapshot";
+import { acknowledgementRecord, missingAcknowledgements } from "@/lib/compliance/order-checks";
+import { creditDecision, type CreditDecision } from "@/lib/payments/credit";
+import { raiseStaffAlert } from "./alerts";
 import type { CheckoutSnapshot } from "@/lib/checkout-snapshot-types";
 import { toConfirmation, type OrderConfirmation, type StoredOrder } from "@/lib/order-confirmation";
 
@@ -61,7 +64,7 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   // 1. Re-issue the snapshot from current data -- prices by the session's
   //    authorization, live stock, fulfillment, fee and tax. The client never
   //    sends prices, and what it reviewed must still be what is true now.
-  const snapshot = await issueCheckoutSnapshot({
+  const { snapshot, compliance } = await issueCheckoutSnapshotWithCompliance({
     items: parsed.items.map((item) => ({ skuId: item.skuId, qty: item.qty })),
     method: parsed.method,
     zip: parsed.zip ?? null,
@@ -82,6 +85,11 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   }
   if (parsed.method !== "freight" && !isFulfillmentWindowAvailable(parsed.method, parsed.zip ?? null, parsed.window!)) {
     throw new CheckoutConflictError("That fulfillment window is no longer available. Choose another time.");
+  }
+  // Phase 3: the buyer ticked every acknowledgement this order needs, in the
+  // version that was shown. The text and version are stored as evidence.
+  if (missingAcknowledgements(compliance.acknowledgements, parsed.acknowledgements).length > 0) {
+    throw new CheckoutConflictError("Confirm the installation and warranty terms for the equipment in this order to continue.");
   }
 
   const lines = parsed.items.map((item) => {
@@ -115,12 +123,27 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
     .maybeSingle();
   if (existing) return existingCheckoutResult(existing);
 
+  // Holds: the order is placed, but staff release it before it is charged,
+  // picked or shipped. Net terms extend credit (1.6); a compliance note can
+  // need a conversation with the buyer (3.3).
+  const accountId = profile?.accountId ?? null;
+  const credit = payment === "net_terms" ? await checkCredit(supabase, accountId, total) : null;
+  if (credit && !credit.ok && credit.action === "block") {
+    throw new CheckoutConflictError("This order is over your account's credit limit. Call the counter to arrange payment.");
+  }
+  const hold: { reason: string; detail: string } | null =
+    credit && !credit.ok
+      ? { reason: "credit_limit", detail: credit.detail }
+      : compliance.hold
+        ? { reason: "compliance_review", detail: compliance.review.filter((note) => note.hold).map((note) => note.message).join(" ") }
+        : null;
+
   // 5. Insert the order + lines (service-role; validated above).
   const { data: order, error } = await supabase
     .from("sales_orders")
     .insert({
       order_number: orderNumber,
-      account_id: profile?.accountId ?? null,
+      account_id: accountId,
       status: "pending",
       subtotal,
       total,
@@ -140,6 +163,15 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
       checkout_idempotency_key: parsed.idempotencyKey,
       reservation_expires_at: payment === "card" ? new Date(Date.now() + 30 * 60_000).toISOString() : null,
       payment_mode: payment,
+      install_acknowledgement:
+        compliance.acknowledgements.length > 0 || compliance.review.length > 0
+          ? { ...acknowledgementRecord(compliance.acknowledgements, compliance.review, new Date()), pickupName: parsed.pickupName?.trim() || null }
+          : parsed.pickupName?.trim()
+            ? { pickupName: parsed.pickupName.trim() }
+            : null,
+      hold_reason: hold?.reason ?? null,
+      hold_detail: hold?.detail ?? null,
+      hold_set_at: hold ? new Date().toISOString() : null,
     })
     .select("id")
     .single();
@@ -180,13 +212,19 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
   if (payment === "card") {
     const stripe = getStripe();
     if (stripe && total > 0) {
+      let intentId: string | null = null;
       try {
+        // Authorize only. The card is charged when the counter confirms the
+        // unit is on the shelf (src/lib/backend/payments.ts): catalog stock
+        // lives in QuickBooks, so the counter may have sold it in person.
         const intent = await stripe.paymentIntents.create({
           amount: Math.round(total * 100),
           currency: "usd",
+          capture_method: "manual",
           automatic_payment_methods: { enabled: true },
           metadata: { order_id: order.id, order_number: orderNumber },
         }, { idempotencyKey: parsed.idempotencyKey });
+        intentId = intent.id;
         clientSecret = intent.client_secret ?? undefined;
         await supabase.from("sales_orders").update({
           checkout_state: "payment_pending",
@@ -194,6 +232,9 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
           checkout_updated_at: new Date().toISOString(),
         }).eq("id", order.id);
       } catch (error) {
+        // If the intent exists but the order could not be linked to it, cancel
+        // it so it can never be paid for a released order.
+        if (intentId) await stripe.paymentIntents.cancel(intentId).catch(() => {});
         await supabase.rpc("release_checkout_order", { p_order_id: order.id, p_state: "payment_failed" });
         throw error;
       }
@@ -201,6 +242,17 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
       await supabase.rpc("release_checkout_order", { p_order_id: order.id, p_state: "payment_failed" });
       throw new Error("Card payment is temporarily unavailable. Your cart has been preserved.");
     }
+  }
+
+  if (hold) {
+    void raiseStaffAlert({
+      kind: "order_hold",
+      dedupeKey: `hold:${order.id}`,
+      subject: `Order ${orderNumber} is on hold: ${hold.reason === "credit_limit" ? "credit limit" : "compliance review"}`,
+      body: `${hold.detail}\n\nRelease or cancel it in Admin → Fulfillment.${payment === "card" ? " The card is only authorized; nothing is charged until it is released and captured." : ""}`,
+      relatedType: "order",
+      relatedId: order.id,
+    });
   }
 
   const checkoutState: CheckoutState = payment === "card" ? "payment_pending" : "confirmed";
@@ -219,6 +271,32 @@ export async function placeOrder(input: unknown): Promise<CheckoutResult> {
     checkoutState,
     clientSecret,
   }, "supabase");
+}
+
+type ServiceClient = NonNullable<ReturnType<typeof createServiceRoleSupabaseClient>>;
+
+/** Open AR plus uninvoiced net-terms orders, against the account's limit. */
+async function checkCredit(supabase: ServiceClient, accountId: string | null, total: number): Promise<CreditDecision> {
+  if (!accountId) return creditDecision({ creditLimit: 0, openInvoiceBalance: 0, uninvoicedOrders: 0 }, total);
+  const [account, invoices, orders] = await Promise.all([
+    supabase.from("accounts").select("credit_limit").eq("id", accountId).maybeSingle(),
+    supabase.from("invoices").select("order_id, status, balance").eq("account_id", accountId).neq("status", "void"),
+    supabase.from("sales_orders").select("id, total").eq("account_id", accountId).eq("payment_mode", "net_terms").eq("paid", false).neq("status", "cancelled"),
+  ]);
+  // A lookup failure must not extend credit: treat it as no limit (held).
+  if (account.error || invoices.error || orders.error) {
+    return creditDecision({ creditLimit: 0, openInvoiceBalance: 0, uninvoicedOrders: 0 }, total);
+  }
+  const invoiceRows = invoices.data ?? [];
+  const invoiced = new Set(invoiceRows.map((row) => row.order_id).filter(Boolean));
+  return creditDecision(
+    {
+      creditLimit: Number(account.data?.credit_limit ?? 0),
+      openInvoiceBalance: invoiceRows.filter((row) => row.status !== "paid").reduce((sum, row) => sum + Number(row.balance ?? 0), 0),
+      uninvoicedOrders: (orders.data ?? []).filter((row) => !invoiced.has(row.id)).reduce((sum, row) => sum + Number(row.total ?? 0), 0),
+    },
+    total
+  );
 }
 
 type ExistingOrder = {
@@ -279,12 +357,14 @@ function withToken(status: CheckoutStatus, mode: CheckoutResult["mode"]): Checko
   return { ...status, mode, confirmationToken: createOrderToken(status.orderId) };
 }
 
+/**
+ * Kept for the lifecycle dispatcher. Delegates to the payment-safe expiry,
+ * which settles each PaymentIntent with Stripe before releasing its order.
+ */
 export async function cleanupExpiredCheckouts(): Promise<number> {
-  const supabase = createServiceRoleSupabaseClient();
-  if (!supabase) return 0;
-  const { data, error } = await supabase.rpc("expire_stale_checkout_orders");
-  if (error) throw new Error(error.message);
-  return Number(data ?? 0);
+  const { expireStaleCheckouts } = await import("./payments");
+  const { expired } = await expireStaleCheckouts();
+  return expired;
 }
 
 export async function getCheckoutStatus(orderId: string): Promise<CheckoutStatus | null> {
@@ -300,6 +380,11 @@ export async function getCheckoutStatus(orderId: string): Promise<CheckoutStatus
     .maybeSingle();
   if (error || !data) return null;
   const result = await existingCheckoutResult(data as ExistingOrder);
+  // The confirmation email goes out the first time anyone sees a confirmable
+  // order (usually the buyer, on this page); the hourly job retries failures.
+  if (["authorized", "paid", "confirmed", "paid_needs_review"].includes(result.checkoutState)) {
+    void import("./payments").then((module) => module.ensureOrderConfirmation(result.orderId)).catch(() => {});
+  }
   return {
     orderId: result.orderId,
     orderNumber: result.orderNumber,

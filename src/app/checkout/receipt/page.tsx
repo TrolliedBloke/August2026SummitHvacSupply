@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site";
 export const metadata = { title: "Receipt", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
-const PAYMENT_LABEL = { pending: "Payment pending", paid: "Paid by card", failed: "Not paid", invoiced: "Invoiced on net terms", quoted: "Freight quote pending" } as const;
+const PAYMENT_LABEL = { pending: "Payment pending", authorized: "Card authorized, not yet charged", paid: "Paid by card", failed: "Not paid", invoiced: "Invoiced on net terms", quoted: "Freight quote pending" } as const;
 
 /**
  * The canonical receipt, from the same confirmation DTO as the confirmation

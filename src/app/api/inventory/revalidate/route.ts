@@ -1,6 +1,7 @@
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { INVENTORY_TAG } from "@/lib/storefront/live-inventory";
+import { cronAuthorized } from "@/lib/backend/cron-auth";
 
 /**
  * Drops the cached inventory map after the QuickBooks sync writes new counts.
@@ -16,9 +17,7 @@ import { INVENTORY_TAG } from "@/lib/storefront/live-inventory";
  * caller could hammer it and force a database read on every request.
  */
 function authorized(request: Request): boolean {
-  const secret = process.env.CRON_SECRET;
-  if (!secret) return process.env.NODE_ENV !== "production";
-  return request.headers.get("authorization") === `Bearer ${secret}`;
+  return cronAuthorized(request);
 }
 
 export async function POST(request: Request) {

@@ -18,6 +18,7 @@ const SERVICE_PREFIXES = [
   "/shipping",
   "/terms",
   "/tools",
+  "/warranty",
 ];
 const CHAT_SUPPRESSED_PREFIXES = [
   ...FOCUSED_PREFIXES,

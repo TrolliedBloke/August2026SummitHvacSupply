@@ -23,6 +23,7 @@ const COMPANY_LINKS = [
   { href: "/locations/newark", label: "Newark location" },
   { href: "/returns", label: "Returns & Refunds" },
   { href: "/shipping", label: "Shipping & Delivery" },
+  { href: "/warranty", label: "Warranty claims" },
   { href: "/resources", label: "Warranty & FAQ" },
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms of Service" },

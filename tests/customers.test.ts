@@ -6,7 +6,7 @@ import { DEMO_CRM_ROWS } from "../src/lib/crm/demo-rows";
 const NOW = new Date("2026-10-04T18:00:00Z");
 const empty: CrmRows = {
   profiles: [], accounts: [], contacts: [], quoteRequests: [], contactRequests: [], homeownerRequests: [], dealerApplications: [],
-  orders: [], orderLines: [], carts: [], stockAlerts: [], categoryAlerts: [], finderSessions: [], consents: [], emails: [],
+  orders: [], orderLines: [], carts: [], stockAlerts: [], categoryAlerts: [], finderSessions: [], consents: [], emails: [], tasks: [], shipments: [],
 };
 const people = buildPeople(DEMO_CRM_ROWS, NOW);
 const byEmail = (email: string) => people.find((person) => person.email === email)!;
@@ -70,8 +70,11 @@ describe("customer view: orders and emails", () => {
     assert.equal(jin.emails.filter((email) => email.kind === "order_confirmation").length, 1);
     assert.equal(jin.emails[0].source, "log");
     const maria = byEmail("maria@bayheat.example.com");
-    assert.deepEqual(new Set(maria.emails.map((email) => email.kind)), new Set(["order_confirmation", "review_request", "warranty"]));
-    assert.ok(maria.emails.every((email) => email.source === "reconstructed"));
+    assert.deepEqual(new Set(maria.emails.map((email) => email.kind)), new Set(["order_confirmation", "review_request", "warranty", "shipped"]));
+    assert.ok(maria.emails.filter((email) => email.kind !== "shipped").every((email) => email.source === "reconstructed"));
+    // Delivery outcomes from the provider webhook ride along with logged sends.
+    assert.equal(maria.emails.find((email) => email.kind === "shipped")!.delivery, "bounced");
+    assert.equal(byEmail("jin.park@example.com").emails[0].delivery, "opened");
     assert.ok(byEmail("sam.ortiz@example.com").emails.some((email) => email.kind === "abandoned_cart"));
   });
 });
@@ -81,7 +84,7 @@ describe("customer view: follow-ups", () => {
     assert.ok(byEmail("maria@bayheat.example.com").followUps.some((item) => item.reason.includes("Q-1042") && item.priority === "high"));
     assert.ok(byEmail("sam.ortiz@example.com").followUps.some((item) => item.reason.includes("cart")));
     assert.ok(byEmail("lee.wong@example.com").followUps.some((item) => item.reason.includes("finder")));
-    assert.ok(byEmail("jin.park@example.com").followUps.some((item) => item.reason.includes("C-2207")));
+    assert.ok(byEmail("jin.park@example.com").followUps.some((item) => item.reason.includes("E-2207")));
     // Priya asked for installer help, so finishing the finder is not an open loop.
     assert.ok(!byEmail("priya.shah@example.com").followUps.some((item) => item.reason.includes("finder")));
   });
@@ -94,5 +97,23 @@ describe("customer view: follow-ups", () => {
     assert.equal(filterPeople(people, { persona: "homeowner" }).length, 3);
     assert.equal(filterPeople(people, { q: "bay heat" })[0].email, "maria@bayheat.example.com");
     assert.equal(peopleKpis(people).people, list.length);
+  });
+});
+
+describe("customer view: tasks, shipments and support email", () => {
+  it("attaches each auto-task to its request and flags an overdue one", () => {
+    const jin = byEmail("jin.park@example.com");
+    const message = jin.requests.find((request) => request.kind === "contact")!;
+    assert.equal(message.channel, "email");
+    assert.equal(message.task?.overdue, true);
+    const followUp = jin.followUps.find((item) => item.reason.startsWith("Support email E-2207"))!;
+    assert.equal(followUp.priority, "high");
+    assert.ok(followUp.due);
+    assert.ok(peopleKpis(people).overdueTasks >= 1);
+  });
+
+  it("shows tracking on shipped orders", () => {
+    const order = byEmail("maria@bayheat.example.com").orders[0];
+    assert.equal(order.shipments[0].trackingNumber, "1Z999AA10123456784");
   });
 });

@@ -3,7 +3,11 @@ import "server-only";
 export type CheckoutState =
   | "checkout_started"
   | "payment_pending"
+  /** Card held, not charged: waiting for the counter to confirm stock. */
+  | "authorized"
   | "paid"
+  /** Money arrived for an order that had been cancelled; staff decide. */
+  | "paid_needs_review"
   | "payment_failed"
   | "expired"
   | "confirmed";

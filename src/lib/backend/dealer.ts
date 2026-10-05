@@ -4,6 +4,7 @@ import { createServiceRoleSupabaseClient } from "./supabase";
 import { createServerSupabase } from "./supabase-ssr";
 import { rememberedResult, rememberResult } from "./idempotency";
 import { DEALER_REVIEW_SLA } from "@/lib/forms/dealer";
+import { assertSeededAllowed } from "./seeded";
 
 export type DealerReceipt = {
   reference: string;
@@ -32,6 +33,7 @@ export async function submitDealerApplication(input: unknown): Promise<DealerRec
 
   const supabase = createServiceRoleSupabaseClient();
   if (!supabase) {
+    assertSeededAllowed("dealer application");
     const key = parsed.email;
     const existing = seededOpen.get(key);
     const receipt = existing

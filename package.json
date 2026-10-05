@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --require ./tests/register-server-only.cjs --test tests/backend.test.ts tests/remediation.test.ts tests/request-body.test.ts tests/inventory.test.ts tests/design-remediation.test.ts tests/finder.test.ts tests/media.test.ts tests/ux-fix.test.ts tests/tokens.test.ts tests/customers.test.ts",
+    "test": "tsx --require ./tests/register-server-only.cjs --test tests/backend.test.ts tests/remediation.test.ts tests/request-body.test.ts tests/inventory.test.ts tests/design-remediation.test.ts tests/finder.test.ts tests/media.test.ts tests/ux-fix.test.ts tests/tokens.test.ts tests/customers.test.ts tests/pipeline.test.ts tests/liability.test.ts",
     "test:e2e": "playwright test",
     "test:links": "tsx scripts/check-external-links.ts",
     "catalog:import": "tsx scripts/import-inventory-catalog.ts",
@@ -22,7 +22,8 @@
     "qa:first-action": "node scripts/measure-first-action.mjs",
     "inventory:quickbooks": "tsx scripts/sync-quickbooks-inventory.ts",
     "seed:staff": "tsx scripts/create-staff-user.ts",
-    "test:security": "tsx --test tests/security.live.test.ts"
+    "test:security": "tsx --test tests/security.live.test.ts",
+    "eval:chat": "tsx --require ./tests/register-server-only.cjs scripts/chat-eval.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.111.0",

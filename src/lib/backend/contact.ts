@@ -4,6 +4,7 @@ import { makeReference } from "@/lib/forms/result";
 import { getStorefrontSku } from "@/lib/storefront/catalog";
 import { createServiceRoleSupabaseClient } from "./supabase";
 import { rememberedResult, rememberResult } from "./idempotency";
+import { assertSeededAllowed } from "./seeded";
 
 export type ContactReceipt = {
   id: string;
@@ -97,6 +98,7 @@ export async function createContactRequest(input: unknown): Promise<ContactRecei
     return stored;
   }
 
+  assertSeededAllowed("contact request");
   const seeded = { ...receipt, id: `contact-${Date.now()}`, mode: "seeded" as const };
   rememberResult("contact", parsed.clientRequestId, seeded);
   return seeded;

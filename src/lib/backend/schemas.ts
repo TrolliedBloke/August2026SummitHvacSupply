@@ -42,25 +42,30 @@ export const checkoutSchema = z.object({
   items: z
     .array(
       z.object({
-        skuId: z.string().min(1),
-        sku: z.string().min(1),
-        modelNumber: z.string().min(1),
-        title: z.string().min(1),
+        skuId: z.string().min(1).max(120),
+        sku: z.string().min(1).max(120),
+        modelNumber: z.string().min(1).max(120),
+        title: z.string().min(1).max(300),
         qty: z.number().int().min(1).max(200),
       })
     )
-    .min(1),
+    .min(1)
+    .max(100),
   method: z.enum(["pickup", "local_delivery", "freight"]),
-  zip: z.string().optional(),
-  address: z.string().optional(),
-  company: z.string().optional(),
-  phone: z.string().optional(),
-  role: z.string().optional(),
-  poNumber: z.string().optional(),
-  billingContact: z.string().optional(),
-  window: z.string().optional(),
-  buyerName: z.string().optional(),
-  buyerEmail: z.string().email().optional(),
+  zip: z.string().max(10).optional(),
+  address: z.string().max(500).optional(),
+  company: z.string().max(200).optional(),
+  phone: z.string().max(40).optional(),
+  role: z.string().max(60).optional(),
+  poNumber: z.string().max(80).optional(),
+  billingContact: z.string().max(200).optional(),
+  window: z.string().max(80).optional(),
+  buyerName: z.string().max(200).optional(),
+  buyerEmail: z.string().email().max(254).optional(),
+  /** Who may collect a will-call order, when not the buyer (shown to the counter). */
+  pickupName: z.string().max(200).optional(),
+  /** Versions of the acknowledgements the buyer ticked (snapshot.acknowledgements). */
+  acknowledgements: z.array(z.string().max(80)).max(10).optional(),
   /** The signed snapshot the buyer reviewed. Orders are accepted only against a current one. */
   snapshotToken: z.string().max(2000).optional(),
 }).superRefine((value, ctx) => {

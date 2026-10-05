@@ -157,10 +157,10 @@ describe("catalog import reconciliation", () => {
     const branded = skus.filter((sku) => sku.brand !== "Unbranded");
     const verified = branded.filter((sku) => sku.imageVerified);
     assert.equal(branded.length, 78);
-    // 56 records carry manufacturer media; 8 of those show something else (6
-    // caught by file name, 2 by visual review in data/catalog/media-review.json)
+    // 56 records carry manufacturer media; 9 of those show something else (6
+    // caught by file name, 3 by visual review in data/catalog/media-review.json)
     // and are withheld until the catalog owner supplies the right photo.
-    assert.equal(verified.length, 48);
+    assert.equal(verified.length, 47);
     assert.equal(verified.filter((sku) => sku.imageExactModel).length, 9);
     assert.ok(verified.every((sku) => sku.images.length > 0));
     // Exact means no other model uses the file.

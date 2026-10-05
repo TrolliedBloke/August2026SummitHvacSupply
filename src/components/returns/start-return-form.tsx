@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { Notice } from "@/components/state";
 import { Select } from "@/components/form";
 import { evaluateReturn, RETURN_QUESTIONS, returnsRulesAreConfirmed, type ReturnFacts, type ReturnQuestion } from "@/lib/returns-policy";
@@ -15,27 +16,31 @@ const REASONS = [
   { value: "job_cancelled", label: "Job cancelled" },
 ];
 
-/** Start a return from one order line: order, SKU and quantity limit are prefilled from the order. */
-export function StartReturnForm({ line }: { line: ReturnableLine }) {
+/**
+ * Start a return from one order line: order, SKU and quantity limit are
+ * prefilled from the order, and a recorded delivery date answers the "how
+ * many days" question. Until operations confirms the rules, the policy result
+ * is not shown as an outcome: the request goes to staff, who confirm terms.
+ */
+export function StartReturnForm({ line, endpoint = "/api/returns", token }: { line: ReturnableLine; endpoint?: string; token?: string }) {
+  const recordedDays = line.daysSinceDelivery ?? undefined;
   const [quantity, setQuantity] = React.useState(1);
   const [reason, setReason] = React.useState("");
-  const [facts, setFacts] = React.useState<ReturnFacts>({});
+  const [facts, setFacts] = React.useState<ReturnFacts>(recordedDays === undefined ? {} : { daysSinceDelivery: recordedDays });
   const [days, setDays] = React.useState("");
-  const [result, setResult] = React.useState<{ ok: true; rmaNumber: string; validDays: number } | { ok: false; error: string } | null>(null);
+  const [notes, setNotes] = React.useState("");
+  const [result, setResult] = React.useState<{ ok: true; rmaNumber: string; validDays: number; reviewOnly: boolean } | { ok: false; error: string } | null>(null);
   const [busy, setBusy] = React.useState(false);
   const outcome = evaluateReturn(facts);
-
-  if (!returnsRulesAreConfirmed()) {
-    return (
-      <Notice tone="warning" title="Online return initiation is not available yet">
-        Operations has not approved the automated eligibility rules. Contact the counter so staff can review this order line directly.
-      </Notice>
-    );
-  }
+  const confirmed = returnsRulesAreConfirmed();
 
   async function submit() {
     setBusy(true);
-    const response = await fetch("/api/returns", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ lineId: line.lineId, quantity, reason, facts }) }).catch(() => null);
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, lineId: line.lineId, quantity, reason, facts, notes: notes.trim() || undefined }),
+    }).catch(() => null);
     const payload = response ? await response.json().catch(() => null) : null;
     setBusy(false);
     setResult(payload?.ok ? payload : { ok: false, error: payload?.error ?? "The return could not be started. Call the counter." });
@@ -43,12 +48,15 @@ export function StartReturnForm({ line }: { line: ReturnableLine }) {
 
   if (result?.ok) {
     return (
-      <Notice tone="success" role="status" title={`Return started: ${result.rmaNumber}`}>
-        Staff review it and email the next step. The RMA is valid for {result.validDays} days once approved. Write the RMA number on the outer packaging.
+      <Notice tone="success" role="status" title={`Return requested: ${result.rmaNumber}`}>
+        We&apos;ve emailed you a copy. The counter reviews it and replies within one business day with the terms and how to send it back. Please
+        don&apos;t ship anything until we approve it; an approved return is valid for {result.validDays} days.
       </Notice>
     );
   }
 
+  const warranty = outcome.kind === "result" && outcome.verdict === "warranty";
+  const blockedByPolicy = outcome.kind === "result" && confirmed && outcome.verdict === "not_returnable";
   const question = outcome.kind === "needs" ? outcome.question : null;
   return (
     <div className="flex flex-col gap-4">
@@ -70,10 +78,29 @@ export function StartReturnForm({ line }: { line: ReturnableLine }) {
           onAnswer={(value) => setFacts((current) => ({ ...current, [question as ReturnQuestion]: value }))}
         />
       )}
-      {outcome.kind === "result" && (
-        <Notice tone={outcome.verdict === "not_returnable" || outcome.verdict === "warranty" ? "warning" : "info"} title={`Preliminary: ${outcome.headline}`}>
+      {warranty && (
+        <Notice tone="info" title="Installed equipment is a warranty claim, not a return">
+          We coordinate it with the manufacturer.{" "}
+          <Link href="/warranty" className="font-medium underline underline-offset-4">
+            File a warranty claim
+          </Link>
+        </Notice>
+      )}
+      {outcome.kind === "result" && !warranty && confirmed && (
+        <Notice tone={outcome.verdict === "not_returnable" ? "warning" : "info"} title={`Preliminary: ${outcome.headline}`}>
           {outcome.explanation} Staff confirm every return.
         </Notice>
+      )}
+      {outcome.kind === "result" && !warranty && !confirmed && (
+        <Notice tone="info" title="Our team reviews this return">
+          We confirm the terms for your order after reviewing it. Nothing is decided yet.
+        </Notice>
+      )}
+      {outcome.kind === "result" && !warranty && !blockedByPolicy && (
+        <label className="flex flex-col gap-1.5 text-sm font-medium text-ink-1">
+          Anything we should know? (optional)
+          <textarea value={notes} onChange={(event) => setNotes(event.target.value.slice(0, 2000))} rows={3} className="rounded-(--r-sm) border border-control-border bg-control-bg px-3 py-2 text-sm" />
+        </label>
       )}
       {result && !result.ok && (
         <Notice tone="danger" role="alert">
@@ -82,11 +109,11 @@ export function StartReturnForm({ line }: { line: ReturnableLine }) {
       )}
       <button
         type="button"
-        disabled={busy || !reason || outcome.kind !== "result" || outcome.verdict === "not_returnable" || outcome.verdict === "warranty"}
+        disabled={busy || !reason || outcome.kind !== "result" || warranty || blockedByPolicy}
         onClick={submit}
         className="h-11 self-start rounded-(--r-sm) bg-brand px-5 text-sm font-medium text-brand-ink disabled:opacity-50"
       >
-        {busy ? "Starting…" : "Start return"}
+        {busy ? "Sending…" : "Request return"}
       </button>
     </div>
   );

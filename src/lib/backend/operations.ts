@@ -65,8 +65,19 @@ export async function invoiceOrder(orderId: string, dueDate?: string): Promise<s
 }
 
 /** Advance an order's pickup/delivery status (staff only; enforced in DB). */
-export async function advanceFulfillment(orderId: string, status: string): Promise<void> {
-  await rpc("advance_fulfillment", { p_order_id: orderId, p_status: status });
+export async function advanceFulfillment(
+  orderId: string,
+  status: string,
+  pickup?: { collectedBy: string; idChecked: boolean }
+): Promise<void> {
+  // The database refuses unpaid, held or cancelled orders and a pickup with
+  // no collector or ID check (migration 043).
+  await rpc("advance_fulfillment", {
+    p_order_id: orderId,
+    p_status: status,
+    p_collected_by: pickup?.collectedBy ?? null,
+    p_id_checked: pickup?.idChecked ?? false,
+  });
 }
 
 /** Manual (non-Stripe) payment, e.g. a check at the counter. */

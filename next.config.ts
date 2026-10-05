@@ -83,7 +83,8 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline'",
               `img-src 'self' data: blob:${AD_IMG_HOSTS}`,
               "font-src 'self' data:",
-              `connect-src 'self' https://api.stripe.com https://*.supabase.co${AD_CONNECT_HOSTS}`,
+              // Realtime (admin live refresh) is a websocket: an https: source does not cover wss: in Chromium.
+              `connect-src 'self' https://api.stripe.com https://*.supabase.co wss://*.supabase.co${AD_CONNECT_HOSTS}`,
               // The Newark location page embeds one Google Maps frame and
               // provides a plain directions link as its fallback.
               `frame-src https://js.stripe.com https://hooks.stripe.com https://www.google.com${AD_FRAME_HOSTS}`,

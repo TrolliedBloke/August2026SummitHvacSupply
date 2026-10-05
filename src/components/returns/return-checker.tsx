@@ -21,13 +21,18 @@ export function ReturnChecker() {
     return (
       <section aria-labelledby="return-checker-title" className="rounded-(--r-md) border border-line bg-surface-1 p-5 sm:p-7">
         <h2 id="return-checker-title" className="text-lead font-semibold text-ink-1">Check a return</h2>
-        <Notice tone="warning" className="mt-4" title="Online eligibility is awaiting operations confirmation">
-          The counter will review the order, product condition, and current policy directly. The site will not issue a preliminary
-          result from rules that operations has not approved.
-        </Notice>
-        <Link href="/contact?topic=returns" className="mt-4 inline-flex min-h-11 items-center rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink hover:bg-brand-hover">
-          Ask the returns desk
-        </Link>
+        <p className="mt-3 text-sm text-ink-2">
+          Returns are reviewed by our team. Start a return and we&apos;ll confirm the terms for your order within one business day. Installed
+          equipment that stopped working is a warranty claim instead.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link href="/returns/start" className="inline-flex min-h-11 items-center rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink hover:bg-brand/90">
+            Start a return
+          </Link>
+          <Link href="/warranty" className="inline-flex min-h-11 items-center rounded-(--r-sm) border border-line bg-surface-1 px-4 text-sm font-medium text-ink-1 hover:bg-surface-2">
+            File a warranty claim
+          </Link>
+        </div>
       </section>
     );
   }
@@ -70,13 +75,20 @@ export function ReturnChecker() {
               Rules {outcome.rulesVersion}, policy version {outcome.documentVersion}. This is not an approval: an RMA number is
               issued only after staff review.
             </p>
+            {outcome.verdict === "warranty" && (
+              <div className="mt-4">
+                <Link href="/warranty" className="inline-flex min-h-11 items-center rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink hover:bg-brand/90">
+                  File a warranty claim
+                </Link>
+              </div>
+            )}
             {outcome.verdict !== "not_returnable" && outcome.verdict !== "warranty" && (
               <div className="mt-4 flex flex-wrap gap-3">
                 <Link href="/portal/returns/new" className="inline-flex min-h-11 items-center rounded-(--r-sm) bg-brand px-4 text-sm font-medium text-brand-ink hover:bg-brand-hover">
-                  Start a return from your order
+                  Start a return from your account
                 </Link>
-                <Link href="/contact?topic=returns" className="inline-flex min-h-11 items-center rounded-(--r-sm) border border-line-strong bg-surface-1 px-4 text-sm font-medium text-ink-1 hover:bg-surface-2">
-                  No account? Contact the counter
+                <Link href="/returns/start" className="inline-flex min-h-11 items-center rounded-(--r-sm) border border-line bg-surface-1 px-4 text-sm font-medium text-ink-1 hover:bg-surface-2">
+                  Ordered as a guest? Start with your order email
                 </Link>
               </div>
             )}

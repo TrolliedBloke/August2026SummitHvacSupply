@@ -69,14 +69,21 @@ function ConfirmationInner() {
 
   const confirmation = order.confirmation ?? null;
   const complete = order.checkoutState === "paid" || order.checkoutState === "confirmed";
+  const authorized = order.checkoutState === "authorized" || order.checkoutState === "paid_needs_review";
   const failed = order.checkoutState === "payment_failed" || order.checkoutState === "expired";
   // Combination-specific copy: paid-but-backordered never reads as "complete".
   const message = confirmation
     ? confirmationMessage(confirmation)
     : {
         tone: complete ? "success" : failed ? "danger" : "pending",
-        title: order.checkoutState === "paid" ? "Payment received" : order.checkoutState === "confirmed" ? "Order confirmed" : failed ? "Payment not completed" : "Payment pending",
-        body: complete ? "Your order is confirmed." : failed ? "Your cart is still available so you can try again." : "Inventory is reserved while payment is completed.",
+        title: order.checkoutState === "paid" ? "Payment received" : order.checkoutState === "confirmed" ? "Order confirmed" : authorized ? "We're confirming your order" : failed ? "Payment not completed" : "Payment pending",
+        body: complete
+          ? "Your order is confirmed."
+          : authorized
+            ? "Your payment is held, not charged, while the Newark counter checks the stock. We'll email you before anything is charged."
+            : failed
+              ? "Your cart is still available so you can try again."
+              : "Inventory is reserved while payment is completed.",
         next: "",
       };
 
@@ -94,7 +101,7 @@ function ConfirmationInner() {
 
         {confirmation?.email === "failed" && (
           <Notice tone="info" className="mt-6" title="We could not email your confirmation">
-            Your order is placed -- only the email failed, and staff have been notified to resend it. Save or print the receipt below.
+            Your order is placed -- only the email failed. We retry it automatically, and staff are alerted if it keeps failing. Save or print the receipt below.
           </Notice>
         )}
 

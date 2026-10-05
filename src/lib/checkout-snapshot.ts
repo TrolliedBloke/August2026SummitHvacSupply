@@ -9,6 +9,7 @@ import { fulfillmentOptions, fulfillmentWindows, resolveZone, localDeliveryFee, 
 import { presentCommerceState, resolveCommerceState, type PricingLookup } from "@/lib/commerce/state";
 import { isTradeContext, type AccountContext } from "@/lib/commerce/price-presentation";
 import type { StorefrontSku } from "@/lib/storefront/catalog";
+import { evaluateOrderCompliance, type OrderCompliance } from "@/lib/compliance/order-checks";
 import type { CheckoutSnapshot, SnapshotLine, SnapshotMethod } from "./checkout-snapshot-types";
 
 export const SNAPSHOT_TTL_MS = 15 * 60_000;
@@ -23,13 +24,20 @@ export type SnapshotInputs = {
   pricing: { status: "ok"; prices: Map<string, number> } | { status: "error" } | null;
   /** Authoritative delivery fee when the DB has one; null falls back to the policy zone. */
   deliveryFee: (subtotal: number) => number | null;
+  /** accounts.epa608_on_file for a trade account; only refrigerant products need it. */
+  epa608OnFile?: boolean;
   now?: Date;
 };
 
-export function buildSnapshot(inputs: SnapshotInputs): Omit<CheckoutSnapshot, "digest" | "token"> & { digestSource: string } {
+export function buildSnapshot(inputs: SnapshotInputs): Omit<CheckoutSnapshot, "digest" | "token"> & { digestSource: string; compliance: OrderCompliance } {
   const now = inputs.now ?? new Date();
   const asOf = now.toISOString();
   const expiresAt = new Date(now.getTime() + SNAPSHOT_TTL_MS).toISOString();
+  const tradeAccount = isTradeContext(inputs.account) ? inputs.account : null;
+  const compliance = evaluateOrderCompliance(
+    inputs.items.map((item) => inputs.resolveSku(item.skuId)).filter((sku): sku is StorefrontSku => Boolean(sku)),
+    { trade: Boolean(tradeAccount), epa608OnFile: Boolean(inputs.epa608OnFile) }
+  );
 
   const lines: SnapshotLine[] = inputs.items.map(({ skuId, qty }) => {
     const sku = inputs.resolveSku(skuId);
@@ -48,6 +56,11 @@ export function buildSnapshot(inputs: SnapshotInputs): Omit<CheckoutSnapshot, "d
     }
     if (state.kind !== "purchasable") {
       return { skuId, sku: sku.sku, title: sku.title, qty, state: state.kind, unitPrice: null, lineTotal: null, provenance: "", error: { code: "not_purchasable", message: `${view.statusLabel}. Move it to a quote request to continue.` } };
+    }
+    // Purchasable in general, but not by this buyer (R-410A, refrigerant).
+    const restriction = compliance.restricted.get(sku.id);
+    if (restriction) {
+      return { skuId, sku: sku.sku, title: sku.title, qty, state: state.kind, unitPrice: null, lineTotal: null, provenance: "", error: { code: "restricted", message: restriction.message } };
     }
     const unit = state.price.amount ?? 0;
     if (qty > state.stock.quantity) {
@@ -72,7 +85,6 @@ export function buildSnapshot(inputs: SnapshotInputs): Omit<CheckoutSnapshot, "d
   });
   const chosen = methods.find((entry) => entry.method === inputs.method);
   const methodAvailable = Boolean(chosen?.available);
-  const tradeAccount = isTradeContext(inputs.account) ? inputs.account : null;
   const trade = Boolean(tradeAccount);
   const payment: CheckoutSnapshot["payment"] = inputs.method === "freight" ? "freight_quote" : trade ? "net_terms" : "card";
   const fee = methodAvailable && inputs.method === "local_delivery" ? chosen?.fee ?? 0 : 0;
@@ -98,6 +110,7 @@ export function buildSnapshot(inputs: SnapshotInputs): Omit<CheckoutSnapshot, "d
     total,
     payment,
     account: tradeAccount?.accountId ?? inputs.account.kind,
+    acknowledgements: compliance.acknowledgements.map((ack) => ack.version),
   });
 
   return {
@@ -115,6 +128,9 @@ export function buildSnapshot(inputs: SnapshotInputs): Omit<CheckoutSnapshot, "d
     tax,
     total,
     payment,
+    acknowledgements: compliance.acknowledgements.map(({ id, version, text }) => ({ id, version, text })),
+    reviewRequired: compliance.hold,
     digestSource,
+    compliance,
   };
 }

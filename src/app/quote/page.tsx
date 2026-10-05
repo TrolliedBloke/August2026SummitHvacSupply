@@ -30,7 +30,7 @@ type Receipt = { reference: string; lifecycle: "received" | "needs_information";
  * note that staff will confirm.
  */
 export default function QuotePage() {
-  const { items, hydrated, setQty, remove } = useQuote();
+  const { items, hydrated, setQty, remove, reconcile } = useQuote();
   const [values, setValues] = React.useState({ name: "", email: "", phone: "", zip: "", projectType: "", requestedDate: "", notes: "" });
   const [errors, setErrors] = React.useState<FieldErrors<QuoteField>>({});
   const [formError, setFormError] = React.useState<string | null>(null);
@@ -38,6 +38,7 @@ export default function QuotePage() {
   const [receipt, setReceipt] = React.useState<Receipt | null>(null);
   const [checks, setChecks] = React.useState<Record<string, QuoteLineCheck>>({});
   const [compatibility, setCompatibility] = React.useState<CompatibilityNote[]>([]);
+  const [restrictions, setRestrictions] = React.useState<Array<{ sku: string; message: string }>>([]);
   const requestIdRef = React.useRef<string | null>(null);
   const formRef = React.useRef<HTMLFormElement>(null);
   const [focusTick, setFocusTick] = React.useState(0);
@@ -47,6 +48,28 @@ export default function QuotePage() {
   React.useEffect(() => {
     if (focusTick) focusFirstInvalid(formRef.current);
   }, [focusTick]);
+
+  // A line's intent comes from localStorage, which may be stale or edited.
+  // Revalidate it with the server (as the drawer does) before calling any
+  // line "Ready to buy"; until then a cart line reads as being checked.
+  const skuKey = items.map((item) => item.skuId).sort().join(",");
+  const [verifiedKey, setVerifiedKey] = React.useState<string | null>(null);
+  React.useEffect(() => {
+    if (!skuKey) return;
+    let cancelled = false;
+    fetch("/api/commerce/lines", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ skuIds: skuKey.split(",") }), cache: "no-store" })
+      .then(async (response) => (response.ok ? response.json() : null))
+      .then((payload) => {
+        if (cancelled || !payload?.ok) return;
+        reconcile((payload.lines as Array<{ skuId: string; intent: QuoteItem["intent"]; unitPrice: number; available: number }>).map((line) => ({ skuId: line.skuId, intent: line.intent, unitPrice: line.unitPrice, available: line.available })));
+        setVerifiedKey(skuKey);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [skuKey, reconcile]);
+  const verified = verifiedKey === skuKey;
 
   const lines = items.map((item) => ({ skuId: item.skuId, sku: item.sku, quantity: item.qty, intent: item.intent }));
   const linesKey = JSON.stringify(lines);
@@ -62,6 +85,7 @@ export default function QuotePage() {
         if (cancelled || !payload?.ok) return;
         setChecks(Object.fromEntries((payload.lines as QuoteLineCheck[]).map((line) => [line.skuId, line])));
         setCompatibility(payload.compatibility ?? []);
+        setRestrictions(payload.restrictions ?? []);
       })
       .catch(() => undefined);
     return () => {
@@ -148,7 +172,7 @@ export default function QuotePage() {
                 ) : (
                   <ul id="lines" tabIndex={-1} data-invalid={errors.lines ? "true" : undefined} className="mt-3 divide-y divide-line rounded-(--r-sm) border border-line outline-none">
                     {items.map((item) => (
-                      <QuoteLine key={item.skuId} item={item} check={checks[item.skuId]} onQty={(qty) => setQty(item.skuId, qty)} onRemove={() => remove(item.skuId)} />
+                      <QuoteLine key={item.skuId} item={item} verified={verified} check={checks[item.skuId]} onQty={(qty) => setQty(item.skuId, qty)} onRemove={() => remove(item.skuId)} />
                     ))}
                   </ul>
                 )}
@@ -162,6 +186,15 @@ export default function QuotePage() {
                     <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" /> {note.message}
                   </p>
                 ))}
+                {restrictions.length > 0 && (
+                  <Notice tone="warning" className="mt-3" title="The counter will confirm these before quoting">
+                    <ul className="list-disc pl-5">
+                      {restrictions.map((note) => (
+                        <li key={note.sku}>{note.message}</li>
+                      ))}
+                    </ul>
+                  </Notice>
+                )}
                 {reviewNotes.length > 0 && (
                   <Notice tone="info" className="mt-3" title="Compatibility will be confirmed by staff">
                     <ul className="list-disc pl-5">
@@ -238,7 +271,7 @@ export default function QuotePage() {
   );
 }
 
-function QuoteLine({ item, check, onQty, onRemove }: { item: QuoteItem; check?: QuoteLineCheck; onQty: (qty: number) => void; onRemove: () => void }) {
+function QuoteLine({ item, verified, check, onQty, onRemove }: { item: QuoteItem; verified: boolean; check?: QuoteLineCheck; onQty: (qty: number) => void; onRemove: () => void }) {
   const problem = check && (check.status === "unknown" || check.status === "unavailable");
   return (
     <li className={`grid gap-3 p-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center ${problem ? "bg-state-danger" : ""}`}>
@@ -248,7 +281,7 @@ function QuoteLine({ item, check, onQty, onRemove }: { item: QuoteItem; check?: 
         </Link>
         <p className="part-number break-all text-xs text-ink-3">{item.sku}</p>
         <p className="mt-1 flex flex-wrap items-center gap-x-2 text-xs">
-          <span className="rounded-full border border-line bg-surface-1 px-2 py-0.5 text-ink-2">{INTENT_LABEL[item.intent]}</span>
+          <span className="rounded-full border border-line bg-surface-1 px-2 py-0.5 text-ink-2">{item.intent === "cart" && !verified ? "Checking availability" : INTENT_LABEL[item.intent]}</span>
           {check?.status === "merged" && (
             <span className="flex items-center gap-1 text-ink-2">
               <Info size={12} aria-hidden="true" /> {check.message}
