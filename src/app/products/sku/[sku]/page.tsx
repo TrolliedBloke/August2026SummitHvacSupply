@@ -51,7 +51,7 @@ export const dynamicParams = false;
  * The page is otherwise static -- identity, specifications and documents change
  * only when the catalog is regenerated and redeployed. Stock is the one field
  * that moves between deploys, so the shell is prerendered and revalidated on a
- * short interval to pick up the QuickBooks counts.
+ * short interval to pick up the current counts.
  */
 export const revalidate = 60;
 
@@ -76,7 +76,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
   const { sku: skuParam } = await params;
   const record = getStorefrontSku(decodeURIComponent(skuParam));
   if (!record) notFound();
-  // Live counts from QuickBooks, where the warehouse has counted this product.
+  // Live counts for products the warehouse has actually counted.
   // Overlays availability only; the product stays quote-only regardless.
   // Fetched once and shared with the related items below, so a visitor never
   // sees one count on the page and a different one in the strip beneath it.

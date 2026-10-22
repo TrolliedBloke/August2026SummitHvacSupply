@@ -51,7 +51,7 @@ export async function CounterStock() {
       <CounterWidth>
         <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
           <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1.5">
-            {/* Not "in stock today". Counts now arrive from QuickBooks, but
+            {/* Not "in stock today". Counts are real where they exist, but
                 they arrive per SKU and only for products the warehouse actually
                 tracks -- a blanket heading would still be claiming something
                 the data cannot support for the whole catalog. The heading

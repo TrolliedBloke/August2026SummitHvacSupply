@@ -51,63 +51,47 @@ values ('https://<ref>.functions.supabase.co', '<service-role-key>');
 (`004_cron.sql` already created the `low-stock-alert-daily` and
 `ar-statements-monthly` schedules.)
 
-## 4. QuickBooks inventory (live stock on the storefront)
+## 4. Catalog and inventory (CSV import)
 
-Copies `QtyOnHand` from QuickBooks Online onto `catalog_products` every 15
-minutes, so product pages show real counts without a redeploy.
+The catalog CSV is the single source for product identity, price and on-hand
+counts. There is no live inventory integration: the QuickBooks sync was retired
+in migration `026`.
 
-**This never makes anything purchasable.** The catalog stays quote-only: the
-sync writes `inventory_quantity` and `inventory_status` and nothing else, and
-`quickbooks_apply_inventory()` is written so it *cannot* write anything else.
+```bash
+# 1. Put the approved export at data/catalog/inventory-source.csv
+npm run catalog:import     # -> src/data/catalog.generated.json + reports
+npm test && npm run build  # the generated catalog is baked into the build
+# 2. With production service-role credentials, from an approved environment:
+npm run catalog:sync       # upserts catalog_products, costs, evidence, media
+```
 
-1. In the [Intuit Developer](https://developer.intuit.com) portal, create an app
-   with the `com.intuit.quickbooks.accounting` scope and note its client id and
-   secret. `QBO_REALM_ID` is the Company ID in QuickBooks settings.
-2. Get an initial refresh token from the OAuth 2.0 Playground.
-3. ```bash
-   supabase secrets set QBO_CLIENT_ID=... QBO_CLIENT_SECRET=... QBO_REALM_ID=... QBO_ENVIRONMENT=production
-   # Optional: lets a successful sync refresh the site immediately instead of
-   # waiting out the 60s page cache.
-   supabase secrets set SITE_REVALIDATE_URL=https://www.summithvacsupply.com/api/inventory/revalidate CRON_SECRET=...
-   supabase functions deploy quickbooks-inventory-sync
-   ```
-4. Seed the refresh token once (migration `024` creates the table):
-   ```sql
-   insert into private.quickbooks_token (refresh_token) values ('<refresh-token>');
-   ```
-5. Verify before trusting the schedule:
-   ```bash
-   supabase functions invoke quickbooks-inventory-sync
-   ```
-   ```sql
-   select * from quickbooks_sync_runs order by started_at desc limit 1;
-   ```
-   Check `matched`, `untracked`, `unmatched_qbo` and `ambiguous` look sane. Then
-   confirm the guarantee held:
-   ```sql
-   select count(*) from catalog_products
-   where inventory_status <> 'unknown' and purchase_eligible;  -- must be 0
-   ```
+`catalog:import` reads these columns (header row, exact names):
 
-**Matching.** QuickBooks items are matched to catalog rows by SKU, trying
-`catalog_sku` then `source_sku`. Three cases to know about:
+| Column | Required | Notes |
+|---|---|---|
+| `SKU` | yes | The key. Duplicates become separate variants pending review. |
+| `Product Name` | yes | Absent means the row is held back as `needs_review`. |
+| `Sell Price` | for purchase | No price, or `$0`, keeps the product quote-only. |
+| `Current Stock` | for purchase | Blank means *unknown*, which is never published as zero. |
+| `Unit Cost` | no | Isolated into `costs.generated.json`, never reaches the browser. |
+| `Brand`, `Category`, `Product Type` | no | Drive categorisation and the SEO gate. |
+| `BTU`, `Voltage`, `Refrigerant`, `Zones` | no | Shown as specifications where present. |
+| `Min Stock`, `Bundle/Kit Name`, `Compatible Outdoor SKU` | no | |
+| `OEM Barcode/UPC`, `Location`, `Notes` | no | |
 
-- An item with `TrackQtyOnHand = false` is left **unknown**, not zero. "We do
-  not count this" is not "we have none of these."
-- A catalog row QuickBooks never mentions keeps its last value. The sync never
-  zeroes a product by omission.
-- One QuickBooks SKU matching several catalog rows updates **none** of them and
-  is reported in `ambiguous`. This happens where the importer split one sheet
-  row into variants (`TCL36KMZODU` → `-R-410A` and `-R-454B`): one shelf count
-  cannot be divided between two refrigerants. Fix it by creating separate
-  QuickBooks items whose SKUs match the catalog SKUs.
+A product becomes directly purchasable only with a confirmed price, a known
+quantity **and** a non-conflicted identity. That rule lives in the importer and
+is backed by a check constraint on `catalog_products`.
 
-**The refresh token rotates.** Intuit issues a new one on most exchanges and
-kills the old one immediately, so the Edge Function persists each rotation
-before doing any other work. Two consequences: never hand-edit
-`private.quickbooks_token` while the schedule is running, and if the sync stays
-broken for 100 days the token expires for good and step 2 must be repeated.
-`rotated_at` in that table is the freshness signal.
+**Keep the source files safe.** `inventory-source.csv` and
+`costs.generated.json` are gitignored — deliberately, since the cost file
+carries what Summit pays per unit — so they exist only on the machine that runs
+the import. Back them up somewhere that is not one laptop.
+
+The storefront reads counts from `catalog_products` at request time
+(`src/lib/storefront/live-inventory.ts`), so a corrected count can be written to
+the database and appear without a rebuild. That is also the seam a future ERP
+writes into.
 
 ## 5. Books (already live)
 `003_ledger.sql` auto-posts a balanced journal entry on every invoice, payment,

@@ -177,7 +177,7 @@ function categoryLabel(category: CatalogCategory): string {
  * Physical inventory signal to the storefront's coarser display bucket.
  *
  * Exported because the live-inventory overlay (which replaces these fields with
- * counts pulled from QuickBooks) has to bucket them the same way. Two copies of
+ * counts read from catalog_products) has to bucket them the same way. Two copies of
  * this ternary would eventually disagree about what "low_stock" looks like.
  */
 export function stockStatusFor(status: CatalogAvailability): StorefrontSku["stockStatus"] {
@@ -705,7 +705,7 @@ export function searchStorefrontSkus(query: string, limit = 12): StorefrontSku[]
 
 /**
  * `pool` defaults to the build-time catalog. The catalog page passes its own
- * array instead, because the server has already overlaid live QuickBooks counts
+ * array instead, because the server has already overlaid the live counts
  * onto those records -- filtering the generated JSON again here would silently
  * discard the live stock and re-render the uncounted originals.
  */

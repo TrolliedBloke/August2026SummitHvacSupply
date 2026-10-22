@@ -5,8 +5,8 @@ import type { CatalogAvailability, StorefrontSku } from "@/lib/storefront/catalo
 /**
  * The stock counter. One component, every product surface.
  *
- * Counts come from QuickBooks via the live-inventory overlay and are refreshed
- * on a 15-minute schedule. Three rules hold everywhere it renders:
+ * Counts reach the page through the live-inventory overlay, which reads what
+ * the catalog import last wrote. Three rules hold everywhere it renders:
  *
  *  1. A number appears ONLY when the warehouse actually counted the product.
  *     An uncounted product says "Availability on request" -- it never borrows a

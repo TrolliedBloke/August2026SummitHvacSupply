@@ -20,7 +20,7 @@ test("landing page never claims a stock count the catalog cannot verify", async 
   // is a fabricated claim, and the audit calls an unbacked stock metric the
   // single most damaging thing on this page.
   //
-  // A real count from QuickBooks is a different matter and IS allowed to render
+  // A real counted quantity is a different matter and IS allowed to render
   // "N in stock"; what must never happen is this page inventing one when the
   // warehouse has said nothing. Keep the assertion, keep the env absent.
   await expect(page.getByText(/\b\d+\s+in stock\b/)).toHaveCount(0);

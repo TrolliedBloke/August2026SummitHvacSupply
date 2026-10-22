@@ -14,11 +14,16 @@ import {
  * research provenance, price. None of that changes between deploys and none of
  * it belongs in a request-time query.
  *
- * On-hand quantity is the one field that moves hourly, and it is now written to
- * catalog_products by the QuickBooks sync (supabase/functions/
- * quickbooks-inventory-sync). This module reads those counts and overlays them
- * onto the build-time records, so a number that changed in QuickBooks fifteen
- * minutes ago shows on the site without a deploy.
+ * On-hand quantity is the one field that moves between deploys. It lands in
+ * catalog_products (today from `npm run catalog:sync`, which writes what the
+ * CSV import generated), and this module reads those counts and overlays them
+ * onto the build-time records -- so a corrected count shows on the site without
+ * a rebuild.
+ *
+ * This is deliberately the seam an inventory source plugs into. Nothing here
+ * knows or cares where a count came from; it reads two columns. The QuickBooks
+ * sync that first wrote them was retired in migration 026, and the next system
+ * writes the same two columns without touching this file.
  *
  * TWO PROPERTIES THIS MODULE MUST KEEP.
  *

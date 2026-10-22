@@ -3,12 +3,12 @@ import { NextResponse } from "next/server";
 import { INVENTORY_TAG } from "@/lib/storefront/live-inventory";
 
 /**
- * Drops the cached inventory map after the QuickBooks sync writes new counts.
+ * Drops the cached inventory map once new counts land in catalog_products.
  *
- * Without this the site still picks changes up on its own, but the two delays
- * compound: up to 15 minutes waiting for the next sync, then up to another 60
- * seconds for the cache entry to expire. The sync pings this on a run that
- * actually changed something, which collapses the second delay to nothing.
+ * Without it the cached map lives out its 60-second TTL before new counts
+ * appear. Anything that writes counts can POST here afterwards to collapse that
+ * delay to nothing -- it is a cache-invalidation hook, not tied to any
+ * particular source.
  *
  * Authorization matches the lifecycle dispatcher, including its fail-closed
  * default: outside development, no CRON_SECRET means no caller is trusted.
