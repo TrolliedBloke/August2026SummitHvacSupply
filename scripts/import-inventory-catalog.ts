@@ -477,12 +477,51 @@ function normalizeBrand(value: string | null, sku: string): string {
   return "Unbranded";
 }
 
+/**
+ * The product types the rest of the pipeline matches on by exact string:
+ * normalizeCategory() below, FIELD_MANIFEST in lib/catalog/field-manifest.ts,
+ * and the SEO gate all compare against these exact spellings.
+ *
+ * A supplied type used to be passed through titleCase(), so a sheet saying
+ * "Air handler" became "Air Handler" and matched none of them -- silently. Every
+ * air handler, cassette, coil and line set landed in installation-supplies and
+ * was described by the Accessory field manifest, with no error anywhere, because
+ * both lookups fall back rather than throw. The sheet that preceded this left
+ * Product Type blank or coded (IDU/ODU/COIL), which took the inference path
+ * below and happened to produce the right spelling; the first sheet to supply
+ * readable product types is what exposed it.
+ *
+ * Canonicalising on the way in is the fix rather than making each consumer
+ * case-insensitive: a human-maintained spreadsheet should not have to know that
+ * "Air Handler" and "Air handler" are different things.
+ */
+const CANONICAL_PRODUCT_TYPES = [
+  "Indoor unit",
+  "Outdoor unit",
+  "Air handler",
+  "Furnace",
+  "Evaporator coil",
+  "Ceiling cassette",
+  "Cassette panel",
+  "Control",
+  "Line set",
+  "Accessory",
+  "Installation accessory",
+] as const;
+
+const PRODUCT_TYPE_BY_LOWER = new Map(
+  CANONICAL_PRODUCT_TYPES.map((type) => [type.toLowerCase(), type as string])
+);
+
 function normalizeProductType(value: string | null, text: string): string {
   if (value && value !== "#NAME?") {
     if (value.toUpperCase() === "IDU") return "Indoor unit";
     if (value.toUpperCase() === "ODU") return "Outdoor unit";
     if (value.toUpperCase() === "COIL") return "Evaporator coil";
-    return titleCase(value);
+    // A known type keeps its canonical spelling whatever case it arrived in.
+    // An unknown one (say "Infrared thermometer") is still title-cased: it
+    // matches no downstream rule either way, and reads better on the page.
+    return PRODUCT_TYPE_BY_LOWER.get(value.trim().toLowerCase()) ?? titleCase(value);
   }
   if (/air handler|\bahu\b/i.test(text)) return "Air handler";
   if (/furnace|\bfur\b/i.test(text)) return "Furnace";
@@ -495,6 +534,27 @@ function normalizeProductType(value: string | null, text: string): string {
   if (/indoor|\bidu\b/i.test(text)) return "Indoor unit";
   return "Installation accessory";
 }
+
+/**
+ * The storefront's category labels, keyed the way `normalized` arrives here
+ * (lowercased, spaces stripped). Mirrors CATALOG_CATEGORIES in
+ * src/lib/storefront/catalog.ts -- those slugs are what the catalog renders and
+ * filters on, so an operator typing the label they see on the site should land
+ * on the matching slug.
+ */
+const CATEGORY_BY_LABEL = new Map<string, string>([
+  ["minisplits", "mini-splits"],
+  ["centralheatpumps", "central-heat-pumps"],
+  ["centralairconditioners", "central-air-conditioners"],
+  ["centralsystems", "central-systems"],
+  ["airhandlers", "air-handlers"],
+  ["evaporatorcoils", "evaporator-coils"],
+  ["furnaces", "furnaces"],
+  ["cassettes", "cassettes"],
+  ["linesets", "line-sets"],
+  ["controls", "controls"],
+  ["installationsupplies", "installation-supplies"],
+]);
 
 function normalizeCategory(value: string | null, productType: string, sku: string, name: string): string {
   const normalized = value?.toLowerCase().replaceAll(" ", "");
@@ -509,6 +569,16 @@ function normalizeCategory(value: string | null, productType: string, sku: strin
   // kit, and listing it beside heat pumps in the mini-split category is how a
   // buyer ends up with trim instead of a condenser.
   if (productType === "Accessory" || productType === "Installation accessory") return "installation-supplies";
+  // An explicit category wins over the inference below.
+  //
+  // The sheet's Category column uses the storefront's own display labels, and
+  // only the literal "central" was recognised -- so "Central heat pumps" fell
+  // through to the rule that files any outdoor unit as a mini-split, and eight
+  // central heat pumps were listed beside ductless heads. The accessory rules
+  // above still run first: a "Mini Split Line Hide Cover Kit" is trim, whatever
+  // its name says, and that deliberate ordering is unchanged.
+  const explicit = CATEGORY_BY_LABEL.get(normalized ?? "");
+  if (explicit) return explicit;
   if (normalized === "central") return productType === "Outdoor unit" ? "central-heat-pumps" : "central-systems";
   // ODU/IDU suffixes live on the SKU, not in the prose name. Matching against
   // "sku + name" meant a row whose category cell was blank fell through to
