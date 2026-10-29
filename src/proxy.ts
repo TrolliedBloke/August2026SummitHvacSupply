@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { AD_COOKIE_MAX_AGE_SECONDS, AD_CONSENT_COOKIE, AD_OPT_OUT_COOKIE } from "@/lib/privacy-cookies";
 
 /**
  * Refreshes the Supabase auth session on every request and re-issues the
@@ -10,8 +11,19 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
 
+  function privacyResponse(result: NextResponse) {
+    if (request.headers.get("sec-gpc") === "1") {
+      const options = { path: "/", sameSite: "lax" as const, secure: process.env.NODE_ENV === "production", maxAge: AD_COOKIE_MAX_AGE_SECONDS };
+      result.cookies.set(AD_OPT_OUT_COOKIE, "1", options);
+      result.cookies.set(AD_CONSENT_COOKIE, "denied", options);
+    }
+    return result;
+  }
+
   const path = request.nextUrl.pathname;
   const gated = path.startsWith("/admin");
+  // Public GPC requests only write privacy cookies, without an auth round trip.
+  if (!gated && !path.startsWith("/portal") && !path.startsWith("/checkout")) return privacyResponse(response);
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const publicKey =
@@ -29,7 +41,7 @@ export async function proxy(request: NextRequest) {
     if (gated && !demoBypass) {
       return NextResponse.redirect(new URL("/portal/login", request.url));
     }
-    return response;
+    return privacyResponse(response);
   }
 
   const supabase = createServerClient(url, publicKey, {
@@ -71,7 +83,7 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  return response;
+  return privacyResponse(response);
 }
 
 export const config = {
@@ -80,5 +92,5 @@ export const config = {
   // homepage and every product page -- latency paid in TTFB, and therefore LCP,
   // on exactly the pages where speed converts. Public catalog pages read no
   // session, so they gain nothing from the refresh.
-  matcher: ["/admin/:path*", "/portal/:path*", "/checkout/:path*"],
+  matcher: ["/admin/:path*", "/portal/:path*", "/checkout/:path*", { source: "/((?!api|_next|favicon.ico).*)", has: [{ type: "header", key: "sec-gpc", value: "1" }] }],
 };

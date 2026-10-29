@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container, LinkButton } from "@/components/ui";
+import { DEALER_REVIEW_SLA } from "@/lib/forms/dealer";
 
 export default function AccountPage() {
   return (
@@ -7,11 +8,11 @@ export default function AccountPage() {
       <section aria-labelledby="account-heading" className="mx-auto max-w-4xl text-center">
         <h1
           id="account-heading"
-          className="font-display text-4xl font-semibold leading-tight tracking-tight text-ink-1 sm:text-[42px]"
+          className="font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl"
         >
           One store, the right account for you
         </h1>
-        <p className="mx-auto mt-3 max-w-3xl text-[15px] leading-6 text-ink-2 sm:text-base">
+        <p className="mx-auto mt-3 max-w-3xl text-base leading-6 text-ink-2 sm:text-base">
           Retail customers can shop at listed prices. Approved contractors and trade customers sign in for wholesale
           pricing and purchasing tools.
         </p>
@@ -21,7 +22,7 @@ export default function AccountPage() {
             title="Retail customer"
             body="Shop at listed prices with faster checkout, order history, and saved equipment."
             details={[
-              "No license or business required. Pick up in Newark or ship anywhere in California.",
+              "No license or business required. Pick up in Newark, or check delivery to your ZIP.",
             ]}
             href="/account/create"
             action="Create retail account"
@@ -31,8 +32,8 @@ export default function AccountPage() {
             title="Wholesale customer"
             body="Account pricing, net terms eligibility, saved lists, and repeat ordering."
             details={[
-              "You’ll need: contractor license #, resale certificate, and a business EIN.",
-              "Most applications approved within one business day. Will-call pickup in Newark same day once approved.",
+              "Have ready: your license number if your work needs one, a seller's permit if you resell, and the last 4 of the business EIN.",
+              `Staff review every application and reply ${DEALER_REVIEW_SLA}. Already a retail customer? Apply with the same email.`,
             ]}
             href="/dealers"
             action="Apply for wholesale"
@@ -78,8 +79,8 @@ function AccountChoice({
   return (
     <article className="flex h-full flex-col rounded-(--r-md) border border-line bg-surface-1 p-6 sm:p-8 md:min-h-[360px]">
       <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-1">{title}</h2>
-      <p className="mt-3 text-[15px] leading-6 text-ink-2 sm:text-base">{body}</p>
-      <div className="mt-4 space-y-3 text-[15px] leading-6 text-ink-2 sm:text-base">
+      <p className="mt-3 text-base leading-6 text-ink-2 sm:text-base">{body}</p>
+      <div className="mt-4 space-y-3 text-base leading-6 text-ink-2 sm:text-base">
         {details.map((detail) => (
           <p key={detail}>{detail}</p>
         ))}

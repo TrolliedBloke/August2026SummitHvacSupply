@@ -27,7 +27,7 @@ const buttonVariants: Record<ButtonVariant, string> = {
 
 const buttonSizes: Record<ButtonSize, string> = {
   md: "h-11 px-4 text-sm",
-  lg: "h-12 px-6 text-[15px]",
+  lg: "h-12 px-6 text-base",
 };
 
 type ButtonProps = {
@@ -131,7 +131,7 @@ export function Container({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`mx-auto w-full max-w-[1180px] px-5 sm:px-6 lg:px-8 ${className}`}>
+    <div className={`mx-auto w-full max-w-[var(--page-max)] px-5 ${className}`}>
       {children}
     </div>
   );

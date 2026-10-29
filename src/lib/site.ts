@@ -1,4 +1,10 @@
+import { branchAddressLine, directionsHref, hoursSummary, NEWARK } from "./branch";
+import { FULFILLMENT_POLICY } from "./fulfillment-policy";
+import { pickupReadyLine } from "./backend/fulfillment";
+import { formatHour } from "./branch-hours";
+
 // Real business facts -- single source of truth. No placeholder social links anywhere.
+// Address, contacts and hours are projections of the Branch entity in branch.ts.
 export const SITE = {
   name: "Summit HVAC Supply",
   legalName: "Summit HVAC Supply",
@@ -6,19 +12,20 @@ export const SITE = {
   tagline: "Bay Area HVAC equipment and quote support, supplied locally",
   brandLine: "Bay Area HVAC equipment supply from Newark, CA",
   address: {
-    street: "5437 Central Ave., Suite 10",
-    city: "Newark",
-    state: "CA",
-    zip: "94560",
-    full: "5437 Central Ave., Suite 10, Newark, CA 94560",
+    street: NEWARK.address.street,
+    city: NEWARK.address.city,
+    state: NEWARK.address.state,
+    zip: NEWARK.address.zip,
+    full: branchAddressLine(NEWARK),
   },
-  phone: "(415) 988-4445",
-  phoneHref: "tel:+14159884445",
-  smsHref: "sms:+14159884445",
-  email: "info@summithvacsupply.com",
-  emailHref: "mailto:info@summithvacsupply.com",
-  counterHours: "Mon–Fri 7:00 AM–5:00 PM PT",
-  hours: "Mon-Fri 7:00a-5:00p PT · Newark will-call, Bay Area delivery & freight",
+  phone: NEWARK.phone,
+  phoneHref: NEWARK.phoneHref,
+  smsHref: NEWARK.smsHref,
+  email: NEWARK.email,
+  emailHref: `mailto:${NEWARK.email}`,
+  /** Regular weekly hours only. Live status (holidays, closures) comes from branchStatus(). */
+  counterHours: hoursSummary(NEWARK),
+  hours: `${hoursSummary(NEWARK)} · Newark will-call, Bay Area delivery & freight`,
   serviceArea: "San Jose, Oakland, Fremont, San Francisco, the Peninsula, East Bay, South Bay, North Bay & nearby Bay Area cities",
   broaderServiceArea: "California, Oregon, Washington, Nevada & Arizona",
   ahriDirectory: "https://www.ahridirectory.org/",
@@ -48,26 +55,29 @@ export const PURCHASE = {
   delivery: "Newark will-call, Bay Area delivery, and freight are confirmed with each quote",
 } as const;
 
+/** "14" -> "2 PM". Shared so the string and the countdown cannot disagree. */
+export function formatCutoffHour(hour: number): string {
+  return formatHour(hour);
+}
+
+const CUTOFF_HOUR = FULFILLMENT_POLICY.cutoff.minutes / 60;
+
 /**
- * Fulfillment facts shown on the landing page and /delivery. Single source of
- * truth so the branch card, the product cards, and the delivery page can never
- * disagree about a cutoff or a ready time.
- *
- * TODO(summit-ops): every value below is shaped to the right length but is NOT
- * confirmed by the counter. Replace each one with the real operating number
- * before launch, or drop the line entirely. Do not let these ship as final.
+ * Fulfillment facts shown on the landing page and /delivery, read from the
+ * versioned policy (lib/fulfillment-policy.ts) that the checkout calculator
+ * also enforces. Nothing here is typed by hand: the cutoff and the ready time
+ * a customer reads are the ones checkout will hold them to.
  */
 export const FULFILLMENT = {
-  /** TODO(summit-ops): confirm the real will-call pick-and-stage time. */
-  pickupReady: "Will-call ready in 30 min",
-  /** TODO(summit-ops): confirm the real next-day delivery order cutoff. */
-  deliveryCutoff: "2:00 PM",
+  pickupReady: pickupReadyLine(),
+  /** The cutoff as an hour in branch time. The SOURCE is the policy. */
+  deliveryCutoffHour: CUTOFF_HOUR,
+  /** Derived from deliveryCutoffHour. Do not hand-edit. */
+  deliveryCutoff: formatCutoffHour(CUTOFF_HOUR),
   deliveryLine: "for next-day delivery",
   /** Shown under both fulfillment rows on product cards. */
   bothMethods: "Pickup or delivery",
-  mapsHref: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    "5437 Central Ave., Suite 10, Newark, CA 94560"
-  )}`,
+  mapsHref: directionsHref(NEWARK),
 } as const;
 
 /** Rough monthly-payment estimate for the buy box ("as low as $/mo"). */

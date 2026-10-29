@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Headphones, House } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { ArrowRight, House } from "lucide-react";
+import { Container } from "@/components/ui";
 
 /* A2L is the live question in Bay Area HVAC right now: the refrigerant
    transition decides which condensers a contractor is allowed to install. The
    chips are real catalog filters, not decoration. */
 const FILTERS = [
-  { label: "A2L rated", href: "/products?refrigerant=R-454B" },
   { label: "R-454B", href: "/products?refrigerant=R-454B" },
   { label: "R-32", href: "/products?refrigerant=R-32" },
 ];
@@ -15,14 +14,14 @@ const FILTERS = [
 export function A2lStrip() {
   return (
     <section className="bg-canvas py-6">
-      <CounterWidth>
+      <Container>
         <div className="rounded-(--r-md) bg-band p-5 lg:flex lg:items-center lg:justify-between lg:gap-8">
           <div className="flex items-start gap-4">
             <span className="relative mt-0.5 block size-10 shrink-0" aria-hidden="true">
               <Image src="/site/sketches/a2l-ready.png" alt="" fill sizes="40px" className="object-contain" />
             </span>
             <div className="min-w-0">
-              <h2 className="counter-heading text-[1.35rem] leading-none text-ink-1">
+              <h2 className="text-lg font-semibold leading-snug text-ink-1">
                 A2L-ready parts &amp; equipment
               </h2>
               <p className="mt-2 max-w-[52ch] text-sm leading-6 text-ink-2">
@@ -57,7 +56,7 @@ export function A2lStrip() {
             </Link>
           </div>
         </div>
-      </CounterWidth>
+      </Container>
     </section>
   );
 }
@@ -67,9 +66,9 @@ export function A2lStrip() {
 export function HelpStrip() {
   return (
     <section className="bg-canvas pb-8">
-      <CounterWidth>
-        <div className="grid gap-4 border-t border-line pt-6 sm:grid-cols-2">
-          <p className="flex items-center gap-3 text-[0.95rem] text-ink-1">
+      <Container>
+        <div className="border-t border-line pt-6">
+          <p className="flex items-center gap-3 text-base text-ink-1">
             <House size={26} strokeWidth={1.4} className="shrink-0" aria-hidden="true" />
             Replacing a home system?
             <Link href="/homeowners#homeowner-request" className="inline-flex items-center gap-1.5 font-medium underline underline-offset-4">
@@ -77,23 +76,8 @@ export function HelpStrip() {
               <ArrowRight size={14} />
             </Link>
           </p>
-          <p className="flex items-center gap-3 text-[0.95rem] text-ink-1 sm:justify-end">
-            <Headphones size={26} strokeWidth={1.4} className="shrink-0" aria-hidden="true" />
-            Need help verifying a match?
-            <a href={SITE.phoneHref} className="part-number font-medium underline underline-offset-4">
-              {SITE.phone}
-            </a>
-          </p>
         </div>
-      </CounterWidth>
+      </Container>
     </section>
-  );
-}
-
-function CounterWidth({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="mx-4 w-auto max-w-[var(--counter-max)] px-0 sm:mx-auto sm:w-full sm:px-6 lg:px-[var(--counter-pad)]">
-      {children}
-    </div>
   );
 }

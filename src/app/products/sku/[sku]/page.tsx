@@ -1,18 +1,28 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AlertTriangle, BadgeCheck, Box, Download, FileText, ImageOff, PackageCheck, ShieldCheck, UserRoundCheck } from "lucide-react";
+import Link from "next/link";
+import { AlertTriangle, Download, Link2, PackageCheck, ShieldCheck } from "lucide-react";
+import { ProductCard } from "@/components/product-card";
 import { AddToQuote } from "@/components/add-to-quote";
+import { AccountPrice } from "@/components/account-price";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CommerceStatusLine } from "@/components/commerce-status";
+import { NotifyMe } from "@/components/notify-me";
 import { ProductGallery } from "@/components/product-gallery";
-import { StockBadge, StockLine } from "@/components/stock-badge";
+import { StickyBuyBar } from "@/components/sticky-buy-bar";
 import { Container, LinkButton } from "@/components/ui";
+import { presentCommerceState, publicCommerceState } from "@/lib/commerce/state";
+import { skuMedia } from "@/lib/media";
 import { getRelatedSkus, getStorefrontSku, getStorefrontSkus, productHref, skuSlug } from "@/lib/storefront/catalog";
 import { applyLiveInventory, applyLiveInventoryAll, getLiveInventory } from "@/lib/storefront/live-inventory";
 import { buildProductSchema, getSkuSeoState } from "@/lib/seo/catalog";
 import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
 import { SITE } from "@/lib/site";
 import { FIELD_GROUPS, FIELD_LABELS, isFieldApplicable } from "@/lib/catalog/field-manifest";
+import { CA_STATUS_PUBLIC_LABEL, caResidentialStatus, matchedSystems } from "@/lib/catalog/compliance";
+import { compatibilitySummary, productCompatibility } from "@/lib/storefront/compatibility";
+import { brandPolicy, internetSaleWarrantyLine, WARRANTY_DISCLOSURE } from "@/lib/brand-policy";
+import { isR410a, R410A_POLICY } from "@/lib/refrigerant-policy";
 
 // Every valid slug is known at build time. Without this, an unknown slug is
 // rendered on demand and notFound() is served with HTTP 200 -- a soft 404 that
@@ -83,9 +93,14 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
   const live = await getLiveInventory();
   const sku = applyLiveInventory(record, live);
   const related = applyLiveInventoryAll(getRelatedSkus(sku, 4), live);
-  const galleryImages = sku.imageVerified ? sku.images : sku.referenceImages;
+  const media = skuMedia(sku);
+  // The public CommerceState. Price, status and action below all come from it;
+  // an approved trade session's own price arrives through <AccountPrice />.
+  const commerce = publicCommerceState(sku);
+  const commerceView = presentCommerceState(commerce);
   // Manifest-driven: only fields that apply to this equipment type are shown,
   // so a furnace never renders a SEER2 row and a base pad never renders MCA.
+  const summaryLabels = new Set(["Brand", "Internal SKU", "Manufacturer model", "Equipment type", "Capacity", "Voltage", "Refrigerant", "Zones", "Bundle / kit"]);
   const researched = FIELD_GROUPS.map((group) => ({
     heading: group.heading,
     rows: group.fields
@@ -96,7 +111,8 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
         label: FIELD_LABELS[row.field].label,
         value: `${typeof row.value === "number" ? row.value.toLocaleString("en-US") : row.value}${FIELD_LABELS[row.field].unit ? ` ${FIELD_LABELS[row.field].unit}` : ""}`,
         source: sku.fieldSources[row.field]?.sourceUrl ?? sku.fieldSources.specifications?.sourceUrl ?? null,
-      })),
+      }))
+      .filter((row) => !summaryLabels.has(row.label)),
   })).filter((group) => group.rows.length > 0);
 
   const specs = [
@@ -112,11 +128,160 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
     ["Refrigerant", sku.refrigerant ? `${sku.refrigerant}${sku.refrigerantClass ? ` (${sku.refrigerantClass})` : ""}` : null],
     ["Zones", sku.zones || null],
     ["Bundle / kit", sku.bundleName],
+    ["California efficiency", CA_STATUS_PUBLIC_LABEL[caResidentialStatus(sku)]],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
   // Only indexable records publish structured data; buildProductSchema returns
   // null for conflicted or incomplete ones.
   const productSchema = buildProductSchema(sku, SITE.origin);
+  const equipmentBrand = brandPolicy(sku.brand).kind === "equipment";
+  const warrantyLine = equipmentBrand ? internetSaleWarrantyLine(sku.brand) ?? WARRANTY_DISCLOSURE : null;
+  const compatibility = productCompatibility(sku, matchedSystems(), getStorefrontSku);
+  const compatibilityText = compatibilitySummary(compatibility, sku.refrigerant);
+  const model = sku.modelNumber ? `model ${sku.modelNumber}` : "this model";
+
+  /* The evidence, as configuration: each section names itself, carries its
+     content or null, and says plainly what is missing when it is null. Deep
+     links (#specifications, #documents, ...) are the section ids. */
+  const evidence: EvidenceSection[] = [
+    {
+      id: "overview",
+      title: "Overview",
+      content: (
+        <dl className="divide-y divide-line">
+          {specs.map(([label, value]) => (
+            <div key={label} className="grid gap-1 py-3 sm:grid-cols-[180px_1fr]">
+              <dt className="text-sm text-ink-3">{label}</dt>
+              <dd className="text-sm font-medium text-ink-1">{value}</dd>
+            </div>
+          ))}
+        </dl>
+      ),
+      missing: "",
+    },
+    {
+      id: "compatibility",
+      title: "Compatibility",
+      content: (
+        <div className="text-sm leading-6">
+          <p className="font-medium text-ink-1">{compatibilityText.label}</p>
+          <p className="mt-1 text-ink-2">{compatibilityText.detail}</p>
+          {(compatibility.level === "matched" || compatibility.level === "listed") && compatibility.partners.length > 0 && (
+            <ul className="mt-3 divide-y divide-line border-y border-line">
+              {compatibility.partners.map((partner) => (
+                <li key={partner.id} className="flex flex-wrap items-baseline justify-between gap-2 py-2.5">
+                  <Link href={productHref(partner)} className="font-medium text-brand underline-offset-4 hover:underline">{partner.title}</Link>
+                  <span className="part-number text-xs text-ink-3">{partner.unitType} · {partner.sku}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {sku.ahri && (
+            <div className="mt-4">
+              <h3 className="text-xs font-medium text-ink-3">AHRI certification</h3>
+              {sku.ahri.referenceNumber ? (
+                <p className="mt-1 text-ink-1">Certified reference <span className="part-number font-medium">{sku.ahri.referenceNumber}</span>{sku.ahri.certifiedModel ? ` for ${sku.ahri.certifiedModel}` : ""}.</p>
+              ) : (
+                <p className="mt-1 text-ink-1">
+                  {sku.ahri.status === "requires_matched_combination"
+                    ? "Rated as a matched system, not as a standalone unit."
+                    : sku.ahri.status === "not_applicable"
+                      ? "AHRI certification does not apply to this product."
+                      : "No AHRI certificate located for this exact model."}
+                </p>
+              )}
+              {sku.ahri.note && <p className="mt-1 text-ink-2">{sku.ahri.note}</p>}
+              <a href="https://www.ahridirectory.org/" target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-xs font-medium text-brand hover:text-brand-hover">Search the AHRI directory</a>
+            </div>
+          )}
+          {compatibility.level === "notEstablished" && (
+            <p className="mt-3"><Link href="/finder" className="font-medium text-brand underline-offset-4 hover:underline">Find a matched system</Link></p>
+          )}
+        </div>
+      ),
+      missing: "",
+    },
+    {
+      id: "specifications",
+      title: "Specifications",
+      content:
+        researched.length > 0 ? (
+          <>
+            <p className="text-sm text-ink-2">Read from manufacturer documentation for {model}. Every value links to its source.</p>
+            <div className="mt-4 grid gap-6 sm:grid-cols-2">
+              {researched.map((group) => (
+                <div key={group.heading}>
+                  <h3 className="text-xs font-medium text-ink-3">{group.heading}</h3>
+                  <dl className="mt-2 divide-y divide-line">
+                    {group.rows.map((row) => (
+                      <div key={row.label} className="grid gap-1 py-2.5 sm:grid-cols-[160px_1fr]">
+                        <dt className="text-sm text-ink-3">{row.label}</dt>
+                        <dd className="text-sm font-medium text-ink-1">
+                          {row.value}
+                          {row.source && <a href={row.source} target="_blank" rel="noopener noreferrer" className="ml-2 text-xs font-normal text-ink-3 underline hover:text-brand">source</a>}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : null,
+      missing: `Manufacturer specifications have not been verified for ${model} yet. The overview above comes from our inventory records; ask the counter for the spec sheet.`,
+    },
+    {
+      id: "documents",
+      title: "Documents",
+      content:
+        sku.documents.length > 0 ? (
+          <>
+            <p className="text-sm text-ink-2">Manufacturer documentation confirmed to cover {model}.</p>
+            <ul className="mt-3 divide-y divide-line">
+              {sku.documents.map((document) => (
+                <li key={document.url} className="py-3">
+                  <a href={document.url} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 hover:text-brand">
+                    <Download size={16} className="mt-0.5 shrink-0 text-ink-3" />
+                    <span>
+                      <span className="block font-medium text-ink-1">{document.title}</span>
+                      <span className="block text-xs capitalize text-ink-3">{document.kind.replaceAll("_", " ")}{document.coverageNote ? ` · ${document.coverageNote}` : ""}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null,
+      missing: `No documents confirmed for ${model} yet. Ask the counter for the installation manual and spec sheet.`,
+    },
+    {
+      id: "warranty",
+      title: "Warranty",
+      content: sku.warranty ? (
+        <div>
+          <dl className="space-y-2 text-sm">
+            {sku.warranty.parts && <div className="flex justify-between gap-4"><dt className="text-ink-3">Parts</dt><dd className="font-medium text-ink-1">{sku.warranty.parts}</dd></div>}
+            {sku.warranty.partsWithRegistration && <div className="flex justify-between gap-4"><dt className="text-ink-3">Parts, registered</dt><dd className="font-medium text-ink-1">{sku.warranty.partsWithRegistration}</dd></div>}
+            {sku.warranty.compressor && <div className="flex justify-between gap-4"><dt className="text-ink-3">Compressor</dt><dd className="font-medium text-ink-1">{sku.warranty.compressor}</dd></div>}
+            {sku.warranty.heatExchanger && <div className="flex justify-between gap-4"><dt className="text-ink-3">Heat exchanger</dt><dd className="font-medium text-ink-1">{sku.warranty.heatExchanger}</dd></div>}
+          </dl>
+          {sku.warranty.registrationRequired && (
+            <p className="mt-3 text-sm leading-6 text-ink-2">
+              Register within {sku.warranty.registrationWindowDays ?? 90} days of installation to keep the extended parts term.
+            </p>
+          )}
+          {sku.warranty.conditions && <p className="mt-2 text-xs leading-5 text-ink-3">{sku.warranty.conditions}</p>}
+          {warrantyLine && <p className="mt-2 text-xs leading-5 text-ink-3">{warrantyLine}</p>}
+          {sku.warranty.sourceUrl && (
+            <a href={sku.warranty.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-xs font-medium text-brand hover:text-brand-hover">
+              Manufacturer warranty source
+            </a>
+          )}
+        </div>
+      ) : null,
+      missing: "No manufacturer warranty terms on file for this item. Professional installation and registration may be required; the counter can confirm before installation.",
+    },
+  ];
 
   return (
     <>
@@ -130,33 +295,23 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
         <Container className="py-3"><Breadcrumbs items={[{ label: "Products", href: "/products" }, { label: sku.categoryLabel, href: `/products?category=${sku.category}` }, { label: sku.sku, href: productHref(sku) }]} /></Container>
       </div>
       <Container className="py-8 lg:py-12">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.05fr]">
-          <div>
-            {galleryImages.length > 0 ? (
-              <>
-                <ProductGallery
-                  images={galleryImages}
-                  title={sku.title}
-                  mediaLabel={sku.imageExactModel ? "Manufacturer product view" : "Reference product view"}
-                />
-                <p className="mt-3 text-xs leading-5 text-ink-3">
-                  {sku.imageExactModel
-                    ? `Manufacturer media verified against model ${sku.modelNumber}.`
-                    : "Reference product media. Appearance and fittings may vary; confirm the listed dimensions before ordering."}
-                </p>
-              </>
-            ) : (
-              <div className="grid min-h-80 place-items-center rounded-(--r-md) border border-line bg-surface-2 p-8 text-center">
-                <div><ImageOff className="mx-auto text-ink-3" size={36} aria-hidden="true" /><p className="mt-3 font-medium text-ink-1">Product photo coming soon</p><p className="mt-1 max-w-sm text-sm text-ink-2">Use the manufacturer model and specifications on this page when matching equipment.</p></div>
-              </div>
-            )}
+        {/* Three areas, one source order: gallery, decision panel, evidence.
+            Phones read them in that order; from lg the panel moves to its own
+            column and stays in view (sticky) while the evidence scrolls. */}
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,27rem)] lg:grid-rows-[auto_1fr] lg:gap-x-12">
+          <div className="min-w-0 lg:col-start-1 lg:row-start-1">
+            <ProductGallery media={media.items} title={sku.title} verification={media.verification} modelNumber={sku.modelNumber} />
           </div>
 
-          <section aria-labelledby="product-title">
-            <div className="flex flex-wrap gap-2 text-xs"><span className="rounded-full border border-line bg-surface-1 px-3 py-1 text-ink-2">{sku.brand}</span><span className="rounded-full border border-line bg-surface-1 px-3 py-1 text-ink-2">{sku.categoryLabel}</span><span className="rounded-full border border-line bg-surface-1 px-3 py-1 text-ink-2">{sku.productType}</span></div>
-            <p className="part-number mt-5 text-sm text-ink-3">SKU {sku.sku}</p>
-            <h1 id="product-title" className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">{sku.title}</h1>
-            <p className="part-number mt-3 text-sm text-ink-2">{sku.modelNumber ? `Manufacturer model ${sku.modelNumber}` : "Manufacturer model not supplied"}</p>
+          <aside
+            aria-labelledby="product-title"
+            className="min-w-0 lg:sticky lg:top-6 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-h-[calc(100dvh-3rem)] lg:self-start lg:overflow-y-auto lg:overscroll-contain"
+            data-decision-panel
+          >
+            <div className="flex flex-wrap gap-2 text-xs"><span className="rounded-full bg-surface-1 px-3 py-1 text-ink-2">{sku.brand}</span><span className="rounded-full bg-surface-1 px-3 py-1 text-ink-2">{sku.categoryLabel}</span><span className="rounded-full bg-surface-1 px-3 py-1 text-ink-2">{sku.productType}</span></div>
+            <p className="part-number mt-4 text-sm text-ink-3">SKU {sku.sku}</p>
+            <h1 id="product-title" className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink-1">{sku.title}</h1>
+            <p className="part-number mt-2 text-sm text-ink-2">{sku.modelNumber ? `Manufacturer model ${sku.modelNumber}` : "Manufacturer model not supplied"}</p>
 
             {/* A conflict means the model number on our inventory sheet could
                 not be found in the manufacturer's own model tables. Saying so
@@ -177,131 +332,115 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
               </div>
             )}
 
-            <div className="mt-6 border-y border-line py-5">
-              <p className="text-sm text-ink-3">Price</p>
-              <p className="mt-1 text-3xl font-semibold text-ink-1">{sku.retailPrice !== null ? currency(sku.retailPrice) : "Request price"}</p>
+            <div className="mt-5 border-y border-line py-5">
+              <p className="text-sm text-ink-3">{commerceView.priceText ? commerceView.priceQualifier ?? "Price" : "Price"}</p>
+              <p className={`mt-1 text-3xl font-semibold text-ink-1 ${commerceView.priceText ? "part-number" : ""}`}>{commerceView.priceText ?? commerceView.priceFallback}</p>
+              {commerceView.priceText && (
+                <p className="mt-1 text-xs text-ink-3">Plus tax. Approved trade accounts see their own price after sign-in.</p>
+              )}
               {sku.bundleName && <p className="mt-2 text-sm text-ink-2">This component may be priced as part of {sku.bundleName}. We confirm the complete configuration before quoting.</p>}
-              <StockLine sku={sku} className="mt-4" />
+              <AccountPrice skuId={sku.id} />
+              <CommerceStatusLine state={commerce} className="mt-4" />
             </div>
 
-            <div className="mt-5 rounded-(--r-md) border border-line bg-surface-2 p-4">
-              <div className="flex gap-3"><PackageCheck className="mt-0.5 shrink-0 text-brand" size={20} /><div><h2 className="font-medium text-ink-1">Pickup and delivery</h2><p className="mt-1 text-sm text-ink-2">Choose Newark pickup or an eligible delivery option during checkout. Large and unpriced orders can be submitted to our sales team.</p></div></div>
-            </div>
+            {/* What can I do now, answered in two short rows before the action. */}
+            <dl className="divide-y divide-line border-b border-line text-sm">
+              <div className="flex gap-3 py-3" data-compatibility-level={compatibility.level}>
+                <dt className="sr-only">Compatibility</dt>
+                <Link2 className={`mt-0.5 shrink-0 ${compatibility.level === "matched" ? "text-brand" : "text-ink-3"}`} size={18} aria-hidden="true" />
+                <dd>
+                  <span className="block font-medium text-ink-1">{compatibilityText.label}</span>
+                  <a href="#compatibility" className="text-ink-2 underline-offset-4 hover:underline">See what it pairs with</a>
+                </dd>
+              </div>
+              <div className="flex gap-3 py-3">
+                <dt className="sr-only">Fulfillment</dt>
+                <PackageCheck className="mt-0.5 shrink-0 text-ink-3" size={18} aria-hidden="true" />
+                <dd>
+                  <span className="block font-medium text-ink-1">Newark pickup or delivery</span>
+                  <span className="text-ink-2">Choose at checkout or on your request. Large and unpriced orders go to the counter.</span>
+                </dd>
+              </div>
+            </dl>
 
-            <div className="mt-5 flex flex-wrap gap-3"><AddToQuote sku={sku} /><LinkButton href={`/contact?sku=${encodeURIComponent(sku.sku)}`} variant="secondary">Ask about compatibility</LinkButton></div>
-            <p className="mt-4 text-xs leading-5 text-ink-3">Retail customers can check out at the listed price. Wholesale pricing is available only to approved signed-in accounts.</p>
-          </section>
-        </div>
-
-        <section className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_.8fr]">
-          <div className="rounded-(--r-md) border border-line bg-surface-1 p-6">
-            <div className="flex items-center gap-2"><Box size={19} /><h2 className="font-display text-xl font-semibold text-ink-1">Product information</h2></div>
-            <dl className="mt-5 divide-y divide-line">{specs.map(([label, value]) => <div key={label} className="grid gap-1 py-3 sm:grid-cols-[180px_1fr]"><dt className="text-sm text-ink-3">{label}</dt><dd className="text-sm font-medium text-ink-1">{value}</dd></div>)}</dl>
-          </div>
-          <div className="flex flex-col gap-4">
-            {sku.warranty ? (
-              <article className="rounded-(--r-md) border border-line bg-surface-1 p-5">
-                <div className="flex items-center gap-2 text-ink-1"><ShieldCheck size={20} /><h2 className="font-medium">Manufacturer warranty</h2></div>
-                <dl className="mt-3 space-y-2 text-sm">
-                  {sku.warranty.parts && <div className="flex justify-between gap-4"><dt className="text-ink-3">Parts</dt><dd className="font-medium text-ink-1">{sku.warranty.parts}</dd></div>}
-                  {sku.warranty.partsWithRegistration && <div className="flex justify-between gap-4"><dt className="text-ink-3">Parts, registered</dt><dd className="font-medium text-ink-1">{sku.warranty.partsWithRegistration}</dd></div>}
-                  {sku.warranty.compressor && <div className="flex justify-between gap-4"><dt className="text-ink-3">Compressor</dt><dd className="font-medium text-ink-1">{sku.warranty.compressor}</dd></div>}
-                  {sku.warranty.heatExchanger && <div className="flex justify-between gap-4"><dt className="text-ink-3">Heat exchanger</dt><dd className="font-medium text-ink-1">{sku.warranty.heatExchanger}</dd></div>}
-                </dl>
-                {sku.warranty.registrationRequired && (
-                  <p className="mt-3 text-sm leading-6 text-ink-2">
-                    Register within {sku.warranty.registrationWindowDays ?? 90} days of installation to keep the extended parts term.
-                  </p>
-                )}
-                {sku.warranty.conditions && <p className="mt-2 text-xs leading-5 text-ink-3">{sku.warranty.conditions}</p>}
-                {sku.warranty.sourceUrl && (
-                  <a href={sku.warranty.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-xs font-medium text-brand hover:text-brand-hover">
-                    Manufacturer warranty source
-                  </a>
-                )}
-              </article>
-            ) : (
-              <StatusCard icon={<ShieldCheck size={20} />} title="Protect your warranty" body="Professional installation and manufacturer registration may be required. We can help confirm documentation before installation." />
-            )}
-            <StatusCard icon={<UserRoundCheck size={20} />} title="Wholesale accounts" body="Contractors and trade customers can sign in for account pricing, order history, saved lists, and purchasing tools." />
-            <LinkButton href="/dealers" variant="secondary">Apply for a wholesale account</LinkButton>
-          </div>
-        </section>
-
-        {researched.length > 0 && (
-          <section className="mt-10 rounded-(--r-md) border border-line bg-surface-1 p-6">
-            <div className="flex items-center gap-2"><Box size={19} /><h2 className="font-display text-xl font-semibold text-ink-1">Manufacturer specifications</h2></div>
-            <p className="mt-1 text-sm text-ink-2">Read from manufacturer documentation for model {sku.modelNumber}. Every value links to its source.</p>
-            <div className="mt-5 grid gap-6 sm:grid-cols-2">
-              {researched.map((group) => (
-                <div key={group.heading}>
-                  <h3 className="text-xs font-medium uppercase tracking-[0.12em] text-ink-3">{group.heading}</h3>
-                  <dl className="mt-2 divide-y divide-line">
-                    {group.rows.map((row) => (
-                      <div key={row.label} className="grid gap-1 py-2.5 sm:grid-cols-[160px_1fr]">
-                        <dt className="text-sm text-ink-3">{row.label}</dt>
-                        <dd className="text-sm font-medium text-ink-1">
-                          {row.value}
-                          {row.source && <a href={row.source} target="_blank" rel="noopener noreferrer" className="ml-2 text-xs font-normal text-ink-3 underline hover:text-brand">source</a>}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {sku.documents.length > 0 && (
-          <section className="mt-10 rounded-(--r-md) border border-line bg-surface-1 p-6">
-            <div className="flex items-center gap-2"><FileText size={19} /><h2 className="font-display text-xl font-semibold text-ink-1">Documents</h2></div>
-            <p className="mt-1 text-sm text-ink-2">Manufacturer documentation confirmed to cover model {sku.modelNumber}.</p>
-            <ul className="mt-4 divide-y divide-line">
-              {sku.documents.map((document) => (
-                <li key={document.url} className="py-3">
-                  <a href={document.url} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 hover:text-brand">
-                    <Download size={16} className="mt-0.5 shrink-0 text-ink-3" />
-                    <span>
-                      <span className="block font-medium text-ink-1">{document.title}</span>
-                      <span className="block text-xs capitalize text-ink-3">{document.kind.replaceAll("_", " ")}{document.coverageNote ? ` · ${document.coverageNote}` : ""}</span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {sku.ahri && (
-          <section className="mt-10 rounded-(--r-md) border border-line bg-surface-1 p-6">
-            <div className="flex items-center gap-2"><BadgeCheck size={19} /><h2 className="font-display text-xl font-semibold text-ink-1">AHRI certification</h2></div>
-            {sku.ahri.referenceNumber ? (
-              <p className="mt-2 text-sm text-ink-1">Certified reference <span className="part-number font-medium">{sku.ahri.referenceNumber}</span>{sku.ahri.certifiedModel ? ` for ${sku.ahri.certifiedModel}` : ""}.</p>
-            ) : (
-              <p className="mt-2 text-sm font-medium text-ink-1">
-                {sku.ahri.status === "requires_matched_combination"
-                  ? "Rated as a matched system, not as a standalone unit."
-                  : sku.ahri.status === "not_applicable"
-                    ? "AHRI certification does not apply to this product."
-                    : "No AHRI certificate located for this exact model."}
+            {isR410a(sku.refrigerant) && (
+              <p className="mt-5 flex gap-2 rounded-(--r-sm) border border-state-warning-line bg-state-warning p-3 text-sm leading-6 text-state-warning-ink">
+                <AlertTriangle className="mt-0.5 shrink-0" size={16} aria-hidden="true" />
+                <span>{R410A_POLICY.contractorNotice}</span>
               </p>
             )}
-            {sku.ahri.note && <p className="mt-2 text-sm leading-6 text-ink-2">{sku.ahri.note}</p>}
-            <a href="https://www.ahridirectory.org/" target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-xs font-medium text-brand hover:text-brand-hover">Search the AHRI directory</a>
+
+            {commerceView.action.intent === "notify" ? (
+              <div id="restock" className="mt-5 scroll-mt-6">
+                <NotifyMe skuId={sku.id} />
+              </div>
+            ) : (
+              <div className="mt-5 flex flex-wrap gap-3">
+                <AddToQuote sku={sku} state={commerce} />
+                <LinkButton href={`/contact?topic=product&sku=${encodeURIComponent(sku.sku)}`} variant="secondary">Ask about compatibility</LinkButton>
+              </div>
+            )}
+            <p className="mt-4 text-xs leading-5 text-ink-3">
+              {commerceView.action.intent === "cart"
+                ? "Checkout confirms the price, stock and fulfillment window again before payment."
+                : "Requests go to the Newark counter, which confirms price, stock and timing in writing. Nothing is charged."}
+            </p>
+            <p className="mt-2 text-xs leading-5 text-ink-3">
+              Contractor? <Link href="/dealers" className="font-medium text-brand underline-offset-4 hover:underline">Apply for a wholesale account</Link> for account pricing and purchasing tools.
+            </p>
+          </aside>
+
+          <div className="min-w-0 lg:col-start-1 lg:row-start-2">
+            <nav aria-label="On this page" className="border-t border-line pt-5">
+              <ul className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+                {evidence.map((section) => (
+                  <li key={section.id}>
+                    <a href={`#${section.id}`} className="inline-flex min-h-11 items-center text-ink-2 underline-offset-4 hover:text-ink-1 hover:underline">
+                      {section.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            {evidence.map((section) => (
+              <ProductEvidenceSection key={section.id} {...section} />
+            ))}
+          </div>
+        </div>
+
+        {related.length > 0 && (
+          <section className="mt-12 border-t border-line pt-10" aria-labelledby="nearby-heading">
+            <h2 id="nearby-heading" className="font-display text-2xl font-semibold tracking-tight text-ink-1">Nearby catalog items</h2>
+            <p className="mt-1 text-sm text-ink-2">Other products in {sku.categoryLabel.toLowerCase()}. Compatibility with this unit is not established; similar capacity does not make a match.</p>
+            <div className="product-grid mt-6">
+              {related.map((item) => <ProductCard key={item.id} sku={item} />)}
+            </div>
           </section>
         )}
-
-        {related.length > 0 && <section className="mt-10"><h2 className="font-display text-xl font-semibold text-ink-1">Related catalog items</h2><p className="mt-1 text-sm text-ink-2">Nearby products in the same category. Similar capacity does not prove compatibility.</p><div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{related.map((item) => <Link key={item.id} href={productHref(item)} className="rounded-(--r-sm) border border-line bg-surface-1 p-4 hover:border-line-strong"><span className="part-number text-xs text-ink-3">{item.sku}</span><span className="mt-2 block font-medium text-ink-1">{item.title}</span><span className="mt-2 block text-xs text-ink-2">{item.retailPrice !== null ? currency(item.retailPrice) : "Contact for price"} · {item.purchaseEligible ? "available to order" : "sales assistance"}</span><StockBadge sku={item} className="mt-2" /></Link>)}</div></section>}
+        <StickyBuyBar sku={sku} state={commerce} />
       </Container>
     </>
   );
 }
 
-function StatusCard({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
-  return <article className="rounded-(--r-md) border border-line bg-surface-1 p-5"><div className="flex items-center gap-2 text-ink-1">{icon}<h2 className="font-medium">{title}</h2></div><p className="mt-2 text-sm leading-6 text-ink-2">{body}</p></article>;
-}
+type EvidenceSection = {
+  id: "overview" | "compatibility" | "specifications" | "documents" | "warranty";
+  title: string;
+  /** null when the evidence does not exist yet; `missing` then says so. */
+  content: React.ReactNode | null;
+  missing: string;
+};
 
-function currency(value: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(value);
+/** One evidence section. Missing evidence is a sentence, never an empty gap. */
+function ProductEvidenceSection({ id, title, content, missing }: EvidenceSection) {
+  const icon = id === "warranty" ? <ShieldCheck size={18} aria-hidden="true" className="text-ink-3" /> : null;
+  return (
+    <section id={id} aria-labelledby={`${id}-heading`} className="mt-8 scroll-mt-6 border-t border-line pt-8" data-evidence={id} data-evidence-state={content ? "present" : "missing"}>
+      <h2 id={`${id}-heading`} className="flex items-center gap-2 font-display text-xl font-semibold tracking-tight text-ink-1">
+        {icon}
+        {title}
+      </h2>
+      <div className="mt-4">{content ?? <p className="text-sm leading-6 text-ink-2">{missing}</p>}</div>
+    </section>
+  );
 }

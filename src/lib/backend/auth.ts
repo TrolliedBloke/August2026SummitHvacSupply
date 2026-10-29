@@ -52,11 +52,18 @@ export async function requireStaff(nextPath = "/admin"): Promise<SessionProfile>
   return profile;
 }
 
-/** Gate for any signed-in user (portal). Redirects guests to login. */
+/**
+ * Gate for any signed-in user (portal). Guests go to login; a signed-in person
+ * without a usable profile goes to /portal/status, which explains why --
+ * sending them to login again was a loop.
+ */
 export async function requireUser(nextPath = "/portal"): Promise<SessionProfile> {
   const profile = await getSessionProfile();
   if (!profile) {
-    redirect(`/portal/login?next=${encodeURIComponent(nextPath)}`);
+    const { resolvePortalAccess } = await import("./session-access");
+    const access = await resolvePortalAccess();
+    if (access.kind === "signedOut") redirect(`/portal/login?next=${encodeURIComponent(nextPath)}`);
+    redirect("/portal/status");
   }
   return profile;
 }

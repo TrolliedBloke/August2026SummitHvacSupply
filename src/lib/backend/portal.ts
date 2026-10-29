@@ -178,6 +178,29 @@ export async function loadPortalData(
  * than seeded with invented numbers. Callers must treat a missing entry as
  * "no trade price on file" and fall back to quote/retail, never to 0.
  */
+/**
+ * Trade prices with an explicit outcome. `error` means the account price
+ * could not be confirmed -- callers must say so rather than fall back to
+ * retail labelled as the account's price.
+ */
+export async function loadTradePricingResult(
+  productIds: string[]
+): Promise<{ status: "ok"; prices: Map<string, number> } | { status: "error" }> {
+  const prices = new Map<string, number>();
+  if (productIds.length === 0) return { status: "ok", prices };
+  const supabase = createServiceRoleSupabaseClient();
+  if (!supabase) return { status: "error" };
+  const { data, error } = await supabase
+    .from("catalog_product_trade_pricing")
+    .select("product_id, contractor_price")
+    .in("product_id", productIds);
+  if (error || !data) return { status: "error" };
+  for (const row of data as Array<{ product_id: string; contractor_price: number | null }>) {
+    if (row.contractor_price !== null && row.contractor_price > 0) prices.set(row.product_id, Number(row.contractor_price));
+  }
+  return { status: "ok", prices };
+}
+
 export async function loadTradePricing(
   productIds: string[]
 ): Promise<Map<string, number>> {

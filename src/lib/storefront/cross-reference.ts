@@ -1,28 +1,34 @@
+import { normalizeIdentifier, type VerifiedCrossReference } from "@/lib/model-identifier";
+
 /**
- * OEM cross-reference: competitor/predecessor model numbers → compatible
+ * OEM cross-reference: competitor/predecessor model numbers -> compatible
  * Summit SKU ids. Wired into search so a buyer holding an old unit's model
  * plate lands on the right replacement.
  *
- * ⚠️ SHIPS EMPTY BY DESIGN. Populating this is a catalog-content job that
- * must be done from verified AHRI match-ups -- never guessed. Add entries as
- * `"competitor model": ["sku-id", ...]` (keys are normalized on lookup, so
- * dashes/case/spacing don't matter).
+ * SHIPS EMPTY BY DESIGN. Populating this is a catalog-content job that must be
+ * done from verified AHRI match-ups -- never guessed. A row without
+ * `verifiedBy` and `evidenceUrl` is ignored, because this table is the only
+ * thing allowed to make a compatibility or replacement claim.
+ *
+ * Keys are compared with the shared identifier normalizer (lib/model-
+ * identifier.ts), the same one the decoder and quick order use, so case,
+ * dashes and spacing never change the answer.
  */
-export const CROSS_REFERENCES: Record<string, string[]> = {
-  // e.g. "38MARBQ09AA3": ["sku-brz-09"],   // Carrier 9k single-zone
-};
+export const CROSS_REFERENCES: VerifiedCrossReference[] = [
+  // { sourceModel: "38MARBQ09AA3", skuIds: ["catalog-0001"], verifiedBy: "AHRI 123456", evidenceUrl: "https://..." },
+];
 
+/** Kept for existing callers. Delegates to the shared normalizer. */
 export function normalizeModelQuery(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return normalizeIdentifier(value).toLowerCase();
 }
 
-const normalizedTable: Array<{ key: string; skuIds: string[] }> = Object.entries(
-  CROSS_REFERENCES
-).map(([key, skuIds]) => ({ key: normalizeModelQuery(key), skuIds }));
-
+/** Exact verified matches only. A prefix is not evidence of compatibility. */
 export function crossReferenceLookup(query: string): string[] {
-  const q = normalizeModelQuery(query);
+  const q = normalizeIdentifier(query);
   if (q.length < 4) return [];
-  const hit = normalizedTable.find((row) => row.key === q || row.key.startsWith(q));
+  const hit = CROSS_REFERENCES.find(
+    (row) => row.verifiedBy && row.evidenceUrl && normalizeIdentifier(row.sourceModel) === q
+  );
   return hit?.skuIds ?? [];
 }

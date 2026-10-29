@@ -1,47 +1,49 @@
 import Link from "next/link";
-import { Clock, Truck } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
+import { BranchStatusText } from "@/components/branch-status";
+import { DeliveryPromiseText } from "@/components/delivery-promise";
 import { FULFILLMENT, SITE } from "@/lib/site";
 
 /**
  * The Newark branch card in the landing page rail.
  *
- * This card used to be titled "Newark will-call" and carried a single pickup
- * line, which read as pickup-only: the page named will-call three times and
- * delivery zero times. It now carries both fulfillment methods as two labeled
- * rows sharing one card, so a visitor choosing between them sees the same
- * level of detail for each.
+ * Reads top to bottom the way someone deciding between pickup and delivery
+ * reads it: which branch and is it open, then the delivery promise, then the
+ * pickup alternative, then where to drive.
+ *
+ * Status, the order-by line and the pickup time are projections of the Branch
+ * entity and the fulfillment policy -- the same calculator checkout enforces.
+ * The delivery link keeps one stable name ("Delivery and pickup"); the dated
+ * order-by line is its description, so the clock can change the detail
+ * without renaming the control.
  */
-export function FulfillmentCard({ open = true }: { open?: boolean }) {
+export function FulfillmentCard() {
   return (
-    <article className="rounded-(--r-md) border border-line bg-surface-1 p-3.5">
-      <h2 className="counter-heading text-[1.25rem] leading-none text-ink-1">Newark branch</h2>
-
-      <p className="part-number mt-2.5 flex items-center gap-2.5 text-sm text-ink-1">
-        <span
-          className={`size-2.5 shrink-0 rounded-full ${open ? "bg-brand" : "bg-ink-4"}`}
-          aria-hidden="true"
-        />
-        {open ? "Open until 5:00 PM" : "Closed · opens 7:00 AM"}
-      </p>
-
-      <div className="mt-2.5 flex flex-col">
-        <FulfillmentRow
-          label="Pickup"
-          icon={<Clock size={17} strokeWidth={1.6} aria-hidden="true" />}
-          detail={FULFILLMENT.pickupReady}
-        />
-        <hr className="my-2 border-0 border-t border-line" />
-        <FulfillmentRow
-          label="Delivery"
-          icon={<Truck size={17} strokeWidth={1.6} aria-hidden="true" />}
-          detail={`Order by ${FULFILLMENT.deliveryCutoff} ${FULFILLMENT.deliveryLine}`}
-        />
+    <article className="h-full min-w-0 rounded-(--r-md) border border-line bg-surface-1 p-7">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <h2 className="text-lead font-semibold text-ink-1">Newark branch</h2>
+        <BranchStatusText withDot className="text-meta text-ink-2" />
       </div>
 
-      {/* The address was missing from the page entirely. Once a visitor is
-          choosing between pickup and delivery, "where is it" is part of the
-          choice, not a detail for the locations page. */}
-      <address className="mt-2.5 border-t border-line pt-2.5 text-sm not-italic leading-5 text-ink-2">
+      <hr className="my-7 border-0 border-t border-line" />
+
+      <Link
+        href="/delivery"
+        aria-describedby="home-delivery-detail"
+        className="group inline-flex items-center gap-2 text-lead font-semibold text-ink-1 transition-colors duration-120 hover:text-brand"
+      >
+        Delivery and pickup
+        <ArrowRight size={16} strokeWidth={1.8} aria-hidden="true" className="transition-transform duration-120 group-hover:translate-x-0.5" />
+      </Link>
+      <DeliveryPromiseText id="home-delivery-detail" className="mt-1.5 text-base text-ink-1" />
+      <p className="mt-5 flex items-center gap-3 text-base text-ink-1">
+        <Clock size={17} strokeWidth={1.6} aria-hidden="true" />
+        {FULFILLMENT.pickupReady}
+      </p>
+
+      <hr className="my-7 border-0 border-t border-line" />
+
+      <address className="text-meta not-italic leading-6 text-ink-2">
         {SITE.address.street}
         <br />
         {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
@@ -50,40 +52,11 @@ export function FulfillmentCard({ open = true }: { open?: boolean }) {
           href={FULFILLMENT.mapsHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-ink-1 underline underline-offset-4"
+          className="text-ink-1 underline underline-offset-4 transition-colors duration-120 hover:text-brand"
         >
           Directions
         </a>
       </address>
-
-      <div className="mt-2.5 flex flex-wrap items-center gap-x-5 gap-y-2">
-        <Link href="/locations/newark" className="text-sm text-ink-1 underline underline-offset-4">
-          Change location
-        </Link>
-        <Link href="/delivery" className="text-sm text-ink-1 underline underline-offset-4">
-          Delivery details
-        </Link>
-      </div>
     </article>
-  );
-}
-
-function FulfillmentRow({
-  label,
-  icon,
-  detail,
-}: {
-  label: string;
-  icon: React.ReactNode;
-  detail: string;
-}) {
-  return (
-    <div className="grid grid-cols-[17px_minmax(0,1fr)] items-start gap-x-3">
-      <span className="mt-0.5 text-ink-1">{icon}</span>
-      <div className="min-w-0">
-        <p className="text-[11px] font-medium leading-4 text-ink-3">{label}</p>
-        <p className="part-number text-[13px] leading-5 text-ink-1">{detail}</p>
-      </div>
-    </div>
   );
 }

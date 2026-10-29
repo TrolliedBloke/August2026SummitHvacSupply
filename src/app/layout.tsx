@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo_Narrow, Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { QuoteProvider } from "@/components/quote-context";
 import { FulfillmentProvider } from "@/components/fulfillment-context";
@@ -9,20 +9,17 @@ import { AnalyticsListener } from "@/components/analytics-listener";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE } from "@/lib/site";
+import { catalogCategoryDestinations } from "@/lib/storefront/catalog";
 import { Analytics } from "@vercel/analytics/next";
+import { AdTags } from "@/components/ad-tags";
+import { adsConfig } from "@/lib/ads-config";
+import { BrowserPrivacy } from "@/components/privacy/browser-privacy";
 
-// Body: Inter -- neutral, legible at small sizes for spec-dense pages.
+// Inter is the only typeface: headings, body and data. Numbers line up via
+// tabular figures (see globals.css), not a monospace font.
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-// Display: Inter Tight -- the weight and tight tracking of a distributor
-// catalog without the geometric SaaS-dashboard vocabulary. Shares rendering
-// DNA with Inter, so the two families never fight.
-const grotesk = Inter_Tight({ subsets: ["latin"], variable: "--font-grotesk", display: "swap" });
-// Counter headings: Archivo Narrow -- the bold condensed uppercase used for
-// section titles on the landing page. Narrow enough that a four-word heading
-// holds one line at the counter width without shrinking the type.
-const condensed = Archivo_Narrow({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-condensed-archivo", display: "swap" });
-// Data: JetBrains Mono -- tabular figures so spec rails and tables align.
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-jb", display: "swap" });
+// SKUs and spec values only (.part-number), never prose.
+const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono-jb", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.origin),
@@ -56,6 +53,14 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // The production analytics endpoint exists on Vercel only. Rendering the
+  // component in a self-hosted production build requests a missing
+  // /_vercel/insights/script.js and creates a 404/MIME console error on every
+  // page. Custom first-party event logging remains available everywhere.
+  const vercelAnalyticsAvailable = process.env.VERCEL === "1";
+  // Ad tags render only when every gate in lib/ads-config.ts is open; today
+  // the privacy notice says Summit does not share data, so this is null.
+  const ads = adsConfig();
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "HVACBusiness",
@@ -74,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     areaServed: SITE.serviceArea,
   };
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${grotesk.variable} ${condensed.variable} ${mono.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${mono.variable}`}>
       <body className="min-h-dvh antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
@@ -88,7 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <FulfillmentProvider>
           <QuoteProvider>
-            <SiteNav />
+            <SiteNav categories={catalogCategoryDestinations()} />
             <main id="main">{children}</main>
             <SiteFooter />
             <QuoteDrawerMount />
@@ -96,7 +101,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AnalyticsListener />
           </QuoteProvider>
         </FulfillmentProvider>
-        <Analytics />
+        {vercelAnalyticsAvailable && <Analytics />}
+        <BrowserPrivacy />
+        {ads.enabled && <AdTags metaPixelId={ads.metaPixelId} googleTagId={ads.googleTagId} />}
       </body>
     </html>
   );

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, CheckCircle2, Home, Ruler, ShieldCheck, Users } from "lucide-react";
 import { Container, Eyebrow, LinkButton } from "@/components/ui";
@@ -5,7 +6,6 @@ import { HomeownerRequestForm } from "@/components/homeowner-request-form";
 import { HeroRoutingPanel } from "@/components/homepage-conversion-tools";
 import { TestimonialSlot } from "@/components/testimonial-slot";
 import { HOMEOWNER_TESTIMONIALS } from "@/lib/testimonials";
-import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "For Homeowners - Buy One TCL Mini Split or Heat Pump in the Bay Area",
@@ -73,10 +73,17 @@ export default function HomeownersPage() {
               <LinkButton href="#homeowner-request" size="lg">
                 Get Bay Area installer help <ArrowRight size={18} />
               </LinkButton>
-              <LinkButton href="/bay-area-heat-pump-rebates" variant="secondary" size="lg">
-                See rebate options
+              <LinkButton href="/finder" variant="secondary" size="lg">
+                Find your system
               </LinkButton>
             </div>
+            <p className="mt-4 text-sm text-ink-3">
+              Five questions to a starting size and what your install will involve.{" "}
+              <Link href="/bay-area-heat-pump-rebates" className="text-ink-1 underline underline-offset-4">
+                See rebate options
+              </Link>
+              .
+            </p>
           </div>
           <div className="flex flex-col gap-5">
             {/* Relocated from the homepage hero -- ZIP + role routing earns its
@@ -90,7 +97,7 @@ export default function HomeownersPage() {
             <div className="mt-4 grid gap-3">
               <Proof title="Yes, one system is okay" body="You do not need to be buying a truckload or know the exact SKU." />
               <Proof title="Equipment supply only" body="We do not install. We help you prepare for a qualified installer conversation." />
-              <Proof title="Local Bay Area focus" body={`Newark supply hub serving ${SITE.serviceArea}.`} />
+              <Proof title="Local Bay Area focus" body="Newark supply hub with Bay Area delivery routes. The request form checks your ZIP." />
             </div>
             </div>
             </div>
@@ -119,9 +126,9 @@ export default function HomeownersPage() {
               you ask the right questions before money is spent.
             </p>
           </div>
-          <div className="grid gap-3">
+          <div className="grid gap-5">
             {faq.map((item) => (
-              <div key={item.q} className="rounded-(--r-md) border border-line bg-canvas p-5">
+              <div key={item.q} className="border-t border-line pt-5">
                 <h3 className="font-display text-base font-semibold text-ink-1">{item.q}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-2">{item.a}</p>
               </div>
@@ -136,7 +143,7 @@ export default function HomeownersPage() {
       <TestimonialSlot
         items={HOMEOWNER_TESTIMONIALS}
         heading="What other Bay Area homeowners found"
-        className="border-t border-line bg-surface-1 px-5 py-14 sm:px-6 lg:px-8 [&>*]:mx-auto [&>*]:max-w-[1180px]"
+        className="border-t border-line bg-surface-1 py-14 [&>*]:mx-auto [&>*]:max-w-[var(--page-max)] [&>*]:px-5 sm:[&>*]:px-6 lg:[&>*]:px-8"
       />
 
       <section id="homeowner-request">
@@ -150,7 +157,7 @@ export default function HomeownersPage() {
 
 function Proof({ title, body }: { title: string; body: string }) {
   return (
-    <div className="flex gap-3 rounded-(--r-sm) border border-line bg-surface-1 p-3">
+    <div className="flex gap-3">
       <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-eco" />
       <div>
         <h3 className="text-sm font-semibold text-ink-1">{title}</h3>
@@ -162,7 +169,7 @@ function Proof({ title, body }: { title: string; body: string }) {
 
 function Step({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
   return (
-    <div className="rounded-(--r-md) border border-line bg-surface-1 p-5 shadow-[var(--shadow-sm)]">
+    <div>
       <span className="grid size-11 place-items-center rounded-(--r-sm) bg-brand-tint text-brand">{icon}</span>
       <h2 className="mt-4 font-display text-lg font-semibold tracking-tight text-ink-1">{title}</h2>
       <p className="mt-2 text-sm leading-relaxed text-ink-2">{body}</p>

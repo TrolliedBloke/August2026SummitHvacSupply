@@ -1,32 +1,17 @@
 "use client";
 
-import { ArrowRight, CheckCircle2, Search } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import * as React from "react";
-import { Field, Input, Select } from "@/components/form";
+import { Field, Input } from "@/components/form";
 import { Button } from "@/components/ui";
-import { postJson } from "@/lib/client/post-json";
 
-const homeTypeOptions = [
-  { value: "single_family", label: "Single-family" },
-  { value: "townhome_condo", label: "Townhome / condo" },
-  { value: "adu_addition", label: "ADU / addition" },
-  { value: "small_commercial", label: "Small commercial" },
-];
-
-const ductsOptions = [
-  { value: "yes", label: "Yes" },
-  { value: "no", label: "No" },
-  { value: "unknown", label: "Not sure" },
-];
-
-const timelineOptions = [
-  { value: "asap", label: "ASAP" },
-  { value: "month", label: "This month" },
-  { value: "quarter", label: "1-3 months" },
-  { value: "researching", label: "Researching" },
-];
+/* The homeowner mini form that lived here posted free text to the contact
+   endpoint; homeowner requests are now typed (HomeownerRequestForm ->
+   /api/homeowner-requests), so the routing panel sends people there. */
 
 export function HeroRoutingPanel() {
+  const router = useRouter();
   const [buyerType, setBuyerType] = React.useState<"homeowner" | "contractor" | "property">("homeowner");
   const [zip, setZip] = React.useState("");
 
@@ -40,7 +25,7 @@ export function HeroRoutingPanel() {
           : "/homeowners";
     const params = zip.trim() ? `?zip=${encodeURIComponent(zip.trim())}` : "";
     const anchor = buyerType === "homeowner" ? "#homeowner-request" : "";
-    window.location.href = `${base}${params}${anchor}`;
+    router.push(`${base}${params}${anchor}`);
   }
 
   return (
@@ -84,6 +69,7 @@ export function HeroRoutingPanel() {
             <button
               key={value}
               type="button"
+              aria-pressed={buyerType === value}
               onClick={() => setBuyerType(value as "homeowner" | "contractor" | "property")}
               className={`h-10 rounded-(--r-sm) text-sm font-medium transition-colors ${
                 buyerType === value
@@ -104,114 +90,6 @@ export function HeroRoutingPanel() {
       <p className="mt-3 hidden text-xs leading-relaxed text-ink-3 sm:block">
         Homeowners get equipment guidance and installer referral. Contractors go straight to
         systems, stock, and documents.
-      </p>
-    </form>
-  );
-}
-
-export function HomepageHomeownerMiniForm() {
-  const [sent, setSent] = React.useState(false);
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
-  const [homeType, setHomeType] = React.useState("");
-  const [ducts, setDucts] = React.useState("");
-  const [timeline, setTimeline] = React.useState("");
-
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setError(null);
-    if (!homeType || !ducts || !timeline) {
-      setError("Please choose home type, duct status, and timeline.");
-      return;
-    }
-    setIsSubmitting(true);
-    const form = new FormData(event.currentTarget);
-    try {
-      await postJson<{ ok: boolean; error?: string }>("/api/contact-requests", {
-        topic: "homeowner_one_system",
-        name: String(form.get("name") ?? ""),
-        email: String(form.get("email") ?? ""),
-        message: [
-          "Homepage mini form",
-          `ZIP: ${String(form.get("zip") ?? "")}`,
-          `Home type: ${homeType}`,
-          `Rooms / zones: ${String(form.get("zones") ?? "")}`,
-          `Existing ducts: ${ducts}`,
-          `Timeline: ${timeline}`,
-        ].join("\n"),
-      });
-      setSent(true);
-    } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : "Could not send request.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
-
-  if (sent) {
-    return (
-      <div className="rounded-(--r-md) border border-eco/30 bg-eco-tint/50 p-6">
-        <CheckCircle2 size={28} className="text-eco" />
-        <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-ink-1">
-          Request received.
-        </h3>
-        <p className="mt-2 text-sm leading-relaxed text-ink-2">
-          We&apos;ll review your details and explain the next step before you buy equipment.
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <form
-      onSubmit={onSubmit}
-      data-conversion-hook="homeowner-mini-form-submit"
-      className="rounded-(--r-md) border border-line bg-surface-1 p-5 shadow-[var(--shadow-sm)]"
-    >
-      <div className="flex items-center gap-3">
-        <span className="grid size-10 place-items-center rounded-(--r-sm) bg-brand-tint text-brand">
-          <Search size={18} />
-        </span>
-        <div>
-          <h3 className="font-display text-xl font-semibold tracking-tight text-ink-1">
-            Get Bay Area installer help
-          </h3>
-          <p className="mt-1 text-sm text-ink-2">A short start for one-system buyers.</p>
-        </div>
-      </div>
-
-      <div className="mt-5 grid gap-4 sm:grid-cols-2">
-        <Field label="ZIP code" required>
-          <Input name="zip" required inputMode="numeric" placeholder="94560" />
-        </Field>
-        <Field label="Home type" required>
-          <Select ariaLabel="Home type" value={homeType} onChange={setHomeType} placeholder="Select" options={homeTypeOptions} />
-        </Field>
-        <Field label="Rooms / zones" required>
-          <Input name="zones" required placeholder="1 room, whole home..." />
-        </Field>
-        <Field label="Existing ducts" required>
-          <Select ariaLabel="Existing ducts" value={ducts} onChange={setDucts} placeholder="Select" options={ductsOptions} />
-        </Field>
-        <Field label="Timeline" required>
-          <Select ariaLabel="Timeline" value={timeline} onChange={setTimeline} placeholder="Select" options={timelineOptions} />
-        </Field>
-        <Field label="Name" required>
-          <Input name="name" required autoComplete="name" placeholder="Your name" />
-        </Field>
-        <div className="sm:col-span-2">
-          <Field label="Email" required>
-            <Input name="email" type="email" required autoComplete="email" placeholder="you@email.com" />
-          </Field>
-        </div>
-      </div>
-      {error && <p role="alert" className="mt-4 text-sm text-danger">{error}</p>}
-      <Button type="submit" size="lg" full className="mt-5" disabled={isSubmitting}>
-        {isSubmitting ? "Sending..." : "Get Bay Area installer help"}
-        <ArrowRight size={18} />
-      </Button>
-      <p className="mt-3 text-xs leading-relaxed text-ink-3">
-        We&apos;ll review your details and explain the next step before you buy equipment.
       </p>
     </form>
   );

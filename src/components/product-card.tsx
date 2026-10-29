@@ -1,118 +1,105 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowUpRight, Leaf } from "lucide-react";
-import { type Series, CATEGORY_LABEL, ENERGY_STAR_LABEL } from "@/lib/products";
-import { SpecStockStrip } from "./spec-stock-strip";
-import { FulfillmentBadge } from "./fulfillment-badge";
-import { AddToQuote } from "./add-to-quote";
-import { Chip } from "./ui";
-import type { SeriesCardSummary } from "@/lib/backend/catalog";
-import { getSeriesPriceRange, getStorefrontSkus } from "@/lib/storefront/catalog";
+import { AddToQuote } from "@/components/add-to-quote";
+import { ProductImage } from "@/components/product-image";
+import { productHref, type StorefrontSku } from "@/lib/storefront/catalog";
+import { skuMedia } from "@/lib/media";
+import { presentCommerceState, publicCommerceState, type CommerceState } from "@/lib/commerce/state";
 
-function currency(value: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(value);
-}
+/* The one product card, used on the homepage, in the catalog and under related
+   items so they can never drift apart. Price, status and action come from one
+   CommerceState, so the three can never disagree with each other.
+
+   The card spans six rows of its parent grid and adopts them as a subgrid, so
+   titles, prices and actions line up across a row of cards however many lines
+   each title wraps to -- no fixed title height, and no clipped names. Parents
+   use the `.product-grid` track definition in globals.css. */
+
+export const PRODUCT_CARD_ROWS = 6;
 
 export function ProductCard({
-  series,
-  ops,
+  sku,
+  state: stateProp,
   priority = false,
+  headingLevel = 3,
+  compactOnMobile = false,
+  matchReason = null,
 }: {
-  series: Series;
-  ops?: SeriesCardSummary;
+  sku: StorefrontSku;
+  /** Why this card matched the search, from searchMatchReason. */
+  matchReason?: string | null;
+  state?: CommerceState;
   priority?: boolean;
+  headingLevel?: 2 | 3 | 4;
+  compactOnMobile?: boolean;
 }) {
-  const energyStar = ENERGY_STAR_LABEL[series.energyStar];
-  const representativeSku = getStorefrontSkus().find((sku) => sku.seriesSlug === series.slug);
-  const priceRange = getSeriesPriceRange(series.slug);
+  const state = stateProp ?? publicCommerceState(sku);
+  const view = presentCommerceState(state);
+  const Heading = `h${headingLevel}` as "h2" | "h3" | "h4";
+  const media = skuMedia(sku);
+  // Provenance is always visible: a signed-in trade buyer must never read the
+  // public list price as their account price (account prices appear only on
+  // the product page, cart and checkout, from the session projection).
+  const visibleQualifier = view.priceText ? view.priceQualifier : null;
+
   return (
-    <article className="group flex flex-col overflow-hidden rounded-(--r-md) border border-line bg-surface-1 shadow-[var(--shadow-sm)] transition-shadow duration-200 hover:shadow-[var(--shadow-md)]">
-      <Link
-        href={`/products/${series.slug}`}
-        className="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-surface-2"
-      >
-        <Image
-          src={series.image}
-          alt={`${series.name} product image`}
-          fill
-          preload={priority}
-          sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
-          className="object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+    <article className={`group grid min-w-0 gap-y-0 ${compactOnMobile ? "row-span-1 grid-cols-[7rem_minmax(0,1fr)] grid-rows-[auto_auto_auto_auto_auto] gap-x-3 border-b border-line pb-4 sm:row-span-6 sm:grid-cols-none sm:grid-rows-subgrid sm:gap-x-0 sm:border-b-0 sm:pb-0" : "row-span-6 grid-rows-subgrid"}`}>
+      {/* The title link is the card's one link stop; the image repeats it for
+          pointer users only, so keyboard and screen-reader users meet it once. */}
+      <Link href={productHref(sku)} tabIndex={-1} aria-hidden="true" className={`block ${compactOnMobile ? "col-start-1 row-span-4 row-start-1 sm:col-auto sm:row-span-1 sm:row-auto" : ""}`}>
+        <ProductImage
+          src={media.primarySrc}
+          alt=""
+          sizes="(min-width: 1280px) 300px, (min-width: 640px) 45vw, 100vw"
+          priority={priority}
+          verification={media.verification}
         />
-        {energyStar === "ENERGY STAR Most Efficient 2025" && (
-          <span className="absolute left-3 top-3">
-            <Chip tone="eco">
-              <Leaf size={12} strokeWidth={2.5} /> Most Efficient 2025
-            </Chip>
-          </span>
-        )}
       </Link>
 
-      <div className="flex flex-1 flex-col gap-4 p-5">
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center justify-between gap-3">
-            <Chip tone="neutral">{CATEGORY_LABEL[series.category]}</Chip>
-            {energyStar && energyStar !== "ENERGY STAR Most Efficient 2025" && (
-              <span className="font-mono text-[10px] uppercase tracking-wider text-eco-ink">
-                ★ ENERGY STAR
-              </span>
-            )}
-          </div>
-          <h3 className="font-display text-xl font-semibold tracking-tight text-ink-1">
-            <Link href={`/products/${series.slug}`} className="hover:text-brand">
-              {series.name}
-            </Link>
-          </h3>
-          <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-3">
-            Type: {series.type}
-          </p>
-          <ul className="grid gap-1.5 text-sm leading-relaxed text-ink-2">
-            {series.highlights.map((highlight) => (
-              <li key={highlight} className="flex gap-2">
-                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-eco" />
-                <span>{highlight}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <Heading className={`min-w-0 text-item font-medium leading-6 text-ink-1 ${compactOnMobile ? "col-start-2 row-start-1 sm:col-auto sm:row-auto sm:mt-3" : "mt-3"}`}>
+        <Link href={productHref(sku)} className="line-clamp-3 break-words group-hover:underline" title={sku.title}>
+          {sku.title}
+        </Link>
+      </Heading>
+      {/* The match reason shares the SKU's subgrid row so card rows stay aligned. */}
+      <p className={`mt-0.5 min-w-0 text-micro text-ink-3 ${compactOnMobile ? "col-start-2 sm:col-auto" : ""}`}>
+        <span className="part-number block break-all">{sku.sku}</span>
+        {matchReason && <span className="mt-0.5 block text-ink-2" data-match-reason>{matchReason}</span>}
+      </p>
 
-        <SpecStockStrip series={series} className="mt-auto" />
-        <FulfillmentBadge inStock={series.stock === "ready"} />
-        {ops && (
-          <div className="grid grid-cols-3 gap-px overflow-hidden rounded-(--r-sm) border border-line bg-line text-center">
-            <OpsCell label="SKUs" value={`${ops.skuCount}`} />
-            <OpsCell label="Available" value={`${ops.availableUnits}`} />
-            <OpsCell
-              label="Retail from"
-              value={priceRange ? currency(priceRange.low) : "Quote"}
-            />
-          </div>
+      <p className={`mt-2 flex min-w-0 flex-wrap items-baseline gap-x-2 text-item ${compactOnMobile ? "col-start-2 sm:col-auto" : ""}`}>
+        {view.priceText ? (
+          <>
+            <span className="part-number font-semibold text-ink-1">{view.priceText}</span>
+            {visibleQualifier && <span className="text-micro text-ink-3">{visibleQualifier.toLowerCase()}</span>}
+          </>
+        ) : (
+          <span className="font-medium text-ink-1">{view.priceFallback}</span>
         )}
+      </p>
 
-        <div className="flex items-center gap-3">
-          {representativeSku && <AddToQuote sku={representativeSku} size="sm" />}
-          <Link
-            href={`/products/${series.slug}`}
-            className="inline-flex items-center gap-1 text-sm font-medium text-ink-2 hover:text-brand"
-          >
-            Specs & support
-            <ArrowUpRight size={15} strokeWidth={2.2} />
-          </Link>
-        </div>
+      <div
+        className={`mt-1.5 flex min-w-0 items-start gap-2 text-meta text-ink-2 ${compactOnMobile ? "col-start-2 sm:col-auto" : ""}`}
+        data-commerce-state={view.kind}
+      >
+        <span
+          className={`mt-[0.4375rem] size-2 shrink-0 rounded-full ${
+            view.tone === "ready" ? (view.statusLabel.includes("left") ? "bg-[var(--amber)]" : "bg-brand") : "bg-ink-4"
+          }`}
+          aria-hidden="true"
+        />
+        <span className="min-w-0">
+          <span className="block">{view.statusLabel}</span>
+          {view.tone !== "ready" ? (
+            <span className="mt-0.5 block text-micro leading-4 text-ink-3">{view.statusDetail}</span>
+          ) : (
+            <span className="sr-only">. {view.statusDetail}</span>
+          )}
+        </span>
+      </div>
+
+      <div className={`self-end pt-3 ${compactOnMobile ? "col-span-2 sm:col-span-1" : ""}`}>
+        <AddToQuote sku={sku} state={state} size="sm" variant="outline" full />
       </div>
     </article>
-  );
-}
-
-function OpsCell({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="bg-surface-1 px-2 py-2">
-      <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-4">{label}</p>
-      <p className="tnum mt-1 font-mono text-sm font-semibold text-ink-1">{value}</p>
-    </div>
   );
 }

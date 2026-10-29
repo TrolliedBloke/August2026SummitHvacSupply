@@ -154,7 +154,8 @@ export const REVIEWS: Record<string, Review[]> = {
  * not a control -- so production refuses to serve them regardless of what the
  * file contains.
  *
- * The demo keeps working locally and in preview. To show them in a hosted demo,
+ * The demo keeps working in local development only (Vercel previews run with
+ * NODE_ENV=production, so they hide them too). To show them in a hosted demo,
  * set SHOW_PLACEHOLDER_REVIEWS=true explicitly and accept the above.
  * Real, consented reviews should be moved to the database and read from there,
  * at which point this gate stops applying.

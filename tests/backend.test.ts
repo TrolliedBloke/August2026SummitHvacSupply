@@ -12,12 +12,24 @@ import {
 import { createDemoOperationsData } from "../src/lib/backend/mock-data";
 import { checkoutSchema } from "../src/lib/backend/schemas";
 import { resolveUnitPrice } from "../src/lib/backend/pricing";
+import { FULFILLMENT, formatCutoffHour } from "../src/lib/site";
 import { fulfillmentWindows, isFulfillmentWindowAvailable } from "../src/lib/backend/fulfillment";
+import { FULFILLMENT_POLICY, type FulfillmentPolicy } from "../src/lib/fulfillment-policy";
+import { NEWARK, type Branch } from "../src/lib/branch";
 import { createQuoteRequest, roleCanAccessAccount } from "../src/lib/backend/services";
 import { categorySitemapEntries, productSitemapEntries, renderSitemapIndex } from "../src/lib/seo/sitemaps";
 import { filterStorefrontSkus, getStorefrontSku, getStorefrontSkus, searchStorefrontSkus } from "../src/lib/storefront/catalog";
 import { catalogHealth, catalogReconciliation } from "../src/lib/catalog/reconciliation";
 import type { InventoryLot, OrderLine } from "../src/lib/backend/types";
+
+const CONFIRMED_REVIEW = { status: "confirmed" as const, reviewedAt: "2026-09-30" };
+const CONFIRMED_BRANCH: Branch = { ...NEWARK, hoursReview: CONFIRMED_REVIEW };
+const CONFIRMED_POLICY: FulfillmentPolicy = {
+  ...FULFILLMENT_POLICY,
+  cutoff: { ...FULFILLMENT_POLICY.cutoff, review: CONFIRMED_REVIEW },
+  pickupPrep: { ...FULFILLMENT_POLICY.pickupPrep, review: CONFIRMED_REVIEW },
+  zones: { ...FULFILLMENT_POLICY.zones, review: CONFIRMED_REVIEW },
+};
 
 describe("backend inventory math", () => {
   const lots: InventoryLot[] = [
@@ -140,16 +152,27 @@ describe("catalog import reconciliation", () => {
     }
   });
 
-  it("publishes only exact-model mapped imagery and never falls back to a broad family assignment", async () => {
+  it("publishes manufacturer imagery only with an honest exact/family split", async () => {
     const skus = getStorefrontSkus();
     const branded = skus.filter((sku) => sku.brand !== "Unbranded");
     const verified = branded.filter((sku) => sku.imageVerified);
     assert.equal(branded.length, 78);
-    assert.equal(verified.length, 56);
-    assert.ok(verified.every((sku) => sku.imageExactModel && sku.images.length > 0));
-    assert.ok(branded.filter((sku) => !sku.imageVerified).every((sku) => sku.images.length === 0));
+    // 56 records carry manufacturer media; 9 of those show something else (6
+    // caught by file name, 3 by visual review in data/catalog/media-review.json)
+    // and are withheld until the catalog owner supplies the right photo.
+    assert.equal(verified.length, 47);
+    assert.equal(verified.filter((sku) => sku.imageExactModel).length, 9);
+    assert.ok(verified.every((sku) => sku.images.length > 0));
+    // Exact means no other model uses the file.
+    const modelsByImage = new Map<string, Set<string>>();
+    for (const sku of verified) for (const image of sku.images) modelsByImage.set(image, (modelsByImage.get(image) ?? new Set()).add(sku.modelNumber));
+    for (const sku of verified.filter((item) => item.imageExactModel)) {
+      assert.ok(sku.images.every((image) => modelsByImage.get(image)!.size === 1), `${sku.sku} shares an image but is labelled exact`);
+    }
+    assert.ok(branded.filter((sku) => sku.mediaVerification === "missing" && sku.images.length > 0).every((sku) => !sku.imageVerified));
     assert.ok(skus.filter((sku) => sku.brand === "Unbranded").every((sku) => !sku.imageVerified && sku.images.length === 0));
     assert.equal(catalogReconciliation.manufacturerImageCoverage, 56);
+    // The import-time flag; the storefront classification above is stricter.
     assert.equal(catalogReconciliation.exactModelImageCoverage, 56);
     for (const image of new Set(verified.flatMap((sku) => sku.images))) {
       const bytes = await readFile(new URL(`../public${image}`, import.meta.url));
@@ -318,7 +341,8 @@ describe("fulfillment windows", () => {
     const windows = fulfillmentWindows("pickup", "94560", now);
     assert.ok(windows.length > 0);
     assert.ok(windows.every((window) => new Date(window.startAt) > now));
-    assert.equal(isFulfillmentWindowAvailable("pickup", "94560", windows[0].id, now), true);
+    assert.equal(isFulfillmentWindowAvailable("pickup", "94560", windows[0].id, now), false, "draft operations data cannot authorize checkout");
+    assert.equal(isFulfillmentWindowAvailable("pickup", "94560", windows[0].id, now, CONFIRMED_POLICY, CONFIRMED_BRANCH), true);
   });
 
   it("does not offer same-day pickup after the Pacific cutoff", () => {
@@ -441,5 +465,30 @@ describe("trade pricing fallback", () => {
 
   it("never charges a trade buyer above list on a bad trade row", () => {
     assert.equal(resolveUnitPrice(true, 9999, 2500), 2500);
+  });
+});
+
+describe("fulfillment cutoff is stated once", () => {
+  // The homepage countdown and /delivery render the same cutoff from different
+  // code paths. They were briefly two literals -- "2:00 PM" in site.ts and a
+  // hardcoded cutoffHour={14} on the branch card -- so one edit could leave the
+  // two pages promising different times to the same customer.
+  it("derives the display string from the hour", () => {
+    assert.equal(FULFILLMENT.deliveryCutoff, formatCutoffHour(FULFILLMENT.deliveryCutoffHour));
+  });
+
+  it("formats hours the way the counter says them", () => {
+    // On-the-hour times read without ":00" -- the counter says "2 PM", and the
+    // site states it that way everywhere it appears.
+    assert.equal(formatCutoffHour(14), "2 PM");
+    assert.equal(formatCutoffHour(9), "9 AM");
+    assert.equal(formatCutoffHour(12), "12 PM");
+    assert.equal(formatCutoffHour(0), "12 AM");
+  });
+
+  it("keeps the cutoff inside business hours", () => {
+    // A cutoff outside opening hours would be unmeetable, and the countdown
+    // would tick toward a time nobody is at the counter.
+    assert.ok(FULFILLMENT.deliveryCutoffHour > 7 && FULFILLMENT.deliveryCutoffHour < 17);
   });
 });

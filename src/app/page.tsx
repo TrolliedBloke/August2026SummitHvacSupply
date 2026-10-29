@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -9,11 +8,11 @@ import {
   Store,
   Truck,
 } from "lucide-react";
-import { LinkButton } from "@/components/ui";
+import { Container, LinkButton } from "@/components/ui";
 import { CounterPanel } from "@/components/home/counter-panel";
+import { AudiencePaths } from "@/components/home/audience-paths";
 import { CounterStock } from "@/components/home/counter-stock";
 import { FulfillmentCard } from "@/components/home/fulfillment-card";
-import { TradePricingCard } from "@/components/home/trade-pricing-card";
 import { A2lStrip, HelpStrip } from "@/components/home/a2l-strip";
 import { getCategoryHeroImage, type CatalogCategory } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
@@ -30,27 +29,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const doors = [
-  {
-    eyebrow: "I know what I need",
-    title: "Browse products by category",
-    body: "Equipment, parts, tools, and common job materials.",
-    href: "/products",
-    cta: "Shop categories",
-    image: "/site/sketches/browse-categories.png",
-    mediaSide: "left" as const,
-  },
-  {
-    eyebrow: "I am replacing a system",
-    title: "Find the right system for your home",
-    body: "Answer a few basics. Get matched with equipment and installer help.",
-    href: "/homeowners#homeowner-request",
-    cta: "Start system selector",
-    image: "/site/sketches/home-system-green.png",
-    mediaSide: "right" as const,
-  },
-];
-
 /* `image` is the fallback only. Each tile prefers a verified product photo from
    its own category (see getCategoryHeroImage) and drops to the sketch when the
    category has no exact-model imagery yet -- currently line sets and controls. */
@@ -64,33 +42,6 @@ const categories = [
   { title: "Line sets", body: "Copper line sets by connection size", category: "line-sets", image: "/site/sketches/line-set.png" },
   { title: "Installation supplies", body: "Pads, covers, fittings, wire, and conduit", category: "installation-supplies", image: "/site/sketches/installation-supplies.png" },
 ] as const;
-
-const branches = [
-  {
-    name: "Newark",
-    stock: "Retail pickup and trade orders",
-    address: SITE.address.full,
-    note: "Will-call until 5:00pm",
-  },
-  {
-    name: "Bay Area delivery",
-    stock: "Local routes available",
-    address: "San Jose, Oakland, Fremont, peninsula",
-    note: "Ask before ordering",
-  },
-  {
-    name: "Contractor pickup",
-    stock: "Counter workflow ready",
-    address: "Orders, documents, and job quotes",
-    note: "Sign in for pro pricing",
-  },
-  {
-    name: "Homeowner help",
-    stock: "One-system buyers welcome",
-    address: "Equipment guidance and installer referral",
-    note: "No model number needed",
-  },
-];
 
 /* The reason-to-buy row. Each icon is green, which is a deliberate departure
    from THEME.md ("nothing else is green") -- the flat ink row read as fine
@@ -141,97 +92,86 @@ export default function HomePage() {
       />
 
       <section className="bg-canvas">
-        <CounterContainer className="pb-2 pt-8 md:pt-10">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10">
+        <Container className="pb-0 pt-14">
+          <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1.65fr)_minmax(320px,0.85fr)] lg:gap-8">
             <div className="min-w-0">
-              <h1 className="counter-heading text-[2.1rem] leading-[1.02] text-ink-1 sm:text-[2.6rem]">
-                Find it. Verify it.
-                <br />
-                Get it today.
+              <h1 className="max-w-[760px] font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink-1 sm:text-display">
+                HVAC equipment and parts,{" "}
+                <br className="hidden sm:block" />ready from Newark.
               </h1>
-              <p className="mt-3 text-[0.98rem] leading-7 text-ink-2">
-                Search by part number, equipment model, or product.
+              <p className="mt-8 text-base leading-6 text-ink-2">
+                Trade pricing for approved contractors. List pricing for homeowners.
               </p>
-              <div className="mt-5">
-                <CounterPanel />
-              </div>
+              <AudiencePaths />
             </div>
 
-            <div className="flex flex-col gap-3">
+            {/* The rail's top aligns with the h1's cap height rather than its
+                line box, which is what the reference shows. */}
+            <div className="min-w-0 lg:-mt-2">
               <FulfillmentCard />
-              <TradePricingCard />
             </div>
           </div>
-        </CounterContainer>
+        </Container>
       </section>
 
       <CounterStock />
 
-      <A2lStrip />
-
-      <HelpStrip />
-
-      <MobileBranchStrip />
-
-      <section className="bg-canvas pb-4 pt-5 md:pb-5">
-        <CounterContainer className="grid gap-2 lg:grid-cols-2">
-          {doors.map((door) => (
-            <DoorCard key={door.title} {...door} />
-          ))}
-        </CounterContainer>
+      <section className="bg-canvas pb-5 pt-10">
+        <Container>
+          <CounterPanel />
+        </Container>
       </section>
 
-      <section className="bg-canvas pb-4 pt-3">
-        <CounterContainer>
+      <section className="bg-canvas py-7">
+        <Container>
           <div className="mb-4 flex items-center justify-between gap-4">
-            <h2 className="text-2xl font-medium leading-tight text-ink-1">Shop by category</h2>
+            <h2 className="counter-heading text-2xl leading-tight text-ink-1">Shop by category</h2>
             <Link href="/products" className="hidden items-center gap-2 text-sm font-medium text-ink-1 md:inline-flex">
               View all categories
               <ArrowRight size={15} />
             </Link>
           </div>
-          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
             {categories.map((item) => (
               <CategoryCard key={item.title} {...item} />
             ))}
           </div>
-        </CounterContainer>
+        </Container>
       </section>
 
-      <BranchSection />
+      <A2lStrip />
+
+      <HelpStrip />
 
       <section className="bg-canvas py-9">
-        <CounterContainer>
-          <h2 className="counter-heading text-[1.25rem] leading-none text-ink-1">
+        <Container>
+          <h2 className="counter-heading text-2xl leading-tight text-ink-1">
             Why buy from Summit
           </h2>
-          {/* Cards, not a bare row. The border is what turns four sentences into
-              four reasons -- it gives each one a boundary the eye can land on,
-              which a flat grid of text does not. */}
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {/* No card borders: the icon and the spacing already separate the four
+              reasons, and outlining every block on the page left nothing to
+              stand out. Borders are kept for things you click. */}
+          <div className="mt-5 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {proof.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-(--r-md) border border-line bg-surface-1 p-5"
-              >
+              <div key={item.title}>
                 <span className="grid size-8 place-items-center text-brand [&_svg]:size-7 [&_svg]:stroke-[1.5]">
                   {item.icon}
                 </span>
-                <p className="mt-3.5 text-[0.95rem] font-medium text-ink-1">{item.title}</p>
+                <p className="mt-3.5 text-base font-medium text-ink-1">{item.title}</p>
                 <p className="mt-1 text-sm leading-6 text-ink-2">{item.body}</p>
               </div>
             ))}
           </div>
-        </CounterContainer>
+        </Container>
       </section>
 
       <section className="bg-canvas py-8">
-        <CounterContainer>
-          <div className="rounded-(--r-md) border border-line bg-surface-1 p-5 md:flex md:items-center md:justify-between md:gap-8">
+        <Container>
+          <div className="border-t border-line pt-8 md:flex md:items-center md:justify-between md:gap-8">
             <div className="flex items-start gap-4">
               <Truck size={38} strokeWidth={1.4} className="mt-1 shrink-0 text-ink-1" aria-hidden="true" />
               <div>
-                <h2 className="text-lg font-medium text-ink-1">Need help finding something?</h2>
+                <h2 className="text-lg font-semibold leading-snug text-ink-1">Need help finding something?</h2>
                 <p className="mt-1 text-sm leading-6 text-ink-2">
                   Call {SITE.phone} or submit your local branch request.
                 </p>
@@ -241,60 +181,21 @@ export default function HomePage() {
               Contact us
             </LinkButton>
           </div>
-        </CounterContainer>
+        </Container>
       </section>
 
       <section className="bg-canvas pb-10">
-        <CounterContainer>
-          <div className="grid gap-2 md:grid-cols-3">
+        <Container>
+          <div className="grid gap-6 md:grid-cols-3">
             {compliance.map((item) => (
-              <p key={item} className="rounded-(--r-md) border border-line bg-surface-1 p-4 text-sm leading-6 text-ink-2">
+              <p key={item} className="text-xs leading-5 text-ink-3">
                 {item}
               </p>
             ))}
           </div>
-        </CounterContainer>
+        </Container>
       </section>
     </>
-  );
-}
-
-function DoorCard({
-  eyebrow,
-  title,
-  body,
-  href,
-  cta,
-  image,
-  mediaSide,
-}: {
-  eyebrow: string;
-  title: string;
-  body: string;
-  href: string;
-  cta: string;
-  image: string;
-  mediaSide: "left" | "right";
-}) {
-  return (
-    <article className={`grid min-h-[190px] items-center gap-4 rounded-(--r-md) border border-line bg-surface-1 p-5 md:p-6 ${
-      mediaSide === "right"
-        ? "grid-cols-[minmax(0,1fr)_120px] md:grid-cols-[minmax(0,1fr)_190px]"
-        : "grid-cols-[96px_minmax(0,1fr)] md:grid-cols-[118px_minmax(0,1fr)]"
-    }`}>
-      <div className={`relative aspect-square w-full ${mediaSide === "right" ? "order-2" : ""}`} aria-hidden="true">
-        <Image src={image} alt="" fill loading="lazy" sizes="(min-width: 768px) 190px, 120px" className="object-contain" />
-      </div>
-      <div className={`min-w-0 ${mediaSide === "right" ? "order-1" : ""}`}>
-        <p className="text-sm font-medium text-ink-1">{eyebrow}</p>
-        <h2 className="mt-2 max-w-[360px] text-[1.42rem] font-medium leading-tight text-ink-1 sm:text-[1.55rem]">{title}</h2>
-        <p className="mt-2 text-sm leading-6 text-ink-2">{body}</p>
-        <LinkButton href={href} variant="secondary" className="mt-4" data-conversion-hook="buyer-door-click">
-          {cta}
-          <ArrowRight size={15} />
-        </LinkButton>
-      </div>
-    </article>
   );
 }
 
@@ -315,10 +216,10 @@ function CategoryCard({
   return (
     <Link
       href={`/products?category=${category}`}
-      className="group grid min-h-[124px] grid-cols-[58px_minmax(0,1fr)_18px] items-center gap-3 rounded-(--r-sm) border border-line bg-surface-1 p-4 transition-colors duration-150 hover:border-line-strong sm:grid-cols-[68px_minmax(0,1fr)_18px]"
+      className="group relative flex min-h-[108px] flex-col items-start gap-2 rounded-(--r-sm) border border-line bg-surface-1 p-3 pr-8 transition-colors duration-150 hover:border-line-strong sm:grid sm:min-h-[124px] sm:grid-cols-[68px_minmax(0,1fr)_18px] sm:items-center sm:gap-3 sm:p-4"
       data-conversion-hook="category-tile-click"
     >
-      <span className="relative block aspect-square w-full" aria-hidden="true">
+      <span className="relative block size-11 shrink-0 sm:aspect-square sm:size-auto sm:w-full" aria-hidden="true">
         <Image
           src={photo ?? image}
           alt=""
@@ -330,75 +231,9 @@ function CategoryCard({
       </span>
       <span className="min-w-0">
         <span className="block text-base font-medium leading-tight text-ink-1">{title}</span>
-        <span className="mt-1 block text-sm leading-5 text-ink-2">{body}</span>
+        <span className="mt-1 hidden text-sm leading-5 text-ink-2 sm:block">{body}</span>
       </span>
-      <ArrowRight size={16} strokeWidth={1.8} className="text-ink-1" aria-hidden="true" />
+      <ArrowRight size={16} strokeWidth={1.8} className="absolute right-3 top-3 text-ink-1 sm:static" aria-hidden="true" />
     </Link>
-  );
-}
-
-function BranchSection() {
-  return (
-    <section className="hidden bg-canvas py-7 md:block">
-      <CounterContainer>
-        <div className="mb-5 flex items-center justify-between gap-4">
-          <h2 className="text-2xl font-medium leading-tight text-ink-1">Pick up at a branch near you</h2>
-          <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-medium text-ink-1">
-            View locations
-            <ArrowRight size={15} />
-          </Link>
-        </div>
-        <div className="grid gap-2 lg:grid-cols-4">
-          {branches.map((branch) => (
-            <BranchCard key={branch.name} {...branch} />
-          ))}
-        </div>
-      </CounterContainer>
-    </section>
-  );
-}
-
-function MobileBranchStrip() {
-  return (
-    <section className="border-b border-line bg-surface-1 py-4 md:hidden">
-      <CounterContainer>
-        <BranchCard {...branches[0]} />
-      </CounterContainer>
-    </section>
-  );
-}
-
-function BranchCard({
-  name,
-  stock,
-  address,
-  note,
-}: {
-  name: string;
-  stock: string;
-  address: string;
-  note: string;
-}) {
-  return (
-    <article className="rounded-(--r-sm) border border-line bg-surface-1 p-4">
-      <h3 className="text-sm font-medium text-ink-1">{name}</h3>
-      <p className="mt-1 text-sm font-medium text-brand">{stock}</p>
-      <p className="mt-3 min-h-10 text-sm leading-5 text-ink-1">{address}</p>
-      <p className="mt-3 text-sm text-ink-2">{note}</p>
-    </article>
-  );
-}
-
-function CounterContainer({
-  className = "",
-  children,
-}: {
-  className?: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className={`mx-4 w-auto max-w-[var(--counter-max)] px-0 sm:mx-auto sm:w-full sm:px-6 lg:px-[var(--counter-pad)] ${className}`}>
-      {children}
-    </div>
   );
 }

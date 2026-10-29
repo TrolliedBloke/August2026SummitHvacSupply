@@ -1,36 +1,30 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-import { createQuoteRequest } from "@/lib/backend/services";
+import { submitQuoteDraft } from "@/lib/backend/quote";
+import { clientKey, rateLimit } from "@/lib/backend/rate-limit";
+import { BodyNotJsonError, BodyTooLargeError, readJsonBody } from "@/lib/backend/request-body";
+import { fieldErrorsFrom } from "@/lib/forms/result";
 
-const requests = new Map<string, { count: number; windowStart: number }>();
-
-function isRateLimited(ip: string) {
-  const now = Date.now();
-  const entry = requests.get(ip);
-  if (!entry || now - entry.windowStart > 60_000) {
-    requests.set(ip, { count: 1, windowStart: now });
-    return false;
-  }
-  entry.count += 1;
-  return entry.count > 8;
-}
-
+/**
+ * Typed quote requests. 400 responses carry `fieldErrors` for the form and,
+ * when lines were the problem, `lines` with each line's outcome so the page
+ * can show exactly which ones to fix.
+ */
 export async function POST(request: Request) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
-  if (isRateLimited(ip)) return NextResponse.json({ ok: false, error: "Too many quote requests. Please wait a minute." }, { status: 429 });
-  const contentLength = Number(request.headers.get("content-length") ?? 0);
-  if (contentLength > 50_000) return NextResponse.json({ ok: false, error: "Quote request is too large." }, { status: 413 });
+  const limit = rateLimit(clientKey(request, "quote-request"), 8, 60);
+  if (!limit.allowed) {
+    return NextResponse.json({ ok: false, error: "Too many quote requests. Please wait a minute." }, { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } });
+  }
   try {
-    const payload = await request.json();
-    const result = await createQuoteRequest(payload);
-    return NextResponse.json({ ok: true, ...result });
+    const receipt = await submitQuoteDraft(await readJsonBody(request, 64_000));
+    return NextResponse.json({ ok: true, ...receipt });
   } catch (error) {
-    // Log the real cause server-side; never return it. Provider and
-    // Postgres messages carry table, column and constraint names.
+    if (error instanceof ZodError) return NextResponse.json({ ok: false, error: "Check the highlighted fields.", fieldErrors: fieldErrorsFrom(error) }, { status: 400 });
+    const lineErrors = (error as { lineErrors?: unknown }).lineErrors;
+    if (lineErrors) return NextResponse.json({ ok: false, error: "Some products need attention.", fieldErrors: { lines: "Fix or remove the highlighted products." }, lines: lineErrors }, { status: 400 });
+    if (error instanceof BodyTooLargeError) return NextResponse.json({ ok: false, error: "Quote request is too large." }, { status: 413 });
+    if (error instanceof BodyNotJsonError) return NextResponse.json({ ok: false, error: "Invalid quote request" }, { status: 400 });
     console.error("[api/quote-requests] failed", error);
-    if (error instanceof ZodError) {
-      return NextResponse.json({ ok: false, error: "Invalid quote request", issues: error.issues }, { status: 400 });
-    }
-    return NextResponse.json({ ok: false, error: "Quote request failed" }, { status: 500 });
+    return NextResponse.json({ ok: false, error: "We could not send the request. Your entries are still here -- try again." }, { status: 500 });
   }
 }

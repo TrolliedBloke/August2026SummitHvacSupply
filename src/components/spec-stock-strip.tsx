@@ -29,10 +29,10 @@ function SpecCell({
 }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-ink-4">
+      <span className="text-xs font-medium text-ink-4">
         {label}
       </span>
-      <span className="tnum font-mono text-[15px] font-semibold leading-none text-ink-1">
+      <span className="tnum text-base font-semibold leading-none text-ink-1">
         {value}
       </span>
     </div>

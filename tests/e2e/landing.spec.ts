@@ -11,7 +11,7 @@ import { expect, test } from "@playwright/test";
 test("landing page never claims a stock count the catalog cannot verify", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
-  const stockRow = page.getByText("Stock at order").first();
+  const stockRow = page.getByText("Stock confirmed at order", { exact: true }).first();
   await expect(stockRow).toBeVisible();
 
   // This suite runs without Supabase credentials, so the live-inventory overlay
@@ -33,37 +33,85 @@ test("landing page never claims a stock count the catalog cannot verify", async 
 test("landing page surfaces delivery alongside pickup, not pickup alone", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
-  const branch = page.getByRole("article").filter({ hasText: "NEWARK BRANCH" }).first();
-  await expect(branch.getByText("Pickup", { exact: true })).toBeVisible();
-  await expect(branch.getByText("Delivery", { exact: true })).toBeVisible();
+  const branch = page.getByRole("article").filter({ hasText: "Newark branch" }).first();
+  // Stable link name; the dated order-by line is its description.
+  await expect(branch.getByRole("link", { name: "Delivery and pickup" })).toBeVisible();
+  await expect(branch.getByText(/Delivery timing confirmed after ZIP and stock review/)).toBeVisible();
+  await expect(branch.getByText(/Will-call timing confirmed with your order/)).toBeVisible();
 
-  // The address was absent entirely while the card was pickup-only; once a
-  // visitor is choosing between two methods, "where is it" is part of the choice.
+  // The address and Directions were required by the original brief and were
+  // dropped when the fold was rebuilt delivery-first. Someone weighing pickup
+  // against delivery is deciding whether the drive is worth it, so the branch
+  // location belongs in the fold, not only in the strip further down.
   await expect(branch.getByText(/5437 Central Ave/)).toBeVisible();
   await expect(branch.getByRole("link", { name: "Directions" })).toBeVisible();
 
-  // Product cards state both methods too.
-  await expect(page.getByText("PICKUP OR DELIVERY").first()).toBeVisible();
-
-  await branch.getByRole("link", { name: "Delivery details" }).click();
+  await branch.getByRole("link", { name: "Delivery and pickup" }).click();
   await expect(page).toHaveURL(/\/delivery$/);
   await expect(page.getByRole("heading", { name: /Delivery and pickup/i })).toBeVisible();
 });
 
+test("landing uses the header search once and routes product-led hero actions", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  await expect(page.locator("main input[type=search]")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Shop retail" })).toHaveAttribute("href", "/products");
+  await expect(page.getByRole("link", { name: "Contractor sign in" })).toHaveAttribute("href", "/portal/login?next=/products");
+  await expect(page.getByRole("radio")).toHaveCount(0);
+});
+
+test("contractor ordering opens, switches, and collapses without a duplicate search", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  const quick = page.getByRole("button", { name: "Quick order" });
+  const upload = page.getByRole("button", { name: "Upload CSV" });
+  await expect(quick).toHaveAttribute("aria-expanded", "false");
+  await expect(page.getByLabel("Part numbers and quantities")).toHaveCount(0);
+
+  await quick.click();
+  await expect(quick).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByLabel("Part numbers and quantities")).toBeVisible();
+
+  await upload.click();
+  await expect(upload).toHaveAttribute("aria-expanded", "true");
+  await expect(quick).toHaveAttribute("aria-expanded", "false");
+  await expect(page.getByLabel("Part numbers and quantities")).toHaveCount(0);
+  await expect(page.locator("#csv-upload")).toHaveCount(1);
+
+  await upload.click();
+  await expect(upload).toHaveAttribute("aria-expanded", "false");
+  await expect(page.locator("#csv-upload")).toHaveCount(0);
+});
+
 test("quick order resolves real SKUs and reports the ones it cannot match", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  await page.getByRole("tab", { name: "Quick order" }).click();
+  await page.getByRole("button", { name: "Quick order" }).click();
 
   await page
     .getByLabel("Part numbers and quantities")
     .fill("TCL24KAHU, 2\nNOTAREALSKU, 1");
-  await page.getByRole("button", { name: "Add to order" }).click();
+  await page.getByRole("button", { name: "Review lines" }).click();
 
-  // A part number the catalog does not carry must be named, not silently
-  // dropped -- a contractor pasting a job list has to know what did not land.
-  await expect(page.getByText(/Not matched:/)).toBeVisible();
-  await expect(page.getByText("NOTAREALSKU", { exact: true })).toBeVisible();
+  // A part number the catalog does not carry is named in the review table,
+  // not silently dropped, and nothing is added until the user confirms.
+  await expect(page.getByText(/Not in the catalog:/)).toBeVisible();
+  await page.getByRole("button", { name: /Add 1 line to order/ }).click();
   await expect(page.getByRole("link", { name: "TCL 2 Ton Air Handler" }).first()).toBeVisible();
+});
+
+test("CSV upload parses a headed job list before adding it to the order", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: "Upload CSV" }).click();
+
+  await page.locator("#csv-upload").setInputFiles({
+    name: "newark-job.csv",
+    mimeType: "text/csv",
+    buffer: Buffer.from("sku,qty\nTCL24KAHU,2\nNOTAREALSKU,1"),
+  });
+
+  await expect(page.getByText("newark-job.csv", { exact: true })).toBeVisible();
+  await expect(page.getByText("2 lines", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Not in the catalog:/)).toBeVisible();
 });
 
 test("delivery page marks unconfirmed terms rather than presenting them as final", async ({ page }) => {

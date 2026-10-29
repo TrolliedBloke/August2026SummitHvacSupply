@@ -3,12 +3,16 @@ import { ReviewForm } from "@/components/review-form";
 import { getStorefrontSku } from "@/lib/storefront/catalog";
 
 /**
- * Landing page for the day-14 review request email. noindex: it is reached
- * from a personal email with an order number attached and has no business in
- * search results.
+ * "Write a product review" -- the landing page for the day-14 review request
+ * email. It is a PRODUCT review (rating, name, body, consent, moderated), not
+ * a checkout "review your order" step: order review lives inside the checkout
+ * itself (components/checkout-client.tsx). The URL stays /review to keep
+ * emailed links working; the name everywhere else is unambiguous.
+ *
+ * noindex: reached from a personal email with an order number attached.
  */
 export const metadata = {
-  title: "Write a review",
+  title: "Write a product review",
   robots: { index: false, follow: false },
 };
 
@@ -25,9 +29,9 @@ export default async function ReviewPage({
   return (
     <Container className="py-10 lg:py-14">
       <div className="max-w-2xl">
-        <Eyebrow>Your order</Eyebrow>
-        <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
-          Tell the next buyer what actually happened.
+        <Eyebrow>Write a product review</Eyebrow>
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
+          {sku ? `Review the ${sku.title}` : "Tell the next buyer what actually happened."}
         </h1>
         <p className="mt-3 text-ink-2">
           We publish reviews as written — including the unflattering ones — after

@@ -3,11 +3,7 @@ import { unstable_cache } from "next/cache";
 import { getSeededSeriesCardSummary } from "./catalog";
 import { createDemoOperationsData } from "./mock-data";
 import { invoiceBalance, summarizeInventory } from "./math";
-import {
-  contactRequestSchema,
-  dealerApplicationSchema,
-  quoteRequestSchema,
-} from "./schemas";
+import { quoteRequestSchema } from "./schemas";
 import {
   createServerSupabaseClient,
   createServiceRoleSupabaseClient,
@@ -355,76 +351,10 @@ export async function createQuoteRequest(input: unknown) {
   };
 }
 
-export async function createDealerApplication(input: unknown) {
-  const parsed = dealerApplicationSchema.parse(input);
-  // Public form writes use the SERVICE ROLE, not the anon client.
-  // The anon key is in the browser, so an anon INSERT policy means anyone can
-  // POST straight to /rest/v1/<table> and skip this function entirely --
-  // no zod validation, no rate limit, no canonical SKU resolution. Writing as
-  // the service role lets migration 017 revoke anon INSERT, which makes this
-  // server action the only way in.
-  const supabase = createServiceRoleSupabaseClient();
+/** Moved to ./dealer.ts (submitDealerApplication), which owns the application lifecycle. */
 
-  if (supabase) {
-    const id = crypto.randomUUID();
-    const { error } = await supabase
-      .from("dealer_applications")
-      .insert({
-        id,
-        company: parsed.company,
-        contact_name: parsed.contactName,
-        email: parsed.email,
-        phone: parsed.phone,
-        license_number: parsed.licenseNumber,
-        service_area: parsed.serviceArea,
-        business_type: parsed.businessType,
-        monthly_volume: parsed.monthlyVolume,
-        brands: parsed.brands,
-        notes: parsed.notes,
-      });
-    if (error) throw new Error(error.message);
-    return { id, mode: "supabase" as const };
-  }
-
-  return {
-    id: `dealer-${Date.now()}`,
-    mode: "seeded" as const,
-    status: "pending_review",
-    company: parsed.company,
-  };
-}
-
-export async function createContactRequest(input: unknown) {
-  const parsed = contactRequestSchema.parse(input);
-  // Public form writes use the SERVICE ROLE, not the anon client.
-  // The anon key is in the browser, so an anon INSERT policy means anyone can
-  // POST straight to /rest/v1/<table> and skip this function entirely --
-  // no zod validation, no rate limit, no canonical SKU resolution. Writing as
-  // the service role lets migration 017 revoke anon INSERT, which makes this
-  // server action the only way in.
-  const supabase = createServiceRoleSupabaseClient();
-
-  if (supabase) {
-    const id = crypto.randomUUID();
-    const { error } = await supabase
-      .from("contact_requests")
-      .insert({
-        id,
-        topic: parsed.topic,
-        name: parsed.name,
-        email: parsed.email,
-        message: parsed.message,
-      });
-    if (error) throw new Error(error.message);
-    return { id, mode: "supabase" as const };
-  }
-
-  return {
-    id: `contact-${Date.now()}`,
-    mode: "seeded" as const,
-    title: `${parsed.topic}: ${parsed.name}`,
-  };
-}
+/** Moved to ./contact.ts, which owns routing, context and idempotency. */
+export { createContactRequest } from "./contact";
 
 export function roleCanAccessAccount(role: PersonaRole, accountId: string, requestedAccountId: string): boolean {
   return role === "staff" || accountId === requestedAccountId;

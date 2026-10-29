@@ -22,6 +22,18 @@ const LEGACY_SERIES_REDIRECTS: Array<[string, string]> = [
   ["central-system", "central-heat-pumps"],
 ];
 
+/**
+ * Ad hosts join the CSP only when the owner has turned ads on at build time.
+ * The tags still load only when every runtime gate in lib/ads-config.ts is
+ * open and the visitor agreed (components/ad-tags.tsx); this just stops the
+ * policy from blocking them once that day comes. No wildcards.
+ */
+const ADS_ON = process.env.ADS_ENABLED === "true";
+const AD_SCRIPT_HOSTS = ADS_ON ? " https://connect.facebook.net https://www.googletagmanager.com" : "";
+const AD_CONNECT_HOSTS = ADS_ON ? " https://www.facebook.com https://www.google.com https://googleads.g.doubleclick.net https://www.googletagmanager.com" : "";
+const AD_IMG_HOSTS = ADS_ON ? " https://www.facebook.com https://www.google.com https://googleads.g.doubleclick.net" : "";
+const AD_FRAME_HOSTS = ADS_ON ? " https://td.doubleclick.net" : "";
+
 const nextConfig: NextConfig = {
   // Release checks can build beside a running local dev server without both
   // processes clearing and rewriting the same .next directory.
@@ -54,12 +66,28 @@ const nextConfig: NextConfig = {
               // across environments) and the dev overlay fails loudly without
               // it -- verified in the browser console. React never uses eval()
               // in a production build, so the production policy stays strict.
-              `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://js.stripe.com`,
+              //
+              // va.vercel-scripts.com is likewise development ONLY.
+              // @vercel/analytics loads two different scripts: in production it
+              // injects /_vercel/insights/script.js, same-origin and already
+              // covered by 'self'; in development it loads script.debug.js from
+              // that host, which this policy refused, so the dev console
+              // reported analytics as blocked while production was fine.
+              // Allowing the host in production would widen the policy to fix a
+              // problem production does not have.
+              `script-src 'self' 'unsafe-inline'${
+                process.env.NODE_ENV === "development"
+                  ? " 'unsafe-eval' https://va.vercel-scripts.com"
+                  : ""
+              } https://js.stripe.com${AD_SCRIPT_HOSTS}`,
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: blob:",
+              `img-src 'self' data: blob:${AD_IMG_HOSTS}`,
               "font-src 'self' data:",
-              "connect-src 'self' https://api.stripe.com https://*.supabase.co",
-              "frame-src https://js.stripe.com https://hooks.stripe.com",
+              // Realtime (admin live refresh) is a websocket: an https: source does not cover wss: in Chromium.
+              `connect-src 'self' https://api.stripe.com https://*.supabase.co wss://*.supabase.co${AD_CONNECT_HOSTS}`,
+              // The Newark location page embeds one Google Maps frame and
+              // provides a plain directions link as its fallback.
+              `frame-src https://js.stripe.com https://hooks.stripe.com https://www.google.com${AD_FRAME_HOSTS}`,
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",

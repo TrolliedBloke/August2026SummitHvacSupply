@@ -35,14 +35,26 @@ Deno.serve(async (req) => {
     .single();
   if (!contact?.email) return new Response(JSON.stringify({ skipped: "no contact" }));
 
-  await resend.emails.send({
+  const subject = `Payment received - Invoice ${inv.invoice_number}`;
+  const { data: sentEmail, error: sendError } = await resend.emails.send({
     from: FROM,
     to: contact.email,
-    subject: `Payment received - Invoice ${inv.invoice_number}`,
+    subject,
     html: `<h2>Payment received</h2>
       <p>Invoice ${inv.invoice_number}</p>
       <p>Paid to date: <strong>${money(Number(inv.paid))}</strong></p>
       <p>Remaining balance: <strong>${money(Number(inv.balance))}</strong></p>`,
+  });
+  // One row per send for the staff customer view (migration 036). Best effort.
+  await supabase.from("email_messages").insert({
+    to_email: contact.email,
+    subject,
+    kind: "receipt",
+    status: sendError ? "failed" : "sent",
+    provider_id: sentEmail?.id ?? null,
+    error: sendError?.name ?? null,
+    related_type: "invoice",
+    related_id: invoiceId,
   });
 
   return new Response(JSON.stringify({ sent: true }), {

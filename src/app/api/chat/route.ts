@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { buildChatSystemPrompt, logChatMessage } from "@/lib/backend/chat";
+import { chatRequestParams, logChatMessage } from "@/lib/backend/chat";
+import { takeSharedRateLimit } from "@/lib/backend/shared-rate-limit";
 import { SITE } from "@/lib/site";
 
 /**
@@ -14,24 +15,19 @@ export const maxDuration = 60;
 const MAX_TURNS = 12;
 const MAX_MESSAGE_CHARS = 2000;
 
-/* Simple per-instance rate limit: 20 requests/minute per IP. */
-const hits = new Map<string, { count: number; windowStart: number }>();
-function rateLimited(ip: string): boolean {
-  const now = Date.now();
-  const entry = hits.get(ip);
-  if (!entry || now - entry.windowStart > 60_000) {
-    hits.set(ip, { count: 1, windowStart: now });
-    return false;
-  }
-  entry.count++;
-  return entry.count > 20;
-}
+/**
+ * Limits shared by every server instance (migration 046): 20 messages a
+ * minute per visitor, and a daily cap on all chat calls so a scraper or a
+ * runaway client can't run up the API bill. CHAT_DAILY_CAP overrides the cap.
+ */
+const PER_MINUTE = 20;
+const DAILY_CAP = Number(process.env.CHAT_DAILY_CAP) > 0 ? Number(process.env.CHAT_DAILY_CAP) : 1000;
 
 const OFFLINE_MESSAGE = `Our AI assistant is offline right now. For instant help, call or text ${SITE.phone} (${SITE.hours}). Texting is fastest during business hours.`;
 
 export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
-  if (rateLimited(ip)) {
+  if (!(await takeSharedRateLimit(`chat:ip:${ip}`, PER_MINUTE, 60))) {
     return new Response("Too many messages, give it a minute, or call us.", { status: 429 });
   }
 
@@ -66,6 +62,12 @@ export async function POST(request: Request) {
   const lastUser = history[history.length - 1].content;
   void logChatMessage(sessionId, "user", lastUser);
 
+  if (process.env.ANTHROPIC_API_KEY && !(await takeSharedRateLimit("chat:global:day", DAILY_CAP, 86_400))) {
+    // Spend cap reached: the same handoff as when the assistant is offline.
+    void logChatMessage(sessionId, "assistant", OFFLINE_MESSAGE);
+    return new Response(OFFLINE_MESSAGE, { headers: { "Content-Type": "text/plain; charset=utf-8", "X-Chat-Mode": "capped" } });
+  }
+
   if (!process.env.ANTHROPIC_API_KEY) {
     // Keyless fallback: the widget still gives the buyer a real path forward.
     void logChatMessage(sessionId, "assistant", OFFLINE_MESSAGE);
@@ -81,21 +83,7 @@ export async function POST(request: Request) {
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
       try {
-        const messageStream = client.messages.stream({
-          model: "claude-opus-4-8",
-          max_tokens: 1024,
-          // Retail chat: latency matters more than depth; low effort keeps
-          // replies snappy while the grounded prompt carries the facts.
-          output_config: { effort: "low" },
-          system: [
-            {
-              type: "text",
-              text: buildChatSystemPrompt(),
-              cache_control: { type: "ephemeral" },
-            },
-          ],
-          messages: history,
-        });
+        const messageStream = client.messages.stream(chatRequestParams(history));
         for await (const event of messageStream) {
           if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
             assistantText += event.delta.text;

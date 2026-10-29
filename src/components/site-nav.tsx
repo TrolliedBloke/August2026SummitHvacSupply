@@ -2,41 +2,31 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Lock, Search, ShoppingCart, MapPin } from "lucide-react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import { ChevronLeft, ChevronRight, Menu, MessageSquare, X, ShoppingCart, MapPin, Phone, UserRound, LayoutGrid, FileText } from "lucide-react";
 import * as React from "react";
 import { useQuote } from "./quote-context";
+import { Modal } from "./dialog";
+import { BranchStatusText } from "./branch-status";
+import { ICON_STROKE, SearchField } from "./nav/search-field";
+import { AccountMenu, accountActions, triggerLabel, useNavAccount } from "./nav/account-menu";
 import { SITE } from "@/lib/site";
-import { CATALOG_CATEGORIES } from "@/lib/storefront/catalog";
+import { CATEGORY_RAIL } from "@/lib/nav-links";
+import { shellVariantForPathname } from "@/lib/shell-variant";
+import type { CategoryDestination } from "@/lib/storefront/catalog";
 
-/* One icon spec for the whole header. Every mark -- pin, magnifier, cart,
-   chevron -- is drawn from lucide at this stroke so no single icon reads
-   heavier than its neighbours. Sizes vary by role; the weight never does. */
-const ICON_STROKE = 1.75;
+/* Shared by every row-3 entry so the run reads as an even rhythm. */
+const NAV_ITEM =
+  "inline-flex h-16 items-center whitespace-nowrap px-4 text-base font-medium text-ink-1 transition-colors duration-120";
+/* The 2px green underline is a state, not decoration: hover, open, and the
+   current category page (aria-current). */
+const NAV_UNDERLINE =
+  "relative after:absolute after:inset-x-4 after:bottom-0 after:h-0.5 after:bg-brand after:opacity-0 after:transition-opacity after:duration-120 hover:after:opacity-100";
+const NAV_UNDERLINE_ON = "after:opacity-100";
 
-/* Primary nav mirrors how the counter is organized: equipment first, then the
-   parts that go with it, then brand. Every target is a real catalog view --
-   nothing here lands on an empty result set. */
-const PRIMARY = [
-  { href: "/products", label: "Equipment" },
-  { href: "/products?category=installation-supplies", label: "Parts" },
-  { href: "/products?category=line-sets", label: "Tools" },
-  { href: "/brands", label: "Brands" },
-];
-
-const RESOURCES = [
-  { href: "/tools/model-number-decoder", label: "Model number decoder" },
-  { href: "/guides/bay-area-hvac-permits", label: "Permit and code guides" },
-  { href: "/bay-area-heat-pump-rebates", label: "Bay Area Heat Pump Rebates" },
-  { href: "/locations/newark", label: "Newark delivery and will-call" },
-];
-
-const RESOURCE_HREFS = ["/resources", ...RESOURCES.map((resource) => resource.href)];
-
-/* Shared by every row-3 entry so the run reads as an even rhythm: the spacing
-   is padding carried by each item, not a fixed gap between labels of very
-   different widths. */
-const NAV_ITEM = "whitespace-nowrap rounded-(--r-sm) px-5 py-2 text-[15px] font-medium transition-colors";
+/** Past this many categories the panel offers a filter field instead of a bare list. */
+const CATEGORY_SEARCH_THRESHOLD = 16;
 
 function useClientMounted() {
   return React.useSyncExternalStore(
@@ -46,7 +36,7 @@ function useClientMounted() {
   );
 }
 
-function Wordmark() {
+function Wordmark({ compact = false }: { compact?: boolean }) {
   return (
     <Link href="/" className="flex shrink-0 items-center" aria-label="Summit HVAC Supply home">
       <Image
@@ -55,436 +45,135 @@ function Wordmark() {
         width={1010}
         height={280}
         preload
-        sizes="160px"
-        className="h-9 w-auto object-contain lg:h-10"
+        sizes="(min-width: 1024px) 270px, 160px"
+        className={`${compact ? "h-[39px]" : "h-9 md:h-12 lg:h-16"} w-auto object-contain`}
       />
     </Link>
   );
 }
 
-type SearchResult = {
-  id: string;
-  sku: string;
-  modelNumber: string;
-  title: string;
-  btu: number;
-  voltage: string;
-  available: number;
-  availabilityStatus: string;
-  purchaseEligible: boolean;
-  href: string;
-};
-
-/* Shared search field + results. Rendered as the bar in row 2 and inside the
-   mobile sheet. Fully keyboard-operable (arrows/Enter/Escape). */
-function SearchField({
+/* "All products" is a disclosure: a button controlling a labelled navigation
+   region of ordinary links (no role="menu", so Tab works as everywhere else).
+   The panel is bound to the viewport -- width, columns and height -- and
+   scrolls inside itself when categories outgrow it. */
+function AllProductsPanel({
+  id,
+  categories,
   onNavigate,
-  autoFocus = false,
-  inline = false,
-  withButton = false,
 }: {
-  onNavigate?: () => void;
-  autoFocus?: boolean;
-  /** Inline lives in the nav bar, so results float over the page instead of
-      pushing the bar taller as the user types. */
-  inline?: boolean;
-  /** Attaches the green submit button, which runs the query against the
-      catalog rather than picking a single typeahead hit. */
-  withButton?: boolean;
+  id: string;
+  categories: CategoryDestination[];
+  onNavigate: () => void;
 }) {
-  const router = useRouter();
-  const [query, setQuery] = React.useState("");
-  const [results, setResults] = React.useState<SearchResult[]>([]);
-  const [active, setActive] = React.useState(-1);
-  const [loading, setLoading] = React.useState(false);
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const requestRef = React.useRef(0);
-
-  React.useEffect(() => {
-    if (autoFocus) inputRef.current?.focus();
-  }, [autoFocus]);
-
-  React.useEffect(() => {
-    const trimmed = query.trim();
-    const requestId = ++requestRef.current;
-    if (trimmed.length < 2) return;
-    const controller = new AbortController();
-    const timer = setTimeout(() => {
-      fetch(`/api/search?q=${encodeURIComponent(trimmed)}`, { signal: controller.signal })
-        .then((res) => res.json())
-        .then((payload) => {
-          if (requestRef.current !== requestId) return;
-          setResults(payload.results ?? []);
-          setActive(-1);
-        })
-        .catch(() => undefined)
-        .finally(() => {
-          if (requestRef.current === requestId) setLoading(false);
-        });
-    }, 140);
-    return () => {
-      clearTimeout(timer);
-      controller.abort();
-    };
-  }, [query]);
-
-  const showResults = query.trim().length >= 2;
-  const resultsId = React.useId();
-
-  function onQueryChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const next = event.target.value;
-    setQuery(next);
-    if (next.trim().length < 2) {
-      setResults([]);
-      setActive(-1);
-      setLoading(false);
-    } else {
-      setLoading(true);
-    }
-  }
-
-  function onKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (!showResults || results.length === 0) return;
-    if (event.key === "ArrowDown") {
-      event.preventDefault();
-      setActive((i) => (i + 1) % results.length);
-    } else if (event.key === "ArrowUp") {
-      event.preventDefault();
-      setActive((i) => (i <= 0 ? results.length - 1 : i - 1));
-    } else if (event.key === "Enter" && active >= 0) {
-      event.preventDefault();
-      router.push(results[active].href);
-      onNavigate?.();
-    }
-  }
-
-  /* Enter with a highlighted typeahead row is handled above and never reaches
-     here; a bare Enter, or the button, runs the full catalog search. */
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const trimmed = query.trim();
-    if (!trimmed) {
-      inputRef.current?.focus();
-      return;
-    }
-    router.push(`/products?q=${encodeURIComponent(trimmed)}`);
-    onNavigate?.();
-  }
-
+  const [filter, setFilter] = React.useState("");
+  const available = categories.filter((category) => category.status === "available");
+  const shown = filter ? available.filter((category) => category.label.toLowerCase().includes(filter.toLowerCase())) : available;
   return (
-    <div className={inline ? "relative w-full" : undefined}>
-      <form
-        onSubmit={onSubmit}
-        role="search"
-        className="flex h-11 items-stretch overflow-hidden rounded-(--r-sm) border border-line-strong bg-surface-1 focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/25"
-      >
-        <div className="flex min-w-0 flex-1 items-center gap-2.5 px-3.5">
-          <Search size={18} strokeWidth={ICON_STROKE} className="shrink-0 text-ink-3" aria-hidden="true" />
+    <nav
+      id={id}
+      aria-label="All product categories"
+      className="absolute left-5 top-[calc(100%-0.25rem)] z-50 flex max-h-[min(32rem,calc(100dvh-14rem))] w-[min(36rem,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-(--r-md) border border-line bg-surface-1 shadow-[0_8px_24px_rgba(28,28,26,0.10)]"
+    >
+      {available.length > CATEGORY_SEARCH_THRESHOLD && (
+        <div className="border-b border-line p-2">
+          <label className="sr-only" htmlFor={`${id}-filter`}>
+            Filter categories
+          </label>
           <input
-            ref={inputRef}
-            value={query}
-            onChange={onQueryChange}
-            onKeyDown={onKeyDown}
-            role="combobox"
-            aria-expanded={showResults && results.length > 0}
-            aria-controls={resultsId}
-            aria-autocomplete="list"
-            aria-activedescendant={active >= 0 ? `${resultsId}-${active}` : undefined}
-            placeholder="Search products, models, or SKUs"
-            className="min-w-0 flex-1 bg-transparent text-sm text-ink-1 outline-none placeholder:text-ink-4"
-            aria-label="Search products, models, or SKUs"
+            id={`${id}-filter`}
+            value={filter}
+            onChange={(event) => setFilter(event.target.value)}
+            placeholder="Filter categories"
+            className="h-11 w-full rounded-(--r-sm) border border-control-border px-3 text-sm outline-none focus:border-brand"
           />
-          {query.length > 0 && (
-            <button
-              type="button"
-              onClick={() => {
-                setQuery("");
-                setResults([]);
-                setActive(-1);
-                setLoading(false);
-                inputRef.current?.focus();
-              }}
-              aria-label="Clear search"
-              className="grid size-8 shrink-0 place-items-center rounded-(--r-sm) text-ink-2 hover:bg-surface-2 hover:text-ink-1"
+        </div>
+      )}
+      <ul className="grid min-h-0 flex-1 grid-cols-[repeat(auto-fill,minmax(min(100%,13rem),1fr))] gap-x-1 overflow-y-auto overscroll-contain p-2">
+        {shown.map((category) => (
+          <li key={category.value} className="min-w-0">
+            <Link
+              href={category.href}
+              onClick={onNavigate}
+              className="flex min-h-11 items-center justify-between gap-3 rounded-(--r-sm) px-3 py-2 text-sm font-medium text-ink-1 hover:bg-surface-2"
             >
-              <X size={16} strokeWidth={ICON_STROKE} />
-            </button>
-          )}
-        </div>
-        {withButton && (
-          <button
-            type="submit"
-            className="inline-flex shrink-0 items-center px-7 text-sm font-medium text-brand-ink transition-opacity hover:opacity-90"
-            style={{ backgroundColor: "var(--brand)" }}
-          >
-            Search
-          </button>
-        )}
-      </form>
-      {showResults && (
-        <ul
-          id={resultsId}
-          role="listbox"
-          aria-label="Search results"
-          className={`max-h-[60vh] overflow-y-auto overflow-hidden rounded-(--r-md) border border-line bg-surface-1 ${
-            inline ? "absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 shadow-[0_8px_24px_rgba(28,28,26,0.10)]" : "mt-2"
-          }`}
-        >
-          {loading && results.length === 0 && (
-            <li className="px-3 py-3 text-sm text-ink-3">Searching…</li>
-          )}
-          {!loading && results.length === 0 && (
-            <li className="px-3 py-4 text-sm text-ink-3">
-              No matches for “{query.trim()}”. Try a model number, or{" "}
-              <Link href="/contact" onClick={onNavigate} className="font-medium text-ink-1 underline underline-offset-4">
-                contact our team
-              </Link>
-              .
-            </li>
-          )}
-          {results.map((result, index) => (
-            <li key={result.id} role="option" id={`${resultsId}-${index}`} aria-selected={index === active}>
-              <Link
-                href={result.href}
-                onClick={onNavigate}
-                onMouseEnter={() => setActive(index)}
-                className={`block border-b border-line px-3 py-3 last:border-b-0 ${
-                  index === active ? "bg-surface-2" : "hover:bg-surface-2"
-                }`}
-              >
-                <span className="block font-mono text-[11px] font-medium text-ink-3">
-                  {result.sku}
-                </span>
-                <span className="mt-0.5 block text-sm font-medium text-ink-1">{result.title}</span>
-                <span className="mt-0.5 block text-xs text-ink-3">
-                  {result.modelNumber}{result.btu ? ` · ${result.btu.toLocaleString()} BTU` : ""}{result.voltage ? ` · ${result.voltage}` : ""} · {result.purchaseEligible ? "available to order" : "contact for price"}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-/* Closes a popover on outside click and on Escape, returning focus to the
-   trigger. Shared by the two row-3 menus so they behave identically. */
-function useDismissable(
-  open: boolean,
-  close: () => void,
-  wrapRef: React.RefObject<HTMLDivElement | null>,
-  triggerRef?: React.RefObject<HTMLButtonElement | null>
-) {
-  React.useEffect(() => {
-    if (!open) return;
-    const onDoc = (event: MouseEvent) => {
-      if (wrapRef.current && !wrapRef.current.contains(event.target as Node)) close();
-    };
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        close();
-        triggerRef?.current?.focus();
-      }
-    };
-    document.addEventListener("mousedown", onDoc);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onDoc);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open, close, wrapRef, triggerRef]);
-}
-
-/* "All products" is a mega-menu trigger, not a destination, so it sits apart
-   from the category run behind a hairline divider. The panel is built from the
-   catalog's own category list -- it cannot drift from the facets. */
-function AllProductsMenu() {
-  const [open, setOpen] = React.useState(false);
-  const wrapRef = React.useRef<HTMLDivElement>(null);
-  const triggerRef = React.useRef<HTMLButtonElement>(null);
-  const close = React.useCallback(() => setOpen(false), []);
-  useDismissable(open, close, wrapRef, triggerRef);
-
-  return (
-    <div ref={wrapRef} className="relative">
-      <button
-        ref={triggerRef}
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        aria-haspopup="menu"
-        className={`${NAV_ITEM} inline-flex items-center gap-4 text-ink-1 hover:bg-surface-2`}
+              <span className="min-w-0 break-words">{category.label}</span>
+              <span className="part-number shrink-0 text-xs font-normal text-ink-3">
+                <span className="sr-only">, </span>
+                {category.productCount}
+                <span className="sr-only">{category.productCount === 1 ? " product" : " products"}</span>
+              </span>
+            </Link>
+          </li>
+        ))}
+        {shown.length === 0 && <li className="px-3 py-2 text-sm text-ink-3">No category matches “{filter}”.</li>}
+      </ul>
+      <Link
+        href="/products"
+        onClick={onNavigate}
+        className="flex min-h-11 items-center border-t border-line px-5 text-sm font-medium text-brand hover:underline"
       >
-        <Menu size={22} strokeWidth={2} aria-hidden="true" />
-        All products
-      </button>
-      {open && (
-        <div
-          role="menu"
-          aria-label="All product categories"
-          className="absolute left-0 top-[calc(100%+0.5rem)] z-50 w-[560px] rounded-(--r-md) border border-line bg-surface-1 p-2 shadow-[0_8px_24px_rgba(28,28,26,0.10)]"
-        >
-          <div className="grid grid-cols-2 gap-x-1">
-            {CATALOG_CATEGORIES.map((category) => (
-              <Link
-                key={category.value}
-                href={`/products?category=${category.value}`}
-                role="menuitem"
-                onClick={close}
-                className="rounded-(--r-sm) px-3 py-2 text-sm font-medium text-ink-1 hover:bg-surface-2"
-              >
-                {category.label}
-              </Link>
-            ))}
-          </div>
-          <Link
-            href="/products"
-            role="menuitem"
-            onClick={close}
-            className="mt-1 block border-t border-line px-3 pb-1 pt-2.5 text-sm font-medium text-brand hover:underline"
-          >
-            View the full catalog
-          </Link>
-        </div>
-      )}
-    </div>
+        View the full catalog
+      </Link>
+    </nav>
   );
 }
 
-function ResourcesMenu({ pathname }: { pathname: string }) {
-  const [open, setOpen] = React.useState(false);
-  const wrapRef = React.useRef<HTMLDivElement>(null);
-  const triggerRef = React.useRef<HTMLButtonElement>(null);
-  const menuRef = React.useRef<HTMLDivElement>(null);
-  const close = React.useCallback(() => setOpen(false), []);
-  const active =
-    pathname.startsWith("/guides/") ||
-    pathname.startsWith("/tools/") ||
-    RESOURCE_HREFS.some((href) => pathname === href || pathname.startsWith(href + "/"));
-
-  useDismissable(open, close, wrapRef, triggerRef);
-
-  function onMenuKeyDown(event: React.KeyboardEvent) {
-    if (!open || !menuRef.current) return;
-    const items = Array.from(menuRef.current.querySelectorAll<HTMLElement>('[role="menuitem"]'));
-    if (items.length === 0) return;
-    const current = Math.max(0, items.indexOf(document.activeElement as HTMLElement));
-    let next: number | null = null;
-    if (event.key === "ArrowDown") next = (current + 1) % items.length;
-    if (event.key === "ArrowUp") next = (current - 1 + items.length) % items.length;
-    if (event.key === "Home") next = 0;
-    if (event.key === "End") next = items.length - 1;
-    if (next !== null) {
-      event.preventDefault();
-      items[next].focus();
-    }
-  }
-
-  return (
-    <div ref={wrapRef} className="relative" onKeyDown={onMenuKeyDown}>
-      <button
-        ref={triggerRef}
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        onKeyDown={(event) => {
-          if (event.key === "ArrowDown") {
-            event.preventDefault();
-            setOpen(true);
-            window.setTimeout(() => menuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus());
-          }
-        }}
-        aria-expanded={open}
-        aria-haspopup="menu"
-        className={`${NAV_ITEM} inline-flex items-center ${
-          active || open ? "text-ink-1 underline underline-offset-4" : "text-ink-1 hover:bg-surface-2"
-        }`}
-      >
-        Resources
-      </button>
-      {open && (
-        <div
-          ref={menuRef}
-          role="menu"
-          aria-label="Resources"
-          className="absolute left-5 top-[calc(100%+0.5rem)] z-50 w-64 overflow-hidden rounded-(--r-md) border border-line bg-surface-1 p-1.5 shadow-[0_8px_24px_rgba(28,28,26,0.10)]"
-        >
-          {RESOURCES.map((item) => {
-            const itemActive = pathname === item.href || pathname.startsWith(item.href + "/");
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                role="menuitem"
-                aria-current={itemActive ? "page" : undefined}
-                onClick={close}
-                className={`block rounded-(--r-sm) px-3 py-2.5 text-sm font-medium transition-colors hover:bg-surface-2 focus-visible:bg-surface-2 ${
-                  itemActive ? "bg-surface-2 text-brand" : "text-ink-1"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function CartButton() {
+function CartButton({ onOpen }: { onOpen?: () => void }) {
   const { count, toggle } = useQuote();
-  // The count comes from localStorage (client-only), so defer showing it until
-  // after mount -- otherwise SSR (count 0) and hydration (real count) mismatch.
+  // The count comes from localStorage (client-only), so defer showing it
+  // until after mount to keep server and client markup identical.
   const mounted = useClientMounted();
   const showCount = mounted && count > 0;
   return (
     <button
-      onClick={toggle}
+      type="button"
+      onClick={() => {
+        onOpen?.();
+        toggle();
+      }}
       aria-label={showCount ? `Open your cart (${count} ${count === 1 ? "item" : "items"})` : "Open your cart"}
-      className="relative grid size-11 shrink-0 place-items-center rounded-(--r-sm) text-ink-1 transition-colors hover:bg-surface-2"
+      className="relative flex h-11 shrink-0 items-center gap-2 rounded-(--r-sm) px-2.5 text-sm font-medium text-ink-1 transition-colors hover:bg-surface-2 lg:px-3"
     >
-      <ShoppingCart size={24} strokeWidth={ICON_STROKE} />
-      {showCount && (
-        <span className="tnum absolute right-0 top-0 grid min-w-[18px] place-items-center rounded-full bg-brand px-1 font-mono text-[10px] font-medium leading-[18px] text-brand-ink">
-          {count}
-        </span>
-      )}
+      <span className="relative grid size-6 place-items-center">
+        <ShoppingCart size={24} strokeWidth={ICON_STROKE} aria-hidden="true" />
+        {showCount && (
+          <span className="tnum absolute -right-2 -top-1.5 grid min-w-[18px] place-items-center rounded-full bg-ink-1 px-1 text-xs font-medium leading-[18px] text-white">
+            {count}
+          </span>
+        )}
+      </span>
+      <span className="hidden lg:inline">Cart</span>
     </button>
   );
 }
 
-/* Row 1. Chrome, not navigation -- but on the ink panel rather than a light
-   tint. Three white bands stacked (utility, search, category) separated only by
-   hairlines gave the page no top edge at all: the strip receded instead of
-   capping. Dark ink caps it, and by contrast pushes the white search row below
-   it forward.
-   
-   This is not a new colour. --ink-panel is already the full-width footer, so
-   the same token now bookends the page top and bottom. It also raises the
-   strip's contrast from 5.11:1 (muted ink on white -- AA, but quiet enough to
-   disappear) to 11.3:1. */
+/* Row 1: chrome on the deep green band. The branch status is live and comes
+   from the Branch model; server HTML carries the weekly hours, never a guessed
+   "open". */
 function UtilityStrip() {
   return (
-    <div className="hidden bg-[var(--ink-panel)] md:block">
-      <div className="mx-auto flex h-9 w-full max-w-[var(--nav-max)] items-center gap-4 px-5 text-xs text-white/80 sm:px-6 lg:px-[var(--counter-pad)]">
+    <div className="hidden bg-[var(--chrome)] md:block">
+      <div className="mx-auto flex h-12 w-full max-w-[var(--page-max)] items-center gap-3 px-5 text-meta font-medium text-white">
         <MapPin size={14} strokeWidth={ICON_STROKE} className="shrink-0" aria-hidden="true" />
-        <span className="-ml-2.5 whitespace-nowrap">Newark — Open until 5:00 PM</span>
-        <Link
-          href="/locations/newark"
-          className="whitespace-nowrap underline underline-offset-2 transition-colors hover:text-white"
-        >
+        <span className="whitespace-nowrap">Newark, CA</span>
+        <span aria-hidden="true" className="text-white/50">
+          ·
+        </span>
+        <BranchStatusText className="whitespace-nowrap" />
+        <Link href="/locations/newark" className="ml-1 inline-flex items-center whitespace-nowrap py-3 underline underline-offset-2 transition-colors hover:text-white/80">
           Change
         </Link>
-        <div className="ml-auto flex items-center gap-6">
-          <a href={SITE.phoneHref} className="tnum whitespace-nowrap transition-colors hover:text-white">
+        <div className="ml-auto flex min-w-0 items-center gap-4 lg:gap-5">
+          <a href={SITE.phoneHref} className="tnum inline-flex items-center gap-2 whitespace-nowrap py-3 transition-colors hover:text-white/80">
+            <Phone size={14} strokeWidth={ICON_STROKE} aria-hidden="true" />
             {SITE.phone}
           </a>
-          <Link href="/dealers" className="whitespace-nowrap transition-colors hover:text-white">
-            Apply for trade account
+          <Link href="/resources" className="hidden items-center whitespace-nowrap py-3 transition-colors hover:text-white/80 lg:inline-flex">
+            Resources
           </Link>
-          <Link href="/account" className="whitespace-nowrap transition-colors hover:text-white">
-            Sign in
+          <span className="hidden h-5 w-px bg-white/35 lg:block" aria-hidden="true" />
+          <Link href="/dealers" className="hidden items-center whitespace-nowrap py-3 transition-colors hover:text-white/80 lg:inline-flex">
+            Apply for trade account
           </Link>
         </div>
       </div>
@@ -492,164 +181,341 @@ function UtilityStrip() {
   );
 }
 
-export function SiteNav() {
+/* The category run. `query` is null until the client provides it, so the
+   server can prerender the links and only the current-page marking waits. */
+function CategoryLinks({ pathname, query }: { pathname: string; query: string | null }) {
+  const isCurrent = (href: string) => {
+    if (query === null) return false;
+    const [path, itemQuery = ""] = href.split("?");
+    if (pathname !== path) return false;
+    return itemQuery ? query === itemQuery : query === "";
+  };
+  return (
+    <ul className="flex shrink-0 items-center">
+      {CATEGORY_RAIL.map((item) => (
+        <li key={item.href}>
+          <Link
+            href={item.href}
+            aria-current={isCurrent(item.href) ? "page" : undefined}
+            className={`${NAV_ITEM} ${NAV_UNDERLINE} block ${isCurrent(item.href) ? NAV_UNDERLINE_ON : ""}`}
+          >
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function CategoryRail({ pathname }: { pathname: string }) {
+  const searchParams = useSearchParams();
+  return <CategoryLinks pathname={pathname} query={searchParams.toString()} />;
+}
+
+export function SiteNav({ categories }: { categories: CategoryDestination[] }) {
   const pathname = usePathname();
+  const shellVariant = shellVariantForPathname(pathname);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const closeMobile = () => setMobileOpen(false);
+  const [productsOpen, setProductsOpen] = React.useState(false);
+  const productsWrapRef = React.useRef<HTMLDivElement>(null);
+  const productsTriggerRef = React.useRef<HTMLButtonElement>(null);
+  const productsPanelId = React.useId();
 
-  // Highlight the section, not the filter. Three primary entries share the
-  // /products path and differ only by query string, which the server cannot
-  // see -- resolving them client-side meant a post-hydration state flip that
-  // raced anything reading the nav. Matching on pathname alone is decided at
-  // render time, identical on server and client, and only ever marks one
-  // entry: the first whose path matches wins.
-  const activeHref = PRIMARY.map((item) => item.href).find((href) => {
-    const path = href.split("?")[0];
-    return pathname === path || pathname.startsWith(path + "/");
-  });
-
-  const isActive = (href: string) => href === activeHref;
+  // Close the desktop disclosure on Escape (focus back to the trigger) and on
+  // a click anywhere outside it.
+  React.useEffect(() => {
+    if (!productsOpen) return;
+    const onPointer = (event: PointerEvent) => {
+      if (productsWrapRef.current && !productsWrapRef.current.contains(event.target as Node)) setProductsOpen(false);
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setProductsOpen(false);
+        productsTriggerRef.current?.focus();
+      }
+    };
+    document.addEventListener("pointerdown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [productsOpen]);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-surface-1">
-      <UtilityStrip />
+    <header className="relative z-30 bg-surface-2" data-shell-variant={shellVariant}>
+      {shellVariant === "commerce" && <UtilityStrip />}
 
-      {/* Row 2. Height is the search field plus an even 10px above and below --
-          the field owns the row, nothing pads around it. */}
-      <div className="mx-auto flex w-full max-w-[var(--nav-max)] items-center gap-6 px-5 py-2.5 sm:px-6 lg:px-[var(--counter-pad)]">
-        <Wordmark />
-        <div className="hidden min-w-0 flex-1 md:block">
-          <SearchField inline withButton />
+      <div
+        className={`mx-auto flex w-full max-w-[var(--page-max)] items-center gap-3 bg-surface-2 px-5 py-2.5 lg:gap-6 ${shellVariant === "commerce" ? "md:py-[18px] lg:py-[15px]" : "md:py-3"}`}
+      >
+        <Wordmark compact={shellVariant !== "commerce"} />
+        {/* Capped and centred, so mark / search / account each hold their space. */}
+        <div className="hidden min-w-0 flex-1 justify-center md:flex">
+          <div className="w-full max-w-[827px]">
+            <SearchField inline withButton />
+          </div>
         </div>
-        <div className="ml-auto flex items-center gap-1 md:ml-0">
+        <div className="ml-auto flex shrink-0 items-center gap-1 md:ml-0">
+          {shellVariant === "focused" && (
+            <Link href="/products" className="hidden h-11 items-center rounded-(--r-sm) px-3 text-sm font-medium text-brand hover:bg-surface-2 md:inline-flex">
+              Catalog
+            </Link>
+          )}
+          <AccountMenu />
           <CartButton />
           <button
-            onClick={() => setMobileOpen((o) => !o)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open menu"
+            aria-haspopup="dialog"
             aria-expanded={mobileOpen}
             className="grid size-11 place-items-center rounded-(--r-sm) text-ink-1 transition-colors hover:bg-surface-2 xl:hidden"
           >
-            {mobileOpen ? <X size={22} strokeWidth={ICON_STROKE} /> : <Menu size={22} strokeWidth={ICON_STROKE} />}
+            <Menu size={22} strokeWidth={ICON_STROKE} aria-hidden="true" />
           </button>
         </div>
       </div>
 
-      {/* Row 3. Inline nav appears at xl, exactly where the hamburger above
-          hides -- the two switch at the same breakpoint so navigation is never
-          unreachable. */}
-      <nav aria-label="Product categories" className="hidden border-t border-line xl:block">
-        <div className="mx-auto flex w-full max-w-[var(--nav-max)] items-center px-5 py-1.5 sm:px-6 lg:px-[var(--counter-pad)]">
-          {/* The trigger sits left of the divider; every destination link sits
-              right of it, so the distinction is legible at a glance. */}
-          <div className="-ml-5">
-            <AllProductsMenu />
-          </div>
-          <ul className="ml-6 flex min-w-0 items-center">
-            {PRIMARY.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`${NAV_ITEM} block ${
-                    isActive(item.href) ? "text-brand" : "text-ink-1 hover:bg-surface-2"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <ResourcesMenu pathname={pathname} />
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      {/* Mobile / tablet sheet -- available at every width below xl. */}
-      {mobileOpen && (
-        <div className="border-t border-line bg-canvas xl:hidden">
-          <div className="mx-auto flex w-full max-w-[var(--counter-max)] flex-col px-5 py-4 sm:px-6">
-            <SearchField onNavigate={closeMobile} />
-            <ul className="mt-4 flex flex-col">
-              <li>
-                <Link
-                  href="/products"
-                  onClick={closeMobile}
-                  className="block rounded-(--r-sm) px-3 py-3 text-[15px] font-medium text-ink-1 hover:bg-surface-2"
-                >
-                  All products
-                </Link>
-              </li>
-              {PRIMARY.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={closeMobile}
-                    className={`block rounded-(--r-sm) px-3 py-3 text-[15px] font-medium hover:bg-surface-2 ${
-                      isActive(item.href) ? "text-ink-1 underline underline-offset-4" : "text-ink-1"
-                    }`}
+      {/* One navigation row: the All-products disclosure, the category run, and
+          Brands pinned right. The disclosure's panel is positioned against this
+          nav (not inside the horizontally scrolling row), so it is never
+          clipped by the row's overflow. */}
+      {shellVariant === "commerce" ? (
+        <nav aria-label="Store navigation" className="relative border-b border-line bg-surface-2">
+          <div ref={productsWrapRef}>
+            <div className="mx-auto w-full max-w-[var(--page-max)] px-5">
+              <div className="flex items-center overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <div className="-ml-4 shrink-0">
+                  <button
+                    ref={productsTriggerRef}
+                    type="button"
+                    onClick={() => setProductsOpen((current) => !current)}
+                    aria-expanded={productsOpen}
+                    aria-controls={productsPanelId}
+                    className={`${NAV_ITEM} inline-flex items-center gap-4 text-ink-1 hover:bg-surface-2`}
                   >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-              <li className="mt-2 border-t border-line pt-2">
-                <p className="px-3 pb-1 pt-2 text-sm font-medium text-ink-2">
-                  Resources
-                </p>
-                {RESOURCES.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={closeMobile}
-                    className="block rounded-(--r-sm) px-3 py-2.5 text-[15px] font-medium text-ink-1 hover:bg-surface-2"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </li>
-              <li>
+                    <Menu size={22} strokeWidth={2} aria-hidden="true" className="hidden md:block" />
+                    All products
+                  </button>
+                </div>
+                <Suspense fallback={<CategoryLinks pathname={pathname} query={null} />}>
+                  <CategoryRail pathname={pathname} />
+                </Suspense>
                 <Link
-                  href="/contact"
-                  onClick={closeMobile}
-                  className={`block rounded-(--r-sm) px-3 py-3 text-[15px] font-medium hover:bg-surface-2 ${
-                    isActive("/contact") ? "text-ink-1 underline underline-offset-4" : "text-ink-1"
-                  }`}
+                  href="/brands"
+                  aria-current={pathname === "/brands" ? "page" : undefined}
+                  className={`${NAV_ITEM} ${NAV_UNDERLINE} ml-auto -mr-4 shrink-0 ${pathname === "/brands" ? NAV_UNDERLINE_ON : ""}`}
                 >
-                  Contact
+                  Brands
                 </Link>
-              </li>
-              <li className="mt-3 grid grid-cols-2 gap-2 border-t border-line pt-3">
-                <Link
-                  href="/quote"
-                  onClick={closeMobile}
-                  className="flex h-11 items-center justify-center gap-1.5 rounded-(--r-sm) bg-brand text-sm font-medium text-brand-ink"
-                >
-                  Get help
-                </Link>
-                <Link
-                  href="/account"
-                  onClick={closeMobile}
-                  className="flex h-11 items-center justify-center gap-1.5 rounded-(--r-sm) border border-line-strong bg-surface-1 text-sm font-medium text-ink-1"
-                >
-                  <Lock size={14} strokeWidth={ICON_STROKE} /> Sign in
-                </Link>
-                <a
-                  href={SITE.phoneHref}
-                  className="flex h-11 items-center justify-center rounded-(--r-sm) bg-surface-2 text-sm font-medium text-ink-1"
-                >
-                  Call {SITE.phone}
-                </a>
-                <a
-                  href={SITE.smsHref}
-                  className="flex h-11 items-center justify-center rounded-(--r-sm) bg-surface-2 text-sm font-medium text-ink-1"
-                >
-                  Text us
-                </a>
-              </li>
-            </ul>
+              </div>
+            </div>
+            <div className="mx-auto w-full max-w-[var(--page-max)]">
+              <div className="relative">
+                {productsOpen && <AllProductsPanel id={productsPanelId} categories={categories} onNavigate={() => setProductsOpen(false)} />}
+              </div>
+            </div>
           </div>
-        </div>
+        </nav>
+      ) : shellVariant === "service" ? (
+        <nav aria-label="Service navigation" className="border-b border-line bg-surface-2">
+          <div className="mx-auto hidden h-12 w-full max-w-[var(--page-max)] items-center gap-7 px-5 text-sm font-medium text-ink-1 md:flex">
+            <Link href="/products" className="hover:text-brand">Catalog</Link>
+            <Link href="/finder" aria-current={pathname.startsWith("/finder") ? "page" : undefined} className="hover:text-brand aria-[current=page]:text-brand">System finder</Link>
+            <Link href="/resources" aria-current={pathname.startsWith("/resources") || pathname.startsWith("/guides") ? "page" : undefined} className="hover:text-brand aria-[current=page]:text-brand">Resources</Link>
+            <Link href="/contact" aria-current={pathname.startsWith("/contact") ? "page" : undefined} className="hover:text-brand aria-[current=page]:text-brand">Contact</Link>
+            <a href={SITE.phoneHref} className="tnum ml-auto inline-flex items-center gap-2 hover:text-brand">
+              <Phone size={14} strokeWidth={ICON_STROKE} aria-hidden="true" />
+              {SITE.phone}
+            </a>
+          </div>
+        </nav>
+      ) : (
+        <div className="border-b border-line" aria-hidden="true" />
       )}
+
+      <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} categories={categories} />
     </header>
+  );
+}
+
+/* The mobile navigation is a real modal surface on the shared dialog
+   primitive: labelled, focus moved in and trapped, background inert, Escape
+   and the close button dismiss it, page scroll is restored, and focus returns
+   to the menu button. Top tasks come first; product families sit one level
+   down behind "Shop by category", with a Back button -- an in-panel view, not
+   a fake history entry. */
+function MobileNav({ open, onClose, categories }: { open: boolean; onClose: () => void; categories: CategoryDestination[] }) {
+  const [view, setView] = React.useState<"main" | "categories">("main");
+  const closeRef = React.useRef<HTMLButtonElement>(null);
+  const backRef = React.useRef<HTMLButtonElement>(null);
+  const categoriesTriggerRef = React.useRef<HTMLButtonElement>(null);
+  const account = useNavAccount();
+  const close = React.useCallback(() => {
+    onClose();
+    setView("main");
+  }, [onClose]);
+
+  // Moving between levels moves focus with it.
+  const [focusTarget, setFocusTarget] = React.useState<"back" | "categories" | null>(null);
+  React.useEffect(() => {
+    if (focusTarget === "back") backRef.current?.focus();
+    if (focusTarget === "categories") categoriesTriggerRef.current?.focus();
+  }, [focusTarget, view]);
+
+  const available = categories.filter((category) => category.status === "available");
+  const signedIn = account && account.variant !== "signedOut";
+
+  return (
+    <Modal open={open} onClose={close} label="Menu" placement="full" initialFocusRef={closeRef} className="xl:hidden" backdropClassName="xl:hidden">
+      <div className="flex h-16 shrink-0 items-center gap-3 px-3.5" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+        <button ref={closeRef} type="button" onClick={close} aria-label="Close menu" className="grid size-11 shrink-0 place-items-center text-ink-1">
+          <X size={28} strokeWidth={1.75} aria-hidden="true" />
+        </button>
+        <Wordmark compact />
+        <div className="ml-auto flex items-center gap-1.5">
+          <CartButton onOpen={close} />
+        </div>
+      </div>
+
+      {view === "main" ? (
+        <>
+          <div className="shrink-0 border-b border-line px-5 pb-3 pt-1">
+            <SearchField onNavigate={close} mobileMenu />
+          </div>
+          <nav aria-label="Menu" className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5">
+            <ul className="flex flex-col">
+              <li>
+                <button
+                  ref={categoriesTriggerRef}
+                  type="button"
+                  onClick={() => {
+                    setView("categories");
+                    setFocusTarget("back");
+                  }}
+                  className="flex min-h-[52px] w-full items-center justify-between border-b border-line px-0.5 text-left text-[18px] font-medium leading-6 text-ink-1"
+                >
+                  <span className="flex items-center gap-3">
+                    <LayoutGrid size={20} strokeWidth={ICON_STROKE} aria-hidden="true" />
+                    Shop by category
+                  </span>
+                  <ChevronRight size={21} strokeWidth={1.9} aria-hidden="true" />
+                </button>
+              </li>
+              <MobileMenuLink href="/products" onClick={close} trailing>
+                All products
+              </MobileMenuLink>
+              <MobileMenuLink href="/quote" onClick={close} icon={<FileText size={20} strokeWidth={ICON_STROKE} aria-hidden="true" />}>
+                Requests and quotes
+              </MobileMenuLink>
+              {signedIn ? (
+                <>
+                  {accountActions(account).slice(0, 2).map((action) => (
+                    <MobileMenuLink key={action.href} href={action.href} onClick={close} icon={<UserRound size={20} strokeWidth={ICON_STROKE} aria-hidden="true" />}>
+                      {action.label}
+                    </MobileMenuLink>
+                  ))}
+                </>
+              ) : (
+                <MobileMenuLink href="/portal/login" onClick={close} icon={<UserRound size={20} strokeWidth={ICON_STROKE} aria-hidden="true" />}>
+                  {account ? triggerLabel(account) : "Account"}
+                </MobileMenuLink>
+              )}
+              <MobileMenuLink href="/brands" onClick={close} trailing>
+                Brands
+              </MobileMenuLink>
+              <MobileMenuLink href="/resources" onClick={close} trailing>
+                Resources
+              </MobileMenuLink>
+              <MobileMenuLink href="/dealers" onClick={close}>
+                Apply for a trade account
+              </MobileMenuLink>
+            </ul>
+          </nav>
+        </>
+      ) : (
+        <nav aria-label="Product categories" className="flex min-h-0 flex-1 flex-col">
+          <div className="shrink-0 border-b border-line px-3.5">
+            <button
+              ref={backRef}
+              type="button"
+              onClick={() => {
+                setView("main");
+                setFocusTarget("categories");
+              }}
+              className="flex min-h-[52px] items-center gap-2 px-1.5 text-base font-medium text-ink-1"
+            >
+              <ChevronLeft size={20} strokeWidth={1.9} aria-hidden="true" />
+              Back to menu
+            </button>
+          </div>
+          <h2 className="px-5 pb-1 pt-4 text-meta font-medium text-ink-3">Shop by category</h2>
+          <ul className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5">
+            {available.map((category) => (
+              <MobileMenuLink key={category.value} href={category.href} onClick={close} meta={`${category.productCount}`}>
+                {category.label}
+              </MobileMenuLink>
+            ))}
+            <MobileMenuLink href="/products" onClick={close} trailing>
+              All products
+            </MobileMenuLink>
+          </ul>
+        </nav>
+      )}
+
+      <div className="shrink-0 border-t border-line bg-canvas px-5 pt-3" style={{ paddingBottom: "calc(1rem + env(safe-area-inset-bottom))" }}>
+        <p className="flex items-center gap-1.5 px-1 text-base font-medium text-ink-1">
+          <MapPin size={18} strokeWidth={2} className="shrink-0 text-ink-1" aria-hidden="true" />
+          <span>Newark ·</span>
+          <BranchStatusText className="font-normal text-ink-2" />
+        </p>
+        <div className="mt-2 grid grid-cols-[3.1fr_2fr] gap-2.5">
+          <a href={SITE.phoneHref} className="flex h-[46px] min-w-0 items-center justify-center gap-3 whitespace-nowrap rounded-(--r-sm) bg-brand px-3 text-base font-medium text-white">
+            <Phone size={20} strokeWidth={2.2} aria-hidden="true" />
+            Call {SITE.phone}
+          </a>
+          <a href={SITE.smsHref} className="flex h-[46px] min-w-0 items-center justify-center gap-3 rounded-(--r-sm) border border-line-strong bg-surface-1 px-3 text-base font-medium text-brand">
+            <MessageSquare size={20} strokeWidth={2} aria-hidden="true" />
+            Text us
+          </a>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
+function MobileMenuLink({
+  href,
+  onClick,
+  trailing = false,
+  icon,
+  meta,
+  children,
+}: {
+  href: string;
+  onClick: () => void;
+  trailing?: boolean;
+  icon?: React.ReactNode;
+  meta?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <li>
+      <Link href={href} onClick={onClick} className="flex min-h-[52px] items-center justify-between gap-3 border-b border-line px-0.5 py-2 text-[18px] font-medium leading-6 text-ink-1">
+        <span className="flex min-w-0 items-center gap-3">
+          {icon}
+          <span className="min-w-0 break-words">{children}</span>
+        </span>
+        {meta && (
+          <span className="part-number shrink-0 text-sm font-normal text-ink-3">
+            <span className="sr-only">, </span>
+            {meta}
+            <span className="sr-only">{meta === "1" ? " product" : " products"}</span>
+          </span>
+        )}
+        {trailing && <ChevronRight size={21} strokeWidth={1.9} aria-hidden="true" className="shrink-0" />}
+      </Link>
+    </li>
   );
 }

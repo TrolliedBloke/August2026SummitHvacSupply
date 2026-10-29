@@ -1,219 +1,105 @@
-"use client";
-
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-  CheckCircle2,
-  ArrowRight,
-  Home,
-} from "lucide-react";
-import * as React from "react";
+import { Clock, Mail, MapPin, Phone, Truck } from "lucide-react";
 import Link from "next/link";
-import { Container, Eyebrow, Button } from "@/components/ui";
-import { Field, Input, Textarea, Select } from "@/components/form";
+import * as React from "react";
+import { Eyebrow } from "@/components/ui";
+import { BranchStatusText } from "@/components/branch-status";
+import { ContactForm } from "@/components/contact/contact-form";
+import { WhatHappensNext } from "@/components/what-happens-next";
+import { contactPrefill } from "@/lib/forms/contact";
+import { getStorefrontSku } from "@/lib/storefront/catalog";
 import { SITE } from "@/lib/site";
-import { postJson } from "@/lib/client/post-json";
+import { deliveryPolicyIsConfirmed } from "@/lib/fulfillment-policy";
 
-export default function ContactPage() {
-  const [topic, setTopic] = React.useState("");
-  const [sent, setSent] = React.useState(false);
-  const [requestId, setRequestId] = React.useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
+/**
+ * Contact. Server-rendered so URL context (?topic=, ?sku=, ?branch=, ?order=)
+ * can be checked against the catalog before it reaches the form: only
+ * allow-listed parameters with canonical values prefill, and every prefilled
+ * value is visible and editable.
+ */
+export default async function ContactPage({ searchParams }: PageProps<"/contact">) {
+  const query = await searchParams;
+  const params = new URLSearchParams(
+    Object.entries(query).flatMap(([key, value]) => (typeof value === "string" ? [[key, value]] : []))
+  );
+  const prefill = contactPrefill(params, (raw) => getStorefrontSku(raw)?.sku ?? null);
 
   return (
-    <Container className="py-12 lg:py-16">
-      <div className="grid gap-12 lg:grid-cols-[1fr_360px]">
-        {/* Form */}
-        <div className="max-w-xl">
+    <div className="bg-canvas py-12 lg:pb-14 lg:pt-16">
+      <div className="contact-layout mx-auto grid w-full max-w-[1428px] gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_360px] min-[1430px]:gap-[52px]">
+        <div className="min-w-0">
           <Eyebrow>Contact</Eyebrow>
-          <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
-            Talk to a real person who knows HVAC.
-          </h1>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">Talk to a real person who knows HVAC.</h1>
           <p className="mt-3 text-ink-2">
-            One system for your home, contractor stock, property quotes, specs,
-            warranty, or installer help. Pick the lane that fits.
+            Product and compatibility questions, quotes, orders, deliveries and returns. Pick the topic and the right desk
+            gets it.
           </p>
 
-          {/* Homeowner secondary path -- capture & hand off, never dominate */}
-          <div className="mt-6 flex items-start gap-3 rounded-(--r-md) border border-line bg-surface-2/60 p-4">
-            <span className="grid size-9 shrink-0 place-items-center rounded-(--r-sm) bg-surface-3 text-ink-3">
-              <Home size={17} />
-            </span>
-            <p className="text-sm text-ink-2">
-              <span className="font-semibold text-ink-1">Homeowner? </span>{" "}
-              We supply equipment and can help route you toward a qualified Bay
-              Area installer. We do not perform installation ourselves.
-            </p>
-          </div>
+          {/* One line, not a second hero: the topic field should be in the first viewport. */}
+          <p className="mt-3 max-w-[670px] text-sm leading-6 text-ink-3">
+            Homeowner looking for an installer? We supply equipment, not installation.{" "}
+            <Link href="/homeowners#homeowner-request" className="font-medium text-ink-1 underline underline-offset-4">
+              Use the homeowner request
+            </Link>
+            .
+          </p>
 
-          {sent ? (
-            <div className="mt-8 rounded-(--r-md) border border-eco/30 bg-eco-tint/50 p-6">
-              <CheckCircle2 className="text-eco" size={28} />
-              <h2 className="mt-3 font-display text-xl font-semibold text-ink-1">
-                Message prepared.
-              </h2>
-              <p className="mt-2 text-ink-2">
-                Your details are ready for follow-up. We will review the topic
-                and explain the next step before asking you to buy equipment. For
-                urgent pricing, stock, or installer help, call{" "}
-                <a href={SITE.phoneHref} className="font-medium text-brand">
-                  {SITE.phone}
-                </a>
-                .
-              </p>
-              {requestId && (
-                <p className="mt-3 font-mono text-xs uppercase tracking-[0.12em] text-ink-3">
-                  Request ID {requestId}
-                </p>
-              )}
-            </div>
-          ) : (
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                setIsSubmitting(true);
-                setError(null);
-                if (!topic) {
-                  setIsSubmitting(false);
-                  setError("Please choose what you are reaching out about.");
-                  return;
-                }
-                const form = new FormData(e.currentTarget);
-                try {
-                  const payload = await postJson<{ ok: boolean; id?: string; error?: string }>("/api/contact-requests", {
-                    topic,
-                    name: String(form.get("name") ?? ""),
-                    email: String(form.get("email") ?? ""),
-                    message: String(form.get("message") ?? ""),
-                  });
-                  setRequestId(payload.id ?? null);
-                  setSent(true);
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                } catch (submitError) {
-                  setError(submitError instanceof Error ? submitError.message : "Could not prepare message.");
-                } finally {
-                  setIsSubmitting(false);
-                }
-              }}
-              className="mt-8 flex flex-col gap-5"
-            >
-              <Field label="I'm reaching out about" required>
-                <Select
-                  ariaLabel="I'm reaching out about"
-                  name="topic"
-                  value={topic}
-                  onChange={setTopic}
-                  placeholder="Choose a topic"
-                  options={[
-                    { value: "one_system", label: "I want one system for my home" },
-                    { value: "installer", label: "I need installer help" },
-                    { value: "contractor", label: "I’m a contractor buying equipment" },
-                    { value: "property", label: "I manage a property" },
-                    { value: "specs", label: "Specs, warranty, or documents" },
-                  ]}
-                />
-              </Field>
-              <div className="grid gap-5 sm:grid-cols-2">
-                <Field label="Name" required>
-                  <Input
-                    name="name"
-                    required
-                    autoComplete="name"
-                    placeholder="Your name"
-                  />
-                </Field>
-                <Field label="Email" required>
-                  <Input
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="you@email.com"
-                  />
-                </Field>
-              </div>
-              <Field label="Message" required>
-                <Textarea
-                  name="message"
-                  required
-                  rows={4}
-                  placeholder="How can we help?"
-                />
-              </Field>
-              <Button type="submit" size="lg" className="self-start" disabled={isSubmitting}>
-                {isSubmitting ? "Preparing..." : "Prepare request"}{" "}
-                <ArrowRight size={18} />
-              </Button>
-              {error && <p role="alert" className="text-sm text-danger">{error}</p>}
-            </form>
-          )}
+          <ContactForm prefill={prefill} />
         </div>
 
-        {/* NAP aside */}
-        <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-(--r-md) border border-line bg-surface-1 p-6 shadow-[var(--shadow-sm)]">
-            <dl className="space-y-4 text-[15px]">
-              <Row icon={<MapPin size={18} />} label="Address">
-                {SITE.address.full}
+        <aside className="lg:sticky lg:top-[102px] lg:mt-[52px] lg:self-start">
+          <div className="rounded-(--r-md) border border-line bg-surface-1 p-8">
+            <dl className="space-y-[27px] text-[18px] leading-6">
+              <Row icon={<MapPin size={27} strokeWidth={1.65} />} label="Address">
+                {SITE.address.street},
+                <br />
+                {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
               </Row>
-              <Row icon={<Phone size={18} />} label="Phone">
-                <a
-                  href={SITE.phoneHref}
-                  className="text-brand hover:text-brand-hover"
-                >
+              <Row icon={<Phone size={27} strokeWidth={1.65} />} label="Phone">
+                <a href={SITE.phoneHref} className="text-brand hover:text-brand-hover">
                   {SITE.phone}
                 </a>
               </Row>
-              <Row icon={<Mail size={18} />} label="Email">
-                <a
-                  href={SITE.emailHref}
-                  className="text-brand hover:text-brand-hover"
-                >
+              <Row icon={<Mail size={27} strokeWidth={1.65} />} label="Email">
+                <a href={SITE.emailHref} className="break-all text-brand hover:text-brand-hover">
                   {SITE.email}
                 </a>
               </Row>
-              <Row icon={<Clock size={18} />} label="Hours">
-                {SITE.hours}
+              <Row icon={<Clock size={27} strokeWidth={1.65} />} label="Hours">
+                {SITE.counterHours}
+                <BranchStatusText withDot className="mt-1 text-base text-ink-2" />
+              </Row>
+              <Row icon={<Truck size={27} strokeWidth={1.65} />} label="Service">
+                {deliveryPolicyIsConfirmed()
+                  ? "Newark will-call, Bay Area delivery & freight"
+                  : "Newark will-call; delivery and freight confirmed by the counter"}
               </Row>
             </dl>
           </div>
-          <Link
-            href="/dealers"
-            className="mt-4 flex items-center justify-between gap-3 rounded-(--r-md) border border-line bg-brand-tint p-4 text-brand transition-colors hover:bg-brand/15"
-          >
-            <span className="text-sm font-semibold">
-              Contractor? Open a pro account
-            </span>
-            <ArrowRight size={16} />
-          </Link>
+          <WhatHappensNext
+            className="mt-4"
+            showPhone={false}
+            steps={[
+              "Your topic routes the message to the counter or the orders desk.",
+              "They reply by email, or by phone if you leave a number. The topic field shows what to expect.",
+              "For an order or return, include the order number so nothing waits on a lookup.",
+            ]}
+          />
         </aside>
       </div>
-    </Container>
+    </div>
   );
 }
 
-function Row({
-  icon,
-  label,
-  children,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  children: React.ReactNode;
-}) {
+function Row({ icon, label, children }: { icon: React.ReactNode; label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-3">
-      <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-(--r-sm) bg-surface-2 text-ink-3">
-        {icon}
-      </span>
-      <div>
-        <dt className="font-mono text-xs uppercase tracking-wider text-ink-3">
-          {label}
-        </dt>
-        <dd className="mt-0.5 text-ink-1">{children}</dd>
-      </div>
+    <div className="grid grid-cols-[2.25rem_minmax(0,1fr)] items-start gap-x-6">
+      <dt className="col-span-2 grid min-w-0 grid-cols-subgrid items-start text-[15px] leading-5 text-ink-3">
+        <span className="row-span-2 mt-0.5 grid size-9 place-items-center text-ink-1" aria-hidden="true">
+          {icon}
+        </span>
+        <span>{label}</span>
+      </dt>
+      <dd className="col-start-2 mt-0.5 min-w-0 max-w-[330px] text-ink-1">{children}</dd>
     </div>
   );
 }

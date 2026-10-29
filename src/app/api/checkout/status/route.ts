@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getCheckoutStatus } from "@/lib/backend/checkout";
+import { getCheckoutStatus, getOrderConfirmation } from "@/lib/backend/checkout";
 import { verifyOrderToken } from "@/lib/backend/order-token";
 
 export async function GET(request: Request) {
@@ -12,7 +12,8 @@ export async function GET(request: Request) {
   if (!order) {
     return NextResponse.json({ ok: false, error: "Order status unavailable" }, { status: 404 });
   }
-  return NextResponse.json({ ok: true, ...order }, {
+  const confirmation = await getOrderConfirmation(orderId);
+  return NextResponse.json({ ok: true, ...order, confirmation }, {
     headers: { "Cache-Control": "private, no-store, max-age=0" },
   });
 }

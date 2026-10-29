@@ -2,12 +2,24 @@ import * as React from "react";
 import { Container, Eyebrow } from "@/components/ui";
 import { SkuCatalogClient } from "@/components/sku-catalog-client";
 import { ZipGate } from "@/components/zip-gate";
-import { getCatalogFacets, getStorefrontSkus } from "@/lib/storefront/catalog";
-import { applyLiveInventoryAll, getLiveInventory } from "@/lib/storefront/live-inventory";
+import { getCatalogFacets, getStorefrontSkus, productHref } from "@/lib/storefront/catalog";
+import { matchedSystems } from "@/lib/catalog/compliance";
+import { applyLiveInventoryAll, getLiveInventoryResult } from "@/lib/storefront/live-inventory";
+import { CatalogResultsSkeleton } from "@/components/catalog-skeleton";
 
 export async function ProductCatalog() {
-  const skus = applyLiveInventoryAll(getStorefrontSkus(), await getLiveInventory());
+  const live = await getLiveInventoryResult();
+  const skus = applyLiveInventoryAll(getStorefrontSkus(), live.inventory);
   const facets = getCatalogFacets();
+  // AHRI-matched pairs, for the "complete system" task. Plain data: the client
+  // never needs the compliance module.
+  const systems = matchedSystems().map((system) => ({
+    ahriReference: system.ahriReference,
+    brand: system.brand,
+    btu: system.btu,
+    refrigerant: system.refrigerant,
+    components: system.components.map((component) => ({ sku: component.sku, unitType: component.unitType, href: productHref(component) })),
+  }));
   return (
     <>
       <section className="border-b border-line bg-surface-1">
@@ -27,8 +39,8 @@ export async function ProductCatalog() {
       </section>
 
       <Container className="py-10 lg:py-12">
-        <React.Suspense fallback={<p className="text-sm text-ink-3">Loading SKU filters...</p>}>
-          <SkuCatalogClient skus={skus} facets={facets} />
+        <React.Suspense fallback={<CatalogResultsSkeleton />}>
+          <SkuCatalogClient skus={skus} facets={facets} systems={systems} inventoryStatus={live.status} />
         </React.Suspense>
       </Container>
     </>

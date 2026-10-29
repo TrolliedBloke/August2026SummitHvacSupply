@@ -43,6 +43,8 @@ export const BODY_LIMITS = {
   form: 16_000,
   /** a dealer application: the above plus licence, service area, notes */
   application: 32_000,
+  /** a batch of up to 100 quick-order rows or cart lines */
+  batch: 64_000,
 } as const;
 
 export async function readJsonBody<T = unknown>(

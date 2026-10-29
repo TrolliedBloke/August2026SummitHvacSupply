@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
-import { CATALOG_CATEGORIES } from "@/lib/storefront/catalog";
+import { CATEGORY_RAIL } from "@/lib/nav-links";
 
-const PRODUCT_CATEGORIES = CATALOG_CATEGORIES.filter(
-  (category) => category.value !== "central-systems"
-);
+/* The same list as the header's category rail. */
+const PRODUCT_CATEGORIES = CATEGORY_RAIL;
 
 const RESOURCE_LINKS = [
   { href: "/resources", label: "Resource center" },
+  { href: "/finder", label: "System finder" },
   { href: "/homeowners", label: "For homeowners" },
   { href: "/dealers", label: "For contractors" },
   { href: "/tools/model-number-decoder", label: "Model decoder" },
@@ -23,6 +23,7 @@ const COMPANY_LINKS = [
   { href: "/locations/newark", label: "Newark location" },
   { href: "/returns", label: "Returns & Refunds" },
   { href: "/shipping", label: "Shipping & Delivery" },
+  { href: "/warranty", label: "Warranty claims" },
   { href: "/resources", label: "Warranty & FAQ" },
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms of Service" },
@@ -30,10 +31,10 @@ const COMPANY_LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-[var(--ink-panel)] text-white">
-      <div className="mx-auto w-full max-w-[var(--nav-max)] px-5 py-12 sm:px-6 sm:py-14 lg:px-[var(--counter-pad)]">
-        <div className="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[minmax(280px,1.45fr)_repeat(3,minmax(0,.8fr))_minmax(190px,1fr)]">
-          <section aria-labelledby="footer-company-heading" className="max-w-md">
+    <footer className="bg-[var(--chrome)] text-[var(--chrome-ink)]">
+      <div className="mx-auto w-full max-w-[1538px] px-6 pt-8 pb-7 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
+        <div className="footer-layout grid gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,.7fr)_minmax(0,.75fr)_minmax(0,.85fr)_minmax(13rem,1fr)] xl:gap-x-10 2xl:gap-x-12">
+          <section aria-labelledby="footer-company-heading" className="max-w-md -translate-y-1">
             <div className="flex items-center gap-3">
               <Image
                 src="/summit-mark-white.svg"
@@ -43,91 +44,100 @@ export function SiteFooter() {
                 sizes="48px"
                 className="h-9 w-12 object-contain"
               />
-              <h2 id="footer-company-heading" className="text-base font-semibold text-white">
+              <h2 id="footer-company-heading" className="text-lg font-semibold text-white">
                 Summit HVAC Supply
               </h2>
             </div>
-            <p className="mt-4 max-w-sm text-sm leading-6 text-white/65">
+            <p className="mt-3 max-w-[410px] text-base leading-[22px] text-white/90">
               Bay Area HVAC supply from Newark. Equipment only; installation by qualified local contractors.
             </p>
-            <address className="mt-4 flex flex-col gap-1 not-italic text-sm text-white/65">
-              <ContactRow icon={<MapPin size={16} strokeWidth={1.75} />}>
+            <address className="mt-2 flex flex-col gap-0 not-italic text-base text-white/90">
+              <ContactRow icon={<MapPin size={21} strokeWidth={1.75} />}>
                 {SITE.address.full}
               </ContactRow>
-              <ContactLink href={SITE.phoneHref} icon={<Phone size={16} strokeWidth={1.75} />}>
+              <ContactLink href={SITE.phoneHref} icon={<Phone size={21} strokeWidth={1.75} />}>
                 {SITE.phone}
               </ContactLink>
-              <ContactLink href={SITE.emailHref} icon={<Mail size={16} strokeWidth={1.75} />}>
+              <ContactLink href={SITE.emailHref} icon={<Mail size={21} strokeWidth={1.75} />}>
                 {SITE.email}
               </ContactLink>
-              <ContactRow icon={<Clock size={16} strokeWidth={1.75} />}>
+              <ContactRow icon={<Clock size={21} strokeWidth={1.75} />}>
                 {SITE.counterHours}
               </ContactRow>
             </address>
           </section>
 
-          <FooterNav title="Products">
-            {PRODUCT_CATEGORIES.map((category) => (
-              <FooterLink key={category.value} href={`/products?category=${category.value}`}>
-                {category.label}
-              </FooterLink>
-            ))}
-          </FooterNav>
+          <div className="hidden md:block">
+            <FooterNav title="Products">
+              {PRODUCT_CATEGORIES.map((category) => (
+                <FooterLink key={category.href} href={category.href}>
+                  {category.label}
+                </FooterLink>
+              ))}
+            </FooterNav>
+          </div>
 
-          <FooterNav title="Resources">
+          <div className="hidden md:block"><FooterNav title="Resources">
             {RESOURCE_LINKS.map((item) => (
               <FooterLink key={item.href} href={item.href}>
                 {item.label}
               </FooterLink>
             ))}
-          </FooterNav>
+          </FooterNav></div>
 
-          <FooterNav title="Company & policies">
+          <div className="hidden md:block"><FooterNav title="Company & policies">
             {COMPANY_LINKS.map((item) => (
               <FooterLink key={`${item.href}-${item.label}`} href={item.href}>
                 {item.label}
               </FooterLink>
             ))}
-          </FooterNav>
+          </FooterNav></div>
 
-          <section aria-labelledby="footer-start-heading">
-            <h2 id="footer-start-heading" className="text-sm font-semibold text-white">
-              Start here
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-white/65">
-              Choose the right way to shop.
-            </p>
-            <div className="mt-4 flex flex-col gap-2.5">
+          <div className="divide-y divide-white/20 border-y border-white/20 md:hidden">
+            <FooterDisclosure title="Products">{PRODUCT_CATEGORIES.map((item) => <FooterLink key={item.href} href={item.href}>{item.label}</FooterLink>)}</FooterDisclosure>
+            <FooterDisclosure title="Resources">{RESOURCE_LINKS.map((item) => <FooterLink key={item.href} href={item.href}>{item.label}</FooterLink>)}</FooterDisclosure>
+            <FooterDisclosure title="Company & policies">{COMPANY_LINKS.map((item) => <FooterLink key={`${item.href}-${item.label}`} href={item.href}>{item.label}</FooterLink>)}</FooterDisclosure>
+          </div>
+
+          <section aria-label="Shopping paths" className="pt-4">
+            <div className="flex flex-col gap-3.5">
               <Link
                 href="/dealers"
-                className="flex h-11 w-full items-center justify-center rounded-(--r-sm) bg-brand px-4 text-center text-sm font-medium text-white transition-colors hover:bg-brand-hover"
+                className="flex h-11 w-full items-center justify-center rounded-[6px] bg-[var(--page)] px-4 text-center text-[17px] font-semibold text-[var(--chrome)] transition-colors hover:bg-[var(--surface)]"
               >
-                Open contractor account
+                Apply for a trade account
               </Link>
               <Link
                 href="/homeowners"
-                className="flex h-11 w-full items-center justify-center rounded-(--r-sm) border border-white/25 bg-transparent px-4 text-center text-sm font-medium text-white transition-colors hover:border-white/45 hover:bg-white/5"
+                className="flex h-12 w-full items-center justify-center rounded-[6px] border-2 border-white/90 bg-transparent px-4 text-center text-[17px] font-semibold text-white transition-colors hover:bg-white/5"
               >
-                Shop for your home
+                Buying for your home
               </Link>
             </div>
           </section>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-white/15 pt-5 pr-14 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between sm:pr-12 lg:pr-14">
-          <p>© 2026 Summit HVAC Supply</p>
-          <p>Newark, California</p>
-        </div>
+        {/* Outside the mobile disclosures on purpose: the opt-out link must be
+            reachable on every page without opening anything (CCPA). */}
+        <p className="mt-8 border-t border-white/20 pt-4 text-sm text-white/90">
+          <Link href="/privacy/opt-out" className="underline underline-offset-4 transition-colors hover:text-white">
+            Do Not Sell or Share My Personal Information
+          </Link>
+        </p>
       </div>
     </footer>
   );
 }
 
+function FooterDisclosure({ title, children }: { title: string; children: React.ReactNode }) {
+  return <details className="group"><summary className="flex min-h-12 cursor-pointer list-none items-center justify-between font-semibold marker:content-none">{title}<span aria-hidden="true" className="text-xl font-normal transition-transform group-open:rotate-45">+</span></summary><ul className="flex flex-col pb-4">{children}</ul></details>;
+}
+
 function FooterNav({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <nav aria-label={`${title} footer navigation`}>
-      <h2 className="text-sm font-semibold text-white">{title}</h2>
-      <ul className="mt-3 flex flex-col gap-0.5">{children}</ul>
+      <h2 className="text-base font-semibold text-white">{title}</h2>
+      <ul className="mt-3 flex flex-col">{children}</ul>
     </nav>
   );
 }
@@ -137,7 +147,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
     <li>
       <Link
         href={href}
-        className="flex min-h-10 items-center text-sm leading-5 text-white/65 transition-colors hover:text-white lg:min-h-8"
+        className="flex min-h-6 items-center text-base leading-6 text-white/90 transition-colors hover:text-white"
       >
         {children}
       </Link>
@@ -147,7 +157,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
 
 function ContactRow({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="flex min-h-9 items-start gap-2.5 py-1 leading-5">
+    <div className="flex min-h-8 items-start gap-3 py-1 leading-6">
       <span className="mt-0.5 shrink-0 text-white/75" aria-hidden="true">
         {icon}
       </span>
@@ -168,7 +178,7 @@ function ContactLink({
   return (
     <a
       href={href}
-      className="flex min-h-9 items-start gap-2.5 py-1 leading-5 transition-colors hover:text-white"
+      className="flex min-h-8 items-start gap-3 py-1 leading-6 transition-colors hover:text-white"
     >
       <span className="mt-0.5 shrink-0 text-white/75" aria-hidden="true">
         {icon}

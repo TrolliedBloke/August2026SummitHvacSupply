@@ -1,0 +1,15 @@
+import { chromium } from "@playwright/test";
+import fs from "node:fs/promises";
+import path from "node:path";
+const root = path.resolve("./screenshots/site-audit");
+const b = await chromium.launch({ headless: true });
+const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+await p.goto("http://127.0.0.1:3000/this-page-does-not-exist", { waitUntil: "domcontentloaded", timeout: 30000 }).catch(() => {});
+await p.waitForTimeout(300);
+const file = "09-other/desktop/not-found-error-state.png";
+await fs.mkdir(path.dirname(path.join(root, file)), { recursive: true });
+await p.screenshot({ path: path.join(root, file), fullPage: true, animations: "disabled" });
+const mf = path.join(root, "manifest.json"); const m = JSON.parse(await fs.readFile(mf, "utf8"));
+m.states.push({ file, url: p.url(), type: "error-state", route: "/this-page-does-not-exist", viewport: "desktop", status: 404 });
+await fs.writeFile(mf, JSON.stringify(m, null, 2));
+await b.close();

@@ -41,7 +41,7 @@ export function TestimonialSlot({
             <div className="flex items-start justify-between gap-4">
               <Quote size={18} className="text-ink-3" aria-hidden="true" />
               {t.demo && (
-                <span className="rounded-(--r-sm) border border-line px-2 py-1 text-[11px] font-medium text-ink-3">
+                <span className="rounded-(--r-sm) border border-line px-2 py-1 text-xs font-medium text-ink-3">
                   Sample testimonial
                 </span>
               )}

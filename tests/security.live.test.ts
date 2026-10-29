@@ -130,7 +130,7 @@ describe("live: anonymous cannot execute operational RPCs", { skip }, () => {
   }
 });
 
-describe("live: tables added by migrations 005-014 are not anon-readable", { skip }, () => {
+describe("live: internal tables added by migrations are not anon-readable", { skip }, () => {
   // These were created after the first lockdown. Supabase's default privileges
   // grant anon full DML on every new table in `public`, so each migration is an
   // opportunity to reopen the hole -- which is exactly what happened with
@@ -147,6 +147,20 @@ describe("live: tables added by migrations 005-014 are not anon-readable", { ski
     "catalog_product_trade_pricing",
     "catalog_import_runs",
     "payment_disputes",
+    "dealer_applications",
+    "dealer_application_events",
+    "homeowner_requests",
+    "homeowner_request_events",
+    "quote_requests",
+    "quote_request_lines",
+    "rmas",
+    "referrals",
+    "finder_sessions",
+    "marketing_consents",
+    "planning_series",
+    "category_stock_alerts",
+    "audience_exports",
+    "lifecycle_deliveries",
   ];
 
   for (const table of mustBeClosed) {
@@ -178,6 +192,14 @@ describe("live: functions added by migrations 006-014 are not anon-executable", 
     ["reserve_public_order", { p_order_id: DEAD_UUID }],
     ["advance_fulfillment", { p_order_id: DEAD_UUID, p_status: "delivered" }],
     ["handle_new_retail_user", {}],
+    ["dealer_application_transition_allowed", { p_from: "submitted", p_to: "approved" }],
+    ["transition_dealer_application", { p_application_id: DEAD_UUID, p_to: "approved", p_reason: "x", p_actor: "x" }],
+    ["approve_dealer_application", { p_application_id: DEAD_UUID, p_price_tier: "standard", p_actor: "x" }],
+    ["record_license_verification", { p_application_id: DEAD_UUID, p_classification: "C-20", p_actor: "x" }],
+    ["record_epa608_sighting", { p_application_id: DEAD_UUID, p_type: "universal", p_number: "test", p_actor: "x" }],
+    ["introduce_installer", { p_request_id: DEAD_UUID, p_account_id: DEAD_UUID, p_actor: "x" }],
+    ["record_referral_outcome", { p_referral_id: DEAD_UUID, p_outcome: "contacted", p_notes: "test", p_actor: "x" }],
+    ["record_marketing_preference", { p_email: "security-check@example.test", p_source: "finder", p_notice_version: "test", p_opt_out: true }],
     // Migration 020. These move money in the opposite direction to
     // mark_order_paid/apply_payment, so an anon caller could zero out an
     // invoice balance or hand an account an unearned credit.
