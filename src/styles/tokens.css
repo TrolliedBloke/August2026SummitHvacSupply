@@ -3,21 +3,42 @@
   --text-2: #555555;
   /* Passes WCAG AA for normal text on both --page and --surface. */
   --text-muted: #6F6E69;
-  --page: #FAF9F6;
+  /* Neutral greys, not the warm off-whites the green palette used. Gold is the
+     only chroma on the page, and a warm page tone muddied it. */
+  --page: #F4F4F2;
   --surface: #FFFFFF;
-  --border: #E2E0DA;
-  /* Two greens, ranked. --green is the strongest on the page and belongs to
-     the primary action (the Search button). --green-deep is one step darker and
-     is chrome only (the utility bar), so Search still wins the eye. Green means
-     interactive, selected, or status -- never a plain label. */
-  --green: #1F4A32;
-  --green-deep: #14331F;
-  /* Chrome: the one named exception to "green means yes". The commerce shell's
-     utility strip and the footer sit on it; nothing else may. It is a surface,
-     never an action or status color (DESIGN-UX-DECISION-LOG D-08). */
-  --chrome: var(--green-deep);
+  --border: #DEDEDA;
+  /* Two golds, ranked, and they are NOT interchangeable.
+
+     --gold-fill is the bright mark. It carries ink text, never white: at
+     #D4AF37 it sits around 2.3:1 against white, nowhere near the 4.5:1 floor,
+     so a white label on it is unreadable at any size.
+
+     --gold is the text-weight gold, around 5:1 on white, and is what links,
+     headings and status use. Reach for this one whenever gold must be read
+     rather than filled.
+
+     The ranking the greens had is preserved: --gold-fill belongs to the
+     primary action (the Search button) and --chrome is the darker shell, so
+     Search still wins the eye. */
+  --gold: #8A6512;
+  --gold-fill: #D4AF37;
+  /* Chrome: the one named exception to "the accent means yes". The commerce
+     shell's utility strip and the footer sit on it; nothing else may. It is a
+     surface, never an action or status color (DESIGN-UX-DECISION-LOG D-08).
+     Dark grey rather than a dark gold -- two golds already carry meaning, and a
+     third would stop the ranking reading as a ranking. */
+  --chrome: #2E2E2B;
   --chrome-ink: var(--surface);
-  --green-bg: #F0F5F1;
+  --gold-bg: #FAF4E4;
+
+  /* Green is retired as the accent (2026-10-29). These aliases remain so any
+     call site not yet migrated resolves to gold instead of a stale green, and
+     so the chrome-usage test keeps its grip on --green-deep. Remove once the
+     deprecated-alias budget in tests/tokens.test.ts reaches zero. */
+  --green: var(--gold);
+  --green-deep: var(--chrome);
+  --green-bg: var(--gold-bg);
   --amber: #C77D2E;
   --dark: #1A1A1A;
   /* Warm band tint for full-width callout strips. Sampled by eye from the
@@ -87,10 +108,19 @@
   --ink-2: var(--text-2);
   --ink-3: var(--text-muted);
   --line: var(--border);
-  --brand: var(--green);
+  /* The READABLE gold, not the bright one.
+     --brand backs both `text-brand` (183 call sites) and `bg-brand` (119).
+     Green could serve both from one hex; gold cannot. Pointing --brand at
+     #D4AF37 put bright gold into body text at 1.91:1 and failed the WCAG gate
+     on the homepage. #8A6512 is 4.8:1 on the page and 5.3:1 under white, so it
+     works as text and as a fill.
+     --gold-fill stays for deliberate use on dark grounds, where it has the
+     contrast to earn its brightness -- not as a general brand fill. */
+  --brand: var(--gold);
   --brand-ink: var(--surface);
-  --brand-tint: var(--green-bg);
-  --stock-ready: var(--green);
+  --brand-tint: var(--gold-bg);
+  /* Status is read, not filled, so it takes the text-weight gold. */
+  --stock-ready: var(--gold);
   --control-bg: var(--surface);
   --control-border: var(--border);
   --r-sm: var(--radius-control);

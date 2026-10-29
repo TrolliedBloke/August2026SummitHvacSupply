@@ -40,10 +40,14 @@ function Wordmark({ compact = false }: { compact?: boolean }) {
   return (
     <Link href="/" className="flex shrink-0 items-center" aria-label="Summit HVAC Supply home">
       <Image
-        src="/logo-summit-lockup.png"
+        src="/logo-summit-gold.png"
         alt="Summit HVAC Supply"
-        width={1010}
-        height={280}
+        /* Intrinsic size of the artwork (2170x725). The previous lockup was
+           declared 1010x280 against a 600x166 file -- both near 3.6:1, so the
+           mismatch never showed. This mark is 2.99:1, and a wrong ratio here
+           reserves the wrong box and shifts the header on load. */
+        width={2170}
+        height={725}
         preload
         sizes="(min-width: 1024px) 270px, 160px"
         className={`${compact ? "h-[39px]" : "h-9 md:h-12 lg:h-16"} w-auto object-contain`}

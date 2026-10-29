@@ -35,6 +35,18 @@ export const BRAND_REGISTRY: BrandEntry[] = [
     note: "Central-system equipment: furnaces, evaporator coils, and matched air handlers.",
   },
   {
+    key: "DEWALT",
+    displayName: "DEWALT",
+    // Used under Summit's reseller agreement, from DEWALT's own artwork.
+    // Filename casing is exact: the deploy target is case-sensitive even though
+    // macOS is not, so a lowercased path would 404 only in production.
+    asset: { src: "/brands/DeWalt-Logo.png", width: 3840, height: 2400 },
+    // The source has generous empty canvas around the yellow block, so it reads
+    // small at equal optical area without this.
+    opticalScale: 1.25,
+    note: "Installation supplies.",
+  },
+  {
     key: "TCL",
     displayName: "TCL",
     asset: { src: "/brands/tcl-logo.png", width: 286, height: 89 },

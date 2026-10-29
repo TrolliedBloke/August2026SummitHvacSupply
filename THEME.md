@@ -6,21 +6,44 @@
 
 ## Color
 
-Black, white, green only:
+Gold, grey, white only. Gold replaced green as the accent on 2026-10-29; the
+single-meaning rule it carried is unchanged, and matters more now, not less.
 
-- `--ink`: `#1C1C1A` for navigation text, headings, and body
-- `--text-2`: `#5F5E5A` for secondary text
-- `--text-muted`: `#8A8880` for hints and metadata
-- `--page`: `#FAFAF8` for the warm page background
+- `--ink`: `#111111` for navigation text, headings, and body
+- `--text-2`: `#555555` for secondary text
+- `--text-muted`: `#6F6E69` for hints and metadata
+- `--page`: `#F4F4F2` for the neutral page background
 - `--surface`: `#FFFFFF` for cards and navigation
-- `--border`: `#E3E1DA` for all hairlines
-- `--green`: `#1B7A3D`
+- `--border`: `#DEDEDA` for all hairlines
+- `--gold`: `#8A6512` — text-weight gold
+- `--gold-fill`: `#D4AF37` — fills only
+- `--chrome`: `#2E2E2B` — the utility strip and footer, nothing else
 
-Green has exactly one meaning: yes.
+The page is a neutral grey, not the warm off-white green used. Gold is the only
+chroma on the screen, and a warm background muddied it.
 
-- Green text means availability.
-- Green fill means action.
-- Nothing else is green. No green headers, backgrounds, icons, or decorative fills.
+**The two golds are not interchangeable, and this is the rule most likely to be
+got wrong.**
+
+- `--gold-fill` (`#D4AF37`) is for fills, and anything on it takes **ink**.
+  White on it measures about 2.3:1 — unreadable at any size. If you find
+  yourself writing white text on gold, you want the other one.
+- `--gold` (`#8A6512`) is for text. It sits around 5:1 on white, so it is safe
+  for links, headings, and status at small sizes.
+
+Gold has exactly one meaning: yes.
+
+- Gold text means availability.
+- Gold fill means action.
+- Nothing else is gold. No gold headers, backgrounds, icons, or decorative
+  fills.
+
+The one named exception is `--chrome`: the utility strip and footer sit on dark
+grey. It is a surface, never an action or a status (DESIGN-UX-DECISION-LOG
+D-08), and `tests/tokens.test.ts` pins which files may use it.
+
+Chrome is deliberately grey rather than a third gold. Two golds already carry
+meaning; a third would stop the ranking reading as a ranking.
 
 ## Typography
 
