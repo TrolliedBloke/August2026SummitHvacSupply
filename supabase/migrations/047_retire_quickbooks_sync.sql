@@ -1,5 +1,12 @@
 -- ── Retire the QuickBooks Online inventory sync ────────────────────────────
 --
+-- Numbered 047, not 026. This was written as 026 while a parallel stream of
+-- work was claiming 026 through 046 on main; both landed independently. The
+-- content was applied to the crm project by hand under its original number, so
+-- this file is a record of a change already in the database rather than one
+-- waiting to run. Verified 2026-10-29: quickbooks_sync_runs is gone, and
+-- finder_sessions / audience_exports / email_messages from 031-036 are present.
+--
 -- Summit is moving off QuickBooks. The catalog CSV import becomes the single
 -- path for product identity, price and on-hand counts, as it already is for
 -- everything except the counts.
