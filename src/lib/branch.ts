@@ -63,7 +63,7 @@ export const NEWARK: Branch = {
   phone: "(415) 988-4445",
   phoneHref: "tel:+14159884445",
   smsHref: "sms:+14159884445",
-  email: "info@summithvacsupply.com",
+  email: "InfoSummitHvacSupply@gmail.com",
   regularHours: {
     1: { opens: hm(7), closes: hm(17) },
     2: { opens: hm(7), closes: hm(17) },
