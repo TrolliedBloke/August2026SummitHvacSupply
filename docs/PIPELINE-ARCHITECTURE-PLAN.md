@@ -1,5 +1,17 @@
 # Summit pipeline architecture plan
 
+> **Superseded in part, 2026-10-29.** Summit has decided to move off QuickBooks
+> entirely, which settles decision **D1** the other way: **Supabase counts
+> stock**, fed by the catalog CSV import. The 15-minute QuickBooks stock sync
+> that D1 recommended was built, ran, and has since been retired — the Edge
+> Function is deleted, its Intuit secrets are unset, and migration `047` drops
+> its database objects. Treat every QuickBooks row below as describing a fork
+> that was taken and then reversed, not as current architecture.
+>
+> **Still open:** item 3 recommends dropping Atlas ERP, while Summit has said it
+> plans to adopt ATLAS later. That disagreement is unresolved and is not settled
+> by this note.
+
 Status: phases 1–4 built (2026-10-04) using the recommended answer to each decision in section 3; phase 5 is an app install and phase 6 is per-person setup, both documented in `BACKEND_SETUP.md` (§7–9). The status table in section 6 is current.
 Source: the two "Summit Pipeline with Vercel" sketches (2026-10-04).
 Goal: the owner runs the counter; online orders, payments, shipping, customer email and books run themselves; staff touch only exceptions.
@@ -60,7 +72,7 @@ flowchart LR
 
 | # | Decision | Options | Recommendation |
 |---|---|---|---|
-| D1 | Which system counts stock? | **QuickBooks**: the owner already keeps it there, and the repo already syncs it every 15 minutes. Or **Supabase**: we become the system of record, and QuickBooks gets only accounting entries. | QuickBooks for now; it is what the counter uses. Revisit if online volume outgrows it. |
+| D1 | Which system counts stock? | **QuickBooks**: the owner already keeps it there, and the repo already syncs it every 15 minutes. Or **Supabase**: we become the system of record, and QuickBooks gets only accounting entries. | ~~QuickBooks for now~~ → **Supabase**, decided 2026-10-29. Counts arrive from the catalog CSV import; nothing else writes them. |
 | D2 | How do orders reach ShipStation? | **Custom Store (pull)**: ShipStation polls our endpoint and posts tracking back. Or **API push**: we call ShipStation when an order is paid. | Custom Store. It matches the sketch's "ShipStation pulls from SQL" and needs no retry logic on our side. Confirm your ShipStation plan includes Custom Store. |
 | D3 | How do Stripe sales reach QuickBooks? | **Stripe's own QuickBooks app**: free, limited. Or **a sync app** (Synder, Acodei): paid, handles fees and refunds. Or **custom code**. | An app, not custom code. Start with Stripe's free app; upgrade if the books need fee and refund detail. |
 | D4 | Keep Atlas ERP? | Keep or drop | Drop (sketch 2 already does). |
@@ -101,7 +113,7 @@ Each flow runs without anyone clicking. A person is needed only at the step mark
 
 **F5. Books and stock**
 
-- **Every 15 minutes:** QuickBooks stock counts sync into Supabase (D1).
+- ~~**Every 15 minutes:** QuickBooks stock counts sync into Supabase (D1).~~ Retired; stock arrives with the catalog import.
 - **Continuously:** Stripe sales sync into QuickBooks (D3).
 - **Monthly:** the existing AR-statements job emails open balances.
 
@@ -129,7 +141,7 @@ Every system except Atlas ERP has an official MCP server, so Claude can work wit
 | Stripe webhook → order paid | Built | `supabase/functions/stripe-webhook` |
 | Receipt and lifecycle emails via Resend | Built | `supabase/functions/send-receipt`, `src/lib/backend/email.ts`, cron 033 |
 | Login, retail vs. trade accounts, contractor verification | Built | migrations 012, 026, 030; `/admin/dealers` |
-| QuickBooks → stock sync (every 15 min) | Built | `supabase/functions/quickbooks-inventory-sync`, cron 024 |
+| QuickBooks → stock sync (every 15 min) | **Retired 2026-10-29** | Was `supabase/functions/quickbooks-inventory-sync`, cron 024. Removed by migration 047. |
 | AR statements, low-stock alerts | Built | `supabase/functions/ar-statements`, `low-stock-alert` |
 | Quote, contact, homeowner and dealer request tables | Built | migrations 005, 027, 029 |
 | CRM tables (accounts, contacts, tasks, notes, activity) | Tables exist; not used in the UI | migration 001 |
