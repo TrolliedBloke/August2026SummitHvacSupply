@@ -8,7 +8,7 @@ import { TestimonialSlot } from "@/components/testimonial-slot";
 import { HOMEOWNER_TESTIMONIALS } from "@/lib/testimonials";
 
 export const metadata: Metadata = {
-  title: "For Homeowners - Buy One TCL Mini Split or Heat Pump in the Bay Area",
+  title: "Homeowners: Buy One Heat Pump or Mini Split",
   description:
     "Retail-friendly Bay Area guide for homeowners buying one TCL mini split or heat pump, understanding installation, rebates, and installer matching.",
   alternates: { canonical: "/homeowners" },

@@ -9,6 +9,7 @@ import { AnalyticsListener } from "@/components/analytics-listener";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE } from "@/lib/site";
+import { BUSINESS_ID, DEFAULT_SHARE_IMAGE } from "@/lib/seo/metadata";
 import { catalogCategoryDestinations } from "@/lib/storefront/catalog";
 import { Analytics } from "@vercel/analytics/next";
 import { AdTags } from "@/components/ad-tags";
@@ -42,7 +43,10 @@ export const metadata: Metadata = {
       "HVAC equipment catalog and quote support for Bay Area homeowners, property teams, and contractors.",
     type: "website",
     siteName: SITE.name,
+    // Default share image for pages that do not set their own via pageMetadata().
+    images: [{ url: DEFAULT_SHARE_IMAGE, width: 1600, height: 900, alt: `${SITE.name} in Newark, California` }],
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_SHARE_IMAGE] },
 };
 
 export const viewport: Viewport = {
@@ -64,8 +68,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "HVACBusiness",
+    "@id": BUSINESS_ID,
     name: SITE.name,
     url: SITE.origin,
+    logo: new URL("/logo-summit.svg", SITE.origin).toString(),
+    image: new URL(DEFAULT_SHARE_IMAGE, SITE.origin).toString(),
     telephone: SITE.phone,
     email: SITE.email,
     address: {

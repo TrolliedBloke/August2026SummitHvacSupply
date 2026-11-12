@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Shipping, Delivery & Newark Will-Call Pickup",
   description:
     "Newark will-call pickup, Bay Area jobsite delivery, and LTL freight for HVAC equipment. Lead times, freight handling, and delivery requirements.",
+  alternates: { canonical: "/shipping" },
 };
 
 /* Content, version and section ids live in src/content/legal/shipping.tsx.

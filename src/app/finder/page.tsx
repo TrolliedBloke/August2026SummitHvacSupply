@@ -7,7 +7,7 @@ import { SITE } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "HVAC system finder: size and match a heat pump or mini split",
+  title: "Heat Pump & Mini Split System Finder",
   description: "Answer a few plain-language questions to get a starting HVAC system recommendation and next steps from Summit HVAC Supply.",
   path: "/finder",
 });

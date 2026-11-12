@@ -18,6 +18,7 @@ import {
 import { pickupReadyLine } from "@/lib/backend/fulfillment";
 import { deliveryPolicyIsConfirmed } from "@/lib/fulfillment-policy";
 import { LocationMap } from "@/components/location-map";
+import { BUSINESS_ID } from "@/lib/seo/metadata";
 
 /**
  * The Newark branch page. Every hour, holiday and status on it -- and the
@@ -27,7 +28,7 @@ import { LocationMap } from "@/components/location-map";
  * their own; the map embed is an enhancement.
  */
 export const metadata: Metadata = pageMetadata({
-  title: "Summit HVAC Supply Newark - Will-Call, Stock & Directions",
+  title: "Newark Branch - Will-Call, Stock & Directions",
   description: `Visit Summit HVAC Supply at ${SITE.address.full} for Newark will-call, Bay Area HVAC stock, documents, and contractor support.`,
   path: "/locations/newark",
   image: "/site/generated/newark-warehouse-stock.jpg",
@@ -52,6 +53,7 @@ export default function NewarkLocationPage() {
     "@context": "https://schema.org",
     "@type": "HVACBusiness",
     "@id": `${SITE.origin}/locations/newark#location`,
+    parentOrganization: { "@id": BUSINESS_ID },
     name: SITE.name,
     url: `${SITE.origin}/locations/newark`,
     image: `${SITE.origin}/site/generated/newark-warehouse-stock.jpg`,

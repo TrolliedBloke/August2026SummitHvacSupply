@@ -5,8 +5,9 @@ import { WarrantyClaimForm } from "@/components/warranty/warranty-claim-form";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Warranty Claim - Equipment Bought from Summit HVAC Supply",
+  title: { absolute: "Warranty Claim for Equipment Bought from Summit HVAC Supply" },
   description: "File a warranty claim for HVAC equipment bought from Summit HVAC Supply. We coordinate the claim with the manufacturer.",
+  alternates: { canonical: "/warranty" },
 };
 
 export default async function WarrantyPage({ searchParams }: PageProps<"/warranty">) {

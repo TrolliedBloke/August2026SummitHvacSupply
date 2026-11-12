@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Terms of Service",
   description:
     "Terms governing purchases from Summit HVAC Supply: pricing, orders, installation responsibility, warranty, and liability.",
+  alternates: { canonical: "/terms" },
 };
 
 /* Content, version and section ids live in src/content/legal/terms.tsx. */

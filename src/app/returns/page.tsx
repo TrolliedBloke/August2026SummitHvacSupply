@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Returns & Refunds - 30-Day Policy & Freight Damage Claims",
   description:
     "30-day returns on unopened HVAC equipment. Freight damage, restocking fees, warranty claims, and how to start a return from Newark, CA.",
+  alternates: { canonical: "/returns" },
 };
 
 /* Content, version and section ids live in src/content/legal/returns.tsx. */

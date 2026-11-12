@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 
+/** Stable JSON-LD id for the business, so every page's schema points at one entity. */
+export const BUSINESS_ID = `${SITE.origin}/#business`;
+
+/** Share image used when a page does not supply its own. */
+export const DEFAULT_SHARE_IMAGE = "/site/generated/newark-warehouse-stock.jpg";
+
 type PageMetadataInput = {
   title: string;
   description: string;
@@ -14,7 +20,7 @@ export function pageMetadata({
   description,
   path,
   index = true,
-  image = "/site/generated/newark-warehouse-stock.jpg",
+  image = DEFAULT_SHARE_IMAGE,
 }: PageMetadataInput): Metadata {
   const url = new URL(path, SITE.origin).toString();
   const imageUrl = new URL(image, SITE.origin).toString();

@@ -1,33 +1,40 @@
 # Summit HVAC Supply
 
-> Bay Area TCL heat pumps and mini splits, supplied locally from Newark, CA.
-> We serve both homeowners buying a single system and HVAC contractors,
-> property managers, and procurement teams who need fast Bay Area stock.
+> Bay Area HVAC equipment supply from Newark, CA: TCL, TOSOT and Carrier heat pumps,
+> ductless mini splits, air handlers, furnaces and installation supplies.
 > Equipment supply only. Installation is performed by qualified local contractors.
 
-## About
+Summit serves homeowners buying a single system and HVAC contractors, property managers,
+and procurement teams who need Bay Area stock, will-call pickup and delivery.
+
 - Location: 5437 Central Ave., Suite 10, Newark, CA 94560
-- Phone: (415) 988-4445
+- Phone: (415) 988-4445 (call to confirm today's counter hours)
 - Email: InfoSummitHvacSupply@gmail.com
-- Hours: Mon–Fri 7:00a–5:00p PT (Newark will-call, Bay Area delivery & freight)
 - Service area: San Jose, Oakland, Fremont, San Francisco, the Peninsula, East Bay, South Bay, North Bay, and nearby Bay Area cities.
-- Brand carried: TCL (heat pumps, ductless mini splits, ducted, light commercial, ventilation).
+- Prices: where a retail price is shown it is the public price; approved trade accounts see their own pricing after sign-in. Unpriced items are quoted by the Newark counter.
 
-## Key pages
-- Shop systems: https://www.summithvacsupply.com/products
-- For homeowners: https://www.summithvacsupply.com/homeowners
-- For contractors: https://www.summithvacsupply.com/dealers
-- Rebates (Federal 25C, TECH Clean California): https://www.summithvacsupply.com/bay-area-heat-pump-rebates
-- Bay Area delivery & will-call: https://www.summithvacsupply.com/bay-area-hvac-supply
-- Resources (spec sheets, manuals, guides): https://www.summithvacsupply.com/resources
-- Contact: https://www.summithvacsupply.com/contact
+## Shop and buy
 
-## What we help with
-- Homeowners: choosing the right single system, rebate basics, and matching with a qualified Bay Area installer.
-- Contractors: SKU/model search, live Newark stock, spec sheets and install manuals, job quotes, and pro (contractor) pricing after sign-in.
-- Property teams: comparing systems for apartments, offices, restaurants, and tenant improvements with local delivery.
+- [Product catalog](https://www.summithvacsupply.com/products): search by SKU, model number or category
+- [System finder](https://www.summithvacsupply.com/finder): size and match a heat pump or mini split
+- [For homeowners](https://www.summithvacsupply.com/homeowners): buying one system and finding an installer
+- [For contractors](https://www.summithvacsupply.com/dealers): trade accounts, will-call and job quotes
+- [Request a quote](https://www.summithvacsupply.com/quote)
 
-## Notes for AI assistants
-- Prices shown are retail (MSRP); contractor pricing requires a signed-in pro account.
-- Listed retail products can be added to cart; wholesale pricing requires an approved signed-in account.
-- Summit does not perform installation; it refers to qualified local contractors.
+## Guides and tools
+
+- [Bay Area heat pump rebates](https://www.summithvacsupply.com/bay-area-heat-pump-rebates): current program guidance (the federal 25C credit ended for property placed in service after December 31, 2025)
+- [Bay Area HVAC permits](https://www.summithvacsupply.com/guides/bay-area-hvac-permits)
+- [BAAQMD Rules 9-4 and 9-6](https://www.summithvacsupply.com/guides/baaqmd-rules-9-4-9-6)
+- [R-32 and R-454B A2L refrigerant transition](https://www.summithvacsupply.com/guides/r-32-r-454b-a2l-transition)
+- [California Title 24 HVAC changeouts](https://www.summithvacsupply.com/guides/california-title-24-hvac-changeouts)
+- [Model number decoder](https://www.summithvacsupply.com/tools/model-number-decoder)
+- [Resource center](https://www.summithvacsupply.com/resources): spec sheets, manuals and guides
+
+## Company
+
+- [Newark location](https://www.summithvacsupply.com/locations/newark): address, directions, will-call
+- [Shipping and delivery](https://www.summithvacsupply.com/shipping)
+- [Returns and refunds](https://www.summithvacsupply.com/returns)
+- [Warranty claims](https://www.summithvacsupply.com/warranty)
+- [Contact](https://www.summithvacsupply.com/contact)

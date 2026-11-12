@@ -4,8 +4,9 @@ import { Container, Eyebrow } from "@/components/ui";
 import { PrivacyRequestForm } from "@/components/privacy/privacy-request-form";
 
 export const metadata: Metadata = {
-  title: "Privacy Request - Know, Delete or Correct Your Information",
+  title: "Privacy Request: Know, Delete or Correct Data",
   description: "Ask Summit HVAC Supply what personal information it holds about you, or ask us to delete or correct it.",
+  alternates: { canonical: "/privacy/request" },
 };
 
 export default function PrivacyRequestPage() {
