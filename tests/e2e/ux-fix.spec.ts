@@ -123,6 +123,14 @@ test.describe("journeys", () => {
     await expect(page.locator("main form input").first()).toBeInViewport();
   });
 
+  test("dealer application explains the account benefits before the form", async ({ page }) => {
+    await page.goto("/dealers", { waitUntil: "load" });
+    await expect(page.getByText("Trade pricing", { exact: true })).toBeVisible();
+    await expect(page.getByText("Quick order + CSV", { exact: true })).toBeVisible();
+    await expect(page.getByText("Newark pickup + delivery", { exact: true })).toBeVisible();
+    await expect(page.getByText("Product and spec support", { exact: true })).toBeVisible();
+  });
+
   test("every tool ends with a next step", async ({ page }) => {
     await page.goto("/tools/system-sizing-estimator", { waitUntil: "load" });
     await expect(page.locator("[data-tool-next-step]").getByRole("link", { name: "See systems in this size" })).toHaveAttribute("href", "/finder");

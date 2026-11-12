@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Check, ArrowRight, ArrowLeft, CheckCircle2, ClipboardList } from "lucide-react";
+import { Check, ArrowRight, ArrowLeft, BadgeCheck, CheckCircle2, ClipboardList, FileSpreadsheet, Truck, Wrench } from "lucide-react";
 import * as React from "react";
 import { Container, Button } from "@/components/ui";
 import { TestimonialSlot } from "@/components/testimonial-slot";
@@ -225,7 +225,7 @@ export default function DealersPage() {
     <>
       {/* A short header, then the checklist and form: the application is the
           reason for the page, so nothing decorative sits before it. */}
-      <section className="border-b border-line bg-[var(--ink-panel)] py-10 text-white">
+      <section className="border-b border-[#152039] bg-[#1F2A44] py-10 text-white">
         <Container>
           <p className="text-sm font-medium text-white">Become a dealer</p>
           <h1 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">Open a contractor account.</h1>
@@ -238,6 +238,23 @@ export default function DealersPage() {
             <Link href="/products" className="font-medium text-white underline underline-offset-4">shop at list price</Link> or{" "}
             <Link href="/quote" className="font-medium text-white underline underline-offset-4">request a quote</Link>.
           </p>
+        </Container>
+      </section>
+
+      <section className="bg-[#edf2f7] py-3 sm:py-9">
+        <Container>
+          <p className="text-center text-xs font-medium leading-5 text-[#1F2A44] sm:hidden">Trade pricing · Quick order + CSV · Newark pickup + Bay Area delivery · Product and spec support</p>
+          <div className="hidden gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              [BadgeCheck, "Trade pricing", "For approved contractor accounts"],
+              [FileSpreadsheet, "Quick order + CSV", "Reuse job lists and order faster"],
+              [Truck, "Newark pickup + delivery", "Use the branch or local routes"],
+              [Wrench, "Product and spec support", "Get help from the Summit team"],
+            ].map(([Icon, title, body]) => {
+              const BenefitIcon = Icon as typeof BadgeCheck;
+              return <div key={title as string} className="rounded-md border border-slate-200 bg-white p-4"><BenefitIcon className="size-6 text-[#8a6512]" strokeWidth={1.8} /><h2 className="mt-3 text-sm font-semibold text-[#1F2A44]">{title as string}</h2><p className="mt-1 text-sm leading-5 text-slate-600">{body as string}</p></div>;
+            })}
+          </div>
         </Container>
       </section>
 
