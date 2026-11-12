@@ -13,7 +13,7 @@ import { StickyBuyBar } from "@/components/sticky-buy-bar";
 import { Container, LinkButton } from "@/components/ui";
 import { presentCommerceState, publicCommerceState } from "@/lib/commerce/state";
 import { skuMedia } from "@/lib/media";
-import { getRelatedSkus, getStorefrontSku, getStorefrontSkus, productHref, skuSlug } from "@/lib/storefront/catalog";
+import { getRecommendedAccessorySkus, getStorefrontSku, getStorefrontSkus, productHref, skuSlug } from "@/lib/storefront/catalog";
 import { applyLiveInventory, applyLiveInventoryAll, getLiveInventory } from "@/lib/storefront/live-inventory";
 import { buildProductSchema, getSkuSeoState } from "@/lib/seo/catalog";
 import { pageMetadata, safeJsonLd } from "@/lib/seo/metadata";
@@ -92,7 +92,7 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
   // sees one count on the page and a different one in the strip beneath it.
   const live = await getLiveInventory();
   const sku = applyLiveInventory(record, live);
-  const related = applyLiveInventoryAll(getRelatedSkus(sku, 4), live);
+  const related = applyLiveInventoryAll(getRecommendedAccessorySkus(sku, getStorefrontSkus(), 4), live);
   const media = skuMedia(sku);
   // The public CommerceState. Price, status and action below all come from it;
   // an approved trade session's own price arrives through <AccountPrice />.
@@ -333,10 +333,10 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
             )}
 
             <div className="mt-5 border-y border-line py-5">
-              <p className="text-sm text-ink-3">{commerceView.priceText ? commerceView.priceQualifier ?? "Price" : "Price"}</p>
-              <p className={`mt-1 text-3xl font-semibold text-ink-1 ${commerceView.priceText ? "part-number" : ""}`}>{commerceView.priceText ?? commerceView.priceFallback}</p>
+              <p className="text-base font-medium text-ink-2">{commerceView.priceText ? commerceView.priceQualifier ?? "List price" : "Price"}</p>
+              <p className={`mt-1 text-4xl font-semibold tracking-tight text-ink-1 ${commerceView.priceText ? "part-number" : ""}`}>{commerceView.priceText ?? commerceView.priceFallback}</p>
               {commerceView.priceText && (
-                <p className="mt-1 text-xs text-ink-3">Plus tax. Approved trade accounts see their own price after sign-in.</p>
+                <p className="mt-2 text-sm leading-6 text-ink-2">List price before tax. Approved trade accounts see their account price after sign-in.</p>
               )}
               {sku.bundleName && <p className="mt-2 text-sm text-ink-2">This component may be priced as part of {sku.bundleName}. We confirm the complete configuration before quoting.</p>}
               <AccountPrice skuId={sku.id} />
@@ -380,12 +380,12 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
                 <LinkButton href={`/contact?topic=product&sku=${encodeURIComponent(sku.sku)}`} variant="secondary">Ask about compatibility</LinkButton>
               </div>
             )}
-            <p className="mt-4 text-xs leading-5 text-ink-3">
+            <p className="mt-4 text-sm leading-6 text-ink-2">
               {commerceView.action.intent === "cart"
                 ? "Checkout confirms the price, stock and fulfillment window again before payment."
                 : "Requests go to the Newark counter, which confirms price, stock and timing in writing. Nothing is charged."}
             </p>
-            <p className="mt-2 text-xs leading-5 text-ink-3">
+            <p className="mt-2 text-sm leading-6 text-ink-2">
               Contractor? <Link href="/dealers" className="font-medium text-brand underline-offset-4 hover:underline">Apply for a wholesale account</Link> for account pricing and purchasing tools.
             </p>
           </aside>
@@ -410,8 +410,8 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
 
         {related.length > 0 && (
           <section className="mt-12 border-t border-line pt-10" aria-labelledby="nearby-heading">
-            <h2 id="nearby-heading" className="font-display text-2xl font-semibold tracking-tight text-ink-1">Nearby catalog items</h2>
-            <p className="mt-1 text-sm text-ink-2">Other products in {sku.categoryLabel.toLowerCase()}. Compatibility with this unit is not established; similar capacity does not make a match.</p>
+            <h2 id="nearby-heading" className="font-display text-2xl font-semibold tracking-tight text-ink-1">You might also need</h2>
+            <p className="mt-1 text-sm text-ink-2">Common installation parts for this equipment. Confirm the exact size and compatibility before ordering.</p>
             <div className="product-grid mt-6">
               {related.map((item) => <ProductCard key={item.id} sku={item} />)}
             </div>

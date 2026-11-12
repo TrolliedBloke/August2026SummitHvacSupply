@@ -344,6 +344,46 @@ export function getRelatedSkus(sku: StorefrontSku, limit = 4): StorefrontSku[] {
     .slice(0, limit);
 }
 
+/**
+ * Accessories are deliberately matched by the equipment family rather than
+ * by nearby BTU. A condenser should suggest installation parts, while an air
+ * handler should suggest the coil and controls that complete the job.
+ * Candidates are real, non-archived catalog records; live inventory is
+ * overlaid by the caller so verified stock can be ranked first.
+ */
+export function getRecommendedAccessorySkus(
+  sku: StorefrontSku,
+  candidates = getStorefrontSkus(),
+  limit = 4,
+): StorefrontSku[] {
+  const equipment = new Set(["mini-splits", "central-heat-pumps", "central-air-conditioners", "central-systems", "cassettes"]);
+  const matching = candidates.filter((candidate) => {
+    if (candidate.id === sku.id || candidate.publicationStatus === "archived") return false;
+    const title = candidate.title.toLowerCase();
+    if (equipment.has(sku.category)) {
+      return candidate.category === "line-sets"
+        || (candidate.category === "installation-supplies" && /pad|disconnect|wire/i.test(title))
+        || (candidate.category === "controls" && /thermostat|control/i.test(title));
+    }
+    if (sku.category === "air-handlers" || sku.category === "furnaces" || sku.category === "evaporator-coils") {
+      return candidate.category === "evaporator-coils"
+        || (candidate.category === "controls" && /thermostat|control/i.test(title))
+        || (candidate.category === "installation-supplies" && /pad|disconnect|wire/i.test(title));
+    }
+    return false;
+  });
+
+  return matching
+    .sort((a, b) => {
+      const stockScore = Number(b.availabilityVerified && b.available > 0) - Number(a.availabilityVerified && a.available > 0);
+      if (stockScore) return stockScore;
+      const categoryScore = Number(b.category === "line-sets") - Number(a.category === "line-sets");
+      if (categoryScore) return categoryScore;
+      return a.title.localeCompare(b.title);
+    })
+    .slice(0, limit);
+}
+
 function normalizeCode(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]/g, "");
 }

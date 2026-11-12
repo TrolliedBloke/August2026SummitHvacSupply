@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { applyLiveInventory, applyLiveInventoryAll, type LiveInventory } from "../src/lib/storefront/live-inventory";
-import { getStorefrontSku, getStorefrontSkus } from "../src/lib/storefront/catalog";
+import { getRecommendedAccessorySkus, getStorefrontSku, getStorefrontSkus } from "../src/lib/storefront/catalog";
 import { hasOffer } from "../src/lib/seo/catalog";
 import { availabilityCopy } from "../src/lib/catalog/availability";
 import { presentCommerceState, publicCommerceState } from "../src/lib/commerce/state";
@@ -78,6 +78,27 @@ describe("live inventory overlay", () => {
     const result = applyLiveInventoryAll(all, live);
     assert.equal(result.filter((sku) => sku.availabilityVerified).length, 1);
     assert.equal(result.find((sku) => sku.id === priced.id)?.available, 4);
+  });
+});
+
+describe("product detail recommendations", () => {
+  it("recommends installation accessories for equipment instead of unrelated equipment", () => {
+    const condenser = getStorefrontSkus().find((sku) => sku.category === "central-heat-pumps");
+    assert.ok(condenser, "expected a central heat pump in the generated catalog");
+    const recommendations = getRecommendedAccessorySkus(condenser);
+    assert.ok(recommendations.length > 0);
+    assert.ok(recommendations.every((sku) => ["line-sets", "installation-supplies", "controls"].includes(sku.category)));
+    assert.ok(recommendations.every((sku) => sku.id !== condenser.id));
+  });
+
+  it("prefers verified stock when ranking matching accessories", () => {
+    const condenser = getStorefrontSkus().find((sku) => sku.category === "central-heat-pumps");
+    assert.ok(condenser);
+    const candidates = getStorefrontSkus().filter((sku) => sku.category === "line-sets").slice(0, 2);
+    assert.equal(candidates.length, 2);
+    const stocked = applyLiveInventory(candidates[1], { [candidates[1].id]: { quantity: 4, status: "in_stock" } });
+    const ranked = getRecommendedAccessorySkus(condenser, [candidates[0], stocked]);
+    assert.equal(ranked[0].id, stocked.id);
   });
 });
 
