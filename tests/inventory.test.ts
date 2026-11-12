@@ -4,6 +4,7 @@ import { applyLiveInventory, applyLiveInventoryAll, type LiveInventory } from ".
 import { getStorefrontSku, getStorefrontSkus } from "../src/lib/storefront/catalog";
 import { hasOffer } from "../src/lib/seo/catalog";
 import { availabilityCopy } from "../src/lib/catalog/availability";
+import { presentCommerceState, publicCommerceState } from "../src/lib/commerce/state";
 
 /**
  * Guard rails for the inventory overlay and the stock counter.
@@ -131,5 +132,12 @@ describe("stock counter display rules", () => {
     const sku = applyLiveInventory(priced, { [priced.id]: { quantity: 40, status: "in_stock" } });
     assert.equal(sku.purchaseEligible, false);
     assert.equal(hasOffer(sku), false);
+  });
+
+  it("uses a neutral order-confirmation fallback when live inventory is unavailable", () => {
+    const view = presentCommerceState(publicCommerceState(priced));
+    assert.equal(view.statusLabel, "Stock confirmed at order");
+    assert.match(view.statusDetail, /confirm availability/i);
+    assert.equal(view.tone, "pending");
   });
 });

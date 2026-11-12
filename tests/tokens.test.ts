@@ -37,7 +37,7 @@ describe("WS-7 token contract", () => {
   });
 
   it("keeps chrome green to the footer and utility strip", () => {
-    const users = sources.filter((file) => /--chrome\b|--green-deep\b/.test(readFileSync(file, "utf8"))).map((file) => path.relative(SRC, file)).sort();
+    const users = sources.filter((file) => /--chrome\b|--green-deep\b/.test(readFileSync(file, "utf8"))).map((file) => path.relative(SRC, file).replaceAll(path.sep, "/")).sort();
     assert.deepEqual(users, ["components/nav/search-field.tsx", "components/site-footer.tsx", "components/site-nav.tsx"]);
   });
 });

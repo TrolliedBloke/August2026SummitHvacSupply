@@ -23,16 +23,16 @@ export async function ProductCatalog() {
   return (
     <>
       <section className="border-b border-line bg-surface-1">
-        <Container className="py-12 lg:py-14">
+        <Container className="py-4 lg:py-8">
           <Eyebrow>Wholesale + retail HVAC catalog</Eyebrow>
-          <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-tight text-ink-1 sm:text-4xl">
+          <h1 className="mt-2 max-w-2xl font-display text-2xl font-semibold tracking-tight text-ink-1 sm:mt-3 sm:text-4xl">
             Find equipment and supplies by SKU, model, brand, and capacity.
           </h1>
-          <p className="mt-3 max-w-2xl text-ink-2">
+          <p className="mt-2 max-w-2xl text-sm leading-5 text-ink-2 sm:mt-3 sm:text-base sm:leading-6">
             Shop listed retail prices or request help with unpriced equipment.
             Approved wholesale accounts receive account pricing and trade purchasing tools after sign-in.
           </p>
-          <div className="mt-5">
+          <div className="mt-3 sm:mt-5">
             <ZipGate />
           </div>
         </Container>

@@ -1,5 +1,5 @@
 import { unstable_cache } from "next/cache";
-import { createServerSupabaseClient } from "@/lib/backend/supabase";
+import { createServerSupabaseClient, createServiceRoleSupabaseClient } from "@/lib/backend/supabase";
 import {
   stockStatusFor,
   type CatalogAvailability,
@@ -71,36 +71,71 @@ export type LiveInventoryResult = {
 
 const LIVE_INVENTORY_TIMEOUT_MS = 2500;
 
+type InventoryRow = { id: string; inventory_quantity: number | null; inventory_status: string };
+
+type InventoryRead =
+  | { kind: "ok"; rows: InventoryRow[] }
+  | { kind: "timeout" }
+  | { kind: "error"; message: string };
+
+async function readInventory(client: ReturnType<typeof createServerSupabaseClient>): Promise<InventoryRead> {
+  if (!client) return { kind: "error", message: "client unavailable" };
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), LIVE_INVENTORY_TIMEOUT_MS);
+  try {
+    const { data, error } = await client
+      .from("catalog_products")
+      .select("id, inventory_quantity, inventory_status")
+      .neq("inventory_status", "unknown")
+      .in("publication_status", ["quote_only", "published"])
+      .abortSignal(controller.signal);
+    if (error || !data) return { kind: "error", message: error?.message ?? "empty response" };
+    return { kind: "ok", rows: data };
+  } catch (error) {
+    return controller.signal.aborted
+      ? { kind: "timeout" }
+      : { kind: "error", message: error instanceof Error ? error.message : "unknown error" };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function inventoryFromRows(rows: InventoryRow[]): LiveInventory {
+  const live: LiveInventory = {};
+  for (const row of rows) {
+    const quantity = row.inventory_quantity;
+    const status = row.inventory_status;
+    if (typeof quantity !== "number" || !VALID_STATUSES.has(status)) continue;
+    live[row.id] = { quantity, status: status as CatalogAvailability };
+  }
+  return live;
+}
+
 async function fetchLiveInventoryResult(): Promise<LiveInventoryResult> {
   try {
     // The anon client, deliberately. catalog_products already carries a public
     // read policy for quote_only and published rows, so the render path needs
     // no service-role key -- and a leaked build artifact cannot contain one.
-    const supabase = createServerSupabaseClient();
-    if (!supabase) return { inventory: {}, status: "unconfigured" };
+    const publicClient = createServerSupabaseClient();
+    if (!publicClient) return { inventory: {}, status: "unconfigured" };
 
-    const query = supabase
-      .from("catalog_products")
-      .select("id, inventory_quantity, inventory_status")
-      .neq("inventory_status", "unknown");
-    const timeout = new Promise<"timeout">((resolve) => setTimeout(() => resolve("timeout"), LIVE_INVENTORY_TIMEOUT_MS));
-    const response = await Promise.race([query, timeout]);
-    if (response === "timeout") return { inventory: {}, status: "timeout" };
+    const publicRead = await readInventory(publicClient);
+    if (publicRead.kind === "ok") return { inventory: inventoryFromRows(publicRead.rows), status: "ok" };
 
-    const { data, error } = response;
-    if (error || !data) return { inventory: {}, status: "error" };
+    // Public catalog reads are the normal path. A server-only retry keeps a
+    // temporary anon grant/schema issue from turning the entire catalog yellow,
+    // without exposing unpublished rows or any service credential to the page.
+    const serviceClient = createServiceRoleSupabaseClient();
+    const serviceRead = serviceClient ? await readInventory(serviceClient) : null;
+    if (serviceRead?.kind === "ok") return { inventory: inventoryFromRows(serviceRead.rows), status: "ok" };
 
-    const live: LiveInventory = {};
-    for (const row of data) {
-      const quantity = row.inventory_quantity;
-      const status = row.inventory_status;
-      // A row claiming a status without a count is not a stock claim we can
-      // stand behind, so it is dropped rather than shown as zero.
-      if (typeof quantity !== "number" || !VALID_STATUSES.has(status)) continue;
-      live[row.id] = { quantity, status: status as CatalogAvailability };
-    }
-    return { inventory: live, status: "ok" };
+    console.error("[live-inventory] catalog_products read failed", {
+      public: publicRead.kind === "error" ? publicRead.message : publicRead.kind,
+      service: serviceRead ? serviceRead.kind === "error" ? serviceRead.message : serviceRead.kind : "unconfigured",
+    });
+    return { inventory: {}, status: publicRead.kind === "timeout" || serviceRead?.kind === "timeout" ? "timeout" : "error" };
   } catch {
+    console.error("[live-inventory] unexpected catalog_products read failure");
     return { inventory: {}, status: "error" };
   }
 }

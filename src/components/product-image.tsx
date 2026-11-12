@@ -44,7 +44,7 @@ export function ProductImage({
 
   return (
     <span
-      className="@container relative block aspect-[16/10] w-full overflow-hidden rounded-(--r-sm) border border-line bg-surface-1"
+      className="@container relative block aspect-[16/10] w-full overflow-hidden rounded-(--r-sm) border border-line bg-[#edf2f7]"
       data-media-state={state}
     >
       {showImage ? (
@@ -63,7 +63,7 @@ export function ProductImage({
               phone list), a corner label once the tile is wide enough that it
               no longer covers the product. */}
           {badge && (
-            <span className="absolute inset-x-0 bottom-0 border-t border-line bg-surface-1/95 px-1 text-center text-[0.6875rem] font-medium leading-4 text-ink-2 @min-[11rem]:inset-x-auto @min-[11rem]:bottom-auto @min-[11rem]:left-2 @min-[11rem]:top-2 @min-[11rem]:rounded-(--r-sm) @min-[11rem]:border @min-[11rem]:px-2 @min-[11rem]:py-1 @min-[11rem]:text-micro">
+            <span className="absolute inset-x-0 bottom-0 px-1 text-center text-[0.625rem] font-normal leading-4 text-ink-3 @min-[11rem]:inset-x-auto @min-[11rem]:bottom-auto @min-[11rem]:left-2 @min-[11rem]:top-2 @min-[11rem]:rounded-(--r-sm) @min-[11rem]:bg-[#edf2f7]/90 @min-[11rem]:px-1.5 @min-[11rem]:py-0.5 @min-[11rem]:text-[0.6875rem]">
               {badge}
             </span>
           )}
@@ -71,7 +71,7 @@ export function ProductImage({
       ) : (
         <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-ink-3">
           <ImageOff size={28} aria-hidden="true" />
-          <span className="text-xs">{phase === "failed" ? "Image unavailable" : "No verified image"}</span>
+          <span className="text-xs text-ink-2">{phase === "failed" ? "Image unavailable" : "Image available on request"}</span>
         </span>
       )}
     </span>

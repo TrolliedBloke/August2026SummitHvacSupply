@@ -341,16 +341,16 @@ export function SkuCatalogClient({
 
         {partial && (
           <Notice
-            tone="warning"
-            className="mb-5"
-            title="Live stock counts did not load"
+            tone="info"
+            className="mb-4 py-2.5"
+            title="Live stock is being confirmed"
             action={
               <button type="button" onClick={() => router.refresh()} className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-ink-1 underline underline-offset-4">
                 <RotateCcw size={14} aria-hidden="true" /> Retry
               </button>
             }
           >
-            Products and prices are shown, but no stock counts. Availability is confirmed before any order is accepted.
+            Products and prices are shown. Availability is confirmed at order before anything is accepted.
           </Notice>
         )}
         {compatibility.length > 0 && (
