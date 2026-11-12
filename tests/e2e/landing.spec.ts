@@ -60,6 +60,16 @@ test("landing uses the header search once and routes product-led hero actions", 
   await expect(page.getByRole("radio")).toHaveCount(0);
 });
 
+test("task pages use the same commerce header as the catalog", async ({ page }) => {
+  for (const route of ["/dealers", "/finder", "/locations/newark"]) {
+    await page.goto(route, { waitUntil: "domcontentloaded" });
+    const storeNav = page.getByRole("navigation", { name: "Store navigation" });
+    await expect(storeNav).toBeVisible();
+    await expect(storeNav.getByRole("link", { name: "Mini splits" })).toBeVisible();
+    await expect(storeNav.getByRole("link", { name: "Thermostats" })).toBeVisible();
+  }
+});
+
 test("contractor ordering opens, switches, and collapses without a duplicate search", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
 

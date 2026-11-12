@@ -219,6 +219,7 @@ function CategoryRail({ pathname }: { pathname: string }) {
 export function SiteNav({ categories }: { categories: CategoryDestination[] }) {
   const pathname = usePathname();
   const shellVariant = shellVariantForPathname(pathname);
+  const isCommerceShell = shellVariant !== "focused";
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [productsOpen, setProductsOpen] = React.useState(false);
   const productsWrapRef = React.useRef<HTMLDivElement>(null);
@@ -248,12 +249,12 @@ export function SiteNav({ categories }: { categories: CategoryDestination[] }) {
 
   return (
     <header className="relative z-30 bg-surface-2" data-shell-variant={shellVariant}>
-      {shellVariant === "commerce" && <UtilityStrip />}
+      {isCommerceShell && <UtilityStrip />}
 
       <div
-        className={`mx-auto flex w-full max-w-[var(--page-max)] items-center gap-3 bg-surface-2 px-5 py-2.5 lg:gap-6 ${shellVariant === "commerce" ? "md:py-[18px] lg:py-[15px]" : "md:py-3"}`}
+        className={`mx-auto flex w-full max-w-[var(--page-max)] items-center gap-3 bg-surface-2 px-5 py-2.5 lg:gap-6 ${isCommerceShell ? "md:py-[18px] lg:py-[15px]" : "md:py-3"}`}
       >
-        <Wordmark compact={shellVariant !== "commerce"} />
+        <Wordmark compact={!isCommerceShell} />
         {/* Capped and centred, so mark / search / account each hold their space. */}
         <div className="hidden min-w-0 flex-1 justify-center md:flex">
           <div className="w-full max-w-[827px]">
@@ -285,7 +286,7 @@ export function SiteNav({ categories }: { categories: CategoryDestination[] }) {
           Brands pinned right. The disclosure's panel is positioned against this
           nav (not inside the horizontally scrolling row), so it is never
           clipped by the row's overflow. */}
-      {shellVariant === "commerce" ? (
+      {isCommerceShell ? (
         <nav aria-label="Store navigation" className="relative border-b border-line bg-surface-2">
           <div ref={productsWrapRef}>
             <div className="mx-auto w-full max-w-[var(--page-max)] px-5">
@@ -320,19 +321,6 @@ export function SiteNav({ categories }: { categories: CategoryDestination[] }) {
                 {productsOpen && <AllProductsPanel id={productsPanelId} categories={categories} onNavigate={() => setProductsOpen(false)} />}
               </div>
             </div>
-          </div>
-        </nav>
-      ) : shellVariant === "service" ? (
-        <nav aria-label="Service navigation" className="border-b border-line bg-surface-2">
-          <div className="mx-auto hidden h-12 w-full max-w-[var(--page-max)] items-center gap-7 px-5 text-sm font-medium text-ink-1 md:flex">
-            <Link href="/products" className="hover:text-brand">Catalog</Link>
-            <Link href="/finder" aria-current={pathname.startsWith("/finder") ? "page" : undefined} className="hover:text-brand aria-[current=page]:text-brand">System finder</Link>
-            <Link href="/resources" aria-current={pathname.startsWith("/resources") || pathname.startsWith("/guides") ? "page" : undefined} className="hover:text-brand aria-[current=page]:text-brand">Resources</Link>
-            <Link href="/contact" aria-current={pathname.startsWith("/contact") ? "page" : undefined} className="hover:text-brand aria-[current=page]:text-brand">Contact</Link>
-            <a href={SITE.phoneHref} className="tnum ml-auto inline-flex items-center gap-2 hover:text-brand">
-              <Phone size={14} strokeWidth={ICON_STROKE} aria-hidden="true" />
-              {SITE.phone}
-            </a>
           </div>
         </nav>
       ) : (
