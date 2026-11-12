@@ -41,7 +41,7 @@ type Phase =
   | { kind: "error"; path: FinderPath; message: string }
   | { kind: "results"; path: FinderPath; result: FinderResult; tier: TradeTier };
 
-export function Finder() {
+export function Finder({ landing = false }: { landing?: boolean }) {
   const router = useRouter();
   const [phase, setPhase] = React.useState<Phase>({ kind: "fork" });
   const [answers, setAnswers] = React.useState<Answers>({});
@@ -122,26 +122,26 @@ export function Finder() {
     return (
       <section
         aria-labelledby="finder-step-heading"
-        className="rounded-(--r-md) border border-line bg-surface-1 p-5 sm:p-7"
+        className={`rounded-(--r-md) border border-line bg-surface-1 p-5 sm:p-7 ${landing ? "border-[#d8c28a] shadow-[0_2px_10px_rgba(31,42,68,.08)] sm:p-8" : ""}`}
         data-finder-phase="fork"
         data-screenshot-ready="true"
       >
         <h2 id="finder-step-heading" ref={headingRef} tabIndex={-1} className="text-lead font-medium text-ink-1 outline-none">
           Who is this for?
         </h2>
-        <ul className="mt-5 grid gap-3 sm:grid-cols-3">
+        <ul className={`mt-5 grid gap-3 ${landing ? "sm:gap-4" : "sm:grid-cols-3"} sm:grid-cols-3`}>
           {FORK_OPTIONS.map((option) => (
             <li key={option.value}>
               <button
                 type="button"
                 onClick={() => choosePath(option.value)}
-                className="group flex h-full w-full flex-col items-start rounded-(--r-sm) border border-line bg-surface-1 px-4 py-4 text-left transition-colors duration-150 hover:border-ink-3 hover:bg-surface-2"
+                className={`group flex h-full w-full flex-col items-start rounded-(--r-sm) border border-line bg-surface-1 px-4 text-left transition-colors duration-150 hover:border-ink-3 hover:bg-surface-2 ${landing ? "min-h-36 py-5 sm:min-h-40 sm:px-5" : "py-4"}`}
               >
-                <span className="flex w-full items-center justify-between gap-2 text-item font-medium text-ink-1">
+                <span className={`flex w-full items-center justify-between gap-2 text-item font-medium text-ink-1 ${landing ? "text-base" : ""}`}>
                   {option.label}
                   <ArrowRight size={16} aria-hidden="true" className="shrink-0 transition-transform duration-150 group-hover:translate-x-0.5" />
                 </span>
-                <span className="mt-1 text-meta text-ink-3">{option.hint}</span>
+                <span className={`mt-1 text-meta text-ink-3 ${landing ? "max-w-[18ch] leading-5" : ""}`}>{option.hint}</span>
               </button>
             </li>
           ))}

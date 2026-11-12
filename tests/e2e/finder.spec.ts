@@ -13,6 +13,17 @@ async function choose(page: Page, name: string | RegExp) {
   await page.getByRole("button", { name: /^(Next|See my results)/ }).click();
 }
 
+test("finder landing explains the path before the interactive questions", async ({ page }) => {
+  await page.goto("/finder", { waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("heading", { name: /Start with the right questions/i })).toBeVisible();
+  await expect(page.getByText("Tell us about the space", { exact: true })).toBeVisible();
+  await expect(page.getByText("Compare suitable equipment", { exact: true })).toBeVisible();
+  await expect(page.getByText("Review next steps", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^My home/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^I'm a contractor/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^I know what I need/ })).toBeVisible();
+});
+
 test("homeowner finder shows a verified system before asking for email and prefills installer request", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
