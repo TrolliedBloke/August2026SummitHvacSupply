@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { CATEGORY_RAIL } from "@/lib/nav-links";
+import { GooglePreferredSource } from "@/components/google-preferred-source";
 
 /* The same list as the header's category rail. */
 const PRODUCT_CATEGORIES = CATEGORY_RAIL;
@@ -119,11 +120,12 @@ export function SiteFooter() {
 
         {/* Outside the mobile disclosures on purpose: the opt-out link must be
             reachable on every page without opening anything (CCPA). */}
-        <p className="mt-8 border-t border-white/20 pt-4 text-sm text-white/90">
+        <div className="mt-8 flex flex-col gap-4 border-t border-white/20 pt-4 text-sm text-white/90 sm:flex-row sm:items-center sm:justify-between">
           <Link href="/privacy/opt-out" className="underline underline-offset-4 transition-colors hover:text-white">
             Do Not Sell or Share My Personal Information
           </Link>
-        </p>
+          <GooglePreferredSource className="self-start sm:self-auto" />
+        </div>
       </div>
     </footer>
   );
