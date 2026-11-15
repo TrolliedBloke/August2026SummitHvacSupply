@@ -339,19 +339,16 @@ export function SkuCatalogClient({
           onClear={() => commit(clearFacets(applied))}
         />
 
+        {/* Each card already states "Stock confirmed at order" when live counts
+            are missing, so the outage is a quiet line, not a banner above the
+            products: the first thing a shopper reads should be the catalog. */}
         {partial && (
-          <Notice
-            tone="info"
-            className="mb-4 py-2.5"
-            title="Live stock is being confirmed"
-            action={
-              <button type="button" onClick={() => router.refresh()} className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-ink-1 underline underline-offset-4">
-                <RotateCcw size={14} aria-hidden="true" /> Retry
-              </button>
-            }
-          >
-            Products and prices are shown. Availability is confirmed at order before anything is accepted.
-          </Notice>
+          <p className="mb-4 flex flex-wrap items-center gap-x-2 text-xs text-ink-3" data-inventory-status={inventoryStatus}>
+            Stock counts are updating; availability is confirmed with your order.
+            <button type="button" onClick={() => router.refresh()} className="inline-flex min-h-11 items-center gap-1 font-medium text-ink-2 underline underline-offset-4">
+              <RotateCcw size={12} aria-hidden="true" /> Refresh
+            </button>
+          </p>
         )}
         {compatibility.length > 0 && (
           <Notice tone="info" className="mb-5" title="Check compatibility before ordering">
