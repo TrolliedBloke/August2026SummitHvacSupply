@@ -5,6 +5,7 @@ import { AlertTriangle, Download, Link2, PackageCheck, ShieldCheck } from "lucid
 import { ProductCard } from "@/components/product-card";
 import { AddToQuote } from "@/components/add-to-quote";
 import { AccountPrice } from "@/components/account-price";
+import { BuyBoxDocuments, CounterCard, OrderedSeparately } from "@/components/buy-box-extras";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CommerceStatusLine } from "@/components/commerce-status";
 import { NotifyMe } from "@/components/notify-me";
@@ -385,7 +386,10 @@ export default async function SkuPage({ params }: PageProps<"/products/sku/[sku]
                 ? "Checkout confirms the price, stock and fulfillment window again before payment."
                 : "Requests go to the Newark counter, which confirms price, stock and timing in writing. Nothing is charged."}
             </p>
-            <p className="mt-2 text-sm leading-6 text-ink-2">
+            <OrderedSeparately accessories={related} targetId="nearby-heading" />
+            <BuyBoxDocuments documents={sku.documents} />
+            <CounterCard />
+            <p className="mt-4 text-sm leading-6 text-ink-2">
               Contractor? <Link href="/dealers" className="font-medium text-brand underline-offset-4 hover:underline">Apply for a wholesale account</Link> for account pricing and purchasing tools.
             </p>
           </aside>

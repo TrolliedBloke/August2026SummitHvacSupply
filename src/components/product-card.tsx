@@ -16,6 +16,15 @@ import { presentCommerceState, publicCommerceState, type CommerceState } from "@
 
 export const PRODUCT_CARD_ROWS = 6;
 
+/** The specs HVAC buyers compare on, so results scan without opening pages.
+    SEER2 is left out on purpose: it is rated per matched pair, not per unit. */
+export function cardSpecLine(sku: Pick<StorefrontSku, "tonnage" | "btu" | "refrigerant" | "refrigerantClass" | "voltage">): string | null {
+  const capacity = sku.tonnage ? `${sku.tonnage} ton` : sku.btu ? `${sku.btu.toLocaleString("en-US")} BTU` : null;
+  const refrigerant = sku.refrigerant ? `${sku.refrigerant}${sku.refrigerantClass ? ` (${sku.refrigerantClass})` : ""}` : null;
+  const parts = [capacity, refrigerant, sku.voltage || null].filter((part): part is string => Boolean(part));
+  return parts.length > 0 ? parts.join(" · ") : null;
+}
+
 export function ProductCard({
   sku,
   state: stateProp,
@@ -40,6 +49,7 @@ export function ProductCard({
   // public list price as their account price (account prices appear only on
   // the product page, cart and checkout, from the session projection).
   const visibleQualifier = view.priceText ? view.priceQualifier : null;
+  const specLine = cardSpecLine(sku);
 
   return (
     <article className={`group grid min-w-0 gap-y-0 ${compactOnMobile ? "row-span-1 grid-cols-[7rem_minmax(0,1fr)] grid-rows-[auto_auto_auto_auto_auto] gap-x-3 border-b border-line pb-4 sm:row-span-6 sm:grid-cols-none sm:grid-rows-subgrid sm:gap-x-0 sm:border-b-0 sm:pb-0" : "row-span-6 grid-rows-subgrid"}`}>
@@ -63,6 +73,7 @@ export function ProductCard({
       {/* The match reason shares the SKU's subgrid row so card rows stay aligned. */}
       <p className={`mt-0.5 min-w-0 text-micro text-ink-3 ${compactOnMobile ? "col-start-2 sm:col-auto" : ""}`}>
         <span className="part-number block break-all">{sku.sku}</span>
+        {specLine && <span className="mt-0.5 block text-ink-2" data-spec-line>{specLine}</span>}
         {matchReason && <span className="mt-0.5 block text-ink-2" data-match-reason>{matchReason}</span>}
       </p>
 

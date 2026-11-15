@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ArrowRight, BadgeCheck, ChevronRight, HardHat, MapPin, Search, Store, Truck, Upload, UserRound, Wrench } from "lucide-react";
 import { Container } from "@/components/ui";
 import { CounterStock } from "@/components/home/counter-stock";
+import { ToolsRow } from "@/components/home/tools-row";
+import { A2lStrip } from "@/components/home/a2l-strip";
 
 export const revalidate = 60;
 
@@ -38,6 +40,9 @@ export default function HomePage() {
 
       {/* Real catalog SKUs with verified images, live stock and the shared price rule. */}
       <div className="bg-canvas pb-12"><CounterStock /></div>
+
+      <ToolsRow />
+      <A2lStrip />
 
       <section className="pb-12"><Container><div className="relative overflow-hidden rounded-xl bg-[#1F2A44] text-white"><Image src="/site/generated/contractor-will-call-counter.jpg" alt="Summit HVAC Supply will-call pickup counter" fill sizes="100vw" className="object-cover opacity-35" /><div className="relative flex min-h-[150px] flex-col justify-center gap-4 px-6 py-7 sm:flex-row sm:items-center sm:px-12"><div className="flex items-start gap-4"><Store className="mt-1 size-10 shrink-0 text-[#e3a11b]" strokeWidth={1.7} /><div><h2 className="text-2xl font-semibold tracking-[-.02em]">Will-call pickup in Newark.</h2><p className="mt-1 text-base text-white/80">Delivery across the Bay Area.</p></div></div><Link href="/locations/newark" className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded border border-[#e3a11b] px-5 text-sm font-semibold text-[#f4c45d] hover:bg-white/10 sm:ml-auto">Learn More <ArrowRight size={17} /></Link></div></div></Container></section>
     </>
