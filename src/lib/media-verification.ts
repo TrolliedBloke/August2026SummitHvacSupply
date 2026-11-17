@@ -125,7 +125,7 @@ export function mediaNotice(state: MediaDisplayState, modelNumber: string): Medi
       return { badge: null, detail: `Manufacturer image matched to ${model}.` };
     case "verifiedFamily":
       return {
-        badge: "Representative",
+        badge: "Similar model shown",
         detail: `Manufacturer image for this product family, not ${model} specifically. The same image covers more than one model, so size, labels and fittings can differ; match the model number and specifications.`,
       };
     case "reference":

@@ -71,7 +71,7 @@ describe("media verification", () => {
   it("states every non-exact state in words, with a visible label when an image is shown", () => {
     assert.equal(mediaNotice("verifiedExact", "X1").badge, null);
     assert.match(mediaNotice("verifiedExact", "X1").detail, /model X1/);
-    assert.equal(mediaNotice("verifiedFamily", "X1").badge, "Representative");
+    assert.equal(mediaNotice("verifiedFamily", "X1").badge, "Similar model shown");
     assert.match(mediaNotice("verifiedFamily", "X1").detail, /not model X1 specifically/);
     assert.equal(mediaNotice("reference", "X1").badge, "Reference photo");
     assert.match(mediaNotice("missing", "X1").detail, /manufacturer model and specifications/);

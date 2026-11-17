@@ -12,7 +12,7 @@ test.describe("media states", () => {
     await page.goto("/products/sku/car48kahu", { waitUntil: "load" });
     const frame = page.locator("[data-media-state]").first();
     await expect(frame).toHaveAttribute("data-media-state", "verifiedFamily", { timeout: 15_000 });
-    await expect(frame.getByText("Representative")).toBeVisible();
+    await expect(frame.getByText("Similar model shown")).toBeVisible();
 
     await page.goto("/products/sku/tcl09kodu", { waitUntil: "load" });
     await expect(page.locator("[data-media-state]").first()).toHaveAttribute("data-media-state", "missing");

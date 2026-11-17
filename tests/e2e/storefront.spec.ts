@@ -44,7 +44,7 @@ test("family media is labelled and supports multiple manufacturer views", async 
   // TOSOT publishes the same photos for the 18K and 24K heads, so they are
   // family media, labelled as such, not "verified against model".
   await expect(page.getByText(/not model TWH18AT19D6D specifically/).first()).toBeVisible();
-  await expect(page.getByText("Representative", { exact: true }).first()).toBeVisible();
+  await expect(page.getByText("Similar model shown", { exact: true }).first()).toBeVisible();
   const productImage = page.getByRole("tabpanel").locator("img");
   await expect(productImage).toBeVisible();
   await expect.poll(() => productImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
